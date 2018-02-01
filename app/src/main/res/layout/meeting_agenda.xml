@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_id"
+    android:orientation="horizontal">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        app:layout_widthPercent="40%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="会议议程编辑"
+            app:layout_heightPercent="10%" />
+
+        <EditText
+            android:id="@+id/meet_agenda_edt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="left|start"
+            android:lines="8"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_heightPercent="70%" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/agenda_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="从文档导入议程" />
+
+            <Button
+                android:id="@+id/agenda_export"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="导出议程到文档" />
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/divLineColor" />
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical"
+        app:layout_widthPercent="40%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="会议公告编辑"
+            app:layout_heightPercent="10%" />
+
+        <EditText
+            android:id="@+id/meet_notice_edt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="left|start"
+            android:lines="8"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_heightPercent="70%" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/notice_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="从文档导入公告" />
+
+            <Button
+                android:id="@+id/notice_export"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="导出公告到文档" />
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

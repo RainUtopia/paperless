@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1d329e"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/company_name"
+        style="@style/TextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:lines="1" />
+
+    <RelativeLayout
+        android:id="@+id/main_date_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:gravity="center|right"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/main_now_time"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+
+            android:id="@+id/main_date_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/main_now_time"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/main_now_date"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:id="@+id/main_now_week"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:textSize="10sp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

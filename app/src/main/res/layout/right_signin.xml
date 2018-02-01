@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="100%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="序号"
+            android:textColor="@color/black"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="15%" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="姓名"
+            android:textColor="@color/black"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="15%" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="签到时间"
+            android:textColor="@color/black"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="50%" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="签到状态"
+            android:textColor="@color/black"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="20%" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ListView
+        android:id="@+id/signin_lv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="70%"
+        app:layout_widthPercent="100%" />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="100%">
+
+        <Button
+            android:id="@+id/prepage_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/selector_pre_pager" />
+
+        <Button
+            android:id="@+id/nextpage_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/prepage_btn"
+            android:background="@drawable/selector_next_pager" />
+
+        <Button
+            android:id="@+id/export_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_toexcel" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

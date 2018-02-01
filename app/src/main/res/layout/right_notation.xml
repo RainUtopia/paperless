@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%">
+
+        <Button
+            android:id="@+id/document"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/selector_btn_guide"
+            android:text="文档批注" />
+
+        <Button
+            android:id="@+id/picture"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_btn_guide"
+            android:text="图片批注" />
+    </LinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="序号" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="@color/divLineColor"
+            app:layout_heightPercent="30%" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="4"
+            android:gravity="center|left"
+            android:text="文件名" />
+
+        <ImageView
+
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="@color/divLineColor"
+            app:layout_heightPercent="30%" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="大小" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="@color/divLineColor"
+            app:layout_heightPercent="30%" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="上传" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ListView
+        android:id="@+id/nota_lv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="70%"/>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%">
+
+        <Button
+            android:id="@+id/nota_prepage"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/nota_nextpage"
+            android:background="@drawable/selector_pre_pager" />
+
+        <Button
+            android:layout_alignParentRight="true"
+            android:id="@+id/nota_nextpage"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_next_pager" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

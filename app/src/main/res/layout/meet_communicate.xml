@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/chat_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_widthPercent="20%">
+
+        <TextView
+            android:id="@+id/chat_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="参会人员名单"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_heightPercent="10%" />
+
+        <ListView
+            android:id="@+id/chat_lv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/chat_title"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            app:layout_heightPercent="70%" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/chat_lv"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_heightPercent="20%">
+
+            <Button
+                android:id="@+id/comm_btn_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_guide"
+                android:text="全选" />
+
+            <Button
+                android:id="@+id/comm_btn_invert"
+                android:layout_width="0dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_guide"
+                android:text="反选" />
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <ImageView
+        android:id="@+id/div_line"
+        android:layout_width="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_height="0dp"
+        android:layout_toRightOf="@id/chat_left"
+        android:background="@color/divLineColor"
+        app:layout_heightPercent="100%" />
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/div_line"
+        android:orientation="vertical"
+        app:layout_widthPercent="80%">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chat_online_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@id/div_line"
+            app:layout_heightPercent="80%" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/chat_online_rl"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="20dp"
+            android:layout_toRightOf="@id/div_line"
+            android:background="@drawable/chat_edt"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/comm_chat_edt"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:background="@null"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sp2" />
+
+            <TextView
+                android:id="@+id/comm_chat_send"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:textColor="@color/colorPrimary"
+                android:layout_height="match_parent"
+                android:text="发送" />
+        </LinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>

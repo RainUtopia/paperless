@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/rightsharefile_type2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="80%">
+
+        <Button
+            android:id="@+id/rightsharefile_document"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_guide"
+            android:text="文档" />
+
+        <Button
+            android:id="@+id/rightsharefile_picture"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/rightsharefile_document"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_guide"
+            android:text="图片" />
+
+        <Button
+            android:id="@+id/rightsharefile_video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/rightsharefile_picture"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_guide"
+            android:text="视频" />
+
+        <Button
+            android:id="@+id/rightsharefile_other"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/rightsharefile_video"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_guide"
+            android:text="其它" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rightsharefile_type2"
+        android:background="@color/divLineColor" />
+
+
+    <LinearLayout
+        android:id="@+id/rightsharefile_type3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/rightsharefile_type2"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="序号" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center|left"
+            android:text="文件名" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="大小" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="上传" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/rightsharefile_lv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/rightsharefile_type3"
+        app:layout_heightPercent="65%"
+        app:layout_widthPercent="100%" />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/rightsharefile_lv"
+        android:gravity="center"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%">
+
+        <Button
+            android:id="@+id/rightsharefile_prepage"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/selector_pre_pager"
+            app:layout_heightPercent="50%" />
+
+        <Button
+            android:id="@+id/rightsharefile_nextpage"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/rightsharefile_prepage"
+            android:background="@drawable/selector_next_pager"
+            app:layout_heightPercent="50%" />
+
+        <Button
+            android:id="@+id/rightsharefile_import"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_right"
+            android:text="导入文件"
+            app:layout_heightPercent="50%" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>

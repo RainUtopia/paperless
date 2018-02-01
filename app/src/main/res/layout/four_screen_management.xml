@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:layout_weight="7">
+
+        <SurfaceView
+            android:id="@+id/camera_top_leftvideo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%" />
+
+        <SurfaceView
+            android:id="@+id/camera_top_rightvideo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@id/camera_top_leftvideo"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%" />
+
+        <SurfaceView
+            android:id="@+id/camera_bottom_leftvideo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/camera_top_leftvideo"
+            android:layout_margin="1dp"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%" />
+
+        <SurfaceView
+            android:id="@+id/camera_bottom_rightvideo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/camera_top_rightvideo"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@id/camera_bottom_leftvideo"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="四分屏投影服务器"
+            android:textStyle="bold"
+            app:layout_heightPercent="10%" />
+
+        <ListView
+            android:id="@+id/camera_video_lv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_heightPercent="70%" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_heightPercent="10%">
+
+            <Button
+                android:id="@+id/look_video_camera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="全屏显示" />
+
+            <Button
+                android:id="@+id/stop_video_camera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="退出全屏" />
+        </LinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

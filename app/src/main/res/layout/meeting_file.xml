@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/meet_file_place"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/tableColor"
+        android:orientation="horizontal"
+        app:layout_heightPercent="7%">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="2"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="目录"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="2"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="序号"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="6"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="文件名"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="2"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="文件大小"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="2"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="文件类型"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="2"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="上传者"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0.5dp"
+                android:layout_weight="2"
+                android:background="#edebeb"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="操作"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/meetfile_rl_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/meet_file_place"
+        app:layout_heightPercent="70%"
+        app:layout_widthPercent="20%" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/meetfile_rl_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/meet_file_place"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/meetfile_rl_left"
+        app:layout_heightPercent="70%"
+        app:layout_widthPercent="80%" />
+
+    <LinearLayout
+        android:id="@+id/meet_place"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/meetfile_rl_left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="50%">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:text="目录名称：" />
+
+            <EditText
+                android:id="@+id/directory_edt"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|left"
+                android:background="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/meetfile_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="增加" />
+
+            <Button
+                android:id="@+id/meetfile_amend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="修改" />
+
+            <Button
+                android:id="@+id/meetfile_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="删除" />
+
+            <Button
+                android:id="@+id/meetfile_directory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="目录权限" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/meetfile_rl_left"
+        android:layout_toRightOf="@id/meet_place"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="50%">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:text="文件名称：" />
+
+            <EditText
+                android:id="@+id/meetfile_name_edt"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:background="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/right_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="增加" />
+
+            <Button
+                android:id="@+id/right_amend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="修改" />
+
+            <Button
+                android:id="@+id/right_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="删除" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.zhy.android.percent.support.PercentRelativeLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/meet_place1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/meetmanage_item_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:text="序号"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/meetmanage_item_meetname"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="4"
+            android:background="#edebeb"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="会议名称"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/meetmanage_item_meetstate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="会议状态"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/meetmanage_item_roomname"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="3"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="会议室名称"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/meetmanage_item_secret"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="保密"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/meetmanage_item_starttime"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="4"
+            android:background="#edebeb"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="开始时间"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/meetmanage_item_overtime"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="4"
+            android:background="#edebeb"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="结束时间"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

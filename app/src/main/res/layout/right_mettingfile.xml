@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/right_meetingfilelayout"
+    android:orientation="horizontal">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="20%">
+
+        <ListView
+            android:id="@+id/type_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/divLineColor" />
+    <!--<include
+    layout="@layout/right_sharedfile"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_heightPercent="100%"
+    app:layout_widthPercent="80%" />-->
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:id="@+id/rightmeetfile_type2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_heightPercent="15%"
+            app:layout_widthPercent="80%">
+
+            <Button
+                android:id="@+id/rightmeetfile_document"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_guide"
+                android:text="文档" />
+
+            <Button
+                android:id="@+id/rightmeetfile_picture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/rightmeetfile_document"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_guide"
+                android:text="图片" />
+
+            <Button
+                android:id="@+id/rightmeetfile_video"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/rightmeetfile_picture"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_guide"
+                android:text="视频" />
+
+            <Button
+                android:id="@+id/rightmeetfile_other"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/rightmeetfile_video"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_guide"
+                android:text="其它" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <ImageView
+            android:id="@+id/right_div_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/rightmeetfile_type2"
+            android:background="@color/divLineColor" />
+
+
+        <LinearLayout
+            android:id="@+id/rightmeetfile_type3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/rightmeetfile_type2"
+            android:orientation="horizontal"
+            app:layout_heightPercent="10%"
+            app:layout_widthPercent="100%">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="序号" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center|left"
+                android:text="文件名" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="大小" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="上传" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/rightmeetfile_lv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/rightmeetfile_type3"
+            app:layout_heightPercent="65%"
+            app:layout_widthPercent="100%" />
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/rightmeetfile_lv"
+            android:gravity="center"
+            app:layout_heightPercent="10%"
+            app:layout_widthPercent="100%">
+
+            <Button
+                android:id="@+id/rightmeetfile_prepage"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/selector_pre_pager"
+                app:layout_heightPercent="50%" />
+
+            <Button
+                android:id="@+id/rightmeetfile_nextpage"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/rightmeetfile_prepage"
+                android:background="@drawable/selector_next_pager"
+                app:layout_heightPercent="50%" />
+
+            <Button
+                android:id="@+id/rightmeetfile_import"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/selector_right"
+                android:text="导入文件"
+                app:layout_heightPercent="50%" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

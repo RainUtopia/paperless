@@ -1,0 +1,954 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//////////////////////////////////////////////////////////////////////////
+///start systemlog
+message pbui_Item_MeetSystemLog
+{
+	fixed32 stage=1;//操作类别 参见STARG_ENUM
+	fixed32 method=2;//操作方法 参见 METHOD_ENUM
+	fixed32 adminid=3;//管理人员ID
+	fixed32 deviceid=4;//操作的设备ID
+	fixed32 meetingid=5;//操作的会议ID
+	fixed64 logtime=6;//操作utc时间 微秒
+	bytes   logmsg=7;//记录文本
+}
+
+//管理日志 
+//stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+//method:查询(数据库返回)
+message pbui_Type_MeetingMeetSystemLog
+{
+	fixed32   startrow=1;//查询返回用户传过来的开始行
+	fixed32	  isfirst=2;//是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
+	repeated pbui_Item_MeetSystemLog item=3;
+}
+
+//管理日志 
+//stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+//method:查询
+message pbui_Type_QueryMeetSystemLog
+{
+	fixed32 stage=1;//操作类别 参见STARG_ENUM 可以为0表示所有类别
+	fixed32 method=2;//操作方法  参见 METHOD_ENUM 可以为0表示所有方法
+
+	fixed32 meetingid=3;//会议ID 可以为0表示所有会议
+	fixed32 adminid=4;//管理人员ID 可以为0表示所有管理人员
+	fixed32 deviceid=5;//操作的设备ID 可以为0表示所有设备
+
+	fixed64 startlogtime=6;//查询的起始记录utc时间 微秒 必须有效
+	fixed64 endlogtime=7;//查询的结束记录utc时间 微秒 必须有效
+	fixed32 startrow=8;//查询开始行 实现分页查询 必须有效
+}
+///end systemlog
+
+//会议双屏显示相关
+message pbui_Item_MeetTableCardDetailInfo
+{
+	bytes fontname=1;//使用字体名称
+	fixed32  fontsize=2;//字体 大小
+	fixed32 fontcolor=3;//字体颜色
+	float lx=4;//左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
+	float ly=5;
+	float rx=6;
+	float ry=7;
+	fixed32 flag=8;//显示标志 参见Pb_TableCardFlag
+	fixed32 align=9;//参见本页 font align flag
+	fixed32  type=10;//显示的信息 参见Pb_TableCardType
+}
+
+//会议双屏显示相关
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETTABLECARD
+//method: mod/query
+message pbui_Type_MeetTableCardDetailInfo
+{
+	fixed32      bgphotoid=1;//底图ID
+	repeated 	pbui_Item_MeetTableCardDetailInfo item=2; //必须是3个
+}
+
+//会议排位信息
+message pbui_Item_MeetSeatDetailInfo
+{
+	fixed32			nameId=1;//参会人员ID
+	fixed32			seatid=2;//设备ID
+	fixed32			role=3;  //人员身份  参见 Pb_MeetMemberRole
+}
+
+//会议排位信息
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETSEAT
+//method: mod/query
+message pbui_Type_MeetSeatDetailInfo
+{
+	repeated 	pbui_Item_MeetSeatDetailInfo item=1; //排位
+}
+
+//收到新的会议交流信息
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_MEETIM
+//method: notify
+message pbui_Type_MeetIM
+{
+	fixed32	    msgtype=1;//消息类型 参见 Pb_MeetIMMSG_TYPE
+	fixed32		role=2;//发送者角色 参见 Pb_MeetMemberRole
+	fixed32	    memberid=3;//发送者ID
+	bytes		msg=4;//消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
+	fixed64	    utcsecond=5;//发送UTC时间 单位:秒
+}
+
+//发送消息
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETIM
+//method: send
+message pbui_Type_SendMeetIM
+{
+	fixed32	    msgtype=1;//消息类型 参见 Pb_MeetIMMSG_TYPE
+	bytes		msg=2;//消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
+	repeated fixed32      userids=3; //为0表示当前会议全部 如果是会议服务类请求为0
+}
+
+//会议交流信息
+message pbui_Item_MeetIMDetailInfo
+{
+	fixed32	    msgtype =1;//消息类型 参见 Pb_MeetIMMSG_TYPE
+	fixed32		role=2;//发送者角色
+	fixed32	    memberid=3;//发送者ID
+	bytes		msg=4;//消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
+	fixed64	    utcsecond=5;//发送UTC时间 单位:秒
+}
+
+//callreturn
+//type:Pb_TYPE_MEET_INTERFACE_MEETIM
+//method: query
+message pbui_Type_MeetIMDetailInfo
+{
+	repeated pbui_Item_MeetIMDetailInfo item=1;
+}
+
+//组合查询
+//type:Pb_TYPE_MEET_INTERFACE_MEETIM
+//method: complexquery
+message pbui_Type_MeetComplexQueryIM
+{
+	fixed32      queryflag=1; //查询标志 参见 Pb_COMPLEXQUERY_ZERO
+
+	fixed32	    msgtype=2;//消息类型
+	fixed32		role=3;//发送者角色
+	fixed32	    memberid=4;//发送者ID
+
+	//时间范围
+	fixed64	    startutcsecond=5;//发送UTC时间
+	fixed64	    endutcsecond=6;//发送UTC时间
+
+	fixed32			pageindex=7;//起始索引 从0 开始
+	fixed32			pagenum=8;//每页项数
+}
+
+//组合查询返回结构头部
+//callreturn
+//type:Pb_TYPE_MEET_INTERFACE_MEETIM
+//method: complexpagequery
+message pbui_TypePageResQueryrMsgInfo
+{
+	fixed32			pageindex=1;//起始索引 从0 开始
+	fixed32			pagenum=2;//每页项数
+	fixed32			itemnum=3;//当前页项数 ,根据数据不同用不同的解析
+	fixed32			totalnum=4;//总项数
+	
+	repeated pbui_Item_MeetIMDetailInfo item =5;//消息
+}
+
+//会议发起投票信息
+message pbui_Item_MeetOnVotingDetailInfo
+{
+	fixed32		voteid=1;
+	bytes		content=2; //投票内容 
+	fixed32			maintype=3; //投票 选举 调查问卷 参见 Pb_MeetVoteType
+	fixed32			mode=4; //匿名投票 记名投票 参见 Pb_MeetVoteMode
+	fixed32			type=5; //多选 单选 参见 Pb_MeetVote_SelType
+	fixed32		timeouts=6;  //超时值 单位 秒
+	fixed32		selectcount=7; //有效选项
+	repeated bytes		text=8;  //选项描述文字
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
+//method: query/add/mod/
+message pbui_Type_MeetOnVotingDetailInfo
+{
+	repeated pbui_Item_MeetOnVotingDetailInfo item=1;//投票信息
+}
+
+//设置投投票计时值
+//type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
+//method: set
+message pbui_Type_MeetSetVoteTimeouts
+{
+	fixed32	  voteid=1; //投票ID
+	fixed32   timeouts=2;//计时 单位 秒
+}
+
+//会议发起投票信息
+//type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
+//method: start/stop/del
+message pbui_Type_MeetStopVoteInfo
+{
+	repeated fixed32		voteid=1;
+}
+
+//提交会议投票信息
+message pbui_Item_MeetSubmitVote
+{
+	fixed32		voteid=1;
+	fixed32			selcnt=2;//有效选项数
+	fixed32		selitem=3;//选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
+}
+
+//提交会议投票信息
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
+//method: submit
+message pbui_Type_MeetSubmitVote
+{
+	repeated pbui_Item_MeetSubmitVote item=1;
+}
+
+//会议投票信息
+message pbui_SubItem_VoteItemInfo
+{
+	bytes    text=1;//描述文字
+	fixed32  selcnt=2;	 //投票数
+}
+
+message pbui_Item_MeetVoteDetailInfo
+{
+	fixed32		voteid=1;
+	bytes		content=2; //投票内容 
+	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见Pb_MeetVoteType
+	fixed32			mode=4; //匿名投票 记名投票 参见Pb_MeetVoteMode
+	fixed32			type=5; //多选 单选 参见Pb_MeetVote_SelType
+	fixed32			votestate=6; //投票状态 参见 Pb_MeetVoteStatus
+	fixed32		timeouts=7;  //超时值
+	fixed32						selectcount=8; //有效选项
+	repeated pbui_SubItem_VoteItemInfo		item=9;  //选项描述文字
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_MEETVOTEINFO
+//method: query
+message pbui_Type_MeetVoteDetailInfo
+{
+	repeated pbui_Item_MeetVoteDetailInfo item=1;
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_MEETVOTEINFO
+//method: complexquery
+message pbui_Type_MeetVoteComplexQuery
+{
+	fixed32	 maintype=1; //指定大类 参见本文件中的maintype 定义
+}
+
+//会议投票人
+message pbui_Item_MeetVoteSignInDetailInfo
+{
+	fixed32		 id=1;//投票人员
+	fixed32       selcnt=2; //投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED
+//method: query
+message pbui_Type_MeetVoteSignInDetailInfo
+{
+	fixed32   voteid=1;
+	repeated pbui_Item_MeetVoteSignInDetailInfo item=2;
+}
+
+//查询会议投票人属性信息
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED
+//method: queryproperty
+message pbui_Type_MeetVoteQueryProperty
+{
+	fixed32 propertyid=1;//数据ID
+	fixed32 voteid=2;//传入参数
+	fixed32 memberid=3;//传入参数 为0表示本身
+}
+
+//会议签到
+message pbui_Item_MeetSignInDetailInfo
+{
+	fixed32		nameId=1; //人员ID
+	fixed64		utcseconds=2;  //日期 时间 单位:秒
+	fixed32		signin_type=3;//签到方式 参见 Pb_MeetSignType
+	bytes		password=4;//签到密码
+	bytes		psigndata=5; //如果有图片签到则为png图片数据(二进制转hex编码)
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_MEETSIGN
+//method: query
+message pbui_Type_MeetSignInDetailInfo
+{
+	repeated pbui_Item_MeetSignInDetailInfo item=1;
+}
+
+//发送会议签到
+//type:Pb_TYPE_MEET_INTERFACE_MEETSIGN
+//method: add
+message pbui_Type_DoMeetSignIno
+{
+	fixed32		signin_type=1;//签到方式 参见Pb_MeetSignType
+
+	bytes		password=2;//签到密码
+	bytes		psigndata=3; //如果有图片签到则为png图片数据(二进制转hex编码)
+}
+
+//执行一个白板操作 用于会议交流 指定需要执行操作的标志
+//call
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: control 
+message pbui_Type_MeetWhiteBoardControl
+{
+	fixed32  operflag=1;//指定操作标志 参见Pb_MeetPostilOperType
+	bytes    medianame=2;//白板操作描述
+	fixed32  opermemberid=3;//当前该命令的人员ID
+	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=5;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+	repeated fixed32 userid=6;//参会人员
+}
+
+//收到白板打开操作
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: ask 
+message pbui_Type_MeetStartWhiteBoard
+{
+	fixed32  operflag=1;//指定操作标志 参见Pb_MeetPostilOperType
+	bytes    medianame=2;//白板操作描述
+	fixed32  opermemberid=3;//当前该命令的人员ID
+	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=5;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+}
+
+//被邀请人拒绝加入你发起的白板(callback/call)
+//被邀请人退出了你发起的白板(callback)
+//被邀请人加入了你发起的白板(callback/call)
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: reject\exit\enter
+message pbui_Type_MeetWhiteBoardOper
+{
+	fixed32  opermemberid=1;//当前该命令的人员ID
+	fixed32  srcmemid=2;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=3;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+}
+
+//白板删除和清空记录通知
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: clear, del
+message pbui_Type_MeetClearWhiteBoard
+{
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
+	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+
+	fixed64  utcstamp=5;	//时间戳  微秒
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
+}
+
+//白板删除和清空记录操作
+//(call)
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: delall, del 
+message pbui_Type_MeetDoClearWhiteBoard
+{
+	fixed32  memberid=1;   //需要删除的人员ID 为0表示清除所有等于人员的白板操作
+	fixed32  operid=2;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+
+	fixed32  opermemberid=3;//当前该命令的人员ID
+	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用
+	fixed32  srcwbid=5;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+
+	fixed64  utcstamp=6;	//时间戳 微秒
+	fixed32  figuretype=7;	//图形类型 为0表示清除所有类型的白板操作
+}
+
+//白板项普通查询
+//(call)
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: query
+message pbui_Type_MeetWhiteBoardQuery
+{
+	fixed32  srcmemid=1;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=2;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+	fixed32  figuretype=3;	//图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
+}
+
+//白板项高级查询
+//(call)
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: complexquery
+message pbui_Type_MeetWhiteBoardComplexQuery
+{
+	fixed32  srcmemid=1;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=2;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+	fixed32  figuretype=3;	//图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
+
+	fixed32  opermemberid=4;//人员ID
+}
+
+//添加墨迹
+//ink
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//callback\call
+//method: add
+message pbui_Type_MeetWhiteBoardInkItem
+{
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
+	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+
+	fixed64  utcstamp=5;	//时间戳  微秒
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
+
+	fixed32  linesize=7;			//线条宽度
+	fixed32  Argb=8;			//线条颜色
+
+	repeated float pinklist=9; //ink point Num, float[2 * ptnum](x,y依次排列)	
+}
+
+//查询Ink白板操作
+//callreturn
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//method: query pagequery
+message pbui_Item_MeetWBInkDetail
+{
+	fixed32  operid=1;	    //操作ID 终端计算产生
+	fixed32  opermemberid=2;//当前该命令的人员ID
+	fixed64  utcstamp=3;	//时间戳
+
+	fixed32  linesize=4;			//线条宽度
+	fixed32  Argb=5;			//线条颜色
+
+	repeated float pinklist=6; //ink point Num, float[2 * ptnum](x,y依次排列)
+}
+
+message pbui_Type_MeetWBInkDetail
+{
+	repeated pbui_Item_MeetWBInkDetail item=1;
+}
+
+//添加矩形、直线、圆形
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//rect line elipse
+//callback\call
+//method: add\query pagequery
+message pbui_Item_MeetWBRectDetail
+{
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
+	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+
+	fixed64  utcstamp=5;	//时间戳  微秒
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
+
+	fixed32  linesize=7;			//线条宽度
+	fixed32  Argb=8;			//线条颜色
+	repeated float pt=9;		    //(lx,ly,rx,ry 左上角,右下角坐标)
+}
+
+//返回查询的矩形、直线、圆形
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//rect line elipse
+//callback\call
+//method: add\query pagequery
+message pbui_Type_MeetWBRectDetail
+{
+	repeated pbui_Item_MeetWBRectDetail item=1;
+}
+
+//添加文本
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//callreturn
+//method: add query pagequery
+message pbui_Item_MeetWBTextDetail
+{
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
+	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+
+	fixed64  utcstamp=5;	//时间戳  微秒
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
+
+	fixed32  fontsize=7;			//字体大小
+	fixed32  fontflag=8;			//字体其它属性
+	fixed32  Argb=9;				//字体颜色
+	bytes    fontname=10; //字体名称
+	float    lx=11;				//(lx,ly,左上角坐标)
+	float    ly=12;				//(lx,ly,左上角坐标)
+	bytes    ptext=13;
+}
+
+message pbui_Type_MeetWBTextDetail
+{
+	repeated pbui_Item_MeetWBTextDetail item=1;
+}
+
+//添加图片
+//type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
+//call return
+//method: add query pagequery
+message pbui_Item_MeetWBPictureDetail
+{
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
+	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
+	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
+
+	fixed64  utcstamp=5;	//时间戳  微秒
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
+
+	float    lx=7;				//(lx,ly,左上角坐标)
+	float    ly=8;				//(lx,ly,左上角坐标)
+
+	bytes  picdata=9;//png图片数据(二进制转hex编码)
+}
+
+message pbui_Type_MeetWBPictureDetail
+{
+	repeated pbui_Item_MeetWBPictureDetail item=1;
+}
+
+//会议功能
+message pbui_Item_MeetFunConfigDetailInfo
+{
+	fixed32	funcode=1;	//功能标识码 参见Pb_Meet_FunctionCode
+	fixed32	position=2;	//位置标识码
+}
+
+//会议功能
+//type:Pb_TYPE_MEET_INTERFACE_FUNCONFIG
+//method: query/save/
+message pbui_Type_MeetFunConfigDetailInfo
+{
+	repeated pbui_Item_MeetFunConfigDetailInfo item=1;
+}
+
+//参会人白板颜色
+message pbui_Item_MeetMemberColorDetailInfo
+{
+	fixed32 memberid=1;//参会人员ID
+	fixed32 rgb=2;//颜色值
+}
+
+//参会人白板颜色
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEMBERCOLOR
+//method: query/mod/
+message pbui_Type_MeetMemberColorDetailInfo
+{
+	repeated pbui_Item_MeetMemberColorDetailInfo item=1;
+}
+
+//屏幕鼠标控制
+//callback
+//method: notify
+message pbui_Type_MeetScreenMouseControl
+{
+	fixed32  flag=1;			//控制的标志  参考streamcontrol.h 定义
+	fixed32  deviceid=2;       //发起请求的设备ID
+	fixed32  memberid=3;       //发起请求的人员ID
+	float   x=4; //x% width的百分
+	float   y=5; //y% height的百分
+}
+
+//屏幕鼠标控制
+//call
+//method: control
+message pbui_Type_MeetDoScreenMouseControl
+{
+	fixed32  flag=1;			//控制的标志  参考streamcontrol.h 定义
+	fixed32  deviceid=2;       //设备ID
+	float   x=3; //x / width的百分比
+	float   y=4; //y / height的百分比
+}
+
+//屏幕键盘控制
+//callback
+//method: notify
+message pbui_Type_MeetScreenKeyBoardControl
+{
+	fixed32  flag=1;			//控制的标志 参考streamcontrol.h 定义
+	fixed32  deviceid=2;       //发起请求的设备ID
+	fixed32  memberid=3;       //发起请求的人员ID
+
+	fixed32  otherflag=4; //参考streamcontrol.h 定义
+	fixed32  key=5; //对应的key值 参考streamcontrol.h 定义
+}
+
+//屏幕键盘控制
+//call
+//method: control
+message pbui_Type_MeetDoScreenKeyBoardControl
+{
+	fixed32  flag=1;			//控制的标志 参考streamcontrol.h 定义
+	fixed32  deviceid=2;       //设备ID
+
+	fixed32  otherflag=3; //参考streamcontrol.h 定义
+	fixed32  key=4; //对应的key值 参考streamcontrol.h 定义
+}
+
+//停止资源功能
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
+//method: close
+message pbui_Type_MeetStopResWork
+{
+	repeated fixed32 res=1;//有效资源个数,为0表示全部
+}
+
+//关闭资源功能
+//call
+//type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
+//method: close
+message pbui_Type_MeetDoStopResWork
+{
+	repeated fixed32 res=1;//有效资源个数,为0表示全部
+	repeated fixed32 deviceid=2;//通知的目标设备,为0表示全部
+}
+
+//停止触发器
+//call
+//type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
+//method: stop
+message pbui_Type_MeetDoStopTrrigerWork
+{
+	fixed32 triggerid=1;//触发器ID
+	repeated fixed32 deviceid=2;//通知的目标设备,为0表示全部
+}
+
+//媒体、流停止播放通知
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
+//method: notify
+message pbui_Type_MeetStopPlay
+{
+	fixed32  triggerid=1;//停止的触发器ID
+	fixed32  createdeviceid=2;//创建该触发器的设备ID
+	fixed32  res=3;//停止的资源ID
+}
+
+//数据后台回复的错误信息
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_DBSERVERERROR
+//method: notify
+message pbui_Type_MeetDBServerOperError
+{
+	fixed32  status=1;//参见 Pb_DB_StatusCode
+}
+
+//媒体播放通知
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: notify
+message pbui_Type_MeetMediaPlay
+{
+	fixed32  triggerid=1;//触发器ID
+	fixed32  createdeviceid=2;//创建执行该触发器的设备ID
+	fixed32  mediaid=3;//播放的媒体id
+	fixed32  res=4;//播放所用的资源ID
+	fixed32  triggeruserval=5;//参见该文件中的triggeruserval定义
+}
+
+//媒体播放操作
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: start
+message pbui_Type_MeetDoMediaPlay
+{
+	fixed32  playflag=1;//播放标志 参见 Pb_MeetPlayFlag
+
+	fixed32  pos=2;//指定开始播放的百分比位置
+	fixed32  mediaid=3;//媒体ID
+	fixed32  triggeruserval=4;//触发器标志0
+
+	repeated fixed32 res=5;//有效资源个数,为0表示全部
+	repeated fixed32 deviceid=6;//通知的目标设备,为0表示全部
+}
+
+//设置播放位置
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: move
+message pbui_Type_MeetDoSetPlayPos
+{
+	fixed32   resindex=1;//资源索引号
+	fixed32   pos=2;//指定开始播放的百分比位置
+	fixed32   triggeruserval=3;//触发器标志
+	repeated fixed32 deviceid=4;//通知的目标设备,为0表示全部
+}
+
+//设置播放暂停 恢复
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: pause play
+message pbui_Type_MeetDoPlayControl
+{
+	fixed32  resindex=1;//资源索引号
+	fixed32  triggeruserval=2;//触发器标志
+	repeated fixed32 deviceid=3;//通知的目标设备,为0表示全部
+}
+
+//查询媒体播放
+message pbui_Item_MeetMediaPlayDetailInfo
+{
+	fixed32 trrigerid=1;//触发器ID
+	fixed32 mediaid=2;//媒体ID
+}
+
+//查询媒体播放
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: query
+message pbui_Type_MeetMediaPlayDetailInfo
+{
+	repeated pbui_Item_MeetMediaPlayDetailInfo item=1;
+}
+
+//文件推送
+//type:Pb_TYPE_MEET_INTERFACE_FILEPUSH
+//method: notify
+//当为询问模式时，回调函数返回1表示同意播放
+message pbui_Type_FilePush
+{
+	fixed32 mediaid=1;//媒体ID
+	fixed32 triggeruserval=2;//参见该文件中的triggeruserval定义
+}
+
+//文件推送
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: push
+message pbui_Type_DoFilePush
+{
+	fixed32 mediaid=1;//媒体ID
+	fixed32 triggeruserval=2;//参见该文件中的triggeruserval定义
+	repeated fixed32 deviceid=3;//通知的目标设备,为0表示全部
+}
+
+//请求播放流通道通知
+//type:Pb_TYPE_MEET_INTERFACE_REQUESTSTREAMPUSH
+//method: notify
+//当为询问模式时，回调函数返回1表示同意播放
+message pbui_Type_ReqStreamPush
+{
+	fixed32  triggeruserval=1;//参见该文件中的triggeruserval定义
+	fixed32  deviceid=2;       //发起请求的设备ID
+	fixed32  memberid=3;       //发起请求的人员ID
+	fixed32  substreamindex=4;       //本设备子通道号
+}
+
+//请求播放流通道
+//type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
+//method: requestpush
+message pbui_Type_DoReqStreamPush
+{
+	fixed32  triggeruserval=1;		  //参见该文件中的triggeruserval定义
+	fixed32  handledeviceid=2;        //处理该请求的设备ID
+	fixed32  substreamindex=3;        //本设备子通道号
+	repeated fixed32 deviceid=4;	  //通知的目标设备,为0表示全部
+}
+
+//推送流通知
+//type:Pb_TYPE_MEET_INTERFACE_STREAMPUSH
+//method: notify
+//当为询问模式时，回调函数返回1表示同意播放
+message pbui_Type_StreamPush
+{
+	fixed32  triggeruserval=1;//参见该文件中的triggeruserval定义
+	fixed32  deviceid=2;       //发起请求的设备ID
+	fixed32  substreamindex=3; //本设备子通道号
+}
+
+//推送流
+//type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
+//method: push
+message pbui_Type_DoStreamPush
+{
+	fixed32  triggeruserval=1;//参见该文件中的triggeruserval定义
+	fixed32  srcdeviceid=2;       //发起请求的设备ID
+	fixed32  substreamindex=3; //本设备子通道号
+	repeated fixed32 deviceid=4;	  //通知的目标设备,为0表示全部
+}
+
+//流播放通知
+//type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
+//callback
+//method: notify
+message pbui_Type_MeetStreamPlay
+{
+	fixed32  triggerid=1;//触发器ID
+	fixed32  createdeviceid=2;//创建执行该触发器的设备ID
+	fixed32  deviceid=3;//流源设备ID
+	fixed32  subid=4;//流源设备子通道ID
+	fixed32  res=5;//播放所用的资源ID
+	fixed32  triggeruserval=6;//参见该文件中的triggeruserval定义
+}
+
+//流播放
+//type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
+//call
+//method: start
+message pbui_Type_MeetDoStreamPlay
+{
+	fixed32  srcdeviceid=1;//设备ID
+	fixed32  subid=2;//设备子通道
+	fixed32  triggeruserval=3;//触发器标志
+
+	repeated fixed32 res=4;	  //播放所用的资源,为0表示全部
+	repeated fixed32 deviceid=5;	  //通知的目标设备,为0表示全部
+}
+
+//查询流播放
+message pbui_Item_MeetStreamPlayDetailInfo
+{
+	fixed32  trrigerid=1;//触发器ID
+	fixed32  deviceid=2;//设备ID
+	fixed32  subid=3;//设备子通道
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
+//method: query/
+message pbui_Type_MeetStreamPlayDetailInfo
+{
+	repeated pbui_Item_MeetStreamPlayDetailInfo item = 1;
+}
+
+//查询会议统计
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
+//method: query
+message pbui_Type_MeetDoReqStatistic
+{
+	fixed32 meetingid=1;//会议ID 为0表示查询当前会议
+}
+
+//返回查询会议统计通知
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
+//method: notify
+message pbui_Type_MeetStatisticInfo
+{
+	fixed32 meetingid=1;//会议ID
+	bytes   meetname=2;//会议名称
+	fixed32 streamgetcount=3;//流请求数
+	fixed32 screengetcount=4;//同屏请求数
+	fixed32 filegetcount=5;//文件请求数
+	fixed32 chatcount=6;//交流次数
+	fixed32 servicegetcount=7;//服务请求数
+	fixed32 whiteboardopencount=8;//白板发起次数
+	fixed32 whiteboardusecount=9;//白板交流次数
+	fixed32 votecount=10;//投票发起次数
+	fixed32 electioncount=11;//选举发起次数
+	fixed32 questioncount=12;//问卷调查发起次数
+	fixed32 bulletcount=13;//公告发起次数
+	fixed64 addtime=14;//创建时间 秒
+}
+
+//按时间段查询会议统计
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
+//method: ask
+message pbui_Type_QueryQuarterStatistic
+{
+	fixed32 quartertype=1;//参见 Pb_MeetStatisticFlag 定义
+
+	//统计时间段
+	fixed32 startyear=2; //
+	fixed32 startmonth=3; ////按月查询才有效
+	fixed32 endyear=4; //
+	fixed32 endmonth=5; ////按月查询才有效
+}
+
+message pbui_Item_MeetOneStatistic
+{
+	//统计时间段
+	fixed32 startyear=1; //
+	fixed32 startmonth=2; //
+	fixed32 endyear=3; //
+	fixed32 endmonth=4; //
+
+	fixed32 meetingcount=5;//总会议数
+
+	//总计数
+	fixed32 streamgetcount=6;//流请求数
+	fixed32 screengetcount=7;//同屏请求数
+	fixed32 filegetcount=8;//文件请求数
+	fixed32 chatcount=9;//交流次数
+	fixed32 servicegetcount=10;//服务请求数
+	fixed32 whiteboardopencount=11;//白板发起次数
+	fixed32 whiteboardusecount=12;//白板交流次数
+	fixed32 votecount=13;//投票发起次数
+	fixed32 electioncount=14;//选举发起次数
+	fixed32 questioncount=15;//问卷调查发起次数
+	fixed32 bulletcount=16;//公告发起次数
+
+}
+
+//返回按时间段查询会议统计
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
+//method: ask
+message pbui_Type_MeetQuarterStatisticInfo
+{
+	fixed32 quartertype=1;////参见 Pb_MeetStatisticFlag 定义
+	repeated pbui_Item_MeetOneStatistic item = 2;
+}
+
+//文本项
+message pbui_Item_FaceTextItemInfo
+{
+	fixed32 faceid=1;  //界面项ID 参见Pb_MeetFaceID
+	fixed32 flag=2;	  //属性值 参见Pb_MeetFaceFlag
+
+	fixed32  fontsize=3;	//字体大小
+	fixed32  color=4;		//字体rgba颜色
+	fixed32  align=5;		//对齐 参见 Pb_FontAlignFlag
+	fixed32  fontflag=6;	//字体属性 Pb_MeetFaceFontFlag
+	bytes	 fontname=7;//字体名称
+
+	float lx=8;//坐标 左上角x  (x * 100 / width)
+	float ly=9;//坐标 左上角y  (y * 100 / height)
+	float bx=10;//坐标 右下角x
+	float by=11;//坐标 右下角y
+}
+
+//图片项
+message pbui_Item_FacePictureItemInfo
+{
+	fixed32 faceid=1;  //界面项ID 参见Pb_MeetFaceID
+	fixed32 flag=2;    //属性值 参见Pb_MeetFaceFlag
+	fixed32 mediaid=3; //项值
+}
+
+//纯文本项
+message pbui_Item_FaceOnlyTextItemInfo
+{
+	fixed32 faceid=1;  //界面项ID 参见Pb_MeetFaceID
+	fixed32 flag=2;    //属性值 参见Pb_MeetFaceFlag
+	bytes	text=3;//文本
+}
+
+//callreturn
+//type:Pb_TYPE_MEET_INTERFACE_MEETFACECONFIG
+//method: query modify
+message pbui_Type_FaceConfigInfo
+{
+    repeated pbui_Item_FaceTextItemInfo     text = 1;
+    repeated pbui_Item_FacePictureItemInfo  picture = 2;
+	repeated pbui_Item_FaceOnlyTextItemInfo onlytext = 3;
+}

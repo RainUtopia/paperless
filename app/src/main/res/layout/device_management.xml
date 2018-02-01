@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/place3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/tableColor"
+        android:orientation="horizontal"
+        app:layout_heightPercent="7%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="序号"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="设备名称"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="设备类型"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="设备IP"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="设备状态"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/devrce_manage_rl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/device_place"
+        android:layout_below="@id/place3"
+        app:layout_heightPercent="73%" />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/device_place"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        app:layout_heightPercent="20%">
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_heightPercent="50%">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|right"
+                android:text="设备名称：" />
+
+            <EditText
+                android:id="@+id/device_name_edt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:imeOptions="flagNoExtractUi" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|right"
+                android:text="设备IP：" />
+
+            <EditText
+                android:id="@+id/device_ip_edt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:imeOptions="flagNoExtractUi" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/linear1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_heightPercent="50%">
+
+            <Button
+                android:id="@+id/modify_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:text="修改"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:padding="5dp"
+                android:text="删除"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+</com.zhy.android.percent.support.PercentRelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/topbar2"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/meeting_company_name"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:lines="1" />
+
+
+    <TextView
+        android:id="@+id/meeting_theme"
+        style="@style/TextStyle"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/meeting_message"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:background="@drawable/chat"
+            android:scaleType="fitXY" />
+
+        <ImageButton
+            android:id="@+id/meeting_chat_online"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/service"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+</LinearLayout>

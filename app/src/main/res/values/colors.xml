@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4a63ea</color>
+    <color name="colorPrimaryDark">#394bbe</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="red">#ff0000</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="CardBackgroundColor">#81b8e2</color>
+    <color name="black">#000000</color>
+    <color name="tableColor">#949ba0</color>
+    <color name="divLineColor">#918c8c</color>
+    <color name="controlsColor">#edebeb</color>
+    <color name="popbackground">#676767</color>
+
+    <color name="ItemCheckedColor">#ff00ee</color>
+
+
+</resources>

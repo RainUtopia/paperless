@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- 主页自定义属性 -->
+    <style name="TextStyle">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <!-- 进入会议页面左边列表字体样式 -->
+    <style name="TextStyle_Left">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="announceTextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="AnimHorizontal" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
+        <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
+
+    </style>
+</resources>

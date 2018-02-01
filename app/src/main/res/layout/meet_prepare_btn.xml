@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/topbar3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/meeting_management"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="会议管理" />
+
+        <Button
+            android:id="@+id/meeting_agenda"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="会议议程" />
+
+        <Button
+            android:id="@+id/attendees"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="参会人员" />
+
+        <Button
+            android:id="@+id/meeting_file"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="会议资料" />
+
+        <Button
+            android:id="@+id/camera_managenment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="摄像机管理" />
+
+        <Button
+            android:id="@+id/vote_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="投票录入" />
+
+        <Button
+            android:id="@+id/seat_binding"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="座位绑定" />
+
+        <Button
+            android:id="@+id/stands_show"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="桌牌显示" />
+
+        <Button
+            android:id="@+id/meeting_functional"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="会议功能" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/meeting_prepare_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

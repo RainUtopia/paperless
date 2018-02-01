@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/roomplace1abcd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="1dp"
+        android:background="#000000"
+        android:orientation="horizontal"
+        app:layout_heightPercent="7%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:background="#ccc9c9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="序号"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="3"
+            android:background="#ccc9c9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="会议室名称"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="3"
+            android:background="#ccc9c9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="会议室地点"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="3"
+            android:background="#ccc9c9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="备注"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/room_top_rl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/roomplace1abcd"
+        app:layout_heightPercent="28%" />
+    <!--中间部分-->
+    <!--中间部分-->
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/meet_room_place2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/room_top_rl"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        app:layout_heightPercent="45%">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_widthPercent="40%">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="会议室设备"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tableColor"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/room_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#edebeb"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="序号"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.5dp"
+                    android:layout_weight="3"
+                    android:background="#edebeb"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="设备名称"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.5dp"
+                    android:layout_weight="3"
+                    android:background="#edebeb"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="设备类型"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/room_left_rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_widthPercent="20%">
+
+            <Button
+                android:id="@+id/room_add_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加" />
+
+            <Button
+                android:id="@+id/room_delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="删除" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_widthPercent="40%">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="所有设备"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tableColor"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#edebeb"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="序号"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.5dp"
+                    android:layout_weight="3"
+                    android:background="#edebeb"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="设备名称"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.5dp"
+                    android:layout_weight="3"
+                    android:background="#edebeb"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="设备类型"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/room_right_rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <LinearLayout
+        android:id="@+id/meet_room_place3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/meet_room_place2"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:text="会议室名称：" />
+
+        <EditText
+            android:id="@+id/room_name_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:imeOptions="flagNoExtractUi" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:text="会议室地点：" />
+
+        <EditText
+            android:id="@+id/room_meetplace_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:imeOptions="flagNoExtractUi" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:text="备注：" />
+
+        <EditText
+            android:id="@+id/room_note_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:imeOptions="flagNoExtractUi" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/meet_room_place3"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%">
+
+        <Button
+            android:id="@+id/bottom_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:text="增加" />
+
+        <Button
+            android:id="@+id/bottom_delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/bottom_amend_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="修改" />
+    </LinearLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>

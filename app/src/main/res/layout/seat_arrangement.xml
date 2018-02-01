@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/seat_arrangement_place"
+        android:layout_width="0dp"
+        app:layout_widthPercent="30%"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        android:background="@color/tableColor"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/seatarrangement_item_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:background="#edebeb"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="序号" />
+
+        <TextView
+            android:id="@+id/seatarrangement_item_roomname"
+            android:layout_width="0dp"
+            android:textStyle="bold"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="3"
+            android:maxLines="1"
+            android:textSize="20sp"
+            android:ellipsize="end"
+            android:background="#edebeb"
+            android:gravity="center"
+            android:text="会议室名称" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/seat_left_rl"
+        android:layout_width="0dp"
+        android:layout_below="@id/seat_arrangement_place"
+        android:layout_height="0dp"
+        app:layout_heightPercent="70%"
+        app:layout_widthPercent="30%" />
+
+    <ImageView
+        android:id="@+id/seat_right_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_toRightOf="@id/seat_left_rl"
+        android:background="@drawable/mid"
+        app:layout_heightPercent="80%"
+        app:layout_widthPercent="70%" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/seat_left_rl"
+        android:background="@color/divLineColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/seat_left_rl"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/file_name_edt"
+            android:hint="文件名称.png"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/seat_load_pic"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_height="wrap_content"
+            android:text="加载底图" />
+
+        <TextView
+            android:id="@+id/seat_show_picinfo"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_height="wrap_content"
+            android:text="长180宽90格式：png" />
+
+        <Button
+            android:id="@+id/seat_device_bind"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设备绑定" />
+    </LinearLayout>
+
+</com.zhy.android.percent.support.PercentRelativeLayout>

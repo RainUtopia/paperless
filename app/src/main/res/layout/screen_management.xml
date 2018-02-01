@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/screen_palce1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="屏幕源"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_heightPercent="25%"
+        app:layout_widthPercent="40%" />
+
+    <View
+        android:id="@+id/divline2"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/divline5"
+        android:layout_toRightOf="@id/screen_palce1"
+        android:background="@color/divLineColor" />
+
+    <View
+        android:id="@+id/divline1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/screen_palce1"
+        android:background="@color/divLineColor" />
+
+    <TextView
+        android:id="@+id/screen_palce2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_toRightOf="@id/screen_palce1"
+        android:gravity="center"
+        android:text="目标屏幕"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_heightPercent="12%"
+        app:layout_widthPercent="60%" />
+
+    <View
+        android:id="@+id/divline3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/screen_palce2"
+        android:layout_toRightOf="@id/screen_palce1"
+        android:background="@color/divLineColor" />
+
+    <LinearLayout
+        android:id="@+id/screen_place3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/divline3"
+        android:layout_toRightOf="@id/divline2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_heightPercent="13%"
+        app:layout_widthPercent="20%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="投影设备"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/device_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全选" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divline4"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/divline5"
+        android:layout_below="@id/divline3"
+        android:layout_toRightOf="@id/screen_place3"
+        android:background="@color/divLineColor" />
+
+    <LinearLayout
+        android:id="@+id/screen_place4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/divline3"
+        android:layout_toRightOf="@id/divline4"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_heightPercent="13%"
+        app:layout_widthPercent="40%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="目标屏幕"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/goal_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全选" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/screen_left_rl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/divline1"
+        android:layout_toLeftOf="@id/divline2"
+        app:layout_heightPercent="60%" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/screen_mid_rl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/divline1"
+        android:layout_toLeftOf="@id/divline4"
+        android:layout_toRightOf="@id/divline2"
+        app:layout_heightPercent="60%" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/screen_right_rl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/divline1"
+        android:layout_toRightOf="@id/divline4"
+        app:layout_heightPercent="60%" />
+
+    <View
+        android:id="@+id/divline5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/screen_mid_rl"
+        android:background="@color/divLineColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divline5"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="预览" />
+
+        <Button
+            android:id="@+id/start_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="发起同屏" />
+
+        <Button
+            android:id="@+id/stop_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="停止同屏" />
+    </LinearLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>

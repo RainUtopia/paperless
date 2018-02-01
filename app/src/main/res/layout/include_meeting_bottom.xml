@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/meeting_layout_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/left_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/left_normal"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="15%">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:id="@+id/the_now_date"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_heightPercent="10%"
+            app:layout_widthPercent="100%">
+
+            <TextView
+                android:id="@+id/meeting_now_time"
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="50%" />
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+
+
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@id/meeting_now_time"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="50%">
+
+                <TextView
+                    android:id="@+id/meeting_now_date"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    app:layout_heightPercent="50%"
+                    app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:id="@+id/meeting_now_week"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    app:layout_heightPercent="50%"
+                    app:layout_widthPercent="100%" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_heightPercent="20%"
+            app:layout_widthPercent="100%">
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="50%">
+
+                <ImageView
+
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/member"
+                    app:layout_heightPercent="50%"
+                    app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="参会人"
+                    android:textColor="@color/textColor"
+                    android:textSize="10sp"
+                    app:layout_heightPercent="25%"
+                    app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:id="@+id/meeting_participate_name"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="13sp"
+                    android:text=" - "
+                    app:layout_heightPercent="25%"
+                    app:layout_widthPercent="100%" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="50%">
+
+                <ImageView
+
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/host"
+                    app:layout_heightPercent="50%"
+                    app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="主持人"
+                    android:textColor="@color/textColor"
+                    android:textSize="10sp"
+                    app:layout_heightPercent="25%"
+                    app:layout_widthPercent="100%" />
+
+                <TextView
+                    android:id="@+id/meeting_host_name"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="13sp"
+                    app:layout_heightPercent="25%"
+                    app:layout_widthPercent="100%" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_heightPercent="70%"
+            app:layout_widthPercent="100%">
+
+            <ImageView
+                android:id="@+id/signin"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_signin"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/agenda"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_announce_agenda"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/meetingfile"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_meetingfile"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/sharedfile"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_sharedfile"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/whiteboard"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_whiteboard"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/chat"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_chat"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_video"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/vote"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_vote"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/postil"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_postil"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+            <ImageView
+                android:id="@+id/webbrowse"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_web"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                app:layout_heightPercent="10%" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <FrameLayout
+        android:id="@+id/right_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_toRightOf="@id/left_layout"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="85%" />
+
+    <com.pa.paperless.views.MyFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/side"
+        android:backgroundTint="#007bff"
+        android:src="@drawable/side"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="10dp" />
+</com.zhy.android.percent.support.PercentRelativeLayout>

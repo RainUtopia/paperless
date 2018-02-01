@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/toview_place"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/tableColor"
+        android:orientation="horizontal"
+        app:layout_heightPercent="7%"
+        app:layout_widthPercent="30%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="当前参会人员"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/notation_left_rl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/toview_place"
+        android:layout_marginRight="5dp"
+        app:layout_heightPercent="73%"
+        app:layout_widthPercent="30%" />
+
+    <View
+        android:id="@+id/lineview1"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lineview2"
+        android:layout_toRightOf="@id/notation_left_rl"
+        android:background="@color/divLineColor" />
+
+    <LinearLayout
+        android:id="@+id/toview_place2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/lineview1"
+        android:background="@color/tableColor"
+        android:orientation="horizontal"
+        app:layout_heightPercent="7%">
+
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="序号"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="5"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="文件名"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="文件大小"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="文件类型"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="上传者"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="2"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="操作"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/notation_right_rl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/toview_place"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/lineview1"
+        app:layout_heightPercent="73%"
+        app:layout_widthPercent="70%" />
+
+    <View
+        android:id="@+id/lineview2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/notation_left_rl"
+        android:layout_marginRight="5dp"
+        android:background="@color/divLineColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lineview2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/notation_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:text="下载" />
+
+        <Button
+            android:id="@+id/notation_download_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下载到压缩文件" />
+    </LinearLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>
