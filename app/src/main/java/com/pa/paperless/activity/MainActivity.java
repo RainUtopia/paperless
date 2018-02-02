@@ -367,16 +367,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     Bundle bundle = new Bundle();
                     ArrayList arraylist = new ArrayList();
                     //将设备会议信息的值传递给MeetingActivity
-                    arraylist.add(nowDivMeetInfo.getDeviceid());
-                    arraylist.add(nowDivMeetInfo.getMeetingid());
-                    arraylist.add(nowDivMeetInfo.getMemberid());
-                    arraylist.add(nowDivMeetInfo.getRoomid());
-                    arraylist.add(nowDivMeetInfo.getSigninType());
-                    arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMeetingname()));
-                    arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMembername()));
-                    arraylist.add(MyUtils.getBts(nowDivMeetInfo.getCompany()));
-                    arraylist.add(MyUtils.getBts(nowDivMeetInfo.getJob()));
-                    arraylist.add(compereName);
+                    if(nowDivMeetInfo!=null) {
+                        arraylist.add(nowDivMeetInfo.getDeviceid());
+                        arraylist.add(nowDivMeetInfo.getMeetingid());
+                        arraylist.add(nowDivMeetInfo.getMemberid());
+                        arraylist.add(nowDivMeetInfo.getRoomid());
+                        arraylist.add(nowDivMeetInfo.getSigninType());
+                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMeetingname()));
+                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMembername()));
+                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getCompany()));
+                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getJob()));
+                        arraylist.add(compereName);
+                    }
                     Log.e("MyLog", "MainActivity.onClick:  传递给MeetingActivity --->>> devid：" + nowDivMeetInfo.getDeviceid() + " memberid:" + nowDivMeetInfo.getMemberid());
                     bundle.putParcelableArrayList("devMeetInfo", arraylist);
                     intent.putExtra("putId", bundle);

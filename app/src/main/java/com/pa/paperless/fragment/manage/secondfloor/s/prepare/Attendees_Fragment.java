@@ -81,7 +81,6 @@ public class Attendees_Fragment extends BaseFragment implements View.OnClickList
     private CheckBox all_check;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -283,7 +282,7 @@ public class Attendees_Fragment extends BaseFragment implements View.OnClickList
                     if (!popAddData.contains(mAddFromData.get(posion))) {
                         popAddData.add(mAddFromData.get(posion));
                     }
-                    checkeds.set(posion, true);
+//                    checkeds.set(posion, true);
                 } else {
                     //删除该项
                     if (popAddData.contains(mAddFromData.get(posion))) {
@@ -293,13 +292,14 @@ public class Attendees_Fragment extends BaseFragment implements View.OnClickList
                             }
                         }
                     }
-                    checkeds.set(posion, false);
+//                    checkeds.set(posion, false);
                 }
-                if (checkeds.contains(false)) {
-                    all_check.setChecked(false);
-                } else {
-                    all_check.setChecked(true);
-                }
+                checkeds.set(posion, itemCb.isChecked());
+//                if (checkeds.contains(false)) {
+                all_check.setChecked(!(checkeds.contains(false)));
+//                } else {
+//                    all_check.setChecked(true);
+//                }
                 addFromAttendeeAdapter.setCheckedId(posion);
                 Log.e("MyLog", "Attendees_Fragment.onItemClick:  Pop中要添加的数据 --->>> " + popAddData.size());
             }
