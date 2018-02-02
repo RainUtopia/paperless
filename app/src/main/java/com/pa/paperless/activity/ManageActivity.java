@@ -95,6 +95,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

@@ -50,7 +50,7 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
             }
         }
     };
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
 
     @Nullable
     @Override
@@ -70,6 +70,7 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -77,6 +78,8 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
+
         nativeUtil.setCallListener(this);
         Log.e("MyLog","WebBrowseFragment.onAttach:   --->>> ");
     }

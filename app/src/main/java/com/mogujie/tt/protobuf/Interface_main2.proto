@@ -477,13 +477,13 @@ message pbui_Type_MeetWBRectDetail
 //method: add query pagequery
 message pbui_Item_MeetWBTextDetail
 {
-	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
-	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于 opermemberid 的白板操作
+	fixed32  opermemberid=2; //当前该命令的人员ID 为0表示清除所有等于 opermemberid 的白板操作
 	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
 	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
 
 	fixed64  utcstamp=5;	//时间戳  微秒
-	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于 figuretype 的白板操作
 
 	fixed32  fontsize=7;			//字体大小
 	fixed32  fontflag=8;			//字体其它属性

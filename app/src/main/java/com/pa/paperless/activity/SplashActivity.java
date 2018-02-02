@@ -70,10 +70,6 @@ public class SplashActivity extends BaseActivity {
         alpha.start();
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-    }
 
     private void initView() {
         over = (Button) findViewById(R.id.over);

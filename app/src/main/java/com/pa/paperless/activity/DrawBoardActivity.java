@@ -15,17 +15,20 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.pa.paperless.R;
+import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.GetPicFilePathUtil;
 import com.pa.paperless.utils.ImageUtils;
 import com.pa.paperless.views.ColorPickerDialog;
 import com.pa.paperless.views.PaletteView;
+import com.wind.myapplication.NativeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.utils.ClickViewAnimationUtil.setAnimator;
+import static com.pa.paperless.utils.MyUtils.setAnimator;
 
-public class DrawBoardActivity extends BaseActivity implements View.OnClickListener {
+
+public class DrawBoardActivity extends BaseActivity implements View.OnClickListener, CallListener {
 
     public static int PHOTO_REQUEST_GALLERY = 1;
     private ImageView mPen;
@@ -59,19 +62,26 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
 
     private List<ImageView> mTopImages;//上方的图片
     private List<ImageView> mBotImages;//下方的图片
+    private NativeUtil nativeUtil;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_board);
+        initController();
         initView();
         initImages();
         initDefaultColor();
         initEvent();
     }
 
-
+    @Override
+    protected void initController() {
+        nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
+        nativeUtil.setCallListener(this);
+    }
 
     private void initEvent() {
         /**
@@ -265,6 +275,8 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.text://添加文字
                 setImgSelect(mTopImages, 3);
+                /** ************ ******  231.添加文本  ****** ************ **/
+//                nativeUtil.addText();
                 break;
             case R.id.pic://打开系统相册
                 setImgSelect(mTopImages, 4);
@@ -452,5 +464,10 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void callListener(int action, Object result) {
+
     }
 }

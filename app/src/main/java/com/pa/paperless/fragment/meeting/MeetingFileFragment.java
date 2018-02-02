@@ -74,7 +74,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     private List<Button> mBtns;
     private List<MeetDirFileInfo> mFileData = new ArrayList<>();
     private TypeFileAdapter dataAdapter;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private MediaPlayer mediaPlayer;
     private Handler mHandler = new Handler() {
         @Override
@@ -215,6 +215,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -250,6 +251,8 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Log.e("MyLog", "MeetingFileFragment.onItemClick:  item 点击 --->>> " + i);
+                // TODO: 2018/2/1
+//                nativeUtil = NativeUtil.getInstance();
                 nativeUtil = NativeUtil.getInstance();
                 //从新设置的nativeUtil后还要从新设置回调
                 nativeUtil.setCallListener(listener);

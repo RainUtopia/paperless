@@ -6,24 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
+import com.pa.paperless.bean.ScreenControlBean;
 import com.pa.paperless.listener.ItemClickListener;
-import com.pa.paperless.utils.MyUtils;
 
 import java.util.List;
 
 
 /**
  * Created by Administrator on 2017/11/9.
+ * 同屏控制Adapter 参与人 和 投影机
  */
 
-public class PlayersPopupRLAdapter extends RecyclerView.Adapter<PlayersPopupRLAdapter.ViewHolder> {
+public class ScreenControlAdapter extends RecyclerView.Adapter<ScreenControlAdapter.ViewHolder> {
 
-    private  List<String> mData;
+    private  List<ScreenControlBean> mData;
     private ItemClickListener mListener;
     private boolean isCheckAll = false;
-    public PlayersPopupRLAdapter(List<String> datas) {
+    public ScreenControlAdapter(List<ScreenControlBean> datas) {
         mData = datas;
     }
     public void setCheckAll(boolean tf){
@@ -40,7 +40,7 @@ public class PlayersPopupRLAdapter extends RecyclerView.Adapter<PlayersPopupRLAd
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.play_btn.setText(mData.get(position));
+        holder.play_btn.setText(mData.get(position).getName());
         holder.play_btn.setSelected(isCheckAll);
         holder.play_btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -98,7 +98,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
     private String rightTypeStr;
     public static boolean isDeleteRight;
     public static int SelectRightPosition;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -270,6 +270,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

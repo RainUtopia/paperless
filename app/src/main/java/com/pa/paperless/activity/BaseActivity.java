@@ -19,7 +19,7 @@ import com.wind.myapplication.NativeUtil;
 public class BaseActivity extends AppCompatActivity implements IModelChangeListener {
 
     protected BaseController mController;
-
+    protected NativeUtil nativeUtil ;
 
     private Handler mHandler = new Handler() {
         @Override

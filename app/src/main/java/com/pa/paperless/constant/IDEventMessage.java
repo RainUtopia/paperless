@@ -49,4 +49,6 @@ public class IDEventMessage {
     public static final int MEDIA_PLAY_INFORM = 3020;
     //180.会议排位变更通知
     public static final int MeetSeat_Change_Inform = 3021;
+    //184.收到新的会议交流信息
+    public static final int Receive_MeetChat_Info = 3022;
 }

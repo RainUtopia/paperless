@@ -52,9 +52,6 @@ import static com.pa.paperless.utils.MyUtils.getStb;
  */
 
 public class NativeUtil {
-
-    private static NativeUtil instance;
-
     static {
         System.loadLibrary("avcodec-57");
         System.loadLibrary("avdevice-57");
@@ -78,7 +75,10 @@ public class NativeUtil {
 
     public CallListener mCallListener;
 
+    private static NativeUtil instance;
+
     private NativeUtil() {
+
     }
 
     public static synchronized NativeUtil getInstance() {
@@ -87,7 +87,6 @@ public class NativeUtil {
         }
         return instance;
     }
-
 
     public void setCallListener(CallListener listener) {
         mCallListener = listener;
@@ -153,11 +152,13 @@ public class NativeUtil {
             int propertyval2 = pbui_deviceInt32uProperty1.getPropertyval2();
             int propertyval3 = pbui_deviceInt32uProperty1.getPropertyval3();
             int propertyval4 = pbui_deviceInt32uProperty1.getPropertyval4();
+            Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:   --->>> " + propertyval + "  " + propertyval2 + "  " + propertyval3 + "  " + propertyval4);
         } else {
             //字符串
             InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty = InterfaceMain.pbui_DeviceStringProperty.getDefaultInstance();
             InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty1 = pbui_deviceStringProperty.parseFrom(array);
             String propertytext = MyUtils.getBts(pbui_deviceStringProperty1.getPropertytext());
+            Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  Propertytext --->>> " + propertytext);
         }
         Log.e("MyLog", "NativeUtil.queryDeviceProperties:  7.按属性ID查询指定设备属性成功 --->>> ");
         return true;
@@ -1108,7 +1109,7 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = defaultInstance.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ATTEND_BYID, pbui_type_memberDetailInfo);
-            Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  91.查询指定ID的参会人员成功 --->>> ");
+            Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  91.查询指定ID的参会人员成功 --->>> id 是："+infoId);
         }
         return true;
     }
@@ -2330,7 +2331,7 @@ public class NativeUtil {
     public boolean queryMeetRanking() throws InvalidProtocolBufferException {
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSEAT.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
-            Log.e("MyLog","NativeUtil.queryMeetRanking:  181.查询会议排位失败 --->>> ");
+            Log.e("MyLog", "NativeUtil.queryMeetRanking:  181.查询会议排位失败 --->>> ");
             return false;
         }
         InterfaceMain2.pbui_Type_MeetSeatDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetSeatDetailInfo.getDefaultInstance();
@@ -2931,6 +2932,21 @@ public class NativeUtil {
      */
     public boolean addText() {
         InterfaceMain2.pbui_Item_MeetWBTextDetail.Builder builder = InterfaceMain2.pbui_Item_MeetWBTextDetail.newBuilder();
+
+//        builder.setOperid();
+//        builder.setOpermemberid();
+//        builder.setSrcmemid();
+//        builder.setSrcwbid();
+//        builder.setUtcstamp();
+//        builder.setFiguretype();
+//        builder.setFontsize();
+//        builder.setFontflag();
+//        builder.setArgb();
+//        builder.setFontname();
+//        builder.setLx();
+//        builder.setLy();
+//        builder.setPtext();
+
         InterfaceMain2.pbui_Item_MeetWBTextDetail build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addText:  231.添加文本 --->>> ");
@@ -3635,7 +3651,7 @@ public class NativeUtil {
             case 28://180
                 InterfaceMain.pbui_MeetNotifyMsg meetRankingChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg9 = meetRankingChangeInform.parseFrom(data);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.MeetSeat_Change_Inform,pbui_meetNotifyMsg9));
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.MeetSeat_Change_Inform, pbui_meetNotifyMsg9));
                 Log.e("CaseLog", "NativeUtil.callback_method:  180 会议排位变更通知 --->>> ");
                 break;
             case 29://184
@@ -3644,6 +3660,7 @@ public class NativeUtil {
                 if (mCallListener != null) {
                     mCallListener.callListener(IDivMessage.RECEIVE_MEET_IMINFO, pbui_type_meetIM);
                 }
+//                EventBus.getDefault().post(new EventMessage(IDEventMessage.Receive_MeetChat_Info,pbui_type_meetIM));
                 Log.e("CaseLog", "NativeUtil.callback_method:  184 收到新的会议交流信息 --->>> ");
                 break;
             case 30://188

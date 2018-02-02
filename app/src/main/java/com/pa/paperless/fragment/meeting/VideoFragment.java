@@ -36,7 +36,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     private Button mStopVideoBtn;
     private Button mPushVideoBtn;
     private Button mProjectorVideoBtn;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
 
     @Nullable
     @Override
@@ -50,6 +50,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

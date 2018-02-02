@@ -49,7 +49,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     private Button mDocument;
     private Button mPicture;
     private List<Button> mBtns;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -124,6 +124,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

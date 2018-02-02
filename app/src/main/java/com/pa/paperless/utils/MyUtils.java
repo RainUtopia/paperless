@@ -1,9 +1,13 @@
 package com.pa.paperless.utils;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 
 import com.google.protobuf.ByteString;
+import com.pa.paperless.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,6 +22,14 @@ import java.util.List;
 
 public class MyUtils {
 
+
+    /**
+     * 设置popupWindow 的动画
+     * @param popupWindow
+     */
+    public static void setAnimal(PopupWindow popupWindow){
+        popupWindow.setAnimationStyle(R.style.AnimHorizontal);
+    }
     /**
      * String 转 ByteString
      * @param name
@@ -96,5 +108,15 @@ public class MyUtils {
             e.printStackTrace();
         }
         return obj;
+    }
+
+    /**
+     * 设置控件点击时放大动画
+     * @param iv
+     */
+    public static void setAnimator(View iv) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(iv, "scaleX", 1f, 1.5f, 1f);
+        animator.setDuration(300);
+        animator.start();
     }
 }

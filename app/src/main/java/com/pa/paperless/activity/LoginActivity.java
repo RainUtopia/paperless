@@ -30,11 +30,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     protected void initController() {
-        mController = new LoginController(getApplication());
-        mController.setIModelChangeListener(this);
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
-//        nativeUtil = new NativeUtil(mController);
     }
 
     private void initView() {

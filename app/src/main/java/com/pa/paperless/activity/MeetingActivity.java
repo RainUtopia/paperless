@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,11 +27,11 @@ import android.widget.Toast;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
-import com.pa.paperless.adapter.PlayersPopupRLAdapter;
+import com.pa.paperless.adapter.ScreenControlAdapter;
 import com.pa.paperless.bean.MainDivMeetInfo;
 import com.pa.paperless.bean.MemberInfo;
+import com.pa.paperless.bean.ScreenControlBean;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
@@ -47,7 +46,6 @@ import com.pa.paperless.fragment.meeting.VoteFragment;
 import com.pa.paperless.fragment.meeting.WebBrowseFragment;
 import com.pa.paperless.fragment.meeting.SharedFileFragment;
 import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.ClickViewAnimationUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
@@ -59,6 +57,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pa.paperless.utils.MyUtils.setAnimator;
 
 
 public class MeetingActivity extends BaseActivity implements View.OnClickListener, CallListener {
@@ -136,18 +136,21 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         Log.e("MyLog", "MeetingActivity.handleMessage:  指定ID的参会人员名称： --->>> " + name);
                     }
                     break;
-                case IDivMessage.QUERY_ATTENDEE://查询参会人员
+                case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                     ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
                     InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryMember.get(0);
                     List<MemberInfo> memberInfos = Dispose.MemberInfo(o2);
-                    members = new ArrayList<>();
+                    //同屏控制 pop 选择参会人
+                    screenControlBeen = new ArrayList<>();
                     for (int i = 0; i < memberInfos.size(); i++) {
-                        members.add(memberInfos.get(i).getName());
+                        MemberInfo memberInfo = memberInfos.get(i);
+                        String name = memberInfo.getName();
+                        int personid = memberInfo.getPersonid();
+                        screenControlBeen.add(new ScreenControlBean(personid, name));
                     }
-//                    setString();
                     Log.e("MyLog", "MeetingActivity.handleMessage:  参会人数量： --->>> " + memberInfos.size());
                     break;
-                case IDivMessage.QUERY_ATTEND_BYID:
+                case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
                     ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
                     InterfaceMain.pbui_Type_MemberDetailInfo o3 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
                     List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList2 = o3.getItemList();
@@ -168,12 +171,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
     };
     public static MainDivMeetInfo o;
+    private List<ScreenControlBean> screenControlBeen;
 
-    public List<String> setString() {
-        return members;
+    public List<ScreenControlBean> getScreenControlBeen() {
+        return screenControlBeen;
     }
 
-    private List<String> members;
 
     @Override
     public void callListener(int action, Object result) {
@@ -388,6 +391,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -654,6 +658,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public void showFabPop() {
         View popupView = getLayoutInflater().inflate(R.layout.pop_meeting, null);
         mPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        mPopupWindow.setAnimationStyle(R.style.AnimHorizontal);
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mPopupWindow.setTouchable(true);
         mPopupWindow.setOutsideTouchable(true);
@@ -673,29 +678,30 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 Toast.makeText(MeetingActivity.this, "点击了软键盘", Toast.LENGTH_SHORT).show();
-                ClickViewAnimationUtil.setAnimator(holder.keyboard);
+                setAnimator(holder.keyboard);
             }
         });
         //手写
         holder.handwritten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.handwritten);
+                setAnimator(holder.handwritten);
             }
         });
         //桌面截图
         holder.screens.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.screens);
+                setAnimator(holder.screens);
             }
         });
-        //同屏录制
+        //同屏控制
         holder.oneScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.oneScreen);
+                setAnimator(holder.oneScreen);
                 mPopupWindow.dismiss();
+                //打开同屏控制弹出框
                 showScreensPop();
             }
         });
@@ -703,7 +709,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.backPop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.backPop);
+                setAnimator(holder.backPop);
                 mPopupWindow.dismiss();
             }
         });
@@ -711,28 +717,28 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.projection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.projection);
+                setAnimator(holder.projection);
             }
         });
         //会议笔记
         holder.note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.note);
+                setAnimator(holder.note);
             }
         });
         //呼叫服务
         holder.callService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.callService);
+                setAnimator(holder.callService);
             }
         });
         //电子白板
         holder.whiteplatePop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClickViewAnimationUtil.setAnimator(holder.whiteplatePop);
+                setAnimator(holder.whiteplatePop);
             }
         });
 
@@ -742,9 +748,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      * 同屏控制
      */
     private void showScreensPop() {
-
         View popupView = getLayoutInflater().inflate(R.layout.pop_sscreen, null);
         mScreenPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setAnimal(mScreenPopupWindow);
         mScreenPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mScreenPopupWindow.setTouchable(true);
         mScreenPopupWindow.setOutsideTouchable(true);
@@ -759,7 +765,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      */
     private void Screen_Event(final ScreenViewHolder holder) {
         // TODO: 2017/11/8 同屏控制
-        //选中所有人
+        holder.everyone_cb.setChecked(isCheckedAllPlayers);
+        //所有人
         holder.everyone_cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -775,7 +782,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.choose_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.choose_player.setSelected(!holder.choose_player.isSelected());
+//                !holder.choose_player.isSelected()
+                holder.choose_player.setSelected(!isCheckedAllPlayers);
                 showPlayerPop();
             }
         });
@@ -827,6 +835,31 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     }
 
+    //同屏控制
+    public static class ScreenViewHolder {
+        public View rootView;
+        public CheckBox everyone_cb;
+        public CheckBox choose_player;
+        public CheckBox all_projector;
+        public CheckBox choose_projector;
+        public Button screens_btn;
+        public Button stop_btn;
+        public Button join_btn;
+        public Button cancel_btn;
+
+        public ScreenViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.everyone_cb = (CheckBox) rootView.findViewById(R.id.everyone_cb);
+            this.choose_player = (CheckBox) rootView.findViewById(R.id.players);
+            this.all_projector = (CheckBox) rootView.findViewById(R.id.all_projector);
+            this.choose_projector = (CheckBox) rootView.findViewById(R.id.choose_projector);
+            this.screens_btn = (Button) rootView.findViewById(R.id.screens_btn);
+            this.stop_btn = (Button) rootView.findViewById(R.id.stop_btn);
+            this.join_btn = (Button) rootView.findViewById(R.id.join_btn);
+            this.cancel_btn = (Button) rootView.findViewById(R.id.cancel_btn);
+        }
+
+    }
 
     /**
      * 选择参会人
@@ -834,28 +867,19 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private void showPlayerPop() {
         View popupView = getLayoutInflater().inflate(R.layout.player_pop, null);
         mPlayerPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setAnimal(mPlayerPopupWindow);
         mPlayerPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mPlayerPopupWindow.setTouchable(true);
         mPlayerPopupWindow.setOutsideTouchable(true);
         PlayerViewHolder holder = new PlayerViewHolder(popupView);
-        if (isCheckedAllPlayers) {
-            holder.PlayAdapter.setCheckAll(isCheckedAllPlayers);
-            holder.playersAllCb.setSelected(true);
-            holder.PlayAdapter.notifyDataSetChanged();
-        } else {
-            holder.PlayAdapter.setCheckAll(isCheckedAllPlayers);
-            holder.playersAllCb.setSelected(false);
-            holder.PlayAdapter.notifyDataSetChanged();
-        }
-        if (isCheckedAllProjector) {
-            holder.ProAapter.setCheckAll(isCheckedAllProjector);
-            holder.projectorAllCb.setSelected(true);
-            holder.ProAapter.notifyDataSetChanged();
-        } else {
-            holder.ProAapter.setCheckAll(isCheckedAllProjector);
-            holder.projectorAllCb.setSelected(false);
-            holder.ProAapter.notifyDataSetChanged();
-        }
+        holder.PlayAdapter.setCheckAll(isCheckedAllPlayers);
+        holder.playersAllCb.setSelected(isCheckedAllPlayers);
+        holder.PlayAdapter.notifyDataSetChanged();
+
+        holder.ProAapter.setCheckAll(isCheckedAllProjector);
+        holder.projectorAllCb.setSelected(isCheckedAllProjector);
+        holder.ProAapter.notifyDataSetChanged();
+
         Player_Event(holder);
         mPlayerPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
@@ -870,34 +894,22 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.playersAllCb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!holder.playersAllCb.isSelected()) {
-                    isCheckedAllPlayers = true;
-                    holder.playersAllCb.setSelected(true);
-                    holder.PlayAdapter.setCheckAll(true);
-                    holder.PlayAdapter.notifyDataSetChanged();
-                } else {
-                    isCheckedAllPlayers = false;
-                    holder.playersAllCb.setSelected(false);
-                    holder.PlayAdapter.setCheckAll(false);
-                    holder.PlayAdapter.notifyDataSetChanged();
-                }
+                isCheckedAllPlayers = !holder.playersAllCb.isSelected();
+                holder.playersAllCb.setSelected(isCheckedAllPlayers);
+                holder.PlayAdapter.setCheckAll(isCheckedAllPlayers);
+                holder.PlayAdapter.notifyDataSetChanged();
+
             }
         });
         // 投影机全选 选择框
         holder.projectorAllCb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!holder.projectorAllCb.isSelected()) {
-                    isCheckedAllProjector = true;
-                    holder.projectorAllCb.setSelected(true);
-                    holder.ProAapter.setCheckAll(true);
-                    holder.ProAapter.notifyDataSetChanged();
-                } else {
-                    isCheckedAllProjector = false;
-                    holder.projectorAllCb.setSelected(false);
-                    holder.ProAapter.setCheckAll(false);
-                    holder.ProAapter.notifyDataSetChanged();
-                }
+                isCheckedAllProjector = !holder.projectorAllCb.isSelected();
+                holder.projectorAllCb.setSelected(isCheckedAllProjector);
+                holder.ProAapter.setCheckAll(isCheckedAllProjector);
+                holder.ProAapter.notifyDataSetChanged();
+
             }
         });
         //确定按钮
@@ -947,31 +959,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    //同屏控制
-    public static class ScreenViewHolder {
-        public View rootView;
-        public CheckBox everyone_cb;
-        public CheckBox choose_player;
-        public CheckBox all_projector;
-        public CheckBox choose_projector;
-        public Button screens_btn;
-        public Button stop_btn;
-        public Button join_btn;
-        public Button cancel_btn;
-
-        public ScreenViewHolder(View rootView) {
-            this.rootView = rootView;
-            this.everyone_cb = (CheckBox) rootView.findViewById(R.id.everyone_cb);
-            this.choose_player = (CheckBox) rootView.findViewById(R.id.players);
-            this.all_projector = (CheckBox) rootView.findViewById(R.id.all_projector);
-            this.choose_projector = (CheckBox) rootView.findViewById(R.id.choose_projector);
-            this.screens_btn = (Button) rootView.findViewById(R.id.screens_btn);
-            this.stop_btn = (Button) rootView.findViewById(R.id.stop_btn);
-            this.join_btn = (Button) rootView.findViewById(R.id.join_btn);
-            this.cancel_btn = (Button) rootView.findViewById(R.id.cancel_btn);
-        }
-
-    }
 
     public class PlayerViewHolder {
         public View rootView;
@@ -983,24 +970,15 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public Button playerPopCancel;
         private List<String> playerDatas;
 
-        public PlayersPopupRLAdapter PlayAdapter;
-        public PlayersPopupRLAdapter ProAapter;
+        public ScreenControlAdapter PlayAdapter;
+        public ScreenControlAdapter ProAapter;
 
         public PlayerViewHolder(final View rootView) {
             this.rootView = rootView;
             this.playersAllCb = (CheckBox) rootView.findViewById(R.id.players_all_cb);
-            // TODO: 2018/1/30 展示参会人
-//            playerDatas = new ArrayList<>();
-//            for (int i = 1; i <= 18; i++) {
-//                if (i % 2 == 0) {
-//                    playerDatas.add("" + i);
-//                } else {
-//                    playerDatas.add("瀑布流" + i);
-//                }
-//            }
-            List<String> strings = setString();
-            Log.e("MyLog", "PlayerViewHolder.PlayerViewHolder:  members --->>> " + strings.size());
-            PlayAdapter = new PlayersPopupRLAdapter(strings);
+            List<ScreenControlBean> screenControlBeen = getScreenControlBeen();
+            Log.e("MyLog", "PlayerViewHolder.PlayerViewHolder:  members --->>> " + screenControlBeen.size());
+            PlayAdapter = new ScreenControlAdapter(screenControlBeen);
             this.playersRl = (RecyclerView) rootView.findViewById(R.id.players_rl);
             //瀑布流布局
             this.playersRl.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
@@ -1015,7 +993,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 //                playerDatas.add(i + "号投影机");
 //            }
             this.projectorRl = (RecyclerView) rootView.findViewById(R.id.projector_rl);
-            ProAapter = new PlayersPopupRLAdapter(strings);
+            ProAapter = new ScreenControlAdapter(screenControlBeen);
             //表格布局
             this.projectorRl.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
             this.projectorRl.setAdapter(ProAapter);

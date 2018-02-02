@@ -59,7 +59,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     private List<Button> mBtns;
     private TypeFileAdapter mAllAdapter;
     private PopupWindow mPopupWindow;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
 
     private List<MeetDirFileInfo> mData = new ArrayList<>();
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
@@ -133,6 +133,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

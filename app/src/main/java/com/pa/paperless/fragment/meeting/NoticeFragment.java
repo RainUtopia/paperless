@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class NoticeFragment extends BaseFragment implements CallListener {
 
     private TextView mNoticeText;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -108,12 +108,10 @@ public class NoticeFragment extends BaseFragment implements CallListener {
 
     @Override
     protected void initController() {
-        mController = new MeetController(getContext());
-        mController.setIModelChangeListener(this);
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
-
     private void initView(View inflate) {
         mNoticeText = (TextView) inflate.findViewById(R.id.notice_text);
     }

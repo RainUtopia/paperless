@@ -151,12 +151,13 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         EventBus.getDefault().unregister(this);
     }
 
+
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
-
     private void initView(View inflate) {
         mSigninLv = (ListView) inflate.findViewById(R.id.signin_lv);
         mPrepageBtn = (Button) inflate.findViewById(R.id.prepage_btn);

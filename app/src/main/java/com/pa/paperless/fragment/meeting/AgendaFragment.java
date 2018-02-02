@@ -37,7 +37,7 @@ import java.util.List;
 public class AgendaFragment extends BaseFragment implements CallListener {
 
     private ListView agenda_lv;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     List<AgendContext> mData;
     private Handler mHandler = new Handler() {
         @Override
@@ -102,6 +102,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
     public void getEventAgenda(EventAgenda eventAgenda) {
         Log.e("MyLog","AgendaFragment.getEventAgenda:  查询议程 EventBus --->>> ");
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         try {
             nativeUtil.queryAgenda();
         } catch (InvalidProtocolBufferException e) {
@@ -117,9 +118,8 @@ public class AgendaFragment extends BaseFragment implements CallListener {
 
     @Override
     protected void initController() {
-        mController = new MeetController(getContext());
-        mController.setIModelChangeListener(this);
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

@@ -67,7 +67,7 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
     public static int mPosion;
     public static boolean isDelete;
     public static boolean isAmend;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -149,6 +149,7 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

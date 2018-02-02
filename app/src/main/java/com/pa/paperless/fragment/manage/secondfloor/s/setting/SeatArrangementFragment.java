@@ -53,7 +53,7 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
     private Button mSeatDeviceBind;
     //会议室名称数据
     private SeatArrangementAdapter mAdapter;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -116,6 +116,7 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

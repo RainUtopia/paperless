@@ -87,7 +87,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
     //是否可以删除
     public static boolean isDeleteLeft;
     public static boolean isDeleteRight;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private int leftPosion;
     private Handler mHandler = new Handler() {
         @Override
@@ -245,6 +245,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

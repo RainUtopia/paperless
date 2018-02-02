@@ -51,7 +51,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     private Button mVoteOpen;
     private PopupWindow mPopupWindow;
     private RelativeLayout mHostFunction;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private List<VoteInfo> mVoteData = new ArrayList<>();
     private Handler mHandler = new Handler() {
         @Override
@@ -107,6 +107,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

@@ -15,6 +15,7 @@ import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.bean.ResInfo;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
+import com.wind.myapplication.NativeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,8 @@ public class Dispose {
     private static List<DeviceInfo> deviceInfos;
     private static List<PlaceInfo> placeInfos;
     private static List<AdminInfo> adminInfos;
+
+
 
     public static List<AdminInfo> AdminInfo(InterfaceMain.pbui_TypeAdminDetailInfo o) {
         if (adminInfos != null) {
@@ -209,7 +212,7 @@ public class Dispose {
             deviceInfos = new ArrayList<>();
         }
         int pdevCount = devInfos.getPdevCount();
-        Log.e("MyLog","Dispose.DevInfo:  pdevCount 设备个数：--->>> "+pdevCount);
+        Log.e("MyLog", "Dispose.DevInfo:  pdevCount 设备个数：--->>> " + pdevCount);
         for (int i = 0; i < pdevCount; i++) {
             InterfaceMain.pbui_Item_DeviceDetailInfo pdev = devInfos.getPdev(i);
             int devcieid = pdev.getDevcieid();

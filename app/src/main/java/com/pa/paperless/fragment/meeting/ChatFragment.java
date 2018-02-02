@@ -30,8 +30,10 @@ import com.pa.paperless.bean.ChatRlBean;
 import com.pa.paperless.bean.CheckedMemberIds;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventAttendPeople;
+import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
@@ -64,7 +66,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     private EditText chat_edt;
     private TextView chat_send;
     private NativeUtil nativeUtil;
-    private List<ChatRlBean> chatDatas = new ArrayList<>();
     private MulitpleItemAdapter chatAdapter;
     private Handler handler = new Handler() {
         @Override
@@ -90,33 +91,36 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                             try {
                                 //91.查询指定ID的参会人员
                                 nativeUtil.queryAttendPeopleFromId(memberid);
+                                Log.e("MyLog", "ChatFragment.handleMessage:  指定ID： --->>> " + memberid);
                             } catch (InvalidProtocolBufferException e) {
                                 e.printStackTrace();
                             }
+                            //刷新
+                            chatAdapter.notifyDataSetChanged();
                             break;
-//                        case 1://多媒体链接
-//                            break;
-//                        case 2://水
-//                            break;
-//                        case 3://茶
-//                            break;
-//                        case 4://咖啡
-//                            break;
-//                        case 5://笔
-//                            break;
-//                        case 6://纸
-//                            break;
-//                        case 7://技术员
-//                            break;
-//                        case 8://服务员
-//                            break;
-//                        case 9://其它服务
-//                            break;
-//                        case 10://申请主持
-//                            break;
-                    }
-                    //参会人员角色
-                    int role = o1.getRole();
+////                        case 1://多媒体链接
+////                            break;
+////                        case 2://水
+////                            break;
+////                        case 3://茶
+////                            break;
+////                        case 4://咖啡
+////                            break;
+////                        case 5://笔
+////                            break;
+////                        case 6://纸
+////                            break;
+////                        case 7://技术员
+////                            break;
+////                        case 8://服务员
+////                            break;
+////                        case 9://其它服务
+////                            break;
+////                        case 10://申请主持
+////                            break;
+//                    }
+                        //参会人员角色
+//                    int role = o1.getRole();
 //                    if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_member_nouser.getNumber()){
 //                        //未使用
 //
@@ -136,16 +140,15 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
 //                        //管理员
 //
 //                    }
+                    }
                     break;
                 case IDivMessage.QUERY_ATTEND_BYID://查询指定参会人信息
                     ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
                     InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
                     List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
-
                     String name = MyUtils.getBts(itemList.get(0).getName());
                     receiveMeetIMInfos.get(receiveMeetIMInfos.size() - 1).setName(name);
                     Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
-                    chatAdapter.notifyDataSetChanged();
                     break;
 
             }
@@ -168,14 +171,26 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         EventBus.getDefault().register(this);
         return inflate;
     }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void getAttendPeople(EventAttendPeople eventAttendPeople) {
+//        Log.e("MyLog", "ChatFragment.getAttendPeople:  92.查询参会人员 EventBus --->>> ");
+//        try {
+//            nativeUtil.queryAttendPeople();
+//        } catch (InvalidProtocolBufferException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getAttendPeople(EventAttendPeople eventAttendPeople) {
-        Log.e("MyLog", "ChatFragment.getAttendPeople:  92.查询参会人员 EventBus --->>> ");
-        try {
-            nativeUtil.queryAttendPeople();
-        } catch (InvalidProtocolBufferException e) {
-            e.printStackTrace();
+    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
+        switch (message.getAction()) {
+            case IDEventMessage.MEMBER_CHANGE_INFORM:
+                Log.e("MyLog", "ChatFragment.getEventMessage:  90 参会人员变更通知 EventBus --->>> ");
+                InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                Log.e("MyLog", "ChatFragment.getEventMessage:  EventBus 指定ID：--->>> " + object.getId());
+                nativeUtil.queryAttendPeopleFromId(object.getId());
+                break;
         }
     }
 
@@ -188,6 +203,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -257,7 +273,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                             chat_edt.setText("".trim());
                         }
 
-                    }else {
+                    } else {
                         Toast.makeText(getActivity(), " 输入的字数不得大于300字 ", Toast.LENGTH_SHORT).show();
                     }
                 } else {

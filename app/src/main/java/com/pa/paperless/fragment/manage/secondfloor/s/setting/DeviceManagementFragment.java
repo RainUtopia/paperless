@@ -57,7 +57,7 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
     private TextView mItemNameTv;
     private TextView mItemIpTv;
 
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     public static boolean isDelete;
     public static boolean isModifi;
     private Handler mHandler = new Handler() {
@@ -143,6 +143,7 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

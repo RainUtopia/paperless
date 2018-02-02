@@ -8,8 +8,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +33,6 @@ import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.PermissionUtils;
-//import com.pa.paperless.utils.RecycleViewDivider;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
@@ -59,7 +56,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView mMainUnit;
     private TextView mMainMemberName;
     private TextView mMainMemberJob;
-    NativeUtil nativeUtil;
+//    NativeUtil nativeUtil;
     /*handle接收*/
     public Handler mHandler = new Handler() {
         @Override
@@ -70,7 +67,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     String[] datatimes = msg.getData().getStringArray("datatime");
                     upDateMainTimeUI(datatimes);
                     break;
-                case IDivMessage.QUERY_DEVMEET_INFO:
+                case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
                     ArrayList devMeetInfos = msg.getData().getParcelableArrayList("devMeetInfos");
                     if (devMeetInfos != null) {
                         upDateMainUI(devMeetInfos);
@@ -80,7 +77,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     ArrayList devInfos = msg.getData().getParcelableArrayList("devInfos");
                     if (devInfos != null) {
                         InterfaceMain.pbui_Type_DeviceDetailInfo o = (InterfaceMain.pbui_Type_DeviceDetailInfo) devInfos.get(0);
-                        Dispose.DevInfo(o);
+//                        Dispose.DevInfo(o);
                     }
                     break;
                 case IDivMessage.QUERY_ATTENDEE:
@@ -96,13 +93,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     List<InterfaceMain2.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
                     for (int i = 0; i < itemList3.size(); i++) {
                         InterfaceMain2.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
-                        nameId = pbui_item_meetSeatDetailInfo.getNameId();
+                        int nameId = pbui_item_meetSeatDetailInfo.getNameId();
                         int role = pbui_item_meetSeatDetailInfo.getRole();
                         int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
                         if (role == 3) {
                             //如果当前人员是主持人
+                            CompereID = nameId;
                             try {
-                                nativeUtil.queryAttendPeopleFromId(nameId);
+                                /** ************ ******  91.查询指定ID的参会人员  ****** ************ **/
+                                nativeUtil.queryAttendPeopleFromId(CompereID);
                             } catch (InvalidProtocolBufferException e) {
                                 e.printStackTrace();
                             }
@@ -111,19 +110,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         Log.e("MyLog", "MeetingActivity.handleMessage:  人员ID： --->>> " + nameId + "  角色ID：" + role + "  设备ID：" + seatid);
                     }
                     break;
-                case IDivMessage.QUERY_ATTEND_BYID:
+                case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
                     ArrayList queryAttendeeById = msg.getData().getParcelableArrayList("queryAttendeeById");
                     InterfaceMain.pbui_Type_MemberDetailInfo o1 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendeeById.get(0);
                     List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o1.getItemList();
                     compereName = MyUtils.getBts(itemList.get(0).getName());
+                    Log.e("MyLog", "MainActivity.handleMessage:  主持人姓名： --->>> " + compereName);
                     break;
             }
         }
     };
     private PopupWindow mPopupWindow;
     private InterfaceMain.pbui_Type_DeviceFaceShowDetail nowDivMeetInfo;
-    private int nameId;
     private String compereName;
+    private int CompereID;
 
     /**
      * 展示选择参会人 弹出框
@@ -203,9 +203,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMainMeetName.setText(meetingName);
         mMainMemberJob.setText(job);
         mMainMemberName.setText(memberName);
-
-        //181.查询会议排位
         try {
+            /** ************ ******  181.查询会议排位  ****** ************ **/
             nativeUtil.queryMeetRanking();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -216,6 +215,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.e("MyLog","MainActivity.onCreate:   --->>> ");
         //  动态申请权限
         initPermissions();
         initController();
@@ -224,12 +224,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         nativeUtil.javaInitSys();
         //  8.修改本机界面状态
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
-        try {
-            //  6.查询设备信息
-            nativeUtil.queryDeviceInfo();
-        } catch (InvalidProtocolBufferException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            //  6.查询设备信息
+////            nativeUtil.queryDeviceInfo();
+//        } catch (InvalidProtocolBufferException e) {
+//            e.printStackTrace();
+//        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -253,34 +253,46 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.MEETINFO_CHANGE_INFORM:
-                Log.e("MyLog", "MainActivity.getEventMessage:  查询设备会议信息 EventBus --->>> ");
-                nativeUtil.queryDeviceMeetInfo();
+                Log.e("MyLog", "MainActivity.getEventMessage:  127.会议信息变更通知 EventBus --->>> ");
+                /** ************ ******  110.查询设备会议信息  ****** ************ **/
+//                nativeUtil.queryDeviceMeetInfo();
                 break;
             case IDEventMessage.DEV_REGISTER_INFORM:
                 Log.e("MyLog", "MainActivity.getEventMessage:  设备寄存器变更 EventBus --->>> ");
-                //6.查询设备信息
-                nativeUtil.queryDeviceInfo();
+                /** ************ ******  6.查询设备信息  ****** ************ **/
+//                nativeUtil.queryDeviceInfo();
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:
                 Log.e("MyLog", "MainActivity.getEventMessage:  参会人员变更通知 EventBus --->>> ");
-                nativeUtil.queryAttendPeople();
-                nativeUtil.queryAttendPeopleFromId(nameId);
+                /** ************ ******  92.查询参会人员  ****** ************ **/
+//                nativeUtil.queryAttendPeople();
+                InterfaceMain.pbui_MeetNotifyMsg object1 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                Log.e("MyLog", "MainActivity.getEventMessage:  查询指定ID的参会人员  object1.getId() --->>> " + object1.getId()
+                        + "  object1.getOpermethod()" + object1.getOpermethod());
+                /** ************ ******  91.查询指定ID的参会人员  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(CompereID);
+
                 break;
             case IDEventMessage.DEVMEETINFO_CHANGE_INFORM:
-                Log.e("MyLog", "MainActivity.getEventMessage:  设备会议信息变更通知 EventBus --->>> ");
+                Log.e("MyLog", "MainActivity.getEventMessage:  109.设备会议信息变更通知 EventBus --->>> ");
+                /** ************ ******  110.查询设备会议信息  ****** ************ **/
                 nativeUtil.queryDeviceMeetInfo();
                 break;
             case IDEventMessage.SIGN_EVENT:
-                Log.e("MyLog", "MainActivity.getEventMessage:  辅助签到变更 EventBus --->>> ");
-                nativeUtil.signAlterationOperate(nowDivMeetInfo.getDeviceid());
+                Log.e("MyLog", "MainActivity.getEventMessage:  17 辅助签到变更通知 EventBus --->>> ");
+                /** ************ ******  18.辅助签到操作  ****** ************ **/
+//                nativeUtil.signAlterationOperate(nowDivMeetInfo.getDeviceid());
                 break;
             case IDEventMessage.MeetSeat_Change_Inform:
                 Log.e("MyLog", "MainActivity.getEventMessage:  180.会议排位变更通知 EventBus --->>> ");
                 InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
                 int id = object.getId();
                 int opermethod = object.getOpermethod();
+                Log.e("MyLog", "MainActivity.getEventMessage:  会议排位返回的数据： --->>> id " + id + "  opermethod ：" + opermethod);
                 /** ************ ******  181.查询会议排位  ****** ************ **/
                 nativeUtil.queryMeetRanking();
+                /** ************ ******  7.按属性ID查询指定设备属性  ****** ************ **/
+//                nativeUtil.queryDevicePropertiesById(id);
                 break;
         }
     }
@@ -294,6 +306,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -392,25 +405,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
     }
 
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e("MyLog", "MainActivity.onRestart:   --->>> ");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e("MyLog", "MainActivity.onStart:   --->>> ");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.e("MyLog", "MainActivity.onStop:   --->>> ");
-    }
-
     private void showDialog() {
         //标题
         TextView title = new TextView(MainActivity.this);
@@ -446,7 +440,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }).create().show();
     }
-
 
     @Override
     public void callListener(int action, Object result) {
@@ -502,10 +495,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 }
                 break;/** ************ ******  在会议Activity中接收的  ****** ************ **/
             case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
-                Log.e("MyLog", "MeetingActivity.callListener:  1111111111 --->>> ");
                 InterfaceMain2.pbui_Type_MeetSeatDetailInfo result5 = (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) result;
                 if (result5 != null) {
-                    Log.e("MyLog", "MeetingActivity.callListener:  2222222222 --->>> ");
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
                     arrayList.add(result5);

@@ -36,7 +36,7 @@ public class OtherSettingFragment extends BaseFragment implements View.OnClickLi
     private EditText mOldPassword;
     private EditText mNewPassword;
     private Button mSubmitBtn;
-    private NativeUtil nativeUtil;
+//    private NativeUtil nativeUtil;
     private EditText mAlginPassword;
     private Handler mHandler = new Handler(){
         @Override
@@ -85,6 +85,7 @@ public class OtherSettingFragment extends BaseFragment implements View.OnClickLi
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
