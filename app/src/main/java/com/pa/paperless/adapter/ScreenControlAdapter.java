@@ -1,5 +1,6 @@
 package com.pa.paperless.adapter;
 
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,68 +9,60 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.bean.ScreenControlBean;
 import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.setIsAllSelect;
-
+import static com.pa.paperless.activity.MeetingActivity.checks;
+import static com.pa.paperless.utils.MyUtils.setAnimator;
 
 /**
  * Created by Administrator on 2017/11/9.
  * 同屏控制Adapter 参与人 和 投影机
  */
 
-public class ScreenControlAdapter extends RecyclerView.Adapter<ScreenControlAdapter.ViewHolder> {
+public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ScreenControlBean> mData;
     private ItemClickListener mListener;
-    //存放是否选中结果集
-    private List<Boolean> itemChecked;
 
 
     public ScreenControlAdapter(List<ScreenControlBean> datas) {
         mData = datas;
-        if (mData != null) {
-            itemChecked = new ArrayList<>();
-            for (int i = 0; i < mData.size(); i++) {
-                itemChecked.add(false);
-            }
-        }
     }
 
     /**
-     * 获取选中人的ID
+     * 获取所有选中的人员
      *
      * @return
      */
-    public List<Integer> getCheckedIds() {
-        List<Integer> checkedId = new ArrayList<>();
-        for (int i = 0; i < itemChecked.size(); i++) {
-            if (itemChecked.get(i)) {
-                checkedId.add(mData.get(i).getId());
+    public List<ScreenControlBean> getCheckedIds() {
+        List<ScreenControlBean> checkedId = new ArrayList<>();
+        for (int i = 0; i < checks.size(); i++) {
+            if (checks.get(i)) {
+                checkedId.add(mData.get(i));
             }
         }
         return checkedId;
     }
+
 
     /**
      * 全选 按钮监听
      */
     public boolean setAllChecked() {
         //只要集合中包含false，就将该索引的位置改为true
-        if (itemChecked.contains(false)) {
-            for (int i = 0; i < itemChecked.size(); i++) {
-                itemChecked.set(i, true);
+        if (checks.contains(false)) {
+            for (int i = 0; i < checks.size(); i++) {
+                checks.set(i, true);
             }
             notifyDataSetChanged();
             return true;
         } else {//全部已经选中状态（true），就全设为false
-            for (int i = 0; i < itemChecked.size(); i++) {
-                itemChecked.set(i, false);
+            for (int i = 0; i < checks.size(); i++) {
+                checks.set(i, false);
             }
             notifyDataSetChanged();
             return false;
@@ -83,35 +76,26 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<ScreenControlAdap
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_paly_rl, parent, false);
         ViewHolder holder = new ViewHolder(inflate);
         return holder;
+
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.play_btn.setText(mData.get(position).getName());
-        holder.play_btn.setSelected(MeetingActivity.checks.get(position));
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-//        holder.play_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                boolean e = !itemChecked.get(position);
-//                itemChecked.set(position, e);
-//                holder.play_btn.setSelected(e);
-//                Log.e("MyLog", "ScreenControlAdapter.onClick: 点击之后  --->>> " + itemChecked.get(position));
-//                //包含false ：其中有false  不包含false：其中没有false
-//                setIsAllSelect(!itemChecked.contains(false));
-//                notifyDataSetChanged();
-//            }
-//        });
+        ((ViewHolder) holder).play_btn.setText(mData.get(position).getName());
+        ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
+                    Log.e("MyLog", "ScreenControlAdapter.onClick: rrrrr  --->>> ");
                     mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
                 }
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -120,14 +104,16 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<ScreenControlAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public Button play_btn;
+        public View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            play_btn = itemView.findViewById(R.id.palyer_name);
+            this.itemView = itemView;
+            this.play_btn = (Button) itemView.findViewById(R.id.palyer_name);
         }
     }
 
-    public void setItemClickListener(ItemClickListener listener) {
+    public void setItemClick(ItemClickListener listener) {
         mListener = listener;
     }
 }

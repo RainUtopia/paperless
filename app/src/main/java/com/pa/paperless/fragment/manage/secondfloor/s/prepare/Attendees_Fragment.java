@@ -305,11 +305,12 @@ public class Attendees_Fragment extends BaseFragment implements View.OnClickList
             }
         });
         add_from_rl.setAdapter(addFromAttendeeAdapter);
-        if (checkeds.contains(false)) {
-            all_check.setChecked(false);
-        } else {
-            all_check.setChecked(true);
-        }
+//        if (checkeds.contains(false)) {
+//            all_check.setChecked(false);
+//        } else {
+//            all_check.setChecked(true);
+//        }
+        all_check.setChecked(!(checkeds.contains(false)));
         all_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

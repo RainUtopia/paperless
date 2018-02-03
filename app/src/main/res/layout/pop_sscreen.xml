@@ -49,7 +49,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:button="@drawable/select_check"
-                        android:clickable="false"
                         android:padding="5dp"
                         android:text="所有人        " />
 
@@ -58,7 +57,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/select_check"
-                        android:clickable="false"
                         android:padding="5dp"
                         android:text="选择参与人" />
 
@@ -83,7 +81,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:button="@drawable/select_check"
-                        android:clickable="false"
                         android:padding="5dp"
                         android:text="所有投影机" />
 
@@ -92,7 +89,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/select_check"
-                        android:clickable="false"
                         android:padding="5dp"
                         android:text="选择投影机" />
 
