@@ -60,8 +60,4 @@ public class ImageUtils {
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
     }
 
-    public static Bitmap ScaleBitmap(Bitmap bitmap, int width, int height) {
-
-        return null;
-    }
 }

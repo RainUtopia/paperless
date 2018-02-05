@@ -134,9 +134,12 @@ public class NativeUtil {
     //  传入数据结构：   pbui_MeetDeviceQueryProperty
     //  成功返回：       pbui_DeviceInt32uProperty（整数）、pbui_DeviceStringProperty（字符串）
     //  相关结构体：     Pb_MeetDevicePropertyID
-    public boolean queryDevicePropertiesById(int value) throws InvalidProtocolBufferException {
+    public boolean queryDevicePropertiesById(int propetyid, int deviceid, int paramterval) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_MeetDeviceQueryProperty.Builder builder = InterfaceMain.pbui_MeetDeviceQueryProperty.newBuilder();
-        builder.setDeviceid(value);
+//        InterfaceMacro.Pb_MeetDevicePropertyID.Pb_MEETDEVICE_PROPERTY_PORT.getNumber()
+        builder.setDeviceid(deviceid);
+        builder.setParamterval(paramterval);
+        builder.setPropertyid(propetyid);
         InterfaceMain.pbui_MeetDeviceQueryProperty build = builder.build();
         byte[] bytes = build.toByteArray();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEVICEINFO.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERYPROPERTY.getNumber(), bytes);
@@ -152,7 +155,7 @@ public class NativeUtil {
             int propertyval2 = pbui_deviceInt32uProperty1.getPropertyval2();
             int propertyval3 = pbui_deviceInt32uProperty1.getPropertyval3();
             int propertyval4 = pbui_deviceInt32uProperty1.getPropertyval4();
-            Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:   --->>> " + propertyval + "  " + propertyval2 + "  " + propertyval3 + "  " + propertyval4);
+            Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  7.按属性ID查询指定设备属性 --->>> " + propertyval + "  " + propertyval2 + "  " + propertyval3 + "  " + propertyval4);
         } else {
             //字符串
             InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty = InterfaceMain.pbui_DeviceStringProperty.getDefaultInstance();
@@ -1109,7 +1112,7 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = defaultInstance.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ATTEND_BYID, pbui_type_memberDetailInfo);
-            Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  91.查询指定ID的参会人员成功 --->>> id 是："+infoId);
+            Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  91.查询指定ID的参会人员成功 --->>> id 是：" + infoId);
         }
         return true;
     }
@@ -1616,7 +1619,7 @@ public class NativeUtil {
         builder.setFilterflag(filterflag);
         builder.setRoomid(roomid);
         builder.setFacestatus(facestatus);
-        builder.setExceptdevid(exceptdevid);
+//        builder.setExceptdevid(exceptdevid);
         InterfaceMain.pbui_Type_DumpMeetRoomDevInfo build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_ROOMDEVICE.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_COMPLEXQUERY.getNumber(), build.toByteArray());
         if (array == null) {
@@ -3504,7 +3507,7 @@ public class NativeUtil {
                 int attribid = pbui_type_meetDeviceBaseInfo.getAttribid();
                 int deviceid = pbui_type_meetDeviceBaseInfo.getDeviceid();
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.DEV_REGISTER_INFORM, pbui_type_meetDeviceBaseInfo));
-                Log.e("CaseLog", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>>attribid： " + attribid + "  deviceid：" + deviceid);
+                Log.e("CaseLog", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>> 寄存器ID ： " + attribid + "  设备ID：" + deviceid);
                 break;
             case 7://40
                 InterfaceMain.pbui_meetUrl pbui_meetUrl = InterfaceMain.pbui_meetUrl.getDefaultInstance();

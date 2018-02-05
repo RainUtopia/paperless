@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.constant.IDEventMessage;
@@ -29,6 +30,7 @@ import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
+import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.SDCardUtils;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
@@ -59,7 +61,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     private List<Button> mBtns;
     private TypeFileAdapter mAllAdapter;
     private PopupWindow mPopupWindow;
-//    private NativeUtil nativeUtil;
 
     private List<MeetDirFileInfo> mData = new ArrayList<>();
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
@@ -133,7 +134,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -162,13 +162,18 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         mAllAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
             public void onLookListener(int posion, String filename) {
-                OpenFile(posion, filename);
+                if (FileUtil.isVideoFile(filename)) {
+                    MyUtils.playMedia(nativeUtil,getContext(),MeetingActivity.getDevId(),getActivity());
+                    nativeUtil.mediaPlayOperate(posion, MeetingActivity.getDevId(), 0);
+                }else {
+                    MyUtils.openFile(filename, getView(),nativeUtil,posion,getContext());
+                }
             }
         });
         mAllAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
             @Override
             public void onDownListener(int posion, String filename) {
-                downLoadFile(posion, filename);
+                MyUtils.downLoadFile(filename, getView(),getContext(),posion,nativeUtil);
             }
         });
 
@@ -179,49 +184,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         share_prepage.setOnClickListener(this);
         share_nextpage.setOnClickListener(this);
         share_import.setOnClickListener(this);
-    }
-    private void OpenFile(final int posion, final String filename) {
-        //点击查看文件 如果手机上没有就得先下载下来
-        if (SDCardUtils.isSDCardEnable()) {
-            String file = SDCardUtils.getSDCardPath();
-            file += filename;
-            File file1 = new File(file);
-            if (!file1.exists()) {
-                final String finalFile = file;
-                Snackbar.make(getView(), " 文件不存在，是否先下载？ ", Snackbar.LENGTH_LONG)
-                        .setAction(" 下载 ", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
-                            }
-                        }).show();
-            } else {
-                //已经存在才打开文件
-                FileUtil.openFile(getContext(), file1);
-            }
-        }
-    }
-    private void downLoadFile(int posion, String filename) {
-        if (SDCardUtils.isSDCardEnable()) {
-            String sdCardPath = SDCardUtils.getSDCardPath();
-            sdCardPath += filename;
-            final File file = new File(sdCardPath);
-            if (file.exists()) {
-                Snackbar.make(getView(), "  文件已经存在是否直接打开？  ", Snackbar.LENGTH_LONG)
-                        .setAction("打开", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // TODO: 2018/1/27 查看文件
-                                Log.e("MyLog", "MeetingFileFragment.onClick:  查看文件操作 --->>> ");
-                                FileUtil.openFile(getContext(), file);
-                            }
-                        }).show();
-
-            } else {
-                Log.e("MyLog", "MeetingFileFragment.onLookListener: 下载操作： 文件的绝对路径： --->>> " + sdCardPath);
-                nativeUtil.creationFileDownload(sdCardPath, posion, 0, 0);
-            }
-        }
     }
     //设置选中状态
     private void setBtnSelect(int index) {

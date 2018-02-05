@@ -74,6 +74,7 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SplashActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".activity.ScreenShotActivity"/>
     </application>
 
 </manifest>

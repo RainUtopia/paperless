@@ -15,6 +15,14 @@ import android.widget.PopupWindow;
  */
 public class PopWindowUtil {
 
+    /**
+     * 使用
+     */
+//    View inflate = LayoutInflater.from(getContext()).inflate(R.layout.media_pop, null);
+    //                     //right_meetingfilelayout  rightmeetfile_type3
+//    PopupWindow popupWindow = PopWindowUtil.getInstance().makePopupWindow(getContext(), right_meetingfilelayout, inflate, Color.RED).showLocationWithAnimation(
+//            getContext(), inflate, 10, 10, R.style.AnimHorizontal);
+
     private static PopWindowUtil instance;
 
     private PopupWindow mPopupWindow;
@@ -37,17 +45,14 @@ public class PopWindowUtil {
     }
 
     /**
-     * @param cx
-     *            activity
-     * @param view
-     *            传入需要显示在什么控件下
-     * @param view1
-     *            传入内容的view
+     * @param cx    activity
+     * @param view  传入需要显示在什么控件下
+     * @param view1 传入内容的view
      * @return
      */
     public PopWindowUtil makePopupWindow(Context cx, View view, View view1, int color) {
         DisplayMetrics dm = new DisplayMetrics();
-        WindowManager wmManager=(WindowManager) cx.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wmManager = (WindowManager) cx.getSystemService(Context.WINDOW_SERVICE);
         wmManager.getDefaultDisplay().getMetrics(dm);
         int Hight = dm.heightPixels;
 
@@ -69,8 +74,7 @@ public class PopWindowUtil {
     }
 
     /**
-     *
-     * @param cx 此处必须为Activity的实例
+     * @param cx   此处必须为Activity的实例
      * @param view 显示在该控件之下
      * @param xOff 距离view的x轴偏移量
      * @param yOff 距离view的y轴偏移量
@@ -84,7 +88,7 @@ public class PopWindowUtil {
 
         // 弹出PopupWindow时让后面的界面变暗
         WindowManager.LayoutParams parms = ((Activity) cx).getWindow().getAttributes();
-        parms.alpha =0.5f;
+        parms.alpha = 0.5f;
         ((Activity) cx).getWindow().setAttributes(parms);
 
         int[] positon = new int[2];
@@ -98,7 +102,7 @@ public class PopWindowUtil {
             public void onDismiss() {
                 // PopupWindow消失后让后面的界面变亮
                 WindowManager.LayoutParams parms = ((Activity) cx).getWindow().getAttributes();
-                parms.alpha =1.0f;
+                parms.alpha = 1.0f;
                 ((Activity) cx).getWindow().setAttributes(parms);
 
                 if (mListener != null) {
@@ -110,7 +114,7 @@ public class PopWindowUtil {
         return mPopupWindow;
     }
 
-    private interface OnDissmissListener{
+    private interface OnDissmissListener {
 
         void dissmiss();
 

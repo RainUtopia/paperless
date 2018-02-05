@@ -169,7 +169,7 @@ message pbui_CommonTextProperty
 message pbui_Type_MeetDeviceBaseInfo
 {
 	fixed32   deviceid=1;//设备ID
-	fixed32	  attribid=2;//寄存器id 0:net status  50:res status  63:base info
+	fixed32	  attribid=2;//寄存器 id 0:net status  50:res status  63:base info
 }
 
 //设备ip信息

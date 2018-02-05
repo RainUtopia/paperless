@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView mMainUnit;
     private TextView mMainMemberName;
     private TextView mMainMemberJob;
-//    NativeUtil nativeUtil;
+    //    NativeUtil nativeUtil;
     /*handle接收*/
     public Handler mHandler = new Handler() {
         @Override
@@ -124,6 +124,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private InterfaceMain.pbui_Type_DeviceFaceShowDetail nowDivMeetInfo;
     private String compereName;
     private int CompereID;
+    //是否有会议信息
+    private boolean haveDevMeetInfo;
 
     /**
      * 展示选择参会人 弹出框
@@ -215,7 +217,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("MyLog","MainActivity.onCreate:   --->>> ");
+        Log.e("MyLog", "MainActivity.onCreate:   --->>> ");
         //  动态申请权限
         initPermissions();
         initController();
@@ -230,17 +232,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //        } catch (InvalidProtocolBufferException e) {
 //            e.printStackTrace();
 //        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 try {
-                    //  110.查询设备会议信息
-                    nativeUtil.queryDeviceMeetInfo();
+                    // 110.查询设备会议信息
+                    haveDevMeetInfo = nativeUtil.queryDeviceMeetInfo();
                 } catch (InvalidProtocolBufferException e) {
                     e.printStackTrace();
                 }
-            }
-        }, 5000);
+//            }
+//        }, 5000);
         EventBus.getDefault().register(this);
     }
 
@@ -359,38 +361,50 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         switch (v.getId()) {
             case R.id.mian_into_meeting://进入会议
 //                nativeUtil.sendSign();
-                if (true) {
+                if (haveDevMeetInfo) {
                     /*b_devMeetInfo*/
                     /** ************ ******  18.辅助签到操作  ****** ************ **/
 //                    nativeUtil.signAlterationOperate(nowDivMeetInfo.getDeviceid());
-                    Intent intent = new Intent(MainActivity.this, MeetingActivity.class);
-                    Bundle bundle = new Bundle();
-                    ArrayList arraylist = new ArrayList();
-                    //将设备会议信息的值传递给MeetingActivity
-                    if(nowDivMeetInfo!=null) {
-                        arraylist.add(nowDivMeetInfo.getDeviceid());
-                        arraylist.add(nowDivMeetInfo.getMeetingid());
-                        arraylist.add(nowDivMeetInfo.getMemberid());
-                        arraylist.add(nowDivMeetInfo.getRoomid());
-                        arraylist.add(nowDivMeetInfo.getSigninType());
-                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMeetingname()));
-                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMembername()));
-                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getCompany()));
-                        arraylist.add(MyUtils.getBts(nowDivMeetInfo.getJob()));
-                        arraylist.add(compereName);
-                    }
-                    Log.e("MyLog", "MainActivity.onClick:  传递给MeetingActivity --->>> devid：" + nowDivMeetInfo.getDeviceid() + " memberid:" + nowDivMeetInfo.getMemberid());
-                    bundle.putParcelableArrayList("devMeetInfo", arraylist);
-                    intent.putExtra("putId", bundle);
-                    startActivityForResult(intent, IDivMessage.MAIN_REQUEST_CODE);
+                    gotoMeet();
                 } else {
-                    //如果没有查找到
-                    showDialog();
+                    try {
+                        /** ************ ******  110.查询设备会议信息  ****** ************ **/
+                        haveDevMeetInfo = nativeUtil.queryDeviceMeetInfo();
+                    } catch (InvalidProtocolBufferException e) {
+                        e.printStackTrace();
+                    }
+                    if(haveDevMeetInfo) {
+                        //如果没有查找到
+                        showDialog();
+                    }
                 }
                 break;
             case R.id.main_secretary_manage://秘书管理
                 startActivityForResult(new Intent(MainActivity.this, ManageActivity.class), IDivMessage.MAIN_REQUEST_CODE);
                 break;
+        }
+    }
+
+    private void gotoMeet() {
+        //将设备会议信息的值传递给MeetingActivity
+        if (nowDivMeetInfo != null) {
+            Intent intent = new Intent(MainActivity.this, MeetingActivity.class);
+            Bundle bundle = new Bundle();
+            ArrayList arraylist = new ArrayList();
+            arraylist.add(nowDivMeetInfo.getDeviceid());
+            arraylist.add(nowDivMeetInfo.getMeetingid());
+            arraylist.add(nowDivMeetInfo.getMemberid());
+            arraylist.add(nowDivMeetInfo.getRoomid());
+            arraylist.add(nowDivMeetInfo.getSigninType());
+            arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMeetingname()));
+            arraylist.add(MyUtils.getBts(nowDivMeetInfo.getMembername()));
+            arraylist.add(MyUtils.getBts(nowDivMeetInfo.getCompany()));
+            arraylist.add(MyUtils.getBts(nowDivMeetInfo.getJob()));
+            arraylist.add(compereName);
+            Log.e("MyLog", "MainActivity.onClick:  传递给MeetingActivity --->>> devid：" + nowDivMeetInfo.getDeviceid() + " memberid:" + nowDivMeetInfo.getMemberid());
+            bundle.putParcelableArrayList("devMeetInfo", arraylist);
+            intent.putExtra("putId", bundle);
+            startActivityForResult(intent, IDivMessage.MAIN_REQUEST_CODE);
         }
     }
 
@@ -439,6 +453,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 } catch (InvalidProtocolBufferException e) {
                     e.printStackTrace();
                 }
+                gotoMeet();
             }
         }).create().show();
     }

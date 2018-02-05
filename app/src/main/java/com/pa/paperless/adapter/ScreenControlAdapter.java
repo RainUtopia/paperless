@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.pa.paperless.activity.MeetingActivity.checks;
-import static com.pa.paperless.utils.MyUtils.setAnimator;
 
 /**
  * Created by Administrator on 2017/11/9.
