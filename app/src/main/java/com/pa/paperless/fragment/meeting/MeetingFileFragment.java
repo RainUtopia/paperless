@@ -1,6 +1,7 @@
 package com.pa.paperless.fragment.meeting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -50,6 +51,7 @@ import com.zhy.android.percent.support.PercentLinearLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.libsdl.app.SDLActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -199,6 +201,10 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 Log.e("MyLog", "MeetingFileFragment.getEventMessage:  object.getMediaid() --->>> " + mediaid + " createdeviceid： " + createdeviceid
                         + "  triggeruserval " + triggeruserval + "  triggerid : " + triggerid + "  res: " + res);
                 break;
+            case IDEventMessage.STOP_PLAY:
+                //248.停止资源操作
+                nativeUtil.stopResourceOperate(0, devID);
+                break;
         }
     }
 
@@ -245,7 +251,9 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
 //                     //right_meetingfilelayout  rightmeetfile_type3
 //                    PopupWindow popupWindow = PopWindowUtil.getInstance().makePopupWindow(getContext(), right_meetingfilelayout, inflate, Color.RED).showLocationWithAnimation(
 //                            getContext(), inflate, 10, 10, R.style.AnimHorizontal);
-                    MyUtils.playMedia(nativeUtil, getContext(), devID, getActivity());
+                    /** ************ ******    ****** ************ **/
+//                    MyUtils.playMedia(nativeUtil, getContext(), devID, getActivity());
+                    startActivity(new Intent(getActivity(), SDLActivity.class));
                     nativeUtil.mediaPlayOperate(mediaId, devID, 0);
                 } else {
                     MyUtils.openFile(filename, getView(), nativeUtil, mediaId, getContext());
@@ -271,9 +279,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         rightmeetfile_prepage = (Button) inflate.findViewById(R.id.rightmeetfile_prepage);
         rightmeetfile_nextpage = (Button) inflate.findViewById(R.id.rightmeetfile_nextpage);
         rightmeetfile_import = (Button) inflate.findViewById(R.id.rightmeetfile_import);
-//        right_meetingfilelayout = (PercentLinearLayout) inflate.findViewById(R.id.right_meetingfilelayout);
-//        div_line = (ImageView) inflate.findViewById(R.id.right_div_line);
-//        rightmeetfile_type3 = (LinearLayout) inflate.findViewById(R.id.rightmeetfile_type3);
         rightmeetfile_document.setOnClickListener(this);
         rightmeetfile_picture.setOnClickListener(this);
         rightmeetfile_video.setOnClickListener(this);

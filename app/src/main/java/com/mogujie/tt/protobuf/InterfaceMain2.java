@@ -14,7 +14,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ????STARG_ENUM
+     *操作类别 参见STARG_ENUM
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -23,7 +23,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? ???? METHOD_ENUM
+     *操作方法 参见 METHOD_ENUM
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -32,7 +32,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????ID
+     *管理人员ID
      * </pre>
      *
      * <code>fixed32 adminid = 3;</code>
@@ -41,7 +41,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????ID
+     *操作的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 4;</code>
@@ -50,7 +50,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????ID
+     *操作的会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 5;</code>
@@ -59,7 +59,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????utc??? ???
+     *操作utc时间 微秒
      * </pre>
      *
      * <code>fixed64 logtime = 6;</code>
@@ -68,7 +68,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *记录文本
      * </pre>
      *
      * <code>bytes logmsg = 7;</code>
@@ -95,7 +95,7 @@ public final class InterfaceMain2 {
     private int stage_;
     /**
      * <pre>
-     *??????? ????STARG_ENUM
+     *操作类别 参见STARG_ENUM
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -105,7 +105,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????STARG_ENUM
+     *操作类别 参见STARG_ENUM
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -116,7 +116,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????STARG_ENUM
+     *操作类别 参见STARG_ENUM
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -130,7 +130,7 @@ public final class InterfaceMain2 {
     private int method_;
     /**
      * <pre>
-     *???????? ???? METHOD_ENUM
+     *操作方法 参见 METHOD_ENUM
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -140,7 +140,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ???? METHOD_ENUM
+     *操作方法 参见 METHOD_ENUM
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -151,7 +151,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ???? METHOD_ENUM
+     *操作方法 参见 METHOD_ENUM
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -165,7 +165,7 @@ public final class InterfaceMain2 {
     private int adminid_;
     /**
      * <pre>
-     *???????ID
+     *管理人员ID
      * </pre>
      *
      * <code>fixed32 adminid = 3;</code>
@@ -175,7 +175,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *管理人员ID
      * </pre>
      *
      * <code>fixed32 adminid = 3;</code>
@@ -186,7 +186,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *管理人员ID
      * </pre>
      *
      * <code>fixed32 adminid = 3;</code>
@@ -200,7 +200,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *?????????ID
+     *操作的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 4;</code>
@@ -210,7 +210,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID
+     *操作的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 4;</code>
@@ -221,7 +221,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID
+     *操作的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 4;</code>
@@ -235,7 +235,7 @@ public final class InterfaceMain2 {
     private int meetingid_;
     /**
      * <pre>
-     *?????????ID
+     *操作的会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 5;</code>
@@ -245,7 +245,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID
+     *操作的会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 5;</code>
@@ -256,7 +256,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID
+     *操作的会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 5;</code>
@@ -270,7 +270,7 @@ public final class InterfaceMain2 {
     private long logtime_;
     /**
      * <pre>
-     *????utc??? ???
+     *操作utc时间 微秒
      * </pre>
      *
      * <code>fixed64 logtime = 6;</code>
@@ -280,7 +280,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????utc??? ???
+     *操作utc时间 微秒
      * </pre>
      *
      * <code>fixed64 logtime = 6;</code>
@@ -291,7 +291,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????utc??? ???
+     *操作utc时间 微秒
      * </pre>
      *
      * <code>fixed64 logtime = 6;</code>
@@ -305,7 +305,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString logmsg_;
     /**
      * <pre>
-     *??????
+     *记录文本
      * </pre>
      *
      * <code>bytes logmsg = 7;</code>
@@ -315,7 +315,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *记录文本
      * </pre>
      *
      * <code>bytes logmsg = 7;</code>
@@ -329,7 +329,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *记录文本
      * </pre>
      *
      * <code>bytes logmsg = 7;</code>
@@ -503,7 +503,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ????STARG_ENUM
+       *操作类别 参见STARG_ENUM
        * </pre>
        *
        * <code>fixed32 stage = 1;</code>
@@ -513,7 +513,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????STARG_ENUM
+       *操作类别 参见STARG_ENUM
        * </pre>
        *
        * <code>fixed32 stage = 1;</code>
@@ -525,7 +525,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????STARG_ENUM
+       *操作类别 参见STARG_ENUM
        * </pre>
        *
        * <code>fixed32 stage = 1;</code>
@@ -538,7 +538,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? ???? METHOD_ENUM
+       *操作方法 参见 METHOD_ENUM
        * </pre>
        *
        * <code>fixed32 method = 2;</code>
@@ -548,7 +548,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ???? METHOD_ENUM
+       *操作方法 参见 METHOD_ENUM
        * </pre>
        *
        * <code>fixed32 method = 2;</code>
@@ -560,7 +560,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ???? METHOD_ENUM
+       *操作方法 参见 METHOD_ENUM
        * </pre>
        *
        * <code>fixed32 method = 2;</code>
@@ -573,7 +573,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????ID
+       *管理人员ID
        * </pre>
        *
        * <code>fixed32 adminid = 3;</code>
@@ -583,7 +583,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *管理人员ID
        * </pre>
        *
        * <code>fixed32 adminid = 3;</code>
@@ -595,7 +595,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *管理人员ID
        * </pre>
        *
        * <code>fixed32 adminid = 3;</code>
@@ -608,7 +608,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????ID
+       *操作的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 4;</code>
@@ -618,7 +618,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID
+       *操作的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 4;</code>
@@ -630,7 +630,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID
+       *操作的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 4;</code>
@@ -643,7 +643,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????ID
+       *操作的会议ID
        * </pre>
        *
        * <code>fixed32 meetingid = 5;</code>
@@ -653,7 +653,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID
+       *操作的会议ID
        * </pre>
        *
        * <code>fixed32 meetingid = 5;</code>
@@ -665,7 +665,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID
+       *操作的会议ID
        * </pre>
        *
        * <code>fixed32 meetingid = 5;</code>
@@ -678,7 +678,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????utc??? ???
+       *操作utc时间 微秒
        * </pre>
        *
        * <code>fixed64 logtime = 6;</code>
@@ -688,7 +688,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????utc??? ???
+       *操作utc时间 微秒
        * </pre>
        *
        * <code>fixed64 logtime = 6;</code>
@@ -700,7 +700,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????utc??? ???
+       *操作utc时间 微秒
        * </pre>
        *
        * <code>fixed64 logtime = 6;</code>
@@ -713,7 +713,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????
+       *记录文本
        * </pre>
        *
        * <code>bytes logmsg = 7;</code>
@@ -723,7 +723,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *记录文本
        * </pre>
        *
        * <code>bytes logmsg = 7;</code>
@@ -735,7 +735,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *记录文本
        * </pre>
        *
        * <code>bytes logmsg = 7;</code>
@@ -894,7 +894,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????????????????
+     *查询返回用户传过来的开始行
      * </pre>
      *
      * <code>fixed32 startrow = 1;</code>
@@ -903,7 +903,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????,??????????,?????????????????????????
+     *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
      * </pre>
      *
      * <code>fixed32 isfirst = 2;</code>
@@ -926,9 +926,9 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????? 
-   *stages??Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
-   *method:???(???????)
+   *管理日志 
+   *stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+   *method:查询(数据库返回)
    * </pre>
    *
    * Protobuf type {@code pbui_Type_MeetingMeetSystemLog}
@@ -946,7 +946,7 @@ public final class InterfaceMain2 {
     private int startrow_;
     /**
      * <pre>
-     *??????????????????????
+     *查询返回用户传过来的开始行
      * </pre>
      *
      * <code>fixed32 startrow = 1;</code>
@@ -956,7 +956,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????????????????
+     *查询返回用户传过来的开始行
      * </pre>
      *
      * <code>fixed32 startrow = 1;</code>
@@ -967,7 +967,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????????????????
+     *查询返回用户传过来的开始行
      * </pre>
      *
      * <code>fixed32 startrow = 1;</code>
@@ -981,7 +981,7 @@ public final class InterfaceMain2 {
     private int isfirst_;
     /**
      * <pre>
-     *????????,??????????,?????????????????????????
+     *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
      * </pre>
      *
      * <code>fixed32 isfirst = 2;</code>
@@ -991,7 +991,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????,??????????,?????????????????????????
+     *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
      * </pre>
      *
      * <code>fixed32 isfirst = 2;</code>
@@ -1002,7 +1002,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????,??????????,?????????????????????????
+     *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
      * </pre>
      *
      * <code>fixed32 isfirst = 2;</code>
@@ -1249,9 +1249,9 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? 
-     *stages??Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
-     *method:???(???????)
+     *管理日志 
+     *stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+     *method:查询(数据库返回)
      * </pre>
      *
      * Protobuf type {@code pbui_Type_MeetingMeetSystemLog}
@@ -1269,7 +1269,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????????????????
+       *查询返回用户传过来的开始行
        * </pre>
        *
        * <code>fixed32 startrow = 1;</code>
@@ -1279,7 +1279,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????????????????
+       *查询返回用户传过来的开始行
        * </pre>
        *
        * <code>fixed32 startrow = 1;</code>
@@ -1291,7 +1291,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????????????????
+       *查询返回用户传过来的开始行
        * </pre>
        *
        * <code>fixed32 startrow = 1;</code>
@@ -1304,7 +1304,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????,??????????,?????????????????????????
+       *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
        * </pre>
        *
        * <code>fixed32 isfirst = 2;</code>
@@ -1314,7 +1314,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????,??????????,?????????????????????????
+       *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
        * </pre>
        *
        * <code>fixed32 isfirst = 2;</code>
@@ -1326,7 +1326,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????,??????????,?????????????????????????
+       *是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
        * </pre>
        *
        * <code>fixed32 isfirst = 2;</code>
@@ -1559,7 +1559,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ????STARG_ENUM ?????0??????????
+     *操作类别 参见STARG_ENUM 可以为0表示所有类别
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -1568,7 +1568,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????  ???? METHOD_ENUM ?????0???????????
+     *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -1577,7 +1577,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ?????0???????????
+     *会议ID 可以为0表示所有会议
      * </pre>
      *
      * <code>fixed32 meetingid = 3;</code>
@@ -1586,7 +1586,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????ID ?????0??????????????
+     *管理人员ID 可以为0表示所有管理人员
      * </pre>
      *
      * <code>fixed32 adminid = 4;</code>
@@ -1595,7 +1595,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????ID ?????0??????????
+     *操作的设备ID 可以为0表示所有设备
      * </pre>
      *
      * <code>fixed32 deviceid = 5;</code>
@@ -1604,7 +1604,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的起始记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 startlogtime = 6;</code>
@@ -1613,7 +1613,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的结束记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 endlogtime = 7;</code>
@@ -1622,7 +1622,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? ???????? ????????
+     *查询开始行 实现分页查询 必须有效
      * </pre>
      *
      * <code>fixed32 startrow = 8;</code>
@@ -1631,9 +1631,9 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????? 
-   *stages??Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
-   *method:???
+   *管理日志 
+   *stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+   *method:查询
    * </pre>
    *
    * Protobuf type {@code pbui_Type_QueryMeetSystemLog}
@@ -1649,7 +1649,7 @@ public final class InterfaceMain2 {
     private int stage_;
     /**
      * <pre>
-     *??????? ????STARG_ENUM ?????0??????????
+     *操作类别 参见STARG_ENUM 可以为0表示所有类别
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -1659,7 +1659,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????STARG_ENUM ?????0??????????
+     *操作类别 参见STARG_ENUM 可以为0表示所有类别
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -1670,7 +1670,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????STARG_ENUM ?????0??????????
+     *操作类别 参见STARG_ENUM 可以为0表示所有类别
      * </pre>
      *
      * <code>fixed32 stage = 1;</code>
@@ -1684,7 +1684,7 @@ public final class InterfaceMain2 {
     private int method_;
     /**
      * <pre>
-     *????????  ???? METHOD_ENUM ?????0???????????
+     *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -1694,7 +1694,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????  ???? METHOD_ENUM ?????0???????????
+     *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -1705,7 +1705,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????  ???? METHOD_ENUM ?????0???????????
+     *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
      * </pre>
      *
      * <code>fixed32 method = 2;</code>
@@ -1719,7 +1719,7 @@ public final class InterfaceMain2 {
     private int meetingid_;
     /**
      * <pre>
-     *????ID ?????0???????????
+     *会议ID 可以为0表示所有会议
      * </pre>
      *
      * <code>fixed32 meetingid = 3;</code>
@@ -1729,7 +1729,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ?????0???????????
+     *会议ID 可以为0表示所有会议
      * </pre>
      *
      * <code>fixed32 meetingid = 3;</code>
@@ -1740,7 +1740,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ?????0???????????
+     *会议ID 可以为0表示所有会议
      * </pre>
      *
      * <code>fixed32 meetingid = 3;</code>
@@ -1754,7 +1754,7 @@ public final class InterfaceMain2 {
     private int adminid_;
     /**
      * <pre>
-     *???????ID ?????0??????????????
+     *管理人员ID 可以为0表示所有管理人员
      * </pre>
      *
      * <code>fixed32 adminid = 4;</code>
@@ -1764,7 +1764,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID ?????0??????????????
+     *管理人员ID 可以为0表示所有管理人员
      * </pre>
      *
      * <code>fixed32 adminid = 4;</code>
@@ -1775,7 +1775,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID ?????0??????????????
+     *管理人员ID 可以为0表示所有管理人员
      * </pre>
      *
      * <code>fixed32 adminid = 4;</code>
@@ -1789,7 +1789,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *?????????ID ?????0??????????
+     *操作的设备ID 可以为0表示所有设备
      * </pre>
      *
      * <code>fixed32 deviceid = 5;</code>
@@ -1799,7 +1799,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID ?????0??????????
+     *操作的设备ID 可以为0表示所有设备
      * </pre>
      *
      * <code>fixed32 deviceid = 5;</code>
@@ -1810,7 +1810,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID ?????0??????????
+     *操作的设备ID 可以为0表示所有设备
      * </pre>
      *
      * <code>fixed32 deviceid = 5;</code>
@@ -1824,7 +1824,7 @@ public final class InterfaceMain2 {
     private long startlogtime_;
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的起始记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 startlogtime = 6;</code>
@@ -1834,7 +1834,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的起始记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 startlogtime = 6;</code>
@@ -1845,7 +1845,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的起始记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 startlogtime = 6;</code>
@@ -1859,7 +1859,7 @@ public final class InterfaceMain2 {
     private long endlogtime_;
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的结束记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 endlogtime = 7;</code>
@@ -1869,7 +1869,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的结束记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 endlogtime = 7;</code>
@@ -1880,7 +1880,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????utc??? ??? ????????
+     *查询的结束记录utc时间 微秒 必须有效
      * </pre>
      *
      * <code>fixed64 endlogtime = 7;</code>
@@ -1894,7 +1894,7 @@ public final class InterfaceMain2 {
     private int startrow_;
     /**
      * <pre>
-     *???????? ???????? ????????
+     *查询开始行 实现分页查询 必须有效
      * </pre>
      *
      * <code>fixed32 startrow = 8;</code>
@@ -1904,7 +1904,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ???????? ????????
+     *查询开始行 实现分页查询 必须有效
      * </pre>
      *
      * <code>fixed32 startrow = 8;</code>
@@ -1915,7 +1915,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ???????? ????????
+     *查询开始行 实现分页查询 必须有效
      * </pre>
      *
      * <code>fixed32 startrow = 8;</code>
@@ -2077,9 +2077,9 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? 
-     *stages??Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
-     *method:???
+     *管理日志 
+     *stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+     *method:查询
      * </pre>
      *
      * Protobuf type {@code pbui_Type_QueryMeetSystemLog}
@@ -2097,7 +2097,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ????STARG_ENUM ?????0??????????
+       *操作类别 参见STARG_ENUM 可以为0表示所有类别
        * </pre>
        *
        * <code>fixed32 stage = 1;</code>
@@ -2107,7 +2107,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????STARG_ENUM ?????0??????????
+       *操作类别 参见STARG_ENUM 可以为0表示所有类别
        * </pre>
        *
        * <code>fixed32 stage = 1;</code>
@@ -2119,7 +2119,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????STARG_ENUM ?????0??????????
+       *操作类别 参见STARG_ENUM 可以为0表示所有类别
        * </pre>
        *
        * <code>fixed32 stage = 1;</code>
@@ -2132,7 +2132,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????  ???? METHOD_ENUM ?????0???????????
+       *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
        * </pre>
        *
        * <code>fixed32 method = 2;</code>
@@ -2142,7 +2142,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????  ???? METHOD_ENUM ?????0???????????
+       *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
        * </pre>
        *
        * <code>fixed32 method = 2;</code>
@@ -2154,7 +2154,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????  ???? METHOD_ENUM ?????0???????????
+       *操作方法  参见 METHOD_ENUM 可以为0表示所有方法
        * </pre>
        *
        * <code>fixed32 method = 2;</code>
@@ -2167,7 +2167,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ?????0???????????
+       *会议ID 可以为0表示所有会议
        * </pre>
        *
        * <code>fixed32 meetingid = 3;</code>
@@ -2177,7 +2177,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ?????0???????????
+       *会议ID 可以为0表示所有会议
        * </pre>
        *
        * <code>fixed32 meetingid = 3;</code>
@@ -2189,7 +2189,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ?????0???????????
+       *会议ID 可以为0表示所有会议
        * </pre>
        *
        * <code>fixed32 meetingid = 3;</code>
@@ -2202,7 +2202,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????ID ?????0??????????????
+       *管理人员ID 可以为0表示所有管理人员
        * </pre>
        *
        * <code>fixed32 adminid = 4;</code>
@@ -2212,7 +2212,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID ?????0??????????????
+       *管理人员ID 可以为0表示所有管理人员
        * </pre>
        *
        * <code>fixed32 adminid = 4;</code>
@@ -2224,7 +2224,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID ?????0??????????????
+       *管理人员ID 可以为0表示所有管理人员
        * </pre>
        *
        * <code>fixed32 adminid = 4;</code>
@@ -2237,7 +2237,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????ID ?????0??????????
+       *操作的设备ID 可以为0表示所有设备
        * </pre>
        *
        * <code>fixed32 deviceid = 5;</code>
@@ -2247,7 +2247,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID ?????0??????????
+       *操作的设备ID 可以为0表示所有设备
        * </pre>
        *
        * <code>fixed32 deviceid = 5;</code>
@@ -2259,7 +2259,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID ?????0??????????
+       *操作的设备ID 可以为0表示所有设备
        * </pre>
        *
        * <code>fixed32 deviceid = 5;</code>
@@ -2272,7 +2272,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????utc??? ??? ????????
+       *查询的起始记录utc时间 微秒 必须有效
        * </pre>
        *
        * <code>fixed64 startlogtime = 6;</code>
@@ -2282,7 +2282,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????utc??? ??? ????????
+       *查询的起始记录utc时间 微秒 必须有效
        * </pre>
        *
        * <code>fixed64 startlogtime = 6;</code>
@@ -2294,7 +2294,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????utc??? ??? ????????
+       *查询的起始记录utc时间 微秒 必须有效
        * </pre>
        *
        * <code>fixed64 startlogtime = 6;</code>
@@ -2307,7 +2307,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????utc??? ??? ????????
+       *查询的结束记录utc时间 微秒 必须有效
        * </pre>
        *
        * <code>fixed64 endlogtime = 7;</code>
@@ -2317,7 +2317,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????utc??? ??? ????????
+       *查询的结束记录utc时间 微秒 必须有效
        * </pre>
        *
        * <code>fixed64 endlogtime = 7;</code>
@@ -2329,7 +2329,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????utc??? ??? ????????
+       *查询的结束记录utc时间 微秒 必须有效
        * </pre>
        *
        * <code>fixed64 endlogtime = 7;</code>
@@ -2342,7 +2342,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? ???????? ????????
+       *查询开始行 实现分页查询 必须有效
        * </pre>
        *
        * <code>fixed32 startrow = 8;</code>
@@ -2352,7 +2352,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ???????? ????????
+       *查询开始行 实现分页查询 必须有效
        * </pre>
        *
        * <code>fixed32 startrow = 8;</code>
@@ -2364,7 +2364,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ???????? ????????
+       *查询开始行 实现分页查询 必须有效
        * </pre>
        *
        * <code>fixed32 startrow = 8;</code>
@@ -2530,7 +2530,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *使用字体名称
      * </pre>
      *
      * <code>bytes fontname = 1;</code>
@@ -2539,7 +2539,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ????
+     *字体 大小
      * </pre>
      *
      * <code>fixed32 fontsize = 2;</code>
@@ -2548,7 +2548,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 fontcolor = 3;</code>
@@ -2557,7 +2557,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+     *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
      * </pre>
      *
      * <code>float lx = 4;</code>
@@ -2581,7 +2581,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ????Pb_TableCardFlag
+     *显示标志 参见Pb_TableCardFlag
      * </pre>
      *
      * <code>fixed32 flag = 8;</code>
@@ -2590,7 +2590,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? font align flag
+     *参见本页 font align flag
      * </pre>
      *
      * <code>fixed32 align = 9;</code>
@@ -2599,7 +2599,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? ????Pb_TableCardType
+     *显示的信息 参见Pb_TableCardType
      * </pre>
      *
      * <code>fixed32 type = 10;</code>
@@ -2608,7 +2608,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????????
+   *会议双屏显示相关
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetTableCardDetailInfo}
@@ -2625,7 +2625,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString fontname_;
     /**
      * <pre>
-     *???????????
+     *使用字体名称
      * </pre>
      *
      * <code>bytes fontname = 1;</code>
@@ -2635,7 +2635,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *使用字体名称
      * </pre>
      *
      * <code>bytes fontname = 1;</code>
@@ -2649,7 +2649,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *使用字体名称
      * </pre>
      *
      * <code>bytes fontname = 1;</code>
@@ -2663,7 +2663,7 @@ public final class InterfaceMain2 {
     private int fontsize_;
     /**
      * <pre>
-     *???? ????
+     *字体 大小
      * </pre>
      *
      * <code>fixed32 fontsize = 2;</code>
@@ -2673,7 +2673,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ????
+     *字体 大小
      * </pre>
      *
      * <code>fixed32 fontsize = 2;</code>
@@ -2684,7 +2684,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ????
+     *字体 大小
      * </pre>
      *
      * <code>fixed32 fontsize = 2;</code>
@@ -2698,7 +2698,7 @@ public final class InterfaceMain2 {
     private int fontcolor_;
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 fontcolor = 3;</code>
@@ -2708,7 +2708,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 fontcolor = 3;</code>
@@ -2719,7 +2719,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 fontcolor = 3;</code>
@@ -2733,7 +2733,7 @@ public final class InterfaceMain2 {
     private float lx_;
     /**
      * <pre>
-     *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+     *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
      * </pre>
      *
      * <code>float lx = 4;</code>
@@ -2743,7 +2743,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+     *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
      * </pre>
      *
      * <code>float lx = 4;</code>
@@ -2754,7 +2754,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+     *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
      * </pre>
      *
      * <code>float lx = 4;</code>
@@ -2837,7 +2837,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *?????? ????Pb_TableCardFlag
+     *显示标志 参见Pb_TableCardFlag
      * </pre>
      *
      * <code>fixed32 flag = 8;</code>
@@ -2847,7 +2847,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ????Pb_TableCardFlag
+     *显示标志 参见Pb_TableCardFlag
      * </pre>
      *
      * <code>fixed32 flag = 8;</code>
@@ -2858,7 +2858,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ????Pb_TableCardFlag
+     *显示标志 参见Pb_TableCardFlag
      * </pre>
      *
      * <code>fixed32 flag = 8;</code>
@@ -2872,7 +2872,7 @@ public final class InterfaceMain2 {
     private int align_;
     /**
      * <pre>
-     *??????? font align flag
+     *参见本页 font align flag
      * </pre>
      *
      * <code>fixed32 align = 9;</code>
@@ -2882,7 +2882,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? font align flag
+     *参见本页 font align flag
      * </pre>
      *
      * <code>fixed32 align = 9;</code>
@@ -2893,7 +2893,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? font align flag
+     *参见本页 font align flag
      * </pre>
      *
      * <code>fixed32 align = 9;</code>
@@ -2907,7 +2907,7 @@ public final class InterfaceMain2 {
     private int type_;
     /**
      * <pre>
-     *???????? ????Pb_TableCardType
+     *显示的信息 参见Pb_TableCardType
      * </pre>
      *
      * <code>fixed32 type = 10;</code>
@@ -2917,7 +2917,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ????Pb_TableCardType
+     *显示的信息 参见Pb_TableCardType
      * </pre>
      *
      * <code>fixed32 type = 10;</code>
@@ -2928,7 +2928,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ????Pb_TableCardType
+     *显示的信息 参见Pb_TableCardType
      * </pre>
      *
      * <code>fixed32 type = 10;</code>
@@ -3104,7 +3104,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????
+     *会议双屏显示相关
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetTableCardDetailInfo}
@@ -3122,7 +3122,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????
+       *使用字体名称
        * </pre>
        *
        * <code>bytes fontname = 1;</code>
@@ -3132,7 +3132,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *使用字体名称
        * </pre>
        *
        * <code>bytes fontname = 1;</code>
@@ -3144,7 +3144,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *使用字体名称
        * </pre>
        *
        * <code>bytes fontname = 1;</code>
@@ -3157,7 +3157,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ????
+       *字体 大小
        * </pre>
        *
        * <code>fixed32 fontsize = 2;</code>
@@ -3167,7 +3167,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ????
+       *字体 大小
        * </pre>
        *
        * <code>fixed32 fontsize = 2;</code>
@@ -3179,7 +3179,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ????
+       *字体 大小
        * </pre>
        *
        * <code>fixed32 fontsize = 2;</code>
@@ -3192,7 +3192,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *字体颜色
        * </pre>
        *
        * <code>fixed32 fontcolor = 3;</code>
@@ -3202,7 +3202,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体颜色
        * </pre>
        *
        * <code>fixed32 fontcolor = 3;</code>
@@ -3214,7 +3214,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体颜色
        * </pre>
        *
        * <code>fixed32 fontcolor = 3;</code>
@@ -3227,7 +3227,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+       *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
        * </pre>
        *
        * <code>float lx = 4;</code>
@@ -3237,7 +3237,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+       *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
        * </pre>
        *
        * <code>float lx = 4;</code>
@@ -3249,7 +3249,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? x???? ???????? ???lx=0.1 ?????1920? ??????lx???= 0.1 * 1920 = 192
+       *左上角 x坐标 相对宽的百分比 如：lx=0.1 当宽为1920时 真正的lx应该= 0.1 * 1920 = 192
        * </pre>
        *
        * <code>float lx = 4;</code>
@@ -3331,7 +3331,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ????Pb_TableCardFlag
+       *显示标志 参见Pb_TableCardFlag
        * </pre>
        *
        * <code>fixed32 flag = 8;</code>
@@ -3341,7 +3341,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ????Pb_TableCardFlag
+       *显示标志 参见Pb_TableCardFlag
        * </pre>
        *
        * <code>fixed32 flag = 8;</code>
@@ -3353,7 +3353,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ????Pb_TableCardFlag
+       *显示标志 参见Pb_TableCardFlag
        * </pre>
        *
        * <code>fixed32 flag = 8;</code>
@@ -3366,7 +3366,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? font align flag
+       *参见本页 font align flag
        * </pre>
        *
        * <code>fixed32 align = 9;</code>
@@ -3376,7 +3376,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? font align flag
+       *参见本页 font align flag
        * </pre>
        *
        * <code>fixed32 align = 9;</code>
@@ -3388,7 +3388,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? font align flag
+       *参见本页 font align flag
        * </pre>
        *
        * <code>fixed32 align = 9;</code>
@@ -3401,7 +3401,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? ????Pb_TableCardType
+       *显示的信息 参见Pb_TableCardType
        * </pre>
        *
        * <code>fixed32 type = 10;</code>
@@ -3411,7 +3411,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ????Pb_TableCardType
+       *显示的信息 参见Pb_TableCardType
        * </pre>
        *
        * <code>fixed32 type = 10;</code>
@@ -3423,7 +3423,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ????Pb_TableCardType
+       *显示的信息 参见Pb_TableCardType
        * </pre>
        *
        * <code>fixed32 type = 10;</code>
@@ -3603,7 +3603,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *底图ID
      * </pre>
      *
      * <code>fixed32 bgphotoid = 1;</code>
@@ -3612,7 +3612,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3621,7 +3621,7 @@ public final class InterfaceMain2 {
         getItemList();
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3629,7 +3629,7 @@ public final class InterfaceMain2 {
     com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetTableCardDetailInfo getItem(int index);
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3638,7 +3638,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????????
+   *会议双屏显示相关
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETTABLECARD
    *method: mod/query
@@ -3659,7 +3659,7 @@ public final class InterfaceMain2 {
     private int bgphotoid_;
     /**
      * <pre>
-     *???ID
+     *底图ID
      * </pre>
      *
      * <code>fixed32 bgphotoid = 1;</code>
@@ -3669,7 +3669,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *底图ID
      * </pre>
      *
      * <code>fixed32 bgphotoid = 1;</code>
@@ -3680,7 +3680,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *底图ID
      * </pre>
      *
      * <code>fixed32 bgphotoid = 1;</code>
@@ -3694,7 +3694,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetTableCardDetailInfo> item_;
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3704,7 +3704,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3715,7 +3715,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3725,7 +3725,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3735,7 +3735,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3753,7 +3753,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3768,7 +3768,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3780,7 +3780,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3794,7 +3794,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3809,7 +3809,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3821,7 +3821,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3833,7 +3833,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3846,7 +3846,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3856,7 +3856,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????3??
+     *必须是3个
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -3976,7 +3976,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????
+     *会议双屏显示相关
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETTABLECARD
      *method: mod/query
@@ -3997,7 +3997,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *底图ID
        * </pre>
        *
        * <code>fixed32 bgphotoid = 1;</code>
@@ -4007,7 +4007,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *底图ID
        * </pre>
        *
        * <code>fixed32 bgphotoid = 1;</code>
@@ -4019,7 +4019,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *底图ID
        * </pre>
        *
        * <code>fixed32 bgphotoid = 1;</code>
@@ -4032,7 +4032,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4043,7 +4043,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4052,7 +4052,7 @@ public final class InterfaceMain2 {
         return instance.getItemCount();
       }/**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4062,7 +4062,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4075,7 +4075,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4088,7 +4088,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4100,7 +4100,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4113,7 +4113,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4126,7 +4126,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4139,7 +4139,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4152,7 +4152,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4164,7 +4164,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????3??
+       *必须是3个
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetTableCardDetailInfo item = 2;</code>
@@ -4293,7 +4293,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -4302,7 +4302,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 seatid = 2;</code>
@@ -4311,7 +4311,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????  ????Pb_MeetMemberRole
+     *人员身份  参见Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -4320,7 +4320,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *会议排位信息
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetSeatDetailInfo}
@@ -4336,7 +4336,7 @@ public final class InterfaceMain2 {
     private int nameId_;
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -4346,7 +4346,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -4357,7 +4357,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -4371,7 +4371,7 @@ public final class InterfaceMain2 {
     private int seatid_;
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 seatid = 2;</code>
@@ -4381,7 +4381,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 seatid = 2;</code>
@@ -4392,7 +4392,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 seatid = 2;</code>
@@ -4406,7 +4406,7 @@ public final class InterfaceMain2 {
     private int role_;
     /**
      * <pre>
-     *??????  ????Pb_MeetMemberRole
+     *人员身份  参见Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -4416,7 +4416,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????  ????Pb_MeetMemberRole
+     *人员身份  参见Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -4427,7 +4427,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????  ????Pb_MeetMemberRole
+     *人员身份  参见Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -4554,7 +4554,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *会议排位信息
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetSeatDetailInfo}
@@ -4572,7 +4572,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????ID
+       *参会人员ID
        * </pre>
        *
        * <code>fixed32 nameId = 1;</code>
@@ -4582,7 +4582,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *参会人员ID
        * </pre>
        *
        * <code>fixed32 nameId = 1;</code>
@@ -4594,7 +4594,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *参会人员ID
        * </pre>
        *
        * <code>fixed32 nameId = 1;</code>
@@ -4607,7 +4607,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 seatid = 2;</code>
@@ -4617,7 +4617,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 seatid = 2;</code>
@@ -4629,7 +4629,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 seatid = 2;</code>
@@ -4642,7 +4642,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????  ????Pb_MeetMemberRole
+       *人员身份  参见Pb_MeetMemberRole
        * </pre>
        *
        * <code>fixed32 role = 3;</code>
@@ -4652,7 +4652,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????  ????Pb_MeetMemberRole
+       *人员身份  参见Pb_MeetMemberRole
        * </pre>
        *
        * <code>fixed32 role = 3;</code>
@@ -4664,7 +4664,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????  ????Pb_MeetMemberRole
+       *人员身份  参见Pb_MeetMemberRole
        * </pre>
        *
        * <code>fixed32 role = 3;</code>
@@ -4795,7 +4795,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4804,7 +4804,7 @@ public final class InterfaceMain2 {
         getItemList();
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4812,7 +4812,7 @@ public final class InterfaceMain2 {
     com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetSeatDetailInfo getItem(int index);
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4821,7 +4821,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *会议排位信息
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETSEAT
    *method: mod/query
@@ -4841,7 +4841,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetSeatDetailInfo> item_;
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4851,7 +4851,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4862,7 +4862,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4872,7 +4872,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4882,7 +4882,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4900,7 +4900,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4915,7 +4915,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4927,7 +4927,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4941,7 +4941,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4956,7 +4956,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4968,7 +4968,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4980,7 +4980,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -4993,7 +4993,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5003,7 +5003,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *排位
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5116,7 +5116,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *会议排位信息
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETSEAT
      *method: mod/query
@@ -5137,7 +5137,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5148,7 +5148,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5157,7 +5157,7 @@ public final class InterfaceMain2 {
         return instance.getItemCount();
       }/**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5167,7 +5167,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5180,7 +5180,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5193,7 +5193,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5205,7 +5205,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5218,7 +5218,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5231,7 +5231,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5244,7 +5244,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5257,7 +5257,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5269,7 +5269,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *排位
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetSeatDetailInfo item = 1;</code>
@@ -5390,7 +5390,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -5399,7 +5399,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? ???? Pb_MeetMemberRole
+     *发送者角色 参见 Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -5408,7 +5408,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -5417,7 +5417,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -5426,7 +5426,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -5435,7 +5435,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????????
+   *收到新的会议交流信息
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_MEETIM
    *method: notify
@@ -5455,7 +5455,7 @@ public final class InterfaceMain2 {
     private int msgtype_;
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -5465,7 +5465,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -5476,7 +5476,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -5490,7 +5490,7 @@ public final class InterfaceMain2 {
     private int role_;
     /**
      * <pre>
-     *???????? ???? Pb_MeetMemberRole
+     *发送者角色 参见 Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -5500,7 +5500,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ???? Pb_MeetMemberRole
+     *发送者角色 参见 Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -5511,7 +5511,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ???? Pb_MeetMemberRole
+     *发送者角色 参见 Pb_MeetMemberRole
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -5525,7 +5525,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -5535,7 +5535,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -5546,7 +5546,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -5560,7 +5560,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString msg_;
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -5570,7 +5570,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -5584,7 +5584,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -5598,7 +5598,7 @@ public final class InterfaceMain2 {
     private long utcsecond_;
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -5608,7 +5608,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -5619,7 +5619,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -5760,7 +5760,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????
+     *收到新的会议交流信息
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_MEETIM
      *method: notify
@@ -5781,7 +5781,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -5791,7 +5791,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -5803,7 +5803,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -5816,7 +5816,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? ???? Pb_MeetMemberRole
+       *发送者角色 参见 Pb_MeetMemberRole
        * </pre>
        *
        * <code>fixed32 role = 2;</code>
@@ -5826,7 +5826,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ???? Pb_MeetMemberRole
+       *发送者角色 参见 Pb_MeetMemberRole
        * </pre>
        *
        * <code>fixed32 role = 2;</code>
@@ -5838,7 +5838,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ???? Pb_MeetMemberRole
+       *发送者角色 参见 Pb_MeetMemberRole
        * </pre>
        *
        * <code>fixed32 role = 2;</code>
@@ -5851,7 +5851,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -5861,7 +5861,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -5873,7 +5873,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -5886,7 +5886,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 4;</code>
@@ -5896,7 +5896,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 4;</code>
@@ -5908,7 +5908,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 4;</code>
@@ -5921,7 +5921,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????UTC??? ????:??
+       *发送UTC时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcsecond = 5;</code>
@@ -5931,7 +5931,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????UTC??? ????:??
+       *发送UTC时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcsecond = 5;</code>
@@ -5943,7 +5943,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????UTC??? ????:??
+       *发送UTC时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcsecond = 5;</code>
@@ -6088,7 +6088,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6097,7 +6097,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 2;</code>
@@ -6106,7 +6106,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6114,7 +6114,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getUseridsList();
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6122,7 +6122,7 @@ public final class InterfaceMain2 {
     int getUseridsCount();
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6131,7 +6131,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *发送消息
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETIM
    *method: send
@@ -6153,7 +6153,7 @@ public final class InterfaceMain2 {
     private int msgtype_;
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6163,7 +6163,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6174,7 +6174,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6188,7 +6188,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString msg_;
     /**
      * <pre>
-     *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 2;</code>
@@ -6198,7 +6198,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 2;</code>
@@ -6212,7 +6212,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 2;</code>
@@ -6226,7 +6226,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList userids_;
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6237,7 +6237,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6247,7 +6247,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6263,7 +6263,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6275,7 +6275,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6286,7 +6286,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6299,7 +6299,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?0????????????? ??????????????????0
+     *为0表示当前会议全部 如果是会议服务类请求为0
      * </pre>
      *
      * <code>repeated fixed32 userids = 3;</code>
@@ -6428,7 +6428,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *发送消息
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETIM
      *method: send
@@ -6449,7 +6449,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -6459,7 +6459,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -6471,7 +6471,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -6484,7 +6484,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 2;</code>
@@ -6494,7 +6494,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 2;</code>
@@ -6506,7 +6506,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????  ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 2;</code>
@@ -6519,7 +6519,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6531,7 +6531,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6541,7 +6541,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6551,7 +6551,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6564,7 +6564,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6576,7 +6576,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6589,7 +6589,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?0????????????? ??????????????????0
+       *为0表示当前会议全部 如果是会议服务类请求为0
        * </pre>
        *
        * <code>repeated fixed32 userids = 3;</code>
@@ -6738,7 +6738,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6747,7 +6747,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -6756,7 +6756,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -6765,7 +6765,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -6774,7 +6774,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -6783,7 +6783,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *会议交流信息
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetIMDetailInfo}
@@ -6800,7 +6800,7 @@ public final class InterfaceMain2 {
     private int msgtype_;
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6810,7 +6810,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6821,7 +6821,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ???? Pb_MeetIMMSG_TYPE
+     *消息类型 参见 Pb_MeetIMMSG_TYPE
      * </pre>
      *
      * <code>fixed32 msgtype = 1;</code>
@@ -6835,7 +6835,7 @@ public final class InterfaceMain2 {
     private int role_;
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -6845,7 +6845,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -6856,7 +6856,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 2;</code>
@@ -6870,7 +6870,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -6880,7 +6880,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -6891,7 +6891,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -6905,7 +6905,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString msg_;
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -6915,7 +6915,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -6929,7 +6929,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+     *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
      * </pre>
      *
      * <code>bytes msg = 4;</code>
@@ -6943,7 +6943,7 @@ public final class InterfaceMain2 {
     private long utcsecond_;
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -6953,7 +6953,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -6964,7 +6964,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????UTC??? ????:??
+     *发送UTC时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcsecond = 5;</code>
@@ -7105,7 +7105,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *会议交流信息
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetIMDetailInfo}
@@ -7123,7 +7123,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -7133,7 +7133,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -7145,7 +7145,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ???? Pb_MeetIMMSG_TYPE
+       *消息类型 参见 Pb_MeetIMMSG_TYPE
        * </pre>
        *
        * <code>fixed32 msgtype = 1;</code>
@@ -7158,7 +7158,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *发送者角色
        * </pre>
        *
        * <code>fixed32 role = 2;</code>
@@ -7168,7 +7168,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *发送者角色
        * </pre>
        *
        * <code>fixed32 role = 2;</code>
@@ -7180,7 +7180,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *发送者角色
        * </pre>
        *
        * <code>fixed32 role = 2;</code>
@@ -7193,7 +7193,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -7203,7 +7203,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -7215,7 +7215,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -7228,7 +7228,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 4;</code>
@@ -7238,7 +7238,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 4;</code>
@@ -7250,7 +7250,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_MEETIM_CHAR_MSG_MAXLEN
+       *消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
        * </pre>
        *
        * <code>bytes msg = 4;</code>
@@ -7263,7 +7263,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????UTC??? ????:??
+       *发送UTC时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcsecond = 5;</code>
@@ -7273,7 +7273,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????UTC??? ????:??
+       *发送UTC时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcsecond = 5;</code>
@@ -7285,7 +7285,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????UTC??? ????:??
+       *发送UTC时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcsecond = 5;</code>
@@ -7907,7 +7907,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ???? Pb_COMPLEXQUERY_ZERO
+     *查询标志 参见 Pb_COMPLEXQUERY_ZERO
      * </pre>
      *
      * <code>fixed32 queryflag = 1;</code>
@@ -7916,7 +7916,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *消息类型
      * </pre>
      *
      * <code>fixed32 msgtype = 2;</code>
@@ -7925,7 +7925,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -7934,7 +7934,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 4;</code>
@@ -7943,7 +7943,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *时间范围
      * </pre>
      *
      * <code>fixed64 startutcsecond = 5;</code>
@@ -7952,7 +7952,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????UTC???
+     *发送UTC时间
      * </pre>
      *
      * <code>fixed64 endutcsecond = 6;</code>
@@ -7961,7 +7961,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 7;</code>
@@ -7970,7 +7970,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 8;</code>
@@ -7979,7 +7979,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????
+   *组合查询
    *type:Pb_TYPE_MEET_INTERFACE_MEETIM
    *method: complexquery
    * </pre>
@@ -7997,7 +7997,7 @@ public final class InterfaceMain2 {
     private int queryflag_;
     /**
      * <pre>
-     *?????? ???? Pb_COMPLEXQUERY_ZERO
+     *查询标志 参见 Pb_COMPLEXQUERY_ZERO
      * </pre>
      *
      * <code>fixed32 queryflag = 1;</code>
@@ -8007,7 +8007,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_COMPLEXQUERY_ZERO
+     *查询标志 参见 Pb_COMPLEXQUERY_ZERO
      * </pre>
      *
      * <code>fixed32 queryflag = 1;</code>
@@ -8018,7 +8018,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_COMPLEXQUERY_ZERO
+     *查询标志 参见 Pb_COMPLEXQUERY_ZERO
      * </pre>
      *
      * <code>fixed32 queryflag = 1;</code>
@@ -8032,7 +8032,7 @@ public final class InterfaceMain2 {
     private int msgtype_;
     /**
      * <pre>
-     *???????
+     *消息类型
      * </pre>
      *
      * <code>fixed32 msgtype = 2;</code>
@@ -8042,7 +8042,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *消息类型
      * </pre>
      *
      * <code>fixed32 msgtype = 2;</code>
@@ -8053,7 +8053,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *消息类型
      * </pre>
      *
      * <code>fixed32 msgtype = 2;</code>
@@ -8067,7 +8067,7 @@ public final class InterfaceMain2 {
     private int role_;
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -8077,7 +8077,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -8088,7 +8088,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *发送者角色
      * </pre>
      *
      * <code>fixed32 role = 3;</code>
@@ -8102,7 +8102,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 4;</code>
@@ -8112,7 +8112,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 4;</code>
@@ -8123,7 +8123,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *发送者ID
      * </pre>
      *
      * <code>fixed32 memberid = 4;</code>
@@ -8137,7 +8137,7 @@ public final class InterfaceMain2 {
     private long startutcsecond_;
     /**
      * <pre>
-     *?????
+     *时间范围
      * </pre>
      *
      * <code>fixed64 startutcsecond = 5;</code>
@@ -8147,7 +8147,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *时间范围
      * </pre>
      *
      * <code>fixed64 startutcsecond = 5;</code>
@@ -8158,7 +8158,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *时间范围
      * </pre>
      *
      * <code>fixed64 startutcsecond = 5;</code>
@@ -8172,7 +8172,7 @@ public final class InterfaceMain2 {
     private long endutcsecond_;
     /**
      * <pre>
-     *????UTC???
+     *发送UTC时间
      * </pre>
      *
      * <code>fixed64 endutcsecond = 6;</code>
@@ -8182,7 +8182,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????UTC???
+     *发送UTC时间
      * </pre>
      *
      * <code>fixed64 endutcsecond = 6;</code>
@@ -8193,7 +8193,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????UTC???
+     *发送UTC时间
      * </pre>
      *
      * <code>fixed64 endutcsecond = 6;</code>
@@ -8207,7 +8207,7 @@ public final class InterfaceMain2 {
     private int pageindex_;
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 7;</code>
@@ -8217,7 +8217,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 7;</code>
@@ -8228,7 +8228,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 7;</code>
@@ -8242,7 +8242,7 @@ public final class InterfaceMain2 {
     private int pagenum_;
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 8;</code>
@@ -8252,7 +8252,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 8;</code>
@@ -8263,7 +8263,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 8;</code>
@@ -8425,7 +8425,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *组合查询
      *type:Pb_TYPE_MEET_INTERFACE_MEETIM
      *method: complexquery
      * </pre>
@@ -8445,7 +8445,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ???? Pb_COMPLEXQUERY_ZERO
+       *查询标志 参见 Pb_COMPLEXQUERY_ZERO
        * </pre>
        *
        * <code>fixed32 queryflag = 1;</code>
@@ -8455,7 +8455,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_COMPLEXQUERY_ZERO
+       *查询标志 参见 Pb_COMPLEXQUERY_ZERO
        * </pre>
        *
        * <code>fixed32 queryflag = 1;</code>
@@ -8467,7 +8467,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_COMPLEXQUERY_ZERO
+       *查询标志 参见 Pb_COMPLEXQUERY_ZERO
        * </pre>
        *
        * <code>fixed32 queryflag = 1;</code>
@@ -8480,7 +8480,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *消息类型
        * </pre>
        *
        * <code>fixed32 msgtype = 2;</code>
@@ -8490,7 +8490,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *消息类型
        * </pre>
        *
        * <code>fixed32 msgtype = 2;</code>
@@ -8502,7 +8502,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *消息类型
        * </pre>
        *
        * <code>fixed32 msgtype = 2;</code>
@@ -8515,7 +8515,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *发送者角色
        * </pre>
        *
        * <code>fixed32 role = 3;</code>
@@ -8525,7 +8525,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *发送者角色
        * </pre>
        *
        * <code>fixed32 role = 3;</code>
@@ -8537,7 +8537,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *发送者角色
        * </pre>
        *
        * <code>fixed32 role = 3;</code>
@@ -8550,7 +8550,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 4;</code>
@@ -8560,7 +8560,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 4;</code>
@@ -8572,7 +8572,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *发送者ID
        * </pre>
        *
        * <code>fixed32 memberid = 4;</code>
@@ -8585,7 +8585,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????
+       *时间范围
        * </pre>
        *
        * <code>fixed64 startutcsecond = 5;</code>
@@ -8595,7 +8595,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *时间范围
        * </pre>
        *
        * <code>fixed64 startutcsecond = 5;</code>
@@ -8607,7 +8607,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *时间范围
        * </pre>
        *
        * <code>fixed64 startutcsecond = 5;</code>
@@ -8620,7 +8620,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????UTC???
+       *发送UTC时间
        * </pre>
        *
        * <code>fixed64 endutcsecond = 6;</code>
@@ -8630,7 +8630,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????UTC???
+       *发送UTC时间
        * </pre>
        *
        * <code>fixed64 endutcsecond = 6;</code>
@@ -8642,7 +8642,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????UTC???
+       *发送UTC时间
        * </pre>
        *
        * <code>fixed64 endutcsecond = 6;</code>
@@ -8655,7 +8655,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ??0 ???
+       *起始索引 从0 开始
        * </pre>
        *
        * <code>fixed32 pageindex = 7;</code>
@@ -8665,7 +8665,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??0 ???
+       *起始索引 从0 开始
        * </pre>
        *
        * <code>fixed32 pageindex = 7;</code>
@@ -8677,7 +8677,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??0 ???
+       *起始索引 从0 开始
        * </pre>
        *
        * <code>fixed32 pageindex = 7;</code>
@@ -8690,7 +8690,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????
+       *每页项数
        * </pre>
        *
        * <code>fixed32 pagenum = 8;</code>
@@ -8700,7 +8700,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *每页项数
        * </pre>
        *
        * <code>fixed32 pagenum = 8;</code>
@@ -8712,7 +8712,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *每页项数
        * </pre>
        *
        * <code>fixed32 pagenum = 8;</code>
@@ -8878,7 +8878,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 1;</code>
@@ -8887,7 +8887,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 2;</code>
@@ -8896,7 +8896,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? ,????????????????????
+     *当前页项数 ,根据数据不同用不同的解析
      * </pre>
      *
      * <code>fixed32 itemnum = 3;</code>
@@ -8905,7 +8905,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *总项数
      * </pre>
      *
      * <code>fixed32 totalnum = 4;</code>
@@ -8914,7 +8914,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -8923,7 +8923,7 @@ public final class InterfaceMain2 {
         getItemList();
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -8931,7 +8931,7 @@ public final class InterfaceMain2 {
     com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetIMDetailInfo getItem(int index);
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -8940,7 +8940,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????????
+   *组合查询返回结构头部
    *callreturn
    *type:Pb_TYPE_MEET_INTERFACE_MEETIM
    *method: complexpagequery
@@ -8961,7 +8961,7 @@ public final class InterfaceMain2 {
     private int pageindex_;
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 1;</code>
@@ -8971,7 +8971,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 1;</code>
@@ -8982,7 +8982,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??0 ???
+     *起始索引 从0 开始
      * </pre>
      *
      * <code>fixed32 pageindex = 1;</code>
@@ -8996,7 +8996,7 @@ public final class InterfaceMain2 {
     private int pagenum_;
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 2;</code>
@@ -9006,7 +9006,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 2;</code>
@@ -9017,7 +9017,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *每页项数
      * </pre>
      *
      * <code>fixed32 pagenum = 2;</code>
@@ -9031,7 +9031,7 @@ public final class InterfaceMain2 {
     private int itemnum_;
     /**
      * <pre>
-     *???????? ,????????????????????
+     *当前页项数 ,根据数据不同用不同的解析
      * </pre>
      *
      * <code>fixed32 itemnum = 3;</code>
@@ -9041,7 +9041,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ,????????????????????
+     *当前页项数 ,根据数据不同用不同的解析
      * </pre>
      *
      * <code>fixed32 itemnum = 3;</code>
@@ -9052,7 +9052,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ,????????????????????
+     *当前页项数 ,根据数据不同用不同的解析
      * </pre>
      *
      * <code>fixed32 itemnum = 3;</code>
@@ -9066,7 +9066,7 @@ public final class InterfaceMain2 {
     private int totalnum_;
     /**
      * <pre>
-     *??????
+     *总项数
      * </pre>
      *
      * <code>fixed32 totalnum = 4;</code>
@@ -9076,7 +9076,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *总项数
      * </pre>
      *
      * <code>fixed32 totalnum = 4;</code>
@@ -9087,7 +9087,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????
+     *总项数
      * </pre>
      *
      * <code>fixed32 totalnum = 4;</code>
@@ -9101,7 +9101,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetIMDetailInfo> item_;
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9111,7 +9111,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9122,7 +9122,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9132,7 +9132,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9142,7 +9142,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9160,7 +9160,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9175,7 +9175,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9187,7 +9187,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9201,7 +9201,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9216,7 +9216,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9228,7 +9228,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9240,7 +9240,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9253,7 +9253,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9263,7 +9263,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *消息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9404,7 +9404,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????
+     *组合查询返回结构头部
      *callreturn
      *type:Pb_TYPE_MEET_INTERFACE_MEETIM
      *method: complexpagequery
@@ -9425,7 +9425,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ??0 ???
+       *起始索引 从0 开始
        * </pre>
        *
        * <code>fixed32 pageindex = 1;</code>
@@ -9435,7 +9435,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??0 ???
+       *起始索引 从0 开始
        * </pre>
        *
        * <code>fixed32 pageindex = 1;</code>
@@ -9447,7 +9447,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??0 ???
+       *起始索引 从0 开始
        * </pre>
        *
        * <code>fixed32 pageindex = 1;</code>
@@ -9460,7 +9460,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????
+       *每页项数
        * </pre>
        *
        * <code>fixed32 pagenum = 2;</code>
@@ -9470,7 +9470,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *每页项数
        * </pre>
        *
        * <code>fixed32 pagenum = 2;</code>
@@ -9482,7 +9482,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *每页项数
        * </pre>
        *
        * <code>fixed32 pagenum = 2;</code>
@@ -9495,7 +9495,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? ,????????????????????
+       *当前页项数 ,根据数据不同用不同的解析
        * </pre>
        *
        * <code>fixed32 itemnum = 3;</code>
@@ -9505,7 +9505,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ,????????????????????
+       *当前页项数 ,根据数据不同用不同的解析
        * </pre>
        *
        * <code>fixed32 itemnum = 3;</code>
@@ -9517,7 +9517,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ,????????????????????
+       *当前页项数 ,根据数据不同用不同的解析
        * </pre>
        *
        * <code>fixed32 itemnum = 3;</code>
@@ -9530,7 +9530,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????
+       *总项数
        * </pre>
        *
        * <code>fixed32 totalnum = 4;</code>
@@ -9540,7 +9540,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *总项数
        * </pre>
        *
        * <code>fixed32 totalnum = 4;</code>
@@ -9552,7 +9552,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????
+       *总项数
        * </pre>
        *
        * <code>fixed32 totalnum = 4;</code>
@@ -9565,7 +9565,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9576,7 +9576,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9585,7 +9585,7 @@ public final class InterfaceMain2 {
         return instance.getItemCount();
       }/**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9595,7 +9595,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9608,7 +9608,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9621,7 +9621,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9633,7 +9633,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9646,7 +9646,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9659,7 +9659,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9672,7 +9672,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9685,7 +9685,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9697,7 +9697,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *消息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetIMDetailInfo item = 5;</code>
@@ -9852,7 +9852,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -9861,7 +9861,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?? ??? ??????? ????Pb_MeetVoteType
+     *投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -9870,7 +9870,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -9879,7 +9879,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -9888,7 +9888,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ???? ??
+     *超时值 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 6;</code>
@@ -9897,7 +9897,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 7;</code>
@@ -9906,7 +9906,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -9914,7 +9914,7 @@ public final class InterfaceMain2 {
     java.util.List<com.google.protobuf.ByteString> getTextList();
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -9922,7 +9922,7 @@ public final class InterfaceMain2 {
     int getTextCount();
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -9931,7 +9931,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????????
+   *会议发起投票信息
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetOnVotingDetailInfo}
@@ -9973,7 +9973,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString content_;
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -9983,7 +9983,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -9997,7 +9997,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -10011,7 +10011,7 @@ public final class InterfaceMain2 {
     private int maintype_;
     /**
      * <pre>
-     *?? ??? ??????? ????Pb_MeetVoteType
+     *投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -10021,7 +10021,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?? ??? ??????? ????Pb_MeetVoteType
+     *投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -10032,7 +10032,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?? ??? ??????? ????Pb_MeetVoteType
+     *投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -10046,7 +10046,7 @@ public final class InterfaceMain2 {
     private int mode_;
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -10056,7 +10056,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -10067,7 +10067,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -10081,7 +10081,7 @@ public final class InterfaceMain2 {
     private int type_;
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -10091,7 +10091,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -10102,7 +10102,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -10116,7 +10116,7 @@ public final class InterfaceMain2 {
     private int timeouts_;
     /**
      * <pre>
-     *???? ???? ??
+     *超时值 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 6;</code>
@@ -10126,7 +10126,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ???? ??
+     *超时值 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 6;</code>
@@ -10137,7 +10137,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ???? ??
+     *超时值 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 6;</code>
@@ -10151,7 +10151,7 @@ public final class InterfaceMain2 {
     private int selectcount_;
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 7;</code>
@@ -10161,7 +10161,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 7;</code>
@@ -10172,7 +10172,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 7;</code>
@@ -10186,7 +10186,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.ProtobufList<com.google.protobuf.ByteString> text_;
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10197,7 +10197,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10207,7 +10207,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10223,7 +10223,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10238,7 +10238,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10252,7 +10252,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10265,7 +10265,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated bytes text = 8;</code>
@@ -10431,7 +10431,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *会议发起投票信息
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetOnVotingDetailInfo}
@@ -10472,7 +10472,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? 
+       *投票内容 
        * </pre>
        *
        * <code>bytes content = 2;</code>
@@ -10482,7 +10482,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? 
+       *投票内容 
        * </pre>
        *
        * <code>bytes content = 2;</code>
@@ -10494,7 +10494,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? 
+       *投票内容 
        * </pre>
        *
        * <code>bytes content = 2;</code>
@@ -10507,7 +10507,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?? ??? ??????? ????Pb_MeetVoteType
+       *投票 选举 调查问卷 参见Pb_MeetVoteType
        * </pre>
        *
        * <code>fixed32 maintype = 3;</code>
@@ -10517,7 +10517,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?? ??? ??????? ????Pb_MeetVoteType
+       *投票 选举 调查问卷 参见Pb_MeetVoteType
        * </pre>
        *
        * <code>fixed32 maintype = 3;</code>
@@ -10529,7 +10529,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?? ??? ??????? ????Pb_MeetVoteType
+       *投票 选举 调查问卷 参见Pb_MeetVoteType
        * </pre>
        *
        * <code>fixed32 maintype = 3;</code>
@@ -10542,7 +10542,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ?????? ????Pb_MeetVoteMode
+       *匿名投票 记名投票 参见Pb_MeetVoteMode
        * </pre>
        *
        * <code>fixed32 mode = 4;</code>
@@ -10552,7 +10552,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ?????? ????Pb_MeetVoteMode
+       *匿名投票 记名投票 参见Pb_MeetVoteMode
        * </pre>
        *
        * <code>fixed32 mode = 4;</code>
@@ -10564,7 +10564,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ?????? ????Pb_MeetVoteMode
+       *匿名投票 记名投票 参见Pb_MeetVoteMode
        * </pre>
        *
        * <code>fixed32 mode = 4;</code>
@@ -10577,7 +10577,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??? ??? ????Pb_MeetVote_SelType
+       *多选 单选 参见Pb_MeetVote_SelType
        * </pre>
        *
        * <code>fixed32 type = 5;</code>
@@ -10587,7 +10587,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ??? ????Pb_MeetVote_SelType
+       *多选 单选 参见Pb_MeetVote_SelType
        * </pre>
        *
        * <code>fixed32 type = 5;</code>
@@ -10599,7 +10599,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ??? ????Pb_MeetVote_SelType
+       *多选 单选 参见Pb_MeetVote_SelType
        * </pre>
        *
        * <code>fixed32 type = 5;</code>
@@ -10612,7 +10612,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ???? ??
+       *超时值 单位 秒
        * </pre>
        *
        * <code>fixed32 timeouts = 6;</code>
@@ -10622,7 +10622,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ???? ??
+       *超时值 单位 秒
        * </pre>
        *
        * <code>fixed32 timeouts = 6;</code>
@@ -10634,7 +10634,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ???? ??
+       *超时值 单位 秒
        * </pre>
        *
        * <code>fixed32 timeouts = 6;</code>
@@ -10647,7 +10647,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *有效选项
        * </pre>
        *
        * <code>fixed32 selectcount = 7;</code>
@@ -10657,7 +10657,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *有效选项
        * </pre>
        *
        * <code>fixed32 selectcount = 7;</code>
@@ -10669,7 +10669,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *有效选项
        * </pre>
        *
        * <code>fixed32 selectcount = 7;</code>
@@ -10682,7 +10682,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10694,7 +10694,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10704,7 +10704,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10714,7 +10714,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10727,7 +10727,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10739,7 +10739,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10752,7 +10752,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated bytes text = 8;</code>
@@ -10922,7 +10922,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -10931,7 +10931,7 @@ public final class InterfaceMain2 {
         getItemList();
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -10939,7 +10939,7 @@ public final class InterfaceMain2 {
     com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetOnVotingDetailInfo getItem(int index);
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -10966,7 +10966,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceMain2.pbui_Item_MeetOnVotingDetailInfo> item_;
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -10976,7 +10976,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -10987,7 +10987,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -10997,7 +10997,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11007,7 +11007,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11025,7 +11025,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11040,7 +11040,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11052,7 +11052,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11066,7 +11066,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11081,7 +11081,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11093,7 +11093,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11105,7 +11105,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11118,7 +11118,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11128,7 +11128,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票信息
      * </pre>
      *
      * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11260,7 +11260,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11271,7 +11271,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11280,7 +11280,7 @@ public final class InterfaceMain2 {
         return instance.getItemCount();
       }/**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11290,7 +11290,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11303,7 +11303,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11316,7 +11316,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11328,7 +11328,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11341,7 +11341,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11354,7 +11354,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11367,7 +11367,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11380,7 +11380,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11392,7 +11392,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票信息
        * </pre>
        *
        * <code>repeated .pbui_Item_MeetOnVotingDetailInfo item = 1;</code>
@@ -11513,7 +11513,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??ID
+     *投票ID
      * </pre>
      *
      * <code>fixed32 voteid = 1;</code>
@@ -11522,7 +11522,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??? ???? ??
+     *计时 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 2;</code>
@@ -11531,7 +11531,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *设置投投票计时值
    *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
    *method: set
    * </pre>
@@ -11549,7 +11549,7 @@ public final class InterfaceMain2 {
     private int voteid_;
     /**
      * <pre>
-     *??ID
+     *投票ID
      * </pre>
      *
      * <code>fixed32 voteid = 1;</code>
@@ -11559,7 +11559,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??ID
+     *投票ID
      * </pre>
      *
      * <code>fixed32 voteid = 1;</code>
@@ -11570,7 +11570,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??ID
+     *投票ID
      * </pre>
      *
      * <code>fixed32 voteid = 1;</code>
@@ -11584,7 +11584,7 @@ public final class InterfaceMain2 {
     private int timeouts_;
     /**
      * <pre>
-     *??? ???? ??
+     *计时 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 2;</code>
@@ -11594,7 +11594,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ???? ??
+     *计时 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 2;</code>
@@ -11605,7 +11605,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ???? ??
+     *计时 单位 秒
      * </pre>
      *
      * <code>fixed32 timeouts = 2;</code>
@@ -11725,7 +11725,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *设置投投票计时值
      *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
      *method: set
      * </pre>
@@ -11745,7 +11745,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??ID
+       *投票ID
        * </pre>
        *
        * <code>fixed32 voteid = 1;</code>
@@ -11755,7 +11755,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??ID
+       *投票ID
        * </pre>
        *
        * <code>fixed32 voteid = 1;</code>
@@ -11767,7 +11767,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??ID
+       *投票ID
        * </pre>
        *
        * <code>fixed32 voteid = 1;</code>
@@ -11780,7 +11780,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??? ???? ??
+       *计时 单位 秒
        * </pre>
        *
        * <code>fixed32 timeouts = 2;</code>
@@ -11790,7 +11790,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ???? ??
+       *计时 单位 秒
        * </pre>
        *
        * <code>fixed32 timeouts = 2;</code>
@@ -11802,7 +11802,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ???? ??
+       *计时 单位 秒
        * </pre>
        *
        * <code>fixed32 timeouts = 2;</code>
@@ -11939,7 +11939,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????????
+   *会议发起投票信息
    *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
    *method: start/stop/del
    * </pre>
@@ -12118,7 +12118,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *会议发起投票信息
      *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
      *method: start/stop/del
      * </pre>
@@ -12319,7 +12319,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *有效选项数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -12328,7 +12328,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selitem = 3;</code>
@@ -12337,7 +12337,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *提交会议投票信息
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetSubmitVote}
@@ -12376,7 +12376,7 @@ public final class InterfaceMain2 {
     private int selcnt_;
     /**
      * <pre>
-     *?????????
+     *有效选项数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -12386,7 +12386,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *有效选项数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -12397,7 +12397,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *有效选项数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -12411,7 +12411,7 @@ public final class InterfaceMain2 {
     private int selitem_;
     /**
      * <pre>
-     *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selitem = 3;</code>
@@ -12421,7 +12421,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selitem = 3;</code>
@@ -12432,7 +12432,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selitem = 3;</code>
@@ -12559,7 +12559,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *提交会议投票信息
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetSubmitVote}
@@ -12600,7 +12600,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *有效选项数
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -12610,7 +12610,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *有效选项数
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -12622,7 +12622,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *有效选项数
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -12635,7 +12635,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+       *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
        * </pre>
        *
        * <code>fixed32 selitem = 3;</code>
@@ -12645,7 +12645,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+       *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
        * </pre>
        *
        * <code>fixed32 selitem = 3;</code>
@@ -12657,7 +12657,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+       *选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
        * </pre>
        *
        * <code>fixed32 selitem = 3;</code>
@@ -12802,7 +12802,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *提交会议投票信息
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
    *method: submit
@@ -13041,7 +13041,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *提交会议投票信息
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
      *method: submit
@@ -13267,7 +13267,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *描述文字
      * </pre>
      *
      * <code>bytes text = 1;</code>
@@ -13276,7 +13276,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *投票数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -13285,7 +13285,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *会议投票信息
    * </pre>
    *
    * Protobuf type {@code pbui_SubItem_VoteItemInfo}
@@ -13302,7 +13302,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString text_;
     /**
      * <pre>
-     *????????
+     *描述文字
      * </pre>
      *
      * <code>bytes text = 1;</code>
@@ -13312,7 +13312,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *描述文字
      * </pre>
      *
      * <code>bytes text = 1;</code>
@@ -13326,7 +13326,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *描述文字
      * </pre>
      *
      * <code>bytes text = 1;</code>
@@ -13340,7 +13340,7 @@ public final class InterfaceMain2 {
     private int selcnt_;
     /**
      * <pre>
-     *????
+     *投票数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -13350,7 +13350,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *投票数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -13361,7 +13361,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *投票数
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -13481,7 +13481,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *会议投票信息
      * </pre>
      *
      * Protobuf type {@code pbui_SubItem_VoteItemInfo}
@@ -13499,7 +13499,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *描述文字
        * </pre>
        *
        * <code>bytes text = 1;</code>
@@ -13509,7 +13509,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *描述文字
        * </pre>
        *
        * <code>bytes text = 1;</code>
@@ -13521,7 +13521,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *描述文字
        * </pre>
        *
        * <code>bytes text = 1;</code>
@@ -13534,7 +13534,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????
+       *投票数
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -13544,7 +13544,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *投票数
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -13556,7 +13556,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *投票数
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -13685,7 +13685,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -13694,7 +13694,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??? ?? ??? ??????? ????Pb_MeetVoteType
+     *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -13703,7 +13703,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -13712,7 +13712,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -13721,7 +13721,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ????Pb_MeetVoteStatus
+     *投票状态 参见Pb_MeetVoteStatus
      * </pre>
      *
      * <code>fixed32 votestate = 6;</code>
@@ -13730,7 +13730,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *超时值
      * </pre>
      *
      * <code>fixed32 timeouts = 7;</code>
@@ -13739,7 +13739,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 8;</code>
@@ -13748,7 +13748,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -13757,7 +13757,7 @@ public final class InterfaceMain2 {
         getItemList();
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -13765,7 +13765,7 @@ public final class InterfaceMain2 {
     com.mogujie.tt.protobuf.InterfaceMain2.pbui_SubItem_VoteItemInfo getItem(int index);
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -13812,7 +13812,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString content_;
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -13822,7 +13822,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -13836,7 +13836,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? 
+     *投票内容 
      * </pre>
      *
      * <code>bytes content = 2;</code>
@@ -13850,7 +13850,7 @@ public final class InterfaceMain2 {
     private int maintype_;
     /**
      * <pre>
-     *??? ?? ??? ??????? ????Pb_MeetVoteType
+     *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -13860,7 +13860,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ?? ??? ??????? ????Pb_MeetVoteType
+     *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -13871,7 +13871,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ?? ??? ??????? ????Pb_MeetVoteType
+     *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
      * </pre>
      *
      * <code>fixed32 maintype = 3;</code>
@@ -13885,7 +13885,7 @@ public final class InterfaceMain2 {
     private int mode_;
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -13895,7 +13895,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -13906,7 +13906,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ?????? ????Pb_MeetVoteMode
+     *匿名投票 记名投票 参见Pb_MeetVoteMode
      * </pre>
      *
      * <code>fixed32 mode = 4;</code>
@@ -13920,7 +13920,7 @@ public final class InterfaceMain2 {
     private int type_;
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -13930,7 +13930,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -13941,7 +13941,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??? ??? ????Pb_MeetVote_SelType
+     *多选 单选 参见Pb_MeetVote_SelType
      * </pre>
      *
      * <code>fixed32 type = 5;</code>
@@ -13955,7 +13955,7 @@ public final class InterfaceMain2 {
     private int votestate_;
     /**
      * <pre>
-     *???? ????Pb_MeetVoteStatus
+     *投票状态 参见Pb_MeetVoteStatus
      * </pre>
      *
      * <code>fixed32 votestate = 6;</code>
@@ -13965,7 +13965,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ????Pb_MeetVoteStatus
+     *投票状态 参见Pb_MeetVoteStatus
      * </pre>
      *
      * <code>fixed32 votestate = 6;</code>
@@ -13976,7 +13976,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ????Pb_MeetVoteStatus
+     *投票状态 参见Pb_MeetVoteStatus
      * </pre>
      *
      * <code>fixed32 votestate = 6;</code>
@@ -13990,7 +13990,7 @@ public final class InterfaceMain2 {
     private int timeouts_;
     /**
      * <pre>
-     *????
+     *超时值
      * </pre>
      *
      * <code>fixed32 timeouts = 7;</code>
@@ -14000,7 +14000,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *超时值
      * </pre>
      *
      * <code>fixed32 timeouts = 7;</code>
@@ -14011,7 +14011,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *超时值
      * </pre>
      *
      * <code>fixed32 timeouts = 7;</code>
@@ -14025,7 +14025,7 @@ public final class InterfaceMain2 {
     private int selectcount_;
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 8;</code>
@@ -14035,7 +14035,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 8;</code>
@@ -14046,7 +14046,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *有效选项
      * </pre>
      *
      * <code>fixed32 selectcount = 8;</code>
@@ -14060,7 +14060,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceMain2.pbui_SubItem_VoteItemInfo> item_;
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14070,7 +14070,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14081,7 +14081,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14091,7 +14091,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14101,7 +14101,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14119,7 +14119,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14134,7 +14134,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14146,7 +14146,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14160,7 +14160,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14175,7 +14175,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14187,7 +14187,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14199,7 +14199,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14212,7 +14212,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14222,7 +14222,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????
+     *选项描述文字
      * </pre>
      *
      * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14428,7 +14428,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? 
+       *投票内容 
        * </pre>
        *
        * <code>bytes content = 2;</code>
@@ -14438,7 +14438,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? 
+       *投票内容 
        * </pre>
        *
        * <code>bytes content = 2;</code>
@@ -14450,7 +14450,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? 
+       *投票内容 
        * </pre>
        *
        * <code>bytes content = 2;</code>
@@ -14463,7 +14463,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??? ?? ??? ??????? ????Pb_MeetVoteType
+       *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
        * </pre>
        *
        * <code>fixed32 maintype = 3;</code>
@@ -14473,7 +14473,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ?? ??? ??????? ????Pb_MeetVoteType
+       *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
        * </pre>
        *
        * <code>fixed32 maintype = 3;</code>
@@ -14485,7 +14485,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ?? ??? ??????? ????Pb_MeetVoteType
+       *类别 投票 选举 调查问卷 参见Pb_MeetVoteType
        * </pre>
        *
        * <code>fixed32 maintype = 3;</code>
@@ -14498,7 +14498,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ?????? ????Pb_MeetVoteMode
+       *匿名投票 记名投票 参见Pb_MeetVoteMode
        * </pre>
        *
        * <code>fixed32 mode = 4;</code>
@@ -14508,7 +14508,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ?????? ????Pb_MeetVoteMode
+       *匿名投票 记名投票 参见Pb_MeetVoteMode
        * </pre>
        *
        * <code>fixed32 mode = 4;</code>
@@ -14520,7 +14520,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ?????? ????Pb_MeetVoteMode
+       *匿名投票 记名投票 参见Pb_MeetVoteMode
        * </pre>
        *
        * <code>fixed32 mode = 4;</code>
@@ -14533,7 +14533,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??? ??? ????Pb_MeetVote_SelType
+       *多选 单选 参见Pb_MeetVote_SelType
        * </pre>
        *
        * <code>fixed32 type = 5;</code>
@@ -14543,7 +14543,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ??? ????Pb_MeetVote_SelType
+       *多选 单选 参见Pb_MeetVote_SelType
        * </pre>
        *
        * <code>fixed32 type = 5;</code>
@@ -14555,7 +14555,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??? ??? ????Pb_MeetVote_SelType
+       *多选 单选 参见Pb_MeetVote_SelType
        * </pre>
        *
        * <code>fixed32 type = 5;</code>
@@ -14568,7 +14568,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ????Pb_MeetVoteStatus
+       *投票状态 参见Pb_MeetVoteStatus
        * </pre>
        *
        * <code>fixed32 votestate = 6;</code>
@@ -14578,7 +14578,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ????Pb_MeetVoteStatus
+       *投票状态 参见Pb_MeetVoteStatus
        * </pre>
        *
        * <code>fixed32 votestate = 6;</code>
@@ -14590,7 +14590,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ????Pb_MeetVoteStatus
+       *投票状态 参见Pb_MeetVoteStatus
        * </pre>
        *
        * <code>fixed32 votestate = 6;</code>
@@ -14603,7 +14603,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????
+       *超时值
        * </pre>
        *
        * <code>fixed32 timeouts = 7;</code>
@@ -14613,7 +14613,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *超时值
        * </pre>
        *
        * <code>fixed32 timeouts = 7;</code>
@@ -14625,7 +14625,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *超时值
        * </pre>
        *
        * <code>fixed32 timeouts = 7;</code>
@@ -14638,7 +14638,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *有效选项
        * </pre>
        *
        * <code>fixed32 selectcount = 8;</code>
@@ -14648,7 +14648,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *有效选项
        * </pre>
        *
        * <code>fixed32 selectcount = 8;</code>
@@ -14660,7 +14660,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *有效选项
        * </pre>
        *
        * <code>fixed32 selectcount = 8;</code>
@@ -14673,7 +14673,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14684,7 +14684,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14693,7 +14693,7 @@ public final class InterfaceMain2 {
         return instance.getItemCount();
       }/**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14703,7 +14703,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14716,7 +14716,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14729,7 +14729,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14741,7 +14741,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14754,7 +14754,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14767,7 +14767,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14780,7 +14780,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14793,7 +14793,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -14805,7 +14805,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????
+       *选项描述文字
        * </pre>
        *
        * <code>repeated .pbui_SubItem_VoteItemInfo item = 9;</code>
@@ -15458,7 +15458,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?????????????maintype ????
+     *指定大类 参见本文件中的maintype 定义
      * </pre>
      *
      * <code>fixed32 maintype = 1;</code>
@@ -15484,7 +15484,7 @@ public final class InterfaceMain2 {
     private int maintype_;
     /**
      * <pre>
-     *??????? ?????????????maintype ????
+     *指定大类 参见本文件中的maintype 定义
      * </pre>
      *
      * <code>fixed32 maintype = 1;</code>
@@ -15494,7 +15494,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?????????????maintype ????
+     *指定大类 参见本文件中的maintype 定义
      * </pre>
      *
      * <code>fixed32 maintype = 1;</code>
@@ -15505,7 +15505,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?????????????maintype ????
+     *指定大类 参见本文件中的maintype 定义
      * </pre>
      *
      * <code>fixed32 maintype = 1;</code>
@@ -15637,7 +15637,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?????????????maintype ????
+       *指定大类 参见本文件中的maintype 定义
        * </pre>
        *
        * <code>fixed32 maintype = 1;</code>
@@ -15647,7 +15647,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?????????????maintype ????
+       *指定大类 参见本文件中的maintype 定义
        * </pre>
        *
        * <code>fixed32 maintype = 1;</code>
@@ -15659,7 +15659,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?????????????maintype ????
+       *指定大类 参见本文件中的maintype 定义
        * </pre>
        *
        * <code>fixed32 maintype = 1;</code>
@@ -15776,7 +15776,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *投票人员
      * </pre>
      *
      * <code>fixed32 id = 1;</code>
@@ -15785,7 +15785,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -15794,7 +15794,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????
+   *会议投票人
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetVoteSignInDetailInfo}
@@ -15810,7 +15810,7 @@ public final class InterfaceMain2 {
     private int id_;
     /**
      * <pre>
-     *?????
+     *投票人员
      * </pre>
      *
      * <code>fixed32 id = 1;</code>
@@ -15820,7 +15820,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票人员
      * </pre>
      *
      * <code>fixed32 id = 1;</code>
@@ -15831,7 +15831,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *投票人员
      * </pre>
      *
      * <code>fixed32 id = 1;</code>
@@ -15845,7 +15845,7 @@ public final class InterfaceMain2 {
     private int selcnt_;
     /**
      * <pre>
-     *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -15855,7 +15855,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -15866,7 +15866,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+     *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
      * </pre>
      *
      * <code>fixed32 selcnt = 2;</code>
@@ -15986,7 +15986,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *会议投票人
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetVoteSignInDetailInfo}
@@ -16004,7 +16004,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????
+       *投票人员
        * </pre>
        *
        * <code>fixed32 id = 1;</code>
@@ -16014,7 +16014,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票人员
        * </pre>
        *
        * <code>fixed32 id = 1;</code>
@@ -16026,7 +16026,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *投票人员
        * </pre>
        *
        * <code>fixed32 id = 1;</code>
@@ -16039,7 +16039,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+       *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -16049,7 +16049,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+       *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -16061,7 +16061,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? 0x00000001 ????????? 0x00000002????? ?????????1??????
+       *投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
        * </pre>
        *
        * <code>fixed32 selcnt = 2;</code>
@@ -16727,7 +16727,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID
+     *数据ID
      * </pre>
      *
      * <code>fixed32 propertyid = 1;</code>
@@ -16736,7 +16736,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *传入参数
      * </pre>
      *
      * <code>fixed32 voteid = 2;</code>
@@ -16745,7 +16745,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0???????
+     *传入参数 为0表示本身
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -16754,7 +16754,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????????????
+   *查询会议投票人属性信息
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED
    *method: queryproperty
@@ -16773,7 +16773,7 @@ public final class InterfaceMain2 {
     private int propertyid_;
     /**
      * <pre>
-     *????ID
+     *数据ID
      * </pre>
      *
      * <code>fixed32 propertyid = 1;</code>
@@ -16783,7 +16783,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID
+     *数据ID
      * </pre>
      *
      * <code>fixed32 propertyid = 1;</code>
@@ -16794,7 +16794,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID
+     *数据ID
      * </pre>
      *
      * <code>fixed32 propertyid = 1;</code>
@@ -16808,7 +16808,7 @@ public final class InterfaceMain2 {
     private int voteid_;
     /**
      * <pre>
-     *???????
+     *传入参数
      * </pre>
      *
      * <code>fixed32 voteid = 2;</code>
@@ -16818,7 +16818,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *传入参数
      * </pre>
      *
      * <code>fixed32 voteid = 2;</code>
@@ -16829,7 +16829,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *传入参数
      * </pre>
      *
      * <code>fixed32 voteid = 2;</code>
@@ -16843,7 +16843,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *??????? ?0???????
+     *传入参数 为0表示本身
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -16853,7 +16853,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0???????
+     *传入参数 为0表示本身
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -16864,7 +16864,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0???????
+     *传入参数 为0表示本身
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -16991,7 +16991,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????????????
+     *查询会议投票人属性信息
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED
      *method: queryproperty
@@ -17012,7 +17012,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID
+       *数据ID
        * </pre>
        *
        * <code>fixed32 propertyid = 1;</code>
@@ -17022,7 +17022,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID
+       *数据ID
        * </pre>
        *
        * <code>fixed32 propertyid = 1;</code>
@@ -17034,7 +17034,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID
+       *数据ID
        * </pre>
        *
        * <code>fixed32 propertyid = 1;</code>
@@ -17047,7 +17047,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *传入参数
        * </pre>
        *
        * <code>fixed32 voteid = 2;</code>
@@ -17057,7 +17057,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *传入参数
        * </pre>
        *
        * <code>fixed32 voteid = 2;</code>
@@ -17069,7 +17069,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *传入参数
        * </pre>
        *
        * <code>fixed32 voteid = 2;</code>
@@ -17082,7 +17082,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0???????
+       *传入参数 为0表示本身
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -17092,7 +17092,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0???????
+       *传入参数 为0表示本身
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -17104,7 +17104,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0???????
+       *传入参数 为0表示本身
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -17235,7 +17235,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -17244,7 +17244,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ??? ????:??
+     *日期 时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcseconds = 2;</code>
@@ -17253,7 +17253,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 3;</code>
@@ -17262,7 +17262,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 4;</code>
@@ -17271,7 +17271,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 5;</code>
@@ -17280,7 +17280,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *会议签到
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetSignInDetailInfo}
@@ -17298,7 +17298,7 @@ public final class InterfaceMain2 {
     private int nameId_;
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -17308,7 +17308,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -17319,7 +17319,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 nameId = 1;</code>
@@ -17333,7 +17333,7 @@ public final class InterfaceMain2 {
     private long utcseconds_;
     /**
      * <pre>
-     *???? ??? ????:??
+     *日期 时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcseconds = 2;</code>
@@ -17343,7 +17343,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ??? ????:??
+     *日期 时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcseconds = 2;</code>
@@ -17354,7 +17354,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ??? ????:??
+     *日期 时间 单位:秒
      * </pre>
      *
      * <code>fixed64 utcseconds = 2;</code>
@@ -17368,7 +17368,7 @@ public final class InterfaceMain2 {
     private int signinType_;
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 3;</code>
@@ -17378,7 +17378,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 3;</code>
@@ -17389,7 +17389,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 3;</code>
@@ -17403,7 +17403,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString password_;
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 4;</code>
@@ -17413,7 +17413,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 4;</code>
@@ -17427,7 +17427,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 4;</code>
@@ -17441,7 +17441,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString psigndata_;
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 5;</code>
@@ -17451,7 +17451,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 5;</code>
@@ -17465,7 +17465,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 5;</code>
@@ -17606,7 +17606,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *会议签到
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetSignInDetailInfo}
@@ -17624,7 +17624,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *人员ID
        * </pre>
        *
        * <code>fixed32 nameId = 1;</code>
@@ -17634,7 +17634,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *人员ID
        * </pre>
        *
        * <code>fixed32 nameId = 1;</code>
@@ -17646,7 +17646,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *人员ID
        * </pre>
        *
        * <code>fixed32 nameId = 1;</code>
@@ -17659,7 +17659,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ??? ????:??
+       *日期 时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcseconds = 2;</code>
@@ -17669,7 +17669,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ??? ????:??
+       *日期 时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcseconds = 2;</code>
@@ -17681,7 +17681,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ??? ????:??
+       *日期 时间 单位:秒
        * </pre>
        *
        * <code>fixed64 utcseconds = 2;</code>
@@ -17694,7 +17694,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ????Pb_MeetSignType
+       *签到方式 参见Pb_MeetSignType
        * </pre>
        *
        * <code>fixed32 signin_type = 3;</code>
@@ -17704,7 +17704,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ????Pb_MeetSignType
+       *签到方式 参见Pb_MeetSignType
        * </pre>
        *
        * <code>fixed32 signin_type = 3;</code>
@@ -17716,7 +17716,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ????Pb_MeetSignType
+       *签到方式 参见Pb_MeetSignType
        * </pre>
        *
        * <code>fixed32 signin_type = 3;</code>
@@ -17729,7 +17729,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *签到密码
        * </pre>
        *
        * <code>bytes password = 4;</code>
@@ -17739,7 +17739,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *签到密码
        * </pre>
        *
        * <code>bytes password = 4;</code>
@@ -17751,7 +17751,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *签到密码
        * </pre>
        *
        * <code>bytes password = 4;</code>
@@ -17764,7 +17764,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????png??????(???????hex????)
+       *如果有图片签到则为png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes psigndata = 5;</code>
@@ -17774,7 +17774,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????png??????(???????hex????)
+       *如果有图片签到则为png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes psigndata = 5;</code>
@@ -17786,7 +17786,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????png??????(???????hex????)
+       *如果有图片签到则为png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes psigndata = 5;</code>
@@ -18406,7 +18406,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 1;</code>
@@ -18415,7 +18415,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 2;</code>
@@ -18424,7 +18424,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 3;</code>
@@ -18433,7 +18433,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *发送会议签到
    *type:Pb_TYPE_MEET_INTERFACE_MEETSIGN
    *method: add
    * </pre>
@@ -18453,7 +18453,7 @@ public final class InterfaceMain2 {
     private int signinType_;
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 1;</code>
@@ -18463,7 +18463,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 1;</code>
@@ -18474,7 +18474,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ????Pb_MeetSignType
+     *签到方式 参见Pb_MeetSignType
      * </pre>
      *
      * <code>fixed32 signin_type = 1;</code>
@@ -18488,7 +18488,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString password_;
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 2;</code>
@@ -18498,7 +18498,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 2;</code>
@@ -18512,7 +18512,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *签到密码
      * </pre>
      *
      * <code>bytes password = 2;</code>
@@ -18526,7 +18526,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString psigndata_;
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 3;</code>
@@ -18536,7 +18536,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 3;</code>
@@ -18550,7 +18550,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????png??????(???????hex????)
+     *如果有图片签到则为png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes psigndata = 3;</code>
@@ -18677,7 +18677,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *发送会议签到
      *type:Pb_TYPE_MEET_INTERFACE_MEETSIGN
      *method: add
      * </pre>
@@ -18697,7 +18697,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ????Pb_MeetSignType
+       *签到方式 参见Pb_MeetSignType
        * </pre>
        *
        * <code>fixed32 signin_type = 1;</code>
@@ -18707,7 +18707,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ????Pb_MeetSignType
+       *签到方式 参见Pb_MeetSignType
        * </pre>
        *
        * <code>fixed32 signin_type = 1;</code>
@@ -18719,7 +18719,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ????Pb_MeetSignType
+       *签到方式 参见Pb_MeetSignType
        * </pre>
        *
        * <code>fixed32 signin_type = 1;</code>
@@ -18732,7 +18732,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *签到密码
        * </pre>
        *
        * <code>bytes password = 2;</code>
@@ -18742,7 +18742,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *签到密码
        * </pre>
        *
        * <code>bytes password = 2;</code>
@@ -18754,7 +18754,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *签到密码
        * </pre>
        *
        * <code>bytes password = 2;</code>
@@ -18767,7 +18767,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????png??????(???????hex????)
+       *如果有图片签到则为png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes psigndata = 3;</code>
@@ -18777,7 +18777,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????png??????(???????hex????)
+       *如果有图片签到则为png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes psigndata = 3;</code>
@@ -18789,7 +18789,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????png??????(???????hex????)
+       *如果有图片签到则为png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes psigndata = 3;</code>
@@ -18920,7 +18920,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -18929,7 +18929,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -18938,7 +18938,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -18947,7 +18947,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -18956,7 +18956,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -18965,7 +18965,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -18973,7 +18973,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getUseridList();
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -18981,7 +18981,7 @@ public final class InterfaceMain2 {
     int getUseridCount();
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -18990,7 +18990,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????? ?????????? ?????????????????
+   *执行一个白板操作 用于会议交流 指定需要执行操作的标志
    *call
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: control 
@@ -19012,7 +19012,7 @@ public final class InterfaceMain2 {
     private int operflag_;
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19022,7 +19022,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19033,7 +19033,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19047,7 +19047,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString medianame_;
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19057,7 +19057,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19071,7 +19071,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19085,7 +19085,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -19095,7 +19095,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -19106,7 +19106,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -19120,7 +19120,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -19130,7 +19130,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -19141,7 +19141,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -19155,7 +19155,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -19165,7 +19165,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -19176,7 +19176,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -19190,7 +19190,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList userid_;
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19201,7 +19201,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19211,7 +19211,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19227,7 +19227,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19239,7 +19239,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19250,7 +19250,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19263,7 +19263,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *参会人员
      * </pre>
      *
      * <code>repeated fixed32 userid = 6;</code>
@@ -19413,7 +19413,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????? ?????????? ?????????????????
+     *执行一个白板操作 用于会议交流 指定需要执行操作的标志
      *call
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: control 
@@ -19434,7 +19434,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????? ????Pb_MeetPostilOperType
+       *指定操作标志 参见Pb_MeetPostilOperType
        * </pre>
        *
        * <code>fixed32 operflag = 1;</code>
@@ -19444,7 +19444,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????? ????Pb_MeetPostilOperType
+       *指定操作标志 参见Pb_MeetPostilOperType
        * </pre>
        *
        * <code>fixed32 operflag = 1;</code>
@@ -19456,7 +19456,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????? ????Pb_MeetPostilOperType
+       *指定操作标志 参见Pb_MeetPostilOperType
        * </pre>
        *
        * <code>fixed32 operflag = 1;</code>
@@ -19469,7 +19469,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????
+       *白板操作描述
        * </pre>
        *
        * <code>bytes medianame = 2;</code>
@@ -19479,7 +19479,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板操作描述
        * </pre>
        *
        * <code>bytes medianame = 2;</code>
@@ -19491,7 +19491,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板操作描述
        * </pre>
        *
        * <code>bytes medianame = 2;</code>
@@ -19504,7 +19504,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -19514,7 +19514,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -19526,7 +19526,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -19539,7 +19539,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -19549,7 +19549,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -19561,7 +19561,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -19574,7 +19574,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 5;</code>
@@ -19584,7 +19584,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 5;</code>
@@ -19596,7 +19596,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 5;</code>
@@ -19609,7 +19609,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19621,7 +19621,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19631,7 +19631,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19641,7 +19641,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19654,7 +19654,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19666,7 +19666,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19679,7 +19679,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *参会人员
        * </pre>
        *
        * <code>repeated fixed32 userid = 6;</code>
@@ -19849,7 +19849,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19858,7 +19858,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19867,7 +19867,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -19876,7 +19876,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -19885,7 +19885,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -19894,7 +19894,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *收到白板打开操作
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: ask 
@@ -19914,7 +19914,7 @@ public final class InterfaceMain2 {
     private int operflag_;
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19924,7 +19924,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19935,7 +19935,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????? ????Pb_MeetPostilOperType
+     *指定操作标志 参见Pb_MeetPostilOperType
      * </pre>
      *
      * <code>fixed32 operflag = 1;</code>
@@ -19949,7 +19949,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString medianame_;
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19959,7 +19959,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19973,7 +19973,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板操作描述
      * </pre>
      *
      * <code>bytes medianame = 2;</code>
@@ -19987,7 +19987,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -19997,7 +19997,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -20008,7 +20008,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -20022,7 +20022,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -20032,7 +20032,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -20043,7 +20043,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -20057,7 +20057,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -20067,7 +20067,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -20078,7 +20078,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 5;</code>
@@ -20219,7 +20219,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *收到白板打开操作
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: ask 
@@ -20240,7 +20240,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????? ????Pb_MeetPostilOperType
+       *指定操作标志 参见Pb_MeetPostilOperType
        * </pre>
        *
        * <code>fixed32 operflag = 1;</code>
@@ -20250,7 +20250,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????? ????Pb_MeetPostilOperType
+       *指定操作标志 参见Pb_MeetPostilOperType
        * </pre>
        *
        * <code>fixed32 operflag = 1;</code>
@@ -20262,7 +20262,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????? ????Pb_MeetPostilOperType
+       *指定操作标志 参见Pb_MeetPostilOperType
        * </pre>
        *
        * <code>fixed32 operflag = 1;</code>
@@ -20275,7 +20275,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????
+       *白板操作描述
        * </pre>
        *
        * <code>bytes medianame = 2;</code>
@@ -20285,7 +20285,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板操作描述
        * </pre>
        *
        * <code>bytes medianame = 2;</code>
@@ -20297,7 +20297,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板操作描述
        * </pre>
        *
        * <code>bytes medianame = 2;</code>
@@ -20310,7 +20310,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -20320,7 +20320,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -20332,7 +20332,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -20345,7 +20345,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -20355,7 +20355,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -20367,7 +20367,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -20380,7 +20380,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 5;</code>
@@ -20390,7 +20390,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 5;</code>
@@ -20402,7 +20402,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 5;</code>
@@ -20547,7 +20547,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 1;</code>
@@ -20556,7 +20556,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 2;</code>
@@ -20565,7 +20565,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 3;</code>
@@ -20574,9 +20574,9 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????????????????(callback/call)
-   *????????????????????(callback)
-   *????????????????????(callback/call)
+   *被邀请人拒绝加入你发起的白板(callback/call)
+   *被邀请人退出了你发起的白板(callback)
+   *被邀请人加入了你发起的白板(callback/call)
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: reject&#92;exit&#92;enter
    * </pre>
@@ -20594,7 +20594,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 1;</code>
@@ -20604,7 +20604,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 1;</code>
@@ -20615,7 +20615,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 1;</code>
@@ -20629,7 +20629,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 2;</code>
@@ -20639,7 +20639,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 2;</code>
@@ -20650,7 +20650,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 2;</code>
@@ -20664,7 +20664,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 3;</code>
@@ -20674,7 +20674,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 3;</code>
@@ -20685,7 +20685,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 3;</code>
@@ -20812,9 +20812,9 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????????????(callback/call)
-     *????????????????????(callback)
-     *????????????????????(callback/call)
+     *被邀请人拒绝加入你发起的白板(callback/call)
+     *被邀请人退出了你发起的白板(callback)
+     *被邀请人加入了你发起的白板(callback/call)
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: reject&#92;exit&#92;enter
      * </pre>
@@ -20834,7 +20834,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 1;</code>
@@ -20844,7 +20844,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 1;</code>
@@ -20856,7 +20856,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 1;</code>
@@ -20869,7 +20869,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 2;</code>
@@ -20879,7 +20879,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 2;</code>
@@ -20891,7 +20891,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 2;</code>
@@ -20904,7 +20904,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 3;</code>
@@ -20914,7 +20914,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 3;</code>
@@ -20926,7 +20926,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 3;</code>
@@ -21057,7 +21057,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -21066,7 +21066,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -21075,7 +21075,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -21084,7 +21084,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -21093,7 +21093,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -21102,7 +21102,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -21111,7 +21111,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????????
+   *白板删除和清空记录通知
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: clear, del
@@ -21130,7 +21130,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -21140,7 +21140,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -21151,7 +21151,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -21165,7 +21165,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -21175,7 +21175,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -21186,7 +21186,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -21200,7 +21200,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -21210,7 +21210,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -21221,7 +21221,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -21235,7 +21235,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -21245,7 +21245,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -21256,7 +21256,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -21270,7 +21270,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -21280,7 +21280,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -21291,7 +21291,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -21305,7 +21305,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -21315,7 +21315,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -21326,7 +21326,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -21474,7 +21474,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????
+     *白板删除和清空记录通知
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: clear, del
@@ -21495,7 +21495,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -21505,7 +21505,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -21517,7 +21517,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -21530,7 +21530,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -21540,7 +21540,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -21552,7 +21552,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -21565,7 +21565,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -21575,7 +21575,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -21587,7 +21587,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -21600,7 +21600,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -21610,7 +21610,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -21622,7 +21622,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -21635,7 +21635,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -21645,7 +21645,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -21657,7 +21657,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -21670,7 +21670,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -21680,7 +21680,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -21692,7 +21692,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -21844,7 +21844,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????ID ?0????????????????????????
+     *需要删除的人员ID 为0表示清除所有等于人员的白板操作
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -21853,7 +21853,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 2;</code>
@@ -21862,7 +21862,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -21871,7 +21871,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -21880,7 +21880,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcwbid = 5;</code>
@@ -21889,7 +21889,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ???
+     *时间戳 微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 6;</code>
@@ -21898,7 +21898,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0????????????????????
+     *图形类型 为0表示清除所有类型的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 7;</code>
@@ -21907,7 +21907,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????????????
+   *白板删除和清空记录操作
    *(call)
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: delall, del 
@@ -21926,7 +21926,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *???????????ID ?0????????????????????????
+     *需要删除的人员ID 为0表示清除所有等于人员的白板操作
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -21936,7 +21936,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????ID ?0????????????????????????
+     *需要删除的人员ID 为0表示清除所有等于人员的白板操作
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -21947,7 +21947,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????ID ?0????????????????????????
+     *需要删除的人员ID 为0表示清除所有等于人员的白板操作
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -21961,7 +21961,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 2;</code>
@@ -21971,7 +21971,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 2;</code>
@@ -21982,7 +21982,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 2;</code>
@@ -21996,7 +21996,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -22006,7 +22006,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -22017,7 +22017,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 3;</code>
@@ -22031,7 +22031,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -22041,7 +22041,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -22052,7 +22052,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 4;</code>
@@ -22066,7 +22066,7 @@ public final class InterfaceMain2 {
     private int srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcwbid = 5;</code>
@@ -22076,7 +22076,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcwbid = 5;</code>
@@ -22087,7 +22087,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcwbid = 5;</code>
@@ -22101,7 +22101,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *???? ???
+     *时间戳 微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 6;</code>
@@ -22111,7 +22111,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ???
+     *时间戳 微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 6;</code>
@@ -22122,7 +22122,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ???
+     *时间戳 微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 6;</code>
@@ -22136,7 +22136,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ?0????????????????????
+     *图形类型 为0表示清除所有类型的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 7;</code>
@@ -22146,7 +22146,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0????????????????????
+     *图形类型 为0表示清除所有类型的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 7;</code>
@@ -22157,7 +22157,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0????????????????????
+     *图形类型 为0表示清除所有类型的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 7;</code>
@@ -22312,7 +22312,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????????
+     *白板删除和清空记录操作
      *(call)
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: delall, del 
@@ -22333,7 +22333,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????ID ?0????????????????????????
+       *需要删除的人员ID 为0表示清除所有等于人员的白板操作
        * </pre>
        *
        * <code>fixed32 memberid = 1;</code>
@@ -22343,7 +22343,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????ID ?0????????????????????????
+       *需要删除的人员ID 为0表示清除所有等于人员的白板操作
        * </pre>
        *
        * <code>fixed32 memberid = 1;</code>
@@ -22355,7 +22355,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????ID ?0????????????????????????
+       *需要删除的人员ID 为0表示清除所有等于人员的白板操作
        * </pre>
        *
        * <code>fixed32 memberid = 1;</code>
@@ -22368,7 +22368,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 2;</code>
@@ -22378,7 +22378,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 2;</code>
@@ -22390,7 +22390,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 2;</code>
@@ -22403,7 +22403,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -22413,7 +22413,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -22425,7 +22425,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 3;</code>
@@ -22438,7 +22438,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -22448,7 +22448,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -22460,7 +22460,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 4;</code>
@@ -22473,7 +22473,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcwbid = 5;</code>
@@ -22483,7 +22483,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcwbid = 5;</code>
@@ -22495,7 +22495,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcwbid = 5;</code>
@@ -22508,7 +22508,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ???
+       *时间戳 微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 6;</code>
@@ -22518,7 +22518,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ???
+       *时间戳 微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 6;</code>
@@ -22530,7 +22530,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ???
+       *时间戳 微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 6;</code>
@@ -22543,7 +22543,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0????????????????????
+       *图形类型 为0表示清除所有类型的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 7;</code>
@@ -22553,7 +22553,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0????????????????????
+       *图形类型 为0表示清除所有类型的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 7;</code>
@@ -22565,7 +22565,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0????????????????????
+       *图形类型 为0表示清除所有类型的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 7;</code>
@@ -22724,7 +22724,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -22733,7 +22733,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -22742,7 +22742,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -22751,7 +22751,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *白板项普通查询
    *(call)
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: query
@@ -22770,7 +22770,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -22780,7 +22780,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -22791,7 +22791,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -22805,7 +22805,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -22815,7 +22815,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -22826,7 +22826,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -22840,7 +22840,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -22850,7 +22850,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -22861,7 +22861,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -22988,7 +22988,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *白板项普通查询
      *(call)
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: query
@@ -23009,7 +23009,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 1;</code>
@@ -23019,7 +23019,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 1;</code>
@@ -23031,7 +23031,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 1;</code>
@@ -23044,7 +23044,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 2;</code>
@@ -23054,7 +23054,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 2;</code>
@@ -23066,7 +23066,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 2;</code>
@@ -23079,7 +23079,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ??????????????,??????????????,???????,?????????????
+       *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
        * </pre>
        *
        * <code>fixed32 figuretype = 3;</code>
@@ -23089,7 +23089,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??????????????,??????????????,???????,?????????????
+       *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
        * </pre>
        *
        * <code>fixed32 figuretype = 3;</code>
@@ -23101,7 +23101,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??????????????,??????????????,???????,?????????????
+       *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
        * </pre>
        *
        * <code>fixed32 figuretype = 3;</code>
@@ -23232,7 +23232,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -23241,7 +23241,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -23250,7 +23250,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -23259,7 +23259,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 4;</code>
@@ -23268,7 +23268,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *白板项高级查询
    *(call)
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: complexquery
@@ -23287,7 +23287,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -23297,7 +23297,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -23308,7 +23308,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 1;</code>
@@ -23322,7 +23322,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -23332,7 +23332,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -23343,7 +23343,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 2;</code>
@@ -23357,7 +23357,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -23367,7 +23367,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -23378,7 +23378,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??????????????,??????????????,???????,?????????????
+     *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
      * </pre>
      *
      * <code>fixed32 figuretype = 3;</code>
@@ -23392,7 +23392,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 4;</code>
@@ -23402,7 +23402,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 4;</code>
@@ -23413,7 +23413,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 4;</code>
@@ -23547,7 +23547,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *白板项高级查询
      *(call)
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: complexquery
@@ -23568,7 +23568,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 1;</code>
@@ -23578,7 +23578,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 1;</code>
@@ -23590,7 +23590,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 1;</code>
@@ -23603,7 +23603,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 2;</code>
@@ -23613,7 +23613,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 2;</code>
@@ -23625,7 +23625,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 2;</code>
@@ -23638,7 +23638,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ??????????????,??????????????,???????,?????????????
+       *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
        * </pre>
        *
        * <code>fixed32 figuretype = 3;</code>
@@ -23648,7 +23648,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??????????????,??????????????,???????,?????????????
+       *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
        * </pre>
        *
        * <code>fixed32 figuretype = 3;</code>
@@ -23660,7 +23660,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??????????????,??????????????,???????,?????????????
+       *图形类型 必须指定一种类型,因为不同类型结构不同,不好解析,所以要按类型查询
        * </pre>
        *
        * <code>fixed32 figuretype = 3;</code>
@@ -23673,7 +23673,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 4;</code>
@@ -23683,7 +23683,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 4;</code>
@@ -23695,7 +23695,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 4;</code>
@@ -23833,7 +23833,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -23842,7 +23842,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -23851,7 +23851,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -23860,7 +23860,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -23869,7 +23869,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -23878,7 +23878,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -23887,7 +23887,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -23896,7 +23896,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -23905,7 +23905,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -23913,7 +23913,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Float> getPinklistList();
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -23921,7 +23921,7 @@ public final class InterfaceMain2 {
     int getPinklistCount();
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -23930,7 +23930,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *添加墨迹
    *ink
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *callback&#92;call
@@ -23952,7 +23952,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -23962,7 +23962,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -23973,7 +23973,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -23987,7 +23987,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -23997,7 +23997,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -24008,7 +24008,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -24022,7 +24022,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -24032,7 +24032,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -24043,7 +24043,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -24057,7 +24057,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -24067,7 +24067,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -24078,7 +24078,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -24092,7 +24092,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -24102,7 +24102,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -24113,7 +24113,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -24127,7 +24127,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -24137,7 +24137,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -24148,7 +24148,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -24162,7 +24162,7 @@ public final class InterfaceMain2 {
     private int linesize_;
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -24172,7 +24172,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -24183,7 +24183,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -24197,7 +24197,7 @@ public final class InterfaceMain2 {
     private int argb_;
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -24207,7 +24207,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -24218,7 +24218,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -24232,7 +24232,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.FloatList pinklist_;
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24243,7 +24243,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24253,7 +24253,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24269,7 +24269,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24281,7 +24281,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24292,7 +24292,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24305,7 +24305,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)	
+     *ink point Num, float[2 * ptnum](x,y依次排列)	
      * </pre>
      *
      * <code>repeated float pinklist = 9;</code>
@@ -24476,7 +24476,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *添加墨迹
      *ink
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *callback&#92;call
@@ -24498,7 +24498,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -24508,7 +24508,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -24520,7 +24520,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -24533,7 +24533,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -24543,7 +24543,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -24555,7 +24555,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -24568,7 +24568,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -24578,7 +24578,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -24590,7 +24590,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -24603,7 +24603,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -24613,7 +24613,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -24625,7 +24625,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -24638,7 +24638,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -24648,7 +24648,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -24660,7 +24660,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -24673,7 +24673,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -24683,7 +24683,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -24695,7 +24695,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -24708,7 +24708,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 7;</code>
@@ -24718,7 +24718,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 7;</code>
@@ -24730,7 +24730,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 7;</code>
@@ -24743,7 +24743,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 8;</code>
@@ -24753,7 +24753,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 8;</code>
@@ -24765,7 +24765,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 8;</code>
@@ -24778,7 +24778,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -24790,7 +24790,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -24800,7 +24800,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -24810,7 +24810,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -24823,7 +24823,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -24835,7 +24835,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -24848,7 +24848,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)	
+       *ink point Num, float[2 * ptnum](x,y依次排列)	
        * </pre>
        *
        * <code>repeated float pinklist = 9;</code>
@@ -25039,7 +25039,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ?????????
+     *操作ID 终端计算产生
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -25048,7 +25048,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -25057,7 +25057,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *时间戳
      * </pre>
      *
      * <code>fixed64 utcstamp = 3;</code>
@@ -25066,7 +25066,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 4;</code>
@@ -25075,7 +25075,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 5;</code>
@@ -25084,7 +25084,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25092,7 +25092,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Float> getPinklistList();
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25100,7 +25100,7 @@ public final class InterfaceMain2 {
     int getPinklistCount();
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25109,7 +25109,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???Ink??????
+   *查询Ink白板操作
    *callreturn
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *method: query pagequery
@@ -25130,7 +25130,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ?????????
+     *操作ID 终端计算产生
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -25140,7 +25140,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ?????????
+     *操作ID 终端计算产生
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -25151,7 +25151,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ?????????
+     *操作ID 终端计算产生
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -25165,7 +25165,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -25175,7 +25175,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -25186,7 +25186,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *当前该命令的人员ID
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -25200,7 +25200,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *????
+     *时间戳
      * </pre>
      *
      * <code>fixed64 utcstamp = 3;</code>
@@ -25210,7 +25210,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *时间戳
      * </pre>
      *
      * <code>fixed64 utcstamp = 3;</code>
@@ -25221,7 +25221,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *时间戳
      * </pre>
      *
      * <code>fixed64 utcstamp = 3;</code>
@@ -25235,7 +25235,7 @@ public final class InterfaceMain2 {
     private int linesize_;
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 4;</code>
@@ -25245,7 +25245,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 4;</code>
@@ -25256,7 +25256,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 4;</code>
@@ -25270,7 +25270,7 @@ public final class InterfaceMain2 {
     private int argb_;
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 5;</code>
@@ -25280,7 +25280,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 5;</code>
@@ -25291,7 +25291,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 5;</code>
@@ -25305,7 +25305,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.FloatList pinklist_;
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25316,7 +25316,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25326,7 +25326,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25342,7 +25342,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25354,7 +25354,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25365,7 +25365,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25378,7 +25378,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *ink point Num, float[2 * ptnum](x,y????????)
+     *ink point Num, float[2 * ptnum](x,y依次排列)
      * </pre>
      *
      * <code>repeated float pinklist = 6;</code>
@@ -25528,7 +25528,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???Ink??????
+     *查询Ink白板操作
      *callreturn
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *method: query pagequery
@@ -25549,7 +25549,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ?????????
+       *操作ID 终端计算产生
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -25559,7 +25559,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ?????????
+       *操作ID 终端计算产生
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -25571,7 +25571,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ?????????
+       *操作ID 终端计算产生
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -25584,7 +25584,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -25594,7 +25594,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -25606,7 +25606,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *当前该命令的人员ID
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -25619,7 +25619,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????
+       *时间戳
        * </pre>
        *
        * <code>fixed64 utcstamp = 3;</code>
@@ -25629,7 +25629,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *时间戳
        * </pre>
        *
        * <code>fixed64 utcstamp = 3;</code>
@@ -25641,7 +25641,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *时间戳
        * </pre>
        *
        * <code>fixed64 utcstamp = 3;</code>
@@ -25654,7 +25654,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 4;</code>
@@ -25664,7 +25664,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 4;</code>
@@ -25676,7 +25676,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 4;</code>
@@ -25689,7 +25689,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 5;</code>
@@ -25699,7 +25699,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 5;</code>
@@ -25711,7 +25711,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 5;</code>
@@ -25724,7 +25724,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -25736,7 +25736,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -25746,7 +25746,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -25756,7 +25756,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -25769,7 +25769,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -25781,7 +25781,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -25794,7 +25794,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *ink point Num, float[2 * ptnum](x,y????????)
+       *ink point Num, float[2 * ptnum](x,y依次排列)
        * </pre>
        *
        * <code>repeated float pinklist = 6;</code>
@@ -26429,7 +26429,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -26438,7 +26438,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -26447,7 +26447,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -26456,7 +26456,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -26465,7 +26465,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -26474,7 +26474,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -26483,7 +26483,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -26492,7 +26492,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -26501,7 +26501,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26509,7 +26509,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Float> getPtList();
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26517,7 +26517,7 @@ public final class InterfaceMain2 {
     int getPtCount();
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26526,7 +26526,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????????
+   *添加矩形、直线、圆形
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *rect line elipse
    *callback&#92;call
@@ -26548,7 +26548,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -26558,7 +26558,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -26569,7 +26569,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -26583,7 +26583,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -26593,7 +26593,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -26604,7 +26604,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -26618,7 +26618,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -26628,7 +26628,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -26639,7 +26639,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -26653,7 +26653,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -26663,7 +26663,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -26674,7 +26674,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -26688,7 +26688,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -26698,7 +26698,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -26709,7 +26709,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -26723,7 +26723,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -26733,7 +26733,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -26744,7 +26744,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -26758,7 +26758,7 @@ public final class InterfaceMain2 {
     private int linesize_;
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -26768,7 +26768,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -26779,7 +26779,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条宽度
      * </pre>
      *
      * <code>fixed32 linesize = 7;</code>
@@ -26793,7 +26793,7 @@ public final class InterfaceMain2 {
     private int argb_;
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -26803,7 +26803,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -26814,7 +26814,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *线条颜色
      * </pre>
      *
      * <code>fixed32 Argb = 8;</code>
@@ -26828,7 +26828,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.FloatList pt_;
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26839,7 +26839,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26849,7 +26849,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26865,7 +26865,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26877,7 +26877,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26888,7 +26888,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -26901,7 +26901,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,rx,ry ?????,?????????)
+     *(lx,ly,rx,ry 左上角,右下角坐标)
      * </pre>
      *
      * <code>repeated float pt = 9;</code>
@@ -27072,7 +27072,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????
+     *添加矩形、直线、圆形
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *rect line elipse
      *callback&#92;call
@@ -27094,7 +27094,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -27104,7 +27104,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -27116,7 +27116,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -27129,7 +27129,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -27139,7 +27139,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -27151,7 +27151,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -27164,7 +27164,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -27174,7 +27174,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -27186,7 +27186,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -27199,7 +27199,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -27209,7 +27209,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -27221,7 +27221,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -27234,7 +27234,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -27244,7 +27244,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -27256,7 +27256,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -27269,7 +27269,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -27279,7 +27279,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -27291,7 +27291,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -27304,7 +27304,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 7;</code>
@@ -27314,7 +27314,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 7;</code>
@@ -27326,7 +27326,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条宽度
        * </pre>
        *
        * <code>fixed32 linesize = 7;</code>
@@ -27339,7 +27339,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 8;</code>
@@ -27349,7 +27349,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 8;</code>
@@ -27361,7 +27361,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *线条颜色
        * </pre>
        *
        * <code>fixed32 Argb = 8;</code>
@@ -27374,7 +27374,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27386,7 +27386,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27396,7 +27396,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27406,7 +27406,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27419,7 +27419,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27431,7 +27431,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27444,7 +27444,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,rx,ry ?????,?????????)
+       *(lx,ly,rx,ry 左上角,右下角坐标)
        * </pre>
        *
        * <code>repeated float pt = 9;</code>
@@ -27649,7 +27649,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????????????????
+   *返回查询的矩形、直线、圆形
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *rect line elipse
    *callback&#92;call
@@ -27889,7 +27889,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????????????
+     *返回查询的矩形、直线、圆形
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *rect line elipse
      *callback&#92;call
@@ -28116,7 +28116,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -28125,7 +28125,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -28134,7 +28134,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -28143,7 +28143,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -28152,7 +28152,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -28161,7 +28161,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -28170,7 +28170,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 7;</code>
@@ -28179,7 +28179,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *字体其它属性
      * </pre>
      *
      * <code>fixed32 fontflag = 8;</code>
@@ -28188,7 +28188,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 Argb = 9;</code>
@@ -28197,7 +28197,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 10;</code>
@@ -28206,7 +28206,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 11;</code>
@@ -28215,7 +28215,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 12;</code>
@@ -28229,7 +28229,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????
+   *添加文本
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *callreturn
    *method: add query pagequery
@@ -28250,7 +28250,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -28260,7 +28260,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -28271,7 +28271,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -28285,7 +28285,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -28295,7 +28295,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -28306,7 +28306,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -28320,7 +28320,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -28330,7 +28330,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -28341,7 +28341,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -28355,7 +28355,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -28365,7 +28365,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -28376,7 +28376,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -28390,7 +28390,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -28400,7 +28400,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -28411,7 +28411,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -28425,7 +28425,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -28435,7 +28435,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -28446,7 +28446,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -28460,7 +28460,7 @@ public final class InterfaceMain2 {
     private int fontsize_;
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 7;</code>
@@ -28470,7 +28470,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 7;</code>
@@ -28481,7 +28481,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 7;</code>
@@ -28495,7 +28495,7 @@ public final class InterfaceMain2 {
     private int fontflag_;
     /**
      * <pre>
-     *????????????
+     *字体其它属性
      * </pre>
      *
      * <code>fixed32 fontflag = 8;</code>
@@ -28505,7 +28505,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *字体其它属性
      * </pre>
      *
      * <code>fixed32 fontflag = 8;</code>
@@ -28516,7 +28516,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *字体其它属性
      * </pre>
      *
      * <code>fixed32 fontflag = 8;</code>
@@ -28530,7 +28530,7 @@ public final class InterfaceMain2 {
     private int argb_;
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 Argb = 9;</code>
@@ -28540,7 +28540,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 Argb = 9;</code>
@@ -28551,7 +28551,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体颜色
      * </pre>
      *
      * <code>fixed32 Argb = 9;</code>
@@ -28565,7 +28565,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString fontname_;
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 10;</code>
@@ -28575,7 +28575,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 10;</code>
@@ -28589,7 +28589,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 10;</code>
@@ -28603,7 +28603,7 @@ public final class InterfaceMain2 {
     private float lx_;
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 11;</code>
@@ -28613,7 +28613,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 11;</code>
@@ -28624,7 +28624,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 11;</code>
@@ -28638,7 +28638,7 @@ public final class InterfaceMain2 {
     private float ly_;
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 12;</code>
@@ -28648,7 +28648,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 12;</code>
@@ -28659,7 +28659,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 12;</code>
@@ -28882,7 +28882,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *添加文本
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *callreturn
      *method: add query pagequery
@@ -28903,7 +28903,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -28913,7 +28913,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -28925,7 +28925,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -28938,7 +28938,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -28948,7 +28948,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -28960,7 +28960,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -28973,7 +28973,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -28983,7 +28983,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -28995,7 +28995,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -29008,7 +29008,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -29018,7 +29018,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -29030,7 +29030,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -29043,7 +29043,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -29053,7 +29053,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -29065,7 +29065,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -29078,7 +29078,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -29088,7 +29088,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -29100,7 +29100,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -29113,7 +29113,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *字体大小
        * </pre>
        *
        * <code>fixed32 fontsize = 7;</code>
@@ -29123,7 +29123,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体大小
        * </pre>
        *
        * <code>fixed32 fontsize = 7;</code>
@@ -29135,7 +29135,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体大小
        * </pre>
        *
        * <code>fixed32 fontsize = 7;</code>
@@ -29148,7 +29148,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *字体其它属性
        * </pre>
        *
        * <code>fixed32 fontflag = 8;</code>
@@ -29158,7 +29158,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *字体其它属性
        * </pre>
        *
        * <code>fixed32 fontflag = 8;</code>
@@ -29170,7 +29170,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *字体其它属性
        * </pre>
        *
        * <code>fixed32 fontflag = 8;</code>
@@ -29183,7 +29183,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *字体颜色
        * </pre>
        *
        * <code>fixed32 Argb = 9;</code>
@@ -29193,7 +29193,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体颜色
        * </pre>
        *
        * <code>fixed32 Argb = 9;</code>
@@ -29205,7 +29205,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体颜色
        * </pre>
        *
        * <code>fixed32 Argb = 9;</code>
@@ -29218,7 +29218,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *字体名称
        * </pre>
        *
        * <code>bytes fontname = 10;</code>
@@ -29228,7 +29228,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *字体名称
        * </pre>
        *
        * <code>bytes fontname = 10;</code>
@@ -29240,7 +29240,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *字体名称
        * </pre>
        *
        * <code>bytes fontname = 10;</code>
@@ -29253,7 +29253,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float lx = 11;</code>
@@ -29263,7 +29263,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float lx = 11;</code>
@@ -29275,7 +29275,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float lx = 11;</code>
@@ -29288,7 +29288,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float ly = 12;</code>
@@ -29298,7 +29298,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float ly = 12;</code>
@@ -29310,7 +29310,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float ly = 12;</code>
@@ -29999,7 +29999,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -30008,7 +30008,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -30017,7 +30017,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -30026,7 +30026,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -30035,7 +30035,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -30044,7 +30044,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -30053,7 +30053,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 7;</code>
@@ -30062,7 +30062,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 8;</code>
@@ -30071,7 +30071,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *png??????(???????hex????)
+     *png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes picdata = 9;</code>
@@ -30080,7 +30080,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????
+   *添加图片
    *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
    *call return
    *method: add query pagequery
@@ -30100,7 +30100,7 @@ public final class InterfaceMain2 {
     private int operid_;
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -30110,7 +30110,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -30121,7 +30121,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ????????? ?0??????????????opermemberid???????
+     *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 operid = 1;</code>
@@ -30135,7 +30135,7 @@ public final class InterfaceMain2 {
     private int opermemberid_;
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -30145,7 +30145,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -30156,7 +30156,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID ?0??????????????opermemberid???????
+     *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
      * </pre>
      *
      * <code>fixed32 opermemberid = 2;</code>
@@ -30170,7 +30170,7 @@ public final class InterfaceMain2 {
     private int srcmemid_;
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -30180,7 +30180,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -30191,7 +30191,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????ID ????????
+     *发起人的人员ID 白板标识使用
      * </pre>
      *
      * <code>fixed32 srcmemid = 3;</code>
@@ -30205,7 +30205,7 @@ public final class InterfaceMain2 {
     private long srcwbid_;
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -30215,7 +30215,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -30226,7 +30226,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????? ?????????????? ????????
+     *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
      * <code>fixed64 srcwbid = 4;</code>
@@ -30240,7 +30240,7 @@ public final class InterfaceMain2 {
     private long utcstamp_;
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -30250,7 +30250,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -30261,7 +30261,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????  ???
+     *时间戳  微秒
      * </pre>
      *
      * <code>fixed64 utcstamp = 5;</code>
@@ -30275,7 +30275,7 @@ public final class InterfaceMain2 {
     private int figuretype_;
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -30285,7 +30285,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -30296,7 +30296,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ?0??????????????figuretype???????
+     *图形类型 为0表示清除所有等于figuretype的白板操作
      * </pre>
      *
      * <code>fixed32 figuretype = 6;</code>
@@ -30310,7 +30310,7 @@ public final class InterfaceMain2 {
     private float lx_;
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 7;</code>
@@ -30320,7 +30320,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 7;</code>
@@ -30331,7 +30331,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float lx = 7;</code>
@@ -30345,7 +30345,7 @@ public final class InterfaceMain2 {
     private float ly_;
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 8;</code>
@@ -30355,7 +30355,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 8;</code>
@@ -30366,7 +30366,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *(lx,ly,?????????)
+     *(lx,ly,左上角坐标)
      * </pre>
      *
      * <code>float ly = 8;</code>
@@ -30380,7 +30380,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString picdata_;
     /**
      * <pre>
-     *png??????(???????hex????)
+     *png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes picdata = 9;</code>
@@ -30390,7 +30390,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *png??????(???????hex????)
+     *png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes picdata = 9;</code>
@@ -30404,7 +30404,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *png??????(???????hex????)
+     *png图片数据(二进制转hex编码)
      * </pre>
      *
      * <code>bytes picdata = 9;</code>
@@ -30573,7 +30573,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *添加图片
      *type:Pb_TYPE_MEET_INTERFACE_WHITEBOARD
      *call return
      *method: add query pagequery
@@ -30594,7 +30594,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -30604,7 +30604,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -30616,7 +30616,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ????????? ?0??????????????opermemberid???????
+       *操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 operid = 1;</code>
@@ -30629,7 +30629,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -30639,7 +30639,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -30651,7 +30651,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID ?0??????????????opermemberid???????
+       *当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
        * </pre>
        *
        * <code>fixed32 opermemberid = 2;</code>
@@ -30664,7 +30664,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -30674,7 +30674,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -30686,7 +30686,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????ID ????????
+       *发起人的人员ID 白板标识使用
        * </pre>
        *
        * <code>fixed32 srcmemid = 3;</code>
@@ -30699,7 +30699,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -30709,7 +30709,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -30721,7 +30721,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????? ?????????????? ????????
+       *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
        * <code>fixed64 srcwbid = 4;</code>
@@ -30734,7 +30734,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -30744,7 +30744,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -30756,7 +30756,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????  ???
+       *时间戳  微秒
        * </pre>
        *
        * <code>fixed64 utcstamp = 5;</code>
@@ -30769,7 +30769,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -30779,7 +30779,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -30791,7 +30791,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ?0??????????????figuretype???????
+       *图形类型 为0表示清除所有等于figuretype的白板操作
        * </pre>
        *
        * <code>fixed32 figuretype = 6;</code>
@@ -30804,7 +30804,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float lx = 7;</code>
@@ -30814,7 +30814,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float lx = 7;</code>
@@ -30826,7 +30826,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float lx = 7;</code>
@@ -30839,7 +30839,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float ly = 8;</code>
@@ -30849,7 +30849,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float ly = 8;</code>
@@ -30861,7 +30861,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *(lx,ly,?????????)
+       *(lx,ly,左上角坐标)
        * </pre>
        *
        * <code>float ly = 8;</code>
@@ -30874,7 +30874,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *png??????(???????hex????)
+       *png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes picdata = 9;</code>
@@ -30884,7 +30884,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *png??????(???????hex????)
+       *png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes picdata = 9;</code>
@@ -30896,7 +30896,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *png??????(???????hex????)
+       *png图片数据(二进制转hex编码)
        * </pre>
        *
        * <code>bytes picdata = 9;</code>
@@ -31534,7 +31534,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? ????Pb_Meet_FunctionCode
+     *功能标识码 参见Pb_Meet_FunctionCode
      * </pre>
      *
      * <code>fixed32 funcode = 1;</code>
@@ -31543,7 +31543,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *位置标识码
      * </pre>
      *
      * <code>fixed32 position = 2;</code>
@@ -31552,7 +31552,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *会议功能
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetFunConfigDetailInfo}
@@ -31568,7 +31568,7 @@ public final class InterfaceMain2 {
     private int funcode_;
     /**
      * <pre>
-     *???????? ????Pb_Meet_FunctionCode
+     *功能标识码 参见Pb_Meet_FunctionCode
      * </pre>
      *
      * <code>fixed32 funcode = 1;</code>
@@ -31578,7 +31578,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ????Pb_Meet_FunctionCode
+     *功能标识码 参见Pb_Meet_FunctionCode
      * </pre>
      *
      * <code>fixed32 funcode = 1;</code>
@@ -31589,7 +31589,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? ????Pb_Meet_FunctionCode
+     *功能标识码 参见Pb_Meet_FunctionCode
      * </pre>
      *
      * <code>fixed32 funcode = 1;</code>
@@ -31603,7 +31603,7 @@ public final class InterfaceMain2 {
     private int position_;
     /**
      * <pre>
-     *????????
+     *位置标识码
      * </pre>
      *
      * <code>fixed32 position = 2;</code>
@@ -31613,7 +31613,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *位置标识码
      * </pre>
      *
      * <code>fixed32 position = 2;</code>
@@ -31624,7 +31624,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *位置标识码
      * </pre>
      *
      * <code>fixed32 position = 2;</code>
@@ -31744,7 +31744,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *会议功能
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetFunConfigDetailInfo}
@@ -31762,7 +31762,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? ????Pb_Meet_FunctionCode
+       *功能标识码 参见Pb_Meet_FunctionCode
        * </pre>
        *
        * <code>fixed32 funcode = 1;</code>
@@ -31772,7 +31772,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ????Pb_Meet_FunctionCode
+       *功能标识码 参见Pb_Meet_FunctionCode
        * </pre>
        *
        * <code>fixed32 funcode = 1;</code>
@@ -31784,7 +31784,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? ????Pb_Meet_FunctionCode
+       *功能标识码 参见Pb_Meet_FunctionCode
        * </pre>
        *
        * <code>fixed32 funcode = 1;</code>
@@ -31797,7 +31797,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *位置标识码
        * </pre>
        *
        * <code>fixed32 position = 2;</code>
@@ -31807,7 +31807,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *位置标识码
        * </pre>
        *
        * <code>fixed32 position = 2;</code>
@@ -31819,7 +31819,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *位置标识码
        * </pre>
        *
        * <code>fixed32 position = 2;</code>
@@ -31957,7 +31957,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *会议功能
    *type:Pb_TYPE_MEET_INTERFACE_FUNCONFIG
    *method: query/save/
    * </pre>
@@ -32195,7 +32195,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *会议功能
      *type:Pb_TYPE_MEET_INTERFACE_FUNCONFIG
      *method: query/save/
      * </pre>
@@ -32420,7 +32420,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -32429,7 +32429,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *颜色值
      * </pre>
      *
      * <code>fixed32 rgb = 2;</code>
@@ -32438,7 +32438,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *参会人白板颜色
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetMemberColorDetailInfo}
@@ -32454,7 +32454,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -32464,7 +32464,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -32475,7 +32475,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *参会人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 1;</code>
@@ -32489,7 +32489,7 @@ public final class InterfaceMain2 {
     private int rgb_;
     /**
      * <pre>
-     *????
+     *颜色值
      * </pre>
      *
      * <code>fixed32 rgb = 2;</code>
@@ -32499,7 +32499,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *颜色值
      * </pre>
      *
      * <code>fixed32 rgb = 2;</code>
@@ -32510,7 +32510,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????
+     *颜色值
      * </pre>
      *
      * <code>fixed32 rgb = 2;</code>
@@ -32630,7 +32630,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *参会人白板颜色
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetMemberColorDetailInfo}
@@ -32648,7 +32648,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????ID
+       *参会人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 1;</code>
@@ -32658,7 +32658,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *参会人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 1;</code>
@@ -32670,7 +32670,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *参会人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 1;</code>
@@ -32683,7 +32683,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????
+       *颜色值
        * </pre>
        *
        * <code>fixed32 rgb = 2;</code>
@@ -32693,7 +32693,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *颜色值
        * </pre>
        *
        * <code>fixed32 rgb = 2;</code>
@@ -32705,7 +32705,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????
+       *颜色值
        * </pre>
        *
        * <code>fixed32 rgb = 2;</code>
@@ -32843,7 +32843,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????
+   *参会人白板颜色
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEMBERCOLOR
    *method: query/mod/
@@ -33082,7 +33082,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????
+     *参会人白板颜色
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEMBERCOLOR
      *method: query/mod/
@@ -33308,7 +33308,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -33317,7 +33317,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -33326,7 +33326,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -33335,7 +33335,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *x% width????
+     *x% width的百分
      * </pre>
      *
      * <code>float x = 4;</code>
@@ -33344,7 +33344,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *y% height????
+     *y% height的百分
      * </pre>
      *
      * <code>float y = 5;</code>
@@ -33353,7 +33353,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *屏幕鼠标控制
    *callback
    *method: notify
    * </pre>
@@ -33371,7 +33371,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -33381,7 +33381,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -33392,7 +33392,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -33406,7 +33406,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -33416,7 +33416,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -33427,7 +33427,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -33441,7 +33441,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -33451,7 +33451,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -33462,7 +33462,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -33476,7 +33476,7 @@ public final class InterfaceMain2 {
     private float x_;
     /**
      * <pre>
-     *x% width????
+     *x% width的百分
      * </pre>
      *
      * <code>float x = 4;</code>
@@ -33486,7 +33486,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *x% width????
+     *x% width的百分
      * </pre>
      *
      * <code>float x = 4;</code>
@@ -33497,7 +33497,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *x% width????
+     *x% width的百分
      * </pre>
      *
      * <code>float x = 4;</code>
@@ -33511,7 +33511,7 @@ public final class InterfaceMain2 {
     private float y_;
     /**
      * <pre>
-     *y% height????
+     *y% height的百分
      * </pre>
      *
      * <code>float y = 5;</code>
@@ -33521,7 +33521,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *y% height????
+     *y% height的百分
      * </pre>
      *
      * <code>float y = 5;</code>
@@ -33532,7 +33532,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *y% height????
+     *y% height的百分
      * </pre>
      *
      * <code>float y = 5;</code>
@@ -33673,7 +33673,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *屏幕鼠标控制
      *callback
      *method: notify
      * </pre>
@@ -33693,7 +33693,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????  ????streamcontrol.h ????
+       *控制的标志  参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -33703,7 +33703,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????  ????streamcontrol.h ????
+       *控制的标志  参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -33715,7 +33715,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????  ????streamcontrol.h ????
+       *控制的标志  参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -33728,7 +33728,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -33738,7 +33738,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -33750,7 +33750,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -33763,7 +33763,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -33773,7 +33773,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -33785,7 +33785,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -33798,7 +33798,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *x% width????
+       *x% width的百分
        * </pre>
        *
        * <code>float x = 4;</code>
@@ -33808,7 +33808,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *x% width????
+       *x% width的百分
        * </pre>
        *
        * <code>float x = 4;</code>
@@ -33820,7 +33820,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *x% width????
+       *x% width的百分
        * </pre>
        *
        * <code>float x = 4;</code>
@@ -33833,7 +33833,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *y% height????
+       *y% height的百分
        * </pre>
        *
        * <code>float y = 5;</code>
@@ -33843,7 +33843,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *y% height????
+       *y% height的百分
        * </pre>
        *
        * <code>float y = 5;</code>
@@ -33855,7 +33855,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *y% height????
+       *y% height的百分
        * </pre>
        *
        * <code>float y = 5;</code>
@@ -34000,7 +34000,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34009,7 +34009,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34018,7 +34018,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *x / width?????
+     *x / width的百分比
      * </pre>
      *
      * <code>float x = 3;</code>
@@ -34027,7 +34027,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *y / height?????
+     *y / height的百分比
      * </pre>
      *
      * <code>float y = 4;</code>
@@ -34036,7 +34036,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *屏幕鼠标控制
    *call
    *method: control
    * </pre>
@@ -34054,7 +34054,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34064,7 +34064,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34075,7 +34075,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????  ????streamcontrol.h ????
+     *控制的标志  参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34089,7 +34089,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34099,7 +34099,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34110,7 +34110,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34124,7 +34124,7 @@ public final class InterfaceMain2 {
     private float x_;
     /**
      * <pre>
-     *x / width?????
+     *x / width的百分比
      * </pre>
      *
      * <code>float x = 3;</code>
@@ -34134,7 +34134,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *x / width?????
+     *x / width的百分比
      * </pre>
      *
      * <code>float x = 3;</code>
@@ -34145,7 +34145,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *x / width?????
+     *x / width的百分比
      * </pre>
      *
      * <code>float x = 3;</code>
@@ -34159,7 +34159,7 @@ public final class InterfaceMain2 {
     private float y_;
     /**
      * <pre>
-     *y / height?????
+     *y / height的百分比
      * </pre>
      *
      * <code>float y = 4;</code>
@@ -34169,7 +34169,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *y / height?????
+     *y / height的百分比
      * </pre>
      *
      * <code>float y = 4;</code>
@@ -34180,7 +34180,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *y / height?????
+     *y / height的百分比
      * </pre>
      *
      * <code>float y = 4;</code>
@@ -34314,7 +34314,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *屏幕鼠标控制
      *call
      *method: control
      * </pre>
@@ -34334,7 +34334,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????  ????streamcontrol.h ????
+       *控制的标志  参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -34344,7 +34344,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????  ????streamcontrol.h ????
+       *控制的标志  参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -34356,7 +34356,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????  ????streamcontrol.h ????
+       *控制的标志  参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -34369,7 +34369,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -34379,7 +34379,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -34391,7 +34391,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -34404,7 +34404,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *x / width?????
+       *x / width的百分比
        * </pre>
        *
        * <code>float x = 3;</code>
@@ -34414,7 +34414,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *x / width?????
+       *x / width的百分比
        * </pre>
        *
        * <code>float x = 3;</code>
@@ -34426,7 +34426,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *x / width?????
+       *x / width的百分比
        * </pre>
        *
        * <code>float x = 3;</code>
@@ -34439,7 +34439,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *y / height?????
+       *y / height的百分比
        * </pre>
        *
        * <code>float y = 4;</code>
@@ -34449,7 +34449,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *y / height?????
+       *y / height的百分比
        * </pre>
        *
        * <code>float y = 4;</code>
@@ -34461,7 +34461,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *y / height?????
+       *y / height的百分比
        * </pre>
        *
        * <code>float y = 4;</code>
@@ -34599,7 +34599,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34608,7 +34608,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34617,7 +34617,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -34626,7 +34626,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 4;</code>
@@ -34635,7 +34635,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 5;</code>
@@ -34644,7 +34644,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *屏幕键盘控制
    *callback
    *method: notify
    * </pre>
@@ -34662,7 +34662,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34672,7 +34672,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34683,7 +34683,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -34697,7 +34697,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34707,7 +34707,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34718,7 +34718,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -34732,7 +34732,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -34742,7 +34742,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -34753,7 +34753,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -34767,7 +34767,7 @@ public final class InterfaceMain2 {
     private int otherflag_;
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 4;</code>
@@ -34777,7 +34777,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 4;</code>
@@ -34788,7 +34788,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 4;</code>
@@ -34802,7 +34802,7 @@ public final class InterfaceMain2 {
     private int key_;
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 5;</code>
@@ -34812,7 +34812,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 5;</code>
@@ -34823,7 +34823,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 5;</code>
@@ -34964,7 +34964,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *屏幕键盘控制
      *callback
      *method: notify
      * </pre>
@@ -34984,7 +34984,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ????streamcontrol.h ????
+       *控制的标志 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -34994,7 +34994,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????streamcontrol.h ????
+       *控制的标志 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -35006,7 +35006,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????streamcontrol.h ????
+       *控制的标志 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -35019,7 +35019,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -35029,7 +35029,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -35041,7 +35041,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -35054,7 +35054,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -35064,7 +35064,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -35076,7 +35076,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -35089,7 +35089,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????streamcontrol.h ????
+       *参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 otherflag = 4;</code>
@@ -35099,7 +35099,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????streamcontrol.h ????
+       *参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 otherflag = 4;</code>
@@ -35111,7 +35111,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????streamcontrol.h ????
+       *参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 otherflag = 4;</code>
@@ -35124,7 +35124,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????key? ????streamcontrol.h ????
+       *对应的key值 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 key = 5;</code>
@@ -35134,7 +35134,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????key? ????streamcontrol.h ????
+       *对应的key值 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 key = 5;</code>
@@ -35146,7 +35146,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????key? ????streamcontrol.h ????
+       *对应的key值 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 key = 5;</code>
@@ -35291,7 +35291,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -35300,7 +35300,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -35309,7 +35309,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 3;</code>
@@ -35318,7 +35318,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 4;</code>
@@ -35327,7 +35327,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *屏幕键盘控制
    *call
    *method: control
    * </pre>
@@ -35345,7 +35345,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -35355,7 +35355,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -35366,7 +35366,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ????streamcontrol.h ????
+     *控制的标志 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 flag = 1;</code>
@@ -35380,7 +35380,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -35390,7 +35390,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -35401,7 +35401,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -35415,7 +35415,7 @@ public final class InterfaceMain2 {
     private int otherflag_;
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 3;</code>
@@ -35425,7 +35425,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 3;</code>
@@ -35436,7 +35436,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????streamcontrol.h ????
+     *参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 otherflag = 3;</code>
@@ -35450,7 +35450,7 @@ public final class InterfaceMain2 {
     private int key_;
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 4;</code>
@@ -35460,7 +35460,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 4;</code>
@@ -35471,7 +35471,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????key? ????streamcontrol.h ????
+     *对应的key值 参考streamcontrol.h 定义
      * </pre>
      *
      * <code>fixed32 key = 4;</code>
@@ -35605,7 +35605,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *屏幕键盘控制
      *call
      *method: control
      * </pre>
@@ -35625,7 +35625,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ????streamcontrol.h ????
+       *控制的标志 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -35635,7 +35635,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????streamcontrol.h ????
+       *控制的标志 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -35647,7 +35647,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ????streamcontrol.h ????
+       *控制的标志 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 flag = 1;</code>
@@ -35660,7 +35660,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -35670,7 +35670,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -35682,7 +35682,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -35695,7 +35695,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????streamcontrol.h ????
+       *参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 otherflag = 3;</code>
@@ -35705,7 +35705,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????streamcontrol.h ????
+       *参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 otherflag = 3;</code>
@@ -35717,7 +35717,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????streamcontrol.h ????
+       *参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 otherflag = 3;</code>
@@ -35730,7 +35730,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????key? ????streamcontrol.h ????
+       *对应的key值 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 key = 4;</code>
@@ -35740,7 +35740,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????key? ????streamcontrol.h ????
+       *对应的key值 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 key = 4;</code>
@@ -35752,7 +35752,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????key? ????streamcontrol.h ????
+       *对应的key值 参考streamcontrol.h 定义
        * </pre>
        *
        * <code>fixed32 key = 4;</code>
@@ -35890,7 +35890,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35898,7 +35898,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getResList();
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35906,7 +35906,7 @@ public final class InterfaceMain2 {
     int getResCount();
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35915,7 +35915,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *停止资源功能
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
    *method: close
@@ -35935,7 +35935,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList res_;
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35946,7 +35946,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35956,7 +35956,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35972,7 +35972,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35984,7 +35984,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -35995,7 +35995,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36008,7 +36008,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36123,7 +36123,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *停止资源功能
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
      *method: close
@@ -36144,7 +36144,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36156,7 +36156,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36166,7 +36166,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36176,7 +36176,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36189,7 +36189,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36201,7 +36201,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36214,7 +36214,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36348,7 +36348,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36356,7 +36356,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getResList();
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36364,7 +36364,7 @@ public final class InterfaceMain2 {
     int getResCount();
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36373,7 +36373,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36381,7 +36381,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36389,7 +36389,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36398,7 +36398,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *关闭资源功能
    *call
    *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
    *method: close
@@ -36419,7 +36419,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList res_;
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36430,7 +36430,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36440,7 +36440,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36456,7 +36456,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36468,7 +36468,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36479,7 +36479,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36492,7 +36492,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 1;</code>
@@ -36505,7 +36505,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36516,7 +36516,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36526,7 +36526,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36542,7 +36542,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36554,7 +36554,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36565,7 +36565,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36578,7 +36578,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -36702,7 +36702,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *关闭资源功能
      *call
      *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
      *method: close
@@ -36723,7 +36723,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36735,7 +36735,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36745,7 +36745,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36755,7 +36755,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36768,7 +36768,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36780,7 +36780,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36793,7 +36793,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 1;</code>
@@ -36806,7 +36806,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -36818,7 +36818,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -36828,7 +36828,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -36838,7 +36838,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -36851,7 +36851,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -36863,7 +36863,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -36876,7 +36876,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37034,7 +37034,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37043,7 +37043,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37051,7 +37051,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37059,7 +37059,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37068,7 +37068,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????
+   *停止触发器
    *call
    *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
    *method: stop
@@ -37089,7 +37089,7 @@ public final class InterfaceMain2 {
     private int triggerid_;
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37099,7 +37099,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37110,7 +37110,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37124,7 +37124,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37135,7 +37135,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37145,7 +37145,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37161,7 +37161,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37173,7 +37173,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37184,7 +37184,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37197,7 +37197,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 2;</code>
@@ -37319,7 +37319,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *停止触发器
      *call
      *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
      *method: stop
@@ -37340,7 +37340,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -37350,7 +37350,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -37362,7 +37362,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -37375,7 +37375,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37387,7 +37387,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37397,7 +37397,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37407,7 +37407,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37420,7 +37420,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37432,7 +37432,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37445,7 +37445,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 2;</code>
@@ -37587,7 +37587,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????ID
+     *停止的触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37596,7 +37596,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????????ID
+     *创建该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -37605,7 +37605,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????ID
+     *停止的资源ID
      * </pre>
      *
      * <code>fixed32 res = 3;</code>
@@ -37614,7 +37614,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???]??????????
+   *媒体、流停止播放通知
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
    *method: notify
@@ -37633,7 +37633,7 @@ public final class InterfaceMain2 {
     private int triggerid_;
     /**
      * <pre>
-     *?????????ID
+     *停止的触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37643,7 +37643,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID
+     *停止的触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37654,7 +37654,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????ID
+     *停止的触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -37668,7 +37668,7 @@ public final class InterfaceMain2 {
     private int createdeviceid_;
     /**
      * <pre>
-     *????????????????ID
+     *创建该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -37678,7 +37678,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????????ID
+     *创建该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -37689,7 +37689,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????????ID
+     *创建该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -37703,7 +37703,7 @@ public final class InterfaceMain2 {
     private int res_;
     /**
      * <pre>
-     *???????ID
+     *停止的资源ID
      * </pre>
      *
      * <code>fixed32 res = 3;</code>
@@ -37713,7 +37713,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *停止的资源ID
      * </pre>
      *
      * <code>fixed32 res = 3;</code>
@@ -37724,7 +37724,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????ID
+     *停止的资源ID
      * </pre>
      *
      * <code>fixed32 res = 3;</code>
@@ -37851,7 +37851,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???]??????????
+     *媒体、流停止播放通知
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_STOPPLAY
      *method: notify
@@ -37872,7 +37872,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????ID
+       *停止的触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -37882,7 +37882,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID
+       *停止的触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -37894,7 +37894,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????ID
+       *停止的触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -37907,7 +37907,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????????ID
+       *创建该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -37917,7 +37917,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????????ID
+       *创建该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -37929,7 +37929,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????????ID
+       *创建该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -37942,7 +37942,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????ID
+       *停止的资源ID
        * </pre>
        *
        * <code>fixed32 res = 3;</code>
@@ -37952,7 +37952,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *停止的资源ID
        * </pre>
        *
        * <code>fixed32 res = 3;</code>
@@ -37964,7 +37964,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????ID
+       *停止的资源ID
        * </pre>
        *
        * <code>fixed32 res = 3;</code>
@@ -38095,7 +38095,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? Pb_DB_StatusCode
+     *参见 Pb_DB_StatusCode
      * </pre>
      *
      * <code>fixed32 status = 1;</code>
@@ -38104,7 +38104,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????????????
+   *数据后台回复的错误信息
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_DBSERVERERROR
    *method: notify
@@ -38123,7 +38123,7 @@ public final class InterfaceMain2 {
     private int status_;
     /**
      * <pre>
-     *???? Pb_DB_StatusCode
+     *参见 Pb_DB_StatusCode
      * </pre>
      *
      * <code>fixed32 status = 1;</code>
@@ -38133,7 +38133,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? Pb_DB_StatusCode
+     *参见 Pb_DB_StatusCode
      * </pre>
      *
      * <code>fixed32 status = 1;</code>
@@ -38144,7 +38144,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? Pb_DB_StatusCode
+     *参见 Pb_DB_StatusCode
      * </pre>
      *
      * <code>fixed32 status = 1;</code>
@@ -38257,7 +38257,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????????
+     *数据后台回复的错误信息
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_DBSERVERERROR
      *method: notify
@@ -38278,7 +38278,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? Pb_DB_StatusCode
+       *参见 Pb_DB_StatusCode
        * </pre>
        *
        * <code>fixed32 status = 1;</code>
@@ -38288,7 +38288,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? Pb_DB_StatusCode
+       *参见 Pb_DB_StatusCode
        * </pre>
        *
        * <code>fixed32 status = 1;</code>
@@ -38300,7 +38300,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? Pb_DB_StatusCode
+       *参见 Pb_DB_StatusCode
        * </pre>
        *
        * <code>fixed32 status = 1;</code>
@@ -38411,13 +38411,945 @@ public final class InterfaceMain2 {
     }
   }
 
+  public interface pbui_Type_MeetInitPlayResOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_MeetInitPlayRes)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    int getRes();
+
+    /**
+     * <pre>
+     *资源的坐标和宽高
+     * </pre>
+     *
+     * <code>fixed32 x = 2;</code>
+     */
+    int getX();
+
+    /**
+     * <code>fixed32 y = 3;</code>
+     */
+    int getY();
+
+    /**
+     * <code>fixed32 w = 4;</code>
+     */
+    int getW();
+
+    /**
+     * <code>fixed32 h = 5;</code>
+     */
+    int getH();
+  }
+  /**
+   * <pre>
+   *视频播放资源初始化
+   *call
+   *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+   *method: init
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_MeetInitPlayRes}
+   */
+  public  static final class pbui_Type_MeetInitPlayRes extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_MeetInitPlayRes, pbui_Type_MeetInitPlayRes.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_MeetInitPlayRes)
+      pbui_Type_MeetInitPlayResOrBuilder {
+    private pbui_Type_MeetInitPlayRes() {
+    }
+    public static final int RES_FIELD_NUMBER = 1;
+    private int res_;
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    public int getRes() {
+      return res_;
+    }
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    private void setRes(int value) {
+      
+      res_ = value;
+    }
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    private void clearRes() {
+      
+      res_ = 0;
+    }
+
+    public static final int X_FIELD_NUMBER = 2;
+    private int x_;
+    /**
+     * <pre>
+     *资源的坐标和宽高
+     * </pre>
+     *
+     * <code>fixed32 x = 2;</code>
+     */
+    public int getX() {
+      return x_;
+    }
+    /**
+     * <pre>
+     *资源的坐标和宽高
+     * </pre>
+     *
+     * <code>fixed32 x = 2;</code>
+     */
+    private void setX(int value) {
+      
+      x_ = value;
+    }
+    /**
+     * <pre>
+     *资源的坐标和宽高
+     * </pre>
+     *
+     * <code>fixed32 x = 2;</code>
+     */
+    private void clearX() {
+      
+      x_ = 0;
+    }
+
+    public static final int Y_FIELD_NUMBER = 3;
+    private int y_;
+    /**
+     * <code>fixed32 y = 3;</code>
+     */
+    public int getY() {
+      return y_;
+    }
+    /**
+     * <code>fixed32 y = 3;</code>
+     */
+    private void setY(int value) {
+      
+      y_ = value;
+    }
+    /**
+     * <code>fixed32 y = 3;</code>
+     */
+    private void clearY() {
+      
+      y_ = 0;
+    }
+
+    public static final int W_FIELD_NUMBER = 4;
+    private int w_;
+    /**
+     * <code>fixed32 w = 4;</code>
+     */
+    public int getW() {
+      return w_;
+    }
+    /**
+     * <code>fixed32 w = 4;</code>
+     */
+    private void setW(int value) {
+      
+      w_ = value;
+    }
+    /**
+     * <code>fixed32 w = 4;</code>
+     */
+    private void clearW() {
+      
+      w_ = 0;
+    }
+
+    public static final int H_FIELD_NUMBER = 5;
+    private int h_;
+    /**
+     * <code>fixed32 h = 5;</code>
+     */
+    public int getH() {
+      return h_;
+    }
+    /**
+     * <code>fixed32 h = 5;</code>
+     */
+    private void setH(int value) {
+      
+      h_ = value;
+    }
+    /**
+     * <code>fixed32 h = 5;</code>
+     */
+    private void clearH() {
+      
+      h_ = 0;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (res_ != 0) {
+        output.writeFixed32(1, res_);
+      }
+      if (x_ != 0) {
+        output.writeFixed32(2, x_);
+      }
+      if (y_ != 0) {
+        output.writeFixed32(3, y_);
+      }
+      if (w_ != 0) {
+        output.writeFixed32(4, w_);
+      }
+      if (h_ != 0) {
+        output.writeFixed32(5, h_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (res_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, res_);
+      }
+      if (x_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, x_);
+      }
+      if (y_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(3, y_);
+      }
+      if (w_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(4, w_);
+      }
+      if (h_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(5, h_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *视频播放资源初始化
+     *call
+     *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+     *method: init
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_MeetInitPlayRes}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_MeetInitPlayRes)
+        com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayResOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *资源索引
+       * </pre>
+       *
+       * <code>fixed32 res = 1;</code>
+       */
+      public int getRes() {
+        return instance.getRes();
+      }
+      /**
+       * <pre>
+       *资源索引
+       * </pre>
+       *
+       * <code>fixed32 res = 1;</code>
+       */
+      public Builder setRes(int value) {
+        copyOnWrite();
+        instance.setRes(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *资源索引
+       * </pre>
+       *
+       * <code>fixed32 res = 1;</code>
+       */
+      public Builder clearRes() {
+        copyOnWrite();
+        instance.clearRes();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *资源的坐标和宽高
+       * </pre>
+       *
+       * <code>fixed32 x = 2;</code>
+       */
+      public int getX() {
+        return instance.getX();
+      }
+      /**
+       * <pre>
+       *资源的坐标和宽高
+       * </pre>
+       *
+       * <code>fixed32 x = 2;</code>
+       */
+      public Builder setX(int value) {
+        copyOnWrite();
+        instance.setX(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *资源的坐标和宽高
+       * </pre>
+       *
+       * <code>fixed32 x = 2;</code>
+       */
+      public Builder clearX() {
+        copyOnWrite();
+        instance.clearX();
+        return this;
+      }
+
+      /**
+       * <code>fixed32 y = 3;</code>
+       */
+      public int getY() {
+        return instance.getY();
+      }
+      /**
+       * <code>fixed32 y = 3;</code>
+       */
+      public Builder setY(int value) {
+        copyOnWrite();
+        instance.setY(value);
+        return this;
+      }
+      /**
+       * <code>fixed32 y = 3;</code>
+       */
+      public Builder clearY() {
+        copyOnWrite();
+        instance.clearY();
+        return this;
+      }
+
+      /**
+       * <code>fixed32 w = 4;</code>
+       */
+      public int getW() {
+        return instance.getW();
+      }
+      /**
+       * <code>fixed32 w = 4;</code>
+       */
+      public Builder setW(int value) {
+        copyOnWrite();
+        instance.setW(value);
+        return this;
+      }
+      /**
+       * <code>fixed32 w = 4;</code>
+       */
+      public Builder clearW() {
+        copyOnWrite();
+        instance.clearW();
+        return this;
+      }
+
+      /**
+       * <code>fixed32 h = 5;</code>
+       */
+      public int getH() {
+        return instance.getH();
+      }
+      /**
+       * <code>fixed32 h = 5;</code>
+       */
+      public Builder setH(int value) {
+        copyOnWrite();
+        instance.setH(value);
+        return this;
+      }
+      /**
+       * <code>fixed32 h = 5;</code>
+       */
+      public Builder clearH() {
+        copyOnWrite();
+        instance.clearH();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_MeetInitPlayRes)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes other = (com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes) arg1;
+          res_ = visitor.visitInt(res_ != 0, res_,
+              other.res_ != 0, other.res_);
+          x_ = visitor.visitInt(x_ != 0, x_,
+              other.x_ != 0, other.x_);
+          y_ = visitor.visitInt(y_ != 0, y_,
+              other.y_ != 0, other.y_);
+          w_ = visitor.visitInt(w_ != 0, w_,
+              other.w_ != 0, other.w_);
+          h_ = visitor.visitInt(h_ != 0, h_,
+              other.h_ != 0, other.h_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  res_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+
+                  x_ = input.readFixed32();
+                  break;
+                }
+                case 29: {
+
+                  y_ = input.readFixed32();
+                  break;
+                }
+                case 37: {
+
+                  w_ = input.readFixed32();
+                  break;
+                }
+                case 45: {
+
+                  h_ = input.readFixed32();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_MeetInitPlayRes)
+    private static final com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_MeetInitPlayRes();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetInitPlayRes getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_MeetInitPlayRes> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_MeetInitPlayRes> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Type_MeetDestroyPlayResOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_MeetDestroyPlayRes)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    int getRes();
+  }
+  /**
+   * <pre>
+   *视频播放资源释放
+   *call
+   *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+   *method: destroy
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_MeetDestroyPlayRes}
+   */
+  public  static final class pbui_Type_MeetDestroyPlayRes extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_MeetDestroyPlayRes, pbui_Type_MeetDestroyPlayRes.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_MeetDestroyPlayRes)
+      pbui_Type_MeetDestroyPlayResOrBuilder {
+    private pbui_Type_MeetDestroyPlayRes() {
+    }
+    public static final int RES_FIELD_NUMBER = 1;
+    private int res_;
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    public int getRes() {
+      return res_;
+    }
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    private void setRes(int value) {
+      
+      res_ = value;
+    }
+    /**
+     * <pre>
+     *资源索引
+     * </pre>
+     *
+     * <code>fixed32 res = 1;</code>
+     */
+    private void clearRes() {
+      
+      res_ = 0;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (res_ != 0) {
+        output.writeFixed32(1, res_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (res_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, res_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *视频播放资源释放
+     *call
+     *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+     *method: destroy
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_MeetDestroyPlayRes}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_MeetDestroyPlayRes)
+        com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayResOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *资源索引
+       * </pre>
+       *
+       * <code>fixed32 res = 1;</code>
+       */
+      public int getRes() {
+        return instance.getRes();
+      }
+      /**
+       * <pre>
+       *资源索引
+       * </pre>
+       *
+       * <code>fixed32 res = 1;</code>
+       */
+      public Builder setRes(int value) {
+        copyOnWrite();
+        instance.setRes(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *资源索引
+       * </pre>
+       *
+       * <code>fixed32 res = 1;</code>
+       */
+      public Builder clearRes() {
+        copyOnWrite();
+        instance.clearRes();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_MeetDestroyPlayRes)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes other = (com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes) arg1;
+          res_ = visitor.visitInt(res_ != 0, res_,
+              other.res_ != 0, other.res_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  res_ = input.readFixed32();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_MeetDestroyPlayRes)
+    private static final com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_MeetDestroyPlayRes();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain2.pbui_Type_MeetDestroyPlayRes getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_MeetDestroyPlayRes> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_MeetDestroyPlayRes> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface pbui_Type_MeetMediaPlayOrBuilder extends
       // @@protoc_insertion_point(interface_extends:pbui_Type_MeetMediaPlay)
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -38426,7 +39358,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -38435,7 +39367,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????id
+     *播放的媒体id
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -38444,7 +39376,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 4;</code>
@@ -38453,7 +39385,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 5;</code>
@@ -38462,7 +39394,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????
+   *媒体播放通知
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
    *method: notify
@@ -38481,7 +39413,7 @@ public final class InterfaceMain2 {
     private int triggerid_;
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -38491,7 +39423,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -38502,7 +39434,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -38516,7 +39448,7 @@ public final class InterfaceMain2 {
     private int createdeviceid_;
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -38526,7 +39458,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -38537,7 +39469,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -38551,7 +39483,7 @@ public final class InterfaceMain2 {
     private int mediaid_;
     /**
      * <pre>
-     *????????id
+     *播放的媒体id
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -38561,7 +39493,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????id
+     *播放的媒体id
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -38572,7 +39504,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????id
+     *播放的媒体id
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -38586,7 +39518,7 @@ public final class InterfaceMain2 {
     private int res_;
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 4;</code>
@@ -38596,7 +39528,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 4;</code>
@@ -38607,7 +39539,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 4;</code>
@@ -38621,7 +39553,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 5;</code>
@@ -38631,7 +39563,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 5;</code>
@@ -38642,7 +39574,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 5;</code>
@@ -38783,7 +39715,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *媒体播放通知
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
      *method: notify
@@ -38804,7 +39736,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -38814,7 +39746,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -38826,7 +39758,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -38839,7 +39771,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????????????ID
+       *创建执行该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -38849,7 +39781,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????????????ID
+       *创建执行该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -38861,7 +39793,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????????????ID
+       *创建执行该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -38874,7 +39806,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????id
+       *播放的媒体id
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -38884,7 +39816,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????id
+       *播放的媒体id
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -38896,7 +39828,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????id
+       *播放的媒体id
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -38909,7 +39841,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *播放所用的资源ID
        * </pre>
        *
        * <code>fixed32 res = 4;</code>
@@ -38919,7 +39851,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *播放所用的资源ID
        * </pre>
        *
        * <code>fixed32 res = 4;</code>
@@ -38931,7 +39863,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *播放所用的资源ID
        * </pre>
        *
        * <code>fixed32 res = 4;</code>
@@ -38944,7 +39876,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 5;</code>
@@ -38954,7 +39886,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 5;</code>
@@ -38966,7 +39898,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 5;</code>
@@ -39111,7 +40043,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????? ???? Pb_MeetPlayFlag
+     *播放标志 参见 Pb_MeetPlayFlag
      * </pre>
      *
      * <code>fixed32 playflag = 1;</code>
@@ -39120,7 +40052,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -39129,7 +40061,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -39138,7 +40070,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 4;</code>
@@ -39147,7 +40079,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39155,7 +40087,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getResList();
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39163,7 +40095,7 @@ public final class InterfaceMain2 {
     int getResCount();
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39172,7 +40104,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39180,7 +40112,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39188,7 +40120,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39197,7 +40129,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *媒体播放操作
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
    *method: start
@@ -39219,7 +40151,7 @@ public final class InterfaceMain2 {
     private int playflag_;
     /**
      * <pre>
-     *?????? ???? Pb_MeetPlayFlag
+     *播放标志 参见 Pb_MeetPlayFlag
      * </pre>
      *
      * <code>fixed32 playflag = 1;</code>
@@ -39229,7 +40161,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_MeetPlayFlag
+     *播放标志 参见 Pb_MeetPlayFlag
      * </pre>
      *
      * <code>fixed32 playflag = 1;</code>
@@ -39240,7 +40172,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????? ???? Pb_MeetPlayFlag
+     *播放标志 参见 Pb_MeetPlayFlag
      * </pre>
      *
      * <code>fixed32 playflag = 1;</code>
@@ -39254,7 +40186,7 @@ public final class InterfaceMain2 {
     private int pos_;
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -39264,7 +40196,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -39275,7 +40207,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -39289,7 +40221,7 @@ public final class InterfaceMain2 {
     private int mediaid_;
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -39299,7 +40231,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -39310,7 +40242,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -39324,7 +40256,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 4;</code>
@@ -39334,7 +40266,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 4;</code>
@@ -39345,7 +40277,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 4;</code>
@@ -39359,7 +40291,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList res_;
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39370,7 +40302,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39380,7 +40312,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39396,7 +40328,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39408,7 +40340,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39419,7 +40351,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39432,7 +40364,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????,?0??????
+     *有效资源个数,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 5;</code>
@@ -39445,7 +40377,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39456,7 +40388,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39466,7 +40398,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39482,7 +40414,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39494,7 +40426,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39505,7 +40437,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39518,7 +40450,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 6;</code>
@@ -39670,7 +40602,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *媒体播放操作
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
      *method: start
@@ -39691,7 +40623,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????? ???? Pb_MeetPlayFlag
+       *播放标志 参见 Pb_MeetPlayFlag
        * </pre>
        *
        * <code>fixed32 playflag = 1;</code>
@@ -39701,7 +40633,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_MeetPlayFlag
+       *播放标志 参见 Pb_MeetPlayFlag
        * </pre>
        *
        * <code>fixed32 playflag = 1;</code>
@@ -39713,7 +40645,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????? ???? Pb_MeetPlayFlag
+       *播放标志 参见 Pb_MeetPlayFlag
        * </pre>
        *
        * <code>fixed32 playflag = 1;</code>
@@ -39726,7 +40658,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????????????
+       *指定开始播放的百分比位置
        * </pre>
        *
        * <code>fixed32 pos = 2;</code>
@@ -39736,7 +40668,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????????????
+       *指定开始播放的百分比位置
        * </pre>
        *
        * <code>fixed32 pos = 2;</code>
@@ -39748,7 +40680,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????????????
+       *指定开始播放的百分比位置
        * </pre>
        *
        * <code>fixed32 pos = 2;</code>
@@ -39761,7 +40693,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -39771,7 +40703,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -39783,7 +40715,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -39796,7 +40728,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 4;</code>
@@ -39806,7 +40738,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 4;</code>
@@ -39818,7 +40750,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 4;</code>
@@ -39831,7 +40763,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39843,7 +40775,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39853,7 +40785,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39863,7 +40795,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39876,7 +40808,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39888,7 +40820,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39901,7 +40833,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????,?0??????
+       *有效资源个数,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 5;</code>
@@ -39914,7 +40846,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -39926,7 +40858,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -39936,7 +40868,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -39946,7 +40878,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -39959,7 +40891,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -39971,7 +40903,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -39984,7 +40916,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 6;</code>
@@ -40171,7 +41103,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40180,7 +41112,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -40189,7 +41121,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -40198,7 +41130,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40206,7 +41138,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40214,7 +41146,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40223,7 +41155,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????????
+   *设置播放位置
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
    *method: move
@@ -40244,7 +41176,7 @@ public final class InterfaceMain2 {
     private int resindex_;
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40254,7 +41186,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40265,7 +41197,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40279,7 +41211,7 @@ public final class InterfaceMain2 {
     private int pos_;
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -40289,7 +41221,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -40300,7 +41232,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????????????
+     *指定开始播放的百分比位置
      * </pre>
      *
      * <code>fixed32 pos = 2;</code>
@@ -40314,7 +41246,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -40324,7 +41256,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -40335,7 +41267,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -40349,7 +41281,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40360,7 +41292,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40370,7 +41302,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40386,7 +41318,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40398,7 +41330,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40409,7 +41341,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40422,7 +41354,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -40558,7 +41490,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *设置播放位置
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
      *method: move
@@ -40579,7 +41511,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *资源索引号
        * </pre>
        *
        * <code>fixed32 resindex = 1;</code>
@@ -40589,7 +41521,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *资源索引号
        * </pre>
        *
        * <code>fixed32 resindex = 1;</code>
@@ -40601,7 +41533,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *资源索引号
        * </pre>
        *
        * <code>fixed32 resindex = 1;</code>
@@ -40614,7 +41546,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????????????
+       *指定开始播放的百分比位置
        * </pre>
        *
        * <code>fixed32 pos = 2;</code>
@@ -40624,7 +41556,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????????????
+       *指定开始播放的百分比位置
        * </pre>
        *
        * <code>fixed32 pos = 2;</code>
@@ -40636,7 +41568,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????????????
+       *指定开始播放的百分比位置
        * </pre>
        *
        * <code>fixed32 pos = 2;</code>
@@ -40649,7 +41581,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 3;</code>
@@ -40659,7 +41591,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 3;</code>
@@ -40671,7 +41603,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 3;</code>
@@ -40684,7 +41616,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40696,7 +41628,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40706,7 +41638,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40716,7 +41648,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40729,7 +41661,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40741,7 +41673,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40754,7 +41686,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -40910,7 +41842,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40919,7 +41851,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -40928,7 +41860,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -40936,7 +41868,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -40944,7 +41876,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -40953,7 +41885,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????? ???
+   *设置播放暂停 恢复
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
    *method: pause play
@@ -40974,7 +41906,7 @@ public final class InterfaceMain2 {
     private int resindex_;
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40984,7 +41916,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -40995,7 +41927,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *资源索引号
      * </pre>
      *
      * <code>fixed32 resindex = 1;</code>
@@ -41009,7 +41941,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -41019,7 +41951,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -41030,7 +41962,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -41044,7 +41976,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41055,7 +41987,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41065,7 +41997,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41081,7 +42013,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41093,7 +42025,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41104,7 +42036,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41117,7 +42049,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -41246,7 +42178,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????? ???
+     *设置播放暂停 恢复
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
      *method: pause play
@@ -41267,7 +42199,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *资源索引号
        * </pre>
        *
        * <code>fixed32 resindex = 1;</code>
@@ -41277,7 +42209,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *资源索引号
        * </pre>
        *
        * <code>fixed32 resindex = 1;</code>
@@ -41289,7 +42221,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *资源索引号
        * </pre>
        *
        * <code>fixed32 resindex = 1;</code>
@@ -41302,7 +42234,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -41312,7 +42244,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -41324,7 +42256,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -41337,7 +42269,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41349,7 +42281,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41359,7 +42291,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41369,7 +42301,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41382,7 +42314,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41394,7 +42326,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41407,7 +42339,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -41556,7 +42488,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -41565,7 +42497,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 2;</code>
@@ -41574,7 +42506,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *查询媒体播放
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetMediaPlayDetailInfo}
@@ -41590,7 +42522,7 @@ public final class InterfaceMain2 {
     private int trrigerid_;
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -41600,7 +42532,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -41611,7 +42543,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -41625,7 +42557,7 @@ public final class InterfaceMain2 {
     private int mediaid_;
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 2;</code>
@@ -41635,7 +42567,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 2;</code>
@@ -41646,7 +42578,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 2;</code>
@@ -41766,7 +42698,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *查询媒体播放
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetMediaPlayDetailInfo}
@@ -41784,7 +42716,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 trrigerid = 1;</code>
@@ -41794,7 +42726,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 trrigerid = 1;</code>
@@ -41806,7 +42738,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 trrigerid = 1;</code>
@@ -41819,7 +42751,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 2;</code>
@@ -41829,7 +42761,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 2;</code>
@@ -41841,7 +42773,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 2;</code>
@@ -41979,7 +42911,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *查询媒体播放
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
    *method: query
@@ -42218,7 +43150,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *查询媒体播放
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
      *method: query
@@ -42444,7 +43376,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42453,7 +43385,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42462,10 +43394,10 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *文件推送
    *type:Pb_TYPE_MEET_INTERFACE_FILEPUSH
    *method: notify
-   *??????????????????????1????????
+   *当为询问模式时，回调函数返回1表示同意播放
    * </pre>
    *
    * Protobuf type {@code pbui_Type_FilePush}
@@ -42481,7 +43413,7 @@ public final class InterfaceMain2 {
     private int mediaid_;
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42491,7 +43423,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42502,7 +43434,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42516,7 +43448,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42526,7 +43458,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42537,7 +43469,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42657,10 +43589,10 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *文件推送
      *type:Pb_TYPE_MEET_INTERFACE_FILEPUSH
      *method: notify
-     *??????????????????????1????????
+     *当为询问模式时，回调函数返回1表示同意播放
      * </pre>
      *
      * Protobuf type {@code pbui_Type_FilePush}
@@ -42678,7 +43610,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 1;</code>
@@ -42688,7 +43620,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 1;</code>
@@ -42700,7 +43632,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 1;</code>
@@ -42713,7 +43645,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -42723,7 +43655,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -42735,7 +43667,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -42859,7 +43791,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42868,7 +43800,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42877,7 +43809,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -42885,7 +43817,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -42893,7 +43825,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -42902,7 +43834,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *文件推送
    *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
    *method: push
    * </pre>
@@ -42922,7 +43854,7 @@ public final class InterfaceMain2 {
     private int mediaid_;
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42932,7 +43864,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42943,7 +43875,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *媒体ID
      * </pre>
      *
      * <code>fixed32 mediaid = 1;</code>
@@ -42957,7 +43889,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42967,7 +43899,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42978,7 +43910,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 2;</code>
@@ -42992,7 +43924,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43003,7 +43935,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43013,7 +43945,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43029,7 +43961,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43041,7 +43973,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43052,7 +43984,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43065,7 +43997,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 3;</code>
@@ -43194,7 +44126,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *文件推送
      *type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
      *method: push
      * </pre>
@@ -43214,7 +44146,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 1;</code>
@@ -43224,7 +44156,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 1;</code>
@@ -43236,7 +44168,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *媒体ID
        * </pre>
        *
        * <code>fixed32 mediaid = 1;</code>
@@ -43249,7 +44181,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -43259,7 +44191,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -43271,7 +44203,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 2;</code>
@@ -43284,7 +44216,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43296,7 +44228,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43306,7 +44238,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43316,7 +44248,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43329,7 +44261,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43341,7 +44273,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43354,7 +44286,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 3;</code>
@@ -43503,7 +44435,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -43512,7 +44444,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -43521,7 +44453,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -43530,7 +44462,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 4;</code>
@@ -43539,10 +44471,10 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????????
+   *请求播放流通道通知
    *type:Pb_TYPE_MEET_INTERFACE_REQUESTSTREAMPUSH
    *method: notify
-   *??????????????????????1????????
+   *当为询问模式时，回调函数返回1表示同意播放
    * </pre>
    *
    * Protobuf type {@code pbui_Type_ReqStreamPush}
@@ -43558,7 +44490,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -43568,7 +44500,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -43579,7 +44511,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -43593,7 +44525,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -43603,7 +44535,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -43614,7 +44546,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -43628,7 +44560,7 @@ public final class InterfaceMain2 {
     private int memberid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -43638,7 +44570,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -43649,7 +44581,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的人员ID
      * </pre>
      *
      * <code>fixed32 memberid = 3;</code>
@@ -43663,7 +44595,7 @@ public final class InterfaceMain2 {
     private int substreamindex_;
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 4;</code>
@@ -43673,7 +44605,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 4;</code>
@@ -43684,7 +44616,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 4;</code>
@@ -43818,10 +44750,10 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *请求播放流通道通知
      *type:Pb_TYPE_MEET_INTERFACE_REQUESTSTREAMPUSH
      *method: notify
-     *??????????????????????1????????
+     *当为询问模式时，回调函数返回1表示同意播放
      * </pre>
      *
      * Protobuf type {@code pbui_Type_ReqStreamPush}
@@ -43839,7 +44771,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -43849,7 +44781,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -43861,7 +44793,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -43874,7 +44806,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -43884,7 +44816,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -43896,7 +44828,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -43909,7 +44841,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -43919,7 +44851,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -43931,7 +44863,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的人员ID
        * </pre>
        *
        * <code>fixed32 memberid = 3;</code>
@@ -43944,7 +44876,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 4;</code>
@@ -43954,7 +44886,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 4;</code>
@@ -43966,7 +44898,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 4;</code>
@@ -44104,7 +45036,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44113,7 +45045,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????ID
+     *处理该请求的设备ID
      * </pre>
      *
      * <code>fixed32 handledeviceid = 2;</code>
@@ -44122,7 +45054,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44131,7 +45063,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44139,7 +45071,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44147,7 +45079,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44156,7 +45088,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *请求播放流通道
    *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
    *method: requestpush
    * </pre>
@@ -44176,7 +45108,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44186,7 +45118,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44197,7 +45129,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44211,7 +45143,7 @@ public final class InterfaceMain2 {
     private int handledeviceid_;
     /**
      * <pre>
-     *?????????????ID
+     *处理该请求的设备ID
      * </pre>
      *
      * <code>fixed32 handledeviceid = 2;</code>
@@ -44221,7 +45153,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *处理该请求的设备ID
      * </pre>
      *
      * <code>fixed32 handledeviceid = 2;</code>
@@ -44232,7 +45164,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????ID
+     *处理该请求的设备ID
      * </pre>
      *
      * <code>fixed32 handledeviceid = 2;</code>
@@ -44246,7 +45178,7 @@ public final class InterfaceMain2 {
     private int substreamindex_;
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44256,7 +45188,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44267,7 +45199,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44281,7 +45213,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44292,7 +45224,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44302,7 +45234,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44318,7 +45250,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44330,7 +45262,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44341,7 +45273,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44354,7 +45286,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -44490,7 +45422,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *请求播放流通道
      *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
      *method: requestpush
      * </pre>
@@ -44510,7 +45442,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -44520,7 +45452,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -44532,7 +45464,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -44545,7 +45477,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????ID
+       *处理该请求的设备ID
        * </pre>
        *
        * <code>fixed32 handledeviceid = 2;</code>
@@ -44555,7 +45487,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *处理该请求的设备ID
        * </pre>
        *
        * <code>fixed32 handledeviceid = 2;</code>
@@ -44567,7 +45499,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????ID
+       *处理该请求的设备ID
        * </pre>
        *
        * <code>fixed32 handledeviceid = 2;</code>
@@ -44580,7 +45512,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -44590,7 +45522,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -44602,7 +45534,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -44615,7 +45547,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44627,7 +45559,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44637,7 +45569,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44647,7 +45579,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44660,7 +45592,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44672,7 +45604,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44685,7 +45617,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -44841,7 +45773,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44850,7 +45782,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -44859,7 +45791,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44868,10 +45800,10 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????
+   *推送流通知
    *type:Pb_TYPE_MEET_INTERFACE_STREAMPUSH
    *method: notify
-   *??????????????????????1????????
+   *当为询问模式时，回调函数返回1表示同意播放
    * </pre>
    *
    * Protobuf type {@code pbui_Type_StreamPush}
@@ -44887,7 +45819,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44897,7 +45829,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44908,7 +45840,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -44922,7 +45854,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -44932,7 +45864,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -44943,7 +45875,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -44957,7 +45889,7 @@ public final class InterfaceMain2 {
     private int substreamindex_;
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44967,7 +45899,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -44978,7 +45910,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -45105,10 +46037,10 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *推送流通知
      *type:Pb_TYPE_MEET_INTERFACE_STREAMPUSH
      *method: notify
-     *??????????????????????1????????
+     *当为询问模式时，回调函数返回1表示同意播放
      * </pre>
      *
      * Protobuf type {@code pbui_Type_StreamPush}
@@ -45126,7 +46058,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -45136,7 +46068,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -45148,7 +46080,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -45161,7 +46093,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -45171,7 +46103,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -45183,7 +46115,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -45196,7 +46128,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -45206,7 +46138,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -45218,7 +46150,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -45349,7 +46281,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -45358,7 +46290,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 2;</code>
@@ -45367,7 +46299,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -45376,7 +46308,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45384,7 +46316,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45392,7 +46324,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45401,7 +46333,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????
+   *推送流
    *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
    *method: push
    * </pre>
@@ -45421,7 +46353,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -45431,7 +46363,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -45442,7 +46374,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 1;</code>
@@ -45456,7 +46388,7 @@ public final class InterfaceMain2 {
     private int srcdeviceid_;
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 2;</code>
@@ -45466,7 +46398,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 2;</code>
@@ -45477,7 +46409,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *发起请求的设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 2;</code>
@@ -45491,7 +46423,7 @@ public final class InterfaceMain2 {
     private int substreamindex_;
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -45501,7 +46433,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -45512,7 +46444,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *本设备子通道号
      * </pre>
      *
      * <code>fixed32 substreamindex = 3;</code>
@@ -45526,7 +46458,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45537,7 +46469,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45547,7 +46479,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45563,7 +46495,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45575,7 +46507,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45586,7 +46518,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45599,7 +46531,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 4;</code>
@@ -45735,7 +46667,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *推送流
      *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
      *method: push
      * </pre>
@@ -45755,7 +46687,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -45765,7 +46697,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -45777,7 +46709,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 1;</code>
@@ -45790,7 +46722,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 srcdeviceid = 2;</code>
@@ -45800,7 +46732,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 srcdeviceid = 2;</code>
@@ -45812,7 +46744,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *发起请求的设备ID
        * </pre>
        *
        * <code>fixed32 srcdeviceid = 2;</code>
@@ -45825,7 +46757,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -45835,7 +46767,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -45847,7 +46779,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *本设备子通道号
        * </pre>
        *
        * <code>fixed32 substreamindex = 3;</code>
@@ -45860,7 +46792,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -45872,7 +46804,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -45882,7 +46814,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -45892,7 +46824,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -45905,7 +46837,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -45917,7 +46849,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -45930,7 +46862,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 4;</code>
@@ -46086,7 +47018,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -46095,7 +47027,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -46104,7 +47036,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *流源设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 3;</code>
@@ -46113,7 +47045,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????ID
+     *流源设备子通道ID
      * </pre>
      *
      * <code>fixed32 subid = 4;</code>
@@ -46122,7 +47054,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 5;</code>
@@ -46131,7 +47063,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 6;</code>
@@ -46140,7 +47072,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????
+   *流播放通知
    *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
    *callback
    *method: notify
@@ -46159,7 +47091,7 @@ public final class InterfaceMain2 {
     private int triggerid_;
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -46169,7 +47101,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -46180,7 +47112,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 triggerid = 1;</code>
@@ -46194,7 +47126,7 @@ public final class InterfaceMain2 {
     private int createdeviceid_;
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -46204,7 +47136,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -46215,7 +47147,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????????????ID
+     *创建执行该触发器的设备ID
      * </pre>
      *
      * <code>fixed32 createdeviceid = 2;</code>
@@ -46229,7 +47161,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *??????ID
+     *流源设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 3;</code>
@@ -46239,7 +47171,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *流源设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 3;</code>
@@ -46250,7 +47182,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *流源设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 3;</code>
@@ -46264,7 +47196,7 @@ public final class InterfaceMain2 {
     private int subid_;
     /**
      * <pre>
-     *???????????ID
+     *流源设备子通道ID
      * </pre>
      *
      * <code>fixed32 subid = 4;</code>
@@ -46274,7 +47206,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????ID
+     *流源设备子通道ID
      * </pre>
      *
      * <code>fixed32 subid = 4;</code>
@@ -46285,7 +47217,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????????ID
+     *流源设备子通道ID
      * </pre>
      *
      * <code>fixed32 subid = 4;</code>
@@ -46299,7 +47231,7 @@ public final class InterfaceMain2 {
     private int res_;
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 5;</code>
@@ -46309,7 +47241,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 5;</code>
@@ -46320,7 +47252,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????ID
+     *播放所用的资源ID
      * </pre>
      *
      * <code>fixed32 res = 5;</code>
@@ -46334,7 +47266,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 6;</code>
@@ -46344,7 +47276,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 6;</code>
@@ -46355,7 +47287,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????????triggeruserval????
+     *参见该文件中的triggeruserval定义
      * </pre>
      *
      * <code>fixed32 triggeruserval = 6;</code>
@@ -46503,7 +47435,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *流播放通知
      *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
      *callback
      *method: notify
@@ -46524,7 +47456,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -46534,7 +47466,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -46546,7 +47478,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 triggerid = 1;</code>
@@ -46559,7 +47491,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????????????ID
+       *创建执行该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -46569,7 +47501,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????????????ID
+       *创建执行该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -46581,7 +47513,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????????????ID
+       *创建执行该触发器的设备ID
        * </pre>
        *
        * <code>fixed32 createdeviceid = 2;</code>
@@ -46594,7 +47526,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *流源设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 3;</code>
@@ -46604,7 +47536,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *流源设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 3;</code>
@@ -46616,7 +47548,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *流源设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 3;</code>
@@ -46629,7 +47561,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????????ID
+       *流源设备子通道ID
        * </pre>
        *
        * <code>fixed32 subid = 4;</code>
@@ -46639,7 +47571,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????ID
+       *流源设备子通道ID
        * </pre>
        *
        * <code>fixed32 subid = 4;</code>
@@ -46651,7 +47583,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????????ID
+       *流源设备子通道ID
        * </pre>
        *
        * <code>fixed32 subid = 4;</code>
@@ -46664,7 +47596,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????ID
+       *播放所用的资源ID
        * </pre>
        *
        * <code>fixed32 res = 5;</code>
@@ -46674,7 +47606,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *播放所用的资源ID
        * </pre>
        *
        * <code>fixed32 res = 5;</code>
@@ -46686,7 +47618,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????ID
+       *播放所用的资源ID
        * </pre>
        *
        * <code>fixed32 res = 5;</code>
@@ -46699,7 +47631,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 6;</code>
@@ -46709,7 +47641,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 6;</code>
@@ -46721,7 +47653,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????????triggeruserval????
+       *参见该文件中的triggeruserval定义
        * </pre>
        *
        * <code>fixed32 triggeruserval = 6;</code>
@@ -46873,7 +47805,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 1;</code>
@@ -46882,7 +47814,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 2;</code>
@@ -46891,7 +47823,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -46900,7 +47832,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -46908,7 +47840,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getResList();
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -46916,7 +47848,7 @@ public final class InterfaceMain2 {
     int getResCount();
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -46925,7 +47857,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -46933,7 +47865,7 @@ public final class InterfaceMain2 {
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -46941,7 +47873,7 @@ public final class InterfaceMain2 {
     int getDeviceidCount();
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -46950,7 +47882,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????
+   *流播放
    *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
    *call
    *method: start
@@ -46972,7 +47904,7 @@ public final class InterfaceMain2 {
     private int srcdeviceid_;
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 1;</code>
@@ -46982,7 +47914,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 1;</code>
@@ -46993,7 +47925,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 srcdeviceid = 1;</code>
@@ -47007,7 +47939,7 @@ public final class InterfaceMain2 {
     private int subid_;
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 2;</code>
@@ -47017,7 +47949,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 2;</code>
@@ -47028,7 +47960,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 2;</code>
@@ -47042,7 +47974,7 @@ public final class InterfaceMain2 {
     private int triggeruserval_;
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -47052,7 +47984,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -47063,7 +47995,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *触发器标志
      * </pre>
      *
      * <code>fixed32 triggeruserval = 3;</code>
@@ -47077,7 +48009,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList res_;
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47088,7 +48020,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47098,7 +48030,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47114,7 +48046,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47126,7 +48058,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47137,7 +48069,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47150,7 +48082,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????,?0??????
+     *播放所用的资源,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 res = 4;</code>
@@ -47163,7 +48095,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47174,7 +48106,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47184,7 +48116,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47200,7 +48132,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47212,7 +48144,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47223,7 +48155,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47236,7 +48168,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????,?0??????
+     *通知的目标设备,为0表示全部
      * </pre>
      *
      * <code>repeated fixed32 deviceid = 5;</code>
@@ -47381,7 +48313,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????
+     *流播放
      *type:Pb_TYPE_MEET_INTERFACE_STREAMPLAY
      *call
      *method: start
@@ -47402,7 +48334,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 srcdeviceid = 1;</code>
@@ -47412,7 +48344,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 srcdeviceid = 1;</code>
@@ -47424,7 +48356,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 srcdeviceid = 1;</code>
@@ -47437,7 +48369,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *设备子通道
        * </pre>
        *
        * <code>fixed32 subid = 2;</code>
@@ -47447,7 +48379,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *设备子通道
        * </pre>
        *
        * <code>fixed32 subid = 2;</code>
@@ -47459,7 +48391,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *设备子通道
        * </pre>
        *
        * <code>fixed32 subid = 2;</code>
@@ -47472,7 +48404,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 3;</code>
@@ -47482,7 +48414,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 3;</code>
@@ -47494,7 +48426,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *触发器标志
        * </pre>
        *
        * <code>fixed32 triggeruserval = 3;</code>
@@ -47507,7 +48439,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47519,7 +48451,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47529,7 +48461,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47539,7 +48471,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47552,7 +48484,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47564,7 +48496,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47577,7 +48509,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????,?0??????
+       *播放所用的资源,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 res = 4;</code>
@@ -47590,7 +48522,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47602,7 +48534,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47612,7 +48544,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47622,7 +48554,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47635,7 +48567,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47647,7 +48579,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47660,7 +48592,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????,?0??????
+       *通知的目标设备,为0表示全部
        * </pre>
        *
        * <code>repeated fixed32 deviceid = 5;</code>
@@ -47840,7 +48772,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -47849,7 +48781,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -47858,7 +48790,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 3;</code>
@@ -47867,7 +48799,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????????
+   *查询流播放
    * </pre>
    *
    * Protobuf type {@code pbui_Item_MeetStreamPlayDetailInfo}
@@ -47883,7 +48815,7 @@ public final class InterfaceMain2 {
     private int trrigerid_;
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -47893,7 +48825,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -47904,7 +48836,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID
+     *触发器ID
      * </pre>
      *
      * <code>fixed32 trrigerid = 1;</code>
@@ -47918,7 +48850,7 @@ public final class InterfaceMain2 {
     private int deviceid_;
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -47928,7 +48860,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -47939,7 +48871,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???ID
+     *设备ID
      * </pre>
      *
      * <code>fixed32 deviceid = 2;</code>
@@ -47953,7 +48885,7 @@ public final class InterfaceMain2 {
     private int subid_;
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 3;</code>
@@ -47963,7 +48895,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 3;</code>
@@ -47974,7 +48906,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *设备子通道
      * </pre>
      *
      * <code>fixed32 subid = 3;</code>
@@ -48101,7 +49033,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *查询流播放
      * </pre>
      *
      * Protobuf type {@code pbui_Item_MeetStreamPlayDetailInfo}
@@ -48119,7 +49051,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 trrigerid = 1;</code>
@@ -48129,7 +49061,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 trrigerid = 1;</code>
@@ -48141,7 +49073,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID
+       *触发器ID
        * </pre>
        *
        * <code>fixed32 trrigerid = 1;</code>
@@ -48154,7 +49086,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -48164,7 +49096,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -48176,7 +49108,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???ID
+       *设备ID
        * </pre>
        *
        * <code>fixed32 deviceid = 2;</code>
@@ -48189,7 +49121,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *设备子通道
        * </pre>
        *
        * <code>fixed32 subid = 3;</code>
@@ -48199,7 +49131,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *设备子通道
        * </pre>
        *
        * <code>fixed32 subid = 3;</code>
@@ -48211,7 +49143,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *设备子通道
        * </pre>
        *
        * <code>fixed32 subid = 3;</code>
@@ -48817,7 +49749,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID ?0?????????????
+     *会议ID 为0表示查询当前会议
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -48826,7 +49758,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *??????????
+   *查询会议统计
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
    *method: query
@@ -48845,7 +49777,7 @@ public final class InterfaceMain2 {
     private int meetingid_;
     /**
      * <pre>
-     *????ID ?0?????????????
+     *会议ID 为0表示查询当前会议
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -48855,7 +49787,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ?0?????????????
+     *会议ID 为0表示查询当前会议
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -48866,7 +49798,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID ?0?????????????
+     *会议ID 为0表示查询当前会议
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -48979,7 +49911,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *查询会议统计
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
      *method: query
@@ -49000,7 +49932,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID ?0?????????????
+       *会议ID 为0表示查询当前会议
        * </pre>
        *
        * <code>fixed32 meetingid = 1;</code>
@@ -49010,7 +49942,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ?0?????????????
+       *会议ID 为0表示查询当前会议
        * </pre>
        *
        * <code>fixed32 meetingid = 1;</code>
@@ -49022,7 +49954,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID ?0?????????????
+       *会议ID 为0表示查询当前会议
        * </pre>
        *
        * <code>fixed32 meetingid = 1;</code>
@@ -49139,7 +50071,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????ID
+     *会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -49148,7 +50080,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *会议名称
      * </pre>
      *
      * <code>bytes meetname = 2;</code>
@@ -49157,7 +50089,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *流请求数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 3;</code>
@@ -49166,7 +50098,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 4;</code>
@@ -49175,7 +50107,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 5;</code>
@@ -49184,7 +50116,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 6;</code>
@@ -49193,7 +50125,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 7;</code>
@@ -49202,7 +50134,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 8;</code>
@@ -49211,7 +50143,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 9;</code>
@@ -49220,7 +50152,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 10;</code>
@@ -49229,7 +50161,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 11;</code>
@@ -49238,7 +50170,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 12;</code>
@@ -49247,7 +50179,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 13;</code>
@@ -49256,7 +50188,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????? ??
+     *创建时间 秒
      * </pre>
      *
      * <code>fixed64 addtime = 14;</code>
@@ -49265,7 +50197,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????????
+   *返回查询会议统计通知
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
    *method: notify
@@ -49285,7 +50217,7 @@ public final class InterfaceMain2 {
     private int meetingid_;
     /**
      * <pre>
-     *????ID
+     *会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -49295,7 +50227,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID
+     *会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -49306,7 +50238,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????ID
+     *会议ID
      * </pre>
      *
      * <code>fixed32 meetingid = 1;</code>
@@ -49320,7 +50252,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString meetname_;
     /**
      * <pre>
-     *????????
+     *会议名称
      * </pre>
      *
      * <code>bytes meetname = 2;</code>
@@ -49330,7 +50262,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *会议名称
      * </pre>
      *
      * <code>bytes meetname = 2;</code>
@@ -49344,7 +50276,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *会议名称
      * </pre>
      *
      * <code>bytes meetname = 2;</code>
@@ -49358,7 +50290,7 @@ public final class InterfaceMain2 {
     private int streamgetcount_;
     /**
      * <pre>
-     *????????
+     *流请求数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 3;</code>
@@ -49368,7 +50300,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *流请求数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 3;</code>
@@ -49379,7 +50311,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *流请求数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 3;</code>
@@ -49393,7 +50325,7 @@ public final class InterfaceMain2 {
     private int screengetcount_;
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 4;</code>
@@ -49403,7 +50335,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 4;</code>
@@ -49414,7 +50346,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 4;</code>
@@ -49428,7 +50360,7 @@ public final class InterfaceMain2 {
     private int filegetcount_;
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 5;</code>
@@ -49438,7 +50370,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 5;</code>
@@ -49449,7 +50381,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 5;</code>
@@ -49463,7 +50395,7 @@ public final class InterfaceMain2 {
     private int chatcount_;
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 6;</code>
@@ -49473,7 +50405,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 6;</code>
@@ -49484,7 +50416,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 6;</code>
@@ -49498,7 +50430,7 @@ public final class InterfaceMain2 {
     private int servicegetcount_;
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 7;</code>
@@ -49508,7 +50440,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 7;</code>
@@ -49519,7 +50451,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 7;</code>
@@ -49533,7 +50465,7 @@ public final class InterfaceMain2 {
     private int whiteboardopencount_;
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 8;</code>
@@ -49543,7 +50475,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 8;</code>
@@ -49554,7 +50486,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 8;</code>
@@ -49568,7 +50500,7 @@ public final class InterfaceMain2 {
     private int whiteboardusecount_;
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 9;</code>
@@ -49578,7 +50510,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 9;</code>
@@ -49589,7 +50521,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 9;</code>
@@ -49603,7 +50535,7 @@ public final class InterfaceMain2 {
     private int votecount_;
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 10;</code>
@@ -49613,7 +50545,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 10;</code>
@@ -49624,7 +50556,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 10;</code>
@@ -49638,7 +50570,7 @@ public final class InterfaceMain2 {
     private int electioncount_;
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 11;</code>
@@ -49648,7 +50580,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 11;</code>
@@ -49659,7 +50591,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 11;</code>
@@ -49673,7 +50605,7 @@ public final class InterfaceMain2 {
     private int questioncount_;
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 12;</code>
@@ -49683,7 +50615,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 12;</code>
@@ -49694,7 +50626,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 12;</code>
@@ -49708,7 +50640,7 @@ public final class InterfaceMain2 {
     private int bulletcount_;
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 13;</code>
@@ -49718,7 +50650,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 13;</code>
@@ -49729,7 +50661,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 13;</code>
@@ -49743,7 +50675,7 @@ public final class InterfaceMain2 {
     private long addtime_;
     /**
      * <pre>
-     *??????? ??
+     *创建时间 秒
      * </pre>
      *
      * <code>fixed64 addtime = 14;</code>
@@ -49753,7 +50685,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??
+     *创建时间 秒
      * </pre>
      *
      * <code>fixed64 addtime = 14;</code>
@@ -49764,7 +50696,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????? ??
+     *创建时间 秒
      * </pre>
      *
      * <code>fixed64 addtime = 14;</code>
@@ -49968,7 +50900,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????
+     *返回查询会议统计通知
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
      *method: notify
@@ -49989,7 +50921,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????ID
+       *会议ID
        * </pre>
        *
        * <code>fixed32 meetingid = 1;</code>
@@ -49999,7 +50931,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID
+       *会议ID
        * </pre>
        *
        * <code>fixed32 meetingid = 1;</code>
@@ -50011,7 +50943,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????ID
+       *会议ID
        * </pre>
        *
        * <code>fixed32 meetingid = 1;</code>
@@ -50024,7 +50956,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *会议名称
        * </pre>
        *
        * <code>bytes meetname = 2;</code>
@@ -50034,7 +50966,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *会议名称
        * </pre>
        *
        * <code>bytes meetname = 2;</code>
@@ -50046,7 +50978,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *会议名称
        * </pre>
        *
        * <code>bytes meetname = 2;</code>
@@ -50059,7 +50991,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *流请求数
        * </pre>
        *
        * <code>fixed32 streamgetcount = 3;</code>
@@ -50069,7 +51001,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *流请求数
        * </pre>
        *
        * <code>fixed32 streamgetcount = 3;</code>
@@ -50081,7 +51013,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *流请求数
        * </pre>
        *
        * <code>fixed32 streamgetcount = 3;</code>
@@ -50094,7 +51026,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *同屏请求数
        * </pre>
        *
        * <code>fixed32 screengetcount = 4;</code>
@@ -50104,7 +51036,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *同屏请求数
        * </pre>
        *
        * <code>fixed32 screengetcount = 4;</code>
@@ -50116,7 +51048,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *同屏请求数
        * </pre>
        *
        * <code>fixed32 screengetcount = 4;</code>
@@ -50129,7 +51061,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *文件请求数
        * </pre>
        *
        * <code>fixed32 filegetcount = 5;</code>
@@ -50139,7 +51071,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *文件请求数
        * </pre>
        *
        * <code>fixed32 filegetcount = 5;</code>
@@ -50151,7 +51083,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *文件请求数
        * </pre>
        *
        * <code>fixed32 filegetcount = 5;</code>
@@ -50164,7 +51096,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *交流次数
        * </pre>
        *
        * <code>fixed32 chatcount = 6;</code>
@@ -50174,7 +51106,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *交流次数
        * </pre>
        *
        * <code>fixed32 chatcount = 6;</code>
@@ -50186,7 +51118,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *交流次数
        * </pre>
        *
        * <code>fixed32 chatcount = 6;</code>
@@ -50199,7 +51131,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????
+       *服务请求数
        * </pre>
        *
        * <code>fixed32 servicegetcount = 7;</code>
@@ -50209,7 +51141,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *服务请求数
        * </pre>
        *
        * <code>fixed32 servicegetcount = 7;</code>
@@ -50221,7 +51153,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *服务请求数
        * </pre>
        *
        * <code>fixed32 servicegetcount = 7;</code>
@@ -50234,7 +51166,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *白板发起次数
        * </pre>
        *
        * <code>fixed32 whiteboardopencount = 8;</code>
@@ -50244,7 +51176,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *白板发起次数
        * </pre>
        *
        * <code>fixed32 whiteboardopencount = 8;</code>
@@ -50256,7 +51188,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *白板发起次数
        * </pre>
        *
        * <code>fixed32 whiteboardopencount = 8;</code>
@@ -50269,7 +51201,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????
+       *白板交流次数
        * </pre>
        *
        * <code>fixed32 whiteboardusecount = 9;</code>
@@ -50279,7 +51211,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板交流次数
        * </pre>
        *
        * <code>fixed32 whiteboardusecount = 9;</code>
@@ -50291,7 +51223,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板交流次数
        * </pre>
        *
        * <code>fixed32 whiteboardusecount = 9;</code>
@@ -50304,7 +51236,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *投票发起次数
        * </pre>
        *
        * <code>fixed32 votecount = 10;</code>
@@ -50314,7 +51246,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *投票发起次数
        * </pre>
        *
        * <code>fixed32 votecount = 10;</code>
@@ -50326,7 +51258,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *投票发起次数
        * </pre>
        *
        * <code>fixed32 votecount = 10;</code>
@@ -50339,7 +51271,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *选举发起次数
        * </pre>
        *
        * <code>fixed32 electioncount = 11;</code>
@@ -50349,7 +51281,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *选举发起次数
        * </pre>
        *
        * <code>fixed32 electioncount = 11;</code>
@@ -50361,7 +51293,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *选举发起次数
        * </pre>
        *
        * <code>fixed32 electioncount = 11;</code>
@@ -50374,7 +51306,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *问卷调查发起次数
        * </pre>
        *
        * <code>fixed32 questioncount = 12;</code>
@@ -50384,7 +51316,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *问卷调查发起次数
        * </pre>
        *
        * <code>fixed32 questioncount = 12;</code>
@@ -50396,7 +51328,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *问卷调查发起次数
        * </pre>
        *
        * <code>fixed32 questioncount = 12;</code>
@@ -50409,7 +51341,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????M?????
+       *公告发起次数
        * </pre>
        *
        * <code>fixed32 bulletcount = 13;</code>
@@ -50419,7 +51351,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????M?????
+       *公告发起次数
        * </pre>
        *
        * <code>fixed32 bulletcount = 13;</code>
@@ -50431,7 +51363,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????M?????
+       *公告发起次数
        * </pre>
        *
        * <code>fixed32 bulletcount = 13;</code>
@@ -50444,7 +51376,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????? ??
+       *创建时间 秒
        * </pre>
        *
        * <code>fixed64 addtime = 14;</code>
@@ -50454,7 +51386,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??
+       *创建时间 秒
        * </pre>
        *
        * <code>fixed64 addtime = 14;</code>
@@ -50466,7 +51398,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????? ??
+       *创建时间 秒
        * </pre>
        *
        * <code>fixed64 addtime = 14;</code>
@@ -50674,7 +51606,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? Pb_MeetStatisticFlag ????
+     *参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -50683,7 +51615,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 2;</code>
@@ -50692,7 +51624,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 startmonth = 3;</code>
@@ -50709,7 +51641,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 endmonth = 5;</code>
@@ -50718,7 +51650,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????????????????
+   *按时间段查询会议统计
    *call
    *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
    *method: ask
@@ -50737,7 +51669,7 @@ public final class InterfaceMain2 {
     private int quartertype_;
     /**
      * <pre>
-     *???? Pb_MeetStatisticFlag ????
+     *参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -50747,7 +51679,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? Pb_MeetStatisticFlag ????
+     *参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -50758,7 +51690,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? Pb_MeetStatisticFlag ????
+     *参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -50772,7 +51704,7 @@ public final class InterfaceMain2 {
     private int startyear_;
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 2;</code>
@@ -50782,7 +51714,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 2;</code>
@@ -50793,7 +51725,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 2;</code>
@@ -50807,7 +51739,7 @@ public final class InterfaceMain2 {
     private int startmonth_;
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 startmonth = 3;</code>
@@ -50817,7 +51749,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 startmonth = 3;</code>
@@ -50828,7 +51760,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 startmonth = 3;</code>
@@ -50874,7 +51806,7 @@ public final class InterfaceMain2 {
     private int endmonth_;
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 endmonth = 5;</code>
@@ -50884,7 +51816,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 endmonth = 5;</code>
@@ -50895,7 +51827,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *&#47;/????????????
+     *&#47;/按月查询才有效
      * </pre>
      *
      * <code>fixed32 endmonth = 5;</code>
@@ -51036,7 +51968,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????????
+     *按时间段查询会议统计
      *call
      *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
      *method: ask
@@ -51057,7 +51989,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? Pb_MeetStatisticFlag ????
+       *参见 Pb_MeetStatisticFlag 定义
        * </pre>
        *
        * <code>fixed32 quartertype = 1;</code>
@@ -51067,7 +51999,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? Pb_MeetStatisticFlag ????
+       *参见 Pb_MeetStatisticFlag 定义
        * </pre>
        *
        * <code>fixed32 quartertype = 1;</code>
@@ -51079,7 +52011,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? Pb_MeetStatisticFlag ????
+       *参见 Pb_MeetStatisticFlag 定义
        * </pre>
        *
        * <code>fixed32 quartertype = 1;</code>
@@ -51092,7 +52024,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *统计时间段
        * </pre>
        *
        * <code>fixed32 startyear = 2;</code>
@@ -51102,7 +52034,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *统计时间段
        * </pre>
        *
        * <code>fixed32 startyear = 2;</code>
@@ -51114,7 +52046,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *统计时间段
        * </pre>
        *
        * <code>fixed32 startyear = 2;</code>
@@ -51127,7 +52059,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *&#47;/????????????
+       *&#47;/按月查询才有效
        * </pre>
        *
        * <code>fixed32 startmonth = 3;</code>
@@ -51137,7 +52069,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *&#47;/????????????
+       *&#47;/按月查询才有效
        * </pre>
        *
        * <code>fixed32 startmonth = 3;</code>
@@ -51149,7 +52081,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *&#47;/????????????
+       *&#47;/按月查询才有效
        * </pre>
        *
        * <code>fixed32 startmonth = 3;</code>
@@ -51194,7 +52126,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *&#47;/????????????
+       *&#47;/按月查询才有效
        * </pre>
        *
        * <code>fixed32 endmonth = 5;</code>
@@ -51204,7 +52136,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *&#47;/????????????
+       *&#47;/按月查询才有效
        * </pre>
        *
        * <code>fixed32 endmonth = 5;</code>
@@ -51216,7 +52148,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *&#47;/????????????
+       *&#47;/按月查询才有效
        * </pre>
        *
        * <code>fixed32 endmonth = 5;</code>
@@ -51361,7 +52293,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 1;</code>
@@ -51394,7 +52326,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *总会议数
      * </pre>
      *
      * <code>fixed32 meetingcount = 5;</code>
@@ -51403,7 +52335,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *总计数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 6;</code>
@@ -51412,7 +52344,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 7;</code>
@@ -51421,7 +52353,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 8;</code>
@@ -51430,7 +52362,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 9;</code>
@@ -51439,7 +52371,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 10;</code>
@@ -51448,7 +52380,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 11;</code>
@@ -51457,7 +52389,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 12;</code>
@@ -51466,7 +52398,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 13;</code>
@@ -51475,7 +52407,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 14;</code>
@@ -51484,7 +52416,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 15;</code>
@@ -51493,7 +52425,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 16;</code>
@@ -51514,7 +52446,7 @@ public final class InterfaceMain2 {
     private int startyear_;
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 1;</code>
@@ -51524,7 +52456,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 1;</code>
@@ -51535,7 +52467,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *统计时间段
      * </pre>
      *
      * <code>fixed32 startyear = 1;</code>
@@ -51645,7 +52577,7 @@ public final class InterfaceMain2 {
     private int meetingcount_;
     /**
      * <pre>
-     *???????
+     *总会议数
      * </pre>
      *
      * <code>fixed32 meetingcount = 5;</code>
@@ -51655,7 +52587,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *总会议数
      * </pre>
      *
      * <code>fixed32 meetingcount = 5;</code>
@@ -51666,7 +52598,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *总会议数
      * </pre>
      *
      * <code>fixed32 meetingcount = 5;</code>
@@ -51680,7 +52612,7 @@ public final class InterfaceMain2 {
     private int streamgetcount_;
     /**
      * <pre>
-     *?????
+     *总计数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 6;</code>
@@ -51690,7 +52622,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *总计数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 6;</code>
@@ -51701,7 +52633,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????
+     *总计数
      * </pre>
      *
      * <code>fixed32 streamgetcount = 6;</code>
@@ -51715,7 +52647,7 @@ public final class InterfaceMain2 {
     private int screengetcount_;
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 7;</code>
@@ -51725,7 +52657,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 7;</code>
@@ -51736,7 +52668,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *同屏请求数
      * </pre>
      *
      * <code>fixed32 screengetcount = 7;</code>
@@ -51750,7 +52682,7 @@ public final class InterfaceMain2 {
     private int filegetcount_;
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 8;</code>
@@ -51760,7 +52692,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 8;</code>
@@ -51771,7 +52703,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *文件请求数
      * </pre>
      *
      * <code>fixed32 filegetcount = 8;</code>
@@ -51785,7 +52717,7 @@ public final class InterfaceMain2 {
     private int chatcount_;
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 9;</code>
@@ -51795,7 +52727,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 9;</code>
@@ -51806,7 +52738,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *交流次数
      * </pre>
      *
      * <code>fixed32 chatcount = 9;</code>
@@ -51820,7 +52752,7 @@ public final class InterfaceMain2 {
     private int servicegetcount_;
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 10;</code>
@@ -51830,7 +52762,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 10;</code>
@@ -51841,7 +52773,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *服务请求数
      * </pre>
      *
      * <code>fixed32 servicegetcount = 10;</code>
@@ -51855,7 +52787,7 @@ public final class InterfaceMain2 {
     private int whiteboardopencount_;
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 11;</code>
@@ -51865,7 +52797,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 11;</code>
@@ -51876,7 +52808,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *白板发起次数
      * </pre>
      *
      * <code>fixed32 whiteboardopencount = 11;</code>
@@ -51890,7 +52822,7 @@ public final class InterfaceMain2 {
     private int whiteboardusecount_;
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 12;</code>
@@ -51900,7 +52832,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 12;</code>
@@ -51911,7 +52843,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????????
+     *白板交流次数
      * </pre>
      *
      * <code>fixed32 whiteboardusecount = 12;</code>
@@ -51925,7 +52857,7 @@ public final class InterfaceMain2 {
     private int votecount_;
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 13;</code>
@@ -51935,7 +52867,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 13;</code>
@@ -51946,7 +52878,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *投票发起次数
      * </pre>
      *
      * <code>fixed32 votecount = 13;</code>
@@ -51960,7 +52892,7 @@ public final class InterfaceMain2 {
     private int electioncount_;
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 14;</code>
@@ -51970,7 +52902,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 14;</code>
@@ -51981,7 +52913,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *?????????
+     *选举发起次数
      * </pre>
      *
      * <code>fixed32 electioncount = 14;</code>
@@ -51995,7 +52927,7 @@ public final class InterfaceMain2 {
     private int questioncount_;
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 15;</code>
@@ -52005,7 +52937,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 15;</code>
@@ -52016,7 +52948,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????????
+     *问卷调查发起次数
      * </pre>
      *
      * <code>fixed32 questioncount = 15;</code>
@@ -52030,7 +52962,7 @@ public final class InterfaceMain2 {
     private int bulletcount_;
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 16;</code>
@@ -52040,7 +52972,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 16;</code>
@@ -52051,7 +52983,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????M?????
+     *公告发起次数
      * </pre>
      *
      * <code>fixed32 bulletcount = 16;</code>
@@ -52283,7 +53215,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *统计时间段
        * </pre>
        *
        * <code>fixed32 startyear = 1;</code>
@@ -52293,7 +53225,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *统计时间段
        * </pre>
        *
        * <code>fixed32 startyear = 1;</code>
@@ -52305,7 +53237,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *统计时间段
        * </pre>
        *
        * <code>fixed32 startyear = 1;</code>
@@ -52414,7 +53346,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *总会议数
        * </pre>
        *
        * <code>fixed32 meetingcount = 5;</code>
@@ -52424,7 +53356,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *总会议数
        * </pre>
        *
        * <code>fixed32 meetingcount = 5;</code>
@@ -52436,7 +53368,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *总会议数
        * </pre>
        *
        * <code>fixed32 meetingcount = 5;</code>
@@ -52449,7 +53381,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????
+       *总计数
        * </pre>
        *
        * <code>fixed32 streamgetcount = 6;</code>
@@ -52459,7 +53391,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *总计数
        * </pre>
        *
        * <code>fixed32 streamgetcount = 6;</code>
@@ -52471,7 +53403,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????
+       *总计数
        * </pre>
        *
        * <code>fixed32 streamgetcount = 6;</code>
@@ -52484,7 +53416,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *同屏请求数
        * </pre>
        *
        * <code>fixed32 screengetcount = 7;</code>
@@ -52494,7 +53426,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *同屏请求数
        * </pre>
        *
        * <code>fixed32 screengetcount = 7;</code>
@@ -52506,7 +53438,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *同屏请求数
        * </pre>
        *
        * <code>fixed32 screengetcount = 7;</code>
@@ -52519,7 +53451,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *文件请求数
        * </pre>
        *
        * <code>fixed32 filegetcount = 8;</code>
@@ -52529,7 +53461,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *文件请求数
        * </pre>
        *
        * <code>fixed32 filegetcount = 8;</code>
@@ -52541,7 +53473,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *文件请求数
        * </pre>
        *
        * <code>fixed32 filegetcount = 8;</code>
@@ -52554,7 +53486,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *交流次数
        * </pre>
        *
        * <code>fixed32 chatcount = 9;</code>
@@ -52564,7 +53496,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *交流次数
        * </pre>
        *
        * <code>fixed32 chatcount = 9;</code>
@@ -52576,7 +53508,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *交流次数
        * </pre>
        *
        * <code>fixed32 chatcount = 9;</code>
@@ -52589,7 +53521,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????
+       *服务请求数
        * </pre>
        *
        * <code>fixed32 servicegetcount = 10;</code>
@@ -52599,7 +53531,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *服务请求数
        * </pre>
        *
        * <code>fixed32 servicegetcount = 10;</code>
@@ -52611,7 +53543,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *服务请求数
        * </pre>
        *
        * <code>fixed32 servicegetcount = 10;</code>
@@ -52624,7 +53556,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *白板发起次数
        * </pre>
        *
        * <code>fixed32 whiteboardopencount = 11;</code>
@@ -52634,7 +53566,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *白板发起次数
        * </pre>
        *
        * <code>fixed32 whiteboardopencount = 11;</code>
@@ -52646,7 +53578,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *白板发起次数
        * </pre>
        *
        * <code>fixed32 whiteboardopencount = 11;</code>
@@ -52659,7 +53591,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????????
+       *白板交流次数
        * </pre>
        *
        * <code>fixed32 whiteboardusecount = 12;</code>
@@ -52669,7 +53601,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板交流次数
        * </pre>
        *
        * <code>fixed32 whiteboardusecount = 12;</code>
@@ -52681,7 +53613,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????????
+       *白板交流次数
        * </pre>
        *
        * <code>fixed32 whiteboardusecount = 12;</code>
@@ -52694,7 +53626,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *投票发起次数
        * </pre>
        *
        * <code>fixed32 votecount = 13;</code>
@@ -52704,7 +53636,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *投票发起次数
        * </pre>
        *
        * <code>fixed32 votecount = 13;</code>
@@ -52716,7 +53648,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *投票发起次数
        * </pre>
        *
        * <code>fixed32 votecount = 13;</code>
@@ -52729,7 +53661,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *?????????
+       *选举发起次数
        * </pre>
        *
        * <code>fixed32 electioncount = 14;</code>
@@ -52739,7 +53671,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *选举发起次数
        * </pre>
        *
        * <code>fixed32 electioncount = 14;</code>
@@ -52751,7 +53683,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *?????????
+       *选举发起次数
        * </pre>
        *
        * <code>fixed32 electioncount = 14;</code>
@@ -52764,7 +53696,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????????
+       *问卷调查发起次数
        * </pre>
        *
        * <code>fixed32 questioncount = 15;</code>
@@ -52774,7 +53706,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *问卷调查发起次数
        * </pre>
        *
        * <code>fixed32 questioncount = 15;</code>
@@ -52786,7 +53718,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????????
+       *问卷调查发起次数
        * </pre>
        *
        * <code>fixed32 questioncount = 15;</code>
@@ -52799,7 +53731,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????M?????
+       *公告发起次数
        * </pre>
        *
        * <code>fixed32 bulletcount = 16;</code>
@@ -52809,7 +53741,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????M?????
+       *公告发起次数
        * </pre>
        *
        * <code>fixed32 bulletcount = 16;</code>
@@ -52821,7 +53753,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????M?????
+       *公告发起次数
        * </pre>
        *
        * <code>fixed32 bulletcount = 16;</code>
@@ -53043,7 +53975,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *&#47;/???? Pb_MeetStatisticFlag ????
+     *&#47;/参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -53066,7 +53998,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????????????????
+   *返回按时间段查询会议统计
    *callback
    *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
    *method: ask
@@ -53087,7 +54019,7 @@ public final class InterfaceMain2 {
     private int quartertype_;
     /**
      * <pre>
-     *&#47;/???? Pb_MeetStatisticFlag ????
+     *&#47;/参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -53097,7 +54029,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *&#47;/???? Pb_MeetStatisticFlag ????
+     *&#47;/参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -53108,7 +54040,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *&#47;/???? Pb_MeetStatisticFlag ????
+     *&#47;/参见 Pb_MeetStatisticFlag 定义
      * </pre>
      *
      * <code>fixed32 quartertype = 1;</code>
@@ -53348,7 +54280,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????????????????
+     *返回按时间段查询会议统计
      *callback
      *type:Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC
      *method: ask
@@ -53369,7 +54301,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *&#47;/???? Pb_MeetStatisticFlag ????
+       *&#47;/参见 Pb_MeetStatisticFlag 定义
        * </pre>
        *
        * <code>fixed32 quartertype = 1;</code>
@@ -53379,7 +54311,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *&#47;/???? Pb_MeetStatisticFlag ????
+       *&#47;/参见 Pb_MeetStatisticFlag 定义
        * </pre>
        *
        * <code>fixed32 quartertype = 1;</code>
@@ -53391,7 +54323,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *&#47;/???? Pb_MeetStatisticFlag ????
+       *&#47;/参见 Pb_MeetStatisticFlag 定义
        * </pre>
        *
        * <code>fixed32 quartertype = 1;</code>
@@ -53617,7 +54549,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -53626,7 +54558,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -53635,7 +54567,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 3;</code>
@@ -53644,7 +54576,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????rgba???
+     *字体rgba颜色
      * </pre>
      *
      * <code>fixed32 color = 4;</code>
@@ -53653,7 +54585,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ???? Pb_FontAlignFlag
+     *对齐 参见 Pb_FontAlignFlag
      * </pre>
      *
      * <code>fixed32 align = 5;</code>
@@ -53662,7 +54594,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????? Pb_MeetFaceFontFlag
+     *字体属性 Pb_MeetFaceFontFlag
      * </pre>
      *
      * <code>fixed32 fontflag = 6;</code>
@@ -53671,7 +54603,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 7;</code>
@@ -53680,7 +54612,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ?????x  (x * 100 / width)
+     *坐标 左上角x  (x * 100 / width)
      * </pre>
      *
      * <code>float lx = 8;</code>
@@ -53689,7 +54621,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ?????y  (y * 100 / height)
+     *坐标 左上角y  (y * 100 / height)
      * </pre>
      *
      * <code>float ly = 9;</code>
@@ -53698,7 +54630,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ?????x
+     *坐标 右下角x
      * </pre>
      *
      * <code>float bx = 10;</code>
@@ -53707,7 +54639,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???? ?????y
+     *坐标 右下角y
      * </pre>
      *
      * <code>float by = 11;</code>
@@ -53716,7 +54648,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *?????
+   *文本项
    * </pre>
    *
    * Protobuf type {@code pbui_Item_FaceTextItemInfo}
@@ -53733,7 +54665,7 @@ public final class InterfaceMain2 {
     private int faceid_;
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -53743,7 +54675,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -53754,7 +54686,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -53768,7 +54700,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -53778,7 +54710,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -53789,7 +54721,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -53803,7 +54735,7 @@ public final class InterfaceMain2 {
     private int fontsize_;
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 3;</code>
@@ -53813,7 +54745,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 3;</code>
@@ -53824,7 +54756,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????
+     *字体大小
      * </pre>
      *
      * <code>fixed32 fontsize = 3;</code>
@@ -53838,7 +54770,7 @@ public final class InterfaceMain2 {
     private int color_;
     /**
      * <pre>
-     *????rgba???
+     *字体rgba颜色
      * </pre>
      *
      * <code>fixed32 color = 4;</code>
@@ -53848,7 +54780,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????rgba???
+     *字体rgba颜色
      * </pre>
      *
      * <code>fixed32 color = 4;</code>
@@ -53859,7 +54791,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????rgba???
+     *字体rgba颜色
      * </pre>
      *
      * <code>fixed32 color = 4;</code>
@@ -53873,7 +54805,7 @@ public final class InterfaceMain2 {
     private int align_;
     /**
      * <pre>
-     *???? ???? Pb_FontAlignFlag
+     *对齐 参见 Pb_FontAlignFlag
      * </pre>
      *
      * <code>fixed32 align = 5;</code>
@@ -53883,7 +54815,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ???? Pb_FontAlignFlag
+     *对齐 参见 Pb_FontAlignFlag
      * </pre>
      *
      * <code>fixed32 align = 5;</code>
@@ -53894,7 +54826,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ???? Pb_FontAlignFlag
+     *对齐 参见 Pb_FontAlignFlag
      * </pre>
      *
      * <code>fixed32 align = 5;</code>
@@ -53908,7 +54840,7 @@ public final class InterfaceMain2 {
     private int fontflag_;
     /**
      * <pre>
-     *???????? Pb_MeetFaceFontFlag
+     *字体属性 Pb_MeetFaceFontFlag
      * </pre>
      *
      * <code>fixed32 fontflag = 6;</code>
@@ -53918,7 +54850,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? Pb_MeetFaceFontFlag
+     *字体属性 Pb_MeetFaceFontFlag
      * </pre>
      *
      * <code>fixed32 fontflag = 6;</code>
@@ -53929,7 +54861,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???????? Pb_MeetFaceFontFlag
+     *字体属性 Pb_MeetFaceFontFlag
      * </pre>
      *
      * <code>fixed32 fontflag = 6;</code>
@@ -53943,7 +54875,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString fontname_;
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 7;</code>
@@ -53953,7 +54885,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 7;</code>
@@ -53967,7 +54899,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????????
+     *字体名称
      * </pre>
      *
      * <code>bytes fontname = 7;</code>
@@ -53981,7 +54913,7 @@ public final class InterfaceMain2 {
     private float lx_;
     /**
      * <pre>
-     *???? ?????x  (x * 100 / width)
+     *坐标 左上角x  (x * 100 / width)
      * </pre>
      *
      * <code>float lx = 8;</code>
@@ -53991,7 +54923,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????x  (x * 100 / width)
+     *坐标 左上角x  (x * 100 / width)
      * </pre>
      *
      * <code>float lx = 8;</code>
@@ -54002,7 +54934,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????x  (x * 100 / width)
+     *坐标 左上角x  (x * 100 / width)
      * </pre>
      *
      * <code>float lx = 8;</code>
@@ -54016,7 +54948,7 @@ public final class InterfaceMain2 {
     private float ly_;
     /**
      * <pre>
-     *???? ?????y  (y * 100 / height)
+     *坐标 左上角y  (y * 100 / height)
      * </pre>
      *
      * <code>float ly = 9;</code>
@@ -54026,7 +54958,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????y  (y * 100 / height)
+     *坐标 左上角y  (y * 100 / height)
      * </pre>
      *
      * <code>float ly = 9;</code>
@@ -54037,7 +54969,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????y  (y * 100 / height)
+     *坐标 左上角y  (y * 100 / height)
      * </pre>
      *
      * <code>float ly = 9;</code>
@@ -54051,7 +54983,7 @@ public final class InterfaceMain2 {
     private float bx_;
     /**
      * <pre>
-     *???? ?????x
+     *坐标 右下角x
      * </pre>
      *
      * <code>float bx = 10;</code>
@@ -54061,7 +54993,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????x
+     *坐标 右下角x
      * </pre>
      *
      * <code>float bx = 10;</code>
@@ -54072,7 +55004,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????x
+     *坐标 右下角x
      * </pre>
      *
      * <code>float bx = 10;</code>
@@ -54086,7 +55018,7 @@ public final class InterfaceMain2 {
     private float by_;
     /**
      * <pre>
-     *???? ?????y
+     *坐标 右下角y
      * </pre>
      *
      * <code>float by = 11;</code>
@@ -54096,7 +55028,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????y
+     *坐标 右下角y
      * </pre>
      *
      * <code>float by = 11;</code>
@@ -54107,7 +55039,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???? ?????y
+     *坐标 右下角y
      * </pre>
      *
      * <code>float by = 11;</code>
@@ -54290,7 +55222,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *?????
+     *文本项
      * </pre>
      *
      * Protobuf type {@code pbui_Item_FaceTextItemInfo}
@@ -54308,7 +55240,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -54318,7 +55250,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -54330,7 +55262,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -54343,7 +55275,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -54353,7 +55285,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -54365,7 +55297,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -54378,7 +55310,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????
+       *字体大小
        * </pre>
        *
        * <code>fixed32 fontsize = 3;</code>
@@ -54388,7 +55320,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体大小
        * </pre>
        *
        * <code>fixed32 fontsize = 3;</code>
@@ -54400,7 +55332,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????
+       *字体大小
        * </pre>
        *
        * <code>fixed32 fontsize = 3;</code>
@@ -54413,7 +55345,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????rgba???
+       *字体rgba颜色
        * </pre>
        *
        * <code>fixed32 color = 4;</code>
@@ -54423,7 +55355,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????rgba???
+       *字体rgba颜色
        * </pre>
        *
        * <code>fixed32 color = 4;</code>
@@ -54435,7 +55367,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????rgba???
+       *字体rgba颜色
        * </pre>
        *
        * <code>fixed32 color = 4;</code>
@@ -54448,7 +55380,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ???? Pb_FontAlignFlag
+       *对齐 参见 Pb_FontAlignFlag
        * </pre>
        *
        * <code>fixed32 align = 5;</code>
@@ -54458,7 +55390,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ???? Pb_FontAlignFlag
+       *对齐 参见 Pb_FontAlignFlag
        * </pre>
        *
        * <code>fixed32 align = 5;</code>
@@ -54470,7 +55402,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ???? Pb_FontAlignFlag
+       *对齐 参见 Pb_FontAlignFlag
        * </pre>
        *
        * <code>fixed32 align = 5;</code>
@@ -54483,7 +55415,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???????? Pb_MeetFaceFontFlag
+       *字体属性 Pb_MeetFaceFontFlag
        * </pre>
        *
        * <code>fixed32 fontflag = 6;</code>
@@ -54493,7 +55425,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? Pb_MeetFaceFontFlag
+       *字体属性 Pb_MeetFaceFontFlag
        * </pre>
        *
        * <code>fixed32 fontflag = 6;</code>
@@ -54505,7 +55437,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???????? Pb_MeetFaceFontFlag
+       *字体属性 Pb_MeetFaceFontFlag
        * </pre>
        *
        * <code>fixed32 fontflag = 6;</code>
@@ -54518,7 +55450,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????????
+       *字体名称
        * </pre>
        *
        * <code>bytes fontname = 7;</code>
@@ -54528,7 +55460,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *字体名称
        * </pre>
        *
        * <code>bytes fontname = 7;</code>
@@ -54540,7 +55472,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????????
+       *字体名称
        * </pre>
        *
        * <code>bytes fontname = 7;</code>
@@ -54553,7 +55485,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ?????x  (x * 100 / width)
+       *坐标 左上角x  (x * 100 / width)
        * </pre>
        *
        * <code>float lx = 8;</code>
@@ -54563,7 +55495,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????x  (x * 100 / width)
+       *坐标 左上角x  (x * 100 / width)
        * </pre>
        *
        * <code>float lx = 8;</code>
@@ -54575,7 +55507,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????x  (x * 100 / width)
+       *坐标 左上角x  (x * 100 / width)
        * </pre>
        *
        * <code>float lx = 8;</code>
@@ -54588,7 +55520,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ?????y  (y * 100 / height)
+       *坐标 左上角y  (y * 100 / height)
        * </pre>
        *
        * <code>float ly = 9;</code>
@@ -54598,7 +55530,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????y  (y * 100 / height)
+       *坐标 左上角y  (y * 100 / height)
        * </pre>
        *
        * <code>float ly = 9;</code>
@@ -54610,7 +55542,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????y  (y * 100 / height)
+       *坐标 左上角y  (y * 100 / height)
        * </pre>
        *
        * <code>float ly = 9;</code>
@@ -54623,7 +55555,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ?????x
+       *坐标 右下角x
        * </pre>
        *
        * <code>float bx = 10;</code>
@@ -54633,7 +55565,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????x
+       *坐标 右下角x
        * </pre>
        *
        * <code>float bx = 10;</code>
@@ -54645,7 +55577,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????x
+       *坐标 右下角x
        * </pre>
        *
        * <code>float bx = 10;</code>
@@ -54658,7 +55590,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???? ?????y
+       *坐标 右下角y
        * </pre>
        *
        * <code>float by = 11;</code>
@@ -54668,7 +55600,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????y
+       *坐标 右下角y
        * </pre>
        *
        * <code>float by = 11;</code>
@@ -54680,7 +55612,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???? ?????y
+       *坐标 右下角y
        * </pre>
        *
        * <code>float by = 11;</code>
@@ -54867,7 +55799,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -54876,7 +55808,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -54885,7 +55817,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???
+     *项值
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -54894,7 +55826,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *????
+   *图片项
    * </pre>
    *
    * Protobuf type {@code pbui_Item_FacePictureItemInfo}
@@ -54910,7 +55842,7 @@ public final class InterfaceMain2 {
     private int faceid_;
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -54920,7 +55852,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -54931,7 +55863,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -54945,7 +55877,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -54955,7 +55887,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -54966,7 +55898,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -54980,7 +55912,7 @@ public final class InterfaceMain2 {
     private int mediaid_;
     /**
      * <pre>
-     *???
+     *项值
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -54990,7 +55922,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *项值
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -55001,7 +55933,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *项值
      * </pre>
      *
      * <code>fixed32 mediaid = 3;</code>
@@ -55128,7 +56060,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????
+     *图片项
      * </pre>
      *
      * Protobuf type {@code pbui_Item_FacePictureItemInfo}
@@ -55146,7 +56078,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -55156,7 +56088,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -55168,7 +56100,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -55181,7 +56113,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -55191,7 +56123,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -55203,7 +56135,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -55216,7 +56148,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???
+       *项值
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -55226,7 +56158,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *项值
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -55238,7 +56170,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *项值
        * </pre>
        *
        * <code>fixed32 mediaid = 3;</code>
@@ -55369,7 +56301,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -55378,7 +56310,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -55387,7 +56319,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???
+     *文本
      * </pre>
      *
      * <code>bytes text = 3;</code>
@@ -55396,7 +56328,7 @@ public final class InterfaceMain2 {
   }
   /**
    * <pre>
-   *???????
+   *纯文本项
    * </pre>
    *
    * Protobuf type {@code pbui_Item_FaceOnlyTextItemInfo}
@@ -55413,7 +56345,7 @@ public final class InterfaceMain2 {
     private int faceid_;
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -55423,7 +56355,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -55434,7 +56366,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *??????ID ????Pb_MeetFaceID
+     *界面项ID 参见Pb_MeetFaceID
      * </pre>
      *
      * <code>fixed32 faceid = 1;</code>
@@ -55448,7 +56380,7 @@ public final class InterfaceMain2 {
     private int flag_;
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -55458,7 +56390,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -55469,7 +56401,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *????? ????Pb_MeetFaceFlag
+     *属性值 参见Pb_MeetFaceFlag
      * </pre>
      *
      * <code>fixed32 flag = 2;</code>
@@ -55483,7 +56415,7 @@ public final class InterfaceMain2 {
     private com.google.protobuf.ByteString text_;
     /**
      * <pre>
-     *???
+     *文本
      * </pre>
      *
      * <code>bytes text = 3;</code>
@@ -55493,7 +56425,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *文本
      * </pre>
      *
      * <code>bytes text = 3;</code>
@@ -55507,7 +56439,7 @@ public final class InterfaceMain2 {
     }
     /**
      * <pre>
-     *???
+     *文本
      * </pre>
      *
      * <code>bytes text = 3;</code>
@@ -55634,7 +56566,7 @@ public final class InterfaceMain2 {
 
     /**
      * <pre>
-     *???????
+     *纯文本项
      * </pre>
      *
      * Protobuf type {@code pbui_Item_FaceOnlyTextItemInfo}
@@ -55652,7 +56584,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -55662,7 +56594,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -55674,7 +56606,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *??????ID ????Pb_MeetFaceID
+       *界面项ID 参见Pb_MeetFaceID
        * </pre>
        *
        * <code>fixed32 faceid = 1;</code>
@@ -55687,7 +56619,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -55697,7 +56629,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -55709,7 +56641,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *????? ????Pb_MeetFaceFlag
+       *属性值 参见Pb_MeetFaceFlag
        * </pre>
        *
        * <code>fixed32 flag = 2;</code>
@@ -55722,7 +56654,7 @@ public final class InterfaceMain2 {
 
       /**
        * <pre>
-       *???
+       *文本
        * </pre>
        *
        * <code>bytes text = 3;</code>
@@ -55732,7 +56664,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *文本
        * </pre>
        *
        * <code>bytes text = 3;</code>
@@ -55744,7 +56676,7 @@ public final class InterfaceMain2 {
       }
       /**
        * <pre>
-       *???
+       *文本
        * </pre>
        *
        * <code>bytes text = 3;</code>

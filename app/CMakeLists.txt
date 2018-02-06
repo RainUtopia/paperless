@@ -58,6 +58,9 @@ set_target_properties(meetAnd PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/s
 add_library(SDL2 SHARED IMPORTED)
 set_target_properties(SDL2 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libSDL2.so)
 
+add_library(main SHARED IMPORTED)
+set_target_properties(main PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libmain.so)
+
 add_library(swresample-2 SHARED IMPORTED)
 set_target_properties(swresample-2 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libswresample-2.so)
 
@@ -81,6 +84,7 @@ target_link_libraries(
                        swresample-2
                        swscale-4
                        SDL2
+                       main
                        NetClient
                        Device-OpenSles
                        Codec

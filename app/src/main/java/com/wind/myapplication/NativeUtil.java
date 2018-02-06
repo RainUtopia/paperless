@@ -52,6 +52,7 @@ import static com.pa.paperless.utils.MyUtils.getStb;
  */
 
 public class NativeUtil {
+
     static {
         System.loadLibrary("avcodec-57");
         System.loadLibrary("avdevice-57");
@@ -62,6 +63,7 @@ public class NativeUtil {
         System.loadLibrary("swresample-2");
         System.loadLibrary("swscale-4");
         System.loadLibrary("SDL2");
+        System.loadLibrary("main");
         System.loadLibrary("NetClient");
         System.loadLibrary("ExecProc");
         System.loadLibrary("Device-OpenSles");
@@ -112,6 +114,20 @@ public class NativeUtil {
         }
         android.util.Log.i("NativeUtil", "javaInitSys:finish!");
         return bret;
+    }
+
+    public boolean initvideores() throws InvalidProtocolBufferException {
+        InterfaceMain2.pbui_Type_MeetInitPlayRes.Builder builder = InterfaceMain2.pbui_Type_MeetInitPlayRes.newBuilder();
+        builder.setRes(0);
+        builder.setY(0);
+        builder.setX(0);
+        builder.setH(1080);
+        builder.setW(1920);
+        InterfaceMain2.pbui_Type_MeetInitPlayRes build = builder.build();
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_INIT.getNumber(), build.toByteArray());
+
+        Log.e("MyLog", "NativeUtil.initvideores:  初始化资源 --->>> ");
+        return true;
     }
 
     //  6.查询设备信息
@@ -3118,8 +3134,9 @@ public class NativeUtil {
         builder.addRes(resVal);
         builder.addDeviceid(devid);
         InterfaceMain2.pbui_Type_MeetDoStopResWork build = builder.build();
+        Log.e("MyLog", "NativeUtil.stopResourceOperate:  248.停止资源操作 111 --->>> ");
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STOPPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber(), build.toByteArray());
-        Log.e("MyLog", "NativeUtil.stopResourceOperate:  248.停止资源操作 --->>> ");
+        Log.e("MyLog", "NativeUtil.stopResourceOperate:  248.停止资源操作 222 --->>> ");
         return true;
     }
 

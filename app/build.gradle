@@ -32,7 +32,6 @@ android {
 
     sourceSets {
         main {
-            //使用绝对路径
             jniLibs.srcDirs = ['E:\\wuzihua\\Paperless\\app\\src\\main\\jniLibs']
         }
     }

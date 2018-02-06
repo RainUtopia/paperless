@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 import com.pa.paperless.R;
@@ -46,7 +48,16 @@ import static com.pa.paperless.utils.FileUtil.getMIMEType;
 
 public class MyUtils {
 
+    public static String[] getArguments()
+    {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+"back_main.bmp";
+        return new String[]{path};
+    }
 
+    /**
+     * 截屏 不能截取状态栏
+     * @param v 截取传入的控件父控件
+     */
     public static void ScreenShot(View v) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
         String name = "/sdcard/" + sdf.format(new Date()) + ".png";
@@ -59,12 +70,22 @@ public class MyUtils {
                 FileOutputStream fos = new FileOutputStream(name);
                 drawingCache.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
+                showMsg(v.getContext(),"截图成功");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         } else {
             Log.e("MyLog", "MyUtils.ScreenShot:  drawingCache 为空 --->>> ");
         }
+    }
+
+    /**
+     * 吐丝
+     * @param c
+     * @param msg
+     */
+    public static void showMsg(Context c,String msg){
+        Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**

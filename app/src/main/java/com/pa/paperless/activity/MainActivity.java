@@ -39,11 +39,20 @@ import com.zhy.android.percent.support.PercentLinearLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.libsdl.app.SDLActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.libsdl.app.SDLActivity.nativeInit;
 
+/**
+ * 必须先修改 app/build.gradle中的 jniLibs的路径
+ *
+ *
+ *
+ *
+ */
 public class MainActivity extends BaseActivity implements View.OnClickListener, CallListener {
 
     public static TextView mCompanyName;
@@ -56,7 +65,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView mMainUnit;
     private TextView mMainMemberName;
     private TextView mMainMemberJob;
-    //    NativeUtil nativeUtil;
     /*handle接收*/
     public Handler mHandler = new Handler() {
         @Override
@@ -217,11 +225,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("MyLog", "MainActivity.onCreate:   --->>> ");
         //  动态申请权限
         initPermissions();
         initController();
         initView();
+        String[] arr = {};
+        SDLActivity.nativeInit(arr);
         //  初始化无纸化网络平台
         nativeUtil.javaInitSys();
         //  8.修改本机界面状态

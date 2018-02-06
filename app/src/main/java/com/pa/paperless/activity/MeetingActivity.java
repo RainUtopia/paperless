@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +21,9 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,11 +43,11 @@ import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.fragment.meeting.ChatFragment;
 import com.pa.paperless.fragment.meeting.MeetingFileFragment;
 import com.pa.paperless.fragment.meeting.NotationFragment;
+import com.pa.paperless.fragment.meeting.SharedFileFragment;
 import com.pa.paperless.fragment.meeting.SigninFragment;
 import com.pa.paperless.fragment.meeting.VideoFragment;
 import com.pa.paperless.fragment.meeting.VoteFragment;
 import com.pa.paperless.fragment.meeting.WebBrowseFragment;
-import com.pa.paperless.fragment.meeting.SharedFileFragment;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
@@ -193,6 +194,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private List<ScreenControlBean> screenControlBeen = new ArrayList<>();
     public static List<Boolean> checks;
     private ScreenControlAdapter playAdapter;
+    private LinearLayout mMeetActivityLayout;
+    private PopupWindow mProjectorPop;
+    private PopupWindow mProRlPop;
+    private PopupWindow mFunctionMsgPop;
 
 
     @Override
@@ -489,73 +494,64 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 if (mSigninFragment == null) {
                     mSigninFragment = new SigninFragment();
                     ft.add(R.id.right_layout, mSigninFragment);
-                } else {
-                    ft.show(mSigninFragment);
                 }
+                ft.show(mSigninFragment);
                 break;
             case 1:
                 if (mAnnAgendaFragment == null) {
                     mAnnAgendaFragment = new AnnAgendaFragment();
                     ft.add(R.id.right_layout, mAnnAgendaFragment);
-                } else {
-                    ft.show(mAnnAgendaFragment);
                 }
+                ft.show(mAnnAgendaFragment);
                 break;
             case 2:
                 if (mMeetingFileFragment == null) {
                     mMeetingFileFragment = new MeetingFileFragment();
                     ft.add(R.id.right_layout, mMeetingFileFragment);
-                } else {
-                    ft.show(mMeetingFileFragment);
                 }
+                ft.show(mMeetingFileFragment);
                 break;
             case 3:
                 if (mSharedFileFragment == null) {
                     mSharedFileFragment = new SharedFileFragment();
                     ft.add(R.id.right_layout, mSharedFileFragment);
-                } else {
-                    ft.show(mSharedFileFragment);
                 }
+                ft.show(mSharedFileFragment);
                 break;
             case 5:
                 if (mChatFragment == null) {
                     mChatFragment = new ChatFragment();
                     ft.add(R.id.right_layout, mChatFragment);
-                } else {
-                    ft.show(mChatFragment);
                 }
+                ft.show(mChatFragment);
                 break;
             case 6:
                 if (mVideoFragment == null) {
                     mVideoFragment = new VideoFragment();
                     ft.add(R.id.right_layout, mVideoFragment);
-                } else {
-                    ft.show(mVideoFragment);
                 }
+                ft.show(mVideoFragment);
                 break;
             case 7:
                 if (mVoteFragment == null) {
                     mVoteFragment = new VoteFragment();
                     ft.add(R.id.right_layout, mVoteFragment);
-                } else {
-                    ft.show(mVoteFragment);
                 }
+                ft.show(mVoteFragment);
                 break;
             case 8:
                 if (mNotationFragment == null) {
                     mNotationFragment = new NotationFragment();
                     ft.add(R.id.right_layout, mNotationFragment);
-                } else {
-                    ft.show(mNotationFragment);
                 }
+                ft.show(mNotationFragment);
                 break;
             case 9:
                 if (mWebbrowseFragment == null) {
                     mWebbrowseFragment = new WebBrowseFragment();
                     ft.add(R.id.right_layout, mWebbrowseFragment);
-                } else {
-                    ft.show(mWebbrowseFragment);
                 }
+                ft.show(mWebbrowseFragment);
                 break;
         }
         ft.commit();
@@ -597,6 +593,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     private void initView() {
         mMeetingCompanyName = (TextView) findViewById(R.id.meeting_company_name);
+        mMeetActivityLayout = (LinearLayout) findViewById(R.id.meetActivity_layout);
         mMeetingTheme = (TextView) findViewById(R.id.meeting_theme);
         mMeetingMessage = (ImageButton) findViewById(R.id.meeting_message);
         mMeetingChatOnline = (ImageButton) findViewById(R.id.meeting_chat_online);
@@ -644,7 +641,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 showFragment(5);
                 break;
             case R.id.meeting_chat_online:
-                showFabPop();
+                showSendFunctionMsg();
                 break;
             case R.id.signin:
                 setImgSelect(0);
@@ -694,6 +691,21 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
+     * 服务选项
+     */
+    private void showSendFunctionMsg() {
+
+        View popupView = getLayoutInflater().inflate(R.layout.pop_function_msg, null);
+        mFunctionMsgPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setAnimal(mFunctionMsgPop);
+        mFunctionMsgPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mFunctionMsgPop.setTouchable(true);
+        mFunctionMsgPop.setOutsideTouchable(true);
+        mFunctionMsgPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+
+    }
+
+    /**
      * 展示fab
      */
     public void showFabPop() {
@@ -735,12 +747,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.screens.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了桌面截图", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.screens);
-                // TODO: 2018/2/5 打开截屏
-//                startActivity(new Intent(MeetingActivity.this,ScreenShotActivity.class));
-                View rootView = view.getRootView();
-                MyUtils.ScreenShot(rootView);
+                mPopupWindow.dismiss();
+                MyUtils.ScreenShot(mMeetActivityLayout);
 
             }
         });
@@ -748,10 +757,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.oneScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了同屏控制", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.oneScreen);
                 mPopupWindow.dismiss();
                 //打开同屏控制弹出框
+                // TODO: 2018/2/6 打开同屏控制
                 showScreensPop();
             }
         });
@@ -768,8 +777,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.projection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了投影控制", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.projection);
+                // TODO: 2018/2/6 打开投影控制
+                showProjector();
+
             }
         });
         //会议笔记
@@ -800,6 +811,79 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
+     * 投影控制
+     */
+    private void showProjector() {
+        View popupView = getLayoutInflater().inflate(R.layout.pop_projector, null);
+        mProjectorPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setAnimal(mProjectorPop);
+        mProjectorPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mProjectorPop.setTouchable(true);
+        mProjectorPop.setOutsideTouchable(true);
+        ProViewHolder holder = new ProViewHolder(popupView);
+        Pro_Event(holder);
+        mProjectorPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+    }
+
+    /**
+     * 投影控制 事件监听
+     *
+     * @param holder
+     */
+    private void Pro_Event(final ProViewHolder holder) {
+        holder.all_pro_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    // TODO: 2018/2/6 获取全部的投影机
+                }
+            }
+        });
+        holder.choose_pro_cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 2018/2/6 打开投影机列表
+                showProRlPop();
+            }
+        });
+    }
+
+    /**
+     * 投影控制 投影机列表
+     */
+    private void showProRlPop() {
+        View popupView = getLayoutInflater().inflate(R.layout.pro_pop, null);
+        mProRlPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setAnimal(mProRlPop);
+        mProRlPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mProRlPop.setTouchable(true);
+        mProRlPop.setOutsideTouchable(true);
+        ProRlViewHolder holder = new ProRlViewHolder(popupView);
+        ProRl_Enent(holder);
+        mProRlPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+    }
+
+    /**
+     * 投影控制 投影机列表 事件监听
+     *
+     * @param holder
+     */
+    private void ProRl_Enent(ProRlViewHolder holder) {
+        holder.pro_all_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    // TODO: 2018/2/6 将全部的item选中
+
+                } else {
+                    // TODO: 2018/2/6 查看item是否全部选中，如果全部选中则将CheckBox设置为选中状态
+                }
+            }
+        });
+    }
+
+
+    /**
      * 同屏控制
      */
     private void showScreensPop() {
@@ -814,32 +898,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mScreenPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
-
     /**
      * 同屏控制 事件监听
      */
     private void Screen_Event(final ScreenViewHolder holder) {
-        // TODO: 2017/11/8 同屏控制
-        //所有人
-        holder.everyone_cb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //设置全部选中
-                boolean selected = !holder.everyone_cb.isSelected();
-                holder.everyone_cb.setChecked(selected);
-                holder.everyone_cb.setSelected(selected);
-                holder.choose_player.setSelected(!selected);
-                for (int i = 0; i < checks.size(); i++) {
-                    checks.set(i, selected);
-                }
-            }
-        });
+
         holder.everyone_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                boolean checked = holder.everyone_cb.isChecked();
-                boolean selected = holder.everyone_cb.isSelected();
-                Log.e("MyLog", "MeetingActivity.onCheckedChanged:   所有人按钮 --->>> checked： " + checked + "   selected：" + selected);
                 if (b) {
                     //如果 所有人 为true
                     for (int i = 0; i < checks.size(); i++) {
@@ -858,30 +924,18 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.choose_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean selected = !holder.choose_player.isSelected();
-                holder.choose_player.setSelected(selected);
-                holder.everyone_cb.setSelected(!selected);
-                for (int i = 0; i < checks.size(); i++) {
-                    checks.set(i, !selected);
-                }
                 //选择参与人 和 投影机
                 showPlayerPop();
             }
         });
 
-        holder.choose_player.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        //选中所有投影机
+        holder.all_projector.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                holder.everyone_cb.setSelected(!b);
-            }
-        });
-        //选中所有投影机
-        holder.all_projector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.all_projector.setSelected(!holder.all_projector.isSelected());
-                if (holder.all_projector.isSelected()) {
-                } else {
+                if (b) {
+                    // TODO: 2018/2/6 获取所有的投影机
                 }
             }
         });
@@ -889,9 +943,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.choose_projector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.choose_projector.setSelected(!holder.choose_projector.isSelected());
                 showPlayerPop();
-
             }
         });
         holder.screens_btn.setOnClickListener(new View.OnClickListener() {
@@ -921,13 +973,35 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     }
 
+    /**
+     * 投影控制
+     */
+    public static class ProViewHolder {
+        public View rootView;
+        public RadioButton all_pro_cb;
+        public RadioButton choose_pro_cb;
+        public Button start_pro;
+        public Button stop_pro;
+        public Button pro_cancel;
+
+        public ProViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.all_pro_cb = (RadioButton) rootView.findViewById(R.id.all_pro_cb);
+            this.choose_pro_cb = (RadioButton) rootView.findViewById(R.id.choose_pro_cb);
+            this.start_pro = (Button) rootView.findViewById(R.id.start_pro);
+            this.stop_pro = (Button) rootView.findViewById(R.id.stop_pro);
+            this.pro_cancel = (Button) rootView.findViewById(R.id.pro_cancel);
+        }
+
+    }
+
     //同屏控制
     public static class ScreenViewHolder {
         public View rootView;
-        public CheckBox everyone_cb;
-        public CheckBox choose_player;
-        public CheckBox all_projector;
-        public CheckBox choose_projector;
+        public RadioButton everyone_cb;
+        public RadioButton choose_player;
+        public RadioButton all_projector;
+        public RadioButton choose_projector;
         public Button screens_btn;
         public Button stop_btn;
         public Button join_btn;
@@ -935,10 +1009,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
         public ScreenViewHolder(View rootView) {
             this.rootView = rootView;
-            this.everyone_cb = (CheckBox) rootView.findViewById(R.id.everyone_cb);
-            this.choose_player = (CheckBox) rootView.findViewById(R.id.players);
-            this.all_projector = (CheckBox) rootView.findViewById(R.id.all_projector);
-            this.choose_projector = (CheckBox) rootView.findViewById(R.id.choose_projector);
+            this.everyone_cb = (RadioButton) rootView.findViewById(R.id.everyone_cb);
+            this.choose_player = (RadioButton) rootView.findViewById(R.id.players);
+            this.all_projector = (RadioButton) rootView.findViewById(R.id.all_projector);
+            this.choose_projector = (RadioButton) rootView.findViewById(R.id.choose_projector);
             this.screens_btn = (Button) rootView.findViewById(R.id.screens_btn);
             this.stop_btn = (Button) rootView.findViewById(R.id.stop_btn);
             this.join_btn = (Button) rootView.findViewById(R.id.join_btn);
@@ -968,26 +1042,15 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      * @param holder
      */
     private void Player_Event(final PlayerViewHolder holder) {
-        //参会人 全选
-        holder.playersAllCb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean selected = !holder.playersAllCb.isSelected();
-                holder.playersAllCb.setSelected(selected);
-                holder.playersAllCb.setChecked(selected);
-                playAdapter.notifyDataSetChanged();
-
-            }
-        });
-
         //item点击事件
         playAdapter.setItemClick(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int posion) {
                 Button player = view.findViewById(R.id.palyer_name);
-                player.setSelected(!player.isSelected());
-                checks.set(posion, player.isSelected());
-                holder.playersAllCb.setSelected(!checks.contains(false));
+                boolean selected = !player.isSelected();
+                player.setSelected(selected);
+                checks.set(posion, selected);
+                holder.playersAllCb.setChecked(!checks.contains(false));
                 playAdapter.notifyDataSetChanged();
             }
         });
@@ -995,17 +1058,16 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.playersAllCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.e("MyLog", "MeetingActivity.onCheckedChanged:  是否全部选中 --->>> " + b);
                 if (b) {
-                    //全选为选中状态
-                    if (checks.contains(false)) {
-                        //如果包含false
-                        for (int i = 0; i < screenControlBeen.size(); i++) {
-                            if (!checks.get(i)) {
-                                //将包含false的选项设为true
-                                checks.set(i, true);
-                            }
+                    //如果包含false
+                    for (int i = 0; i < screenControlBeen.size(); i++) {
+                        if (!checks.get(i)) {
+                            //将包含false的选项设为true
+                            checks.set(i, true);
                         }
                     }
+                    // TODO: 2018/2/6 获取全部的数据
                 } else {
                     //全选为false
                     if (!checks.contains(false)) {
@@ -1020,11 +1082,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             }
         });
         // 投影机全选 选择框
-        holder.projectorAllCb.setOnClickListener(new View.OnClickListener() {
+        holder.projectorAllCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-
-
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    // TODO: 2018/2/6 获取全部投影机
+                }
             }
         });
         //确定按钮
@@ -1085,7 +1148,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public RecyclerView projectorRl;
         public Button playerPopEnsure;
         public Button playerPopCancel;
-//        public ScreenControlAdapter ProAapter;
 
         public PlayerViewHolder(final View rootView) {
             this.rootView = rootView;
@@ -1095,15 +1157,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             //瀑布流布局
             this.playersRl.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
             this.playersRl.setAdapter(playAdapter);
-
-
             /**
              * *************************************
              */
             this.projectorAllCb = (CheckBox) rootView.findViewById(R.id.projector_all_cb);
             this.projectorRl = (RecyclerView) rootView.findViewById(R.id.projector_rl);
-
-//            ProAapter = new ScreenControlAdapter(screenControlBeen);
             //表格布局
             this.projectorRl.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
 //            this.projectorRl.setAdapter(ProAapter);
@@ -1112,6 +1170,26 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
              */
             this.playerPopEnsure = (Button) rootView.findViewById(R.id.player_pop_ensure);
             this.playerPopCancel = (Button) rootView.findViewById(R.id.player_pop_cancel);
+        }
+
+    }
+
+
+    public static class ProRlViewHolder {
+        public View rootView;
+        public CheckBox pro_all_cb;
+        public RecyclerView pro_rl;
+        public Button pro_ensure_btn;
+        public Button pro_cancel_btn;
+
+        public ProRlViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.pro_all_cb = (CheckBox) rootView.findViewById(R.id.pro_all_cb);
+            this.pro_rl = (RecyclerView) rootView.findViewById(R.id.pro_rl);
+            this.pro_rl.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.HORIZONTAL));
+//            this.pro_rl.setAdapter();
+            this.pro_ensure_btn = (Button) rootView.findViewById(R.id.pro_ensure_btn);
+            this.pro_cancel_btn = (Button) rootView.findViewById(R.id.pro_cancel_btn);
         }
 
     }

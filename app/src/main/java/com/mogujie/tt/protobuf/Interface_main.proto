@@ -169,7 +169,7 @@ message pbui_CommonTextProperty
 message pbui_Type_MeetDeviceBaseInfo
 {
 	fixed32   deviceid=1;//设备ID
-	fixed32	  attribid=2;//寄存器 id 0:net status  50:res status  63:base info
+	fixed32	  attribid=2;//寄存器id 0:net status  50:res status  63:base info
 }
 
 //设备ip信息
@@ -194,11 +194,11 @@ message pbui_Item_DeviceDetailInfo
 	fixed32  devcieid=1;
 	bytes    devname=2;
 	repeated pbui_SubItem_DeviceIpAddrInfo ipinfo=3;//ip信息
-	fixed32  netstate=4; //0 离线
+	fixed32  netstate=4;
 
 	repeated pbui_SubItem_DeviceResInfo resinfo=5;//资源信息
 
-	fixed32	 facestate=6;//界面状态 参见 MemState_MainFace 定义
+	fixed32	 facestate=6;//界面状态 参见MemState_MainFace 定义
 	fixed32  memberid=7;//当前人员
 	fixed32  meetingid=8;//当前会议
 }

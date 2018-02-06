@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/app/libs/armeabi/libnative-lib.so" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/mogujie/tt/protobuf/InterfaceMain2.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/mogujie/tt/protobuf/Interface_main2.proto" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/mogujie/tt/protobuf/Interface_main2.proto" charset="GBK" />
   </component>
 </project>

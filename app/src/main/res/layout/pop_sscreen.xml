@@ -43,22 +43,30 @@
                         android:layout_gravity="center"
                         android:text="模式" />
 
-                    <CheckBox
-                        android:id="@+id/everyone_cb"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:button="@drawable/select_check"
-                        android:padding="5dp"
-                        android:text="所有人        " />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <CheckBox
-                        android:id="@+id/players"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/select_check"
-                        android:padding="5dp"
-                        android:text="选择参与人" />
+                        <RadioButton
+                            android:id="@+id/everyone_cb"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:button="@drawable/select_check"
+                            android:padding="5dp"
+                            android:text="所有人" />
+
+                        <RadioButton
+                            android:id="@+id/players"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:button="@drawable/select_check"
+                            android:padding="5dp"
+                            android:text="选择参会人" />
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -74,24 +82,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="投影" />
-
-                    <CheckBox
-                        android:id="@+id/all_projector"
+                    <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:button="@drawable/select_check"
-                        android:padding="5dp"
-                        android:text="所有投影机" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <CheckBox
-                        android:id="@+id/choose_projector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/select_check"
-                        android:padding="5dp"
-                        android:text="选择投影机" />
+                        <RadioButton
+                            android:id="@+id/all_projector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:button="@drawable/select_check"
+                            android:padding="5dp"
+                            android:text="所有投影机" />
 
+                        <RadioButton
+                            android:id="@+id/choose_projector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:button="@drawable/select_check"
+                            android:padding="5dp"
+                            android:text="选择投影机" />
+                    </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +32,7 @@ import com.wind.myapplication.NativeUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.libsdl.app.SDLActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;

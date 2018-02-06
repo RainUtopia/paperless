@@ -75,6 +75,8 @@
         <activity android:name=".activity.SplashActivity"
             android:screenOrientation="landscape"/>
         <activity android:name=".activity.ScreenShotActivity"/>
+        <activity android:name="org.libsdl.app.SDLActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

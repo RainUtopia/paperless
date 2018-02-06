@@ -75,7 +75,7 @@ message pbui_Item_MeetSeatDetailInfo
 {
 	fixed32			nameId=1;//参会人员ID
 	fixed32			seatid=2;//设备ID
-	fixed32			role=3;  //人员身份  参见 Pb_MeetMemberRole
+	fixed32			role=3;  //人员身份  参见Pb_MeetMemberRole
 }
 
 //会议排位信息
@@ -167,9 +167,9 @@ message pbui_Item_MeetOnVotingDetailInfo
 {
 	fixed32		voteid=1;
 	bytes		content=2; //投票内容 
-	fixed32			maintype=3; //投票 选举 调查问卷 参见 Pb_MeetVoteType
-	fixed32			mode=4; //匿名投票 记名投票 参见 Pb_MeetVoteMode
-	fixed32			type=5; //多选 单选 参见 Pb_MeetVote_SelType
+	fixed32			maintype=3; //投票 选举 调查问卷 参见Pb_MeetVoteType
+	fixed32			mode=4; //匿名投票 记名投票 参见Pb_MeetVoteMode
+	fixed32			type=5; //多选 单选 参见Pb_MeetVote_SelType
 	fixed32		timeouts=6;  //超时值 单位 秒
 	fixed32		selectcount=7; //有效选项
 	repeated bytes		text=8;  //选项描述文字
@@ -230,7 +230,7 @@ message pbui_Item_MeetVoteDetailInfo
 	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见Pb_MeetVoteType
 	fixed32			mode=4; //匿名投票 记名投票 参见Pb_MeetVoteMode
 	fixed32			type=5; //多选 单选 参见Pb_MeetVote_SelType
-	fixed32			votestate=6; //投票状态 参见 Pb_MeetVoteStatus
+	fixed32			votestate=6; //投票状态 参见Pb_MeetVoteStatus
 	fixed32		timeouts=7;  //超时值
 	fixed32						selectcount=8; //有效选项
 	repeated pbui_SubItem_VoteItemInfo		item=9;  //选项描述文字
@@ -281,7 +281,7 @@ message pbui_Item_MeetSignInDetailInfo
 {
 	fixed32		nameId=1; //人员ID
 	fixed64		utcseconds=2;  //日期 时间 单位:秒
-	fixed32		signin_type=3;//签到方式 参见 Pb_MeetSignType
+	fixed32		signin_type=3;//签到方式 参见Pb_MeetSignType
 	bytes		password=4;//签到密码
 	bytes		psigndata=5; //如果有图片签到则为png图片数据(二进制转hex编码)
 }
@@ -477,13 +477,13 @@ message pbui_Type_MeetWBRectDetail
 //method: add query pagequery
 message pbui_Item_MeetWBTextDetail
 {
-	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于 opermemberid 的白板操作
-	fixed32  opermemberid=2; //当前该命令的人员ID 为0表示清除所有等于 opermemberid 的白板操作
+	fixed32  operid=1;	    //操作ID 终端计算产生 为0表示清除所有等于opermemberid的白板操作
+	fixed32  opermemberid=2;//当前该命令的人员ID 为0表示清除所有等于opermemberid的白板操作
 	fixed32  srcmemid=3;//发起人的人员ID 白板标识使用
 	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
 
 	fixed64  utcstamp=5;	//时间戳  微秒
-	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于 figuretype 的白板操作
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
 
 	fixed32  fontsize=7;			//字体大小
 	fixed32  fontflag=8;			//字体其它属性
@@ -652,6 +652,30 @@ message pbui_Type_MeetDBServerOperError
 	fixed32  status=1;//参见 Pb_DB_StatusCode
 }
 
+//视频播放资源初始化
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: init
+message pbui_Type_MeetInitPlayRes
+{
+	fixed32 res=1;//资源索引
+	
+	//资源的坐标和宽高
+	fixed32 x=2;
+	fixed32 y=3;
+	fixed32	w=4;
+	fixed32	h=5;					
+}
+
+//视频播放资源释放
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: destroy
+message pbui_Type_MeetDestroyPlayRes
+{
+	fixed32 res=1;//资源索引
+}
+
 //媒体播放通知
 //callback
 //type:Pb_TYPE_MEET_INTERFACE_MEDIAPLAY
@@ -675,7 +699,7 @@ message pbui_Type_MeetDoMediaPlay
 
 	fixed32  pos=2;//指定开始播放的百分比位置
 	fixed32  mediaid=3;//媒体ID
-	fixed32  triggeruserval=4;//触发器标志0
+	fixed32  triggeruserval=4;//触发器标志
 
 	repeated fixed32 res=5;//有效资源个数,为0表示全部
 	repeated fixed32 deviceid=6;//通知的目标设备,为0表示全部
