@@ -11,8 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.views.CustomSurfaceView;
 import com.wind.myapplication.NativeUtil;
 
@@ -36,7 +40,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     private Button mStopVideoBtn;
     private Button mPushVideoBtn;
     private Button mProjectorVideoBtn;
-//    private NativeUtil nativeUtil;
 
     @Nullable
     @Override
@@ -113,8 +116,17 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void callListener(int action, Object result) {
         switch (action){
-            case 1:
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog","VideoFragment.callListener:  收到会议消息 --->>> ");
 
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                }
                 break;
         }
     }

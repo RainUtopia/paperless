@@ -17,15 +17,16 @@ import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.SigninLvAdapter;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.event.EventSign;
 import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.controller.MeetController;
-import com.pa.paperless.event.EventAttendPeople;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
+import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 
@@ -160,6 +161,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
 //        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
+
     private void initView(View inflate) {
         mSigninLv = (ListView) inflate.findViewById(R.id.signin_lv);
         mPrepageBtn = (Button) inflate.findViewById(R.id.prepage_btn);
@@ -267,7 +269,20 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     mHandler.sendMessage(message);
                 }
                 break;
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog","SigninFragment.callListener: 签到状态： 收到会议消息 --->>> ");
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                    Log.e("MyLog","SigninFragment.callListener: 收到的信息个数：  --->>> "+mReceiveMsg.size());
+                }
+                break;
         }
     }
+
 
 }

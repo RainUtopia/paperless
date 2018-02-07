@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -52,6 +53,7 @@ import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
+import com.pa.paperless.utils.ScreenUtils;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
@@ -76,8 +78,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private TextView mMeetingNowDate;
     private TextView mMeetingNowWeek;
     private PercentLinearLayout mTheNowDate;
-    private TextView mAttendee;
-    private TextView mCompere;
+    public static TextView mAttendee;
+    public static TextView mCompere;
     private ImageView mSignin;
     private ImageView mAgenda;
     private ImageView mMeetingfile;
@@ -117,7 +119,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
-                    Log.e("MyLog", "MeetingActivity.handleMessage:  11111111111 --->>> ");
                     ArrayList queryMeetById = msg.getData().getParcelableArrayList("queryMeetById");
                     InterfaceMain.pbui_Type_MeetMeetInfo o = (InterfaceMain.pbui_Type_MeetMeetInfo) queryMeetById.get(0);
                     List<InterfaceMain.pbui_Item_MeetMeetInfo> itemList = o.getItemList();
@@ -128,7 +129,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     }
                     break;
                 case IDivMessage.QUERY_COMMON_BYID://91.查询指定ID的参会人员
-                    Log.e("MyLog", "MeetingActivity.handleMessage:  2222222 --->>> ");
                     ArrayList queryCommonById = msg.getData().getParcelableArrayList("queryAttendById");
                     InterfaceMain.pbui_Type_MemberDetailInfo o1 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryCommonById.get(0);
                     List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList1 = o1.getItemList();
@@ -641,6 +641,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 showFragment(5);
                 break;
             case R.id.meeting_chat_online:
+                // TODO: 2018/2/7 打开发送服务选项
                 showSendFunctionMsg();
                 break;
             case R.id.signin:
@@ -691,17 +692,105 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
-     * 服务选项
+     * 服务功能选项
      */
     private void showSendFunctionMsg() {
-
         View popupView = getLayoutInflater().inflate(R.layout.pop_function_msg, null);
         mFunctionMsgPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
         MyUtils.setAnimal(mFunctionMsgPop);
         mFunctionMsgPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mFunctionMsgPop.setTouchable(true);
         mFunctionMsgPop.setOutsideTouchable(true);
+        FunViewHolder holder = new FunViewHolder(popupView);
+        Function_Event(holder);
         mFunctionMsgPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+
+    }
+
+    /**
+     * 服务功能选项事件监听
+     *
+     * @param holder
+     */
+    private void Function_Event(final FunViewHolder holder) {
+        final List<Integer> arr = new ArrayList<>();
+        arr.add(0);
+        // TODO: 2018/2/7 服务功能事件 发送会议交流信息
+        //纸
+        holder.paper_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                /** ************ ******  185.发送会议交流信息  ****** ************ **/
+                nativeUtil.sendMeetChatInfo("纸", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Paper.getNumber(), arr);
+            }
+        });
+        //笔
+        holder.pen_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("笔", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Pen.getNumber(), arr);
+            }
+        });
+        //茶水
+        holder.tea_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("茶水", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Tea.getNumber(), arr);
+            }
+        });
+        //矿泉水
+        holder.water_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("矿泉水", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Water.getNumber(), arr);
+            }
+        });
+        //计算器
+        holder.calculator_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("计算器", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Other.getNumber(), arr);
+
+            }
+        });
+        //服务员
+        holder.waiter_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("服务员", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Waiter.getNumber(), arr);
+            }
+        });
+        //清扫
+        holder.sweep_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("清扫", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Other.getNumber(), arr);
+            }
+        });
+        //技术员
+        holder.technician_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.setAnimator(view);
+                nativeUtil.sendMeetChatInfo("技术员", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Technical.getNumber(), arr);
+            }
+        });
+        //发送
+        holder.send_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String string = holder.edt_msg.getText().toString();
+                nativeUtil.sendMeetChatInfo(string, InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Message.getNumber(), arr);
+                holder.edt_msg.setText("");
+            }
+        });
 
     }
 
@@ -749,7 +838,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 setAnimator(holder.screens);
                 mPopupWindow.dismiss();
-                MyUtils.ScreenShot(mMeetActivityLayout);
+//                MyUtils.ScreenShot(mMeetActivityLayout);
+                ScreenUtils.snapShotWithStatusBar(MeetingActivity.this);
 
             }
         });
@@ -795,16 +885,16 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.callService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了呼叫服务", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.callService);
+                showSendFunctionMsg();
             }
         });
         //电子白板
         holder.whiteplatePop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了电子白板", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.whiteplatePop);
+                startActivity(new Intent(MeetingActivity.this,DrawBoardActivity.class));
             }
         });
 
@@ -1190,6 +1280,38 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 //            this.pro_rl.setAdapter();
             this.pro_ensure_btn = (Button) rootView.findViewById(R.id.pro_ensure_btn);
             this.pro_cancel_btn = (Button) rootView.findViewById(R.id.pro_cancel_btn);
+        }
+
+    }
+
+    /**
+     * 服务功能
+     */
+    public static class FunViewHolder {
+        public View rootView;
+        public TextView paper_msg;
+        public TextView pen_msg;
+        public TextView tea_msg;
+        public TextView water_msg;
+        public TextView calculator_msg;
+        public TextView waiter_msg;
+        public TextView sweep_msg;
+        public TextView technician_msg;
+        public EditText edt_msg;
+        public TextView send_msg;
+
+        public FunViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.paper_msg = (TextView) rootView.findViewById(R.id.paper_msg);
+            this.pen_msg = (TextView) rootView.findViewById(R.id.pen_msg);
+            this.tea_msg = (TextView) rootView.findViewById(R.id.tea_msg);
+            this.water_msg = (TextView) rootView.findViewById(R.id.water_msg);
+            this.calculator_msg = (TextView) rootView.findViewById(R.id.calculator_msg);
+            this.waiter_msg = (TextView) rootView.findViewById(R.id.waiter_msg);
+            this.sweep_msg = (TextView) rootView.findViewById(R.id.sweep_msg);
+            this.technician_msg = (TextView) rootView.findViewById(R.id.technician_msg);
+            this.edt_msg = (EditText) rootView.findViewById(R.id.edt_msg);
+            this.send_msg = (TextView) rootView.findViewById(R.id.send_msg);
         }
 
     }

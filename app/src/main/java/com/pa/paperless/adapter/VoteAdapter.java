@@ -1,6 +1,7 @@
 package com.pa.paperless.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,10 +22,12 @@ import java.util.List;
  * 投票查询 adapter
  */
 
-public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> implements ItemClickListener {
+public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
 
     private final List<VoteInfo> mData;
     private final Context mContext;
+    private ItemClickListener mListener;
+    private int mCheckedPosion;
 
 
     @Override
@@ -40,7 +43,7 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> im
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.e("MyLog", "VoteAdapter.onBindViewHolder:  /** ************ ******    ****** ************ **/ --->>> " + position);
         //  item的序号
         int number = position + 1;
@@ -139,19 +142,40 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> im
                 holder.vote_option_5.setText(option);
             }
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
+                }
+            }
+
+        });
+
+        /** ************ ******  item设置选中效果  ****** ************ **/
+        if (position == mCheckedPosion) {
+            int color = mContext.getResources().getColor(R.color.ItemCheckedColor);
+            holder.itemView.setBackgroundColor(color);
+        } else {
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
         Log.e("MyLog", "VoteAdapter.onBindViewHolder:  /** ************ ******    ****** ************ **/ --->>> ");
+    }
+
+
+    public void setCheckedId(int posion) {
+        mCheckedPosion = posion;
+        notifyDataSetChanged();
+    }
+
+    public void setItemListener(ItemClickListener listener) {
+        mListener = listener;
     }
 
     @Override
     public int getItemCount() {
         return mData != null ? mData.size() : 0;
     }
-
-    @Override
-    public void onItemClick(View view, int posion) {
-
-    }
-
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;

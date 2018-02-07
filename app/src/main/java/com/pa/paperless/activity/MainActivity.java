@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     ArrayList devInfos = msg.getData().getParcelableArrayList("devInfos");
                     if (devInfos != null) {
                         InterfaceMain.pbui_Type_DeviceDetailInfo o = (InterfaceMain.pbui_Type_DeviceDetailInfo) devInfos.get(0);
-//                        Dispose.DevInfo(o);
+                        Dispose.DevInfo(o);
                     }
                     break;
                 case IDivMessage.QUERY_ATTENDEE:
@@ -235,12 +235,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         nativeUtil.javaInitSys();
         //  8.修改本机界面状态
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
-//        try {
-//            //  6.查询设备信息
-////            nativeUtil.queryDeviceInfo();
-//        } catch (InvalidProtocolBufferException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            //  6.查询设备信息
+            nativeUtil.queryDeviceInfo();
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -466,6 +466,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }).create().show();
     }
+
 
     @Override
     public void callListener(int action, Object result) {

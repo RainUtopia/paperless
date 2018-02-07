@@ -12,14 +12,17 @@ import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.AgendaAdapter;
 import com.pa.paperless.bean.AgendContext;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.event.EventAgenda;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.controller.MeetController;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
+import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.NativeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -147,6 +150,21 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                     message.what = action;
                     message.setData(bundle);
                     mHandler.sendMessage(message);
+                }
+                break;
+
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog","AnnAgendaFragment.callListener:  收到会议信息 --->>> ");
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                    Log.e("MyLog","AgendaFragment.callListener:  未读消息个数 --->>> "+mReceiveMsg.size());
+                }else {
+                    Log.e("MyLog","AgendaFragment.callListener:  收到的receiveMsg为空 --->>> ");
                 }
                 break;
         }

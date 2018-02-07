@@ -38,7 +38,6 @@ public class Dispose {
     private static List<AdminInfo> adminInfos;
 
 
-
     public static List<AdminInfo> AdminInfo(InterfaceMain.pbui_TypeAdminDetailInfo o) {
         if (adminInfos != null) {
             adminInfos.clear();
@@ -103,7 +102,6 @@ public class Dispose {
         int role = o.getRole();
         int memberid = o.getMemberid();
         String msg = MyUtils.getBts(o.getMsg());
-//        String time = DateUtil.getTime(o.getUtcsecond());
         Log.e("MyLog", "Dispose.ReceiveMeetIMinfo:  消息类型： --->>> " + msgtype + "  角色：" + role + "  参会人员ID：" + memberid + "  消息：" + msg + "  时间：" + utcsecond);
         rReceiveMeetIMInfo.add(new ReceiveMeetIMInfo(msgtype, role, memberid, msg, utcsecond));
         return rReceiveMeetIMInfo;
@@ -212,7 +210,6 @@ public class Dispose {
             deviceInfos = new ArrayList<>();
         }
         int pdevCount = devInfos.getPdevCount();
-        Log.e("MyLog", "Dispose.DevInfo:  pdevCount 设备个数：--->>> " + pdevCount);
         for (int i = 0; i < pdevCount; i++) {
             InterfaceMain.pbui_Item_DeviceDetailInfo pdev = devInfos.getPdev(i);
             int devcieid = pdev.getDevcieid();
@@ -224,6 +221,8 @@ public class Dispose {
             int facestate = pdev.getFacestate();
             int memberid = pdev.getMemberid();
             int meetingid = pdev.getMeetingid();
+            Log.e("MyLog", "Dispose.DevInfo:  设备ID --->>> " + devcieid + "  设备名称：" + devName + "  是否在线：" + netstate + "  界面状态：" + facestate
+                    + " 人员ID：" + memberid + "  会议ID：" + meetingid);
             deviceInfos.add(new DeviceInfo(devcieid, devName, ipInfos, netstate, resInfos, facestate, memberid, meetingid));
         }
         return deviceInfos;
@@ -242,6 +241,8 @@ public class Dispose {
             int triggerId = resinfo.getTriggerId();
             int val = resinfo.getVal();
             int val2 = resinfo.getVal2();
+            Log.e("MyLog", "Dispose.resInfo:  设备资源信息： --->>> " + val + " :::: " + val2 +
+                    "playstatus :  " + playstatus + "  triggerId:  " + triggerId);
             resInfos.add(new ResInfo(playstatus, triggerId, val, val2));
         }
         return resInfos;
@@ -258,6 +259,7 @@ public class Dispose {
             InterfaceMain.pbui_SubItem_DeviceIpAddrInfo ipinfo = pdev.getIpinfo(j);
             String IpStr = new String(ipinfo.getIp().toByteArray());
             int port = ipinfo.getPort();
+            Log.e("MyLog", "Dispose.ipInfo:  设备IP信息： --->>> " + IpStr + "   端口号：" + port);
             ipInfos.add(new IpInfo(IpStr, port));
         }
         return ipInfos;

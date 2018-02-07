@@ -13,11 +13,14 @@ import android.webkit.WebView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 
@@ -27,6 +30,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -50,7 +54,6 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
             }
         }
     };
-//    private NativeUtil nativeUtil;
 
     @Nullable
     @Override
@@ -122,6 +125,17 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
                     mHandler.sendMessage(message);
                 }
                 break;
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog","WebBrowseFragment.callListener:  收到会议消息 --->>> ");
+
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                }
         }
     }
 }

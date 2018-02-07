@@ -37,6 +37,7 @@ import com.pa.paperless.adapter.MeetingFileTypeAdapter;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.bean.MeetingFileTypeBean;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
@@ -490,6 +491,18 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     message.what = action;
                     message.setData(bundle);
                     mHandler.sendMessage(message);
+                }
+                break;
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog","MeetingFileFragment.callListener:  收到会议消息 --->>> ");
+
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
                 }
                 break;
         }

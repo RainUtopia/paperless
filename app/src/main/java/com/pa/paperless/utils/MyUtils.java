@@ -48,14 +48,9 @@ import static com.pa.paperless.utils.FileUtil.getMIMEType;
 
 public class MyUtils {
 
-    public static String[] getArguments()
-    {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+"back_main.bmp";
-        return new String[]{path};
-    }
 
     /**
-     * 截屏 不能截取状态栏
+     * 截屏 不能截取状态栏  有bug：界面不同 截出来的图片都一样
      * @param v 截取传入的控件父控件
      */
     public static void ScreenShot(View v) {

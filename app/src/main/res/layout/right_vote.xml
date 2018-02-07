@@ -19,7 +19,6 @@
 
         <Button
             android:id="@+id/vote_open"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -49,7 +48,6 @@
         android:id="@+id/host_function"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:layout_heightPercent="10%">
 
         <TextView

@@ -26,13 +26,11 @@ import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.MulitpleItemAdapter;
 import com.pa.paperless.adapter.MemberListAdapter;
-import com.pa.paperless.bean.ChatRlBean;
 import com.pa.paperless.bean.CheckedMemberIds;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.event.EventAttendPeople;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
@@ -85,9 +83,9 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     switch (msgtype) {
                         case 0://文本消息
                             int memberid = o1.getMemberid();
-                            receiveMeetIMInfos.add(Dispose.ReceiveMeetIMinfo(o1).get(0));
+                            mReceiveMsg.add(Dispose.ReceiveMeetIMinfo(o1).get(0));
                             //为true时，表示是接收的消息
-                            receiveMeetIMInfos.get(receiveMeetIMInfos.size() - 1).setType(true);
+                            mReceiveMsg.get(mReceiveMsg.size() - 1).setType(true);
                             try {
                                 //91.查询指定ID的参会人员
                                 nativeUtil.queryAttendPeopleFromId(memberid);
@@ -98,26 +96,36 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                             //刷新
                             chatAdapter.notifyDataSetChanged();
                             break;
-////                        case 1://多媒体链接
-////                            break;
-////                        case 2://水
-////                            break;
-////                        case 3://茶
-////                            break;
-////                        case 4://咖啡
-////                            break;
-////                        case 5://笔
-////                            break;
-////                        case 6://纸
-////                            break;
-////                        case 7://技术员
-////                            break;
-////                        case 8://服务员
-////                            break;
-////                        case 9://其它服务
-////                            break;
-////                        case 10://申请主持
-////                            break;
+//                        case 1://多媒体链接
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  多媒体链接 --->>> " + 1);
+//                            break;
+//                        case 2://水
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  水 --->>> " + 2);
+//                            break;
+//                        case 3://茶
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  茶 --->>> " + 3);
+//                            break;
+//                        case 4://咖啡
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  咖啡 --->>> " + 4);
+//                            break;
+//                        case 5://笔
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  笔 --->>> " + 5);
+//                            break;
+//                        case 6://纸
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  纸 --->>> " + 6);
+//                            break;
+//                        case 7://技术员
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  技术员 --->>> " + 7);
+//                            break;
+//                        case 8://服务员
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  服务员 --->>> " + 8);
+//                            break;
+//                        case 9://其它服务
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  其它服务 --->>> " + 9);
+//                            break;
+//                        case 10://申请主持
+//                            Log.e("MyLog", "ChatFragment.handleMessage:  申请主持 --->>> " + 10);
+//                            break;
 //                    }
                         //参会人员角色
 //                    int role = o1.getRole();
@@ -146,9 +154,11 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
                     InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
                     List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
-                    String name = MyUtils.getBts(itemList.get(0).getName());
-                    receiveMeetIMInfos.get(receiveMeetIMInfos.size() - 1).setName(name);
-                    Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
+                    if (itemList != null) {
+                        String name = MyUtils.getBts(itemList.get(0).getName());
+                        mReceiveMsg.get(mReceiveMsg.size() - 1).setName(name);
+                        Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
+                    }
                     break;
 
             }
@@ -171,16 +181,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         EventBus.getDefault().register(this);
         return inflate;
     }
-//
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void getAttendPeople(EventAttendPeople eventAttendPeople) {
-//        Log.e("MyLog", "ChatFragment.getAttendPeople:  92.查询参会人员 EventBus --->>> ");
-//        try {
-//            nativeUtil.queryAttendPeople();
-//        } catch (InvalidProtocolBufferException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
@@ -221,7 +221,10 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         /** ***************聊天界面******************** **/
         chat_online_rl = (RecyclerView) inflate.findViewById(R.id.rightchat_online_rl);
         chat_online_rl.setLayoutManager(new LinearLayoutManager(getContext()));
-        chatAdapter = new MulitpleItemAdapter(getContext(), receiveMeetIMInfos);
+        if (mReceiveMsg == null) {
+            mReceiveMsg = new ArrayList<>();
+        }
+        chatAdapter = new MulitpleItemAdapter(getContext(), mReceiveMsg);
         chat_online_rl.setAdapter(chatAdapter);
         /** *********************************** **/
 
@@ -267,12 +270,11 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                             sendInfo.setUtcsecond(System.currentTimeMillis());
                             // false发送的消息  true接收的消息
                             sendInfo.setType(false);
-                            receiveMeetIMInfos.add(sendInfo);
+                            mReceiveMsg.add(sendInfo);
                             chatAdapter.notifyDataSetChanged();
                             //清除输入框内容
                             chat_edt.setText("".trim());
                         }
-
                     } else {
                         Toast.makeText(getActivity(), " 输入的字数不得大于300字 ", Toast.LENGTH_SHORT).show();
                     }

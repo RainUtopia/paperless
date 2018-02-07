@@ -4,38 +4,54 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.utils.Dispose;
+import com.wind.myapplication.NativeUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/31.
  * 公告议程
  */
 
-public class AnnAgendaFragment extends BaseFragment implements View.OnClickListener {
+public class AnnAgendaFragment extends BaseFragment implements View.OnClickListener, CallListener {
 
     private ImageView mAgendaImgbtn;
     private ImageView mAnnouncementImgbtn;
     private FrameLayout mAgendaLl;
     private ArrayList<BaseFragment> mFragments;
     private ArrayList<ImageView> mImgbtns;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_announce_agenda, container, false);
+        initController();
         initView(inflate);
         initImageBtns();
         initFragments();
         changeFragment(mFragments.get(0));
         setImgSelect(0);
         return inflate;
+    }
+
+    @Override
+    protected void initController() {
+        nativeUtil = NativeUtil.getInstance();
+        nativeUtil.setCallListener(this);
     }
 
     private void initImageBtns() {
@@ -46,24 +62,25 @@ public class AnnAgendaFragment extends BaseFragment implements View.OnClickListe
 
     private void setImgSelect(int index) {
         for (int i = 0; i < mImgbtns.size(); i++) {
-            if(i == index){
+            if (i == index) {
                 mImgbtns.get(i).setSelected(true);
-            }else{
+            } else {
                 mImgbtns.get(i).setSelected(false);
             }
         }
     }
+
     private void changeFragment(BaseFragment fragment) {
         FragmentManager fManager = getChildFragmentManager();
         FragmentTransaction transaction = fManager.beginTransaction();
-        transaction.replace(R.id.agenda_fl,fragment);
+        transaction.replace(R.id.agenda_fl, fragment);
         transaction.commitAllowingStateLoss();
     }
+
     private void initFragments() {
         mFragments = new ArrayList<>();
         mFragments.add(new AgendaFragment());
         mFragments.add(new NoticeFragment());
-
     }
 
     private void initView(View inflate) {

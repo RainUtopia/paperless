@@ -20,12 +20,15 @@ import android.widget.RelativeLayout;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VoteAdapter;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventVote;
 import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
@@ -51,7 +54,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     private Button mVoteOpen;
     private PopupWindow mPopupWindow;
     private RelativeLayout mHostFunction;
-//    private NativeUtil nativeUtil;
     private List<VoteInfo> mVoteData = new ArrayList<>();
     private Handler mHandler = new Handler() {
         @Override
@@ -64,6 +66,13 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     mVoteData = Dispose.Vote(o);
                     mVoteAdapter = new VoteAdapter(getContext(), mVoteData);
                     mVoteRl.setAdapter(mVoteAdapter);
+                    mVoteAdapter.setItemListener(new ItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int posion) {
+                            Log.e("MyLog", "VoteFragment.onItemClick:  点击了item --->>> " + posion);
+                            mVoteAdapter.setCheckedId(posion);
+                        }
+                    });
                     break;
             }
         }
@@ -120,10 +129,17 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         mVoteManagement = (Button) inflate.findViewById(R.id.vote_management);
         mVoteOpen = (Button) inflate.findViewById(R.id.vote_open);
         mHostFunction = (RelativeLayout) inflate.findViewById(R.id.host_function);
+
         // TODO: 2018/1/20 如果是主持人则展示主持人功能
-        if (false) {
+        String string1 = MeetingActivity.mAttendee.getText().toString();
+        String string2 = MeetingActivity.mCompere.getText().toString();
+        if (string1.equals(string2)) {
             mHostFunction.setVisibility(View.VISIBLE);
             mVoteOpen.setVisibility(View.VISIBLE);
+        } else {
+            Log.e("MyLog", "VoteFragment.initView:  不一样 --->>> ");
+            mHostFunction.setVisibility(View.GONE);
+            mVoteOpen.setVisibility(View.GONE);
         }
         mVoteOpen.setOnClickListener(this);
         mVoteManagement.setOnClickListener(this);
@@ -135,15 +151,16 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.vote_query:       //结果查询
-
+                Log.e("MyLog", "VoteFragment.onClick:  结果查询 --->>> ");
                 break;
             case R.id.vote_export:      //结果导出
-
+                Log.e("MyLog", "VoteFragment.onClick:  结果导出 --->>> ");
                 break;
             case R.id.vote_management:  //投票管理
-
+                Log.e("MyLog", "VoteFragment.onClick:  投票管理 --->>> ");
                 break;
             case R.id.vote_open:        //发起投票
+                Log.e("MyLog", "VoteFragment.onClick:  发起投票 --->>> ");
                 showPop();
                 break;
         }
@@ -175,6 +192,18 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     message.what = action;
                     message.setData(bundle);
                     mHandler.sendMessage(message);
+                }
+                break;
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog", "VoteFragment.callListener:  收到会议消息 --->>> ");
+
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
                 }
                 break;
         }

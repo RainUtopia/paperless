@@ -198,7 +198,7 @@ message pbui_Item_DeviceDetailInfo
 
 	repeated pbui_SubItem_DeviceResInfo resinfo=5;//资源信息
 
-	fixed32	 facestate=6;//界面状态 参见MemState_MainFace 定义
+	fixed32	 facestate=6;//界面状态 参见 MemState_MainFace 定义
 	fixed32  memberid=7;//当前人员
 	fixed32  meetingid=8;//当前会议
 }

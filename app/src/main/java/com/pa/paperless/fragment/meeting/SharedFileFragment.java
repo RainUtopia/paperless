@@ -20,10 +20,12 @@ import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
@@ -333,6 +335,18 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     message.what = action;
                     message.setData(bundle);
                     mHandler.sendMessage(message);
+                }
+                break;
+            case IDivMessage.RECEIVE_MEET_IMINFO:
+                Log.e("MyLog","SharedFileFragment.callListener:  收到会议消息 --->>> ");
+
+                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                if (receiveMsg != null) {
+                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                    if (mReceiveMsg == null) {
+                        mReceiveMsg = new ArrayList<>();
+                    }
+                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
                 }
                 break;
         }

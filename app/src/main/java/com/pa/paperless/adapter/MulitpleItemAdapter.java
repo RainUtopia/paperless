@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.ChatRlBean;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.utils.DateUtil;
 
@@ -26,7 +25,7 @@ public class MulitpleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<ReceiveMeetIMInfo> data;
 
 
-    public static enum ITEM_TYPE {
+    public  enum ITEM_TYPE {
         SEND,       //发送
         RECEIVW     //接收
     }
