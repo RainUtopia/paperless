@@ -44,16 +44,13 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  /** ************ ******    ****** ************ **/ --->>> " + position);
         //  item的序号
         int number = position + 1;
         VoteInfo voteInfo = mData.get(position);
         //  投票内容文本
         String content = voteInfo.getContent();
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  投票内容 --->>> " + content);
         //  投票主题类别
         int maintype = voteInfo.getMaintype();
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  投票主题类别： --->>> " + maintype);
         switch (maintype) {
             case 0://投票
                 content += "  投票";
@@ -67,7 +64,6 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
         }
         //  投票选项个数文本
         int type = voteInfo.getType();
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  投票选项 0多选  1单选： --->>> " + type);
         switch (type) {
             case 0://多选
                 content += "（多选";
@@ -90,7 +86,6 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
         }
         //  投票是否记名文本
         int mode = voteInfo.getMode();
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  投票是否记名 0匿名 1记名： --->>> " + mode);
         switch (mode) {
             case 0://匿名投票
                 content += "，匿名";
@@ -101,7 +96,6 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
         }
         //  投票当前状态文本
         int votestate = voteInfo.getVotestate();
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  投票状态： --->>> " + votestate);
         switch (votestate) {
             case 0://未发起
                 content += "，未发起）";
@@ -119,13 +113,11 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
         List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
         //  多少个选项
         int size = optionInfo.size();
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  多少个选项： --->>> " + size);
         for (int i = 0; i < size; i++) {
             VoteOptionsInfo voteOptionsInfo = optionInfo.get(i);
             String text = voteOptionsInfo.getText();
             int selcnt = voteOptionsInfo.getSelcnt();
             String option = text + "  " + selcnt;
-            Log.e("MyLog", "VoteAdapter.onBindViewHolder:  option : --->>> " + option);
             if (i == 0) {
                 holder.vote_option_1.setText(option);
             }
@@ -142,6 +134,36 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
                 holder.vote_option_5.setText(option);
             }
         }
+//        holder.vote_option_1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "点击了一" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        holder.vote_option_2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "点击了二" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        holder.vote_option_3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "点击了三" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        holder.vote_option_4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "点击了四" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        holder.vote_option_5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "点击了五" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,12 +176,11 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
 
         /** ************ ******  item设置选中效果  ****** ************ **/
         if (position == mCheckedPosion) {
-            int color = mContext.getResources().getColor(R.color.ItemCheckedColor);
+            int color = mContext.getResources().getColor(R.color.CardBackgroundColor);
             holder.itemView.setBackgroundColor(color);
         } else {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
-        Log.e("MyLog", "VoteAdapter.onBindViewHolder:  /** ************ ******    ****** ************ **/ --->>> ");
     }
 
 

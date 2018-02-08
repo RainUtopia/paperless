@@ -2650,16 +2650,21 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean queryOneVoteSubmitter() throws InvalidProtocolBufferException {
+    public boolean queryOneVoteSubmitter(int value) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_QueryInfoByID.Builder builder = InterfaceMain.pbui_QueryInfoByID.newBuilder();
+        builder.setId(value);
         InterfaceMain.pbui_QueryInfoByID build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), build.toByteArray());
         if (array == null) {
+            Log.e("MyLog","NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人失败 --->>> ");
             return false;
         }
         InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人 --->>> ");
+        InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo pbui_type_meetVoteSignInDetailInfo = defaultInstance.parseFrom(array);
+        if (mCallListener != null) {
+            mCallListener.callListener(IDivMessage.QUERY_MEMBER_BYVOTE, pbui_type_meetVoteSignInDetailInfo);
+        }
+        Log.e("MyLog", "NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人成功 --->>> ");
         return true;
     }
 
@@ -3692,13 +3697,14 @@ public class NativeUtil {
                 InterfaceMain.pbui_MeetNotifyMsg voteChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg queryVote = voteChangeInform.parseFrom(data);
                 int id3 = queryVote.getId();
-                EventBus.getDefault().post(new EventVote());
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform));
                 Log.e("MyLog", "NativeUtil.callback_method:  198 投票变更通知 --->>> ");
                 break;
             case 32://202
                 InterfaceMain.pbui_MeetNotifyMsg voteSubmitterChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                voteSubmitterChangeInform.parseFrom(data);
-                Log.e("CaseLog", "NativeUtil.callback_method:  202 投票提交人变更通知 --->>> ");
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg10 = voteSubmitterChangeInform.parseFrom(data);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform));
+                Log.e("CaseLog", "NativeUtil.callback_method:  202 投票提交人变更通知 --->>> "+pbui_meetNotifyMsg10.getOpermethod());
                 break;
             case 33://59
                 InterfaceMain.pbui_MeetNotifyMsg placeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();

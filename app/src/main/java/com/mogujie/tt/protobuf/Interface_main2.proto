@@ -253,8 +253,8 @@ message pbui_Type_MeetVoteComplexQuery
 //会议投票人
 message pbui_Item_MeetVoteSignInDetailInfo
 {
-	fixed32		 id=1;//投票人员
-	fixed32       selcnt=2; //投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
+	fixed32		  id=1;// 投票人员
+	fixed32       selcnt=2; //投票选项 0x00000001 选择了第一项 0x00000002 第二项 对应项位置1表示选择
 }
 
 //type:Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED

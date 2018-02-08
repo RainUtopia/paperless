@@ -9,15 +9,15 @@ import java.util.List;
  */
 
 public class VoteInfo {
-    int voteid;
-    String content;
-    int maintype;
-    int mode;
-    int type;
-    int votestate;
-    int timeouts;
-    int selectcount;
-    List<VoteOptionsInfo> optionInfo;
+    int voteid;         //id
+    String content;     //投票内容
+    int maintype;       // 类别 投票 选举 调查问卷 参见Pb_MeetVoteType
+    int mode;           //匿名投票 记名投票 参见Pb_MeetVoteMode
+    int type;           //多选 单选 参见Pb_MeetVote_SelType
+    int votestate;      //投票状态 参见 Pb_MeetVoteStatus
+    int timeouts;       //超时值
+    int selectcount;    //有效选项
+    List<VoteOptionsInfo> optionInfo;   //选项描述文字
 
     public VoteInfo(int voteid, String content, int maintype, int mode, int type, int votestate, int timeouts, int selectcount, List<VoteOptionsInfo> optionInfo) {
         this.voteid = voteid;

@@ -83,5 +83,7 @@ public class IDivMessage {
     public static final int QUERY_Attendee_Property = 1036;
     //181.查询会议排位
     public static final int Query_MeetSeat_Inform = 1037;
+    //203.查询指定投票的提交人
+    public static final int QUERY_MEMBER_BYVOTE = 1038;
 
 }

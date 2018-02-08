@@ -9,64 +9,83 @@
         android:id="@+id/vote_rl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="80%" />
+        app:layout_heightPercent="92%" />
 
     <RelativeLayout
         android:id="@+id/wz"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_heightPercent="10%">
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
 
-        <Button
-            android:id="@+id/vote_open"
+        <RelativeLayout
+            android:id="@+id/host_function"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/select_btn"
-            android:text="发起投票" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/vote_query"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/vote_export"
-            android:background="@drawable/select_btn"
-            android:text="结果查询" />
+            <TextView
+                android:id="@+id/text_refe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:text="主持人功能" />
+
+            <Button
+                android:id="@+id/vote_management"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/text_refe"
+                android:background="@drawable/select_btn"
+                android:text="投票管理" />
+
+
+            <Button
+                android:id="@+id/vote_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/vote_management"
+                android:background="@drawable/select_btn"
+                android:text="发起投票" />
+
+            <Button
+                android:id="@+id/vote_over"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/vote_open"
+                android:background="@drawable/select_btn"
+                android:text="结束投票" />
+
+            <Button
+                android:id="@+id/vote_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/vote_over"
+                android:background="@drawable/select_btn"
+                android:text="结果查询" />
+
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/vote_export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/select_btn"
             android:text="结果导出" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/host_function"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_heightPercent="10%">
-
-        <TextView
-            android:id="@+id/text_refe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="主持人功能" />
-
-        <Button
-            android:id="@+id/vote_management"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@id/text_refe"
-            android:background="@drawable/select_btn"
-            android:text="投票管理" />
-    </RelativeLayout>
 
 </com.zhy.android.percent.support.PercentLinearLayout>

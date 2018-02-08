@@ -53,4 +53,8 @@ public class IDEventMessage {
     public static final int Receive_MeetChat_Info = 3022;
     //停止播放
     public static final int STOP_PLAY = 3023;
+    //202 投票提交人变更通知
+    public static final int VoteMember_ChangeInform = 3024;
+    //198 投票变更通知
+    public static final int Vote_Change_Inform = 3025;
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog"
+    android:layout_margin="2dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/place3"
+        android:layout_width="match_parent"
+        android:layout_margin="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/tableColor"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextTwentyAndBlack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="序号"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/TextTwentyAndBlack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="姓名"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/TextTwentyAndBlack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="1"
+            android:background="#edebeb"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="选项"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vote_pop_rl"
+        android:layout_margin="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/export_vote_pop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/select_btn"
+            android:text="导出" />
+
+        <Button
+            android:id="@+id/back_vote_pop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/select_btn"
+            android:text="返回" />
+    </LinearLayout>
+</LinearLayout>
