@@ -38,6 +38,7 @@ import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.bean.ScreenControlBean;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fragment.meeting.AnnAgendaFragment;
 import com.pa.paperless.fragment.meeting.BaseFragment;
@@ -183,7 +184,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     //获得投影机的设备ID
                     List<Integer> devidList = o5.getDevidList();
                     for (int i = 0; i < devidList.size(); i++) {
+                        int number = Macro.DEVICE_MEET_PROJECTIVE;
                         Log.e("MyLog", "MeetingActivity.handleMessage:  投影机的设备ID： --->>> " + devidList.get(i));
+                        if((devidList.get(i) & number) == number){
+                            Log.e("MyLog","MeetingActivity.handleMessage:  该设备为投影机 --->>> ");
+                        }
                     }
                     break;
             }

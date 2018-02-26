@@ -11,9 +11,9 @@ import java.util.List;
 public class VoteInfo {
     int voteid;         //id
     String content;     //投票内容
-    int maintype;       // 类别 投票 选举 调查问卷 参见Pb_MeetVoteType
-    int mode;           //匿名投票 记名投票 参见Pb_MeetVoteMode
-    int type;           //多选 单选 参见Pb_MeetVote_SelType
+    int maintype;       // 类别 投票 选举 调查问卷 参见 Pb_MeetVoteType
+    int mode;           //匿名投票 记名投票 参见 Pb_MeetVoteMode
+    int type;           //多选 单选 参见 Pb_MeetVote_SelType
     int votestate;      //投票状态 参见 Pb_MeetVoteStatus
     int timeouts;       //超时值
     int selectcount;    //有效选项

@@ -7,7 +7,7 @@ extern "C" {
 
     //设置日志回调函数 必须在初始化前先调用
     typedef void (*AndroidDevice_LogCB)(int channelstart, int level, char* pmsg);
-    void SetAndroidDeviceLogCallBack(AndroidDevice_LogCB* pcb);
+    void SetAndroidDeviceLogCallBack(AndroidDevice_LogCB pcb);
     
     #define ANDROID_OPERFLAG_PIXFORMAT     1
 #define ANDROID_OPERFLAG_WIDTH 	       2
@@ -16,7 +16,7 @@ extern "C" {
 #define ANDROID_OPERFLAG_STOP  	       5
      //设置数据通知回调函数 必须在初始化前先调用
     typedef int (*AndroidDevice_GetInfoCB)(int channelstart, int oper);
-    void SetAndroidDeviceGetInfoCallBack(AndroidDevice_GetInfoCB* pcb);
+    void SetAndroidDeviceGetInfoCallBack(AndroidDevice_GetInfoCB pcb);
        
 //初始化桌面采集
 //type 流类型

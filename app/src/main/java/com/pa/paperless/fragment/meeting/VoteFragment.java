@@ -14,12 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
@@ -28,6 +32,7 @@ import com.pa.paperless.adapter.VoteInfoPopAdapter;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
+import com.pa.paperless.bean.VoteOptionsInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
@@ -88,7 +93,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                             mVoteAdapter.setCheckedId(posion);
                             mPosion = posion;
                             VoteInfo voteInfo = mVoteData.get(mPosion);
-                            int voteid = voteInfo.getVoteid();
+                            voteid = voteInfo.getVoteid();
                             int mode = voteInfo.getMode();
                             int votestate = voteInfo.getVotestate();
                             //需要记名 和 已经发起或结束的状态
@@ -151,15 +156,17 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                         InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
                         int id = pbui_item_meetVoteSignInDetailInfo.getId();
                         int selcnt = pbui_item_meetVoteSignInDetailInfo.getSelcnt();
-                        // TODO: 2018/2/8 selcnt   装换成二进制进行比较 哪个位数为1 则表示选择了哪个
+                        // TODO: 2018/2/8  将selcnt装换成二进制字符串 哪个位数为1 则表示选择了哪个
+                        //int变量的二进制表示的字符串
                         String string = Integer.toBinaryString(selcnt);
+                        //查找字符串中为1的索引位置
                         int i1 = string.indexOf("1");
                         int length = string.length();
                         for (int j = 0; j < length; j++) {
-                            if(i1 == j){
-                                // TODO: 2018/2/8 计算出在哪个位置
-                                int i2 = length - j;
-                                // TODO: 2018/2/8 当前人员选择的是第 i2 项的选项值
+                            if (i1 == j) {
+                                // TODO: 2018/2/8 计算出在选择的是第 selectedItem 个选项
+                                selectedItem = length - j;
+                                Log.e("MyLog", "VoteFragment.handleMessage:  选中的项数 --->>> " + selectedItem);
                             }
                         }
                         Log.e("MyLog", "VoteFragment.handleMessage:  投票人员ID: --->>> " + id +
@@ -173,6 +180,8 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     private boolean isCompere = false;
     private Button mVoteOver;
     private PopupWindow mChoosePop;
+    private int selectedItem = 0;
+    private int voteid;
 
     @Nullable
     @Override
@@ -202,6 +211,22 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 Log.e("MyLog", "VoteFragment.getEventMessage:  投票提交人变更通知 EventBus --->>> ");
                 int voteid = mVoteData.get(mPosion).getVoteid();
                 nativeUtil.queryOneVoteSubmitter(voteid);
+                break;
+            case IDEventMessage.open_vote:
+                InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                int id = object.getId();
+
+//                //判断是否是未发起状态
+//                if (votestate == 0) {
+//                    //未发起状态设置成进行状态并投票
+//                    voteInfo.setVotestate(1);
+//                    mVoteAdapter.notifyDataSetChanged();
+//                    showChoose(voteInfo);
+//                } else if (votestate == 1) {
+//                    //如果是进行状态 则进行投票
+//                    showChoose(voteInfo);
+//                }
+
                 break;
         }
     }
@@ -268,14 +293,16 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.vote_open:        //发起投票
                 //判断是否是未发起状态
-                if (votestate == 0) {
-                    //未发起状态设置成进行状态
-                    voteInfo.setVotestate(1);
-                    mVoteAdapter.notifyDataSetChanged();
-                    showChoose();
-                } else if (votestate == 1) {
-                    showChoose();
-                }
+//                if (votestate == 0) {
+//                    //未发起状态设置成进行状态并投票
+//                    voteInfo.setVotestate(1);
+//                    mVoteAdapter.notifyDataSetChanged();
+//                    showChoose(voteInfo);
+//                } else if (votestate == 1) {
+//                    //如果是进行状态 则进行投票
+//                    showChoose(voteInfo);
+//                }
+                nativeUtil.initiateVote(voteid);
                 break;
             case R.id.vote_over:        //结束投票
                 //判断是否是进行状态
@@ -288,26 +315,160 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    private void showChoose() {
-
+    private void showChoose(VoteInfo voteInfo) {
         View popupView = getActivity().getLayoutInflater().inflate(R.layout.compere_vote_pop, null);
-        /** ************ ******  1.判断有几个选项  ****** ************ **/
-        /** ************ ******  2.判断可以选择几个  ****** ************ **/
-
         mChoosePop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
         //设置动画
         mChoosePop.setAnimationStyle(R.style.AnimHorizontal);
         mChoosePop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mChoosePop.setTouchable(true);
         mChoosePop.setOutsideTouchable(true);
-        ChooseViewHolder holder = new ChooseViewHolder(popupView);
-        ChooseHolderEvent(holder);
+        ChooseViewHolder holder = new ChooseViewHolder(popupView, voteInfo);
+        ChooseHolderEvent(holder, voteInfo);
         mChoosePop.showAtLocation(getActivity().findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
-    private void ChooseHolderEvent(ChooseViewHolder holder) {
+    private void ChooseHolderEvent(final ChooseViewHolder holder, final VoteInfo voteInfo) {
+        //存放选择框
+        final ArrayList<CheckBox> btns = new ArrayList<>();
+        btns.add(holder.chooseA);
+        btns.add(holder.chooseB);
+        btns.add(holder.chooseC);
+        btns.add(holder.chooseD);
+        btns.add(holder.chooseE);
 
+        int selectcount = voteInfo.getSelectcount();
+        int type = voteInfo.getType();
+        Log.e("MyLog", "VoteFragment.ChooseHolderEvent:  选择类型 --->>> " + type + "  可选项： " + selectcount);
+        //根据 type 设置可选择的个数
+        switch (type) {
+            case 0://多选
+                setMaxSelect(selectcount, btns, holder);
+                break;
+            case 1://单选
+                setMaxSelect(1, btns, holder);
+                break;
+            case 2://5 4
+                setMaxSelect(4, btns, holder);
+                break;
+            case 3://5 3
+                setMaxSelect(3, btns, holder);
+                break;
+            case 4://5 2
+                setMaxSelect(2, btns, holder);
+                break;
+            case 5://3 2
+                setMaxSelect(2, btns, holder);
+                break;
+        }
+
+        //取消按钮
+        holder.compereVotePopCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mChoosePop.dismiss();
+            }
+        });
+        //确定按钮
+        holder.compereVotePopEnsure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** ************ ******  193.发起投票  ****** ************ **/
+                nativeUtil.initiateVote(voteid);
+                // 获取选中的内容
+                for (int i = 0; i < btns.size(); i++) {
+                    CheckBox checkBox = btns.get(i);
+                    if (checkBox.isChecked()) {
+                        String string = checkBox.getText().toString();
+                        Log.e("MyLog", "VoteFragment.onClick:  选中的内容 --->>> " + string);
+                    }
+                }
+            }
+        });
     }
+
+    /**
+     * CheckBox 事件监听
+     *
+     * @param maxSelect 最多可以选中的个数
+     * @param btns      存放选择框的集合
+     */
+    private void setMaxSelect(final int maxSelect, final ArrayList<CheckBox> btns, final ChooseViewHolder holder) {
+        holder.chooseA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBoxEvent(btns, maxSelect);
+            }
+        });
+        holder.chooseB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBoxEvent(btns, maxSelect);
+            }
+        });
+        holder.chooseC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBoxEvent(btns, maxSelect);
+            }
+        });
+        holder.chooseD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBoxEvent(btns, maxSelect);
+            }
+        });
+        holder.chooseE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBoxEvent(btns, maxSelect);
+            }
+        });
+    }
+
+    /**
+     * @param btns      CheckBox ArrayList集合
+     * @param maxSelect 当前最大选中数
+     */
+    private void CheckBoxEvent(final ArrayList<CheckBox> btns, final int maxSelect) {
+        final int nowSelect = getNowSelect(btns);
+        Log.e("MyLog", "VoteFragment.CheckBoxEvent:  当前最大选中个数 --->>> " + maxSelect);
+        if (maxSelect > nowSelect) {
+            //如果当前选中的个数 小于 可选的个数
+            for (int i = 0; i < btns.size(); i++) {
+                if (!(btns.get(i).isChecked())) {
+                    //就将未选中的选项设置成 可点击状态
+                    btns.get(i).setClickable(true);
+                }
+            }
+        } else if (maxSelect == nowSelect) {
+            //如果当前选中的个数 等于 可选的个数
+            Toast.makeText(getContext(), "最多可选择  " + maxSelect + "  个选项", Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < btns.size(); i++) {
+                if (!(btns.get(i).isChecked())) {
+                    //就将未选中的选项设置成 不可点击状态
+                    btns.get(i).setClickable(false);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param btns CheckBox ArrayList集合
+     * @return 返回当前选中的个数
+     */
+    private int getNowSelect(ArrayList<CheckBox> btns) {
+        int nowSelect = 0;
+        for (int i = 0; i < btns.size(); i++) {
+            if (btns.get(i).isChecked()) {
+                //如果未true 选中的话就将 nowSelect加1
+                nowSelect++;
+            }
+        }
+        Log.e("MyLog", "VoteFragment.onClick:  选中的个数 --->>> " + nowSelect);
+        return nowSelect;
+    }
+
 
     //展示详细的投票信息
     private void showDetailVoteInfo() {
@@ -361,7 +522,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
             this.export_vote_pop = (Button) rootView.findViewById(R.id.export_vote_pop);
             this.back_vote_pop = (Button) rootView.findViewById(R.id.back_vote_pop);
         }
-
     }
 
     @Override
@@ -410,24 +570,73 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
 
     public static class ChooseViewHolder {
         public View rootView;
-        public RadioButton chooseA;
-        public RadioButton chooseB;
-        public RadioButton chooseC;
-        public RadioButton chooseD;
-        public RadioButton chooseE;
+        public TextView tvTitle;
+        public CheckBox chooseA;
+        public CheckBox chooseB;
+        public CheckBox chooseC;
+        public CheckBox chooseD;
+        public CheckBox chooseE;
         public Button compereVotePopEnsure;
         public Button compereVotePopCancel;
 
-        public ChooseViewHolder(View rootView) {
+        public ChooseViewHolder(View rootView, VoteInfo voteInfo) {
             this.rootView = rootView;
-            this.chooseA = (RadioButton) rootView.findViewById(R.id.chooseA);
-            this.chooseB = (RadioButton) rootView.findViewById(R.id.chooseB);
-            this.chooseC = (RadioButton) rootView.findViewById(R.id.chooseC);
-            this.chooseD = (RadioButton) rootView.findViewById(R.id.chooseD);
-            this.chooseE = (RadioButton) rootView.findViewById(R.id.chooseE);
+            this.tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
+            this.chooseA = (CheckBox) rootView.findViewById(R.id.chooseA);
+            this.chooseB = (CheckBox) rootView.findViewById(R.id.chooseB);
+            this.chooseC = (CheckBox) rootView.findViewById(R.id.chooseC);
+            this.chooseD = (CheckBox) rootView.findViewById(R.id.chooseD);
+            this.chooseE = (CheckBox) rootView.findViewById(R.id.chooseE);
             this.compereVotePopEnsure = (Button) rootView.findViewById(R.id.compere_votePop_ensure);
             this.compereVotePopCancel = (Button) rootView.findViewById(R.id.compere_votePop_cancel);
-        }
 
+            // TODO: 2018/2/25 给选项投票弹出框设置文本值
+            //获取投票内容
+            tvTitle.setText(voteInfo.getContent());
+            //获取选项信息
+            List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
+            for (int i = 0; i < optionInfo.size(); i++) {
+                String text = optionInfo.get(i).getText();
+                if (i == 0) {
+                    this.chooseA.setText(text);
+                } else if (i == 1) {
+                    this.chooseB.setText(text);
+                } else if (i == 2) {
+                    this.chooseC.setText(text);
+                } else if (i == 3) {
+                    this.chooseD.setText(text);
+                } else if (i == 4) {
+                    this.chooseE.setText(text);
+                }
+            }
+            int selectcount = voteInfo.getSelectcount();
+            switch (selectcount) {
+                case 5:
+                    this.chooseE.setVisibility(View.VISIBLE);
+                    this.chooseD.setVisibility(View.VISIBLE);
+                    this.chooseC.setVisibility(View.VISIBLE);
+                    this.chooseB.setVisibility(View.VISIBLE);
+                    this.chooseA.setVisibility(View.VISIBLE);
+                    break;
+                case 4:
+                    this.chooseD.setVisibility(View.VISIBLE);
+                    this.chooseC.setVisibility(View.VISIBLE);
+                    this.chooseB.setVisibility(View.VISIBLE);
+                    this.chooseA.setVisibility(View.VISIBLE);
+                    break;
+                case 3:
+                    this.chooseC.setVisibility(View.VISIBLE);
+                    this.chooseB.setVisibility(View.VISIBLE);
+                    this.chooseA.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    this.chooseB.setVisibility(View.VISIBLE);
+                    this.chooseA.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    this.chooseA.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

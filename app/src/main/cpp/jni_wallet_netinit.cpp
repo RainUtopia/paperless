@@ -153,29 +153,28 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 	}
 
 	int status, battach = 0;
-    	JNIEnv *env = NULL;
+	JNIEnv *env = NULL;
 
-    	status = g_pinternalparam->javavm->GetEnv((void **) &env, JNI_VERSION_1_6);
-    	if (status != JNI_OK)
-    	{
-    		status = g_pinternalparam->javavm->AttachCurrentThread(&env, NULL);
-    		if (status < 0)
-    		{
-    			LOGI("Adapter_GetEnv get status2 return null");
-    			return 0;
-    		}
-    		battach = 1;
-    	}
-    	//JNIEnv*		env = Adapter_GetEnv();
-    	jbyteArray barray = env->NewByteArray(datalen);
-    	env->SetByteArrayRegion(barray, 0, datalen, (const jbyte*) pdata);
-    	env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)type, (jint)method, barray, (jint)datalen);
-    	env->DeleteLocalRef(barray);
+	status = g_pinternalparam->javavm->GetEnv((void **) &env, JNI_VERSION_1_6);
+	if (status != JNI_OK)
+	{
+		status = g_pinternalparam->javavm->AttachCurrentThread(&env, NULL);
+		if (status < 0)
+		{
+			LOGI("Adapter_GetEnv get status2 return null");
+			return 0;
+		}
+		battach = 1;
+	}
+	//JNIEnv*		env = Adapter_GetEnv();
+	jbyteArray barray = env->NewByteArray(datalen);
+	env->SetByteArrayRegion(barray, 0, datalen, (const jbyte*) pdata);
+	env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)type, (jint)method, barray, (jint)datalen);
+	env->DeleteLocalRef(barray);
 
-    	if(battach)
-    		g_pinternalparam->javavm->DetachCurrentThread();
+	if(battach)
+		g_pinternalparam->javavm->DetachCurrentThread();
 
-	
 	return 0;
 }
 
@@ -184,23 +183,18 @@ jbyteArray jni_call(JNIEnv *env, jobject thiz, jint type, jint method, jbyteArra
 	int ret = -1;
 	jbyte *jBuf = 0;
     jint length = 0;
-    LOGI("step   0");
 
     		if(NULL != pdata)
     		{
-                    LOGI("step   1");
     		        jBuf = env->GetByteArrayElements(pdata, JNI_FALSE);
             		length = env->GetArrayLength(pdata);
     		}
-    	LOGI("step   2");
         void* pretdata = NULL;
 	    int   retdatalen = 0;
 		ret = meetPB_call(type, method, jBuf, length, &pretdata, &retdatalen, 0);
-		LOGI("step   3");
 		if(jBuf)
 		{
-		    //只要非0 就可以进入方法
-		    LOGI("step   4");
+		    //只要非0 就可以进入方
 		    //释放
 		    env->ReleaseByteArrayElements(pdata, jBuf, 0);
 		}
@@ -209,11 +203,9 @@ jbyteArray jni_call(JNIEnv *env, jobject thiz, jint type, jint method, jbyteArra
 		    LOGI("step   5  type:%d method:%d  ret:%d retdatalen:%d ",type,method, ret, retdatalen);
 			return NULL;
 		}
-		LOGI("step   6");
         jbyteArray barray = env->NewByteArray(retdatalen);
 		env->SetByteArrayRegion(barray, 0, retdatalen,(const jbyte*) pretdata);
 		meetPB_free(pretdata, retdatalen);
-		LOGI("step   7");
 	return barray;
 }
 
@@ -254,19 +246,51 @@ int Init_walletSys(JNIEnv *env, jobject thiz, jbyteArray pdata)
 	return ret;
 }
 
+void InternalAndroidDevice_LogCB(int channelstart, int level, char* pmsg)
+{
+    LOGI("InternalAndroidDevice_LogCB %s!", pmsg);
+}
+
+int InternalAndroidDevice_GetInfoCB(int channelstart, int oper)
+{
+    int status, battach = 0, vals = 0;
+    JNIEnv *env = NULL;
+
+    LOGI("InternalAndroidDevice_GetInfoCB %d", __LINE__);
+    status = g_pinternalparam->javavm->GetEnv((void **) &env, JNI_VERSION_1_6);
+    if (status != JNI_OK)
+    {
+        status = g_pinternalparam->javavm->AttachCurrentThread(&env, NULL);
+        if (status < 0)
+        {
+            LOGI("InternalAndroidDevice_GetInfoCB %d", __LINE__);
+            return 0;
+        }
+        battach = 1;
+    }
+    LOGI("InternalAndroidDevice_GetInfoCB %d", __LINE__);
+    vals = env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mDoCaptureOper, (jint)channelstart, (jint)oper);
+
+    if(battach)
+        g_pinternalparam->javavm->DetachCurrentThread();
+
+    return vals;
+}
+
 //android device capture
 int jni_AndroidDevice_initcapture(JNIEnv *env, jobject thiz, int type, int channelstart)
 {
-	LOGI("------------------------------------------------jni_AndroidDevice_initcapture line:%d!\n", __LINE__);
+    LOGI("------------------------------------------------jni_AndroidDevice_initcapture line:%d!\n", __LINE__);
+    SetAndroidDeviceLogCallBack(InternalAndroidDevice_LogCB);
+    SetAndroidDeviceGetInfoCallBack(InternalAndroidDevice_GetInfoCB);
+    if(AndroidDevice_initcapture(type, channelstart) == 0)
+    {
+        LOGI("----------------------------------------------------------jni_AndroidDevice_initcapture type: %d, channel:%d!\n", type, channelstart);
+        return 0;
+    }
 
-	if(AndroidDevice_initcapture(type, channelstart) == 0)
-	{
-		LOGI("----------------------------------------------------------jni_AndroidDevice_initcapture type: %d, channel:%d!\n", type, channelstart);
-		return 0;
-	}
-
-	LOGI("------------------------------------------------jni_AndroidDevice_initcapture line:%d erro!\n", __LINE__);
-	return -1;
+    LOGI("------------------------------------------------jni_AndroidDevice_initcapture line:%d erro!\n", __LINE__);
+    return -1;
 }
 
 int jni_AndroidDevice_call(JNIEnv *env, jobject thiz, int channelstart,

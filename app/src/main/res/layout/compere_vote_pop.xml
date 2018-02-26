@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_title"
             style="@style/TextTwentyAndBlack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,47 +22,47 @@
             android:text="选项内容标题"
             android:textStyle="bold" />
 
-        <RadioGroup
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/chooseA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="A" />
+                android:visibility="gone" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/chooseB"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="B" />
+                android:visibility="gone" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/chooseC"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="C" />
+                android:visibility="gone" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/chooseD"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="D" />
+                android:visibility="gone" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/chooseE"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="E" />
-        </RadioGroup>
+                android:visibility="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

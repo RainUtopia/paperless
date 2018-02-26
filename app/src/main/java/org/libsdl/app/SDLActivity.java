@@ -156,9 +156,6 @@ public class SDLActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         Log.e("MyLog","SDLActivity.onBackPressed:   --->>> ");
-
-//        InterfaceMain2.pbui_Type_MeetDestroyPlayRes defaultInstance = InterfaceMain2.pbui_Type_MeetDestroyPlayRes.getDefaultInstance();
-//        int res = defaultInstance.getRes();
     }
 
     // Setup
@@ -318,10 +315,6 @@ public class SDLActivity extends Activity {
         super.onDestroy();
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
-
-//        InterfaceMain2.pbui_Type_MeetDestroyPlayRes defaultInstance = InterfaceMain2.pbui_Type_MeetDestroyPlayRes.getDefaultInstance();
-//        int res = defaultInstance.getRes();
-//        defaultInstance.isInitialized();
 
     }
 

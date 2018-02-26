@@ -382,7 +382,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     } catch (InvalidProtocolBufferException e) {
                         e.printStackTrace();
                     }
-                    if(haveDevMeetInfo) {
+                    if(!haveDevMeetInfo) {
                         //如果没有查找到
                         showDialog();
                     }

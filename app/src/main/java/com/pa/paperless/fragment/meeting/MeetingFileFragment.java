@@ -255,6 +255,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     /** ************ ******    ****** ************ **/
 //                    MyUtils.playMedia(nativeUtil, getContext(), devID, getActivity());
                     startActivity(new Intent(getActivity(), SDLActivity.class));
+
                     nativeUtil.mediaPlayOperate(mediaId, devID, 0);
                 } else {
                     MyUtils.openFile(filename, getView(), nativeUtil, mediaId, getContext());
