@@ -233,10 +233,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         SDLActivity.nativeInit(arr);
         //  初始化无纸化网络平台
         nativeUtil.javaInitSys();
-        //  8.修改本机界面状态
+        /** ************ ******  8.修改本机界面状态  ****** ************ **/
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
         try {
-            //  6.查询设备信息
+            /** ************ ******  6.查询设备信息  ****** ************ **/
             nativeUtil.queryDeviceInfo();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -245,7 +245,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //            @Override
 //            public void run() {
                 try {
-                    // 110.查询设备会议信息
+                    /** ************ ******  110.查询设备会议信息  ****** ************ **/
                     haveDevMeetInfo = nativeUtil.queryDeviceMeetInfo();
                 } catch (InvalidProtocolBufferException e) {
                     e.printStackTrace();

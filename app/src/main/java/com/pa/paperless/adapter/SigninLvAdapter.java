@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.SigninBean;
 
@@ -54,7 +55,18 @@ public class SigninLvAdapter extends BaseAdapter {
         holder.signin_item_number.setText(bean.getSignin_num());
         holder.signin_item_name.setText(bean.getSignin_name());
         holder.signin_item_signtime.setText(bean.getSignin_date());
-        holder.signin_item_signstate.setText(bean.getSign_in() + "");
+        if (
+                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_direct.getNumber() ||
+                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw.getNumber() ||
+                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_photo.getNumber() ||
+                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw.getNumber() ||
+                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw_photo.getNumber() ||
+                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw_photo.getNumber()
+                ) {
+            holder.signin_item_signstate.setText("已签到");
+        } else {
+            holder.signin_item_signstate.setText(" ");
+        }
         return view;
     }
 

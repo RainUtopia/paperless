@@ -8,26 +8,18 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
-import com.pa.paperless.bean.IpInfo;
 import com.pa.paperless.bean.PlaceInfo;
 import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.event.EventAdmin;
 import com.pa.paperless.event.EventAgenda;
-import com.pa.paperless.event.EventMeetDir;
-import com.pa.paperless.event.EventMeetDirFile;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.event.EventNotice;
-import com.pa.paperless.event.EventSign;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.event.EventVote;
-import com.pa.paperless.event.MessageEvent;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
-import com.pa.paperless.utils.MyUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.nio.charset.Charset;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD;
@@ -152,7 +144,6 @@ public class NativeUtil {
     //  相关结构体：     Pb_MeetDevicePropertyID
     public boolean queryDevicePropertiesById(int propetyid, int deviceid, int paramterval) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_MeetDeviceQueryProperty.Builder builder = InterfaceMain.pbui_MeetDeviceQueryProperty.newBuilder();
-//        InterfaceMacro.Pb_MeetDevicePropertyID.Pb_MEETDEVICE_PROPERTY_PORT.getNumber()
         builder.setDeviceid(deviceid);
         builder.setParamterval(paramterval);
         builder.setPropertyid(propetyid);
@@ -163,6 +154,11 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  7.按属性ID查询指定设备属性失败 --->>> ");
             return false;
         }
+
+        if (mCallListener != null) {
+            mCallListener.callListener(IDivMessage.Dev_proById, array);
+        }
+        /*
         if (true) {
             //整数
             InterfaceMain.pbui_DeviceInt32uProperty pbui_deviceInt32uProperty = InterfaceMain.pbui_DeviceInt32uProperty.getDefaultInstance();
@@ -178,7 +174,7 @@ public class NativeUtil {
             InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty1 = pbui_deviceStringProperty.parseFrom(array);
             String propertytext = MyUtils.getBts(pbui_deviceStringProperty1.getPropertytext());
             Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  Propertytext --->>> " + propertytext);
-        }
+        }*/
         Log.e("MyLog", "NativeUtil.queryDeviceProperties:  7.按属性ID查询指定设备属性成功 --->>> ");
         return true;
     }
@@ -2466,7 +2462,7 @@ public class NativeUtil {
         InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo pbui_type_meetOnVotingDetailInfo = defaultInstance.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVote:  189.查询发起的投票成功 --->>> ");
         if (mCallListener != null) {
-            mCallListener.callListener(IDivMessage.QUERY_START_VOTE, pbui_type_meetOnVotingDetailInfo);
+            mCallListener.callListener(IDivMessage.QUERY_LUNCHED_VOTE, pbui_type_meetOnVotingDetailInfo);
         }
         return true;
     }
@@ -2477,15 +2473,16 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean queryInitiateVoteById() throws InvalidProtocolBufferException {
+    public boolean queryInitiateVoteById(int id) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_QueryInfoByID.Builder builder = InterfaceMain.pbui_QueryInfoByID.newBuilder();
+        builder.setId(id);
         InterfaceMain.pbui_QueryInfoByID build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETONVOTING.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SINGLEQUERYBYID.getNumber(), build.toByteArray());
         if (array == null) {
             return false;
         }
         InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo pbui_type_meetOnVotingDetailInfo = defaultInstance.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVoteById:  190.查询指定ID发起的投票 --->>> ");
         return true;
     }
@@ -2521,9 +2518,9 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean initiateVote(int values) {
+    public boolean initiateVote(int voteid) {
         InterfaceMain2.pbui_Type_MeetStopVoteInfo.Builder builder = InterfaceMain2.pbui_Type_MeetStopVoteInfo.newBuilder();
-        builder.addVoteid(values);
+        builder.addVoteid(voteid);
         InterfaceMain2.pbui_Type_MeetStopVoteInfo build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETONVOTING.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.startVote:  193.发起投票 --->>> ");
@@ -2549,8 +2546,9 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean stopVote() {
+    public boolean stopVote(int voteid) {
         InterfaceMain2.pbui_Type_MeetStopVoteInfo.Builder builder = InterfaceMain2.pbui_Type_MeetStopVoteInfo.newBuilder();
+        builder.addVoteid(voteid);
         InterfaceMain2.pbui_Type_MeetStopVoteInfo build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETONVOTING.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_STOP.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.deleteVote:  195.停止投票 --->>> ");
@@ -2562,8 +2560,9 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean submitVoteResult() {
+    public boolean submitVoteResult(InterfaceMain2.pbui_Item_MeetSubmitVote value) {
         InterfaceMain2.pbui_Type_MeetSubmitVote.Builder builder = InterfaceMain2.pbui_Type_MeetSubmitVote.newBuilder();
+        builder.addItem(value);
         InterfaceMain2.pbui_Type_MeetSubmitVote build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETONVOTING.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SUBMIT.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.submitVoteResult:  196.提交投票结果 --->>> ");
@@ -3181,10 +3180,11 @@ public class NativeUtil {
     }
 
     /**
-     *  释放播放资源
+     * 释放播放资源
+     *
      * @return
      */
-    public boolean mediaDestroy(){
+    public boolean mediaDestroy() {
 //        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DESTROY.getNumber(), build.toByteArray());
         return true;
     }
@@ -3702,14 +3702,13 @@ public class NativeUtil {
             case 30://188
                 InterfaceMain.pbui_MeetNotifyMsg aNewInitiateVoteInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg11 = aNewInitiateVoteInform.parseFrom(data);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.open_vote,pbui_meetNotifyMsg11));
-                Log.e("CaseLog", "NativeUtil.callback_method:  188 有新的投票发起通知 --->>> " + pbui_meetNotifyMsg11.getId());
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.newVote_launch_inform, pbui_meetNotifyMsg11));
+                Log.e("CaseLog", "NativeUtil.callback_method:  188 有新的投票发起通知 --->>> ");
                 break;
             case 31://198
                 InterfaceMain.pbui_MeetNotifyMsg voteChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg queryVote = voteChangeInform.parseFrom(data);
-                int id3 = queryVote.getId();
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform));
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform,queryVote));
                 Log.e("MyLog", "NativeUtil.callback_method:  198 投票变更通知 --->>> ");
                 break;
             case 32://202

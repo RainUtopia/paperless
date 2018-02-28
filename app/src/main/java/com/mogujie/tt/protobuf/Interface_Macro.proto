@@ -251,7 +251,7 @@ Pb_MemState_AdminFace=2;//后台管理界面
 enum Pb_MeetDevicePropertyID
 {
 Pb_MEETDEVICE_PROPERTY_ZERO=0;
-Pb_MEETDEVICE_PROPERTY_NAME=1; //设备名称 query(text)
+Pb_MEETDEVICE_PROPERTY_NAME=1;      //设备名称 query(text)
 Pb_MEETDEVICE_PROPERTY_IPADDR=2;		 //ip地址 query(text) paramterval(ip地址索引)
 Pb_MEETDEVICE_PROPERTY_PORT=3;				 //网络端口 query(fixed32)
 Pb_MEETDEVICE_PROPERTY_NETSTATUS=4;			 //网络状态 query(fixed32)

@@ -57,6 +57,6 @@ public class IDEventMessage {
     public static final int VoteMember_ChangeInform = 3024;
     //198 投票变更通知
     public static final int Vote_Change_Inform = 3025;
-
-    public static final int open_vote = 3026;
+    //188 有新的投票发起通知
+    public static final int newVote_launch_inform = 3026;
 }

@@ -15,14 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
@@ -73,6 +72,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     mVoteData.clear();
                     ArrayList queryVote = msg.getData().getParcelableArrayList("queryVote");
                     InterfaceMain2.pbui_Type_MeetVoteDetailInfo o = (InterfaceMain2.pbui_Type_MeetVoteDetailInfo) queryVote.get(0);
+                    //获取到所有的投票信息
                     mVoteData = Dispose.Vote(o);
                     mVoteAdapter = new VoteAdapter(getContext(), mVoteData);
                     mVoteRl.setAdapter(mVoteAdapter);
@@ -92,19 +92,19 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                             Log.e("MyLog", "VoteFragment.onItemClick:  主持人点击 --->>> " + posion);
                             mVoteAdapter.setCheckedId(posion);
                             mPosion = posion;
-                            VoteInfo voteInfo = mVoteData.get(mPosion);
-                            voteid = voteInfo.getVoteid();
-                            int mode = voteInfo.getMode();
-                            int votestate = voteInfo.getVotestate();
+                            isClicked = true;
+//                            int mode = mVoteData.get(mPosion).getMode();
+//                            int votestate = mVoteData.get(mPosion).getVotestate();
                             //需要记名 和 已经发起或结束的状态
-                            if (mode == 1 && votestate != 0) {
-                                try {
-                                    /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
-                                    nativeUtil.queryOneVoteSubmitter(voteid);
-                                } catch (InvalidProtocolBufferException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+//                            if (mode == 1 && votestate != 0) {
+//                                try {
+//                                    /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
+//                                    nativeUtil.queryOneVoteSubmitter(voteid);
+//                                } catch (InvalidProtocolBufferException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+                            /** ************ ******    ****** ************ **/
 //                            TextView tv1 = view.findViewById(R.id.vote_option_1);
 //                            TextView tv2 = view.findViewById(R.id.vote_option_2);
 //                            TextView tv3 = view.findViewById(R.id.vote_option_3);
@@ -156,7 +156,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                         InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
                         int id = pbui_item_meetVoteSignInDetailInfo.getId();
                         int selcnt = pbui_item_meetVoteSignInDetailInfo.getSelcnt();
-                        // TODO: 2018/2/8  将selcnt装换成二进制字符串 哪个位数为1 则表示选择了哪个
+                        // TODO: 2018/2/8  将selcnt转换成二进制字符串 从右往左哪个位数为1 则表示选择了第几个
                         //int变量的二进制表示的字符串
                         String string = Integer.toBinaryString(selcnt);
                         //查找字符串中为1的索引位置
@@ -166,7 +166,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                             if (i1 == j) {
                                 // TODO: 2018/2/8 计算出在选择的是第 selectedItem 个选项
                                 selectedItem = length - j;
-                                Log.e("MyLog", "VoteFragment.handleMessage:  选中的项数 --->>> " + selectedItem);
+                                Log.e("MyLog", "VoteFragment.handleMessage:   --->>> 选中了第_ " + selectedItem + " _项");
                             }
                         }
                         Log.e("MyLog", "VoteFragment.handleMessage:  投票人员ID: --->>> " + id +
@@ -181,7 +181,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     private Button mVoteOver;
     private PopupWindow mChoosePop;
     private int selectedItem = 0;
-    private int voteid;
+    private boolean isClicked = false;
 
     @Nullable
     @Override
@@ -203,30 +203,37 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.Vote_Change_Inform://投票变更通知
-                Log.e("MyLog", "VoteFragment.getEventMessage:  投票变更通知 EventBus --->>> ");
-                //200.查询投票
-                nativeUtil.queryVote();
+                InterfaceMain.pbui_MeetNotifyMsg object1 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                int opermethod = object1.getOpermethod();
+                if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
+                    //操作方法为 查询投票 时
+                    Log.e("MyLog", "VoteFragment.getEventMessage:  投票变更通知 EventBus --->>> 200.查询投票");
+                    /** ************ ******  200.查询投票  ****** ************ **/
+                    nativeUtil.queryVote();
+                }
+                if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_STOP.getNumber()) {
+                    //操作方法为 停止投票 时
+                    int id = object1.getId();
+                    Log.e("MyLog", "VoteFragment.getEventMessage 214行:  投票变更通知 EventBus --->>> 195.停止投票   " + id);
+//                    /** ************ ******  195.停止投票  ****** ************ **/
+//                    nativeUtil.stopVote(id);
+                    mVoteData.get(mPosion).setVotestate(2);
+                    mVoteAdapter.notifyDataSetChanged();
+                }
                 break;
             case IDEventMessage.VoteMember_ChangeInform://投票提交人变更通知
                 Log.e("MyLog", "VoteFragment.getEventMessage:  投票提交人变更通知 EventBus --->>> ");
                 int voteid = mVoteData.get(mPosion).getVoteid();
                 nativeUtil.queryOneVoteSubmitter(voteid);
                 break;
-            case IDEventMessage.open_vote:
+            case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
                 InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                int opermethod1 = object.getOpermethod();
                 int id = object.getId();
-
-//                //判断是否是未发起状态
-//                if (votestate == 0) {
-//                    //未发起状态设置成进行状态并投票
-//                    voteInfo.setVotestate(1);
-//                    mVoteAdapter.notifyDataSetChanged();
-//                    showChoose(voteInfo);
-//                } else if (votestate == 1) {
-//                    //如果是进行状态 则进行投票
-//                    showChoose(voteInfo);
-//                }
-
+                Log.e("MyLog", "VoteFragment.getEventMessage 231行:  发起投票 EventBus  方法 --->>> " + opermethod1 + "   投票ID：" + id);
+                if(isClicked) {
+                    showChoose(mVoteData.get(mPosion));
+                }
                 break;
         }
     }
@@ -292,30 +299,29 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.vote_management:  //投票管理
                 break;
             case R.id.vote_open:        //发起投票
-                //判断是否是未发起状态
-//                if (votestate == 0) {
-//                    //未发起状态设置成进行状态并投票
-//                    voteInfo.setVotestate(1);
-//                    mVoteAdapter.notifyDataSetChanged();
-//                    showChoose(voteInfo);
-//                } else if (votestate == 1) {
-//                    //如果是进行状态 则进行投票
-//                    showChoose(voteInfo);
-//                }
-                nativeUtil.initiateVote(voteid);
+                // 判断是否是未发起状态
+                if (votestate == 0 && isClicked) {
+                    /** ************ ******  193.发起投票  ****** ************ **/
+                    nativeUtil.initiateVote(mVoteData.get(mPosion).getVoteid());
+                }
                 break;
             case R.id.vote_over:        //结束投票
                 //判断是否是进行状态
                 if (votestate == 1) {
-                    //进行状态设置成结束状态
-                    voteInfo.setVotestate(2);
-                    mVoteAdapter.notifyDataSetChanged();
+                    /** ************ ******  195.停止投票  ****** ************ **/
+                    nativeUtil.stopVote(mVoteData.get(mPosion).getVoteid());
                 }
                 break;
         }
     }
 
+    /**
+     * 弹出进行投票选择选项的弹出框
+     *
+     * @param voteInfo 主持人当前选中的投票信息
+     */
     private void showChoose(VoteInfo voteInfo) {
+        isClicked = false;
         View popupView = getActivity().getLayoutInflater().inflate(R.layout.compere_vote_pop, null);
         mChoosePop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
         //设置动画
@@ -373,15 +379,42 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         holder.compereVotePopEnsure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /** ************ ******  193.发起投票  ****** ************ **/
-                nativeUtil.initiateVote(voteid);
-                // 获取选中的内容
-                for (int i = 0; i < btns.size(); i++) {
+                List<Integer> choose = new ArrayList<Integer>();
+                int selectcount1 = mVoteData.get(mPosion).getSelectcount();
+                for (int i = 0; i < selectcount1; i++) {
                     CheckBox checkBox = btns.get(i);
                     if (checkBox.isChecked()) {
                         String string = checkBox.getText().toString();
                         Log.e("MyLog", "VoteFragment.onClick:  选中的内容 --->>> " + string);
+                        switch (i) {
+                            case 0://第0项被选中
+                                choose.add(1);
+                                break;
+                            case 1://第1项被选中
+                                choose.add(2);
+                                break;
+                            case 2://第2项被选中
+                                choose.add(4);
+                                break;
+                            case 3://第3项被选中
+                                choose.add(8);
+                                break;
+                            case 4://第4项被选中
+                                // TODO: 2018/2/27   10000 从右往左第五个  10000的十进制为 16
+                                choose.add(16);
+                                break;
+                        }
                     }
+                    for (int j = 0; j < choose.size(); j++) {
+                        Log.e("MyLog","VoteFragment.onClick 414行:   --->>> "+choose.get(j));
+                    }
+                    //int变量的二进制表示的字符串
+                    InterfaceMain2.pbui_Item_MeetSubmitVote item_SubmitVote = InterfaceMain2.pbui_Item_MeetSubmitVote.getDefaultInstance();
+                    int voteid = item_SubmitVote.getVoteid();
+
+                    /** ************ ******  196.提交投票结果  ****** ************ **/
+                    nativeUtil.submitVoteResult(item_SubmitVote);
+
                 }
             }
         });
@@ -590,7 +623,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
             this.compereVotePopEnsure = (Button) rootView.findViewById(R.id.compere_votePop_ensure);
             this.compereVotePopCancel = (Button) rootView.findViewById(R.id.compere_votePop_cancel);
 
-            // TODO: 2018/2/25 给选项投票弹出框设置文本值
+            // 给选项投票弹出框设置文本值
             //获取投票内容
             tvTitle.setText(voteInfo.getContent());
             //获取选项信息
@@ -609,6 +642,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     this.chooseE.setText(text);
                 }
             }
+            // 有多少个选项就展示多少个
             int selectcount = voteInfo.getSelectcount();
             switch (selectcount) {
                 case 5:

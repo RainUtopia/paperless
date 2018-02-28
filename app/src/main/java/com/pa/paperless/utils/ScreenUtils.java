@@ -137,7 +137,7 @@ public class ScreenUtils {
                 FileOutputStream fos = new FileOutputStream(name);
                 bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
-                Toast.makeText(activity, "截图成功吧", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "截图成功", Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

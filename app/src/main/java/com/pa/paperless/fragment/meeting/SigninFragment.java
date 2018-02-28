@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +14,14 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.SigninLvAdapter;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.event.EventSign;
 import com.pa.paperless.bean.SigninBean;
@@ -27,7 +30,9 @@ import com.pa.paperless.controller.MeetController;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
+import com.pa.paperless.utils.Export;
 import com.pa.paperless.utils.MyUtils;
+import com.pa.paperless.utils.SaveToExcelUtil;
 import com.wind.myapplication.NativeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -85,21 +90,22 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                         }
                     }
                     break;
-                case IDivMessage.QUERY_SIGN://查询签到信息
+                case IDivMessage.QUERY_SIGN://查询签到
                     ArrayList signInfo = msg.getData().getParcelableArrayList("signInfo");
                     InterfaceMain2.pbui_Type_MeetSignInDetailInfo o = (InterfaceMain2.pbui_Type_MeetSignInDetailInfo) signInfo.get(0);
                     int itemCount = o.getItemCount();
                     for (int i = 0; i < itemCount; i++) {
                         InterfaceMain2.pbui_Item_MeetSignInDetailInfo item = o.getItem(i);
-                        int nameId = item.getNameId();
+                        int nameId = item.getNameId();  // 已经签到的人员ID
                         String passWord = new String(item.getPassword().toByteArray());
                         String psignData = new String(item.getPsigndata().toByteArray());
                         int signinType = item.getSigninType();
                         long utcseconds = item.getUtcseconds();
                         String[] gtmDate = DateUtil.getDate(utcseconds * 1000);
-                        String dateTime = gtmDate[0] + "-" + gtmDate[2];
+                        String dateTime = gtmDate[0] + "  " + gtmDate[2];
                         for (int j = 0; j < mDatas.size(); j++) {
                             if (mDatas.get(j).getId() == nameId) {
+                                //找出已经签到的人
                                 mDatas.get(j).setSignin_date(dateTime);
                                 mDatas.get(j).setSign_in(signinType);
                             }
@@ -107,6 +113,48 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     }
                     signinLvAdapter = new SigninLvAdapter(getActivity(), mDatas);
                     mSigninLv.setAdapter(signinLvAdapter);
+                    break;
+                case IDivMessage.QUERY_CONFORM_DEVID://125.查询符合要求的设备ID(查询投影机)
+                    ArrayList queryProjector = msg.getData().getParcelableArrayList("queryProjector");
+                    InterfaceMain.pbui_Type_ResMeetRoomDevInfo o5 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) queryProjector.get(0);
+                    //获得投影机的设备ID
+                    List<Integer> devidList = o5.getDevidList();
+                    for (int i = 0; i < devidList.size(); i++) {
+                        int number = Macro.DEVICE_MEET_PROJECTIVE;
+                        Integer devId = devidList.get(i);
+                        int i1 = devId & number;
+                        Log.e("MyLog", "MeetingActivity.handleMessage:  所有的设备ID： --->>> " + devId + "  相于的结果  ：" + i1);
+                        if (i1 == number) {
+                            Log.e("MyLog", "MeetingActivity.handleMessage:  该设备ID为投影机 --->>> ");
+                            try {
+                                /** ************ ******  7.按属性ID查询指定设备属性  ****** ************ **/
+                                // TODO: 2018/2/27 没有二次查找  等待二次查找。。。。
+                                nativeUtil.queryDevicePropertiesById(
+                                        //表示只查找名称，返回时字符串格式解析
+                                        InterfaceMacro.Pb_MeetDevicePropertyID.Pb_MEETDEVICE_PROPERTY_NAME.getNumber() |
+                                                InterfaceMacro.Pb_MeetDevicePropertyID.Pb_MEETDEVICE_PROPERTY_IPADDR.getNumber(),
+                                        devId,
+                                        0);
+                            } catch (InvalidProtocolBufferException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    break;
+                case IDivMessage.Dev_proById: //7.按属性ID查询指定设备属性（投影机）
+                    ArrayList queryProjector1 = msg.getData().getParcelableArrayList("queryProjectorName");
+                    byte[] array = (byte[]) queryProjector1.get(0);
+                    // 根据查找的类型 查询的是名称就解析成字符串格式
+                    InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty = InterfaceMain.pbui_DeviceStringProperty.getDefaultInstance();
+                    try {
+                        InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty1 = pbui_deviceStringProperty.parseFrom(array);
+                        //获取到投影机的名称
+                        String ProName = new String(pbui_deviceStringProperty1.getPropertytext().toByteArray());
+                        Log.e("MyLog", "SigninFragment.handleMessage 145行:  投影机名称 --->>> " + ProName);
+                    } catch (InvalidProtocolBufferException e) {
+                        e.printStackTrace();
+                    }
+
                     break;
             }
         }
@@ -120,9 +168,9 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         initView(inflate);
         checkButton();
         try {
-            //92.查询参会人员
+            /** ************ ******  92.查询参会人员  ****** ************ **/
             nativeUtil.queryAttendPeople();
-            //206.查询签到信息
+            /** ************ ******  206.查询签到信息  ****** ************ **/
             nativeUtil.querySign();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -136,12 +184,12 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         switch (message.getAction()) {
             case IDEventMessage.SIGN_CHANGE_INFORM:
                 Log.e("MyLog", "SigninFragment.getEventMessage:  签到变更通知 EventBus --->>> ");
-                //206.查询签到
+                /** ************ ******  206.查询签到  ****** ************ **/
                 nativeUtil.querySign();
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:
                 Log.e("MyLog", "SigninFragment.getEventMessage:  参会人员变更通知 EventBus --->>> ");
-                //92.查询参会人员
+                /** ************ ******  92.查询参会人员  ****** ************ **/
                 nativeUtil.queryAttendPeople();
                 break;
         }
@@ -182,7 +230,10 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 nextPage();
                 break;
             case R.id.export_btn://导出签到信息
+                String[] titles = {"序号", "姓名", "签到时间", "是否签到"};
+                Export.ToExcel("签到信息", "sheet_1", titles, mDatas);
 
+//                SaveToExcelUtil.createSmtrautExcel("签到信息","sheetName",arr,cod,);
                 break;
         }
     }
@@ -270,7 +321,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 }
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO:
-                Log.e("MyLog","SigninFragment.callListener: 签到状态： 收到会议消息 --->>> ");
+                Log.e("MyLog", "SigninFragment.callListener: 签到状态： 收到会议消息 --->>> ");
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
@@ -278,11 +329,36 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                         mReceiveMsg = new ArrayList<>();
                     }
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog","SigninFragment.callListener: 收到的信息个数：  --->>> "+mReceiveMsg.size());
+                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
+                }
+                break;
+
+            case IDivMessage.QUERY_CONFORM_DEVID: //125.查询符合要求的设备ID
+                InterfaceMain.pbui_Type_ResMeetRoomDevInfo result5 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) result;
+                if (result5 != null) {
+                    Bundle bundle = new Bundle();
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.add(result5);
+                    bundle.putParcelableArrayList("queryProjector", arrayList);
+                    Message message = new Message();
+                    message.what = action;
+                    message.setData(bundle);
+                    mHandler.sendMessage(message);
+                }
+                break;
+            case IDivMessage.Dev_proById://7.按属性ID查询指定设备属性（投影机）
+                InterfaceMain.pbui_DeviceStringProperty result1 = (InterfaceMain.pbui_DeviceStringProperty) result;
+                if (result1 != null) {
+                    Bundle bundle = new Bundle();
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.add(result1);
+                    bundle.putParcelableArrayList("queryProjectorName", arrayList);
+                    Message message = new Message();
+                    message.what = action;
+                    message.setData(bundle);
+                    mHandler.sendMessage(message);
                 }
                 break;
         }
     }
-
-
 }

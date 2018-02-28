@@ -56,7 +56,7 @@ public class IDivMessage {
     //查询长文本公告
     public static final int QUERY_LONG_NOTICE = 1023;
     //189.查询发起的投票
-    public static final int QUERY_START_VOTE = 1024;
+    public static final int QUERY_LUNCHED_VOTE = 1024;
     //116.查询会场属性
     public static final int QUERY_PLACE_PROPERTIES = 1025;
     //60.查询会议管理员控制的会场
@@ -85,5 +85,6 @@ public class IDivMessage {
     public static final int Query_MeetSeat_Inform = 1037;
     //203.查询指定投票的提交人
     public static final int QUERY_MEMBER_BYVOTE = 1038;
+    public static final int Dev_proById = 1039;
 
 }

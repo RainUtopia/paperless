@@ -178,19 +178,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     int propertyval = o4.getPropertyval();
                     Log.e("MyLog", "MeetingActivity.handleMessage:  propertyval： --->>> " + propertyval + "  身份：" + bts);
                     break;
-                case IDivMessage.QUERY_CONFORM_DEVID://125.查询符合要求的设备ID(查询投影机)
-                    ArrayList queryProjector = msg.getData().getParcelableArrayList("queryProjector");
-                    InterfaceMain.pbui_Type_ResMeetRoomDevInfo o5 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) queryProjector.get(0);
-                    //获得投影机的设备ID
-                    List<Integer> devidList = o5.getDevidList();
-                    for (int i = 0; i < devidList.size(); i++) {
-                        int number = Macro.DEVICE_MEET_PROJECTIVE;
-                        Log.e("MyLog", "MeetingActivity.handleMessage:  投影机的设备ID： --->>> " + devidList.get(i));
-                        if((devidList.get(i) & number) == number){
-                            Log.e("MyLog","MeetingActivity.handleMessage:  该设备为投影机 --->>> ");
-                        }
-                    }
-                    break;
+
             }
         }
     };
@@ -254,19 +242,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     ArrayList arrayList = new ArrayList();
                     arrayList.add(result4);
                     bundle.putParcelableArrayList("queryAttendeeProperty", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
-                break;
-            case IDivMessage.QUERY_CONFORM_DEVID: //125.查询符合要求的设备ID
-                InterfaceMain.pbui_Type_ResMeetRoomDevInfo result5 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) result;
-                if (result5 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result5);
-                    bundle.putParcelableArrayList("queryProjector", arrayList);
                     Message message = new Message();
                     message.what = action;
                     message.setData(bundle);
@@ -346,7 +321,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             //91.查询指定ID的参会人员
 //            nativeUtil.queryAttendPeopleFromId(memberid);
             /** ************ ******  125.查询符合要求的设备ID  （投影机）  ****** ************ **/
-            nativeUtil.queryRequestDeviceId(roomid, InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
+            // TODO: 2018/2/27 回调在签到页面进行的处理
+            nativeUtil.queryRequestDeviceId(roomid,
+                    Macro.DEVICE_MEET_PROJECTIVE,
+//                    InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
                     InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
 
             Log.e("MyLog", "MeetingActivity.getIntentBundle:   --->>> devId： " + devId + "  memberid：" + memberid);
@@ -355,7 +333,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        Log.e("MyLog", "MeetingActivity.onCreate:  devid --->>> " + o.getDevId() + "  MEMBERID:" + o.getMemberid());
     }
 
     public static int getDevId() {
@@ -417,9 +394,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case IDEventMessage.PLACE_DEVINFO_CHANGEINFORM:
                 //119 会场设备信息变更通知(投影机)
-
+                Log.e("MyLog","MeetingActivity.getEventMessage:  查询投影机ID EventBus --->>> ");
                 /** ************ ******  125.查询符合要求的设备ID  （投影机）  ****** ************ **/
-                nativeUtil.queryRequestDeviceId(o.getRoomid(), InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
+                // TODO: 2018/2/27 回调在签到页面做的处理
+                nativeUtil.queryRequestDeviceId(o.getRoomid(),
+                        Macro.DEVICE_MEET_PROJECTIVE,
+//                        InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
                         InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
                 break;
         }

@@ -203,7 +203,7 @@ message pbui_Type_MeetStopVoteInfo
 message pbui_Item_MeetSubmitVote
 {
 	fixed32		voteid=1;
-	fixed32			selcnt=2;//有效选项数
+	fixed32		selcnt=2;//有效选项数
 	fixed32		selitem=3;//选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
 }
 
@@ -281,7 +281,7 @@ message pbui_Item_MeetSignInDetailInfo
 {
 	fixed32		nameId=1; //人员ID
 	fixed64		utcseconds=2;  //日期 时间 单位:秒
-	fixed32		signin_type=3;//签到方式 参见Pb_MeetSignType
+	fixed32		signin_type=3;//签到方式 参见 Pb_MeetSignType
 	bytes		password=4;//签到密码
 	bytes		psigndata=5; //如果有图片签到则为png图片数据(二进制转hex编码)
 }
