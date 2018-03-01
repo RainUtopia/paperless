@@ -38,6 +38,7 @@ import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
+import com.pa.paperless.utils.Export;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
@@ -45,8 +46,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import jxl.write.WriteException;
+
+import static com.pa.paperless.activity.MeetingActivity.getMeetName;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -295,6 +301,19 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case R.id.vote_export:      //结果导出
+                String[] titles = {"投票ID","投票内容","投票类型","是否记名","状态","选项一","投票数","选项二","投票数","选项三","投票数","选项四","投票数","选项五","投票数"};
+                String meetName = getMeetName();
+                Log.e("MyLog","VoteFragment.onClick 306行:  meetName --->>> "+meetName);
+                try {
+                    boolean b = Export.ToVoteExcel(meetName, "投票结果", "Sheet1", titles, mVoteData);
+                    if(b){
+                        Toast.makeText(getContext(), "导出成功", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.vote_management:  //投票管理
                 break;

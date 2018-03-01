@@ -72,9 +72,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                     ArrayList attendee = msg.getData().getParcelableArrayList("attendee");
                     InterfaceMain.pbui_Type_MemberDetailInfo o = (InterfaceMain.pbui_Type_MemberDetailInfo) attendee.get(0);
-                    List<InterfaceMain.pbui_Item_MemberDetailInfo> memberInfos = o.getItemList();
-                    mMemberAdapter = new MemberListAdapter(getActivity(), memberInfos);
-                    chat_lv.setAdapter(mMemberAdapter);
+                    memberInfos = o.getItemList();
                     break;
                 case IDivMessage.RECEIVE_MEET_IMINFO://184.收到新的会议交流信息
                     ArrayList receiveMeetIMInfo = msg.getData().getParcelableArrayList("receiveMeetIMInfo");
@@ -160,11 +158,39 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                         Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
                     }
                     break;
+                case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
+                    ArrayList devinfo = msg.getData().getParcelableArrayList("devinfo");
+                    InterfaceMain.pbui_Type_DeviceDetailInfo o3 = (InterfaceMain.pbui_Type_DeviceDetailInfo) devinfo.get(0);
+                    //获取到所有的设备信息，查找在线的设备
+                    List<InterfaceMain.pbui_Item_DeviceDetailInfo> pdevList = o3.getPdevList();
+                    //用来存放在线的设备
+                    List<InterfaceMain.pbui_Item_MemberDetailInfo> OnLineMembers = new ArrayList<>();
+                    for (int i = 0; i < pdevList.size(); i++) {
+                        InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = pdevList.get(i);
+                        int netstate = pbui_item_deviceDetailInfo.getNetstate();
+                        Log.e("MyLog", "ChatFragment.handleMessage 171行:  值为1是在线 ：--->>> " + netstate);
+                        if (netstate == 1) {
+                            //获取在线状态的设备绑定的人员ID
+                            int memberid = pbui_item_deviceDetailInfo.getMemberid();
+                            for (int j = 0; j < memberInfos.size(); j++) {
+                                InterfaceMain.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = memberInfos.get(j);
+                                if (pbui_item_memberDetailInfo.getPersonid() == memberid) {
+                                    //添加在线状态的设备
+                                    OnLineMembers.add(pbui_item_memberDetailInfo);
+                                }
+                            }
+                        }
+                    }
+                    //将在线状态的设备进行Adapter绑定
+                    mMemberAdapter = new MemberListAdapter(getActivity(), OnLineMembers);
+                    chat_lv.setAdapter(mMemberAdapter);
+                    break;
 
             }
         }
     };
     private List<ReceiveMeetIMInfo> receiveMeetIMInfos = new ArrayList<>();
+    private List<InterfaceMain.pbui_Item_MemberDetailInfo> memberInfos;
 
     @Nullable
     @Override
@@ -175,6 +201,8 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         try {
             //92.查询参会人员
             nativeUtil.queryAttendPeople();
+            /** ************ ******  6.查询设备信息  ****** ************ **/
+            nativeUtil.queryDeviceInfo();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -325,6 +353,19 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     ArrayList arrayList = new ArrayList();
                     arrayList.add(result3);
                     bundle.putParcelableArrayList("queryAttendById", arrayList);
+                    Message message = new Message();
+                    message.what = action;
+                    message.setData(bundle);
+                    handler.sendMessage(message);
+                }
+                break;
+            case IDivMessage.QUERY_DEVICE_INFO:
+                InterfaceMain.pbui_Type_DeviceDetailInfo result4 = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                if (result4 != null) {
+                    Bundle bundle = new Bundle();
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.add(result4);
+                    bundle.putParcelableArrayList("devinfo", arrayList);
                     Message message = new Message();
                     message.what = action;
                     message.setData(bundle);

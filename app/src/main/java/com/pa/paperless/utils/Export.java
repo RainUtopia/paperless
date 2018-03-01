@@ -2,8 +2,9 @@ package com.pa.paperless.utils;
 
 import android.util.Log;
 
-import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.bean.SigninBean;
+import com.pa.paperless.bean.VoteInfo;
+import com.pa.paperless.bean.VoteOptionsInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 /**
  * Created by Administrator on 2018/2/28.
@@ -29,9 +31,9 @@ public class Export {
      * @param fileName  创建的表格文件名
      * @param sheetName 工作表名称
      * @param titles    每一列的标题
-     * @param datas     数据
+     * @param datas     签到数据
      */
-    public static void ToExcel(String fileName, String sheetName, String[] titles, List<SigninBean> datas) {
+    public static boolean ToSigninExcel(String fileName, String sheetName, String[] titles, List<SigninBean> datas) {
         try {
             //1.创建Excel文件
             File file = new File("/sdcard/" + fileName + ".xls");
@@ -49,9 +51,10 @@ public class Export {
                 //6.添加单元格
                 sheet.addCell(label);
             }
-            //7.导入数据
-            for (int i = 0; i < datas.size(); i++) {
-                SigninBean bean = datas.get(i);
+            //7.导入数据 i 从1开始
+            for (int i = 1; i <= datas.size(); i++) {
+                //获取正确的数据 i-1  不然会索引越界
+                SigninBean bean = datas.get(i - 1);
                 for (int j = 0; j < titles.length; j++) {
                     // j 表示的是列数
                     String str = "";
@@ -66,17 +69,10 @@ public class Export {
                             str = bean.getSignin_date();
                             break;
                         case 3:
-                            if (
-                                    bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_direct.getNumber() ||
-                                            bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw.getNumber() ||
-                                            bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_photo.getNumber() ||
-                                            bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw.getNumber() ||
-                                            bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw_photo.getNumber() ||
-                                            bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw_photo.getNumber()
-                                    ) {
+                            if (bean.getSignin_date() != null && !(bean.getSignin_date().isEmpty())) {
                                 str = "已签到";
                             } else {
-                                str = "###";
+                                str = " ";
                             }
                             break;
                     }
@@ -84,31 +80,173 @@ public class Export {
                     label = new Label(j, i, str);
                     sheet.addCell(label);
                 }
-//                //8.添加序号
-//                label = new Label(0, i, bean.getSignin_num());
-//                sheet.addCell(label);
-//
-//                //9.添加姓名
-//                label = new Label(1, i, bean.getSignin_name());
-//                sheet.addCell(label);
-//
-//                //10.添加签到时间
-//                label = new Label(2, i, bean.getSignin_date());
-//                sheet.addCell(label);
-//
-//                //11.添加签到状态
-//                label = new Label(3, i, bean.getSign_in() + "");
-//                sheet.addCell(label);
             }
             //9.写入数据，一定记得写入数据，不然你都开始怀疑世界了，excel里面啥都没有
             workbook.write();
             //10.最后一步，关闭工作簿
             workbook.close();
+            Log.e("MyLog", "Export.ToExcel 112行:  导出Excel成功 --->>> ");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
+    }
 
-
+    /**
+     * 以Excel表格的形式导出投票结果信息
+     * @param meetName 当前参加的会议名称
+     * @param fileName 文件名
+     * @param SheetName 工作表名称
+     * @param titles 每一列的标题
+     * @param datas 投票数据
+     * @return
+     * @throws IOException
+     * @throws WriteException
+     */
+    public static boolean ToVoteExcel(String meetName, String fileName, String SheetName, String[] titles, List<VoteInfo> datas) throws IOException, WriteException {
+        //1.创建Excel文件
+        File file = new File("/sdcard/" + fileName + ".xls");
+        file.createNewFile();
+        //2.创建工作簿
+        WritableWorkbook workbook = Workbook.createWorkbook(file);
+        //3.创建Sheet
+        WritableSheet sheet = workbook.createSheet(SheetName, 0);
+        //4.创建单元格
+        Label label = null;
+        //首先在第一行的位置添加 会议名作为主题
+        Label titLable = new Label(0, 0, meetName);
+        sheet.addCell(titLable);
+        for (int i = 0; i < titles.length; i++) {
+            //5.定为 列 行 文本内容
+            label = new Label(i, 1, titles[i]);
+            //6.添加单元格
+            sheet.addCell(label);
+        }
+        //7.导入数据 因为第一行是自定义的标题文本  所以 i从1（第二行）开始
+        for (int i = 2; i <= datas.size() + 1; i++) {
+            VoteInfo voteInfo = datas.get(i - 2);
+            List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
+            for (int j = 0; j < titles.length; j++) {
+                //j表示的是列数
+                String str = "";
+                switch (j) {
+                    case 0:
+                        str = voteInfo.getVoteid() + "";
+                        break;
+                    case 1:
+                        str = voteInfo.getContent();
+                        break;
+                    case 2:
+                        int type = voteInfo.getType();
+                        if (type == 0) {
+                            str = "多选";
+                        } else if (type == 1) {
+                            str = "单选";
+                        } else if (type == 2) {
+                            str = "5选4";
+                        } else if (type == 3) {
+                            str = "5选3";
+                        } else if (type == 4) {
+                            str = "5选2";
+                        } else if (type == 5) {
+                            str = "3选2";
+                        }
+                        break;
+                    case 3:
+                        if (voteInfo.getMode() == 0) {
+                            str = "匿名";
+                        } else {
+                            str = "记名";
+                        }
+                        break;
+                    case 4:
+                        int votestate = voteInfo.getVotestate();
+                        if (votestate == 0) {
+                            str = "未发起";
+                        }
+                        if (votestate == 1) {
+                            str = "正在投票";
+                        }
+                        if (votestate == 2) {
+                            str = "已经结束";
+                        }
+                        break;
+                    case 5: //选项一
+                        if (optionInfo.size() >= 1) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(0);
+                            str = voteOptionsInfo.getText();
+                        }
+                        break;
+                    case 6: //投票数
+                        if (optionInfo.size() >= 1) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(0);
+                            int selcnt = voteOptionsInfo.getSelcnt();
+                            str = selcnt + "";
+                        }
+                        break;
+                    case 7://选项二
+                        if (optionInfo.size() >= 2) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(1);
+                            str = voteOptionsInfo.getText();
+                        }
+                        break;
+                    case 8://投票数
+                        if (optionInfo.size() >= 2) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(1);
+                            int selcnt = voteOptionsInfo.getSelcnt();
+                            str = selcnt + "";
+                        }
+                        break;
+                    case 9://选项三
+                        if (optionInfo.size() >= 3) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(2);
+                            str = voteOptionsInfo.getText();
+                        }
+                        break;
+                    case 10://投票数
+                        if (optionInfo.size() >= 3) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(2);
+                            int selcnt = voteOptionsInfo.getSelcnt();
+                            str = selcnt + "";
+                        }
+                        break;
+                    case 11://选项四
+                        if (optionInfo.size() >= 4) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(3);
+                            str = voteOptionsInfo.getText();
+                        }
+                        break;
+                    case 12://投票数
+                        if (optionInfo.size() >= 4) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(3);
+                            int selcnt = voteOptionsInfo.getSelcnt();
+                            str = selcnt + "";
+                        }
+                        break;
+                    case 13://选项五
+                        if (optionInfo.size() >= 5) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(4);
+                            str = voteOptionsInfo.getText();
+                        }
+                        break;
+                    case 14://投票数
+                        if (optionInfo.size() >= 5) {
+                            VoteOptionsInfo voteOptionsInfo = optionInfo.get(4);
+                            int selcnt = voteOptionsInfo.getSelcnt();
+                            str = selcnt + "";
+                        }
+                        break;
+                }
+                //8.添加数据  列 行 数据
+                label = new Label(j, i, str);
+                sheet.addCell(label);
+            }
+        }
+        //9.写入数据，一定记得写入数据，不然你都开始怀疑世界了，excel里面啥都没有
+        workbook.write();
+        //10.最后一步，关闭工作簿
+        workbook.close();
+        return true;
     }
 
     /**

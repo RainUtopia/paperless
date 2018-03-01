@@ -1,33 +1,54 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ContentUris;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.MainActivity;
 import com.pa.paperless.activity.MeetingActivity;
+import com.pa.paperless.adapter.ChooseDirDialogAdapter;
 import com.pa.paperless.adapter.TypeFileAdapter;
+import com.pa.paperless.bean.MeetDirBean;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
@@ -44,6 +65,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.breadCrumbShortTitle;
+import static android.R.attr.path;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -62,7 +86,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     private Button share_import;
     private List<Button> mBtns;
     private TypeFileAdapter mAllAdapter;
-    private PopupWindow mPopupWindow;
 
     private List<MeetDirFileInfo> mData = new ArrayList<>();
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
@@ -70,6 +93,22 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case IDivMessage.QUERY_MEET_DIR://查询会议目录
+                    ArrayList queryMeetDir = msg.getData().getParcelableArrayList("queryMeetDir");
+                    InterfaceMain.pbui_Type_MeetDirDetailInfo o = (InterfaceMain.pbui_Type_MeetDirDetailInfo) queryMeetDir.get(0);
+                    meetDirInfos.clear();
+                    for (int i = 0; i < o.getItemCount(); i++) {
+                        InterfaceMain.pbui_Item_MeetDirDetailInfo item = o.getItem(i);
+                        String dirName = new String(item.getName().toByteArray());
+                        int id = item.getId();
+                        int parentid = item.getParentid();
+                        // 过滤掉共享文件和批注文件
+                        if (!dirName.equals("共享文件") && !dirName.equals("批注文件")) {
+                            Log.e("MyLog", "SharedFileFragment.handleMessage 102行:  136.查询会议目录  --->>> 文件名：" + dirName + "  目录ID ：" + id + " 父级ID： " + parentid);
+                            meetDirInfos.add(new MeetDirBean(dirName, id, parentid));
+                        }
+                    }
+                    break;
                 case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件
                     ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("queryMeetDirFile");
                     InterfaceMain.pbui_Type_MeetDirFileDetailInfo o2 = (InterfaceMain.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
@@ -93,6 +132,8 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             }
         }
     };
+    //会议目录的信息
+    private List<MeetDirBean> meetDirInfos = new ArrayList<>();
 
 
     @Nullable
@@ -104,8 +145,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         initBtns();
         setBtnSelect(0);
         try {
+            //136.查询会议目录
             nativeUtil.queryMeetDir();
-            //136.查询会议目录文件（直接查询 共享资料(id 是固定为 1 )的文件）
+            //143.查询会议目录文件（直接查询 共享资料(id 是固定为 1 )的文件）
             nativeUtil.queryMeetDirFile(1);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -116,13 +158,20 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
-        switch (message.getAction()){
+        switch (message.getAction()) {
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM://142 会议目录文件变更通知
                 InterfaceMain.pbui_MeetNotifyMsgForDouble object = (InterfaceMain.pbui_MeetNotifyMsgForDouble) message.getObject();
                 nativeUtil.queryMeetDirFile(object.getId());
                 break;
             case IDEventMessage.DOWN_FINISH://67 下载进度回调
                 Toast.makeText(getActivity(), "  下载完成！ ", Toast.LENGTH_SHORT).show();
+                break;
+            case IDEventMessage.MEETDIR_CHANGE_INFORM://135 会议目录变更通知
+                nativeUtil.queryMeetDir();
+                break;
+            case IDEventMessage.Upload_Progress://73 上传进度通知
+                InterfaceMain.pbui_TypeUploadPosCb object1 = (InterfaceMain.pbui_TypeUploadPosCb) message.getObject();
+                Log.e("MyLog", "SharedFileFragment.getEventMessage 174行:  当前进度 --->>> " + object1.getPer());
                 break;
         }
     }
@@ -165,17 +214,17 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             @Override
             public void onLookListener(int posion, String filename) {
                 if (FileUtil.isVideoFile(filename)) {
-                    MyUtils.playMedia(nativeUtil,getContext(),MeetingActivity.getDevId(),getActivity());
+                    MyUtils.playMedia(nativeUtil, getContext(), MeetingActivity.getDevId(), getActivity());
                     nativeUtil.mediaPlayOperate(posion, MeetingActivity.getDevId(), 0);
-                }else {
-                    MyUtils.openFile(filename, getView(),nativeUtil,posion,getContext());
+                } else {
+                    MyUtils.openFile(filename, getView(), nativeUtil, posion, getContext());
                 }
             }
         });
         mAllAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
             @Override
             public void onDownListener(int posion, String filename) {
-                MyUtils.downLoadFile(filename, getView(),getContext(),posion,nativeUtil);
+                MyUtils.downLoadFile(filename, getView(), getContext(), posion, nativeUtil);
             }
         });
 
@@ -187,6 +236,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         share_nextpage.setOnClickListener(this);
         share_import.setOnClickListener(this);
     }
+
     //设置选中状态
     private void setBtnSelect(int index) {
         for (int i = 0; i < mBtns.size(); i++) {
@@ -280,12 +330,272 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     }
 
     private void showPop() {
-        View popupView = getLayoutInflater(new Bundle()).inflate(R.layout.pop_import_file, null);
-        mPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-        mPopupWindow.setTouchable(true);
-        mPopupWindow.setOutsideTouchable(true);
-        mPopupWindow.showAtLocation(getActivity().findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");//无类型限制
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, 1);
+    }
+
+    String path;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            Uri uri = data.getData();
+            if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
+                path = uri.getPath();
+                Log.e("MyLog", "SharedFileFragment.onActivityResult 316行:  选中文件的path路径 --->>> " + path);
+                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {//4.4以后
+                path = getPath(getContext(), uri);
+                Log.e("MyLog", "SharedFileFragment.onActivityResult 322行:  选中文件的path路径 --->>> " + path);
+                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+            } else {//4.4以下下系统调用方法
+                path = getRealPathFromURI(uri);
+                Log.e("MyLog", "SharedFileFragment.onActivityResult 326行:  选中文件的path路径 --->>> " + path);
+                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+            }
+            showDialog(path);
+        }
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param path
+     */
+    public void showDialog(final String path) {
+        final EditText editText = new EditText(getContext());
+        new AlertDialog.Builder(getContext()).setTitle("请输入文件名")
+                .setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (!(TextUtils.isEmpty(editText.getText().toString().trim()))) {
+                    String newName = editText.getText().toString();
+                    // TODO: 2018/3/1 文件上传失败
+                    //计算出 媒体ID
+                    int mediaid = getMediaid(path);
+                    Log.e("MyLog", "SharedFileFragment.onClick 375行:  获得的媒体ID --->>> " + mediaid);
+                    /** ************ ******  69.上传文件  ****** ************ **/
+                    String fileEnd = path.substring(path.lastIndexOf(".") + 1, path.length()).toLowerCase();
+                    try {
+                        nativeUtil.uploadFile(InterfaceMacro.Pb_Upload_Flag.Pb_MEET_UPLOADFLAG_ONLYENDCALLBACK.getNumber(),
+                                4, 0, newName/*+"."+fileEnd*/, path, 0, mediaid);
+                    } catch (InvalidProtocolBufferException e) {
+                        e.printStackTrace();
+                    }
+                    dialogInterface.dismiss();
+                } else {
+                    Toast.makeText(getContext(), "请输入有效文件名", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).show();
+    }
+
+    private int getMediaid(String path) {
+        //其它
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_OTHER | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_RECORD | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_UPDATE | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_TEMP | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        //
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MAINTYPEBITMASK | Macro.SUBTYPEBITMASK;
+        }
+        //音频
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_PCM;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_MP3;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_ADPCM;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_FLAC;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_MP4;
+        }
+        //视屏
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_MKV;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_RMVB;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_AVI;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_RM;
+        }
+        //图片
+        if (FileUtil.isPictureFile(path)) {
+            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_BMP;
+        }
+        if (FileUtil.isPictureFile(path)) {
+            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_JPEG;
+        }
+        if (FileUtil.isPictureFile(path)) {
+            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_PNG;
+        }
+
+        return 0;
+    }
+
+    public void showChooseDir() {
+//        View popupView = getLayoutInflater().inflate(R.layout.pop_sscreen, null);
+//        PopupWindow mScreenPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+//        MyUtils.setAnimal(mScreenPopupWindow);
+//        mScreenPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+//        mScreenPopupWindow.setTouchable(true);
+//        mScreenPopupWindow.setOutsideTouchable(true);
+//        mScreenPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String res = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContext().getContentResolver().query(contentUri, proj, null, null, null);
+        if (null != cursor && cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+            cursor.close();
+        }
+        return res;
+    }
+
+    /**
+     * 专为Android4.4设计的从Uri获取文件绝对路径，以前的方法已不好使
+     */
+    @SuppressLint("NewApi")
+    public String getPath(final Context context, final Uri uri) {
+
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(context, contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[]{split[1]};
+
+                return getDataColumn(context, contentUri, selection, selectionArgs);
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+        return null;
+    }
+
+    /**
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    public String getDataColumn(Context context, Uri uri, String selection,
+                                String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {column};
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
     //下一页
@@ -338,8 +648,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                 }
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO:
-                Log.e("MyLog","SharedFileFragment.callListener:  收到会议消息 --->>> ");
-
+                Log.e("MyLog", "SharedFileFragment.callListener:  收到会议消息 --->>> ");
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
@@ -347,6 +656,19 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                         mReceiveMsg = new ArrayList<>();
                     }
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                }
+                break;
+            case IDivMessage.QUERY_MEET_DIR://136.查询会议目录
+                InterfaceMain.pbui_Type_MeetDirDetailInfo result1 = (InterfaceMain.pbui_Type_MeetDirDetailInfo) result;
+                if (result1 != null) {
+                    Bundle bundle = new Bundle();
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.add(result1);
+                    bundle.putParcelableArrayList("queryMeetDir", arrayList);
+                    Message message = new Message();
+                    message.what = action;
+                    message.setData(bundle);
+                    mHandler.sendMessage(message);
                 }
                 break;
         }

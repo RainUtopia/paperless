@@ -55,16 +55,20 @@ public class SigninLvAdapter extends BaseAdapter {
         holder.signin_item_number.setText(bean.getSignin_num());
         holder.signin_item_name.setText(bean.getSignin_name());
         holder.signin_item_signtime.setText(bean.getSignin_date());
-        if (
-                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_direct.getNumber() ||
-                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw.getNumber() ||
-                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_photo.getNumber() ||
-                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw.getNumber() ||
-                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw_photo.getNumber() ||
-                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw_photo.getNumber()
-                ) {
+        if(!(holder.signin_item_signtime.getText().toString().isEmpty())){
             holder.signin_item_signstate.setText("已签到");
-        } else {
+        }
+//        if (
+//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_direct.getNumber() ||
+//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw.getNumber() ||
+//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_photo.getNumber() ||
+//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw.getNumber() ||
+//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw_photo.getNumber() ||
+//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw_photo.getNumber()
+//                ) {
+//            holder.signin_item_signstate.setText("已签到");
+//        }
+        else {
             holder.signin_item_signstate.setText(" ");
         }
         return view;

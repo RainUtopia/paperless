@@ -334,9 +334,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             e.printStackTrace();
         }
     }
-
+    //获取当前的设备ID
     public static int getDevId() {
         return o.getDevId();
+    }
+    //获取当前的会议名称
+    public static String getMeetName(){
+        return o.getMeetingname();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

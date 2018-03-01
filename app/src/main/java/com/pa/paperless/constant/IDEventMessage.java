@@ -59,4 +59,6 @@ public class IDEventMessage {
     public static final int Vote_Change_Inform = 3025;
     //188 有新的投票发起通知
     public static final int newVote_launch_inform = 3026;
+    //72 上传进度通知 高频回调
+    public static final int Upload_Progress = 3027;
 }

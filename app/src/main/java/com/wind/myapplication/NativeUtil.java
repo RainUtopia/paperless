@@ -139,7 +139,7 @@ public class NativeUtil {
     }
 
     //  7.按属性ID查询指定设备属性
-    //  传入数据结构：   pbui_MeetDeviceQueryProperty
+    //  传入数据结构：    pbui_MeetDeviceQueryProperty
     //  成功返回：       pbui_DeviceInt32uProperty（整数）、pbui_DeviceStringProperty（字符串）
     //  相关结构体：     Pb_MeetDevicePropertyID
     public boolean queryDevicePropertiesById(int propetyid, int deviceid, int paramterval) throws InvalidProtocolBufferException {
@@ -154,27 +154,9 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  7.按属性ID查询指定设备属性失败 --->>> ");
             return false;
         }
-
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.Dev_proById, array);
         }
-        /*
-        if (true) {
-            //整数
-            InterfaceMain.pbui_DeviceInt32uProperty pbui_deviceInt32uProperty = InterfaceMain.pbui_DeviceInt32uProperty.getDefaultInstance();
-            InterfaceMain.pbui_DeviceInt32uProperty pbui_deviceInt32uProperty1 = pbui_deviceInt32uProperty.parseFrom(array);
-            int propertyval = pbui_deviceInt32uProperty1.getPropertyval();
-            int propertyval2 = pbui_deviceInt32uProperty1.getPropertyval2();
-            int propertyval3 = pbui_deviceInt32uProperty1.getPropertyval3();
-            int propertyval4 = pbui_deviceInt32uProperty1.getPropertyval4();
-            Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  7.按属性ID查询指定设备属性 --->>> " + propertyval + "  " + propertyval2 + "  " + propertyval3 + "  " + propertyval4);
-        } else {
-            //字符串
-            InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty = InterfaceMain.pbui_DeviceStringProperty.getDefaultInstance();
-            InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty1 = pbui_deviceStringProperty.parseFrom(array);
-            String propertytext = MyUtils.getBts(pbui_deviceStringProperty1.getPropertytext());
-            Log.e("MyLog", "NativeUtil.queryDevicePropertiesById:  Propertytext --->>> " + propertytext);
-        }*/
         Log.e("MyLog", "NativeUtil.queryDeviceProperties:  7.按属性ID查询指定设备属性成功 --->>> ");
         return true;
     }
@@ -791,7 +773,6 @@ public class NativeUtil {
     /**
      * 69.上传文件
      *
-     * @param value
      * @param dirid
      * @param attrib
      * @param newname
@@ -801,9 +782,9 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean uploadFile(int value, int dirid, int attrib, String newname, String pathname, int userval, int mediaid) throws InvalidProtocolBufferException {
+    public boolean uploadFile(int uploadflag, int dirid, int attrib, String newname, String pathname, int userval, int mediaid) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_Type_AddUploadFile.Builder builder = InterfaceMain.pbui_Type_AddUploadFile.newBuilder();
-        builder.setUploadflag(value);
+        builder.setUploadflag(uploadflag);
         builder.setDirid(dirid);
         builder.setAttrib(attrib);
         builder.setNewname(getStb(newname));
@@ -813,11 +794,12 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_AddUploadFile build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_UPLOAD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD.getNumber(), build.toByteArray());
         if (array == null) {
+            Log.e("MyLog", "NativeUtil.uploadFile 815行:  69.上传文件失败 --->>> ");
             return false;
         }
         InterfaceMain.pbui_TypeUploadReturn defaultInstance = InterfaceMain.pbui_TypeUploadReturn.getDefaultInstance();
-        defaultInstance.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.uploadFile:  69.上传文件 --->>> ");
+        InterfaceMain.pbui_TypeUploadReturn pbui_typeUploadReturn = defaultInstance.parseFrom(array);
+        Log.e("MyLog", "NativeUtil.uploadFile 820行:  69.上传文件成功 --->>> ");
         return true;
     }
 
@@ -1840,16 +1822,18 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean queryMeetAllChildDir() throws InvalidProtocolBufferException {
+    public boolean queryMeetAllChildDir(int groupid) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_QueryInfoByID.Builder builder = InterfaceMain.pbui_QueryInfoByID.newBuilder();
+        builder.setId(groupid);
         InterfaceMain.pbui_QueryInfoByID build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETDIRECTORY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ALLCHILDRED.getNumber(), build.toByteArray());
         if (array == null) {
+            Log.e("MyLog", "NativeUtil.queryMeetAllChildDir 1848行:  138.查询会议所有子级目录失败 --->>> ");
             return false;
         }
         InterfaceMain.pbui_Type_MeetDirDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetDirDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.queryMeetAllChildDir:  138.查询会议所有子级目录 --->>> ");
+        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = defaultInstance.parseFrom(array);
+        Log.e("MyLog", "NativeUtil.queryMeetAllChildDir 1853行:  138.查询会议所有子级目录成功 --->>> ");
         return true;
     }
 
@@ -3525,7 +3509,8 @@ public class NativeUtil {
                 break;
             case 4://72 高频回调
                 InterfaceMain.pbui_TypeUploadPosCb instance = InterfaceMain.pbui_TypeUploadPosCb.getDefaultInstance();
-                instance.parseFrom(data);
+                InterfaceMain.pbui_TypeUploadPosCb pbui_typeUploadPosCb = instance.parseFrom(data);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.Upload_Progress, pbui_typeUploadPosCb));
                 Log.e("CaseLog", "NativeUtil.callback_method:  72 上传进度通知 -- 高频回调 --->>> ");
                 break;
             case 2: //4  平台初始化完毕
@@ -3708,7 +3693,7 @@ public class NativeUtil {
             case 31://198
                 InterfaceMain.pbui_MeetNotifyMsg voteChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg queryVote = voteChangeInform.parseFrom(data);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform,queryVote));
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform, queryVote));
                 Log.e("MyLog", "NativeUtil.callback_method:  198 投票变更通知 --->>> ");
                 break;
             case 32://202
@@ -3967,6 +3952,7 @@ public class NativeUtil {
                 break;
             default:
                 android.util.Log.i("NativeUtil", "callback_method: type: " + type + ", method: " + method);
+                Log.e("MyLog", "NativeUtil.callback_method 3969行:  默认回调 --->>> ");
                 break;
         }
         return 0;

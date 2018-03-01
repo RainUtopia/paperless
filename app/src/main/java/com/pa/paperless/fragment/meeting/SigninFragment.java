@@ -94,6 +94,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     ArrayList signInfo = msg.getData().getParcelableArrayList("signInfo");
                     InterfaceMain2.pbui_Type_MeetSignInDetailInfo o = (InterfaceMain2.pbui_Type_MeetSignInDetailInfo) signInfo.get(0);
                     int itemCount = o.getItemCount();
+                    Log.e("MyLog","SigninFragment.handleMessage 97行:  签到数量 --->>> "+itemCount);
                     for (int i = 0; i < itemCount; i++) {
                         InterfaceMain2.pbui_Item_MeetSignInDetailInfo item = o.getItem(i);
                         int nameId = item.getNameId();  // 已经签到的人员ID
@@ -231,7 +232,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.export_btn://导出签到信息
                 String[] titles = {"序号", "姓名", "签到时间", "是否签到"};
-                Export.ToExcel("签到信息", "sheet_1", titles, mDatas);
+                Export.ToSigninExcel("签到信息", "Sheet1", titles, mDatas);
 
 //                SaveToExcelUtil.createSmtrautExcel("签到信息","sheetName",arr,cod,);
                 break;
