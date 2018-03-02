@@ -151,6 +151,9 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     public void onAttach(Context context) {
         super.onAttach(context);
         isFirstIn = true;
+        if(nativeUtil!=null){
+            nativeUtil.mediaDestroy(0);
+        }
         Log.e("FramentLife", "MeetingFileFragment.onAttach:   --->>> ");
     }
 

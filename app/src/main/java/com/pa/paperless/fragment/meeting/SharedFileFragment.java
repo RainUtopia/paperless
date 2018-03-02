@@ -21,6 +21,8 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -51,6 +54,7 @@ import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
@@ -366,26 +370,22 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
      *
      * @param path
      */
+    // TODO: 2018/3/2 上传的图片文件会在其他类别中展示待解决。。。
     public void showDialog(final String path) {
         final EditText editText = new EditText(getContext());
+        //获取选择的文件名
+        String fileName = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
+        //给输入框设置默认文件名
+        editText.setText(fileName);
+        Log.e("MyLog", "SharedFileFragment.showDialog 377行:   --->>> " + fileName);
         new AlertDialog.Builder(getContext()).setTitle("请输入文件名")
                 .setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (!(TextUtils.isEmpty(editText.getText().toString().trim()))) {
                     String newName = editText.getText().toString();
-                    // TODO: 2018/3/1 文件上传失败
-                    //计算出 媒体ID
-                    int mediaid = getMediaid(path);
-                    Log.e("MyLog", "SharedFileFragment.onClick 375行:  获得的媒体ID --->>> " + mediaid);
-                    /** ************ ******  69.上传文件  ****** ************ **/
-                    String fileEnd = path.substring(path.lastIndexOf(".") + 1, path.length()).toLowerCase();
-                    try {
-                        nativeUtil.uploadFile(InterfaceMacro.Pb_Upload_Flag.Pb_MEET_UPLOADFLAG_ONLYENDCALLBACK.getNumber(),
-                                4, 0, newName/*+"."+fileEnd*/, path, 0, mediaid);
-                    } catch (InvalidProtocolBufferException e) {
-                        e.printStackTrace();
-                    }
+                    //展示选择上传到哪个目录
+                    showChooseDir(newName, path);
                     dialogInterface.dismiss();
                 } else {
                     Toast.makeText(getContext(), "请输入有效文件名", Toast.LENGTH_SHORT).show();
@@ -460,14 +460,42 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         return 0;
     }
 
-    public void showChooseDir() {
-//        View popupView = getLayoutInflater().inflate(R.layout.pop_sscreen, null);
-//        PopupWindow mScreenPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-//        MyUtils.setAnimal(mScreenPopupWindow);
-//        mScreenPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-//        mScreenPopupWindow.setTouchable(true);
-//        mScreenPopupWindow.setOutsideTouchable(true);
-//        mScreenPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+    public void showChooseDir(final String newName, final String path) {
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.pop_filedir, null);
+
+        RecyclerView fileDirRl = popupView.findViewById(R.id.fileDir_rl);
+        fileDirRl.setLayoutManager(new LinearLayoutManager(getContext()));
+        ChooseDirDialogAdapter adapter = new ChooseDirDialogAdapter(getContext(), meetDirInfos);
+        fileDirRl.setAdapter(adapter);
+
+        final PopupWindow mDirPopView = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setAnimal(mDirPopView);
+        mDirPopView.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mDirPopView.setTouchable(true);
+        mDirPopView.setOutsideTouchable(true);
+
+        adapter.setItemListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int posion) {
+                TextView viewById = view.findViewById(R.id.dir_btn);
+                MyUtils.setAnimator(viewById);
+                int dirId = meetDirInfos.get(posion).getDirId();
+                Log.e("MyLog", "SharedFileFragment.onItemClick 478行:  获得的目录ID --->>> " + dirId);
+                //计算出 媒体ID
+                int mediaid = getMediaid(path);
+                String fileEnd = path.substring(path.lastIndexOf(".") + 1, path.length()).toLowerCase();
+                Log.e("MyLog", "SharedFileFragment.onClick 375行:  获得的媒体ID --->>> " + mediaid);
+                /** ************ ******  69.上传文件  ****** ************ **/
+                try {
+                    nativeUtil.uploadFile(InterfaceMacro.Pb_Upload_Flag.Pb_MEET_UPLOADFLAG_ONLYENDCALLBACK.getNumber(),
+                            dirId, 0, newName + "." + fileEnd, path, 0, mediaid);
+                } catch (InvalidProtocolBufferException e) {
+                    e.printStackTrace();
+                }
+                mDirPopView.dismiss();
+            }
+        });
+        mDirPopView.showAtLocation(getActivity().findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
     public String getRealPathFromURI(Uri contentUri) {

@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.pa.paperless.R;
 import com.pa.paperless.bean.MeetDirBean;
+import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.List;
 
@@ -19,10 +21,15 @@ import java.util.List;
 public class ChooseDirDialogAdapter extends RecyclerView.Adapter<ChooseDirDialogAdapter.ViewHolder> {
     private final Context mContext;
     private final List<MeetDirBean> mData;
+    private ItemClickListener mListener;
 
     public ChooseDirDialogAdapter(Context context, List<MeetDirBean> data) {
         mContext = context;
         mData = data;
+    }
+
+    public void setItemListener(ItemClickListener listener) {
+        mListener = listener;
     }
 
     @Override
@@ -33,9 +40,17 @@ public class ChooseDirDialogAdapter extends RecyclerView.Adapter<ChooseDirDialog
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         MeetDirBean meetDirBean = mData.get(position);
         holder.dir_tv.setText(meetDirBean.getDirName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
+                }
+            }
+        });
     }
 
     @Override
@@ -45,12 +60,12 @@ public class ChooseDirDialogAdapter extends RecyclerView.Adapter<ChooseDirDialog
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
-        public Button dir_tv;
+        public TextView dir_tv;
 
         public ViewHolder(View rootView) {
             super(rootView);
             this.rootView = rootView;
-            this.dir_tv = (Button) rootView.findViewById(R.id.dir_btn);
+            this.dir_tv = (TextView) rootView.findViewById(R.id.dir_btn);
         }
 
     }

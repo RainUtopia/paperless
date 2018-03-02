@@ -29,6 +29,7 @@ import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VoteAdapter;
 import com.pa.paperless.adapter.VoteInfoPopAdapter;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.bean.SubmitVoteBean;
 import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
@@ -209,13 +210,24 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.Vote_Change_Inform://投票变更通知
+                Log.e("MyLog", "VoteFragment.getEventMessage 213行:  投票变更通知 EventBus --->>> ");
+                nativeUtil.queryVote();
                 InterfaceMain.pbui_MeetNotifyMsg object1 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
                 int opermethod = object1.getOpermethod();
+                Log.e("MyLog", "VoteFragment.getEventMessage 219行:  投票变更通知 EventBus引起的方法 --->>> " + opermethod);
+                int id1 = object1.getId();
                 if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
                     //操作方法为 查询投票 时
                     Log.e("MyLog", "VoteFragment.getEventMessage:  投票变更通知 EventBus --->>> 200.查询投票");
                     /** ************ ******  200.查询投票  ****** ************ **/
                     nativeUtil.queryVote();
+                }
+                //判断是否是发起投票方法引起的回调
+                if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber()) {
+                    Log.e("MyLog", "VoteFragment.getEventMessage 224行:  投票变更通知 EventBus   --->>> 193.发起投票  " + opermethod + "   投票ID：" + id1);
+                    if (isClicked) {
+                        showChoose(mVoteData.get(mPosion));
+                    }
                 }
                 if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_STOP.getNumber()) {
                     //操作方法为 停止投票 时
@@ -230,15 +242,19 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
             case IDEventMessage.VoteMember_ChangeInform://投票提交人变更通知
                 Log.e("MyLog", "VoteFragment.getEventMessage:  投票提交人变更通知 EventBus --->>> ");
                 int voteid = mVoteData.get(mPosion).getVoteid();
+                /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
                 nativeUtil.queryOneVoteSubmitter(voteid);
                 break;
             case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
                 InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
                 int opermethod1 = object.getOpermethod();
                 int id = object.getId();
-                Log.e("MyLog", "VoteFragment.getEventMessage 231行:  发起投票 EventBus  方法 --->>> " + opermethod1 + "   投票ID：" + id);
-                if(isClicked) {
-                    showChoose(mVoteData.get(mPosion));
+                //判断是否是发起投票方法引起的回调
+                if (opermethod1 == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber()) {
+                    Log.e("MyLog", "VoteFragment.getEventMessage 251行:  发起投票 EventBus  方法 --->>> " + opermethod1 + "   投票ID：" + id);
+                    if (isClicked) {
+                        showChoose(mVoteData.get(mPosion));
+                    }
                 }
                 break;
         }
@@ -301,12 +317,12 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case R.id.vote_export:      //结果导出
-                String[] titles = {"投票ID","投票内容","投票类型","是否记名","状态","选项一","投票数","选项二","投票数","选项三","投票数","选项四","投票数","选项五","投票数"};
+                String[] titles = {"投票ID", "投票内容", "投票类型", "是否记名", "状态", "选项一", "投票数", "选项二", "投票数", "选项三", "投票数", "选项四", "投票数", "选项五", "投票数"};
                 String meetName = getMeetName();
-                Log.e("MyLog","VoteFragment.onClick 306行:  meetName --->>> "+meetName);
+                Log.e("MyLog", "VoteFragment.onClick 306行:  meetName --->>> " + meetName);
                 try {
                     boolean b = Export.ToVoteExcel(meetName, "投票结果", "Sheet1", titles, mVoteData);
-                    if(b){
+                    if (b) {
                         Toast.makeText(getContext(), "导出成功", Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
@@ -322,6 +338,8 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 if (votestate == 0 && isClicked) {
                     /** ************ ******  193.发起投票  ****** ************ **/
                     nativeUtil.initiateVote(mVoteData.get(mPosion).getVoteid());
+                } else {
+                    Toast.makeText(getContext(), "请选中未发起的投票", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.vote_over:        //结束投票
@@ -424,16 +442,16 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                                 break;
                         }
                     }
+                    int bb = 0;
                     for (int j = 0; j < choose.size(); j++) {
-                        Log.e("MyLog","VoteFragment.onClick 414行:   --->>> "+choose.get(j));
+                        bb = bb + choose.get(j);
+                        Log.e("MyLog", "VoteFragment.onClick 443行:  最后传入的值 --->>> " + bb);
                     }
-                    //int变量的二进制表示的字符串
-                    InterfaceMain2.pbui_Item_MeetSubmitVote item_SubmitVote = InterfaceMain2.pbui_Item_MeetSubmitVote.getDefaultInstance();
-                    int voteid = item_SubmitVote.getVoteid();
-
+                    SubmitVoteBean submitVoteBean = new SubmitVoteBean(voteInfo.getVoteid(), selectcount1, bb);
                     /** ************ ******  196.提交投票结果  ****** ************ **/
-                    nativeUtil.submitVoteResult(item_SubmitVote);
-
+                    nativeUtil.submitVoteResult(submitVoteBean);
+//                    mVoteAdapter.notifyDataSetChanged();
+                    mChoosePop.dismiss();
                 }
             }
         });

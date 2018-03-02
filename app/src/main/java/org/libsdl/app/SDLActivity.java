@@ -311,7 +311,6 @@ public class SDLActivity extends Activity {
 
             //Log.v(TAG, "Finished waiting for SDL thread");
         }
-
         super.onDestroy();
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
@@ -785,6 +784,7 @@ public class SDLActivity extends Activity {
      * This method is called by SDL using JNI.
      */
     public InputStream openAPKExtensionInputStream(String fileName) throws IOException {
+        Log.e("MyLog","SDLActivity.openAPKExtensionInputStream 787行:   --->>> ");
         // Get a ZipResourceFile representing a merger of both the main and patch files
         if (expansionFile == null) {
             Integer mainVersion = Integer.valueOf(nativeGetHint("SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION"));
@@ -904,7 +904,7 @@ public class SDLActivity extends Activity {
         // TODO set values from "flags" to messagebox dialog
 
         // get colors
-
+        Log.e("MyLog","SDLActivity.onCreateDialog 906行:   --->>> ");
         int[] colors = args.getIntArray("colors");
         int backgroundColor;
         int textColor;
@@ -1042,6 +1042,7 @@ class SDLMain implements Runnable {
 
     @Override
     public void run() {
+        Log.e("MyLog","SDLMain.run 1044行:   --->>> ");
         // Runs SDL_main()
 
 //    	 Log.i( "SDLMain", "SDLMain start!");
@@ -1096,9 +1097,9 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     // Startup
     public SDLSurface(Context context) {
+
         super(context);
         getHolder().addCallback(this);
-
         setFocusable(true);
         setFocusableInTouchMode(true);
         requestFocus();
@@ -1625,6 +1626,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
 
     @Override
     public void pollInputDevices() {
+        Log.e("MyLog","SDLJoystickHandler_API12.pollInputDevices 1627行:   --->>> ");
         int[] deviceIds = InputDevice.getDeviceIds();
         // It helps processing the device ids in reverse order
         // For example, in the case of the XBox 360 wireless dongle,
@@ -1703,6 +1705,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
 
     @Override
     public boolean handleMotionEvent(MotionEvent event) {
+        Log.e("MyLog","SDLJoystickHandler_API12.handleMotionEvent 1705行:   --->>> ");
         if ((event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0) {
             int actionPointerIndex = event.getActionIndex();
             int action = event.getActionMasked();
@@ -1769,7 +1772,7 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
             default:
                 break;
         }
-
+    Log.e("MyLog","SDLGenericMotionListener_API12.onGenericMotion 1771行:   --->>> ");
         // Event was not managed
         return false;
     }

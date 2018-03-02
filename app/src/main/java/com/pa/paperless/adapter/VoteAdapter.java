@@ -17,6 +17,8 @@ import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.List;
 
+import static com.pa.paperless.utils.MyUtils.get10To2;
+
 /**
  * Created by Administrator on 2017/11/14.
  * 投票查询 adapter

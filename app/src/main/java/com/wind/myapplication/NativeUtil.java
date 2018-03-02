@@ -9,6 +9,7 @@ import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.bean.PlaceInfo;
+import com.pa.paperless.bean.SubmitVoteBean;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventAgenda;
 import com.pa.paperless.event.EventMessage;
@@ -19,6 +20,7 @@ import com.pa.paperless.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -2544,9 +2546,15 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean submitVoteResult(InterfaceMain2.pbui_Item_MeetSubmitVote value) {
+    public boolean submitVoteResult(SubmitVoteBean submitVoteBeen) {
+        InterfaceMain2.pbui_Item_MeetSubmitVote.Builder builder1 = InterfaceMain2.pbui_Item_MeetSubmitVote.newBuilder();
+        builder1.setSelcnt(submitVoteBeen.getSelcnt());
+        builder1.setVoteid(submitVoteBeen.getVoteid());
+        builder1.setSelitem(submitVoteBeen.getSelectItem());
+
         InterfaceMain2.pbui_Type_MeetSubmitVote.Builder builder = InterfaceMain2.pbui_Type_MeetSubmitVote.newBuilder();
-        builder.addItem(value);
+        builder.addItem(builder1);
+
         InterfaceMain2.pbui_Type_MeetSubmitVote build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETONVOTING.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SUBMIT.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.submitVoteResult:  196.提交投票结果 --->>> ");
@@ -3168,8 +3176,12 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean mediaDestroy() {
-//        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DESTROY.getNumber(), build.toByteArray());
+    public boolean mediaDestroy(int resValue) {
+        InterfaceMain2.pbui_Type_MeetDestroyPlayRes.Builder builder = InterfaceMain2.pbui_Type_MeetDestroyPlayRes.newBuilder();
+        builder.setRes(resValue);
+        InterfaceMain2.pbui_Type_MeetDestroyPlayRes build = builder.build();
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DESTORY.getNumber(), build.toByteArray());
+        Log.e("MyLog","NativeUtil.mediaDestroy 3176行:  释放播放资源 --->>> ");
         return true;
     }
 

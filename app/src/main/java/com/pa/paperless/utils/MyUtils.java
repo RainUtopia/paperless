@@ -278,8 +278,21 @@ public class MyUtils {
      * @param iv
      */
     public static void setAnimator(View iv) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(iv, "scaleX", 1f, 1.5f, 1f);
-        animator.setDuration(300);
-        animator.start();
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(iv, "scaleX", 1f, 1.5f, 1f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(iv, "scaleY", 1f, 1.5f, 1f);
+        animatorX.setDuration(300);
+        animatorY.setDuration(300);
+        animatorX.start();
+        animatorY.start();
     }
+
+    /**
+     * 将十进制的数装换成二进制的字符串
+     * @param value
+     * @return
+     */
+    public static String get10To2(int value){
+        return Integer.toBinaryString(value);
+    }
+
 }
