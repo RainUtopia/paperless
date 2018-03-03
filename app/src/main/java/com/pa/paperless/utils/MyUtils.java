@@ -186,7 +186,7 @@ public class MyUtils {
      *
      * @param popupWindow
      */
-    public static void setAnimal(PopupWindow popupWindow) {
+    public static void setPopAnimal(PopupWindow popupWindow) {
         popupWindow.setAnimationStyle(R.style.AnimHorizontal);
     }
 
@@ -294,5 +294,6 @@ public class MyUtils {
     public static String get10To2(int value){
         return Integer.toBinaryString(value);
     }
+
 
 }

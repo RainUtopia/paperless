@@ -19,7 +19,6 @@ import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -42,7 +40,6 @@ import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MainActivity;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.ChooseDirDialogAdapter;
 import com.pa.paperless.adapter.TypeFileAdapter;
@@ -58,7 +55,6 @@ import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
-import com.pa.paperless.utils.SDCardUtils;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
@@ -66,12 +62,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.breadCrumbShortTitle;
-import static android.R.attr.path;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -469,7 +461,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         fileDirRl.setAdapter(adapter);
 
         final PopupWindow mDirPopView = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-        MyUtils.setAnimal(mDirPopView);
+        MyUtils.setPopAnimal(mDirPopView);
         mDirPopView.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mDirPopView.setTouchable(true);
         mDirPopView.setOutsideTouchable(true);

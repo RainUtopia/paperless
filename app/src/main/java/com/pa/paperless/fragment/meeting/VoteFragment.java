@@ -87,7 +87,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                         mVoteAdapter.setItemListener(new ItemClickListener() {
                             @Override
                             public void onItemClick(View view, int posion) {
-                                Log.e("MyLog", "VoteFragment.onItemClick:  不是主持人点击 --->>> " + posion);
                                 mVoteAdapter.setCheckedId(posion);
                             }
                         });
@@ -96,9 +95,12 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     mVoteAdapter.setItemListener(new ItemClickListener() {
                         @Override
                         public void onItemClick(View view, final int posion) {
-                            Log.e("MyLog", "VoteFragment.onItemClick:  主持人点击 --->>> " + posion);
                             mVoteAdapter.setCheckedId(posion);
                             mPosion = posion;
+                            voteInfo = mVoteData.get(mPosion);
+                            int voteid = voteInfo.getVoteid();
+                            int type = mVoteData.get(mPosion).getType();
+                            Log.e("MyLog", "VoteFragment.onItemClick 103行:  item点击时选中的投票ID --->>> " + voteid + "  当前的状态:" + type);
                             isClicked = true;
 //                            int mode = mVoteData.get(mPosion).getMode();
 //                            int votestate = mVoteData.get(mPosion).getVotestate();
@@ -111,75 +113,33 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
 //                                    e.printStackTrace();
 //                                }
 //                            }
-                            /** ************ ******    ****** ************ **/
-//                            TextView tv1 = view.findViewById(R.id.vote_option_1);
-//                            TextView tv2 = view.findViewById(R.id.vote_option_2);
-//                            TextView tv3 = view.findViewById(R.id.vote_option_3);
-//                            TextView tv4 = view.findViewById(R.id.vote_option_4);
-//                            TextView tv5 = view.findViewById(R.id.vote_option_5);
-//                            tv1.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Log.e("MyLog", "VoteFragment.onClick:  点击了第一项 --->>> " + posion);
-//                                    MyUtils.setAnimator(view);
-//                                }
-//                            });
-//                            tv2.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Log.e("MyLog", "VoteFragment.onClick:  点击了第二项 --->>> " + posion);
-//                                    MyUtils.setAnimator(view);
-//                                }
-//                            });
-//                            tv3.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Log.e("MyLog", "VoteFragment.onClick:  点击了第三项 --->>> " + posion);
-//                                    MyUtils.setAnimator(view);
-//                                }
-//                            });
-//                            tv4.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Log.e("MyLog", "VoteFragment.onClick:  点击了第四项 --->>> " + posion);
-//                                    MyUtils.setAnimator(view);
-//                                }
-//                            });
-//                            tv5.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Log.e("MyLog", "VoteFragment.onClick:  点击了第五项 --->>> " + posion);
-//                                    MyUtils.setAnimator(view);
-//                                }
-//                            });
                         }
                     });
                     break;
-                case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
-                    ArrayList queryVoteMember = msg.getData().getParcelableArrayList("queryVoteMember");
-                    InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo o1 = (InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo) queryVoteMember.get(0);
-                    List<InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo> itemList = o1.getItemList();
-                    for (int i = 0; i < itemList.size(); i++) {
-                        InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
-                        int id = pbui_item_meetVoteSignInDetailInfo.getId();
-                        int selcnt = pbui_item_meetVoteSignInDetailInfo.getSelcnt();
-                        // TODO: 2018/2/8  将selcnt转换成二进制字符串 从右往左哪个位数为1 则表示选择了第几个
-                        //int变量的二进制表示的字符串
-                        String string = Integer.toBinaryString(selcnt);
-                        //查找字符串中为1的索引位置
-                        int i1 = string.indexOf("1");
-                        int length = string.length();
-                        for (int j = 0; j < length; j++) {
-                            if (i1 == j) {
-                                // TODO: 2018/2/8 计算出在选择的是第 selectedItem 个选项
-                                selectedItem = length - j;
-                                Log.e("MyLog", "VoteFragment.handleMessage:   --->>> 选中了第_ " + selectedItem + " _项");
-                            }
-                        }
-                        Log.e("MyLog", "VoteFragment.handleMessage:  投票人员ID: --->>> " + id +
-                                "  选择了哪一项：  " + selcnt + "  十进制：" + string + "   位置：  " + i1);
-                    }
-                    break;
+//                case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
+//                    ArrayList queryVoteMember = msg.getData().getParcelableArrayList("queryVoteMember");
+//                    InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo o1 = (InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo) queryVoteMember.get(0);
+//                    List<InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo> itemList = o1.getItemList();
+//                    for (int i = 0; i < itemList.size(); i++) {
+//                        InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
+//                        int id = pbui_item_meetVoteSignInDetailInfo.getId();
+//                        int selcnt = pbui_item_meetVoteSignInDetailInfo.getSelcnt();
+//
+//                        //int变量的二进制表示的字符串
+//                        String string = Integer.toBinaryString(selcnt);
+//                        //查找字符串中为1的索引位置
+//                        int i1 = string.indexOf("1");
+//                        int length = string.length();
+//                        for (int j = 0; j < length; j++) {
+//                            if (i1 == j) {
+//                                selectedItem = length - j;
+//                                Log.e("MyLog", "VoteFragment.handleMessage:   --->>> 选中了第_ " + selectedItem + " _项");
+//                            }
+//                        }
+//                        Log.e("MyLog", "VoteFragment.handleMessage:  投票人员ID: --->>> " + id +
+//                                "  选择了哪一项：  " + selcnt + "  十进制：" + string + "   位置：  " + i1);
+//                    }
+//                    break;
             }
         }
     };
@@ -189,6 +149,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     private PopupWindow mChoosePop;
     private int selectedItem = 0;
     private boolean isClicked = false;
+    private VoteInfo voteInfo;
 
     @Nullable
     @Override
@@ -211,39 +172,45 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         switch (message.getAction()) {
             case IDEventMessage.Vote_Change_Inform://投票变更通知
                 Log.e("MyLog", "VoteFragment.getEventMessage 213行:  投票变更通知 EventBus --->>> ");
-                nativeUtil.queryVote();
                 InterfaceMain.pbui_MeetNotifyMsg object1 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
                 int opermethod = object1.getOpermethod();
-                Log.e("MyLog", "VoteFragment.getEventMessage 219行:  投票变更通知 EventBus引起的方法 --->>> " + opermethod);
                 int id1 = object1.getId();
+
+                nativeUtil.queryVote();
+
                 if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
                     //操作方法为 查询投票 时
                     Log.e("MyLog", "VoteFragment.getEventMessage:  投票变更通知 EventBus --->>> 200.查询投票");
-                    /** ************ ******  200.查询投票  ****** ************ **/
                     nativeUtil.queryVote();
                 }
                 //判断是否是发起投票方法引起的回调
                 if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber()) {
                     Log.e("MyLog", "VoteFragment.getEventMessage 224行:  投票变更通知 EventBus   --->>> 193.发起投票  " + opermethod + "   投票ID：" + id1);
                     if (isClicked) {
-                        showChoose(mVoteData.get(mPosion));
+                        //mVoteData.get(mPosion)
+                        showChoose(voteInfo);
                     }
                 }
                 if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_STOP.getNumber()) {
                     //操作方法为 停止投票 时
                     int id = object1.getId();
-                    Log.e("MyLog", "VoteFragment.getEventMessage 214行:  投票变更通知 EventBus --->>> 195.停止投票   " + id);
+                    Log.e("MyLog", "VoteFragment.getEventMessage 238行:  投票变更通知 EventBus --->>> 195.停止投票   " + id);
 //                    /** ************ ******  195.停止投票  ****** ************ **/
 //                    nativeUtil.stopVote(id);
-                    mVoteData.get(mPosion).setVotestate(2);
+                    voteInfo.setVotestate(2);
                     mVoteAdapter.notifyDataSetChanged();
                 }
                 break;
-            case IDEventMessage.VoteMember_ChangeInform://投票提交人变更通知
+            case IDEventMessage.VoteMember_ChangeInform://203.投票提交人变更通知
                 Log.e("MyLog", "VoteFragment.getEventMessage:  投票提交人变更通知 EventBus --->>> ");
                 int voteid = mVoteData.get(mPosion).getVoteid();
+                InterfaceMain.pbui_MeetNotifyMsg object2 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                int id2 = object2.getId();
+                int opermethod2 = object2.getOpermethod();
+                Log.e("MyLog", "VoteFragment.getEventMessage 209行:  item 的ID --->>> " + voteid + "   回调接收到的ID：" + id2);
                 /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
-                nativeUtil.queryOneVoteSubmitter(voteid);
+//                nativeUtil.queryOneVoteSubmitter(voteid);
+                nativeUtil.queryVote();
                 break;
             case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
                 InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
@@ -253,7 +220,8 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 if (opermethod1 == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber()) {
                     Log.e("MyLog", "VoteFragment.getEventMessage 251行:  发起投票 EventBus  方法 --->>> " + opermethod1 + "   投票ID：" + id);
                     if (isClicked) {
-                        showChoose(mVoteData.get(mPosion));
+                        //mVoteData.get(mPosion)
+                        showChoose(voteInfo);
                     }
                 }
                 break;
@@ -270,7 +238,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -337,7 +304,9 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 // 判断是否是未发起状态
                 if (votestate == 0 && isClicked) {
                     /** ************ ******  193.发起投票  ****** ************ **/
-                    nativeUtil.initiateVote(mVoteData.get(mPosion).getVoteid());
+                    int voteid = mVoteData.get(mPosion).getVoteid();
+                    Log.e("MyLog", "VoteFragment.onClick 341行:  发起的投票ID --->>> " + voteid);
+                    nativeUtil.initiateVote(voteid);
                 } else {
                     Toast.makeText(getContext(), "请选中未发起的投票", Toast.LENGTH_SHORT).show();
                 }
@@ -382,7 +351,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
 
         int selectcount = voteInfo.getSelectcount();
         int type = voteInfo.getType();
-        Log.e("MyLog", "VoteFragment.ChooseHolderEvent:  选择类型 --->>> " + type + "  可选项： " + selectcount);
         //根据 type 设置可选择的个数
         switch (type) {
             case 0://多选
@@ -421,8 +389,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 for (int i = 0; i < selectcount1; i++) {
                     CheckBox checkBox = btns.get(i);
                     if (checkBox.isChecked()) {
-                        String string = checkBox.getText().toString();
-                        Log.e("MyLog", "VoteFragment.onClick:  选中的内容 --->>> " + string);
                         switch (i) {
                             case 0://第0项被选中
                                 choose.add(1);
@@ -442,17 +408,15 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                                 break;
                         }
                     }
-                    int bb = 0;
-                    for (int j = 0; j < choose.size(); j++) {
-                        bb = bb + choose.get(j);
-                        Log.e("MyLog", "VoteFragment.onClick 443行:  最后传入的值 --->>> " + bb);
-                    }
-                    SubmitVoteBean submitVoteBean = new SubmitVoteBean(voteInfo.getVoteid(), selectcount1, bb);
-                    /** ************ ******  196.提交投票结果  ****** ************ **/
-                    nativeUtil.submitVoteResult(submitVoteBean);
-//                    mVoteAdapter.notifyDataSetChanged();
-                    mChoosePop.dismiss();
                 }
+                int bb = 0;
+                for (int j = 0; j < choose.size(); j++) {
+                    bb = bb + choose.get(j);
+                }
+                mChoosePop.dismiss();
+                SubmitVoteBean submitVoteBean = new SubmitVoteBean(voteInfo.getVoteid(), choose.size(), bb);
+                /** ************ ******  196.提交投票结果  ****** ************ **/
+                nativeUtil.submitVoteResult(submitVoteBean);
             }
         });
     }
@@ -502,7 +466,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
      */
     private void CheckBoxEvent(final ArrayList<CheckBox> btns, final int maxSelect) {
         final int nowSelect = getNowSelect(btns);
-        Log.e("MyLog", "VoteFragment.CheckBoxEvent:  当前最大选中个数 --->>> " + maxSelect);
         if (maxSelect > nowSelect) {
             //如果当前选中的个数 小于 可选的个数
             for (int i = 0; i < btns.size(); i++) {
@@ -535,7 +498,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 nowSelect++;
             }
         }
-        Log.e("MyLog", "VoteFragment.onClick:  选中的个数 --->>> " + nowSelect);
         return nowSelect;
     }
 

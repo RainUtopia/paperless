@@ -1,6 +1,6 @@
 package com.pa.paperless.adapter;
 
-
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,26 +9,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.pa.paperless.R;
-import com.pa.paperless.bean.MemberInfo;
+import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.checks;
+import static com.pa.paperless.activity.MeetingActivity.allPerchecks;
 
 /**
- * Created by Administrator on 2017/11/9.
- * 同屏控制Adapter 参与人 和 投影机
+ * Created by Administrator on 2018/3/3.
  */
 
-public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class OnLineProjectorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<MemberInfo> mData;
+    private List<DeviceInfo> mData;
     private ItemClickListener mListener;
 
 
-    public ScreenControlAdapter(List<MemberInfo> datas) {
+    public OnLineProjectorAdapter(List<DeviceInfo> datas) {
         mData = datas;
     }
 
@@ -37,11 +36,11 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
      *
      * @return
      */
-    public List<MemberInfo> getCheckedIds() {
-        List<MemberInfo> checkedId = new ArrayList<>();
-        if(mData.size()>0) {
-            for (int i = 0; i < checks.size(); i++) {
-                if (checks.get(i)) {
+    public List<DeviceInfo> getCheckedIds() {
+        List<DeviceInfo> checkedId = new ArrayList<>();
+        if (mData.size() > 0) {
+            for (int i = 0; i < allPerchecks.size(); i++) {
+                if (allPerchecks.get(i)) {
                     checkedId.add(mData.get(i));
                 }
             }
@@ -55,15 +54,15 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     public boolean setAllChecked() {
         //只要集合中包含false，就将该索引的位置改为true
-        if (checks.contains(false)) {
-            for (int i = 0; i < checks.size(); i++) {
-                checks.set(i, true);
+        if (allPerchecks.contains(false)) {
+            for (int i = 0; i < allPerchecks.size(); i++) {
+                allPerchecks.set(i, true);
             }
             notifyDataSetChanged();
             return true;
         } else {//全部已经选中状态（true），就全设为false
-            for (int i = 0; i < checks.size(); i++) {
-                checks.set(i, false);
+            for (int i = 0; i < allPerchecks.size(); i++) {
+                allPerchecks.set(i, false);
             }
             notifyDataSetChanged();
             return false;
@@ -83,13 +82,14 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        ((ViewHolder) holder).play_btn.setText(mData.get(position).getName());
-        ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
+        ((ViewHolder) holder).play_btn.setText(mData.get(position).getDevName());
+        ((ViewHolder) holder).play_btn.setSelected(allPerchecks.get(position));
 
         ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
+                    Log.e("MyLog", "ScreenControlAdapter.onClick: rrrrr  --->>> ");
                     mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
                 }
             }

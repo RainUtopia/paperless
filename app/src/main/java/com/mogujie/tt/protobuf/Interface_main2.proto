@@ -803,7 +803,7 @@ message pbui_Type_StreamPush
 //method: push
 message pbui_Type_DoStreamPush
 {
-	fixed32  triggeruserval=1;//参见该文件中的triggeruserval定义
+	fixed32  triggeruserval=1;//参见该文件中的 triggeruserval 定义
 	fixed32  srcdeviceid=2;       //发起请求的设备ID
 	fixed32  substreamindex=3; //本设备子通道号
 	repeated fixed32 deviceid=4;	  //通知的目标设备,为0表示全部

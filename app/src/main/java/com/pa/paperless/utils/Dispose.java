@@ -221,8 +221,8 @@ public class Dispose {
             int facestate = pdev.getFacestate();
             int memberid = pdev.getMemberid();
             int meetingid = pdev.getMeetingid();
-            Log.e("MyLog", "Dispose.DevInfo:  设备ID --->>> " + devcieid + "  设备名称：" + devName + "  是否在线：" + netstate + "  界面状态：" + facestate
-                    + " 人员ID：" + memberid + "  会议ID：" + meetingid);
+//            Log.e("MyLog", "Dispose.DevInfo:  设备ID --->>> " + devcieid + "  设备名称：" + devName + "  是否在线：" + netstate + "  界面状态：" + facestate
+//                    + " 人员ID：" + memberid + "  会议ID：" + meetingid);
             deviceInfos.add(new DeviceInfo(devcieid, devName, ipInfos, netstate, resInfos, facestate, memberid, meetingid));
         }
         return deviceInfos;
@@ -241,8 +241,8 @@ public class Dispose {
             int triggerId = resinfo.getTriggerId();
             int val = resinfo.getVal();
             int val2 = resinfo.getVal2();
-            Log.e("MyLog", "Dispose.resInfo:  设备资源信息： --->>> " + val + " :::: " + val2 +
-                    "playstatus :  " + playstatus + "  triggerId:  " + triggerId);
+//            Log.e("MyLog", "Dispose.resInfo:  设备资源信息： --->>> " + val + " :::: " + val2 +
+//                    "playstatus :  " + playstatus + "  triggerId:  " + triggerId);
             resInfos.add(new ResInfo(playstatus, triggerId, val, val2));
         }
         return resInfos;
@@ -259,7 +259,7 @@ public class Dispose {
             InterfaceMain.pbui_SubItem_DeviceIpAddrInfo ipinfo = pdev.getIpinfo(j);
             String IpStr = new String(ipinfo.getIp().toByteArray());
             int port = ipinfo.getPort();
-            Log.e("MyLog", "Dispose.ipInfo:  设备IP信息： --->>> " + IpStr + "   端口号：" + port);
+//            Log.e("MyLog", "Dispose.ipInfo:  设备IP信息： --->>> " + IpStr + "   端口号：" + port);
             ipInfos.add(new IpInfo(IpStr, port));
         }
         return ipInfos;

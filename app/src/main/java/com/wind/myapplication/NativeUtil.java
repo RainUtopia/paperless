@@ -2506,6 +2506,7 @@ public class NativeUtil {
      */
     public boolean initiateVote(int voteid) {
         InterfaceMain2.pbui_Type_MeetStopVoteInfo.Builder builder = InterfaceMain2.pbui_Type_MeetStopVoteInfo.newBuilder();
+        Log.e("MyLog", "NativeUtil.initiateVote 2509行:  发起投票传递的投票ID --->>> " + voteid);
         builder.addVoteid(voteid);
         InterfaceMain2.pbui_Type_MeetStopVoteInfo build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETONVOTING.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber(), build.toByteArray());
@@ -2551,7 +2552,8 @@ public class NativeUtil {
         builder1.setSelcnt(submitVoteBeen.getSelcnt());
         builder1.setVoteid(submitVoteBeen.getVoteid());
         builder1.setSelitem(submitVoteBeen.getSelectItem());
-
+        Log.e("MyLog", "NativeUtil.submitVoteResult 2555行:  提交投票结果传递参数 --->>> 选择了的个数：" + submitVoteBeen.getSelcnt() +
+                "  传递的投票ID  " + submitVoteBeen.getVoteid() + "   已经选择的十进制代表数： " + submitVoteBeen.getSelectItem());
         InterfaceMain2.pbui_Type_MeetSubmitVote.Builder builder = InterfaceMain2.pbui_Type_MeetSubmitVote.newBuilder();
         builder.addItem(builder1);
 
@@ -3181,7 +3183,7 @@ public class NativeUtil {
         builder.setRes(resValue);
         InterfaceMain2.pbui_Type_MeetDestroyPlayRes build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DESTORY.getNumber(), build.toByteArray());
-        Log.e("MyLog","NativeUtil.mediaDestroy 3176行:  释放播放资源 --->>> ");
+        Log.e("MyLog", "NativeUtil.mediaDestroy 3176行:  释放播放资源 --->>> ");
         return true;
     }
 
@@ -3288,8 +3290,14 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean streamPlay() {
+    public boolean streamPlay(List<Integer> alldeviceid, List<Integer> allres, int subid, int srcdeviceid, int triggeruserval) {
         InterfaceMain2.pbui_Type_MeetDoStreamPlay.Builder builder = InterfaceMain2.pbui_Type_MeetDoStreamPlay.newBuilder();
+        builder.setSrcdeviceid(srcdeviceid);
+        builder.setSubid(subid);
+        builder.setTriggeruserval(triggeruserval);
+
+        builder.addAllDeviceid(alldeviceid);
+        builder.addAllRes(allres);
         InterfaceMain2.pbui_Type_MeetDoStreamPlay build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.streamPlay:  264.流播放 --->>> ");
@@ -3537,7 +3545,7 @@ public class NativeUtil {
                 int attribid = pbui_type_meetDeviceBaseInfo.getAttribid();
                 int deviceid = pbui_type_meetDeviceBaseInfo.getDeviceid();
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.DEV_REGISTER_INFORM, pbui_type_meetDeviceBaseInfo));
-                Log.e("CaseLog", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>> 寄存器ID ： " + attribid + "  设备ID：" + deviceid);
+//                Log.e("CaseLog", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>> 寄存器ID ： " + attribid + "  设备ID：" + deviceid);
                 break;
             case 7://40
                 InterfaceMain.pbui_meetUrl pbui_meetUrl = InterfaceMain.pbui_meetUrl.getDefaultInstance();
