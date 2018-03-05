@@ -41,8 +41,8 @@ public abstract class BaseFragment extends Fragment implements IModelChangeListe
 
 
     protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-        nativeUtil.setCallListener(this);
+//        nativeUtil = NativeUtil.getInstance();
+//        nativeUtil.setCallListener(this);
     }
 
     @Override

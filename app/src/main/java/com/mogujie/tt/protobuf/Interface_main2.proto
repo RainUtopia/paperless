@@ -227,7 +227,7 @@ message pbui_Item_MeetVoteDetailInfo
 {
 	fixed32		voteid=1;
 	bytes		content=2; //投票内容 
-	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见Pb_MeetVoteType
+	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见 Pb_MeetVoteType
 	fixed32			mode=4; //匿名投票 记名投票 参见Pb_MeetVoteMode
 	fixed32			type=5; //多选 单选 参见Pb_MeetVote_SelType
 	fixed32			votestate=6; //投票状态 参见Pb_MeetVoteStatus
@@ -247,7 +247,7 @@ message pbui_Type_MeetVoteDetailInfo
 //method: complexquery
 message pbui_Type_MeetVoteComplexQuery
 {
-	fixed32	 maintype=1; //指定大类 参见本文件中的maintype 定义
+	fixed32	 maintype=1; //指定大类 参见本文件中的 maintype 定义
 }
 
 //会议投票人

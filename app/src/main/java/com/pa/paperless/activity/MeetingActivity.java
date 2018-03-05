@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.OnLineProjectorAdapter;
 import com.pa.paperless.adapter.ScreenControlAdapter;
@@ -111,10 +113,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private VoteFragment mVoteFragment;
     private NotationFragment mNotationFragment;
     private WebBrowseFragment mWebbrowseFragment;
-    private int posion;
-    private static final String POSITION = "position";
     private NativeUtil nativeUtil;
-
 
     private Handler mHandler = new Handler() {
         @Override
@@ -122,8 +121,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             switch (msg.what) {
                 case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
                     ArrayList queryMeetById = msg.getData().getParcelableArrayList("queryMeetById");
-                    InterfaceMain.pbui_Type_MeetMeetInfo o = (InterfaceMain.pbui_Type_MeetMeetInfo) queryMeetById.get(0);
-                    List<InterfaceMain.pbui_Item_MeetMeetInfo> itemList = o.getItemList();
+                    InterfaceMain.pbui_Type_MeetMeetInfo o6 = (InterfaceMain.pbui_Type_MeetMeetInfo) queryMeetById.get(0);
+                    List<InterfaceMain.pbui_Item_MeetMeetInfo> itemList = o6.getItemList();
                     for (int i = 0; i < itemList.size(); i++) {
                         InterfaceMain.pbui_Item_MeetMeetInfo pbui_item_meetMeetInfo = itemList.get(i);
                         String name = MyUtils.getBts(pbui_item_meetMeetInfo.getName());
@@ -217,12 +216,30 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors);
                         onLineMemberAdapter = new ScreenControlAdapter(onLineMembers);
                     }
+                    break;
+                case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
+                    ArrayList queryMeetRanking = msg.getData().getParcelableArrayList("queryMeetRanking");
+                    InterfaceMain2.pbui_Type_MeetSeatDetailInfo o5 = (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) queryMeetRanking.get(0);
+                    List<InterfaceMain2.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
+                    for (int i = 0; i < itemList3.size(); i++) {
+                        InterfaceMain2.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
+                        int nameId = pbui_item_meetSeatDetailInfo.getNameId();
+                        int role = pbui_item_meetSeatDetailInfo.getRole();
+                        int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
+
+                        if (role == 3 && o.getMemberid() == nameId) {
+                            //身份为主持人
+                            VoteFragment.isCompere = true;
+                        }
+                    }
+                    break;
 
             }
         }
     };
     // 存放当前设备会议信息
     public static MainDivMeetInfo o;
+
     public static List<Boolean> checks;
     public static ArrayList<Boolean> allPerchecks;
     private ScreenControlAdapter onLineMemberAdapter;
@@ -307,6 +324,21 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     message.setData(bundle);
                     mHandler.sendMessage(message);
                 }
+                break;
+            case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
+                InterfaceMain2.pbui_Type_MeetSeatDetailInfo result5 = (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) result;
+                if (result5 != null) {
+                    Bundle bundle = new Bundle();
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.add(result5);
+                    bundle.putParcelableArrayList("queryMeetRanking", arrayList);
+                    Message message = new Message();
+                    message.what = action;
+                    message.setData(bundle);
+                    mHandler.sendMessage(message);
+                }
+
+                break;
         }
     }
 
@@ -323,6 +355,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         setImgSelect(0);
         //8.修改本机界面状态
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber());
+        //获取从MainActivity中传递过来的参数
+        getIntentBundle();
         try {
             //92.查询参会人员
             nativeUtil.queryAttendPeople();
@@ -335,10 +369,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        //2.参会人/主持人姓名
-        //3.公司名称/会议名称
-        //获取从MainActivity中传递过来的参数
-        getIntentBundle();
         //注册EventBus
         EventBus.getDefault().register(this);
     }
@@ -489,7 +519,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -498,19 +527,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         super.onBackPressed();
         //回到主界面操作
         nativeUtil.backToMainInterfaceOperate();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        //屏幕旋转时记录位置
-        outState.putInt(POSITION, posion);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        //屏幕恢复时取出位置
-        showFragment(savedInstanceState.getInt(POSITION));
-        super.onRestoreInstanceState(savedInstanceState);
     }
 
     private void initImages() {
@@ -540,7 +556,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public void showFragment(int index) {
         FragmentTransaction ft = mFm.beginTransaction();
         hideFragment(ft);
-        posion = index;
+//        posion = index;
         switch (index) {
             case 0:
                 if (mSigninFragment == null) {
@@ -999,7 +1015,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.start_pro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(allProjectorAdapter!=null){
+                if (allProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds();
                 }
             }
@@ -1087,9 +1103,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.pro_ensure_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(allProjectorAdapter!=null){
+                if (allProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds();
-                    Log.e("MyLog","MeetingActivity.onClick 1067行:  选中的投影机有 --->>> "+checkedIds.size());
+                    Log.e("MyLog", "MeetingActivity.onClick 1067行:  选中的投影机有 --->>> " + checkedIds.size());
                 }
                 mProRlPop.dismiss();
                 allProjectorAdapter.notifyDataSetChanged();

@@ -1129,8 +1129,8 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = defaultInstance.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ATTENDEE, pbui_type_memberDetailInfo);
+            Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  92.查询参会人员成功 --->>> ");
         }
-        Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  92.查询参会人员成功 --->>> ");
         return true;
     }
 
@@ -1196,8 +1196,8 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_MeetMembeProperty pbui_type_meetMembeProperty = defaultInstance.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_Attendee_Property, pbui_type_meetMembeProperty);
+            Log.e("MyLog", "NativeUtil.queryAttendPeopleProperties:  96.查询参会人员属性成功 --->>> ");
         }
-        Log.e("MyLog", "NativeUtil.queryAttendPeopleProperties:  96.查询参会人员属性成功 --->>> ");
         return true;
     }
 
@@ -1364,8 +1364,8 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_DeviceFaceShowDetail pbui_type_deviceFaceShowDetail = defaultInstance.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_DEVMEET_INFO, pbui_type_deviceFaceShowDetail);
+            Log.e("MyLog", "NativeUtil.queryDeviceMeetInfo:  110.查询设备会议信息 --->>> 成功");
         }
-        Log.e("MyLog", "NativeUtil.queryDeviceMeetInfo:  110.查询设备会议信息 --->>> 成功");
         return true;
     }
 
@@ -2659,8 +2659,8 @@ public class NativeUtil {
         InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo pbui_type_meetVoteSignInDetailInfo = defaultInstance.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEMBER_BYVOTE, pbui_type_meetVoteSignInDetailInfo);
+            Log.e("MyLog", "NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人成功 --->>> ");
         }
-        Log.e("MyLog", "NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人成功 --->>> ");
         return true;
     }
 
@@ -3719,8 +3719,8 @@ public class NativeUtil {
             case 32://202
                 InterfaceMain.pbui_MeetNotifyMsg voteSubmitterChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg10 = voteSubmitterChangeInform.parseFrom(data);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform));
-                Log.e("CaseLog", "NativeUtil.callback_method:  202 投票提交人变更通知 --->>> " + pbui_meetNotifyMsg10.getOpermethod());
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform,pbui_meetNotifyMsg10));
+                Log.e("CaseLog", "NativeUtil.callback_method:  202 投票提交人变更通知 --->>> ");
                 break;
             case 33://59
                 InterfaceMain.pbui_MeetNotifyMsg placeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();

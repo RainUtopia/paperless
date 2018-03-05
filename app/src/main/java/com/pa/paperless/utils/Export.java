@@ -3,6 +3,7 @@ package com.pa.paperless.utils;
 import android.util.Log;
 
 import com.pa.paperless.bean.SigninBean;
+import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
 
@@ -92,13 +93,61 @@ public class Export {
         return true;
     }
 
+    public static boolean ToVoteResultExcel(String content, String fileName, String SheetName, String[] titles, List<VoteBean> datas) throws IOException, WriteException {
+        // 1.创建Excel文件
+        File file = new File("/sdcard/" + fileName + ".xls");
+        file.createNewFile();
+        // 2.创建工作薄
+        WritableWorkbook workbook = Workbook.createWorkbook(file);
+        // 3.创建Sheet
+        WritableSheet sheet = workbook.createSheet(SheetName, 0);
+        // 4.创建单元格
+        Label label = null;
+        // 第一行展示投票内容
+        Label titLabel = new Label(0, 0, content);
+        sheet.addCell(titLabel);
+        for (int i = 0; i < titles.length; i++) {
+            // 5.定位 列 行 内容
+            label = new Label(i, 1, titles[i]);
+            // 6.添加单元格
+            sheet.addCell(label);
+        }
+        // 7.导入数据 第一行是标题  所以从第二行开始
+        for (int i = 2; i < datas.size() + 2; i++) {
+            VoteBean voteBean = datas.get(i - 2);
+            for (int j = 0; j < titles.length; j++) {
+                String str = "";
+                switch (j) {
+                    case 0:
+                        str = i - 1 + "";
+                        break;
+                    case 1:
+                        str = voteBean.getName();
+                        break;
+                    case 2:
+                        str = voteBean.getChoose();
+                        break;
+                }
+                //8.添加数据  列 行 数据
+                label = new Label(j, i, str);
+                sheet.addCell(label);
+            }
+        }
+        //9.写入数据，一定记得写入数据，不然你都开始怀疑世界了，excel里面啥都没有
+        workbook.write();
+        //10.最后一步，关闭工作簿
+        workbook.close();
+        return true;
+    }
+
     /**
      * 以Excel表格的形式导出投票结果信息
-     * @param meetName 当前参加的会议名称
-     * @param fileName 文件名
+     *
+     * @param meetName  当前参加的会议名称
+     * @param fileName  文件名
      * @param SheetName 工作表名称
-     * @param titles 每一列的标题
-     * @param datas 投票数据
+     * @param titles    每一列的标题
+     * @param datas     投票数据
      * @return
      * @throws IOException
      * @throws WriteException
@@ -123,7 +172,7 @@ public class Export {
             sheet.addCell(label);
         }
         //7.导入数据 因为第一行是自定义的标题文本  所以 i从1（第二行）开始
-        for (int i = 2; i <= datas.size() + 1; i++) {
+        for (int i = 2; i < datas.size() + 2; i++) {
             VoteInfo voteInfo = datas.get(i - 2);
             List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
             for (int j = 0; j < titles.length; j++) {

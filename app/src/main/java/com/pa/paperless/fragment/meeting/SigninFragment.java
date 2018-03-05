@@ -1,10 +1,8 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,22 +21,17 @@ import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.event.EventSign;
 import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.controller.MeetController;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
-import com.pa.paperless.utils.MyUtils;
-import com.pa.paperless.utils.SaveToExcelUtil;
 import com.wind.myapplication.NativeUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.libsdl.app.SDLActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,6 +39,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by Administrator on 2017/11/1.
@@ -207,7 +201,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -233,8 +226,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
             case R.id.export_btn://导出签到信息
                 String[] titles = {"序号", "姓名", "签到时间", "是否签到"};
                 Export.ToSigninExcel("签到信息", "Sheet1", titles, mDatas);
-
-//                SaveToExcelUtil.createSmtrautExcel("签到信息","sheetName",arr,cod,);
                 break;
         }
     }
