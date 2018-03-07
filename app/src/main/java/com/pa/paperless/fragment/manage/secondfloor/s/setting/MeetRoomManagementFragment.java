@@ -50,6 +50,7 @@ import java.util.List;
 
 public class MeetRoomManagementFragment extends BaseFragment implements View.OnClickListener, CallListener {
 
+    private NativeUtil nativeUtil;
     private RecyclerView mRoomTopRl;
     private RecyclerView mRoomLeftRl;
     private Button mRoomAddBtn;

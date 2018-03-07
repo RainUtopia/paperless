@@ -27,4 +27,9 @@
         <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
         <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
     </style>
+    <!--输入框字体大小-->
+    <style name="EdtTextTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

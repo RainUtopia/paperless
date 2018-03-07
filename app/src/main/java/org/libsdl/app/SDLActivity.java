@@ -52,6 +52,7 @@ import com.google.protobuf.MessageLite;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.fragment.meeting.MeetingFileFragment;
 import com.wind.myapplication.NativeUtil;
 
 
@@ -68,6 +69,8 @@ import java.util.List;
  * SDL Activity
  */
 public class SDLActivity extends Activity {
+
+    NativeUtil nativeUtil;
 
     public static int getLineNumber(Exception e) {
         StackTraceElement[] trace = e.getStackTrace();
@@ -136,26 +139,28 @@ public class SDLActivity extends Activity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e("MyLog","SDLActivity.onRestart:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onRestart:   --->>> ");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e("MyLog","SDLActivity.onStop:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onStop:   --->>> ");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e("MyLog","SDLActivity.onStart:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onStart:   --->>> ");
     }
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.e("MyLog","SDLActivity.onBackPressed:   --->>> ");
+        //释放播放资源
+//        nativeUtil.mediaDestroy(MeetingFileFragment.mMediaid);
+        Log.e("MyLog", "SDLActivity.onBackPressed:   --->>> ");
     }
 
     // Setup
@@ -165,7 +170,7 @@ public class SDLActivity extends Activity {
         Log.v(TAG, "Model: " + Build.MODEL);
         Log.v(TAG, "onCreate(): " + mSingleton);
         super.onCreate(savedInstanceState);
-        NativeUtil.getInstance();
+        nativeUtil = NativeUtil.getInstance();
         SDLActivity.initialize();
         // So we can call stuff from static callbacks
         mSingleton = this;
@@ -240,7 +245,7 @@ public class SDLActivity extends Activity {
     @Override
     protected void onResume() {
         Log.v(TAG, "onResume()");
-        Log.e("MyLog","SDLActivity.onResume:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onResume:   --->>> ");
         super.onResume();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -288,11 +293,13 @@ public class SDLActivity extends Activity {
     @Override
     protected void onDestroy() {
         Log.v(TAG, "onDestroy()");
-        Log.e("MyLog","SDLActivity.onDestroy:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onDestroy:   --->>> ");
         if (SDLActivity.mBrokenLibraries) {
             super.onDestroy();
             // Reset everything in case the user re opens the app
             SDLActivity.initialize();
+            //释放播放资源
+//            nativeUtil.mediaDestroy(MeetingFileFragment.mMediaid);
             return;
         }
 
@@ -314,6 +321,8 @@ public class SDLActivity extends Activity {
         super.onDestroy();
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
+        //释放播放资源
+//        nativeUtil.mediaDestroy(MeetingFileFragment.mMediaid);
 
     }
 
@@ -784,7 +793,7 @@ public class SDLActivity extends Activity {
      * This method is called by SDL using JNI.
      */
     public InputStream openAPKExtensionInputStream(String fileName) throws IOException {
-        Log.e("MyLog","SDLActivity.openAPKExtensionInputStream 787行:   --->>> ");
+        Log.e("MyLog", "SDLActivity.openAPKExtensionInputStream 787行:   --->>> ");
         // Get a ZipResourceFile representing a merger of both the main and patch files
         if (expansionFile == null) {
             Integer mainVersion = Integer.valueOf(nativeGetHint("SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION"));
@@ -904,7 +913,7 @@ public class SDLActivity extends Activity {
         // TODO set values from "flags" to messagebox dialog
 
         // get colors
-        Log.e("MyLog","SDLActivity.onCreateDialog 906行:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onCreateDialog 906行:   --->>> ");
         int[] colors = args.getIntArray("colors");
         int backgroundColor;
         int textColor;
@@ -1042,7 +1051,7 @@ class SDLMain implements Runnable {
 
     @Override
     public void run() {
-        Log.e("MyLog","SDLMain.run 1044行:   --->>> ");
+        Log.e("MyLog", "SDLMain.run 1044行:   --->>> ");
         // Runs SDL_main()
 
 //    	 Log.i( "SDLMain", "SDLMain start!");
@@ -1626,7 +1635,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
 
     @Override
     public void pollInputDevices() {
-        Log.e("MyLog","SDLJoystickHandler_API12.pollInputDevices 1627行:   --->>> ");
+        Log.e("MyLog", "SDLJoystickHandler_API12.pollInputDevices 1627行:   --->>> ");
         int[] deviceIds = InputDevice.getDeviceIds();
         // It helps processing the device ids in reverse order
         // For example, in the case of the XBox 360 wireless dongle,
@@ -1705,7 +1714,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
 
     @Override
     public boolean handleMotionEvent(MotionEvent event) {
-        Log.e("MyLog","SDLJoystickHandler_API12.handleMotionEvent 1705行:   --->>> ");
+        Log.e("MyLog", "SDLJoystickHandler_API12.handleMotionEvent 1705行:   --->>> ");
         if ((event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0) {
             int actionPointerIndex = event.getActionIndex();
             int action = event.getActionMasked();
@@ -1741,7 +1750,6 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
         float x, y;
         int mouseButton;
         int action;
-
         switch (event.getSource()) {
             case InputDevice.SOURCE_JOYSTICK:
             case InputDevice.SOURCE_GAMEPAD:
@@ -1772,7 +1780,7 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
             default:
                 break;
         }
-    Log.e("MyLog","SDLGenericMotionListener_API12.onGenericMotion 1771行:   --->>> ");
+        Log.e("MyLog", "SDLGenericMotionListener_API12.onGenericMotion 1771行:   --->>> ");
         // Event was not managed
         return false;
     }

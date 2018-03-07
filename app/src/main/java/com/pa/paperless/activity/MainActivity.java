@@ -25,6 +25,7 @@ import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.MainMemberAdapter;
+import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
@@ -85,7 +86,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     ArrayList devInfos = msg.getData().getParcelableArrayList("devInfos");
                     if (devInfos != null) {
                         InterfaceMain.pbui_Type_DeviceDetailInfo o = (InterfaceMain.pbui_Type_DeviceDetailInfo) devInfos.get(0);
-                        Dispose.DevInfo(o);
+                        List<DeviceInfo> deviceInfos = Dispose.DevInfo(o);
                     }
                     break;
                 case IDivMessage.QUERY_ATTENDEE:
@@ -232,7 +233,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String[] arr = {};
         SDLActivity.nativeInit(arr);
         //  初始化无纸化网络平台
-        nativeUtil.javaInitSys();
+        boolean b = nativeUtil.javaInitSys();
+        Log.e("MyLog","MainActivity.onCreate 236行:  初始化是否成功 --->>> "+b);
         /** ************ ******  8.修改本机界面状态  ****** ************ **/
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
         try {

@@ -45,6 +45,8 @@ import java.util.List;
  */
 
 public class SeatArrangementFragment extends BaseFragment implements View.OnClickListener, CallListener {
+
+    private NativeUtil nativeUtil;
     private RecyclerView mSeatLeftRl;
     private ImageView mSeatRightImg;
     private EditText mFileNameEdt;

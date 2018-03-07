@@ -45,6 +45,8 @@ import java.util.List;
  */
 
 public class DeviceManagementFragment extends BaseFragment implements View.OnClickListener, CallListener {
+
+    private NativeUtil nativeUtil;
     private RecyclerView mDevrceManageRl;
     private EditText mDeviceNameEdt;
     private EditText mDeviceIpEdt;

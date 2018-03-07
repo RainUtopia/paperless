@@ -33,6 +33,8 @@ import java.util.List;
  */
 
 public class OtherSettingFragment extends BaseFragment implements View.OnClickListener, CallListener {
+
+    private NativeUtil nativeUtil;
     private EditText mOldPassword;
     private EditText mNewPassword;
     private Button mSubmitBtn;

@@ -34,6 +34,7 @@ public class AnnAgendaFragment extends BaseFragment implements View.OnClickListe
     private FrameLayout mAgendaLl;
     private ArrayList<BaseFragment> mFragments;
     private ArrayList<ImageView> mImgbtns;
+    private NativeUtil nativeUtil;
 
     @Nullable
     @Override

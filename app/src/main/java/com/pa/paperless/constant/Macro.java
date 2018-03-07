@@ -7,6 +7,8 @@ package com.pa.paperless.constant;
 
 public class Macro {
 
+    public static String UPTATE_BADGE = "update_badge_number";
+
     public static int DEVICE_MEET_DB = 0x01000000; //会议数据库(会议后台)
     public static int DEVICE_MEET_SERVICE = 0x01040000; //会议茶水服务
     public static int DEVICE_MEET_PROJECTIVE = 0x01080000;//会议投影机

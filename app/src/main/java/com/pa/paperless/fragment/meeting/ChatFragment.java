@@ -31,6 +31,7 @@ import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
@@ -48,6 +49,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import static com.pa.paperless.activity.MeetingActivity.mBadge;
+import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
+
 /**
  * Created by Administrator on 2017/10/31.
  * 互动交流
@@ -64,7 +68,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     private EditText chat_edt;
     private TextView chat_send;
     private NativeUtil nativeUtil;
-    private MulitpleItemAdapter chatAdapter;
+    public static MulitpleItemAdapter chatAdapter;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -148,7 +152,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
 //                    }
                     }
                     break;
-                case IDivMessage.QUERY_ATTEND_BYID://查询指定参会人信息
+                case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
                     ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
                     InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
                     List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
@@ -213,14 +217,17 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventMessage.MEMBER_CHANGE_INFORM:
+            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 Log.e("MyLog", "ChatFragment.getEventMessage:  90 参会人员变更通知 EventBus --->>> ");
                 InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
                 Log.e("MyLog", "ChatFragment.getEventMessage:  EventBus 指定ID：--->>> " + object.getId());
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
                 nativeUtil.queryAttendPeopleFromId(object.getId());
                 break;
+
         }
     }
+
 
     @Override
     public void onDestroy() {
@@ -238,20 +245,17 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     private void initView(View inflate) {
         /** ****************聊天参会人列表******************* **/
         chat_lv = (ListView) inflate.findViewById(R.id.right_chat_lv);
-
-        /** *********************************** **/
-
         btn_all = (Button) inflate.findViewById(R.id.rightbtn_all);
         btn_invert = (Button) inflate.findViewById(R.id.rightbtn_invert);
         btn_all.setOnClickListener(this);
         btn_invert.setOnClickListener(this);
-
         /** ***************聊天界面******************** **/
         chat_online_rl = (RecyclerView) inflate.findViewById(R.id.rightchat_online_rl);
         chat_online_rl.setLayoutManager(new LinearLayoutManager(getContext()));
         if (mReceiveMsg == null) {
             mReceiveMsg = new ArrayList<>();
         }
+        mBadge.setBadgeNumber(0);
         chatAdapter = new MulitpleItemAdapter(getContext(), mReceiveMsg);
         chat_online_rl.setAdapter(chatAdapter);
         /** *********************************** **/
@@ -291,7 +295,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                         if (b) { //发送成功
                             //RecyclerView 更新聊天的界面
                             List<String> checkedName = mMemberAdapter.getCheckedName();
-
                             ReceiveMeetIMInfo sendInfo = new ReceiveMeetIMInfo();
                             sendInfo.setNames(checkedName);
                             sendInfo.setMsg(string);
@@ -334,16 +337,39 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO://184.收到新的会议交流信息
-                InterfaceMain2.pbui_Type_MeetIM result2 = (InterfaceMain2.pbui_Type_MeetIM) result;
-                if (result2 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result2);
-                    bundle.putParcelableArrayList("receiveMeetIMInfo", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    handler.sendMessage(message);
+                if (isHidden()) {
+                    Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
+                    InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                    //获取之前的未读消息个数
+                    int badgeNumber1 = mBadge.getBadgeNumber();
+                    int all = badgeNumber1 + 1;
+                    if (receiveMsg != null) {
+                        List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+                        if (mReceiveMsg == null) {
+                            mReceiveMsg = new ArrayList<>();
+                        }
+                        receiveMeetIMInfos.get(0).setType(true);
+                        mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                    }
+                    List<EventBadge> num = new ArrayList<>();
+                    num.add(new EventBadge(all));
+                    // TODO: 2018/3/7 通知界面更新
+                    Log.e("MyLog", "ChatFragment.callListener 359行:  传递过去的未读消息个数 --->>> " + all);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
+                    break;
+                } else {
+                    Log.e("MyLog", "ChatFragment.callListener 364行:  聊天界面收到会议消息 --->>> ");
+                    InterfaceMain2.pbui_Type_MeetIM result2 = (InterfaceMain2.pbui_Type_MeetIM) result;
+                    if (result2 != null) {
+                        Bundle bundle = new Bundle();
+                        ArrayList arrayList = new ArrayList();
+                        arrayList.add(result2);
+                        bundle.putParcelableArrayList("receiveMeetIMInfo", arrayList);
+                        Message message = new Message();
+                        message.what = action;
+                        message.setData(bundle);
+                        handler.sendMessage(message);
+                    }
                 }
                 break;
             case IDivMessage.QUERY_ATTEND_BYID:
@@ -372,6 +398,27 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     handler.sendMessage(message);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden) {
+            if (chatAdapter != null) {
+                chatAdapter.notifyDataSetChanged();
+                mBadge.setBadgeNumber(0);
+            }
+            //隐藏时：
+            Log.e("MyLog", "ChatFragment.onHiddenChanged 412行:  隐藏状态 --->>> ");
+        } else {
+            //显示时：
+            Log.e("MyLog", "ChatFragment.onHiddenChanged 416行:  显示状态 --->>> ");
+            nativeUtil=NativeUtil.getInstance();
+            nativeUtil.setCallListener(this);
+            if (chatAdapter != null) {
+                chatAdapter.notifyDataSetChanged();
+                mBadge.setBadgeNumber(0);
+            }
         }
     }
 }

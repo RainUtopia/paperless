@@ -27,8 +27,8 @@ public abstract class BaseFragment extends Fragment implements IModelChangeListe
             handleUI(msg);
         }
     };
-    protected NativeUtil nativeUtil  ;
-    protected List<ReceiveMeetIMInfo> mReceiveMsg ;
+//    protected NativeUtil nativeUtil  ;
+//    protected List<ReceiveMeetIMInfo> mReceiveMsg ;
 
     protected void handleUI(Message msg) {
         //因为有的要实现网络请求，有的子类不需要，所以只需要空实现，让子类去覆写该方法

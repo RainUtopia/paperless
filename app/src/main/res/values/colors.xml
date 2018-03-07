@@ -11,8 +11,12 @@
     <color name="divLineColor">#918c8c</color>
     <color name="controlsColor">#edebeb</color>
     <color name="popbackground">#676767</color>
-
+    <!--item点击时的颜色-->
     <color name="ItemCheckedColor">#ff00ee</color>
+    <!--popupWindow标题背景色-->
+    <color name="popTitleBackColor">#4993e8</color>
+    <!--popupWindow 输入框背景色-->
+    <color name="popEditTextColor">#b6cce6</color>
 
 
 </resources>

@@ -13,7 +13,7 @@ public class ReceiveMeetIMInfo {
     int memberid;
     String msg;
     long utcsecond;
-    boolean type;
+    boolean type; // true：接收  false：发送
     String name;
     List<String> names;
 

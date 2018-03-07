@@ -50,6 +50,8 @@ import java.util.List;
  */
 
 public class SecretaryManagementFragment extends BaseFragment implements View.OnClickListener, CallListener {
+
+    private NativeUtil nativeUtil;
     private RecyclerView mSecretaryTopRl;
     private RecyclerView mSecretaryLeftRl;
     private RecyclerView mSecretaryRightRl;

@@ -40,6 +40,7 @@ import com.pa.paperless.bean.MeetingFileTypeBean;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
@@ -58,6 +59,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pa.paperless.activity.MeetingActivity.mBadge;
+import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
+
 /**
  * Created by Administrator on 2017/10/31.
  * 会议资料
@@ -66,6 +70,7 @@ import java.util.List;
 
 public class MeetingFileFragment extends BaseFragment implements View.OnClickListener, CallListener {
 
+    private NativeUtil nativeUtil;
 
     private ListView dir_lv;
     private Button rightmeetfile_document;
@@ -135,7 +140,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                         setBtnSelect(0);
                     }
                     break;
-                case IDivMessage.QUERY_DEVMEET_INFO:
+                case IDivMessage.QUERY_DEVMEET_INFO://查询设备会议信息
                     ArrayList devMeetInfos = msg.getData().getParcelableArrayList("devMeetInfos");
                     InterfaceMain.pbui_Type_DeviceFaceShowDetail o3 = (InterfaceMain.pbui_Type_DeviceFaceShowDetail) devMeetInfos.get(0);
                     int deviceid = o3.getDeviceid();
@@ -145,13 +150,15 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     };
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
     private int devID;
+    //播放时的媒体ID
+    public static int mMediaid;
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         isFirstIn = true;
-        if(nativeUtil!=null){
+        if (nativeUtil != null) {
             nativeUtil.mediaDestroy(0);
         }
         Log.e("FramentLife", "MeetingFileFragment.onAttach:   --->>> ");
@@ -249,16 +256,11 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         dataAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
             public void onLookListener(final int mediaId, final String filename) {
+                mMediaid = mediaId;
                 // TODO: 2018/1/29 如果是视屏文件可在线观看
                 if (FileUtil.isVideoFile(filename)) {
-//                    View inflate = LayoutInflater.from(getContext()).inflate(R.layout.media_pop, null);
-//                     //right_meetingfilelayout  rightmeetfile_type3
-//                    PopupWindow popupWindow = PopWindowUtil.getInstance().makePopupWindow(getContext(), right_meetingfilelayout, inflate, Color.RED).showLocationWithAnimation(
-//                            getContext(), inflate, 10, 10, R.style.AnimHorizontal);
-                    /** ************ ******    ****** ************ **/
-//                    MyUtils.playMedia(nativeUtil, getContext(), devID, getActivity());
                     startActivity(new Intent(getActivity(), SDLActivity.class));
-
+                    //媒体播放操作
                     nativeUtil.mediaPlayOperate(mediaId, devID, 0);
                 } else {
                     MyUtils.openFile(filename, getView(), nativeUtil, mediaId, getContext());
@@ -497,18 +499,36 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     mHandler.sendMessage(message);
                 }
                 break;
-            case IDivMessage.RECEIVE_MEET_IMINFO:
-                Log.e("MyLog","MeetingFileFragment.callListener:  收到会议消息 --->>> ");
-
+            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
+                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                //获取之前的未读消息个数
+                int badgeNumber1 = mBadge.getBadgeNumber();
+                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
+                int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
                         mReceiveMsg = new ArrayList<>();
                     }
+                    receiveMeetIMInfos.get(0).setType(true);
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
                 }
+                List<EventBadge> num = new ArrayList<>();
+                num.add(new EventBadge(all));
+                // TODO: 2018/3/7 通知界面更新
+                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            nativeUtil = NativeUtil.getInstance();
+            nativeUtil.setCallListener(this);
         }
     }
 }

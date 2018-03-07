@@ -46,6 +46,8 @@ import java.util.List;
  */
 
 public class CommonlyParticipantsFragment extends BaseFragment implements View.OnClickListener, CallListener {
+
+    private NativeUtil nativeUtil;
     private RecyclerView mCommonlyRl;
     private EditText mCommonlyNameEdt;
     private EditText mCommonlyUnitEdt;

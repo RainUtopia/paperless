@@ -36,6 +36,7 @@ import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
@@ -56,6 +57,8 @@ import java.util.List;
 import jxl.write.WriteException;
 
 import static com.pa.paperless.activity.MeetingActivity.getMeetName;
+import static com.pa.paperless.activity.MeetingActivity.mBadge;
+import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -64,6 +67,7 @@ import static com.pa.paperless.activity.MeetingActivity.getMeetName;
 
 public class VoteFragment extends BaseFragment implements View.OnClickListener, CallListener {
 
+    private NativeUtil nativeUtil;
     private RecyclerView mVoteRl;
     private Button mVoteQuery;
     private Button mVoteExport;
@@ -283,13 +287,13 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         mVoteOver = (Button) inflate.findViewById(R.id.vote_over);
         mHostFunction = (RelativeLayout) inflate.findViewById(R.id.host_function);
 
-        String string1 = MeetingActivity.mAttendee.getText().toString();
-        String string2 = MeetingActivity.mCompere.getText().toString();
         if (isCompere) {
             mVoteManagement.setVisibility(View.VISIBLE);
         }else {
             mVoteManagement.setVisibility(View.GONE);
         }
+//        String string1 = MeetingActivity.mAttendee.getText().toString();
+//        String string2 = MeetingActivity.mCompere.getText().toString();
 //        if (string1.equals(string2)) {
 //            isCompere = true;
 //            mVoteManagement.setVisibility(View.VISIBLE);
@@ -343,10 +347,14 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case R.id.vote_management:  //投票管理
-                /** ************ ******  如果是主持人则展示主持人功能  ****** ************ **/
-                mVoteOpen.setVisibility(View.VISIBLE);
-                mVoteOver.setVisibility(View.VISIBLE);
-                mVoteQuery.setVisibility(View.VISIBLE);
+                if(isClicked) {
+                    /** ************ ******  如果是主持人则展示主持人功能  ****** ************ **/
+                    mVoteOpen.setVisibility(View.VISIBLE);
+                    mVoteOver.setVisibility(View.VISIBLE);
+                    mVoteQuery.setVisibility(View.VISIBLE);
+                }else {
+                    Toast.makeText(getContext(), "先选择投票", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
             case R.id.vote_open:        //发起投票
@@ -626,16 +634,27 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     mHandler.sendMessage(message);
                 }
                 break;
-            case IDivMessage.RECEIVE_MEET_IMINFO:
-                Log.e("MyLog", "VoteFragment.callListener:  收到会议消息 --->>> ");
+            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
+                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                //获取之前的未读消息个数
+                int badgeNumber1 = mBadge.getBadgeNumber();
+                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
+                int all =  badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
                         mReceiveMsg = new ArrayList<>();
                     }
+                    receiveMeetIMInfos.get(0).setType(true);
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
                 }
+                List<EventBadge> num = new ArrayList<>();
+                num.add(new EventBadge(all));
+                // TODO: 2018/3/7 通知界面更新
+                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
 
             case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
@@ -737,6 +756,14 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     this.chooseA.setVisibility(View.VISIBLE);
                     break;
             }
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            nativeUtil = NativeUtil.getInstance();
+            nativeUtil.setCallListener(this);
         }
     }
 }

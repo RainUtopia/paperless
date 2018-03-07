@@ -61,4 +61,6 @@ public class IDEventMessage {
     public static final int newVote_launch_inform = 3026;
     //72 上传进度通知 高频回调
     public static final int Upload_Progress = 3027;
+    // 页面中通知会议页面更新 Badge的未读消息数
+    public static final int UpDate_BadgeNumber = 3028;
 }

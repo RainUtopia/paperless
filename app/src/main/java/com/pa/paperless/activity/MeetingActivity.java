@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,9 +39,11 @@ import com.pa.paperless.adapter.ScreenControlAdapter;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MainDivMeetInfo;
 import com.pa.paperless.bean.MemberInfo;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
+import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fragment.meeting.AnnAgendaFragment;
 import com.pa.paperless.fragment.meeting.BaseFragment;
@@ -67,6 +69,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 import static com.pa.paperless.utils.MyUtils.setAnimator;
 
@@ -113,7 +118,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private VoteFragment mVoteFragment;
     private NotationFragment mNotationFragment;
     private WebBrowseFragment mWebbrowseFragment;
-    private NativeUtil nativeUtil;
+    public static NativeUtil nativeUtil;
+    public static List<ReceiveMeetIMInfo> mReceiveMsg = new ArrayList<>();
 
     private Handler mHandler = new Handler() {
         @Override
@@ -187,7 +193,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                                     onLineProjectors.add(deviceInfo);
                                 }
                             }
-
                             if (netState == 1) {
                                 for (int j = 0; j < memberInfos.size(); j++) {
                                     MemberInfo memberInfo = memberInfos.get(j);
@@ -198,14 +203,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                                 }
                             }
                         }
-
                         //初始化投影机是否选中集合
                         allPerchecks = new ArrayList<>();
                         //初始化 全部设为false
                         for (int k = 0; k < allProjectors.size(); k++) {
                             allPerchecks.add(false);
                         }
-
                         //初始化同屏控制是否选中集合
                         checks = new ArrayList<>();
                         //初始化 全部设为false
@@ -226,14 +229,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         int nameId = pbui_item_meetSeatDetailInfo.getNameId();
                         int role = pbui_item_meetSeatDetailInfo.getRole();
                         int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
-
-                        if (role == 3 && o.getMemberid() == nameId) {
+                        if (role == 3 && MeetingActivity.o.getMemberid() == nameId) {
                             //身份为主持人
                             VoteFragment.isCompere = true;
                         }
                     }
                     break;
-
             }
         }
     };
@@ -256,6 +257,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     //用来存放所有的投影机设备
     private List<DeviceInfo> allProjectors;
     private OnLineProjectorAdapter allProjectorAdapter;
+    public static Badge mBadge; //未读消息提示
+    public static String mNoteCentent;
+    private PopupWindow mNotePop;
 
     @Override
     public void callListener(int action, Object result) {
@@ -337,10 +341,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     message.setData(bundle);
                     mHandler.sendMessage(message);
                 }
-
                 break;
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -369,6 +373,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
+
         //注册EventBus
         EventBus.getDefault().register(this);
     }
@@ -439,6 +444,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
+            case IDEventMessage.UpDate_BadgeNumber:
+                Log.e("MyLog", "MeetingActivity.getEventMessage 457行:  11111111 --->>> ");
+                List<EventBadge> object3 = (List<EventBadge>) message.getObject();
+                if (object3 != null) {
+                    Log.e("MyLog", "MeetingActivity.getEventMessage 459行:  222 --->>> " + object3.get(0).getNum());
+                    mBadge.setBadgeNumber(object3.get(0).getNum());
+                }
+                break;
             case IDEventMessage.DEV_REGISTER_INFORM:
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  设备寄存器变更通知 EventBus --->>> ");
                 break;
@@ -454,7 +467,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 nativeUtil.queryAttendPeopleFromId(o1.getMemberid());
                 /** ************ ******  96.查询参会人员属性  ****** ************ **/
                 nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), o.getMemberid());
-
                 //128.查询会议
 //                nativeUtil.queryMeet();
 //              //129.查询指定ID的会议
@@ -474,7 +486,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 int opermethod1 = object2.getOpermethod();
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  参会人员变更通知 EventBus --->>> id:  " + id1 + "  opermethod1：  " + opermethod1);
                 //92.查询参会人员
-//                nativeUtil.queryAttendPeople();
+                nativeUtil.queryAttendPeople();
                 //91.查询指定ID的参会人员
 //                nativeUtil.queryAttendPeopleFromId(id1);
                 /** ************ ******  96.查询参会人员属性  ****** ************ **/
@@ -512,6 +524,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //将会议笔记的文本清空
+        mNoteCentent = "";
         //取消注册事件
         EventBus.getDefault().unregister(this);
     }
@@ -556,7 +570,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public void showFragment(int index) {
         FragmentTransaction ft = mFm.beginTransaction();
         hideFragment(ft);
-//        posion = index;
         switch (index) {
             case 0:
                 if (mSigninFragment == null) {
@@ -664,6 +677,18 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mMeetActivityLayout = (LinearLayout) findViewById(R.id.meetActivity_layout);
         mMeetingTheme = (TextView) findViewById(R.id.meeting_theme);
         mMeetingMessage = (ImageButton) findViewById(R.id.meeting_message);
+        /** ************ ******  设置未读消息展示  ****** ************ **/
+        mBadge = new QBadgeView(this).bindTarget(mMeetingMessage);
+        mBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
+        mBadge.setBadgeTextSize(20, false);
+        mBadge.setShowShadow(true);
+        mBadge.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+            @Override
+            public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+            }
+        });
+
         mMeetingChatOnline = (ImageButton) findViewById(R.id.meeting_chat_online);
         mMeetingNowTime = (TextView) findViewById(R.id.meeting_now_time);
         mMeetingNowDate = (TextView) findViewById(R.id.meeting_now_date);
@@ -947,6 +972,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 Toast.makeText(MeetingActivity.this, "点击了会议笔记", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.note);
+                showNotePop();
             }
         });
         //呼叫服务
@@ -966,6 +992,48 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             }
         });
 
+    }
+
+    /**
+     * 打开会议笔记
+     */
+    private void showNotePop() {
+        View popupView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.note_pop, null);
+        mNotePop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setPopAnimal(mNotePop);
+        mNotePop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mNotePop.setTouchable(true);
+        mNotePop.setOutsideTouchable(true);
+        NoteViewHolder holder = new NoteViewHolder(popupView);
+        NoteHolderEvent(holder);
+        mNotePop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+        Log.e("MyLog", "MeetingActivity.showNotePop 1015行:   --->>> ");
+    }
+
+    /**
+     * 会议笔记pop事件监听
+     * @param holder
+     */
+    private void NoteHolderEvent(final NoteViewHolder holder) {
+        //返回
+        holder.noteBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //获取输入的文本
+                mNoteCentent = holder.edtNote.getText().toString();
+                mNotePop.dismiss();
+            }
+        });
+        //本地保存
+        holder.noteSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mNoteCentent = holder.edtNote.getText().toString();
+                //保存到手机
+                // TODO: 2018/3/7  
+                mNotePop.dismiss();
+            }
+        });
     }
 
     /**
@@ -1187,18 +1255,22 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 showPlayerPop();
             }
         });
+        //同屏控制按钮
         holder.screens_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
             }
         });
+        //停止同屏按钮
         holder.stop_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MeetingActivity.this, "停止同屏", Toast.LENGTH_SHORT).show();
             }
         });
+        //加入同屏按钮
         holder.join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1506,6 +1578,29 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             this.technician_msg = (TextView) rootView.findViewById(R.id.technician_msg);
             this.edt_msg = (EditText) rootView.findViewById(R.id.edt_msg);
             this.send_msg = (TextView) rootView.findViewById(R.id.send_msg);
+        }
+
+    }
+
+    /**
+     * 会议笔记控件
+     */
+    public static class NoteViewHolder {
+        public View rootView;
+        public EditText edtNote;
+        public Button noteImport;
+        public Button noteSave;
+        public Button noteBack;
+
+        public NoteViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.edtNote = (EditText) rootView.findViewById(R.id.edt_note);
+            if(!("".equals(mNoteCentent))){
+                this.edtNote.setText(mNoteCentent);
+            }
+            this.noteImport = (Button) rootView.findViewById(R.id.note_import);
+            this.noteSave = (Button) rootView.findViewById(R.id.note_save);
+            this.noteBack = (Button) rootView.findViewById(R.id.note_back);
         }
 
     }

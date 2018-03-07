@@ -88,6 +88,5 @@ public class SigninLvAdapter extends BaseAdapter {
             this.signin_item_signtime = (TextView) rootView.findViewById(R.id.signin_item_signtime);
             this.signin_item_signstate = (TextView) rootView.findViewById(R.id.signin_item_signstate);
         }
-
     }
 }

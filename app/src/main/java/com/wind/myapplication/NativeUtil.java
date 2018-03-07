@@ -2292,7 +2292,6 @@ public class NativeUtil {
         return true;
     }
 
-
     /**
      * 178.查询会议双屏显示
      *
@@ -3238,7 +3237,7 @@ public class NativeUtil {
             return false;
         }
         InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo pbui_type_meetMediaPlayDetailInfo = defaultInstance.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMediaPlay:  256.查询媒体播放 --->>> ");
         return true;
     }
@@ -3316,7 +3315,7 @@ public class NativeUtil {
             return false;
         }
         InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo pbui_type_meetStreamPlayDetailInfo = defaultInstance.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryStreamPlay:  265.查询流播放 --->>> ");
         return true;
     }
@@ -3362,7 +3361,7 @@ public class NativeUtil {
             return false;
         }
         InterfaceMain2.pbui_Type_FaceConfigInfo defaultInstance = InterfaceMain2.pbui_Type_FaceConfigInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_FaceConfigInfo pbui_type_faceConfigInfo = defaultInstance.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryInterFaceConfiguration:  271.查询界面配置 --->>> ");
         return true;
     }
@@ -3620,7 +3619,7 @@ public class NativeUtil {
                 break;
             case 18://259
                 InterfaceMain2.pbui_Type_ReqStreamPush requestPlayStreamWayInform = InterfaceMain2.pbui_Type_ReqStreamPush.getDefaultInstance();
-                requestPlayStreamWayInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_ReqStreamPush pbui_type_reqStreamPush = requestPlayStreamWayInform.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  259 请求播放流通道通知 --->>> ");
                 break;
             case 19://261
@@ -3906,14 +3905,13 @@ public class NativeUtil {
                 break;
             case 46://263
                 InterfaceMain2.pbui_Type_MeetStreamPlay streamPlayInform = InterfaceMain2.pbui_Type_MeetStreamPlay.getDefaultInstance();
-                streamPlayInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetStreamPlay pbui_type_meetStreamPlay = streamPlayInform.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  263 流播放通知 --->>> ");
                 break;
             case 47://246-247
                 if (method == Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber()) {
                     InterfaceMain2.pbui_Type_MeetStopResWork stopResourceInform = InterfaceMain2.pbui_Type_MeetStopResWork.getDefaultInstance();
                     InterfaceMain2.pbui_Type_MeetStopResWork pbui_type_meetStopResWork = stopResourceInform.parseFrom(data);
-
                     Log.e("CaseLog", "NativeUtil.callback_method:  246 停止资源通知 --->>> ");
                 } else if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
                     InterfaceMain2.pbui_Type_MeetStopPlay stopPlayInform = InterfaceMain2.pbui_Type_MeetStopPlay.getDefaultInstance();

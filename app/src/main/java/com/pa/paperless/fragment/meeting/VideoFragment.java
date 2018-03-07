@@ -14,14 +14,22 @@ import android.widget.ListView;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.event.EventBadge;
+import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.views.CustomSurfaceView;
 import com.wind.myapplication.NativeUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pa.paperless.activity.MeetingActivity.mBadge;
+import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -30,6 +38,7 @@ import java.util.List;
 
 public class VideoFragment extends BaseFragment implements View.OnClickListener, CallListener {
 
+    private NativeUtil nativeUtil;
     private ListView mVideoLv;
     private List<String> mCameras;
     private SurfaceView mTopLeftVideo;
@@ -116,18 +125,35 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void callListener(int action, Object result) {
         switch (action){
-            case IDivMessage.RECEIVE_MEET_IMINFO:
-                Log.e("MyLog","VideoFragment.callListener:  收到会议消息 --->>> ");
-
+            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
+                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                //获取之前的未读消息个数
+                int badgeNumber1 = mBadge.getBadgeNumber();
+                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
+                int all =  badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
                         mReceiveMsg = new ArrayList<>();
                     }
+                    receiveMeetIMInfos.get(0).setType(true);
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
+                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
                 }
+                List<EventBadge> num = new ArrayList<>();
+                num.add(new EventBadge(all));
+                // TODO: 2018/3/7 通知界面更新
+                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
+        }
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            nativeUtil = NativeUtil.getInstance();
+            nativeUtil.setCallListener(this);
         }
     }
 }

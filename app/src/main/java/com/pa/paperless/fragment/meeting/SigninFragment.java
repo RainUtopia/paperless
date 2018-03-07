@@ -1,5 +1,7 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +22,7 @@ import com.pa.paperless.adapter.SigninLvAdapter;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.Macro;
+import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.constant.IDivMessage;
@@ -33,12 +36,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pa.paperless.activity.MeetingActivity.mBadge;
+import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 
 /**
@@ -51,9 +53,9 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     private Button mPrepageBtn;
     private Button mNextpageBtn;
     private Button mExportBtn;
-    private List<SigninBean> mDatas;
     public static int pageItem = 6;//每一页最多显示 6 个item
     public static int nowPage = 0; //当前页数
+    private List<SigninBean> mDatas;
     private SigninLvAdapter signinLvAdapter;
     private NativeUtil nativeUtil;
     private Handler mHandler = new Handler() {
@@ -88,7 +90,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     ArrayList signInfo = msg.getData().getParcelableArrayList("signInfo");
                     InterfaceMain2.pbui_Type_MeetSignInDetailInfo o = (InterfaceMain2.pbui_Type_MeetSignInDetailInfo) signInfo.get(0);
                     int itemCount = o.getItemCount();
-                    Log.e("MyLog","SigninFragment.handleMessage 97行:  签到数量 --->>> "+itemCount);
+                    Log.e("MyLog", "SigninFragment.handleMessage 97行:  签到数量 --->>> " + itemCount);
                     for (int i = 0; i < itemCount; i++) {
                         InterfaceMain2.pbui_Item_MeetSignInDetailInfo item = o.getItem(i);
                         int nameId = item.getNameId();  // 已经签到的人员ID
@@ -149,7 +151,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     } catch (InvalidProtocolBufferException e) {
                         e.printStackTrace();
                     }
-
                     break;
             }
         }
@@ -159,6 +160,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_signin, container, false);
+        EventBus.getDefault().register(this);
         initController();
         initView(inflate);
         checkButton();
@@ -170,7 +172,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
     }
 
@@ -190,13 +191,11 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
 
     @Override
     protected void initController() {
@@ -227,25 +226,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 String[] titles = {"序号", "姓名", "签到时间", "是否签到"};
                 Export.ToSigninExcel("签到信息", "Sheet1", titles, mDatas);
                 break;
-        }
-    }
-
-    /**
-     * 保存方法
-     */
-    private void savaInfo(Object obj, String path) {
-        File file = new File(path);
-        if (!file.exists()) {
-            //文件不存在--->>> 创建
-            try {
-                file.createNewFile();
-                FileOutputStream fos = new FileOutputStream(file);
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(obj);
-                oos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -282,6 +262,12 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_SIGN://查询签到
@@ -312,17 +298,27 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     mHandler.sendMessage(message);
                 }
                 break;
-            case IDivMessage.RECEIVE_MEET_IMINFO:
-                Log.e("MyLog", "SigninFragment.callListener: 签到状态： 收到会议消息 --->>> ");
+            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
+                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                //获取之前的未读消息个数
+                int badgeNumber1 = mBadge.getBadgeNumber();
+                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
+                int all =  badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
                         mReceiveMsg = new ArrayList<>();
                     }
+                    receiveMeetIMInfos.get(0).setType(true);
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
                     Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
                 }
+                List<EventBadge> num = new ArrayList<>();
+                num.add(new EventBadge(all));
+                // TODO: 2018/3/7 通知界面更新
+                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
 
             case IDivMessage.QUERY_CONFORM_DEVID: //125.查询符合要求的设备ID
@@ -351,6 +347,13 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     mHandler.sendMessage(message);
                 }
                 break;
+        }
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            nativeUtil = NativeUtil.getInstance();
+            nativeUtil.setCallListener(this);
         }
     }
 }
