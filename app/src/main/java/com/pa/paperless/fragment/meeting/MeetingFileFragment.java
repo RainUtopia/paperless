@@ -1,5 +1,6 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -165,6 +166,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     }
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -214,7 +216,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 break;
             case IDEventMessage.STOP_PLAY:
                 //248.停止资源操作
-                nativeUtil.stopResourceOperate(0, devID);
+//                nativeUtil.stopResourceOperate(0, devID);
                 break;
         }
     }

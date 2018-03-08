@@ -50,6 +50,7 @@ import android.widget.TextView;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.MessageLite;
 import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fragment.meeting.MeetingFileFragment;
@@ -158,8 +159,14 @@ public class SDLActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //释放播放资源
-//        nativeUtil.mediaDestroy(MeetingFileFragment.mMediaid);
+        List<Integer> a = new ArrayList<Integer>();
+        List<Integer> b = new ArrayList<Integer>();
+        a.add(0);
+        b.add(MeetingActivity.getDevId());
+        /** ************ ******  停止资源操作  ****** ************ **/
+        nativeUtil.stopResourceOperate(a,b);
+        /** ************ ******  释放播放资源  ****** ************ **/
+        nativeUtil.mediaDestroy(0);
         Log.e("MyLog", "SDLActivity.onBackPressed:   --->>> ");
     }
 
@@ -202,6 +209,7 @@ public class SDLActivity extends Activity {
         // Set up the surface
         mSurface = new SDLSurface(getApplication());
 
+
         if (Build.VERSION.SDK_INT >= 12) {
             mJoystickHandler = new SDLJoystickHandler_API12();
         } else {
@@ -213,9 +221,23 @@ public class SDLActivity extends Activity {
 
         setContentView(mLayout);
         Button btn = new Button(this);
+
         btn.setText("go Camera");
         btn.setTextSize(30);
         mLayout.addView(btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Integer> a = new ArrayList<Integer>();
+                List<Integer> b = new ArrayList<Integer>();
+                a.add(0);
+                b.add(MeetingActivity.getDevId());
+                /** ************ ******  停止资源操作  ****** ************ **/
+                nativeUtil.stopResourceOperate(a,b);
+                /** ************ ******  释放播放资源  ****** ************ **/
+                nativeUtil.mediaDestroy(0);
+            }
+        });
         // Get filename from "Open with" of another application
         Intent intent = getIntent();
 
@@ -292,25 +314,31 @@ public class SDLActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+
+        //释放播放资源
+        nativeUtil.mediaDestroy(0);
         Log.v(TAG, "onDestroy()");
-        Log.e("MyLog", "SDLActivity.onDestroy:   --->>> ");
+        Log.e("MyLog","SDLActivity.onDestroy 315行:   --->>> ");
         if (SDLActivity.mBrokenLibraries) {
             super.onDestroy();
+            Log.e("MyLog","SDLActivity.onDestroy 318行:   --->>> ");
             // Reset everything in case the user re opens the app
+            onNativeSurfaceDestroyed();
             SDLActivity.initialize();
-            //释放播放资源
-//            nativeUtil.mediaDestroy(MeetingFileFragment.mMediaid);
             return;
         }
 
         // Send a quit message to the application
         SDLActivity.mExitCalledFromJava = true;
-        SDLActivity.nativeQuit();
+//        SDLActivity.nativeQuit();
+        onNativeSurfaceDestroyed();
+        Log.e("MyLog","SDLActivity.onDestroy 327行:   --->>> ");
 
         // Now wait for the SDL thread to quit
         if (SDLActivity.mSDLThread != null) {
             try {
                 SDLActivity.mSDLThread.join();
+                Log.e("MyLog","SDLActivity.onDestroy 333行:   --->>> ");
             } catch (Exception e) {
                 Log.v(TAG, "Problem stopping thread: " + e);
             }
@@ -321,9 +349,7 @@ public class SDLActivity extends Activity {
         super.onDestroy();
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
-        //释放播放资源
-//        nativeUtil.mediaDestroy(MeetingFileFragment.mMediaid);
-
+        Log.e("MyLog","SDLActivity.onDestroy 346行:   --->>> ");
     }
 
     @Override
@@ -1080,7 +1106,6 @@ class SDLMain implements Runnable {
 
         try {
             fdd.initvideores();
-            fdd.stopResourceOperate(0, 0);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }

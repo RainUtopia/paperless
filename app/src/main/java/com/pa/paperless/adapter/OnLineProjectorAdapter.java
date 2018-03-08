@@ -1,8 +1,6 @@
 package com.pa.paperless.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,8 @@ import com.pa.paperless.listener.ItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.allPerchecks;
+import static com.pa.paperless.activity.MeetingActivity.checkProAll;
+import static com.pa.paperless.activity.MeetingActivity.checkProOL;
 
 /**
  * Created by Administrator on 2018/3/3.
@@ -23,12 +22,14 @@ import static com.pa.paperless.activity.MeetingActivity.allPerchecks;
 
 public class OnLineProjectorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final int Typea;
     private List<DeviceInfo> mData;
     private ItemClickListener mListener;
 
 
-    public OnLineProjectorAdapter(List<DeviceInfo> datas) {
+    public OnLineProjectorAdapter(List<DeviceInfo> datas,int type) {
         mData = datas;
+        Typea = type;
     }
 
     /**
@@ -36,14 +37,26 @@ public class OnLineProjectorAdapter extends RecyclerView.Adapter<RecyclerView.Vi
      *
      * @return
      */
-    public List<DeviceInfo> getCheckedIds() {
+    public List<DeviceInfo> getCheckedIds(int type) {
         List<DeviceInfo> checkedId = new ArrayList<>();
-        if (mData.size() > 0) {
-            for (int i = 0; i < allPerchecks.size(); i++) {
-                if (allPerchecks.get(i)) {
-                    checkedId.add(mData.get(i));
+        //type 为1时 全部投影机
+        if(type == 1) {
+            if (mData.size() > 0) {
+                for (int i = 0; i < checkProAll.size(); i++) {
+                    if (checkProAll.get(i)) {
+                        checkedId.add(mData.get(i));
+                    }
                 }
             }
+        }else {
+            if (mData.size() > 0) {
+                for (int i = 0; i < checkProOL.size(); i++) {
+                    if (checkProOL.get(i)) {
+                        checkedId.add(mData.get(i));
+                    }
+                }
+            }
+
         }
         return checkedId;
     }
@@ -54,15 +67,15 @@ public class OnLineProjectorAdapter extends RecyclerView.Adapter<RecyclerView.Vi
      */
     public boolean setAllChecked() {
         //只要集合中包含false，就将该索引的位置改为true
-        if (allPerchecks.contains(false)) {
-            for (int i = 0; i < allPerchecks.size(); i++) {
-                allPerchecks.set(i, true);
+        if (checkProAll.contains(false)) {
+            for (int i = 0; i < checkProAll.size(); i++) {
+                checkProAll.set(i, true);
             }
             notifyDataSetChanged();
             return true;
         } else {//全部已经选中状态（true），就全设为false
-            for (int i = 0; i < allPerchecks.size(); i++) {
-                allPerchecks.set(i, false);
+            for (int i = 0; i < checkProAll.size(); i++) {
+                checkProAll.set(i, false);
             }
             notifyDataSetChanged();
             return false;
@@ -83,13 +96,17 @@ public class OnLineProjectorAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
         ((ViewHolder) holder).play_btn.setText(mData.get(position).getDevName());
-        ((ViewHolder) holder).play_btn.setSelected(allPerchecks.get(position));
+        // 为1 是全部投影机
+        if(Typea == 1) {
+            ((ViewHolder) holder).play_btn.setSelected(checkProAll.get(position));
+        }else {
+            ((ViewHolder) holder).play_btn.setSelected(checkProOL.get(position));
+        }
 
         ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
-                    Log.e("MyLog", "ScreenControlAdapter.onClick: rrrrr  --->>> ");
                     mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
                 }
             }

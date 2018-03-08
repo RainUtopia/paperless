@@ -173,7 +173,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         }
     };
     private VoteAdapter mVoteAdapter;
-    public static boolean isCompere ;
+    public static boolean isCompere;
     private Button mVoteOver;
     private PopupWindow mChoosePop;
     private int selectedItem = 0;
@@ -289,7 +289,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
 
         if (isCompere) {
             mVoteManagement.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             mVoteManagement.setVisibility(View.GONE);
         }
 //        String string1 = MeetingActivity.mAttendee.getText().toString();
@@ -335,24 +335,18 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 String[] titles = {"投票ID", "投票内容", "投票类型", "是否记名", "状态", "选项一", "投票数", "选项二", "投票数", "选项三", "投票数", "选项四", "投票数", "选项五", "投票数"};
                 String meetName = getMeetName();
                 Log.e("MyLog", "VoteFragment.onClick 306行:  meetName --->>> " + meetName);
-                try {
-                    boolean b = Export.ToVoteExcel(meetName, "投票结果", "Sheet1", titles, mVoteData);
-                    if (b) {
-                        Toast.makeText(getContext(), "导出成功", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (WriteException e) {
-                    e.printStackTrace();
+                boolean b = Export.ToVoteExcel(meetName, "投票结果", "Sheet1", titles, mVoteData);
+                if (b) {
+                    Toast.makeText(getContext(), "导出成功", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.vote_management:  //投票管理
-                if(isClicked) {
+                if (isClicked) {
                     /** ************ ******  如果是主持人则展示主持人功能  ****** ************ **/
                     mVoteOpen.setVisibility(View.VISIBLE);
                     mVoteOver.setVisibility(View.VISIBLE);
                     mVoteQuery.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     Toast.makeText(getContext(), "先选择投票", Toast.LENGTH_SHORT).show();
                 }
 
@@ -586,15 +580,9 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onClick(View view) {
                 String[] titles = {"序号", "姓名", "选项"};
-                try {
-                    boolean b = Export.ToVoteResultExcel(voteInfo.getContent(), "投票详情", "Sheet1", titles, voteBeen);
-                    if (b) {
-                        Toast.makeText(getContext(), "导出成功", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (WriteException e) {
-                    e.printStackTrace();
+                boolean b = Export.ToVoteResultExcel(voteInfo.getContent(), "投票详情", "Sheet1", titles, voteBeen);
+                if (b) {
+                    Toast.makeText(getContext(), "导出成功", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -640,7 +628,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all =  badgeNumber1 + 1;
+                int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {

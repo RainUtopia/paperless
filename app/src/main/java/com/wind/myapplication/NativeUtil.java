@@ -3129,10 +3129,10 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean stopResourceOperate(int resVal, int devid) {
+    public boolean stopResourceOperate(List<Integer> resVal, List<Integer> devid) {
         InterfaceMain2.pbui_Type_MeetDoStopResWork.Builder builder = InterfaceMain2.pbui_Type_MeetDoStopResWork.newBuilder();
-        builder.addRes(resVal);
-        builder.addDeviceid(devid);
+        builder.addAllRes(resVal);
+        builder.addAllDeviceid(devid);
         InterfaceMain2.pbui_Type_MeetDoStopResWork build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STOPPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.stopResourceOperate:  248.停止资源操作  --->>> ");
@@ -3289,14 +3289,13 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean streamPlay(List<Integer> alldeviceid, List<Integer> allres, int subid, int srcdeviceid, int triggeruserval) {
+    public boolean streamPlay(int srcdeviceid, int subid, int triggeruserval, List<Integer> allres, List<Integer> alldeviceid) {
         InterfaceMain2.pbui_Type_MeetDoStreamPlay.Builder builder = InterfaceMain2.pbui_Type_MeetDoStreamPlay.newBuilder();
         builder.setSrcdeviceid(srcdeviceid);
         builder.setSubid(subid);
         builder.setTriggeruserval(triggeruserval);
-
-        builder.addAllDeviceid(alldeviceid);
         builder.addAllRes(allres);
+        builder.addAllDeviceid(alldeviceid);
         InterfaceMain2.pbui_Type_MeetDoStreamPlay build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.streamPlay:  264.流播放 --->>> ");
@@ -3718,7 +3717,7 @@ public class NativeUtil {
             case 32://202
                 InterfaceMain.pbui_MeetNotifyMsg voteSubmitterChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
                 InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg10 = voteSubmitterChangeInform.parseFrom(data);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform,pbui_meetNotifyMsg10));
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform, pbui_meetNotifyMsg10));
                 Log.e("CaseLog", "NativeUtil.callback_method:  202 投票提交人变更通知 --->>> ");
                 break;
             case 33://59

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.pa.paperless.R;
+import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -24,11 +25,11 @@ import static com.pa.paperless.activity.MeetingActivity.checks;
 
 public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<MemberInfo> mData;
+    private List<DevMember> mData;
     private ItemClickListener mListener;
 
 
-    public ScreenControlAdapter(List<MemberInfo> datas) {
+    public ScreenControlAdapter(List<DevMember> datas) {
         mData = datas;
     }
 
@@ -37,8 +38,8 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
      *
      * @return
      */
-    public List<MemberInfo> getCheckedIds() {
-        List<MemberInfo> checkedId = new ArrayList<>();
+    public List<DevMember> getCheckedIds() {
+        List<DevMember> checkedId = new ArrayList<>();
         if(mData.size()>0) {
             for (int i = 0; i < checks.size(); i++) {
                 if (checks.get(i)) {
@@ -83,7 +84,7 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        ((ViewHolder) holder).play_btn.setText(mData.get(position).getName());
+        ((ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
         ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
 
         ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {

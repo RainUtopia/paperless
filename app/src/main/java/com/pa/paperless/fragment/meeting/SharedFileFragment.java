@@ -215,7 +215,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             @Override
             public void onLookListener(int posion, String filename) {
                 if (FileUtil.isVideoFile(filename)) {
-                    MyUtils.playMedia(nativeUtil, getContext(), MeetingActivity.getDevId(), getActivity());
+//                    MyUtils.playMedia(nativeUtil, getContext(), MeetingActivity.getDevId(), getActivity());
                     nativeUtil.mediaPlayOperate(posion, MeetingActivity.getDevId(), 0);
                 } else {
                     MyUtils.openFile(filename, getView(), nativeUtil, posion, getContext());

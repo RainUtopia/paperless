@@ -830,10 +830,10 @@ message pbui_Type_MeetStreamPlay
 message pbui_Type_MeetDoStreamPlay
 {
 	fixed32  srcdeviceid=1;//设备ID
-	fixed32  subid=2;//设备子通道
-	fixed32  triggeruserval=3;//触发器标志
+	fixed32  subid=2;//设备子通道   2 桌面流 3 摄像头
+	fixed32  triggeruserval=3;//触发器标志 0
 
-	repeated fixed32 res=4;	  //播放所用的资源,为0表示全部
+	repeated fixed32 res=4;	  // 播放所用的资源,为0表示全部
 	repeated fixed32 deviceid=5;	  //通知的目标设备,为0表示全部
 }
 

@@ -106,7 +106,7 @@ public class MyUtils {
             @Override
             public void onClick(View view) {
                 //248.停止资源操作
-                nativeUtil.stopResourceOperate(0, devID);
+
                 mediaPop.dismiss();
             }
         });

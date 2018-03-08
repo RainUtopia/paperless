@@ -76,6 +76,7 @@
             android:screenOrientation="landscape"/>
         <activity android:name=".activity.ScreenShotActivity"/>
         <activity android:name="org.libsdl.app.SDLActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="landscape"/>
     </application>
 

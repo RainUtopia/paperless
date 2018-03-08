@@ -1,5 +1,6 @@
 package com.pa.paperless.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,7 +10,7 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -36,6 +37,7 @@ import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.OnLineProjectorAdapter;
 import com.pa.paperless.adapter.ScreenControlAdapter;
+import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MainDivMeetInfo;
 import com.pa.paperless.bean.MemberInfo;
@@ -58,6 +60,7 @@ import com.pa.paperless.fragment.meeting.WebBrowseFragment;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
+import com.pa.paperless.utils.Export;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.ScreenUtils;
 import com.wind.myapplication.NativeUtil;
@@ -186,6 +189,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                             int i1 = devId & number;
                             //判断是否是投影机
                             if (i1 == number) {
+                                // 添加所有投影机
                                 allProjectors.add(deviceInfo);
                                 //判断是否是在线状态
                                 if (netState == 1) {
@@ -198,16 +202,16 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                                     MemberInfo memberInfo = memberInfos.get(j);
                                     if (memberInfos.get(j).getPersonid() == memberId) {
                                         //查找到在线状态的参会人员
-                                        onLineMembers.add(memberInfos.get(j));
+                                        onLineMembers.add(new DevMember(memberInfos.get(j), devId));
                                     }
                                 }
                             }
                         }
                         //初始化投影机是否选中集合
-                        allPerchecks = new ArrayList<>();
+                        checkProAll = new ArrayList<>();
                         //初始化 全部设为false
                         for (int k = 0; k < allProjectors.size(); k++) {
-                            allPerchecks.add(false);
+                            checkProAll.add(false);
                         }
                         //初始化同屏控制是否选中集合
                         checks = new ArrayList<>();
@@ -215,8 +219,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         for (int k = 0; k < onLineMembers.size(); k++) {
                             checks.add(false);
                         }
-                        allProjectorAdapter = new OnLineProjectorAdapter(allProjectors);
-                        onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors);
+                        //初始化同屏控制投影机选择集合
+                        checkProOL = new ArrayList<>();
+                        for (int i = 0; i < onLineProjectors.size(); i++) {
+                            checkProOL.add(false);
+                        }
+                        allProjectorAdapter = new OnLineProjectorAdapter(allProjectors, 1);
+                        onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors, 0);
                         onLineMemberAdapter = new ScreenControlAdapter(onLineMembers);
                     }
                     break;
@@ -241,8 +250,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     // 存放当前设备会议信息
     public static MainDivMeetInfo o;
 
-    public static List<Boolean> checks;
-    public static ArrayList<Boolean> allPerchecks;
     private ScreenControlAdapter onLineMemberAdapter;
     private LinearLayout mMeetActivityLayout;
     private PopupWindow mProjectorPop;
@@ -252,7 +259,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private List<DeviceInfo> onLineProjectors;
     private List<MemberInfo> memberInfos;
     //用来存放在线状态的参会人员
-    private List<MemberInfo> onLineMembers;
+//    private List<MemberInfo> onLineMembers;
+    private List<DevMember> onLineMembers;
     private OnLineProjectorAdapter onLineProjectorAdapter;
     //用来存放所有的投影机设备
     private List<DeviceInfo> allProjectors;
@@ -260,6 +268,15 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public static Badge mBadge; //未读消息提示
     public static String mNoteCentent;
     private PopupWindow mNotePop;
+
+    public static List<Boolean> checks;
+    public static ArrayList<Boolean> checkProAll;
+    public static List<Boolean> checkProOL;
+    private List<Integer> sameMemberDevIds;
+    private List<Integer> sameMemberDevRrsIds;
+    private List<Integer> applyProjectionIds;
+    private List<Integer> informDev;
+
 
     @Override
     public void callListener(int action, Object result) {
@@ -514,6 +531,17 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    //..//
+
+
+//
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        //如果用以下这种做法则不保存状态，再次进来的话会显示默认tab
+//        //总是执行这句代码来调用父类去保存视图层的状态
+////        super.onSaveInstanceState(outState);
+//    }
+
     private void updataTimeUi(EventMessage message) {
         String[] object = (String[]) message.getObject();
         mMeetingNowDate.setText(object[0]);
@@ -567,6 +595,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    //..//
     public void showFragment(int index) {
         FragmentTransaction ft = mFm.beginTransaction();
         hideFragment(ft);
@@ -1012,6 +1041,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * 会议笔记pop事件监听
+     *
      * @param holder
      */
     private void NoteHolderEvent(final NoteViewHolder holder) {
@@ -1030,10 +1060,30 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 mNoteCentent = holder.edtNote.getText().toString();
                 //保存到手机
+                showFileNamePop(mNoteCentent);
                 // TODO: 2018/3/7  
                 mNotePop.dismiss();
             }
         });
+    }
+
+    private void showFileNamePop(final String mNoteCentent) {
+        final EditText edt = new EditText(MeetingActivity.this);
+        edt.setText("会议笔记");
+        new AlertDialog.Builder(MeetingActivity.this).setTitle("请输入保存的文件名称")
+                .setView(edt).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String string = edt.getText().toString();
+                Export.ToNoteText(mNoteCentent,string);
+
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).create().show();
     }
 
     /**
@@ -1063,11 +1113,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     // TODO: 2018/2/6 获取全部的投影机
-                    for (int i = 0; i < checks.size(); i++) {
-                        checks.set(i, true);
+                    for (int i = 0; i < checkProAll.size(); i++) {
+                        checkProAll.set(i, true);
                     }
                     //获取选中的投影机
-                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds();
+                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
                 }
             }
         });
@@ -1084,7 +1134,17 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 if (allProjectorAdapter != null) {
-                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds();
+                    applyProjectionIds = new ArrayList<Integer>();
+                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
+                    //**//
+                    for (int i = 0; i < checkedIds.size(); i++) {
+                        applyProjectionIds.add(checkedIds.get(i).getDevId());
+                    }
+                    informDev = new ArrayList<Integer>();
+//                    applyProjectionIds.add(0);
+                    informDev.add(0x1080004);
+                    /** ************ ******  流播放  ****** ************ **/
+                    nativeUtil.streamPlay(o.getDevId(), 3, 0, applyProjectionIds, informDev);
                 }
             }
         });
@@ -1092,7 +1152,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.stop_pro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (applyProjectionIds != null && informDev != null) {
+                    /** ************ ******  停止资源操作  ****** ************ **/
+                    nativeUtil.stopResourceOperate(applyProjectionIds, informDev);
+                }
             }
         });
         holder.pro_cancel.setOnClickListener(new View.OnClickListener() {
@@ -1137,31 +1200,31 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 Button player = view.findViewById(R.id.palyer_name);
                 boolean selected = !player.isSelected();
                 player.setSelected(selected);
-                allPerchecks.set(posion, selected);
-                holder.pro_all_cb.setChecked(!allPerchecks.contains(false));
+                checkProAll.set(posion, selected);
+                holder.pro_all_cb.setChecked(!checkProAll.contains(false));
                 allProjectorAdapter.notifyDataSetChanged();
             }
         });
-        ///////////
+        // 全选按钮监听
         holder.pro_all_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     //如果包含false
                     for (int i = 0; i < allProjectors.size(); i++) {
-                        if (!allPerchecks.get(i)) {
+                        if (!checkProAll.get(i)) {
                             //将包含false的选项设为true
-                            allPerchecks.set(i, true);
+                            checkProAll.set(i, true);
                         }
                     }
                     // TODO: 2018/2/6 获取全部的数据
                 } else {
                     //全选为false
-                    if (!allPerchecks.contains(false)) {
+                    if (!checkProAll.contains(false)) {
                         //不包含false 就是全部为true的状态
                         for (int i = 0; i < allProjectors.size(); i++) {
                             //全部都设为false
-                            allPerchecks.set(i, false);
+                            checkProAll.set(i, false);
                         }
                     }
                 }
@@ -1172,7 +1235,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 if (allProjectorAdapter != null) {
-                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds();
+                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
                     Log.e("MyLog", "MeetingActivity.onClick 1067行:  选中的投影机有 --->>> " + checkedIds.size());
                 }
                 mProRlPop.dismiss();
@@ -1219,7 +1282,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     Log.e("MyLog", "MeetingActivity.onCheckedChanged:  全部设置为 true --->>> ");
                     //直接获取全部的数据 onLineMembers
                     // TODO: 2018/2/2 获取到选中的人员
-                    List<MemberInfo> checkedIds = onLineMemberAdapter.getCheckedIds();
+                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
                     Log.e("MyLog", "MeetingActivity.onCheckedChanged:  选中的参会人： --->>> " + checkedIds.size());
                 }
             }
@@ -1240,11 +1303,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    //如果 所有人 为true
-                    for (int i = 0; i < checks.size(); i++) {
-                        checks.set(i, true);
+                    for (int i = 0; i < checkProOL.size(); i++) {
+                        checkProOL.set(i, true);
                     }
-                    List<DeviceInfo> checkedIds = onLineProjectorAdapter.getCheckedIds();
+                    List<DeviceInfo> checkedIds = onLineProjectorAdapter.getCheckedIds(0);
                 }
             }
         });
@@ -1259,7 +1321,23 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.screens_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sameMemberDevRrsIds = new ArrayList<Integer>();
+                sameMemberDevIds = new ArrayList<Integer>();
+                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
+//                List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
+//                for (int i = 0; i < checkedIds.size(); i++) {
+//                    sameMemberDevIds.add(checkedIds.get(i).getDevId());
+//                }
+//                List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
+//                for (int i = 0; i < checkedIds1.size(); i++) {
+//                    sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
+//                }
+                }
+                sameMemberDevRrsIds.add(0);
+                sameMemberDevIds.add(0x1080004);
+                //**//
+                /** ************ ******  流播放  ****** ************ **/
+                nativeUtil.streamPlay(0x1080004, 3, 0, sameMemberDevRrsIds, sameMemberDevIds);
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
             }
         });
@@ -1267,6 +1345,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.stop_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (sameMemberDevIds != null && sameMemberDevRrsIds != null) {
+                    /** ************ ******  停止资源操作  ****** ************ **/
+                    nativeUtil.stopResourceOperate(sameMemberDevRrsIds, sameMemberDevIds);
+                }
                 Toast.makeText(MeetingActivity.this, "停止同屏", Toast.LENGTH_SHORT).show();
             }
         });
@@ -1380,12 +1462,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 Button player = view.findViewById(R.id.palyer_name);
                 boolean selected = !player.isSelected();
                 player.setSelected(selected);
-                checks.set(posion, selected);
-                holder.playersAllCb.setChecked(!checks.contains(false));
+                checkProOL.set(posion, selected);
+                holder.projectorAllCb.setChecked(!checkProOL.contains(false));
                 onLineProjectorAdapter.notifyDataSetChanged();
             }
         });
-        ///////////
         //全选按钮状态监听
         holder.playersAllCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -1420,19 +1501,19 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 if (b) {
                     //如果包含false
                     for (int i = 0; i < onLineProjectors.size(); i++) {
-                        if (!checks.get(i)) {
+                        if (!checkProOL.get(i)) {
                             //将包含false的选项设为true
-                            checks.set(i, true);
+                            checkProOL.set(i, true);
                         }
                     }
                     // TODO: 2018/2/6 获取全部的数据
                 } else {
                     //全选为false
-                    if (!checks.contains(false)) {
+                    if (!checkProOL.contains(false)) {
                         //不包含false 就是全部为true的状态
                         for (int i = 0; i < onLineProjectors.size(); i++) {
                             //全部都设为false
-                            checks.set(i, false);
+                            checkProOL.set(i, false);
                         }
                     }
                 }
@@ -1446,11 +1527,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 // TODO: 2018/2/2 获取到选中的人员
                 if (onLineMemberAdapter != null) {
-                    List<MemberInfo> checkedIds = onLineMemberAdapter.getCheckedIds();
+                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
                     Log.e("MyLog", "MeetingActivity.onClick 1262行:  选中的人员数量： --->>> " + checkedIds.size());
                 }
                 if (onLineProjectorAdapter != null) {
-                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds();
+                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
                     Log.e("MyLog", "MeetingActivity.onClick 1266行:  选中投影机数量 --->>> " + checkedIds1.size());
                 }
                 mPlayerPopupWindow.dismiss();
@@ -1519,8 +1600,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
              */
             this.projectorAllCb = (CheckBox) rootView.findViewById(R.id.projector_all_cb);
             this.projectorRl = (RecyclerView) rootView.findViewById(R.id.projector_rl);
-            //表格布局
-            this.projectorRl.setLayoutManager(new GridLayoutManager(rootView.getContext(), 2));
+            //瀑布流布局
+            this.projectorRl.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
             this.projectorRl.setAdapter(onLineProjectorAdapter);
             /**
              * *************************************
@@ -1595,7 +1676,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public NoteViewHolder(View rootView) {
             this.rootView = rootView;
             this.edtNote = (EditText) rootView.findViewById(R.id.edt_note);
-            if(!("".equals(mNoteCentent))){
+            if (!("".equals(mNoteCentent))) {
                 this.edtNote.setText(mNoteCentent);
             }
             this.noteImport = (Button) rootView.findViewById(R.id.note_import);
