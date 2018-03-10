@@ -9797,6 +9797,955 @@ public final class InterfaceMain {
     }
   }
 
+  public interface pbui_Item_DeviceResPlayOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Item_DeviceResPlay)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>fixed32 devceid = 1;</code>
+     */
+    int getDevceid();
+
+    /**
+     * <pre>
+     *如果设备ID是参会人员席位,以下数据有效
+     * </pre>
+     *
+     * <code>fixed32 memberid = 2;</code>
+     */
+    int getMemberid();
+
+    /**
+     * <pre>
+     *参会人员名称
+     * </pre>
+     *
+     * <code>bytes name = 3;</code>
+     */
+    com.google.protobuf.ByteString getName();
+  }
+  /**
+   * Protobuf type {@code pbui_Item_DeviceResPlay}
+   */
+  public  static final class pbui_Item_DeviceResPlay extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Item_DeviceResPlay, pbui_Item_DeviceResPlay.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Item_DeviceResPlay)
+      pbui_Item_DeviceResPlayOrBuilder {
+    private pbui_Item_DeviceResPlay() {
+      name_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    public static final int DEVCEID_FIELD_NUMBER = 1;
+    private int devceid_;
+    /**
+     * <code>fixed32 devceid = 1;</code>
+     */
+    public int getDevceid() {
+      return devceid_;
+    }
+    /**
+     * <code>fixed32 devceid = 1;</code>
+     */
+    private void setDevceid(int value) {
+      
+      devceid_ = value;
+    }
+    /**
+     * <code>fixed32 devceid = 1;</code>
+     */
+    private void clearDevceid() {
+      
+      devceid_ = 0;
+    }
+
+    public static final int MEMBERID_FIELD_NUMBER = 2;
+    private int memberid_;
+    /**
+     * <pre>
+     *如果设备ID是参会人员席位,以下数据有效
+     * </pre>
+     *
+     * <code>fixed32 memberid = 2;</code>
+     */
+    public int getMemberid() {
+      return memberid_;
+    }
+    /**
+     * <pre>
+     *如果设备ID是参会人员席位,以下数据有效
+     * </pre>
+     *
+     * <code>fixed32 memberid = 2;</code>
+     */
+    private void setMemberid(int value) {
+      
+      memberid_ = value;
+    }
+    /**
+     * <pre>
+     *如果设备ID是参会人员席位,以下数据有效
+     * </pre>
+     *
+     * <code>fixed32 memberid = 2;</code>
+     */
+    private void clearMemberid() {
+      
+      memberid_ = 0;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString name_;
+    /**
+     * <pre>
+     *参会人员名称
+     * </pre>
+     *
+     * <code>bytes name = 3;</code>
+     */
+    public com.google.protobuf.ByteString getName() {
+      return name_;
+    }
+    /**
+     * <pre>
+     *参会人员名称
+     * </pre>
+     *
+     * <code>bytes name = 3;</code>
+     */
+    private void setName(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      name_ = value;
+    }
+    /**
+     * <pre>
+     *参会人员名称
+     * </pre>
+     *
+     * <code>bytes name = 3;</code>
+     */
+    private void clearName() {
+      
+      name_ = getDefaultInstance().getName();
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (devceid_ != 0) {
+        output.writeFixed32(1, devceid_);
+      }
+      if (memberid_ != 0) {
+        output.writeFixed32(2, memberid_);
+      }
+      if (!name_.isEmpty()) {
+        output.writeBytes(3, name_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (devceid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, devceid_);
+      }
+      if (memberid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, memberid_);
+      }
+      if (!name_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, name_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code pbui_Item_DeviceResPlay}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Item_DeviceResPlay)
+        com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlayOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>fixed32 devceid = 1;</code>
+       */
+      public int getDevceid() {
+        return instance.getDevceid();
+      }
+      /**
+       * <code>fixed32 devceid = 1;</code>
+       */
+      public Builder setDevceid(int value) {
+        copyOnWrite();
+        instance.setDevceid(value);
+        return this;
+      }
+      /**
+       * <code>fixed32 devceid = 1;</code>
+       */
+      public Builder clearDevceid() {
+        copyOnWrite();
+        instance.clearDevceid();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *如果设备ID是参会人员席位,以下数据有效
+       * </pre>
+       *
+       * <code>fixed32 memberid = 2;</code>
+       */
+      public int getMemberid() {
+        return instance.getMemberid();
+      }
+      /**
+       * <pre>
+       *如果设备ID是参会人员席位,以下数据有效
+       * </pre>
+       *
+       * <code>fixed32 memberid = 2;</code>
+       */
+      public Builder setMemberid(int value) {
+        copyOnWrite();
+        instance.setMemberid(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *如果设备ID是参会人员席位,以下数据有效
+       * </pre>
+       *
+       * <code>fixed32 memberid = 2;</code>
+       */
+      public Builder clearMemberid() {
+        copyOnWrite();
+        instance.clearMemberid();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *参会人员名称
+       * </pre>
+       *
+       * <code>bytes name = 3;</code>
+       */
+      public com.google.protobuf.ByteString getName() {
+        return instance.getName();
+      }
+      /**
+       * <pre>
+       *参会人员名称
+       * </pre>
+       *
+       * <code>bytes name = 3;</code>
+       */
+      public Builder setName(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setName(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参会人员名称
+       * </pre>
+       *
+       * <code>bytes name = 3;</code>
+       */
+      public Builder clearName() {
+        copyOnWrite();
+        instance.clearName();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Item_DeviceResPlay)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay other = (com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay) arg1;
+          devceid_ = visitor.visitInt(devceid_ != 0, devceid_,
+              other.devceid_ != 0, other.devceid_);
+          memberid_ = visitor.visitInt(memberid_ != 0, memberid_,
+              other.memberid_ != 0, other.memberid_);
+          name_ = visitor.visitByteString(name_ != com.google.protobuf.ByteString.EMPTY, name_,
+              other.name_ != com.google.protobuf.ByteString.EMPTY, other.name_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  devceid_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+
+                  memberid_ = input.readFixed32();
+                  break;
+                }
+                case 26: {
+
+                  name_ = input.readBytes();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Item_DeviceResPlay)
+    private static final com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Item_DeviceResPlay();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Item_DeviceResPlay> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Item_DeviceResPlay> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Type_DeviceResPlayOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_DeviceResPlay)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    java.util.List<com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay> 
+        getPdevList();
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay getPdev(int index);
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    int getPdevCount();
+  }
+  /**
+   * <pre>
+   *查询当前可加入播放的桌面同屏流
+   *call
+   *type:TYPE_MEET_INTERFACE_DEVICEINFO
+   *method: METHOD_MEET_INTERFACE_RESINFO
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_DeviceResPlay}
+   */
+  public  static final class pbui_Type_DeviceResPlay extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_DeviceResPlay, pbui_Type_DeviceResPlay.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_DeviceResPlay)
+      pbui_Type_DeviceResPlayOrBuilder {
+    private pbui_Type_DeviceResPlay() {
+      pdev_ = emptyProtobufList();
+    }
+    public static final int PDEV_FIELD_NUMBER = 1;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay> pdev_;
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay> getPdevList() {
+      return pdev_;
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlayOrBuilder> 
+        getPdevOrBuilderList() {
+      return pdev_;
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    public int getPdevCount() {
+      return pdev_.size();
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    public com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay getPdev(int index) {
+      return pdev_.get(index);
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    public com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlayOrBuilder getPdevOrBuilder(
+        int index) {
+      return pdev_.get(index);
+    }
+    private void ensurePdevIsMutable() {
+      if (!pdev_.isModifiable()) {
+        pdev_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(pdev_);
+       }
+    }
+
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void setPdev(
+        int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensurePdevIsMutable();
+      pdev_.set(index, value);
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void setPdev(
+        int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.Builder builderForValue) {
+      ensurePdevIsMutable();
+      pdev_.set(index, builderForValue.build());
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void addPdev(com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensurePdevIsMutable();
+      pdev_.add(value);
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void addPdev(
+        int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensurePdevIsMutable();
+      pdev_.add(index, value);
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void addPdev(
+        com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.Builder builderForValue) {
+      ensurePdevIsMutable();
+      pdev_.add(builderForValue.build());
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void addPdev(
+        int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.Builder builderForValue) {
+      ensurePdevIsMutable();
+      pdev_.add(index, builderForValue.build());
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void addAllPdev(
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay> values) {
+      ensurePdevIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, pdev_);
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void clearPdev() {
+      pdev_ = emptyProtobufList();
+    }
+    /**
+     * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+     */
+    private void removePdev(int index) {
+      ensurePdevIsMutable();
+      pdev_.remove(index);
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < pdev_.size(); i++) {
+        output.writeMessage(1, pdev_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < pdev_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, pdev_.get(i));
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *查询当前可加入播放的桌面同屏流
+     *call
+     *type:TYPE_MEET_INTERFACE_DEVICEINFO
+     *method: METHOD_MEET_INTERFACE_RESINFO
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_DeviceResPlay}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_DeviceResPlay)
+        com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlayOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay> getPdevList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getPdevList());
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public int getPdevCount() {
+        return instance.getPdevCount();
+      }/**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay getPdev(int index) {
+        return instance.getPdev(index);
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder setPdev(
+          int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay value) {
+        copyOnWrite();
+        instance.setPdev(index, value);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder setPdev(
+          int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.Builder builderForValue) {
+        copyOnWrite();
+        instance.setPdev(index, builderForValue);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder addPdev(com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay value) {
+        copyOnWrite();
+        instance.addPdev(value);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder addPdev(
+          int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay value) {
+        copyOnWrite();
+        instance.addPdev(index, value);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder addPdev(
+          com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.Builder builderForValue) {
+        copyOnWrite();
+        instance.addPdev(builderForValue);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder addPdev(
+          int index, com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.Builder builderForValue) {
+        copyOnWrite();
+        instance.addPdev(index, builderForValue);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder addAllPdev(
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay> values) {
+        copyOnWrite();
+        instance.addAllPdev(values);
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder clearPdev() {
+        copyOnWrite();
+        instance.clearPdev();
+        return this;
+      }
+      /**
+       * <code>repeated .pbui_Item_DeviceResPlay pdev = 1;</code>
+       */
+      public Builder removePdev(int index) {
+        copyOnWrite();
+        instance.removePdev(index);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_DeviceResPlay)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          pdev_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay other = (com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay) arg1;
+          pdev_= visitor.visitList(pdev_, other.pdev_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  if (!pdev_.isModifiable()) {
+                    pdev_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(pdev_);
+                  }
+                  pdev_.add(
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceMain.pbui_Item_DeviceResPlay.parser(), extensionRegistry));
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_DeviceResPlay)
+    private static final com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_DeviceResPlay();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceMain.pbui_Type_DeviceResPlay getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_DeviceResPlay> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_DeviceResPlay> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface pbui_MeetDeviceQueryPropertyOrBuilder extends
       // @@protoc_insertion_point(interface_extends:pbui_MeetDeviceQueryProperty)
       com.google.protobuf.MessageLiteOrBuilder {

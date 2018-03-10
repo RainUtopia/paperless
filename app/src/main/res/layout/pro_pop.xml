@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:background="@drawable/leftsel"
             android:text="确定"
-            android:textColor="@color/textColor"
+            android:textColor="@color/White"
             android:textSize="20sp" />
 
         <Button
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:background="@drawable/rightsel"
             android:text="取消"
-            android:textColor="@color/textColor"
+            android:textColor="@color/White"
             android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>

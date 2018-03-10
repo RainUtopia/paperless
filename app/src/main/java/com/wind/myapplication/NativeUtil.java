@@ -20,8 +20,6 @@ import com.pa.paperless.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD;
@@ -88,9 +86,22 @@ public class NativeUtil {
         mCallListener = listener;
     }
 
-    /**
-     * *********** ******    ****** ************
-     **/
+    // 查询可加入的同屏会话
+    public boolean queryCanJoin() throws InvalidProtocolBufferException {
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEVICEINFO.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_RESINFO.getNumber(), null);
+        if (array == null) {
+            Log.e("MyLog","NativeUtil.queryCanJoin 93行:  查询可加入的同屏会话失败 --->>> ");
+            return false;
+        }
+        InterfaceMain.pbui_Type_DeviceResPlay defaultInstance = InterfaceMain.pbui_Type_DeviceResPlay.getDefaultInstance();
+        InterfaceMain.pbui_Type_DeviceResPlay pbui_type_deviceResPlay = defaultInstance.parseFrom(array);
+        if (mCallListener != null) {
+            mCallListener.callListener(IDivMessage.QUERY_CAN_JOIN, pbui_type_deviceResPlay);
+            Log.e("MyLog","NativeUtil.queryCanJoin 100行:  查询可加入的同屏会话成功 --->>> ");
+        }
+        return true;
+    }
+
     /*2.初始化无纸化网络平台*/
     public boolean javaInitSys() {
         String cfgpath = "/mnt/sdcard/NETCONFIG/client.ini";

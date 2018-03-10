@@ -160,7 +160,10 @@ Pb_METHOD_MEET_INTERFACE_REQUESTTOMANAGE=   54; //请求管理员
 Pb_METHOD_MEET_INTERFACE_RESPONSETOMANAGE=   55; //回复请求管理员
 Pb_METHOD_MEET_INTERFACE_REQUESTPRIVELIGE=   56; //请求参会人员权限
 Pb_METHOD_MEET_INTERFACE_RESPONSEPRIVELIGE=   57; //回复请求参会人员权限
-Pb_METHOD_MEET_INTERFACE_UPDATE=   58; //
+Pb_METHOD_MEET_INTERFACE_UPDATE=   58; //更新、升级
+Pb_METHOD_MEET_INTERFACE_TEXTMSG=   59; //文本消息
+Pb_METHOD_MEET_INTERFACE_REBOOT=    60; //重启
+Pb_METHOD_MEET_INTERFACE_RESINFO=   61; //播放资源信息
 
 Pb_METHOD_MEET_INTERFACE_ADDINK=1001; //添加INK
 Pb_METHOD_MEET_INTERFACE_ADDRECT=1002; //添加矩形、直线、圆形
@@ -251,7 +254,7 @@ Pb_MemState_AdminFace=2;//后台管理界面
 enum Pb_MeetDevicePropertyID
 {
 Pb_MEETDEVICE_PROPERTY_ZERO=0;
-Pb_MEETDEVICE_PROPERTY_NAME=1;      //设备名称 query(text)
+Pb_MEETDEVICE_PROPERTY_NAME=1; //设备名称 query(text)
 Pb_MEETDEVICE_PROPERTY_IPADDR=2;		 //ip地址 query(text) paramterval(ip地址索引)
 Pb_MEETDEVICE_PROPERTY_PORT=3;				 //网络端口 query(fixed32)
 Pb_MEETDEVICE_PROPERTY_NETSTATUS=4;			 //网络状态 query(fixed32)
@@ -630,9 +633,9 @@ Pb_VOTEMODE_signed=		1; //记名投票
 enum Pb_MeetVote_SelType
 {
 Pb_VOTE_TYPE_MANY=			    0; //多选
-Pb_VOTE_TYPE_SINGLE=			1; //单选
+Pb_VOTE_TYPE_SINGLE=			1; //多选
 Pb_VOTE_TYPE_4_5=			    2; //5选4
-Pb_VOTE_TYPE_3_5=			    3; //5选3
+Pb_VOTE_TYPE_3_5=			    3; //5选2
 Pb_VOTE_TYPE_2_5=			    4; //5选2
 Pb_VOTE_TYPE_2_3=			    5; //3选2
 }

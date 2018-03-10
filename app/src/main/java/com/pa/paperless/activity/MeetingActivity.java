@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -35,6 +36,7 @@ import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
+import com.pa.paperless.adapter.JoinAdapter;
 import com.pa.paperless.adapter.OnLineProjectorAdapter;
 import com.pa.paperless.adapter.ScreenControlAdapter;
 import com.pa.paperless.bean.DevMember;
@@ -70,6 +72,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -197,7 +200,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                                     onLineProjectors.add(deviceInfo);
                                 }
                             }
-                            if (netState == 1) {
+                            if (netState == 1 && memberInfos != null) {
                                 for (int j = 0; j < memberInfos.size(); j++) {
                                     MemberInfo memberInfo = memberInfos.get(j);
                                     if (memberInfos.get(j).getPersonid() == memberId) {
@@ -244,6 +247,48 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         }
                     }
                     break;
+                case IDivMessage.QUERY_CAN_JOIN: // 查询可加入的同屏会话
+                    ArrayList queryCanJoin = msg.getData().getParcelableArrayList("queryCanJoin");
+                    InterfaceMain.pbui_Type_DeviceResPlay o = (InterfaceMain.pbui_Type_DeviceResPlay) queryCanJoin.get(0);
+                    List<InterfaceMain.pbui_Item_DeviceResPlay> pdevList = o.getPdevList();
+
+                    memberJoin = new ArrayList<>();
+                    peojectorJoin = new ArrayList<>();
+                    for (int i = 0; i < pdevList.size(); i++) {
+                        InterfaceMain.pbui_Item_DeviceResPlay pbui_item_deviceResPlay = pdevList.get(i);
+                        int devceid = pbui_item_deviceResPlay.getDevceid();
+                        Log.e("MyLog", "MeetingActivity.handleMessage 256行:  可加入设备ID： --->>> " + devceid);
+                        int i1 = devceid & Macro.DEVICE_MEET_DB;
+                        int i2 = devceid & Macro.DEVICE_MEET_SERVICE;
+                        int i3 = devceid & Macro.DEVICE_MEET_PROJECTIVE;
+                        int i4 = devceid & Macro.DEVICE_MEET_CAPTURE;
+                        int i5 = devceid & Macro.DEVICE_MEET_CLIENT;
+                        int i6 = devceid & Macro.DEVICE_MEET_ONEKEYSHARE;
+
+                        if (i1 == Macro.DEVICE_MEET_DB || i2 == Macro.DEVICE_MEET_SERVICE || i4 == Macro.DEVICE_MEET_CAPTURE
+                                || i5 == Macro.DEVICE_MEET_CLIENT || i6 == Macro.DEVICE_MEET_ONEKEYSHARE) {
+                            Log.e("MyLog", "MeetingActivity.handleMessage 268行:  其它类型的设备 --->>> ");
+                        } else if (i3 == Macro.DEVICE_MEET_PROJECTIVE) {
+                            // 投影机
+                            checkedJoinProjector.add(false);
+                            peojectorJoin.add(pbui_item_deviceResPlay);
+                            Log.e("MyLog", "MeetingActivity.handleMessage 271行:  有一个投影机 --->>> ");
+                        } else {
+                            //参会人
+                            checkedJoinMember.add(false);
+                            memberJoin.add(pbui_item_deviceResPlay);
+                            int memberid = pbui_item_deviceResPlay.getMemberid();
+                            String name = MyUtils.getBts(pbui_item_deviceResPlay.getName());
+                            Log.e("MyLog", "MeetingActivity.handleMessage 276行:  名称 --->>> " + name + "  参会人ID：" + memberid);
+                        }
+                    }
+                    if (memberJoin.size() > 0) {
+                        joinMemberAdapter = new JoinAdapter(memberJoin);
+                    }
+                    if (peojectorJoin.size() > 0) {
+                        joinProjectorAdapter = new JoinAdapter(peojectorJoin);
+                    }
+                    break;
             }
         }
     };
@@ -276,6 +321,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private List<Integer> sameMemberDevRrsIds;
     private List<Integer> applyProjectionIds;
     private List<Integer> informDev;
+    private List<InterfaceMain.pbui_Item_DeviceResPlay> memberJoin;
+    private List<InterfaceMain.pbui_Item_DeviceResPlay> peojectorJoin;
+    public static JoinAdapter joinMemberAdapter;
+    public static JoinAdapter joinProjectorAdapter;
+    //存放是否点中
+    public static List<Boolean> checkedJoinMember = new ArrayList<>();
+    public static List<Boolean> checkedJoinProjector = new ArrayList<>();
+    private PopupWindow joinWatchPop;
 
 
     @Override
@@ -359,6 +412,19 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     mHandler.sendMessage(message);
                 }
                 break;
+            case IDivMessage.QUERY_CAN_JOIN:// 查询可加入的同屏会话
+                InterfaceMain.pbui_Type_DeviceResPlay result6 = (InterfaceMain.pbui_Type_DeviceResPlay) result;
+                if (result6 != null) {
+                    Bundle bundle = new Bundle();
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.add(result6);
+                    bundle.putParcelableArrayList("queryCanJoin", arrayList);
+                    Message message = new Message();
+                    message.what = action;
+                    message.setData(bundle);
+                    mHandler.sendMessage(message);
+                }
+                break;
         }
     }
 
@@ -367,6 +433,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting);
+        //获取到之前写得会议笔记文本
+        mNoteCentent = Export.readText(new File("/sdcard/会议笔记文本.txt"));
         initController();
         initView();
         initImages();
@@ -531,17 +599,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    //..//
-
-
-//
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        //如果用以下这种做法则不保存状态，再次进来的话会显示默认tab
-//        //总是执行这句代码来调用父类去保存视图层的状态
-////        super.onSaveInstanceState(outState);
-//    }
-
     private void updataTimeUi(EventMessage message) {
         String[] object = (String[]) message.getObject();
         mMeetingNowDate.setText(object[0]);
@@ -552,8 +609,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //将会议笔记的文本清空
-        mNoteCentent = "";
+        Log.e("MyLog", "MeetingActivity.onDestroy 548行:   --->>> ");
+        //将会议笔记的文本保存到本地
+        Export.ToNoteText(mNoteCentent, "会议笔记文本");
         //取消注册事件
         EventBus.getDefault().unregister(this);
     }
@@ -595,7 +653,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    //..//
+
     public void showFragment(int index) {
         FragmentTransaction ft = mFm.beginTransaction();
         hideFragment(ft);
@@ -942,7 +1000,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.keyboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了软键盘", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.keyboard);
             }
         });
@@ -950,7 +1007,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.handwritten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了手写", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.handwritten);
             }
         });
@@ -960,7 +1016,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 setAnimator(holder.screens);
                 mPopupWindow.dismiss();
-//                MyUtils.ScreenShot(mMeetActivityLayout);
                 ScreenUtils.snapShotWithStatusBar(MeetingActivity.this);
 
             }
@@ -980,7 +1035,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.backPop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了返回", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.backPop);
                 mPopupWindow.dismiss();
             }
@@ -990,7 +1044,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 setAnimator(holder.projection);
-                // TODO: 2018/2/6 打开投影控制
                 showProjector();
 
             }
@@ -999,7 +1052,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "点击了会议笔记", Toast.LENGTH_SHORT).show();
                 setAnimator(holder.note);
                 showNotePop();
             }
@@ -1017,10 +1069,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 setAnimator(holder.whiteplatePop);
+                // TODO: 2018/3/10 需要调用打开白板进行通知
                 startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
             }
         });
-
     }
 
     /**
@@ -1032,15 +1084,22 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         MyUtils.setPopAnimal(mNotePop);
         mNotePop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mNotePop.setTouchable(true);
+        mNotePop.setFocusable(true);
         mNotePop.setOutsideTouchable(true);
-        NoteViewHolder holder = new NoteViewHolder(popupView);
+        final NoteViewHolder holder = new NoteViewHolder(popupView);
         NoteHolderEvent(holder);
+        //当弹出框隐藏时就会调用
+        mNotePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mNoteCentent = holder.edtNote.getText().toString();
+            }
+        });
         mNotePop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
-        Log.e("MyLog", "MeetingActivity.showNotePop 1015行:   --->>> ");
     }
 
     /**
-     * 会议笔记pop事件监听
+     * 会议笔记 pop事件监听
      *
      * @param holder
      */
@@ -1061,13 +1120,35 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 mNoteCentent = holder.edtNote.getText().toString();
                 //保存到手机
                 showFileNamePop(mNoteCentent);
-                // TODO: 2018/3/7  
                 mNotePop.dismiss();
+            }
+        });
+        //清空
+        holder.empty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mNoteCentent = "";
+                holder.edtNote.setText(mNoteCentent);
+            }
+        });
+        //导入
+        holder.noteImport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyUtils.showTxtDialog(MeetingActivity.this, MyUtils.getSDPostfixFile(".txt"), holder.edtNote);
             }
         });
     }
 
+
+    /**
+     * 展示输入要保存笔记的文件名称
+     * 导出成txt文件
+     *
+     * @param mNoteCentent 文本内容
+     */
     private void showFileNamePop(final String mNoteCentent) {
+        //用来输入文件名
         final EditText edt = new EditText(MeetingActivity.this);
         edt.setText("会议笔记");
         new AlertDialog.Builder(MeetingActivity.this).setTitle("请输入保存的文件名称")
@@ -1075,8 +1156,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String string = edt.getText().toString();
-                Export.ToNoteText(mNoteCentent,string);
-
+                Export.ToNoteText(mNoteCentent, string);
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -1116,8 +1196,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     for (int i = 0; i < checkProAll.size(); i++) {
                         checkProAll.set(i, true);
                     }
-                    //获取选中的投影机
-                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
                 }
             }
         });
@@ -1356,7 +1434,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MeetingActivity.this, "加入同屏", Toast.LENGTH_SHORT).show();
+                showJoinPop();
             }
         });
         holder.cancel_btn.setOnClickListener(new View.OnClickListener() {
@@ -1366,6 +1444,43 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             }
         });
 
+    }
+
+    // 展示可观看的屏幕
+    private void showJoinPop() {
+        View popupView = getLayoutInflater().inflate(R.layout.pop_join, null);
+        joinWatchPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setPopAnimal(joinWatchPop);
+        joinWatchPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        joinWatchPop.setTouchable(true);
+        joinWatchPop.setOutsideTouchable(true);
+        try {
+            /** ************ ******  查询可加入的同屏会话  ****** ************ **/
+            nativeUtil.queryCanJoin();
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+        JoinViewHolder holder = new JoinViewHolder(popupView);
+        Join_Event(holder);
+        joinWatchPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+    }
+
+    // 加入同屏事件监听
+    private void Join_Event(JoinViewHolder holder) {
+        // 查看
+        holder.join_watch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        // 取消
+        holder.join_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                joinWatchPop.dismiss();
+            }
+        });
     }
 
     /**
@@ -1672,16 +1787,64 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public Button noteImport;
         public Button noteSave;
         public Button noteBack;
+        public Button empty;
 
         public NoteViewHolder(View rootView) {
             this.rootView = rootView;
             this.edtNote = (EditText) rootView.findViewById(R.id.edt_note);
+
             if (!("".equals(mNoteCentent))) {
                 this.edtNote.setText(mNoteCentent);
             }
             this.noteImport = (Button) rootView.findViewById(R.id.note_import);
+            this.empty = (Button) rootView.findViewById(R.id.empty);
             this.noteSave = (Button) rootView.findViewById(R.id.note_save);
             this.noteBack = (Button) rootView.findViewById(R.id.note_back);
+        }
+    }
+
+    public static class JoinViewHolder {
+        public View rootView;
+        public RecyclerView join_member_screen;
+        public RecyclerView join_projector_screen;
+        public Button join_watch;
+        public Button join_cancel;
+
+        public JoinViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.join_member_screen = (RecyclerView) rootView.findViewById(R.id.join_member_screen);
+            if (joinMemberAdapter != null) {
+                this.join_member_screen.setAdapter(joinMemberAdapter);
+                joinMemberAdapter.setItemListener(new ItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int posion) {
+                        Button player = view.findViewById(R.id.palyer_name);
+                        boolean selected = !player.isSelected();
+                        player.setSelected(selected);
+                        checkedJoinMember.set(posion, selected);
+                        joinMemberAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+            this.join_member_screen.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
+
+            this.join_projector_screen = (RecyclerView) rootView.findViewById(R.id.join_projector_screen);
+            if (joinProjectorAdapter != null) {
+                this.join_projector_screen.setAdapter(joinProjectorAdapter);
+                joinProjectorAdapter.setItemListener(new ItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int posion) {
+                        Button player = view.findViewById(R.id.palyer_name);
+                        boolean selected = !player.isSelected();
+                        player.setSelected(selected);
+                        checkedJoinProjector.set(posion, selected);
+                        joinProjectorAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+            this.join_projector_screen.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
+            this.join_watch = (Button) rootView.findViewById(R.id.join_watch);
+            this.join_cancel = (Button) rootView.findViewById(R.id.join_cancel);
         }
 
     }

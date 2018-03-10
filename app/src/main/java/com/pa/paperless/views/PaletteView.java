@@ -125,7 +125,6 @@ public class PaletteView extends View {
 
     private abstract static class DrawingInfo {
         Paint paint;
-
         abstract void draw(Canvas canvas);
     }
 
@@ -352,8 +351,6 @@ public class PaletteView extends View {
 
                 float vy = (event.getRawY()) - moveY;
                 float vx = (event.getRawX()) - moveX;
-                Log.e("ACTION_MOVE", "PaletteView.onTouchEvent:  event.getX --->>> " + moveX + "   event.getRawX()-->>" + event.getRawX() + " ||||| event.getRawY() -" +
-                        "-->>> " + event.getRawY() + "    event.getY --->>" + moveY + "  Y轴的差值 --->>::" + vy + "  X轴的差值 --->>::" + vx);
                 if (mMode == Mode.DRAW) {
                     //这里终点设为两点的中心点的目的在于使绘制的曲线更平滑，如果终点直接设置为x,y，效果和lineto是一样的,实际是折线效果
                     mPath.quadTo(mStartX, mStartY, (x + mStartX) / 2, (y + mStartY) / 2);

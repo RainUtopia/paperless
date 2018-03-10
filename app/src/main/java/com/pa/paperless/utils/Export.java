@@ -1,15 +1,16 @@
 package com.pa.paperless.utils;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.EditText;
 
 import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import jxl.write.WriteException;
 
 /**
  * Created by Administrator on 2018/2/28.
+ *
  */
 
 public class Export {
@@ -369,7 +371,7 @@ public class Export {
     }
 
     /**
-     * 将文本导出成 txt文件保存
+     * 将String以txt文本格式导出保存
      *
      * @param content
      * @param fileName
@@ -386,6 +388,29 @@ public class Export {
             e.printStackTrace();
         }
         return b;
+    }
+
+    /**
+     * 读取TXT文本文件
+     * @param file
+     * @return 返回字符串形式
+     */
+    public static String readText(File file){
+        StringBuffer sb = new StringBuffer();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = "";
+            while ((line = br.readLine())!=null){
+                sb.append(line);
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.e("MyLog","Export.readText 412行:  读取txt文件内容 --->>> "+sb.toString());
+        return sb.toString();
     }
 
 }

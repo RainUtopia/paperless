@@ -203,7 +203,7 @@ message pbui_Type_MeetStopVoteInfo
 message pbui_Item_MeetSubmitVote
 {
 	fixed32		voteid=1;
-	fixed32		selcnt=2;//有效选项数
+	fixed32			selcnt=2;//有效选项数
 	fixed32		selitem=3;//选择的项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
 }
 
@@ -227,7 +227,7 @@ message pbui_Item_MeetVoteDetailInfo
 {
 	fixed32		voteid=1;
 	bytes		content=2; //投票内容 
-	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见 Pb_MeetVoteType
+	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见Pb_MeetVoteType
 	fixed32			mode=4; //匿名投票 记名投票 参见Pb_MeetVoteMode
 	fixed32			type=5; //多选 单选 参见Pb_MeetVote_SelType
 	fixed32			votestate=6; //投票状态 参见Pb_MeetVoteStatus
@@ -247,14 +247,14 @@ message pbui_Type_MeetVoteDetailInfo
 //method: complexquery
 message pbui_Type_MeetVoteComplexQuery
 {
-	fixed32	 maintype=1; //指定大类 参见本文件中的 maintype 定义
+	fixed32	 maintype=1; //指定大类 参见本文件中的maintype 定义
 }
 
 //会议投票人
 message pbui_Item_MeetVoteSignInDetailInfo
 {
-	fixed32		  id=1;// 投票人员
-	fixed32       selcnt=2; //投票选项 0x00000001 选择了第一项 0x00000002 第二项 对应项位置1表示选择
+	fixed32		 id=1;//投票人员
+	fixed32       selcnt=2; //投票选项 0x00000001 选择了第一项 0x00000002第二项 对应项位置1表示选择
 }
 
 //type:Pb_TYPE_MEET_INTERFACE_MEETVOTESIGNED
@@ -281,7 +281,7 @@ message pbui_Item_MeetSignInDetailInfo
 {
 	fixed32		nameId=1; //人员ID
 	fixed64		utcseconds=2;  //日期 时间 单位:秒
-	fixed32		signin_type=3;//签到方式 参见 Pb_MeetSignType
+	fixed32		signin_type=3;//签到方式 参见Pb_MeetSignType
 	bytes		password=4;//签到密码
 	bytes		psigndata=5; //如果有图片签到则为png图片数据(二进制转hex编码)
 }
@@ -803,7 +803,7 @@ message pbui_Type_StreamPush
 //method: push
 message pbui_Type_DoStreamPush
 {
-	fixed32  triggeruserval=1;//参见该文件中的 triggeruserval 定义
+	fixed32  triggeruserval=1;//参见该文件中的triggeruserval定义
 	fixed32  srcdeviceid=2;       //发起请求的设备ID
 	fixed32  substreamindex=3; //本设备子通道号
 	repeated fixed32 deviceid=4;	  //通知的目标设备,为0表示全部
@@ -830,10 +830,10 @@ message pbui_Type_MeetStreamPlay
 message pbui_Type_MeetDoStreamPlay
 {
 	fixed32  srcdeviceid=1;//设备ID
-	fixed32  subid=2;//设备子通道   2 桌面流 3 摄像头
-	fixed32  triggeruserval=3;//触发器标志 0
+	fixed32  subid=2;//设备子通道
+	fixed32  triggeruserval=3;//触发器标志
 
-	repeated fixed32 res=4;	  // 播放所用的资源,为0表示全部
+	repeated fixed32 res=4;	  //播放所用的资源,为0表示全部
 	repeated fixed32 deviceid=5;	  //通知的目标设备,为0表示全部
 }
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,11 @@ import android.widget.Toast;
 
 import com.pa.paperless.R;
 import com.pa.paperless.fragment.meeting.BaseFragment;
-import com.pa.paperless.utils.SDCardUtils;
-import com.pa.paperless.utils.TxtFileFilter;
+import com.pa.paperless.utils.MyUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/11/17.
@@ -69,10 +61,10 @@ public class MeettingAgenda_Fragment extends BaseFragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.agenda_from:
-                showTxtDialog(getSDTxtFile(), mMeetAgendaEdt);
+                MyUtils.showTxtDialog(getContext(),MyUtils.getSDPostfixFile(".txt"), mMeetAgendaEdt);
                 break;
             case R.id.notice_from:
-                showTxtDialog(getSDTxtFile(), mMeetNoticeEdt);
+                MyUtils.showTxtDialog(getContext(),MyUtils.getSDPostfixFile(".txt"), mMeetAgendaEdt);
                 break;
             case R.id.agenda_export:
                 showDialog(mMeetAgendaEdt);
@@ -84,48 +76,6 @@ public class MeettingAgenda_Fragment extends BaseFragment implements View.OnClic
     }
 
 
-    private List<File> getSDTxtFile() {
-        //1.获取到sd卡目录下所有的txt文件
-        List<File> txtFile = new ArrayList<>();
-        File file = new File(SDCardUtils.getSDCardPath());
-        TxtFileFilter txtFileFilter = new TxtFileFilter();
-        txtFileFilter.addType(".txt");
-        files = file.listFiles(txtFileFilter);
-        if (files!=null) {
-            for (int i = 0; i < files.length; i++) {
-                txtFile.add(files[i]);
-            }
-            return txtFile;
-        }
-        Toast.makeText(getContext(), "没有找到相关文件！", Toast.LENGTH_SHORT).show();
-        return new ArrayList<>();
-    }
-
-    /**
-     * 以弹出框的形式展示查找到的txt文档文件
-     *
-     * @param txtFile 用来定义数组的大小
-     * @param edt     需要获取TXT文本内容的输入框
-     */
-    private void showTxtDialog(List<File> txtFile, final EditText edt) {
-        //存放txt文件的路径
-        final String[] txtFilePath = new String[txtFile.size()];
-        //txt文件的名称
-        final String[] txtFileName = new String[txtFile.size()];
-        for (int i = 0; i < txtFile.size(); i++) {
-            txtFilePath[i] = txtFile.get(i).toString();//  /storage/emulated/0/游戏文本.txt
-            txtFileName[i] = txtFile.get(i).getName();//   游戏文本.txt
-        }
-        new AlertDialog.Builder(getContext()).setTitle("SD卡中所有的文档文件目录")
-                .setItems(txtFileName, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //  读取内容获得文本
-                        String s = ReadTxtFile(txtFilePath[i]);
-                        edt.setText(s);
-                    }
-                }).create().show();
-    }
 
     /**
      * 弹出输入文件名的对话框
@@ -176,33 +126,5 @@ public class MeettingAgenda_Fragment extends BaseFragment implements View.OnClic
         }
     }
 
-    public String ReadTxtFile(String strFilePath) {
-        String path = String.valueOf(strFilePath);
-        String content = ""; //文件内容字符串
-        //打开文件
-        File file = new File(path);
-        //如果path是传递过来的参数，可以做一个非目录的判断
-        if (file.isDirectory()) {
-            Log.d("TestFile", "The File doesn't not exist.");
-        } else {
-            try {
-                InputStream instream = new FileInputStream(file);
-                if (instream != null) {
-                    InputStreamReader inputreader = new InputStreamReader(instream);
-                    BufferedReader buffreader = new BufferedReader(inputreader);
-                    String line;
-                    //分行读取
-                    while ((line = buffreader.readLine()) != null) {
-                        content += line + "\n";
-                    }
-                    instream.close();
-                }
-            } catch (java.io.FileNotFoundException e) {
-                Log.d("TestFile", "The File doesn't not exist.");
-            } catch (IOException e) {
-                Log.d("TestFile", e.getMessage());
-            }
-        }
-        return content;
-    }
+
 }

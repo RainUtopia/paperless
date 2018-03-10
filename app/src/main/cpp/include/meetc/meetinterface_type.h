@@ -93,6 +93,8 @@
 #define METHOD_MEET_INTERFACE_RESPONSEPRIVELIGE   57 //
 #define METHOD_MEET_INTERFACE_UPDATE   58 //
 #define METHOD_MEET_INTERFACE_TEXTMSG   59 //
+#define METHOD_MEET_INTERFACE_REBOOT    60 //
+#define METHOD_MEET_INTERFACE_RESINFO   61 //
 
 //type
 #define TYPE_MEET_INTERFACE_TIME 1 //平台时间 -- 高频回调
@@ -156,7 +158,9 @@
 
 //注：这里所有的字符串都约定为utf8编码
 #define DEFAULT_NAME_MAXLEN   48 //默认名称长度
-#define DEFAULT_DESCRIBE_LENG 100//默认描述字符串长度
+#define DEFAULT_VOTECONTENT_LENG 200//默认投票标题描述字符串长度
+#define DEFAULT_VOTEITEM_LENG    60//默认投票选项描述字符串长度
+#define DEFAULT_DESCRIBE_LENG    100//默认描述字符串长度
 #define DEFAULT_SHORT_DESCRIBE_LENG 40//默认描述字符串长度
 #define DEFAULT_PASSWORD_LENG 40 //默认密码长度
 #define DEFAULT_FILENAME_LENG 150 //默认文件名长度
@@ -350,13 +354,34 @@ typedef struct
 	int32u			devnum;
 }Type_DeviceDetailInfo, *pType_DeviceDetailInfo;
 
+typedef struct
+{
+	int32u devceid;
+
+	//如果设备ID是参会人员席位,以下数据有效
+	int32u memberid;
+	char   name[DEFAULT_NAME_MAXLEN];
+}Item_DeviceResPlay, *pItem_DeviceResPlay;
+
+//查询当前可加入播放的设备流
+//call
+//type:TYPE_MEET_INTERFACE_DEVICEINFO
+//method: METHOD_MEET_INTERFACE_RESINFO
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u			devnum;
+	
+}Type_DeviceResPlay, *pType_DeviceResPlay;
+
 //查询指定设备的某项属性
 //property id
 #define MEETMEMBER_PROPERTY_NAME				1 //设备名称 query
 #define MEETMEMBER_PROPERTY_IPADDR				2 //ip地址 query paramterval(ip地址索引)
 #define MEETMEMBER_PROPERTY_PORT				3 //网络端口 query
 #define MEETMEMBER_PROPERTY_NETSTATUS			4 //网络状态 query
-#define MEETMEMBER_PROPERTY_PLAYSTATUS			5 //播放状态 paramterval(res地址索引)(propertyval2(triggerid), propertyval3(val),propertyval4(val2)有效) query
+#define MEETMEMBER_PROPERTY_PLAYSTATUS			5 //播放状态 paramterval(res地址索引)(propertyval2(triggerid), propertyval3(val),propertyval4(val2),propertyval4(createdeviceid)有效) query
 #define MEETMEMBER_PROPERTY_FACESTATUS			6 //界面状态 query
 #define MEETMEMBER_PROPERTY_MEMBERID			7 //当前参会人员ID query
 #define MEETMEMBER_PROPERTY_MEETINGID			8 //当前会议ID query
@@ -374,10 +399,11 @@ typedef struct
 	int32u deviceid;//传入参数 为0表示本机设备ID
 	int32u paramterval;//传入参数
 
-	int32u propertyval; //数据
+	int32u propertyval; //数据 //0空闲，1播放节目，2播放流，3对讲
 	int32u propertyval2;//数据
 	int32u propertyval3;//数据
 	int32u propertyval4;//数据
+	int32u propertyval5;//数据
 }Type_MeetDeviceQueryProperty_int32u, *pType_MeetDeviceQueryProperty_int32u;
 
 //type:TYPE_MEET_INTERFACE_DEVICEINFO
@@ -514,6 +540,18 @@ typedef struct
 	int32u membersize; //会议中广播时的参会人员数量
 	int32u membersignsize;////会议中广播时的参会人员已经签到的数量
 }Type_MeetMemberCastInfo, *pType_MeetMemberCastInfo;
+
+//发送网络唤醒设备
+//call
+//type:TYPE_MEET_INTERFACE_DEVICEOPER
+//method: reboot
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int   devnum;
+	//int32u deviceid[devnum];
+}Type_MeetDoNetReboot, *pType_MeetDoNetReboot;
 
 //进入会议功能界面
 //callback
@@ -673,6 +711,8 @@ typedef struct
 
 //texttype
 #define TEXTBRODCAST_TYPE_COMMONTEXT 0 //普通文本信息
+#define TEXTBRODCAST_TYPE_MEETINGTEXT 1 //会议名称文本信息
+#define TEXTBRODCAST_TYPE_MEMBERTEXT 2 //参会人文本信息
 
 //发送文本广播
 //call
@@ -805,6 +845,17 @@ typedef struct
 
 }Type_MeetBulletInfo, *pType_MeetBulletInfo;
 
+//TYPE_MEET_INTERFACE_MEETBULLET
+//call
+//method: request,update
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int textlen;
+	//char text[textlen];
+}Type_BigBulletDetailInfo, *pType_BigBulletDetailInfo;
+
 //会议公告
 #define DEFAULT_BULLETCONTENT_LENG 320
 typedef struct
@@ -819,7 +870,7 @@ typedef struct
 
 //TYPE_MEET_INTERFACE_MEETBULLET
 //call
-//method: add,del,modify,query,publish
+//method: add,del,modify,query
 typedef struct
 {
 	Type_HeaderInfo hdr;
@@ -835,7 +886,33 @@ typedef struct
 {
 	Type_HeaderInfo hdr;
 	Item_BulletDetailInfo bullet;
+	int devnum; //发给那个设备
+	//int32u deviceid[];
 }Type_MeetPublishBulletInfo, *pType_MeetPublishBulletInfo;
+
+//停止会议公告
+//TYPE_MEET_INTERFACE_MEETBULLET
+//call
+//method: stop
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u  bulletid;//停止的会议公告ID
+	int     devnum; //设备ID数量，为0表示所有的设备
+	//int32u pdevid[];//设备ID
+}Type_StopBullet, *pType_StopBullet;
+
+//停止会议公告
+//TYPE_MEET_INTERFACE_MEETBULLET
+//callback
+//method: stop
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u  bulletid;//停止的会议公告ID
+}Type_StopBulletMsg, *pType_StopBulletMsg;
 
 //管理员
 //callback
@@ -2354,13 +2431,13 @@ typedef struct
 typedef struct
 {
 	int32u		voteid;
-	char		content[DEFAULT_DESCRIBE_LENG]; //投票内容 
+	char		content[DEFAULT_VOTECONTENT_LENG]; //投票内容 
 	int			maintype; //投票 选举 调查问卷
 	int			mode; //匿名投票 记名投票
 	int			type; //多选 单选
 	int32u		timeouts;  //超时值
 	int32u		selectcount; //有效选项
-	char		text[MEET_MAX_VOTENUM][DEFAULT_DESCRIBE_LENG];  //选项描述文字
+	char		text[MEET_MAX_VOTENUM][DEFAULT_VOTEITEM_LENG];  //选项描述文字
 
 	//发起投票的参数,只在使用查询方法时有效,其它方法要忽略
 	int32u      voteflag; //发起投票标志 参见MEET_VOTING_FLAG_NOPOST 定义
@@ -2465,14 +2542,14 @@ typedef struct
 //会议投票信息
 typedef struct
 {
-	char    text[DEFAULT_DESCRIBE_LENG];//描述文字
+	char    text[DEFAULT_VOTEITEM_LENG];//描述文字
 	int32u  selcnt;	 //投票数
 }SubItem_VoteItemInfo, *pSubItem_VoteItemInfo;
 
 typedef struct
 {
 	int32u		voteid;
-	char		content[DEFAULT_DESCRIBE_LENG]; //投票内容 
+	char		content[DEFAULT_VOTECONTENT_LENG]; //投票内容 
 	int			maintype;//类别 投票 选举 调查问卷
 	int			mode; //匿名投票 记名投票
 	int			type; //多选 单选
@@ -2975,6 +3052,12 @@ typedef struct
 #define MEET_FUNCODE_SIGNINRESULT	9	//签到
 #define MEET_FUNCODE_DOCUMENT		10	//外部文档
 
+// 会议系统标准版 增加的功能识别码
+#define MEET_FUNCODE_DATAREVIEW     11  // 资料评审
+#define MEET_FUNCODE_MEETSERVICE    12  // 会议服务
+#define MEET_FUNCODE_MEETNOTE       13  // 会议笔记
+#define MEET_FUNCODE_WINDESK        14  // 桌面浏览
+#define MEET_FUNCODE_OTHERFUNC      15  // 其他功能
 
 //会议功能
 typedef struct
@@ -3236,6 +3319,7 @@ typedef struct
 }Type_MeetMediaPlayDetailInfo, *pType_MeetMediaPlayDetailInfo;
 
 //文件推送
+//type:TYPE_MEET_INTERFACE_MEDIAPLAY
 //method: notify
 //当为询问模式时，回调函数返回1表示同意播放
 typedef struct
@@ -3246,6 +3330,7 @@ typedef struct
 }Type_FilePush, *pType_FilePush;
 
 //文件推送
+//type:TYPE_MEET_INTERFACE_MEDIAPLAY
 //method: push
 typedef struct
 {
@@ -3258,7 +3343,28 @@ typedef struct
 	//int32u devid[devnum];
 }Type_DoFilePush, *pType_DoFilePush;
 
+
+#define REQUEST_USERVAL_JOINPLAY	1//userdefval1 有申请加入同屏 播放当前推送发起的文件
+#define REQUEST_USERVAL_UPDATEPLAY	2//userdefval1 跟随播放当前文件 需要mediaid==发起推送的meidaid
+
+//音视频文件跟随播放
+//type:TYPE_MEET_INTERFACE_MEDIAPLAY
+//method: METHOD_MEET_INTERFACE_UPDATE
+//当为询问模式时，回调函数返回1表示同意播放
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u  mediaid;
+	int32u  deviceid;//发起请求的设备ID
+	int8u   resindex;//资源索引号
+	int8u   fill[3];
+
+	int32u  userdefval1;//用户自定义的值
+}Type_ReqMediaUpdatePlay, *pType_ReqMediaUpdatePlay;
+
 //流请求
+//type:TYPE_MEET_INTERFACE_STREAMPLAY
 //method: notify
 //当为询问模式时，回调函数返回1表示同意播放
 typedef struct
@@ -3271,6 +3377,7 @@ typedef struct
 }Type_ReqStreamPush, *pType_ReqStreamPush;
 
 //流请求
+//type:TYPE_MEET_INTERFACE_STREAMPLAY
 //method: requestpush
 typedef struct
 {
@@ -3284,6 +3391,7 @@ typedef struct
 }Type_DoReqStreamPush, *pType_DoReqStreamPush;
 
 //流推送
+//type:TYPE_MEET_INTERFACE_STREAMPLAY
 //method: notify
 //当为询问模式时，回调函数返回1表示同意播放
 typedef struct
@@ -3296,6 +3404,7 @@ typedef struct
 }Type_StreamPush, *pType_StreamPush;
 
 //流推送
+//type:TYPE_MEET_INTERFACE_STREAMPLAY
 //method: push
 typedef struct
 {
@@ -3310,6 +3419,7 @@ typedef struct
 
 //流播放通知
 //callback
+//type:TYPE_MEET_INTERFACE_STREAMPLAY
 //method: notify
 typedef struct
 {

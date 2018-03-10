@@ -86,5 +86,7 @@ public class IDivMessage {
     //203.查询指定投票的提交人
     public static final int QUERY_MEMBER_BYVOTE = 1038;
     public static final int Dev_proById = 1039;
+    //查询可加入的同屏会话
+    public static final int QUERY_CAN_JOIN = 1040;
 
 }

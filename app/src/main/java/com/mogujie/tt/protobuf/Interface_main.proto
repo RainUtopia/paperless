@@ -198,7 +198,7 @@ message pbui_Item_DeviceDetailInfo
 
 	repeated pbui_SubItem_DeviceResInfo resinfo=5;//资源信息
 
-	fixed32	 facestate=6;//界面状态 参见 MemState_MainFace 定义
+	fixed32	 facestate=6;//界面状态 参见MemState_MainFace 定义
 	fixed32  memberid=7;//当前人员
 	fixed32  meetingid=8;//当前会议
 }
@@ -210,6 +210,24 @@ message pbui_Item_DeviceDetailInfo
 message pbui_Type_DeviceDetailInfo
 {
 	repeated pbui_Item_DeviceDetailInfo pdev=1;
+}
+
+message pbui_Item_DeviceResPlay
+{
+	fixed32 devceid=1;
+
+	//如果设备ID是参会人员席位,以下数据有效
+	fixed32 memberid=2;
+	bytes   name=3;//参会人员名称
+}
+
+//查询当前可加入播放的桌面同屏流
+//call
+//type:TYPE_MEET_INTERFACE_DEVICEINFO
+//method: METHOD_MEET_INTERFACE_RESINFO
+message pbui_Type_DeviceResPlay
+{
+	repeated pbui_Item_DeviceResPlay pdev=1;
 }
 
 //查询指定设备的某项属性
@@ -283,7 +301,7 @@ message pbui_MeetDeviceMeetStatus
 {
 	fixed32  deviceid=1;
 	fixed32  memberid=2;
-	fixed32  facestatus=3; // 参见 Pb_MeetFaceStatus 定义
+	fixed32  facestatus=3; // 参见Pb_MeetFaceStatus 定义
 	fixed32  meetingid=4;
 }
 
@@ -619,7 +637,7 @@ message pbui_Type_DownloadDel
 //method: notify
 message pbui_Type_DownloadCb
 {
-	fixed32	   progress=1;				    //下载进度
+	fixed32	   progress=1;				//下载进度
 	fixed32	   nstate=2;				    //下载状态,参考state flag
 	fixed32	   err=3;						//错误值 ERROR
 	fixed32    mediaid=4;					//下载媒体id

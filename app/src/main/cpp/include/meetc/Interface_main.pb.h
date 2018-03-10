@@ -30,6 +30,9 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include "Interface_Macro.pb.h"
 // @@protoc_insertion_point(includes)
+class pbui_BigBulletDetailInfo;
+class pbui_BigBulletDetailInfoDefaultTypeInternal;
+extern pbui_BigBulletDetailInfoDefaultTypeInternal _pbui_BigBulletDetailInfo_default_instance_;
 class pbui_BulletDetailInfo;
 class pbui_BulletDetailInfoDefaultTypeInternal;
 extern pbui_BulletDetailInfoDefaultTypeInternal _pbui_BulletDetailInfo_default_instance_;
@@ -72,6 +75,9 @@ extern pbui_Item_BulletDetailInfoDefaultTypeInternal _pbui_Item_BulletDetailInfo
 class pbui_Item_DeviceDetailInfo;
 class pbui_Item_DeviceDetailInfoDefaultTypeInternal;
 extern pbui_Item_DeviceDetailInfoDefaultTypeInternal _pbui_Item_DeviceDetailInfo_default_instance_;
+class pbui_Item_DeviceResPlay;
+class pbui_Item_DeviceResPlayDefaultTypeInternal;
+extern pbui_Item_DeviceResPlayDefaultTypeInternal _pbui_Item_DeviceResPlay_default_instance_;
 class pbui_Item_FileEvaluate;
 class pbui_Item_FileEvaluateDefaultTypeInternal;
 extern pbui_Item_FileEvaluateDefaultTypeInternal _pbui_Item_FileEvaluate_default_instance_;
@@ -240,6 +246,9 @@ extern pbui_Type_DeviceFaceShowDetailDefaultTypeInternal _pbui_Type_DeviceFaceSh
 class pbui_Type_DeviceOperControl;
 class pbui_Type_DeviceOperControlDefaultTypeInternal;
 extern pbui_Type_DeviceOperControlDefaultTypeInternal _pbui_Type_DeviceOperControl_default_instance_;
+class pbui_Type_DeviceResPlay;
+class pbui_Type_DeviceResPlayDefaultTypeInternal;
+extern pbui_Type_DeviceResPlayDefaultTypeInternal _pbui_Type_DeviceResPlay_default_instance_;
 class pbui_Type_DoDeviceUpdate;
 class pbui_Type_DoDeviceUpdateDefaultTypeInternal;
 extern pbui_Type_DoDeviceUpdateDefaultTypeInternal _pbui_Type_DoDeviceUpdate_default_instance_;
@@ -2316,6 +2325,190 @@ class pbui_Type_DeviceDetailInfo : public ::google::protobuf::MessageLite /* @@p
 };
 // -------------------------------------------------------------------
 
+class pbui_Item_DeviceResPlay : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:pbui_Item_DeviceResPlay) */ {
+ public:
+  pbui_Item_DeviceResPlay();
+  virtual ~pbui_Item_DeviceResPlay();
+
+  pbui_Item_DeviceResPlay(const pbui_Item_DeviceResPlay& from);
+
+  inline pbui_Item_DeviceResPlay& operator=(const pbui_Item_DeviceResPlay& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const pbui_Item_DeviceResPlay& default_instance();
+
+  static inline const pbui_Item_DeviceResPlay* internal_default_instance() {
+    return reinterpret_cast<const pbui_Item_DeviceResPlay*>(
+               &_pbui_Item_DeviceResPlay_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    21;
+
+  void Swap(pbui_Item_DeviceResPlay* other);
+
+  // implements Message ----------------------------------------------
+
+  inline pbui_Item_DeviceResPlay* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  pbui_Item_DeviceResPlay* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    PROTOBUF_FINAL;
+  void CopyFrom(const pbui_Item_DeviceResPlay& from);
+  void MergeFrom(const pbui_Item_DeviceResPlay& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  void DiscardUnknownFields();
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(pbui_Item_DeviceResPlay* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::std::string GetTypeName() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bytes name = 3;
+  void clear_name();
+  static const int kNameFieldNumber = 3;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const void* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // fixed32 devceid = 1;
+  void clear_devceid();
+  static const int kDevceidFieldNumber = 1;
+  ::google::protobuf::uint32 devceid() const;
+  void set_devceid(::google::protobuf::uint32 value);
+
+  // fixed32 memberid = 2;
+  void clear_memberid();
+  static const int kMemberidFieldNumber = 2;
+  ::google::protobuf::uint32 memberid() const;
+  void set_memberid(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:pbui_Item_DeviceResPlay)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::uint32 devceid_;
+  ::google::protobuf::uint32 memberid_;
+  mutable int _cached_size_;
+  friend struct protobuf_Interface_5fmain_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class pbui_Type_DeviceResPlay : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:pbui_Type_DeviceResPlay) */ {
+ public:
+  pbui_Type_DeviceResPlay();
+  virtual ~pbui_Type_DeviceResPlay();
+
+  pbui_Type_DeviceResPlay(const pbui_Type_DeviceResPlay& from);
+
+  inline pbui_Type_DeviceResPlay& operator=(const pbui_Type_DeviceResPlay& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const pbui_Type_DeviceResPlay& default_instance();
+
+  static inline const pbui_Type_DeviceResPlay* internal_default_instance() {
+    return reinterpret_cast<const pbui_Type_DeviceResPlay*>(
+               &_pbui_Type_DeviceResPlay_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    22;
+
+  void Swap(pbui_Type_DeviceResPlay* other);
+
+  // implements Message ----------------------------------------------
+
+  inline pbui_Type_DeviceResPlay* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  pbui_Type_DeviceResPlay* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    PROTOBUF_FINAL;
+  void CopyFrom(const pbui_Type_DeviceResPlay& from);
+  void MergeFrom(const pbui_Type_DeviceResPlay& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  void DiscardUnknownFields();
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(pbui_Type_DeviceResPlay* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::std::string GetTypeName() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .pbui_Item_DeviceResPlay pdev = 1;
+  int pdev_size() const;
+  void clear_pdev();
+  static const int kPdevFieldNumber = 1;
+  const ::pbui_Item_DeviceResPlay& pdev(int index) const;
+  ::pbui_Item_DeviceResPlay* mutable_pdev(int index);
+  ::pbui_Item_DeviceResPlay* add_pdev();
+  ::google::protobuf::RepeatedPtrField< ::pbui_Item_DeviceResPlay >*
+      mutable_pdev();
+  const ::google::protobuf::RepeatedPtrField< ::pbui_Item_DeviceResPlay >&
+      pdev() const;
+
+  // @@protoc_insertion_point(class_scope:pbui_Type_DeviceResPlay)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::pbui_Item_DeviceResPlay > pdev_;
+  mutable int _cached_size_;
+  friend struct protobuf_Interface_5fmain_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class pbui_MeetDeviceQueryProperty : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:pbui_MeetDeviceQueryProperty) */ {
  public:
   pbui_MeetDeviceQueryProperty();
@@ -2335,7 +2528,7 @@ class pbui_MeetDeviceQueryProperty : public ::google::protobuf::MessageLite /* @
                &_pbui_MeetDeviceQueryProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    21;
+    23;
 
   void Swap(pbui_MeetDeviceQueryProperty* other);
 
@@ -2427,7 +2620,7 @@ class pbui_DeviceInt32uProperty : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_DeviceInt32uProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    22;
+    24;
 
   void Swap(pbui_DeviceInt32uProperty* other);
 
@@ -2526,7 +2719,7 @@ class pbui_DeviceStringProperty : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_DeviceStringProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    23;
+    25;
 
   void Swap(pbui_DeviceStringProperty* other);
 
@@ -2612,7 +2805,7 @@ class pbui_DeviceModInfo : public ::google::protobuf::MessageLite /* @@protoc_in
                &_pbui_DeviceModInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    24;
+    26;
 
   void Swap(pbui_DeviceModInfo* other);
 
@@ -2739,7 +2932,7 @@ class pbui_DeviceDel : public ::google::protobuf::MessageLite /* @@protoc_insert
                &_pbui_DeviceDel_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    25;
+    27;
 
   void Swap(pbui_DeviceDel* other);
 
@@ -2824,7 +3017,7 @@ class pbui_Type_DoDeviceUpdate : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_Type_DoDeviceUpdate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    26;
+    28;
 
   void Swap(pbui_Type_DoDeviceUpdate* other);
 
@@ -2902,7 +3095,7 @@ class pbui_MeetDeviceMeetStatus : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_MeetDeviceMeetStatus_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    27;
+    29;
 
   void Swap(pbui_MeetDeviceMeetStatus* other);
 
@@ -3001,7 +3194,7 @@ class pbui_ModDeviceMeetStatus : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_ModDeviceMeetStatus_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    28;
+    30;
 
   void Swap(pbui_ModDeviceMeetStatus* other);
 
@@ -3079,7 +3272,7 @@ class pbui_MeetZoomResWin : public ::google::protobuf::MessageLite /* @@protoc_i
                &_pbui_MeetZoomResWin_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    29;
+    31;
 
   void Swap(pbui_MeetZoomResWin* other);
 
@@ -3171,7 +3364,7 @@ class pbui_MeetDoZoomResWin : public ::google::protobuf::MessageLite /* @@protoc
                &_pbui_MeetDoZoomResWin_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    30;
+    32;
 
   void Swap(pbui_MeetDoZoomResWin* other);
 
@@ -3277,7 +3470,7 @@ class pbui_Type_MeetMemberCastInfo : public ::google::protobuf::MessageLite /* @
                &_pbui_Type_MeetMemberCastInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    31;
+    33;
 
   void Swap(pbui_Type_MeetMemberCastInfo* other);
 
@@ -3376,7 +3569,7 @@ class pbui_MeetDoEnterMeet : public ::google::protobuf::MessageLite /* @@protoc_
                &_pbui_MeetDoEnterMeet_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    32;
+    34;
 
   void Swap(pbui_MeetDoEnterMeet* other);
 
@@ -3461,7 +3654,7 @@ class pbui_MeetDoToHomePage : public ::google::protobuf::MessageLite /* @@protoc
                &_pbui_MeetDoToHomePage_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    33;
+    35;
 
   void Swap(pbui_MeetDoToHomePage* other);
 
@@ -3546,7 +3739,7 @@ class pbui_Type_MeetRequestManage : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_MeetRequestManage_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    34;
+    36;
 
   void Swap(pbui_Type_MeetRequestManage* other);
 
@@ -3631,7 +3824,7 @@ class pbui_Type_MeetRequestManageNotify : public ::google::protobuf::MessageLite
                &_pbui_Type_MeetRequestManageNotify_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    35;
+    37;
 
   void Swap(pbui_Type_MeetRequestManageNotify* other);
 
@@ -3716,7 +3909,7 @@ class pbui_Type_MeetResponseRequestManage : public ::google::protobuf::MessageLi
                &_pbui_Type_MeetResponseRequestManage_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    36;
+    38;
 
   void Swap(pbui_Type_MeetResponseRequestManage* other);
 
@@ -3808,7 +4001,7 @@ class pbui_Type_MeetRequestManageResponse : public ::google::protobuf::MessageLi
                &_pbui_Type_MeetRequestManageResponse_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    37;
+    39;
 
   void Swap(pbui_Type_MeetRequestManageResponse* other);
 
@@ -3900,7 +4093,7 @@ class pbui_Type_MeetRequestPrivilege : public ::google::protobuf::MessageLite /*
                &_pbui_Type_MeetRequestPrivilege_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    38;
+    40;
 
   void Swap(pbui_Type_MeetRequestPrivilege* other);
 
@@ -3992,7 +4185,7 @@ class pbui_Type_MeetRequestPrivilegeNotify : public ::google::protobuf::MessageL
                &_pbui_Type_MeetRequestPrivilegeNotify_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    39;
+    41;
 
   void Swap(pbui_Type_MeetRequestPrivilegeNotify* other);
 
@@ -4084,7 +4277,7 @@ class pbui_Type_MeetResponseRequestPrivilege : public ::google::protobuf::Messag
                &_pbui_Type_MeetResponseRequestPrivilege_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    40;
+    42;
 
   void Swap(pbui_Type_MeetResponseRequestPrivilege* other);
 
@@ -4176,7 +4369,7 @@ class pbui_Type_MeetRequestPrivilegeResponse : public ::google::protobuf::Messag
                &_pbui_Type_MeetRequestPrivilegeResponse_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    41;
+    43;
 
   void Swap(pbui_Type_MeetRequestPrivilegeResponse* other);
 
@@ -4268,7 +4461,7 @@ class pbui_QueryMeetContextInfo : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_QueryMeetContextInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    42;
+    44;
 
   void Swap(pbui_QueryMeetContextInfo* other);
 
@@ -4346,7 +4539,7 @@ class pbui_MeetContextInfo : public ::google::protobuf::MessageLite /* @@protoc_
                &_pbui_MeetContextInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    43;
+    45;
 
   void Swap(pbui_MeetContextInfo* other);
 
@@ -4446,7 +4639,7 @@ class pbui_ItemAgendaTimeInfo : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_ItemAgendaTimeInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    44;
+    46;
 
   void Swap(pbui_ItemAgendaTimeInfo* other);
 
@@ -4567,7 +4760,7 @@ class pbui_meetAgenda : public ::google::protobuf::MessageLite /* @@protoc_inser
                &_pbui_meetAgenda_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    45;
+    47;
 
   void Swap(pbui_meetAgenda* other);
 
@@ -4680,7 +4873,7 @@ class pbui_meetUrl : public ::google::protobuf::MessageLite /* @@protoc_insertio
                &_pbui_meetUrl_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    46;
+    48;
 
   void Swap(pbui_meetUrl* other);
 
@@ -4766,7 +4959,7 @@ class pbui_Item_BulletDetailInfo : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Item_BulletDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    47;
+    49;
 
   void Swap(pbui_Item_BulletDetailInfo* other);
 
@@ -4895,7 +5088,7 @@ class pbui_BulletDetailInfo : public ::google::protobuf::MessageLite /* @@protoc
                &_pbui_BulletDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    48;
+    50;
 
   void Swap(pbui_BulletDetailInfo* other);
 
@@ -4960,6 +5153,92 @@ class pbui_BulletDetailInfo : public ::google::protobuf::MessageLite /* @@protoc
 };
 // -------------------------------------------------------------------
 
+class pbui_BigBulletDetailInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:pbui_BigBulletDetailInfo) */ {
+ public:
+  pbui_BigBulletDetailInfo();
+  virtual ~pbui_BigBulletDetailInfo();
+
+  pbui_BigBulletDetailInfo(const pbui_BigBulletDetailInfo& from);
+
+  inline pbui_BigBulletDetailInfo& operator=(const pbui_BigBulletDetailInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const pbui_BigBulletDetailInfo& default_instance();
+
+  static inline const pbui_BigBulletDetailInfo* internal_default_instance() {
+    return reinterpret_cast<const pbui_BigBulletDetailInfo*>(
+               &_pbui_BigBulletDetailInfo_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    51;
+
+  void Swap(pbui_BigBulletDetailInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  inline pbui_BigBulletDetailInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  pbui_BigBulletDetailInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    PROTOBUF_FINAL;
+  void CopyFrom(const pbui_BigBulletDetailInfo& from);
+  void MergeFrom(const pbui_BigBulletDetailInfo& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  void DiscardUnknownFields();
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(pbui_BigBulletDetailInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::std::string GetTypeName() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bytes text = 1;
+  void clear_text();
+  static const int kTextFieldNumber = 1;
+  const ::std::string& text() const;
+  void set_text(const ::std::string& value);
+  #if LANG_CXX11
+  void set_text(::std::string&& value);
+  #endif
+  void set_text(const char* value);
+  void set_text(const void* value, size_t size);
+  ::std::string* mutable_text();
+  ::std::string* release_text();
+  void set_allocated_text(::std::string* text);
+
+  // @@protoc_insertion_point(class_scope:pbui_BigBulletDetailInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr text_;
+  mutable int _cached_size_;
+  friend struct protobuf_Interface_5fmain_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class pbui_Item_AdminDetailInfo : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:pbui_Item_AdminDetailInfo) */ {
  public:
   pbui_Item_AdminDetailInfo();
@@ -4979,7 +5258,7 @@ class pbui_Item_AdminDetailInfo : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_Item_AdminDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    49;
+    52;
 
   void Swap(pbui_Item_AdminDetailInfo* other);
 
@@ -5132,7 +5411,7 @@ class pbui_TypeAdminDetailInfo : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_TypeAdminDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    50;
+    53;
 
   void Swap(pbui_TypeAdminDetailInfo* other);
 
@@ -5216,7 +5495,7 @@ class pbui_Type_AdminModifyPwd : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_Type_AdminModifyPwd_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    51;
+    54;
 
   void Swap(pbui_Type_AdminModifyPwd* other);
 
@@ -5332,7 +5611,7 @@ class pbui_Type_AdminLogon : public ::google::protobuf::MessageLite /* @@protoc_
                &_pbui_Type_AdminLogon_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    52;
+    55;
 
   void Swap(pbui_Type_AdminLogon* other);
 
@@ -5440,7 +5719,7 @@ class pbui_Type_AdminLogonStatus : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Type_AdminLogonStatus_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    53;
+    56;
 
   void Swap(pbui_Type_AdminLogonStatus* other);
 
@@ -5547,7 +5826,7 @@ class pbui_Type_MeetManagerRoomDetailInfo : public ::google::protobuf::MessageLi
                &_pbui_Type_MeetManagerRoomDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    54;
+    57;
 
   void Swap(pbui_Type_MeetManagerRoomDetailInfo* other);
 
@@ -5639,7 +5918,7 @@ class pbui_Type_DeviceControl : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Type_DeviceControl_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    55;
+    58;
 
   void Swap(pbui_Type_DeviceControl* other);
 
@@ -5731,7 +6010,7 @@ class pbui_Type_DeviceOperControl : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_DeviceOperControl_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    56;
+    59;
 
   void Swap(pbui_Type_DeviceOperControl* other);
 
@@ -5837,7 +6116,7 @@ class pbui_Type_DownloadStart : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Type_DownloadStart_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    57;
+    60;
 
   void Swap(pbui_Type_DownloadStart* other);
 
@@ -5944,7 +6223,7 @@ class pbui_Type_DownloadDel : public ::google::protobuf::MessageLite /* @@protoc
                &_pbui_Type_DownloadDel_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    58;
+    61;
 
   void Swap(pbui_Type_DownloadDel* other);
 
@@ -6022,7 +6301,7 @@ class pbui_Type_DownloadCb : public ::google::protobuf::MessageLite /* @@protoc_
                &_pbui_Type_DownloadCb_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    59;
+    62;
 
   void Swap(pbui_Type_DownloadCb* other);
 
@@ -6121,7 +6400,7 @@ class pbui_Type_PlayPosCb : public ::google::protobuf::MessageLite /* @@protoc_i
                &_pbui_Type_PlayPosCb_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    60;
+    63;
 
   void Swap(pbui_Type_PlayPosCb* other);
 
@@ -6220,7 +6499,7 @@ class pbui_TypeUploadPosCb : public ::google::protobuf::MessageLite /* @@protoc_
                &_pbui_TypeUploadPosCb_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    61;
+    64;
 
   void Swap(pbui_TypeUploadPosCb* other);
 
@@ -6326,7 +6605,7 @@ class pbui_Type_AddUploadFile : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Type_AddUploadFile_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    62;
+    65;
 
   void Swap(pbui_Type_AddUploadFile* other);
 
@@ -6462,7 +6741,7 @@ class pbui_TypeUploadReturn : public ::google::protobuf::MessageLite /* @@protoc
                &_pbui_TypeUploadReturn_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    63;
+    66;
 
   void Swap(pbui_TypeUploadReturn* other);
 
@@ -6540,7 +6819,7 @@ class pbui_Item_UploadFileDetailInfo : public ::google::protobuf::MessageLite /*
                &_pbui_Item_UploadFileDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    64;
+    67;
 
   void Swap(pbui_Item_UploadFileDetailInfo* other);
 
@@ -6676,7 +6955,7 @@ class pbui_Type_UploadFileDetailInfo : public ::google::protobuf::MessageLite /*
                &_pbui_Type_UploadFileDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    65;
+    68;
 
   void Swap(pbui_Type_UploadFileDetailInfo* other);
 
@@ -6760,7 +7039,7 @@ class pbui_Type_DelUploadFile : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Type_DelUploadFile_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    66;
+    69;
 
   void Swap(pbui_Type_DelUploadFile* other);
 
@@ -6838,7 +7117,7 @@ class pbui_Item_PersonDetailInfo : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Item_PersonDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    67;
+    70;
 
   void Swap(pbui_Item_PersonDetailInfo* other);
 
@@ -7021,7 +7300,7 @@ class pbui_Type_PersonDetailInfo : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Type_PersonDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    68;
+    71;
 
   void Swap(pbui_Type_PersonDetailInfo* other);
 
@@ -7105,7 +7384,7 @@ class pbui_Item_PeopleGroupDetailInfo : public ::google::protobuf::MessageLite /
                &_pbui_Item_PeopleGroupDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    69;
+    72;
 
   void Swap(pbui_Item_PeopleGroupDetailInfo* other);
 
@@ -7198,7 +7477,7 @@ class pbui_Type_PeopleGroupDetailInfo : public ::google::protobuf::MessageLite /
                &_pbui_Type_PeopleGroupDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    70;
+    73;
 
   void Swap(pbui_Type_PeopleGroupDetailInfo* other);
 
@@ -7282,7 +7561,7 @@ class pbui_Type_PeopleInGroupDetailInfo : public ::google::protobuf::MessageLite
                &_pbui_Type_PeopleInGroupDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    71;
+    74;
 
   void Swap(pbui_Type_PeopleInGroupDetailInfo* other);
 
@@ -7374,7 +7653,7 @@ class pbui_Type_AddPeopleToGroup : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Type_AddPeopleToGroup_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    72;
+    75;
 
   void Swap(pbui_Type_AddPeopleToGroup* other);
 
@@ -7462,7 +7741,7 @@ class pbui_Item_MemberDetailInfo : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Item_MemberDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    73;
+    76;
 
   void Swap(pbui_Item_MemberDetailInfo* other);
 
@@ -7645,7 +7924,7 @@ class pbui_Type_MemberDetailInfo : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Type_MemberDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    74;
+    77;
 
   void Swap(pbui_Type_MemberDetailInfo* other);
 
@@ -7729,7 +8008,7 @@ class pbui_Type_MeetMemberQueryProperty : public ::google::protobuf::MessageLite
                &_pbui_Type_MeetMemberQueryProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    75;
+    78;
 
   void Swap(pbui_Type_MeetMemberQueryProperty* other);
 
@@ -7814,7 +8093,7 @@ class pbui_Type_MeetMembeProperty : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_MeetMembeProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    76;
+    79;
 
   void Swap(pbui_Type_MeetMembeProperty* other);
 
@@ -7907,7 +8186,7 @@ class pbui_Item_MemberPermission : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Item_MemberPermission_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    77;
+    80;
 
   void Swap(pbui_Item_MemberPermission* other);
 
@@ -7992,7 +8271,7 @@ class pbui_Type_MemberPermission : public ::google::protobuf::MessageLite /* @@p
                &_pbui_Type_MemberPermission_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    78;
+    81;
 
   void Swap(pbui_Type_MemberPermission* other);
 
@@ -8076,7 +8355,7 @@ class pbui_Type_MeetMemberPermissionQueryProperty : public ::google::protobuf::M
                &_pbui_Type_MeetMemberPermissionQueryProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    79;
+    82;
 
   void Swap(pbui_Type_MeetMemberPermissionQueryProperty* other);
 
@@ -8161,7 +8440,7 @@ class pbui_Type_MemberPermissionProperty : public ::google::protobuf::MessageLit
                &_pbui_Type_MemberPermissionProperty_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    80;
+    83;
 
   void Swap(pbui_Type_MemberPermissionProperty* other);
 
@@ -8239,7 +8518,7 @@ class pbui_Item_MemberGroupDetailInfo : public ::google::protobuf::MessageLite /
                &_pbui_Item_MemberGroupDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    81;
+    84;
 
   void Swap(pbui_Item_MemberGroupDetailInfo* other);
 
@@ -8332,7 +8611,7 @@ class pbui_Type_MemberGroupDetailInfo : public ::google::protobuf::MessageLite /
                &_pbui_Type_MemberGroupDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    82;
+    85;
 
   void Swap(pbui_Type_MemberGroupDetailInfo* other);
 
@@ -8416,7 +8695,7 @@ class pbui_Type_MemberInGroupDetailInfo : public ::google::protobuf::MessageLite
                &_pbui_Type_MemberInGroupDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    83;
+    86;
 
   void Swap(pbui_Type_MemberInGroupDetailInfo* other);
 
@@ -8508,7 +8787,7 @@ class pbui_Type_DeviceFaceShowDetail : public ::google::protobuf::MessageLite /*
                &_pbui_Type_DeviceFaceShowDetail_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    84;
+    87;
 
   void Swap(pbui_Type_DeviceFaceShowDetail* other);
 
@@ -8674,7 +8953,7 @@ class pbui_Item_MeetVideoDetailInfo : public ::google::protobuf::MessageLite /* 
                &_pbui_Item_MeetVideoDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    85;
+    88;
 
   void Swap(pbui_Item_MeetVideoDetailInfo* other);
 
@@ -8796,7 +9075,7 @@ class pbui_Type_MeetVideoDetailInfo : public ::google::protobuf::MessageLite /* 
                &_pbui_Type_MeetVideoDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    86;
+    89;
 
   void Swap(pbui_Type_MeetVideoDetailInfo* other);
 
@@ -8880,7 +9159,7 @@ class pbui_Item_MeetRoomDetailInfo : public ::google::protobuf::MessageLite /* @
                &_pbui_Item_MeetRoomDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    87;
+    90;
 
   void Swap(pbui_Item_MeetRoomDetailInfo* other);
 
@@ -9017,7 +9296,7 @@ class pbui_Type_MeetRoomDetailInfo : public ::google::protobuf::MessageLite /* @
                &_pbui_Type_MeetRoomDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    88;
+    91;
 
   void Swap(pbui_Type_MeetRoomDetailInfo* other);
 
@@ -9101,7 +9380,7 @@ class pbui_Type_MeetRoomModBGInfo : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_MeetRoomModBGInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    89;
+    92;
 
   void Swap(pbui_Type_MeetRoomModBGInfo* other);
 
@@ -9186,7 +9465,7 @@ class pbui_Type_MeetRoomModDeviceInfo : public ::google::protobuf::MessageLite /
                &_pbui_Type_MeetRoomModDeviceInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    90;
+    93;
 
   void Swap(pbui_Type_MeetRoomModDeviceInfo* other);
 
@@ -9278,7 +9557,7 @@ class pbui_Item_MeetRoomDevPosInfo : public ::google::protobuf::MessageLite /* @
                &_pbui_Item_MeetRoomDevPosInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    91;
+    94;
 
   void Swap(pbui_Item_MeetRoomDevPosInfo* other);
 
@@ -9377,7 +9656,7 @@ class pbui_Type_MeetRoomDevPosInfo : public ::google::protobuf::MessageLite /* @
                &_pbui_Type_MeetRoomDevPosInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    92;
+    95;
 
   void Swap(pbui_Type_MeetRoomDevPosInfo* other);
 
@@ -9468,7 +9747,7 @@ class pbui_Item_MeetRoomDevSeatDetailInfo : public ::google::protobuf::MessageLi
                &_pbui_Item_MeetRoomDevSeatDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    93;
+    96;
 
   void Swap(pbui_Item_MeetRoomDevSeatDetailInfo* other);
 
@@ -9618,7 +9897,7 @@ class pbui_Type_MeetRoomDevSeatDetailInfo : public ::google::protobuf::MessageLi
                &_pbui_Type_MeetRoomDevSeatDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    94;
+    97;
 
   void Swap(pbui_Type_MeetRoomDevSeatDetailInfo* other);
 
@@ -9709,7 +9988,7 @@ class pbui_Type_DumpMeetRoomDevInfo : public ::google::protobuf::MessageLite /* 
                &_pbui_Type_DumpMeetRoomDevInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    95;
+    98;
 
   void Swap(pbui_Type_DumpMeetRoomDevInfo* other);
 
@@ -9808,7 +10087,7 @@ class pbui_Type_ResMeetRoomDevInfo : public ::google::protobuf::MessageLite /* @
                &_pbui_Type_ResMeetRoomDevInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    96;
+    99;
 
   void Swap(pbui_Type_ResMeetRoomDevInfo* other);
 
@@ -9893,7 +10172,7 @@ class pbui_Item_MeetMeetInfo : public ::google::protobuf::MessageLite /* @@proto
                &_pbui_Item_MeetMeetInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    97;
+    100;
 
   void Swap(pbui_Item_MeetMeetInfo* other);
 
@@ -10050,7 +10329,7 @@ class pbui_Type_MeetMeetInfo : public ::google::protobuf::MessageLite /* @@proto
                &_pbui_Type_MeetMeetInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    98;
+    101;
 
   void Swap(pbui_Type_MeetMeetInfo* other);
 
@@ -10134,7 +10413,7 @@ class pbui_Type_MeetModStatus : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Type_MeetModStatus_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    99;
+    102;
 
   void Swap(pbui_Type_MeetModStatus* other);
 
@@ -10219,7 +10498,7 @@ class pbui_Item_MeetDirDetailInfo : public ::google::protobuf::MessageLite /* @@
                &_pbui_Item_MeetDirDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    100;
+    103;
 
   void Swap(pbui_Item_MeetDirDetailInfo* other);
 
@@ -10319,7 +10598,7 @@ class pbui_Type_MeetDirDetailInfo : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_MeetDirDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    101;
+    104;
 
   void Swap(pbui_Type_MeetDirDetailInfo* other);
 
@@ -10403,7 +10682,7 @@ class pbui_Item_MeetDirFileDetailInfo : public ::google::protobuf::MessageLite /
                &_pbui_Item_MeetDirFileDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    102;
+    105;
 
   void Swap(pbui_Item_MeetDirFileDetailInfo* other);
 
@@ -10553,7 +10832,7 @@ class pbui_Type_MeetDirFileDetailInfo : public ::google::protobuf::MessageLite /
                &_pbui_Type_MeetDirFileDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    103;
+    106;
 
   void Swap(pbui_Type_MeetDirFileDetailInfo* other);
 
@@ -10644,7 +10923,7 @@ class pbui_Item_ModMeetDirFile : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_Item_ModMeetDirFile_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    104;
+    107;
 
   void Swap(pbui_Item_ModMeetDirFile* other);
 
@@ -10744,7 +11023,7 @@ class pbui_Type_ModMeetDirFile : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_Type_ModMeetDirFile_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    105;
+    108;
 
   void Swap(pbui_Type_ModMeetDirFile* other);
 
@@ -10835,7 +11114,7 @@ class pbui_Type_ModMeetDirFilePos : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_ModMeetDirFilePos_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    106;
+    109;
 
   void Swap(pbui_Type_ModMeetDirFilePos* other);
 
@@ -10927,7 +11206,7 @@ class pbui_Type_ComplexQueryMeetDirFile : public ::google::protobuf::MessageLite
                &_pbui_Type_ComplexQueryMeetDirFile_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    107;
+    110;
 
   void Swap(pbui_Type_ComplexQueryMeetDirFile* other);
 
@@ -11054,7 +11333,7 @@ class pbui_TypePageResQueryrFileInfo : public ::google::protobuf::MessageLite /*
                &_pbui_TypePageResQueryrFileInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    108;
+    111;
 
   void Swap(pbui_TypePageResQueryrFileInfo* other);
 
@@ -11166,7 +11445,7 @@ class pbui_Type_MeetNewRecordFile : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_MeetNewRecordFile_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    109;
+    112;
 
   void Swap(pbui_Type_MeetNewRecordFile* other);
 
@@ -11273,7 +11552,7 @@ class pbui_Type_MeetDirRightDetailInfo : public ::google::protobuf::MessageLite 
                &_pbui_Type_MeetDirRightDetailInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    110;
+    113;
 
   void Swap(pbui_Type_MeetDirRightDetailInfo* other);
 
@@ -11365,7 +11644,7 @@ class pbui_Item_MeetFileScore : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Item_MeetFileScore_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    111;
+    114;
 
   void Swap(pbui_Item_MeetFileScore* other);
 
@@ -11464,7 +11743,7 @@ class pbui_Type_MeetFileScore : public ::google::protobuf::MessageLite /* @@prot
                &_pbui_Type_MeetFileScore_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    112;
+    115;
 
   void Swap(pbui_Type_MeetFileScore* other);
 
@@ -11555,7 +11834,7 @@ class pbui_Type_QueryFileScore : public ::google::protobuf::MessageLite /* @@pro
                &_pbui_Type_QueryFileScore_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    113;
+    116;
 
   void Swap(pbui_Type_QueryFileScore* other);
 
@@ -11633,7 +11912,7 @@ class pbui_Type_QueryAverageFileScore : public ::google::protobuf::MessageLite /
                &_pbui_Type_QueryAverageFileScore_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    114;
+    117;
 
   void Swap(pbui_Type_QueryAverageFileScore* other);
 
@@ -11718,7 +11997,7 @@ class pbui_Item_FileEvaluate : public ::google::protobuf::MessageLite /* @@proto
                &_pbui_Item_FileEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    115;
+    118;
 
   void Swap(pbui_Item_FileEvaluate* other);
 
@@ -11832,7 +12111,7 @@ class pbui_Type_MeetingFileEvaluate : public ::google::protobuf::MessageLite /* 
                &_pbui_Type_MeetingFileEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    116;
+    119;
 
   void Swap(pbui_Type_MeetingFileEvaluate* other);
 
@@ -11930,7 +12209,7 @@ class pbui_Type_QueryFileEvaluate : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_QueryFileEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    117;
+    120;
 
   void Swap(pbui_Type_QueryFileEvaluate* other);
 
@@ -12036,7 +12315,7 @@ class pbui_Type_DelFileEvaluate : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_Type_DelFileEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    118;
+    121;
 
   void Swap(pbui_Type_DelFileEvaluate* other);
 
@@ -12128,7 +12407,7 @@ class pbui_Item_MeetEvaluate : public ::google::protobuf::MessageLite /* @@proto
                &_pbui_Item_MeetEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    119;
+    122;
 
   void Swap(pbui_Item_MeetEvaluate* other);
 
@@ -12235,7 +12514,7 @@ class pbui_Type_MeetingMeetEvaluate : public ::google::protobuf::MessageLite /* 
                &_pbui_Type_MeetingMeetEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    120;
+    123;
 
   void Swap(pbui_Type_MeetingMeetEvaluate* other);
 
@@ -12333,7 +12612,7 @@ class pbui_Type_QueryMeetEvaluate : public ::google::protobuf::MessageLite /* @@
                &_pbui_Type_QueryMeetEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    121;
+    124;
 
   void Swap(pbui_Type_QueryMeetEvaluate* other);
 
@@ -12432,7 +12711,7 @@ class pbui_Type_DelMeetEvaluate : public ::google::protobuf::MessageLite /* @@pr
                &_pbui_Type_DelMeetEvaluate_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    122;
+    125;
 
   void Swap(pbui_Type_DelMeetEvaluate* other);
 
@@ -13549,6 +13828,125 @@ pbui_Type_DeviceDetailInfo::mutable_pdev() {
 inline const ::google::protobuf::RepeatedPtrField< ::pbui_Item_DeviceDetailInfo >&
 pbui_Type_DeviceDetailInfo::pdev() const {
   // @@protoc_insertion_point(field_list:pbui_Type_DeviceDetailInfo.pdev)
+  return pdev_;
+}
+
+// -------------------------------------------------------------------
+
+// pbui_Item_DeviceResPlay
+
+// fixed32 devceid = 1;
+inline void pbui_Item_DeviceResPlay::clear_devceid() {
+  devceid_ = 0u;
+}
+inline ::google::protobuf::uint32 pbui_Item_DeviceResPlay::devceid() const {
+  // @@protoc_insertion_point(field_get:pbui_Item_DeviceResPlay.devceid)
+  return devceid_;
+}
+inline void pbui_Item_DeviceResPlay::set_devceid(::google::protobuf::uint32 value) {
+  
+  devceid_ = value;
+  // @@protoc_insertion_point(field_set:pbui_Item_DeviceResPlay.devceid)
+}
+
+// fixed32 memberid = 2;
+inline void pbui_Item_DeviceResPlay::clear_memberid() {
+  memberid_ = 0u;
+}
+inline ::google::protobuf::uint32 pbui_Item_DeviceResPlay::memberid() const {
+  // @@protoc_insertion_point(field_get:pbui_Item_DeviceResPlay.memberid)
+  return memberid_;
+}
+inline void pbui_Item_DeviceResPlay::set_memberid(::google::protobuf::uint32 value) {
+  
+  memberid_ = value;
+  // @@protoc_insertion_point(field_set:pbui_Item_DeviceResPlay.memberid)
+}
+
+// bytes name = 3;
+inline void pbui_Item_DeviceResPlay::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& pbui_Item_DeviceResPlay::name() const {
+  // @@protoc_insertion_point(field_get:pbui_Item_DeviceResPlay.name)
+  return name_.GetNoArena();
+}
+inline void pbui_Item_DeviceResPlay::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:pbui_Item_DeviceResPlay.name)
+}
+#if LANG_CXX11
+inline void pbui_Item_DeviceResPlay::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:pbui_Item_DeviceResPlay.name)
+}
+#endif
+inline void pbui_Item_DeviceResPlay::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:pbui_Item_DeviceResPlay.name)
+}
+inline void pbui_Item_DeviceResPlay::set_name(const void* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:pbui_Item_DeviceResPlay.name)
+}
+inline ::std::string* pbui_Item_DeviceResPlay::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:pbui_Item_DeviceResPlay.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* pbui_Item_DeviceResPlay::release_name() {
+  // @@protoc_insertion_point(field_release:pbui_Item_DeviceResPlay.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void pbui_Item_DeviceResPlay::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:pbui_Item_DeviceResPlay.name)
+}
+
+// -------------------------------------------------------------------
+
+// pbui_Type_DeviceResPlay
+
+// repeated .pbui_Item_DeviceResPlay pdev = 1;
+inline int pbui_Type_DeviceResPlay::pdev_size() const {
+  return pdev_.size();
+}
+inline void pbui_Type_DeviceResPlay::clear_pdev() {
+  pdev_.Clear();
+}
+inline const ::pbui_Item_DeviceResPlay& pbui_Type_DeviceResPlay::pdev(int index) const {
+  // @@protoc_insertion_point(field_get:pbui_Type_DeviceResPlay.pdev)
+  return pdev_.Get(index);
+}
+inline ::pbui_Item_DeviceResPlay* pbui_Type_DeviceResPlay::mutable_pdev(int index) {
+  // @@protoc_insertion_point(field_mutable:pbui_Type_DeviceResPlay.pdev)
+  return pdev_.Mutable(index);
+}
+inline ::pbui_Item_DeviceResPlay* pbui_Type_DeviceResPlay::add_pdev() {
+  // @@protoc_insertion_point(field_add:pbui_Type_DeviceResPlay.pdev)
+  return pdev_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::pbui_Item_DeviceResPlay >*
+pbui_Type_DeviceResPlay::mutable_pdev() {
+  // @@protoc_insertion_point(field_mutable_list:pbui_Type_DeviceResPlay.pdev)
+  return &pdev_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::pbui_Item_DeviceResPlay >&
+pbui_Type_DeviceResPlay::pdev() const {
+  // @@protoc_insertion_point(field_list:pbui_Type_DeviceResPlay.pdev)
   return pdev_;
 }
 
@@ -15190,6 +15588,63 @@ inline const ::google::protobuf::RepeatedPtrField< ::pbui_Item_BulletDetailInfo 
 pbui_BulletDetailInfo::item() const {
   // @@protoc_insertion_point(field_list:pbui_BulletDetailInfo.item)
   return item_;
+}
+
+// -------------------------------------------------------------------
+
+// pbui_BigBulletDetailInfo
+
+// bytes text = 1;
+inline void pbui_BigBulletDetailInfo::clear_text() {
+  text_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& pbui_BigBulletDetailInfo::text() const {
+  // @@protoc_insertion_point(field_get:pbui_BigBulletDetailInfo.text)
+  return text_.GetNoArena();
+}
+inline void pbui_BigBulletDetailInfo::set_text(const ::std::string& value) {
+  
+  text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:pbui_BigBulletDetailInfo.text)
+}
+#if LANG_CXX11
+inline void pbui_BigBulletDetailInfo::set_text(::std::string&& value) {
+  
+  text_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:pbui_BigBulletDetailInfo.text)
+}
+#endif
+inline void pbui_BigBulletDetailInfo::set_text(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:pbui_BigBulletDetailInfo.text)
+}
+inline void pbui_BigBulletDetailInfo::set_text(const void* value, size_t size) {
+  
+  text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:pbui_BigBulletDetailInfo.text)
+}
+inline ::std::string* pbui_BigBulletDetailInfo::mutable_text() {
+  
+  // @@protoc_insertion_point(field_mutable:pbui_BigBulletDetailInfo.text)
+  return text_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* pbui_BigBulletDetailInfo::release_text() {
+  // @@protoc_insertion_point(field_release:pbui_BigBulletDetailInfo.text)
+  
+  return text_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void pbui_BigBulletDetailInfo::set_allocated_text(::std::string* text) {
+  if (text != NULL) {
+    
+  } else {
+    
+  }
+  text_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), text);
+  // @@protoc_insertion_point(field_set_allocated:pbui_BigBulletDetailInfo.text)
 }
 
 // -------------------------------------------------------------------
@@ -21387,6 +21842,12 @@ inline void pbui_Type_DelMeetEvaluate::set_evaluatetime(::google::protobuf::uint
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

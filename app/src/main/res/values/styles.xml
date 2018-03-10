@@ -9,12 +9,12 @@
     </style>
     <!-- 主页自定义属性 -->
     <style name="TextStyle">
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/White</item>
         <item name="android:textSize">20sp</item>
     </style>
     <!-- 进入会议页面左边列表字体样式 -->
     <style name="TextStyle_Left">
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/White</item>
         <item name="android:textSize">15sp</item>
     </style>
 

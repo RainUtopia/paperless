@@ -154,19 +154,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     //播放时的媒体ID
     public static int mMediaid;
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        isFirstIn = true;
-        if (nativeUtil != null) {
-            nativeUtil.mediaDestroy(0);
-        }
-        Log.e("FramentLife", "MeetingFileFragment.onAttach:   --->>> ");
-    }
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -180,7 +167,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
             //136.查询会议目录
             nativeUtil.queryMeetDir();
 //            nativeUtil.placeDeviceRankingInfo()
-
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -221,6 +207,10 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+    }
 
     private static boolean isFirstIn = true;
 
@@ -389,7 +379,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 

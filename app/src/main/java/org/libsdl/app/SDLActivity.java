@@ -138,25 +138,6 @@ public class SDLActivity extends Activity {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e("MyLog", "SDLActivity.onRestart:   --->>> ");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.e("MyLog", "SDLActivity.onStop:   --->>> ");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e("MyLog", "SDLActivity.onStart:   --->>> ");
-    }
-
-
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
         List<Integer> a = new ArrayList<Integer>();

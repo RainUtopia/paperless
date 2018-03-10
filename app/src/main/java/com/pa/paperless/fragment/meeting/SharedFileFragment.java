@@ -62,6 +62,7 @@ import com.zhy.android.percent.support.PercentLinearLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.libsdl.app.SDLActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -211,11 +212,13 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
 
         mAllAdapter = new TypeFileAdapter(getContext(), mData);
         sharedfile_lv.setAdapter(mAllAdapter);
+
         mAllAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
             public void onLookListener(int posion, String filename) {
                 if (FileUtil.isVideoFile(filename)) {
-//                    MyUtils.playMedia(nativeUtil, getContext(), MeetingActivity.getDevId(), getActivity());
+                    //如果是音频或视频则在线播放
+                    startActivity(new Intent(getActivity(), SDLActivity.class));
                     nativeUtil.mediaPlayOperate(posion, MeetingActivity.getDevId(), 0);
                 } else {
                     MyUtils.openFile(filename, getView(), nativeUtil, posion, getContext());
@@ -336,7 +339,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, 1);
     }
-
     String path;
 
     @Override
@@ -347,6 +349,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                 path = uri.getPath();
                 Log.e("MyLog", "SharedFileFragment.onActivityResult 316行:  选中文件的path路径 --->>> " + path);
                 Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+                showDialog(path);
                 return;
             }
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {//4.4以后
@@ -374,7 +377,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         String fileName = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
         //给输入框设置默认文件名
         editText.setText(fileName);
-        Log.e("MyLog", "SharedFileFragment.showDialog 377行:   --->>> " + fileName);
+        Log.e("MyLog", "SharedFileFragment.showDialog 378行:   --->>> " + fileName);
         new AlertDialog.Builder(getContext()).setTitle("请输入文件名")
                 .setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override

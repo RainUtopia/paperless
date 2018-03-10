@@ -63,4 +63,6 @@ public class IDEventMessage {
     public static final int Upload_Progress = 3027;
     // 页面中通知会议页面更新 Badge的未读消息数
     public static final int UpDate_BadgeNumber = 3028;
+    // 查询可加入的同屏会话
+    public static final int QUERY_CAN_JOIN = 3029;
 }

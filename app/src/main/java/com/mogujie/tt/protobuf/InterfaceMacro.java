@@ -248,7 +248,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -257,7 +257,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Error valueOf(int value) {
       return forNumber(value);
     }
@@ -479,7 +479,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -488,7 +488,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_DB_StatusCode valueOf(int value) {
       return forNumber(value);
     }
@@ -1474,7 +1474,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -1483,7 +1483,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Type valueOf(int value) {
       return forNumber(value);
     }
@@ -1884,11 +1884,36 @@ public final class InterfaceMacro {
     Pb_METHOD_MEET_INTERFACE_RESPONSEPRIVELIGE(57),
     /**
      * <pre>
+     *更新、升级
      * </pre>
      *
      * <code>Pb_METHOD_MEET_INTERFACE_UPDATE = 58;</code>
      */
     Pb_METHOD_MEET_INTERFACE_UPDATE(58),
+    /**
+     * <pre>
+     *文本消息
+     * </pre>
+     *
+     * <code>Pb_METHOD_MEET_INTERFACE_TEXTMSG = 59;</code>
+     */
+    Pb_METHOD_MEET_INTERFACE_TEXTMSG(59),
+    /**
+     * <pre>
+     *重启
+     * </pre>
+     *
+     * <code>Pb_METHOD_MEET_INTERFACE_REBOOT = 60;</code>
+     */
+    Pb_METHOD_MEET_INTERFACE_REBOOT(60),
+    /**
+     * <pre>
+     *播放资源信息
+     * </pre>
+     *
+     * <code>Pb_METHOD_MEET_INTERFACE_RESINFO = 61;</code>
+     */
+    Pb_METHOD_MEET_INTERFACE_RESINFO(61),
     /**
      * <pre>
      *添加INK
@@ -2226,11 +2251,36 @@ public final class InterfaceMacro {
     public static final int Pb_METHOD_MEET_INTERFACE_RESPONSEPRIVELIGE_VALUE = 57;
     /**
      * <pre>
+     *更新、升级
      * </pre>
      *
      * <code>Pb_METHOD_MEET_INTERFACE_UPDATE = 58;</code>
      */
     public static final int Pb_METHOD_MEET_INTERFACE_UPDATE_VALUE = 58;
+    /**
+     * <pre>
+     *文本消息
+     * </pre>
+     *
+     * <code>Pb_METHOD_MEET_INTERFACE_TEXTMSG = 59;</code>
+     */
+    public static final int Pb_METHOD_MEET_INTERFACE_TEXTMSG_VALUE = 59;
+    /**
+     * <pre>
+     *重启
+     * </pre>
+     *
+     * <code>Pb_METHOD_MEET_INTERFACE_REBOOT = 60;</code>
+     */
+    public static final int Pb_METHOD_MEET_INTERFACE_REBOOT_VALUE = 60;
+    /**
+     * <pre>
+     *播放资源信息
+     * </pre>
+     *
+     * <code>Pb_METHOD_MEET_INTERFACE_RESINFO = 61;</code>
+     */
+    public static final int Pb_METHOD_MEET_INTERFACE_RESINFO_VALUE = 61;
     /**
      * <pre>
      *添加INK
@@ -2267,7 +2317,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -2276,7 +2326,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Method valueOf(int value) {
       return forNumber(value);
     }
@@ -2341,6 +2391,9 @@ public final class InterfaceMacro {
         case 56: return Pb_METHOD_MEET_INTERFACE_REQUESTPRIVELIGE;
         case 57: return Pb_METHOD_MEET_INTERFACE_RESPONSEPRIVELIGE;
         case 58: return Pb_METHOD_MEET_INTERFACE_UPDATE;
+        case 59: return Pb_METHOD_MEET_INTERFACE_TEXTMSG;
+        case 60: return Pb_METHOD_MEET_INTERFACE_REBOOT;
+        case 61: return Pb_METHOD_MEET_INTERFACE_RESINFO;
         case 1001: return Pb_METHOD_MEET_INTERFACE_ADDINK;
         case 1002: return Pb_METHOD_MEET_INTERFACE_ADDRECT;
         case 1003: return Pb_METHOD_MEET_INTERFACE_ADDTEXT;
@@ -2786,7 +2839,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -2795,7 +2848,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_String_LenLimit valueOf(int value) {
       return forNumber(value);
     }
@@ -2946,7 +2999,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -2955,7 +3008,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_ProgramType valueOf(int value) {
       return forNumber(value);
     }
@@ -3033,7 +3086,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -3042,7 +3095,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_CacheFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -3196,7 +3249,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -3205,7 +3258,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_FontAlignFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -3324,7 +3377,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -3333,7 +3386,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_DevicePlayStatus valueOf(int value) {
       return forNumber(value);
     }
@@ -3433,7 +3486,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -3442,7 +3495,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFaceStatus valueOf(int value) {
       return forNumber(value);
     }
@@ -3662,7 +3715,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -3671,7 +3724,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetDevicePropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -3770,7 +3823,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -3779,7 +3832,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_DeviceModifyFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -4017,7 +4070,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4026,7 +4079,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_ContextPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -4135,7 +4188,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4144,7 +4197,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_AgendaType valueOf(int value) {
       return forNumber(value);
     }
@@ -4243,7 +4296,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4252,7 +4305,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_AgendaStatus valueOf(int value) {
       return forNumber(value);
     }
@@ -4367,7 +4420,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4376,7 +4429,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_AdminLogonStatus valueOf(int value) {
       return forNumber(value);
     }
@@ -4613,7 +4666,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4622,7 +4675,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_DeviceControlFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -4722,7 +4775,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4731,7 +4784,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_LiftFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -4879,7 +4932,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -4888,7 +4941,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Download_State valueOf(int value) {
       return forNumber(value);
     }
@@ -5119,7 +5172,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5128,7 +5181,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Download_Erro valueOf(int value) {
       return forNumber(value);
     }
@@ -5284,7 +5337,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5293,7 +5346,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Upload_State valueOf(int value) {
       return forNumber(value);
     }
@@ -5372,7 +5425,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5381,7 +5434,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Upload_Flag valueOf(int value) {
       return forNumber(value);
     }
@@ -5552,7 +5605,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5561,7 +5614,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MemberPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -5706,7 +5759,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5715,7 +5768,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MemberPermissionPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -5865,7 +5918,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5874,7 +5927,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetSignType valueOf(int value) {
       return forNumber(value);
     }
@@ -5969,7 +6022,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -5978,7 +6031,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetRoomPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -6093,7 +6146,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6102,7 +6155,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_DeviceDirection valueOf(int value) {
       return forNumber(value);
     }
@@ -6275,7 +6328,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6284,7 +6337,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_RoomDeviceFilterFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -6404,7 +6457,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6413,7 +6466,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetStatus valueOf(int value) {
       return forNumber(value);
     }
@@ -6586,7 +6639,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6595,7 +6648,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -6747,7 +6800,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6756,7 +6809,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetMemberRole valueOf(int value) {
       return forNumber(value);
     }
@@ -6834,7 +6887,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6843,7 +6896,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFileAttrib valueOf(int value) {
       return forNumber(value);
     }
@@ -6966,7 +7019,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -6975,7 +7028,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFilePropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -7101,7 +7154,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -7110,7 +7163,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFileQueryFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -7252,7 +7305,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -7261,7 +7314,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFileType valueOf(int value) {
       return forNumber(value);
     }
@@ -7404,7 +7457,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -7413,7 +7466,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_TableCardType valueOf(int value) {
       return forNumber(value);
     }
@@ -7540,7 +7593,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -7549,7 +7602,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_TableCardFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -7739,7 +7792,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -7748,7 +7801,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetSeatPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -7982,7 +8035,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -7991,7 +8044,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetIMMSG_TYPE valueOf(int value) {
       return forNumber(value);
     }
@@ -8090,7 +8143,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8099,7 +8152,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetIMMSG_QueryFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -8200,7 +8253,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8209,7 +8262,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetVoteStatus valueOf(int value) {
       return forNumber(value);
     }
@@ -8308,7 +8361,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8317,7 +8370,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetVoteType valueOf(int value) {
       return forNumber(value);
     }
@@ -8400,7 +8453,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8409,7 +8462,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetVoteMode valueOf(int value) {
       return forNumber(value);
     }
@@ -8555,7 +8608,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8564,7 +8617,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetVote_SelType valueOf(int value) {
       return forNumber(value);
     }
@@ -8659,7 +8712,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8668,7 +8721,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetVotePropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -8760,7 +8813,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8769,7 +8822,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetSignPropertyID valueOf(int value) {
       return forNumber(value);
     }
@@ -8924,7 +8977,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -8933,7 +8986,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetPostilOperType valueOf(int value) {
       return forNumber(value);
     }
@@ -9106,7 +9159,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -9115,7 +9168,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetPostilFigureType valueOf(int value) {
       return forNumber(value);
     }
@@ -9243,7 +9296,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -9252,7 +9305,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFontFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -9481,7 +9534,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -9490,7 +9543,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_Meet_FunctionCode valueOf(int value) {
       return forNumber(value);
     }
@@ -9574,7 +9627,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -9583,7 +9636,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetPlayFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -10090,7 +10143,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -10099,7 +10152,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFaceID valueOf(int value) {
       return forNumber(value);
     }
@@ -10232,7 +10285,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -10241,7 +10294,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFaceFontFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -10349,7 +10402,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -10358,7 +10411,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetFaceFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -10467,7 +10520,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -10476,7 +10529,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_MeetStatisticFlag valueOf(int value) {
       return forNumber(value);
     }
@@ -10553,7 +10606,7 @@ public final class InterfaceMacro {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -10562,7 +10615,7 @@ public final class InterfaceMacro {
     /**
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static Pb_FileEvaluateFlag valueOf(int value) {
       return forNumber(value);
     }

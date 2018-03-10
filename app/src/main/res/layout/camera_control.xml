@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:layout_margin="2dp"
         android:layout_weight="7" >
-        <!--<com.pa.paperless.views.CustomSurfaceView-->
             <SurfaceView
             android:id="@+id/camera_top_leftvideo"
             app:layout_widthPercent="50%"

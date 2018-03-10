@@ -69,7 +69,7 @@ public class TypeFileAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (mLookListener != null) {
                     //下载媒体id
-                    mLookListener.onLookListener(mediaId,fileName);
+                    mLookListener.onLookListener(mediaId, fileName);
                 }
             }
         });
@@ -77,7 +77,7 @@ public class TypeFileAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 if (mDownListener != null) {
-                    mDownListener.onDownListener(mediaId,fileName);
+                    mDownListener.onDownListener(mediaId, fileName);
                 }
             }
         });
@@ -93,11 +93,11 @@ public class TypeFileAdapter extends BaseAdapter {
     }
 
     public interface setLookListener {
-        void onLookListener(int posion,String filename);
+        void onLookListener(int posion, String filename);
     }
 
     public interface setDownListener {
-        void onDownListener(int posion,String filename);
+        void onDownListener(int posion, String filename);
     }
 
     public static class ViewHolder {

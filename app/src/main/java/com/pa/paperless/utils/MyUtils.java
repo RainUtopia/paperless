@@ -3,6 +3,7 @@ package com.pa.paperless.utils;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,12 +14,14 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -27,15 +30,21 @@ import com.pa.paperless.R;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +60,7 @@ public class MyUtils {
 
     /**
      * 截屏 不能截取状态栏  有bug：界面不同 截出来的图片都一样
+     *
      * @param v 截取传入的控件父控件
      */
     public static void ScreenShot(View v) {
@@ -65,7 +75,7 @@ public class MyUtils {
                 FileOutputStream fos = new FileOutputStream(name);
                 drawingCache.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
-                showMsg(v.getContext(),"截图成功");
+                showMsg(v.getContext(), "截图成功");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -76,10 +86,11 @@ public class MyUtils {
 
     /**
      * 吐丝
+     *
      * @param c
      * @param msg
      */
-    public static void showMsg(Context c,String msg){
+    public static void showMsg(Context c, String msg) {
         Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -106,7 +117,6 @@ public class MyUtils {
             @Override
             public void onClick(View view) {
                 //248.停止资源操作
-
                 mediaPop.dismiss();
             }
         });
@@ -288,12 +298,102 @@ public class MyUtils {
 
     /**
      * 将十进制的数装换成二进制的字符串
+     *
      * @param value
      * @return
      */
-    public static String get10To2(int value){
+    public static String get10To2(int value) {
         return Integer.toBinaryString(value);
     }
 
+
+    /**
+     * 查找sd卡中以 postfix 为后缀的文件
+     *
+     * @param postfix 文件的后缀  .txt .xls
+     * @return 得到一个存放文件路径的集合
+     */
+    public static List<File> getSDPostfixFile(String postfix) {
+        //1.获取到sd卡目录下所有的txt文件
+        List<File> txtFile = new ArrayList<>();
+        File file = new File(SDCardUtils.getSDCardPath());
+        TxtFileFilter txtFileFilter = new TxtFileFilter();
+        txtFileFilter.addType(postfix);
+        File[] files = file.listFiles(txtFileFilter);
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                txtFile.add(files[i]);
+            }
+            return txtFile;
+        }
+        return new ArrayList<>();
+    }
+
+    /**
+     * 以弹出框的形式展示查找到的txt文档文件
+     *
+     * @param txtFile 存放文件路径的集合 /storage/emulated/0/游戏文本.txt
+     * @param edt     获取TXT文本内容后展示到 edt中
+     */
+    public static void showTxtDialog(Context context, List<File> txtFile, final EditText edt) {
+        //存放txt文件的路径  txtFile.size()用来定义数组的大小
+        final String[] txtFilePath = new String[txtFile.size()];
+        //txt文件的名称
+        final String[] txtFileName = new String[txtFile.size()];
+        for (int i = 0; i < txtFile.size(); i++) {
+            txtFilePath[i] = txtFile.get(i).toString();//  /storage/emulated/0/文本.txt
+            txtFileName[i] = txtFile.get(i).getName();//   文本.txt
+        }
+        if (txtFilePath.length == 0) {
+            Toast.makeText(context, "在SD卡中没有找到该类型文件", Toast.LENGTH_SHORT).show();
+        } else {
+            //只有SD卡中有该类文件的时候才展示，否则会报错
+            new AlertDialog.Builder(context).setTitle("SD卡中所有该类型文件")
+                    .setItems(txtFileName, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //  读取内容获得文本
+                            String s = MyUtils.ReadTxtFile(txtFilePath[i]);
+                            edt.setText(s);
+                        }
+                    }).create().show();
+        }
+    }
+
+    /**
+     * 读取TXT格式文件
+     *
+     * @param strFilePath
+     * @return 返回该文件的文本内容
+     */
+    public static String ReadTxtFile(String strFilePath) {
+        String path = String.valueOf(strFilePath);
+        String content = ""; //文件内容字符串
+        //打开文件
+        File file = new File(path);
+        //如果path是传递过来的参数，可以做一个非目录的判断
+        if (file.isDirectory()) {
+            Log.d("TestFile", "The File doesn't not exist.");
+        } else {
+            try {
+                InputStream instream = new FileInputStream(file);
+                if (instream != null) {
+                    InputStreamReader inputreader = new InputStreamReader(instream);
+                    BufferedReader buffreader = new BufferedReader(inputreader);
+                    String line;
+                    //分行读取
+                    while ((line = buffreader.readLine()) != null) {
+                        content += line + "\n";
+                    }
+                    instream.close();
+                }
+            } catch (java.io.FileNotFoundException e) {
+                Log.d("TestFile", "The File doesn't not exist.");
+            } catch (IOException e) {
+                Log.d("TestFile", e.getMessage());
+            }
+        }
+        return content;
+    }
 
 }

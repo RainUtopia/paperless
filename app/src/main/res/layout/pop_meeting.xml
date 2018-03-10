@@ -22,7 +22,7 @@
             android:drawableTop="@drawable/keyboard"
             android:gravity="center"
             android:text="软键盘"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/handwritten"
@@ -33,7 +33,7 @@
             android:drawableTop="@drawable/writingboard"
             android:gravity="center"
             android:text="手写"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/screens"
@@ -44,7 +44,7 @@
             android:drawableTop="@drawable/screenshot"
             android:gravity="center"
             android:text="桌面截图"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +63,7 @@
             android:drawableTop="@drawable/sscreen"
             android:gravity="center"
             android:text="同屏控制"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/back_pop"
@@ -74,7 +74,7 @@
             android:drawableTop="@drawable/back_pop"
             android:gravity="center"
             android:text="返回"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/projection"
@@ -85,7 +85,7 @@
             android:drawableTop="@drawable/projective"
             android:gravity="center"
             android:text="投影控制"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
     </LinearLayout>
 
     <LinearLayout
@@ -104,7 +104,7 @@
             android:drawableTop="@drawable/note"
             android:gravity="center"
             android:text="会议笔记"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/call_service"
@@ -115,7 +115,7 @@
             android:drawableTop="@drawable/service"
             android:gravity="center"
             android:text="呼叫服务"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/whiteplate_pop"
@@ -126,6 +126,6 @@
             android:drawableTop="@drawable/multipostil"
             android:gravity="center"
             android:text="电子白板"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/White" />
     </LinearLayout>
 </com.zhy.android.percent.support.PercentLinearLayout>

@@ -58,7 +58,7 @@
             app:layout_heightPercent="10%"
             android:text="视屏直播列表" />
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/video_lv"
             android:layout_width="match_parent"
             app:layout_heightPercent="60%"
