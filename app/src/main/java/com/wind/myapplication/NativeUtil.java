@@ -1,9 +1,7 @@
 package com.wind.myapplication;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMain;
@@ -17,26 +15,12 @@ import com.pa.paperless.event.EventNotice;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
+import com.pa.paperless.utils.MyUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ASK;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLEAR;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLOSE;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ENTER;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_EXIT;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REJECT;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSIGN;
-import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM;
 import static com.pa.paperless.utils.MyUtils.getStb;
 
 /**
@@ -90,14 +74,13 @@ public class NativeUtil {
     public boolean queryCanJoin() throws InvalidProtocolBufferException {
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEVICEINFO.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_RESINFO.getNumber(), null);
         if (array == null) {
-            Log.e("MyLog","NativeUtil.queryCanJoin 93行:  查询可加入的同屏会话失败 --->>> ");
+            Log.e("MyLog", "NativeUtil.queryCanJoin 93行:  查询可加入的同屏会话失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_DeviceResPlay defaultInstance = InterfaceMain.pbui_Type_DeviceResPlay.getDefaultInstance();
-        InterfaceMain.pbui_Type_DeviceResPlay pbui_type_deviceResPlay = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_DeviceResPlay pbui_type_deviceResPlay = InterfaceMain.pbui_Type_DeviceResPlay.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_CAN_JOIN, pbui_type_deviceResPlay);
-            Log.e("MyLog","NativeUtil.queryCanJoin 100行:  查询可加入的同屏会话成功 --->>> ");
+            Log.e("MyLog", "NativeUtil.queryCanJoin 100行:  查询可加入的同屏会话成功 --->>> ");
         }
         return true;
     }
@@ -121,13 +104,18 @@ public class NativeUtil {
         return bret;
     }
 
-    public boolean initvideores() throws InvalidProtocolBufferException {
+    //初始化播放资源
+    public boolean initvideores(int resid, int dx, int dy, int dh, int dw) throws InvalidProtocolBufferException {
         InterfaceMain2.pbui_Type_MeetInitPlayRes.Builder builder = InterfaceMain2.pbui_Type_MeetInitPlayRes.newBuilder();
-        builder.setRes(0);
-        builder.setY(0);
-        builder.setX(0);
-        builder.setH(1080);
-        builder.setW(1920);
+        builder.setRes(resid);
+        builder.setX(dx);
+        builder.setY(dy);
+        builder.setH(dh);
+        builder.setW(dw);
+//        builder.setY(0);
+//        builder.setX(0);
+//        builder.setH(1080);
+//        builder.setW(1920);
         InterfaceMain2.pbui_Type_MeetInitPlayRes build = builder.build();
         call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_INIT.getNumber(), build.toByteArray());
 
@@ -142,8 +130,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryDeviceInfo:  6.查询设备信息失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_DeviceDetailInfo tmp = InterfaceMain.pbui_Type_DeviceDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_DeviceDetailInfo pbui_type_deviceDetailInfo = tmp.parseFrom(array);
+        InterfaceMain.pbui_Type_DeviceDetailInfo pbui_type_deviceDetailInfo = InterfaceMain.pbui_Type_DeviceDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_DEVICE_INFO, pbui_type_deviceDetailInfo);
         }
@@ -202,12 +189,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryInterfaceState:  9.查询界面状态失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_MeetDeviceMeetStatus resultb = InterfaceMain.pbui_MeetDeviceMeetStatus.getDefaultInstance();
-        InterfaceMain.pbui_MeetDeviceMeetStatus pbui_meetDeviceMeetStatus = resultb.parseFrom(bytes);
-        int facestatus = resultb.getFacestatus();
-        int deviceid = resultb.getDeviceid();
-        int meetingid = resultb.getMeetingid();
-        int memberid = resultb.getMemberid();
+        InterfaceMain.pbui_MeetDeviceMeetStatus pbui_meetDeviceMeetStatus = InterfaceMain.pbui_MeetDeviceMeetStatus.parseFrom(bytes);
         Log.e("MyLog", "NativeUtil.queryInterfaceState:  9.查询界面状态成功 --->>> ");
         return true;
     }
@@ -364,8 +346,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_MeetContextInfo pbui_meetContextInfo = InterfaceMain.pbui_MeetContextInfo.getDefaultInstance();
-        pbui_meetContextInfo.parseFrom(array);
+        InterfaceMain.pbui_MeetContextInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryContextProperty:  //  31.按属性ID查询指定上下文属性 --->>> ");
         return true;
     }
@@ -391,8 +372,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryAgenda:  34.查询议程失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_meetAgenda pbui_meetAgenda = InterfaceMain.pbui_meetAgenda.getDefaultInstance();
-        InterfaceMain.pbui_meetAgenda pbui_meetAgenda1 = pbui_meetAgenda.parseFrom(array);
+        InterfaceMain.pbui_meetAgenda pbui_meetAgenda1 = InterfaceMain.pbui_meetAgenda.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_AGENDA, pbui_meetAgenda1);
         }
@@ -446,8 +426,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_meetAgenda pbui_meetAgenda = InterfaceMain.pbui_meetAgenda.getDefaultInstance();
-        pbui_meetAgenda.parseFrom(array);
+        InterfaceMain.pbui_meetAgenda.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryTimeAgenda:  //  38.查询时间轴指定的议程 --->>> ");
         return true;
     }
@@ -471,8 +450,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.webQuery:  41.网页查询失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_meetUrl pbui_meetUrl = InterfaceMain.pbui_meetUrl.getDefaultInstance();
-        InterfaceMain.pbui_meetUrl pbui_meetUrl1 = pbui_meetUrl.parseFrom(array);
+        InterfaceMain.pbui_meetUrl pbui_meetUrl1 = InterfaceMain.pbui_meetUrl.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_NET, pbui_meetUrl1);
         }
@@ -486,7 +464,7 @@ public class NativeUtil {
         InterfaceMain.pbui_meetUrl.Builder builder = InterfaceMain.pbui_meetUrl.newBuilder();
         builder.setUrl(getStb(value));
         InterfaceMain.pbui_meetUrl build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEFAULTURL.getNumber(), Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEFAULTURL.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.webModification:  42.网页修改 --->>> ");
         return true;
     }
@@ -499,8 +477,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryNotice:  44.查询公告失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo = InterfaceMain.pbui_BulletDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo1 = pbui_bulletDetailInfo.parseFrom(array);
+        InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo1 = InterfaceMain.pbui_BulletDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_NOTICE, pbui_bulletDetailInfo1);
         }
@@ -520,8 +497,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryLongNotice:  查询长文本公告失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_BigBulletDetailInfo defaultInstance = InterfaceMain.pbui_BigBulletDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_BigBulletDetailInfo pbui_bigBulletDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_BigBulletDetailInfo pbui_bigBulletDetailInfo = InterfaceMain.pbui_BigBulletDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_LONG_NOTICE, pbui_bigBulletDetailInfo);
         }
@@ -584,8 +560,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo = InterfaceMain.pbui_BulletDetailInfo.getDefaultInstance();
-        pbui_bulletDetailInfo.parseFrom(array);
+        InterfaceMain.pbui_BulletDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryAssignNotice:  48.查询指定的公告 --->>> ");
         return true;
     }
@@ -607,8 +582,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryAdmin:  52.查询管理员失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_TypeAdminDetailInfo pbui_typeAdminDetailInfo = InterfaceMain.pbui_TypeAdminDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_TypeAdminDetailInfo pbui_typeAdminDetailInfo1 = pbui_typeAdminDetailInfo.parseFrom(array);
+        InterfaceMain.pbui_TypeAdminDetailInfo pbui_typeAdminDetailInfo1 = InterfaceMain.pbui_TypeAdminDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ADMIN_INFO, pbui_typeAdminDetailInfo1);
         }
@@ -691,8 +665,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetManagerPlace:  60.查询会议管理员控制的会场失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo pbui_type_meetManagerRoomDetailInfo = InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo pbui_type_meetManagerRoomDetailInfo1 = pbui_type_meetManagerRoomDetailInfo.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo pbui_type_meetManagerRoomDetailInfo1 = InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ADMIN_PLACE, pbui_type_meetManagerRoomDetailInfo1);
         }
@@ -810,8 +783,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.uploadFile 815行:  69.上传文件失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_TypeUploadReturn defaultInstance = InterfaceMain.pbui_TypeUploadReturn.getDefaultInstance();
-        InterfaceMain.pbui_TypeUploadReturn pbui_typeUploadReturn = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_TypeUploadReturn pbui_typeUploadReturn = InterfaceMain.pbui_TypeUploadReturn.parseFrom(array);
         Log.e("MyLog", "NativeUtil.uploadFile 820行:  69.上传文件成功 --->>> ");
         return true;
     }
@@ -828,8 +800,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryUploadFile:  70.查询上传文件失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_UploadFileDetailInfo defaultInstance = InterfaceMain.pbui_Type_UploadFileDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_UploadFileDetailInfo pbui_type_uploadFileDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_UploadFileDetailInfo pbui_type_uploadFileDetailInfo = InterfaceMain.pbui_Type_UploadFileDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_UPLOAD_FILE, pbui_type_uploadFileDetailInfo);
         }
@@ -869,8 +840,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryCommonPeopleFromId:  74.查询指定ID的常用人员失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_PersonDetailInfo defaultInstance = InterfaceMain.pbui_Type_PersonDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_PersonDetailInfo pbui_type_personDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_PersonDetailInfo pbui_type_personDetailInfo = InterfaceMain.pbui_Type_PersonDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_COMMON_BYID, pbui_type_personDetailInfo);
         }
@@ -890,8 +860,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryCommonPeople:   75.查询常用人员失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_PersonDetailInfo defaultInstance = InterfaceMain.pbui_Type_PersonDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_PersonDetailInfo pbui_type_personDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_PersonDetailInfo pbui_type_personDetailInfo = InterfaceMain.pbui_Type_PersonDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_COMMON_PEOPLE, pbui_type_personDetailInfo);
         }
@@ -972,8 +941,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_PeopleGroupDetailInfo defaultInstance = InterfaceMain.pbui_Type_PeopleGroupDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_PeopleGroupDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryCommonPeopleGroup:  80.查询常用人员分组 --->>> ");
         return true;
     }
@@ -1031,12 +999,11 @@ public class NativeUtil {
      * @throws InvalidProtocolBufferException
      */
     public boolean queryCommonPeopleGroupPeople() throws InvalidProtocolBufferException {
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_PeopleInGroupDetailInfo defaultInstance = InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryCommonPeopleGroupPeople:  85.查询常用人员分组人员 --->>> ");
         return true;
     }
@@ -1051,7 +1018,7 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_AddPeopleToGroup.Builder builder = InterfaceMain.pbui_Type_AddPeopleToGroup.newBuilder();
         builder.setGroupid(groupid);
         InterfaceMain.pbui_Type_AddPeopleToGroup build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addCommonPeopleGroupPeople:  86.添加常用人员分组人员 --->>> ");
         return true;
     }
@@ -1066,7 +1033,7 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.Builder builder = InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.newBuilder();
         builder.setGroupid(groupid);
         InterfaceMain.pbui_Type_PeopleInGroupDetailInfo build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SAVE.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SAVE.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.saveCommonPeopleGroupPeople:  87.保存常用人员分组人员 --->>> ");
         return true;
     }
@@ -1080,7 +1047,7 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.Builder builder = InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.newBuilder();
 //        builder.get
         InterfaceMain.pbui_Type_PeopleInGroupDetailInfo build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.deleteCommonPeopleGroupPeople:  88.删除常用人员分组人员 --->>> ");
         return true;
     }
@@ -1094,7 +1061,7 @@ public class NativeUtil {
         InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.Builder builder = InterfaceMain.pbui_Type_PeopleInGroupDetailInfo.newBuilder();
 //        builder.get
         InterfaceMain.pbui_Type_PeopleInGroupDetailInfo build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_MOVE.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_MOVE.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.insertCommonPeopleGroupPeople:  89.移入常用人员分组人员 --->>> ");
         return true;
     }
@@ -1115,8 +1082,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  91.查询指定ID的参会人员失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MemberDetailInfo defaultInstance = InterfaceMain.pbui_Type_MemberDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = InterfaceMain.pbui_Type_MemberDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ATTEND_BYID, pbui_type_memberDetailInfo);
             Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  91.查询指定ID的参会人员成功 --->>> id 是：" + infoId);
@@ -1136,8 +1102,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryAttendPeople:  92.查询参会人员失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MemberDetailInfo defaultInstance = InterfaceMain.pbui_Type_MemberDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MemberDetailInfo pbui_type_memberDetailInfo = InterfaceMain.pbui_Type_MemberDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_ATTENDEE, pbui_type_memberDetailInfo);
             Log.e("MyLog", "NativeUtil.queryAttendPeopleFromId:  92.查询参会人员成功 --->>> ");
@@ -1203,8 +1168,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryAttendPeopleProperties:  96.查询参会人员属性失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetMembeProperty defaultInstance = InterfaceMain.pbui_Type_MeetMembeProperty.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetMembeProperty pbui_type_meetMembeProperty = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetMembeProperty pbui_type_meetMembeProperty = InterfaceMain.pbui_Type_MeetMembeProperty.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_Attendee_Property, pbui_type_meetMembeProperty);
             Log.e("MyLog", "NativeUtil.queryAttendPeopleProperties:  96.查询参会人员属性成功 --->>> ");
@@ -1263,8 +1227,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_MemberPermissionProperty defaultInstance = InterfaceMain.pbui_Type_MemberPermissionProperty.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MemberPermissionProperty.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryAttendPeoplePermissionsProperties:  99.查询参会人员权限属性 --->>> ");
         return true;
     }
@@ -1281,8 +1244,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_MemberGroupDetailInfo defaultInstance = InterfaceMain.pbui_Type_MemberGroupDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MemberGroupDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryAttendPeopleGroup:  102.查询参会人员分组 --->>> ");
         return true;
     }
@@ -1335,12 +1297,11 @@ public class NativeUtil {
      * @throws InvalidProtocolBufferException
      */
     public boolean queryAttendPeopleGroupPeople() throws InvalidProtocolBufferException {
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_MemberInGroupDetailInfo defaultInstance = InterfaceMain.pbui_Type_MemberInGroupDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MemberInGroupDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryAttendPeopleGroupPeople:  107.查询参会人员分组人员 --->>> ");
         return true;
     }
@@ -1353,7 +1314,7 @@ public class NativeUtil {
     public boolean savaAttendPeopleGroupPeople() {
         InterfaceMain.pbui_Type_MemberInGroupDetailInfo.Builder builder = InterfaceMain.pbui_Type_MemberInGroupDetailInfo.newBuilder();
         InterfaceMain.pbui_Type_MemberInGroupDetailInfo build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SAVE.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_PEOPLEGROUPITEM.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SAVE.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.savaAttendPeopleGroupPeople:  108.保存参会人员分组人员 --->>> ");
         return true;
     }
@@ -1371,8 +1332,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryDeviceMeetInfo:  110.查询设备会议信息 --->>> 失败");
             return false;
         }
-        InterfaceMain.pbui_Type_DeviceFaceShowDetail defaultInstance = InterfaceMain.pbui_Type_DeviceFaceShowDetail.getDefaultInstance();
-        InterfaceMain.pbui_Type_DeviceFaceShowDetail pbui_type_deviceFaceShowDetail = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_DeviceFaceShowDetail pbui_type_deviceFaceShowDetail = InterfaceMain.pbui_Type_DeviceFaceShowDetail.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_DEVMEET_INFO, pbui_type_deviceFaceShowDetail);
             Log.e("MyLog", "NativeUtil.queryDeviceMeetInfo:  110.查询设备会议信息 --->>> 成功");
@@ -1393,8 +1353,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryPlace:  112.查询会场失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetRoomDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetRoomDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetRoomDetailInfo pbui_type_meetRoomDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetRoomDetailInfo pbui_type_meetRoomDetailInfo = InterfaceMain.pbui_Type_MeetRoomDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_PLACE_INFO, pbui_type_meetRoomDetailInfo);
         }
@@ -1411,7 +1370,7 @@ public class NativeUtil {
 
         InterfaceMain.pbui_Item_MeetRoomDetailInfo.Builder builder1 = InterfaceMain.pbui_Item_MeetRoomDetailInfo.newBuilder();
         builder1.setRoomid(value.getRoomId());
-        builder1.setComment(getValue(value));
+        builder1.setComment(MyUtils.getStb(value.getComment()));
         builder1.setAddr(getStb(value.getAddr()));
         builder1.setManagerid(value.getManagerid());
         builder1.setRoombgpicid(value.getRoombgPicId());
@@ -1427,11 +1386,6 @@ public class NativeUtil {
         return true;
     }
 
-    @NonNull
-    private ByteString getValue(PlaceInfo value) {
-        return getStb(value.getComment());
-    }
-
     /**
      * 114.修改会场
      *
@@ -1441,7 +1395,7 @@ public class NativeUtil {
 
         InterfaceMain.pbui_Item_MeetRoomDetailInfo.Builder builder1 = InterfaceMain.pbui_Item_MeetRoomDetailInfo.newBuilder();
         builder1.setRoomid(value.getRoomId());
-        builder1.setComment(getValue(value));
+        builder1.setComment(MyUtils.getStb(value.getComment()));
         // TODO: 2018/1/26
         InterfaceMain.pbui_Type_MeetRoomDetailInfo.Builder builder = InterfaceMain.pbui_Type_MeetRoomDetailInfo.newBuilder();
         InterfaceMain.pbui_Item_MeetRoomDetailInfo build1 = builder1.build();
@@ -1482,8 +1436,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryPlaceProperties:  116.查询会场属性失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_CommonInt32uProperty defaultInstance = InterfaceMain.pbui_CommonInt32uProperty.getDefaultInstance();
-        InterfaceMain.pbui_CommonInt32uProperty pbui_commonInt32uProperty = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_CommonInt32uProperty pbui_commonInt32uProperty = InterfaceMain.pbui_CommonInt32uProperty.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_PLACE_PROPERTIES, pbui_commonInt32uProperty);
         }
@@ -1521,8 +1474,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryPlaceById:  118.查询指定ID的会场失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetRoomDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetRoomDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetRoomDetailInfo pbui_type_meetRoomDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetRoomDetailInfo pbui_type_meetRoomDetailInfo = InterfaceMain.pbui_Type_MeetRoomDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_PLACE_BYID, pbui_type_meetRoomDetailInfo);
         }
@@ -1572,8 +1524,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryPlaceDeviceCoordFaceInfo:  122.查询会场设备坐标朝向信息失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetRoomDevPosInfo defaultInstance = InterfaceMain.pbui_Type_MeetRoomDevPosInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetRoomDevPosInfo pbui_type_meetRoomDevPosInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetRoomDevPosInfo pbui_type_meetRoomDevPosInfo = InterfaceMain.pbui_Type_MeetRoomDevPosInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_PLACEDEV, pbui_type_meetRoomDevPosInfo);
         }
@@ -1609,8 +1560,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.placeDeviceRankingInfo:  124.会场设备排位详细信息失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Item_MeetRoomDevSeatDetailInfo defaultInstance = InterfaceMain.pbui_Item_MeetRoomDevSeatDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Item_MeetRoomDevSeatDetailInfo pbui_item_meetRoomDevSeatDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Item_MeetRoomDevSeatDetailInfo pbui_item_meetRoomDevSeatDetailInfo = InterfaceMain.pbui_Item_MeetRoomDevSeatDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.placeDeviceRankingInfo:  124.会场设备排位详细信息成功 --->>> ");
         return true;
     }
@@ -1633,8 +1583,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryRequestDeviceId:  125.查询符合要求的设备ID失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_ResMeetRoomDevInfo defaultInstance = InterfaceMain.pbui_Type_ResMeetRoomDevInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_ResMeetRoomDevInfo pbui_type_resMeetRoomDevInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_ResMeetRoomDevInfo pbui_type_resMeetRoomDevInfo = InterfaceMain.pbui_Type_ResMeetRoomDevInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_CONFORM_DEVID, pbui_type_resMeetRoomDevInfo);
         }
@@ -1648,16 +1597,20 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean queryPlaceDeviceStreamPipeInfo() throws InvalidProtocolBufferException {
+    public boolean queryPlaceDeviceStreamPipeInfo(int id) throws InvalidProtocolBufferException {
         InterfaceMain.pbui_QueryInfoByID.Builder builder = InterfaceMain.pbui_QueryInfoByID.newBuilder();
+        builder.setId(id);
         InterfaceMain.pbui_QueryInfoByID build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_ROOMDEVICE.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_MAKEVIDEO.getNumber(), build.toByteArray());
         if (array == null) {
+            Log.e("MyLog", "NativeUtil.queryPlaceDeviceStreamPipeInfo 1656行:  126.查询会场设备的流通道信息失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetVideoDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetVideoDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.queryPlaceDeviceStreamPipeInfo:  126.查询会场设备的流通道信息 --->>> ");
+        InterfaceMain.pbui_Type_MeetVideoDetailInfo pbui_type_meetVideoDetailInfo = InterfaceMain.pbui_Type_MeetVideoDetailInfo.parseFrom(array);
+        if (mCallListener != null) {
+            mCallListener.callListener(IDivMessage.QUERY_STREAM_INFORM, pbui_type_meetVideoDetailInfo);
+        }
+        Log.e("MyLog", "NativeUtil.queryPlaceDeviceStreamPipeInfo:  126.查询会场设备的流通道信息成功 --->>> ");
         return true;
     }
 
@@ -1674,8 +1627,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeet:  128.查询会议失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetMeetInfo defaultInstance = InterfaceMain.pbui_Type_MeetMeetInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetMeetInfo pbui_type_meetMeetInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetMeetInfo pbui_type_meetMeetInfo = InterfaceMain.pbui_Type_MeetMeetInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEET, pbui_type_meetMeetInfo);
         }
@@ -1698,8 +1650,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetFromId:  129.查询指定ID的会议失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetMeetInfo defaultInstance = InterfaceMain.pbui_Type_MeetMeetInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetMeetInfo pbui_type_meetMeetInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetMeetInfo pbui_type_meetMeetInfo = InterfaceMain.pbui_Type_MeetMeetInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEET_BYID, pbui_type_meetMeetInfo);
         }
@@ -1760,11 +1711,9 @@ public class NativeUtil {
             return false;
         }
         if (true) {
-            InterfaceMain.pbui_CommonInt32uProperty defaultInstance = InterfaceMain.pbui_CommonInt32uProperty.getDefaultInstance();
-            defaultInstance.parseFrom(array);
+            InterfaceMain.pbui_CommonInt32uProperty.parseFrom(array);
         } else {
-            InterfaceMain.pbui_CommonInt64uProperty defaultInstance = InterfaceMain.pbui_CommonInt64uProperty.getDefaultInstance();
-            defaultInstance.parseFrom(array);
+            InterfaceMain.pbui_CommonInt64uProperty.parseFrom(array);
         }
         Log.e("MyLog", "NativeUtil.queryMeetProperty:  133.查询会议属性 --->>> ");
         return true;
@@ -1796,8 +1745,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetDir:  136.查询会议目录失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetDirDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetDirDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = InterfaceMain.pbui_Type_MeetDirDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEET_DIR, pbui_type_meetDirDetailInfo);
         }
@@ -1820,8 +1768,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetFistChildDir:  137.查询会议第一层子级目录失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetDirDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetDirDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = InterfaceMain.pbui_Type_MeetDirDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEET_FIRSTChildDir, pbui_type_meetDirDetailInfo);
         }
@@ -1844,8 +1791,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetAllChildDir 1848行:  138.查询会议所有子级目录失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetDirDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetDirDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetDirDetailInfo pbui_type_meetDirDetailInfo = InterfaceMain.pbui_Type_MeetDirDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetAllChildDir 1853行:  138.查询会议所有子级目录成功 --->>> ");
         return true;
     }
@@ -1905,8 +1851,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetDirFile:  143.查询会议目录文件失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetDirFileDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetDirFileDetailInfo.getDefaultInstance();
-        InterfaceMain.pbui_Type_MeetDirFileDetailInfo pbui_type_meetDirFileDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetDirFileDetailInfo pbui_type_meetDirFileDetailInfo = InterfaceMain.pbui_Type_MeetDirFileDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEET_DIR_FILE, pbui_type_meetDirFileDetailInfo);
         }
@@ -1995,10 +1940,8 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryFileProperty:  149.查询文件属性失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_CommonInt64uProperty defaultInstance = InterfaceMain.pbui_CommonInt64uProperty.getDefaultInstance();
-        InterfaceMain.pbui_CommonInt64uProperty pbui_commonInt64uProperty = defaultInstance.parseFrom(array);
-        long propertyval = pbui_commonInt64uProperty.getPropertyval();
-        Log.e("MyLog", "NativeUtil.queryFileProperty:  149.查询文件属性成功 --->>>propertyval： " + propertyval);
+        InterfaceMain.pbui_CommonInt64uProperty pbui_commonInt64uProperty = InterfaceMain.pbui_CommonInt64uProperty.parseFrom(array);
+        Log.e("MyLog", "NativeUtil.queryFileProperty:  149.查询文件属性成功 --->>>propertyval： ");
         return true;
     }
 
@@ -2028,8 +1971,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.pageFileQuery:  150.分页文件高级查询失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_TypePageResQueryrFileInfo defaultInstance = InterfaceMain.pbui_TypePageResQueryrFileInfo.getDefaultInstance();
-        InterfaceMain.pbui_TypePageResQueryrFileInfo pbui_typePageResQueryrFileInfo = defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_TypePageResQueryrFileInfo pbui_typePageResQueryrFileInfo = InterfaceMain.pbui_TypePageResQueryrFileInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.PAGE_FILE_QUERY, pbui_typePageResQueryrFileInfo);
         }
@@ -2050,8 +1992,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_MeetDirRightDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetDirRightDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetDirRightDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetDirPermission:  151.查询会议目录权限 --->>> ");
         return true;
     }
@@ -2091,7 +2032,7 @@ public class NativeUtil {
     public boolean queryMeetFileScoreAverage() {
         InterfaceMain.pbui_Type_QueryFileScore.Builder builder = InterfaceMain.pbui_Type_QueryFileScore.newBuilder();
         InterfaceMain.pbui_Type_QueryFileScore build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_FILESCORE.getNumber(), Pb_METHOD_MEET_INTERFACE_ASK.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_FILESCORE.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ASK.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.queryMeetFileScoreAverage:  157.查询会议文件评分的平均分 --->>> ");
         return true;
     }
@@ -2237,11 +2178,14 @@ public class NativeUtil {
     public boolean queryMeetVedio() throws InvalidProtocolBufferException {
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETVIDEO.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
+            Log.e("MyLog", "NativeUtil.queryMeetVedio 2249行:  172.查询会议视频失败 --->>> ");
             return false;
         }
-        InterfaceMain.pbui_Type_MeetVideoDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetVideoDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.queryMeetVedio:  172.查询会议视频 --->>> ");
+        InterfaceMain.pbui_Type_MeetVideoDetailInfo pbui_type_meetVideoDetailInfo = InterfaceMain.pbui_Type_MeetVideoDetailInfo.parseFrom(array);
+        if (mCallListener != null) {
+            mCallListener.callListener(IDivMessage.QUERY_MEET_VEDIO, pbui_type_meetVideoDetailInfo);
+            Log.e("MyLog", "NativeUtil.queryMeetVedio:  172.查询会议视频成功 --->>> ");
+        }
         return true;
     }
 
@@ -2258,8 +2202,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_Type_MeetVideoDetailInfo defaultInstance = InterfaceMain.pbui_Type_MeetVideoDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_Type_MeetVideoDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetVedio:  173.查询指定ID的会议视频 --->>> ");
         return true;
     }
@@ -2314,8 +2257,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetTableCardDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetTableCardDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetTableCardDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetDoubleShow:  178.查询会议双屏显示 --->>> ");
         return true;
     }
@@ -2345,8 +2287,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetRanking:  181.查询会议排位失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetSeatDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetSeatDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetSeatDetailInfo pbui_type_meetSeatDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetSeatDetailInfo pbui_type_meetSeatDetailInfo = InterfaceMain2.pbui_Type_MeetSeatDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.Query_MeetSeat_Inform, pbui_type_meetSeatDetailInfo);
             Log.e("MyLog", "NativeUtil.queryMeetRanking:  181.查询会议排位成功 --->>> ");
@@ -2380,8 +2321,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_CommonInt32uProperty defaultInstance = InterfaceMain.pbui_CommonInt32uProperty.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_CommonInt32uProperty.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetRankingProperty:  183.查询会议排位属性 --->>> ");
         return true;
     }
@@ -2414,8 +2354,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetIMDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetIMDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetIMDetailInfo pbui_type_meetIMDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetIMDetailInfo pbui_type_meetIMDetailInfo = InterfaceMain2.pbui_Type_MeetIMDetailInfo.parseFrom(array);
 
         Log.e("MyLog", "NativeUtil.queryAllMeetInfo:  186.查询全部会议交流信息 --->>> ");
         return true;
@@ -2434,8 +2373,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_TypePageResQueryrMsgInfo defaultInstance = InterfaceMain2.pbui_TypePageResQueryrMsgInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_TypePageResQueryrMsgInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.complexQueryMeetInfo:  187.组合查询会议交流信息 --->>> ");
 
         return true;
@@ -2454,8 +2392,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryInitiateVote:  189.查询发起的投票失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo pbui_type_meetOnVotingDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo pbui_type_meetOnVotingDetailInfo = InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVote:  189.查询发起的投票成功 --->>> ");
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_LUNCHED_VOTE, pbui_type_meetOnVotingDetailInfo);
@@ -2477,8 +2414,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo pbui_type_meetOnVotingDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo pbui_type_meetOnVotingDetailInfo = InterfaceMain2.pbui_Type_MeetOnVotingDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVoteById:  190.查询指定ID发起的投票 --->>> ");
         return true;
     }
@@ -2603,8 +2539,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetVoteDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetVoteDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetVoteDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVoteById:  199.查询指定ID的投票 --->>> ");
         return true;
     }
@@ -2621,8 +2556,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryVote:  200.查询投票失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetVoteDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetVoteDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetVoteDetailInfo pbui_type_meetVoteDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetVoteDetailInfo pbui_type_meetVoteDetailInfo = InterfaceMain2.pbui_Type_MeetVoteDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_VOTE, pbui_type_meetVoteDetailInfo);
         }
@@ -2643,8 +2577,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetVoteDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetVoteDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetVoteDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVoteByCategory:  201.按类别查询投票 --->>> ");
         return true;
     }
@@ -2665,8 +2598,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo pbui_type_meetVoteSignInDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo pbui_type_meetVoteSignInDetailInfo = InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_MEMBER_BYVOTE, pbui_type_meetVoteSignInDetailInfo);
             Log.e("MyLog", "NativeUtil.queryOneVoteSubmitter:  203.查询指定投票的提交人成功 --->>> ");
@@ -2687,8 +2619,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_CommonInt32uProperty defaultInstance = InterfaceMain.pbui_CommonInt32uProperty.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_CommonInt32uProperty.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryVoteSubmitterProperty:  204.查询投票提交人属性 --->>> ");
         return true;
     }
@@ -2701,13 +2632,12 @@ public class NativeUtil {
      * @throws InvalidProtocolBufferException
      */
     public boolean querySign() throws InvalidProtocolBufferException {
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
             Log.e("MyLog", "NativeUtil.querySign:  206.查询签到失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetSignInDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetSignInDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetSignInDetailInfo pbui_type_meetSignInDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetSignInDetailInfo pbui_type_meetSignInDetailInfo = InterfaceMain2.pbui_Type_MeetSignInDetailInfo.parseFrom(array);
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_SIGN, pbui_type_meetSignInDetailInfo);
         }
@@ -2729,7 +2659,7 @@ public class NativeUtil {
         builder.setPsigndata(getStb(signData));
         builder.setSigninType(signType);
         InterfaceMain2.pbui_Type_DoMeetSignIno build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.sendSign:  207.发送签到 --->>> ");
         return true;
     }
@@ -2743,12 +2673,11 @@ public class NativeUtil {
     public boolean queryMeetSignProperty() throws InvalidProtocolBufferException {
         InterfaceMain.pbui_CommonQueryProperty.Builder builder = InterfaceMain.pbui_CommonQueryProperty.newBuilder();
         InterfaceMain.pbui_CommonQueryProperty build = builder.build();
-        byte[] array = call_method(Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERYPROPERTY.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERYPROPERTY.getNumber(), build.toByteArray());
         if (array == null) {
             return false;
         }
-        InterfaceMain.pbui_CommonInt32uProperty defaultInstance = InterfaceMain.pbui_CommonInt32uProperty.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain.pbui_CommonInt32uProperty.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetSignProperty:  208.查询会议签到属性 --->>> ");
         return true;
     }
@@ -2758,14 +2687,14 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean coerceStartWhiteBoard(int divid, int memberid, int val) {
+    public boolean coerceStartWhiteBoard(int operFlag, String mediaName, int operMemberid, int srcmemId, long srcwbId, List<Integer> allUserId) {
         InterfaceMain2.pbui_Type_MeetWhiteBoardControl.Builder tmp3 = InterfaceMain2.pbui_Type_MeetWhiteBoardControl.newBuilder();
-        tmp3.setSrcmemid(memberid);//人员ID
-        tmp3.setSrcwbid(val);
-        tmp3.addUserid(divid);//0x1100000
-        tmp3.setOpermemberid(memberid);
-//        tmp3.addAllUserid()
-        //该标志表示有人发起白板
+        tmp3.setOperflag(operFlag);
+        tmp3.setMedianame(MyUtils.getStb(mediaName));
+        tmp3.setOpermemberid(operMemberid);
+        tmp3.setSrcmemid(srcmemId);
+        tmp3.setSrcwbid(srcwbId);
+        tmp3.addAllUserid(allUserId);
         tmp3.setOperflag(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber());
         InterfaceMain2.pbui_Type_MeetWhiteBoardControl build = tmp3.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CONTROL.getNumber(), build.toByteArray());
@@ -2775,14 +2704,14 @@ public class NativeUtil {
 
     /**
      * 210.询问式发起白板
-     *
+     *  int operFlag, String mediaName, int operMemberid, int srcmemId, int srcwbId, List<Integer> allUserId
      * @return
      */
     public boolean inquiryStartWhiteBoard() {
         InterfaceMain2.pbui_Type_MeetWhiteBoardControl.Builder builder = InterfaceMain2.pbui_Type_MeetWhiteBoardControl.newBuilder();
-        builder.setOperflag(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_ZERO.getNumber());
+        builder.setOperflag(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber());
         InterfaceMain2.pbui_Type_MeetWhiteBoardControl build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CONTROL.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CONTROL.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.inquiryStartWhiteBoard:  210.询问式发起白板 --->>> ");
         return true;
     }
@@ -2907,8 +2836,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetWBInkDetail defaultInstance = InterfaceMain2.pbui_Type_MeetWBInkDetail.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetWBInkDetail.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryInk:  226.查询墨迹 --->>> ");
         return true;
     }
@@ -2948,8 +2876,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetWBRectDetail defaultInstance = InterfaceMain2.pbui_Type_MeetWBRectDetail.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetWBRectDetail.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryFigure:  229.查询矩形、直线、圆形 --->>> ");
         return true;
     }
@@ -2996,8 +2923,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetWBTextDetail defaultInstance = InterfaceMain2.pbui_Type_MeetWBTextDetail.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetWBTextDetail.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryText:  232.查询文本 --->>> ");
         return true;
     }
@@ -3031,8 +2957,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetWBPictureDetail defaultInstance = InterfaceMain2.pbui_Type_MeetWBPictureDetail.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetWBPictureDetail.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryPicture:  235.查询图片 --->>> ");
         return true;
     }
@@ -3063,14 +2988,7 @@ public class NativeUtil {
             Log.e("MyLog", "NativeUtil.queryMeetFunction:  238.查询会议功能失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetFunConfigDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetFunConfigDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetFunConfigDetailInfo pbui_type_meetFunConfigDetailInfo = defaultInstance.parseFrom(array);
-        List<InterfaceMain2.pbui_Item_MeetFunConfigDetailInfo> itemList = pbui_type_meetFunConfigDetailInfo.getItemList();
-        for (int i = 0; i < itemList.size(); i++) {
-            InterfaceMain2.pbui_Item_MeetFunConfigDetailInfo pbui_item_meetFunConfigDetailInfo = itemList.get(i);
-            Log.e("MyLog", "NativeUtil.queryMeetFunction:  pbui_item_meetFunConfigDetailInfo.getPosition() --->>> " + pbui_item_meetFunConfigDetailInfo.getPosition()
-                    + "  pbui_item_meetFunConfigDetailInfo.getFuncode():" + pbui_item_meetFunConfigDetailInfo.getFuncode());
-        }
+        InterfaceMain2.pbui_Type_MeetFunConfigDetailInfo pbui_type_meetFunConfigDetailInfo = InterfaceMain2.pbui_Type_MeetFunConfigDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMeetFunction:  238.查询会议功能成功 --->>> ");
         return true;
     }
@@ -3099,8 +3017,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetMemberColorDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetMemberColorDetailInfo.getDefaultInstance();
-        defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetMemberColorDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryAttendPeopleBoardColor:  241.查询参会人员白板颜色 --->>> ");
         return true;
     }
@@ -3247,8 +3164,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo pbui_type_meetMediaPlayDetailInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo pbui_type_meetMediaPlayDetailInfo = InterfaceMain2.pbui_Type_MeetMediaPlayDetailInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryMediaPlay:  256.查询媒体播放 --->>> ");
         return true;
     }
@@ -3298,6 +3214,11 @@ public class NativeUtil {
     /**
      * 264.流播放
      *
+     * @param srcdeviceid
+     * @param subid
+     * @param triggeruserval
+     * @param allres
+     * @param alldeviceid
      * @return
      */
     public boolean streamPlay(int srcdeviceid, int subid, int triggeruserval, List<Integer> allres, List<Integer> alldeviceid) {
@@ -3308,7 +3229,7 @@ public class NativeUtil {
         builder.addAllRes(allres);
         builder.addAllDeviceid(alldeviceid);
         InterfaceMain2.pbui_Type_MeetDoStreamPlay build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_START.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.streamPlay:  264.流播放 --->>> ");
         return true;
     }
@@ -3322,11 +3243,14 @@ public class NativeUtil {
     public boolean queryStreamPlay() throws InvalidProtocolBufferException {
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
+            Log.e("MyLog", "NativeUtil.queryStreamPlay:  265.查询流播放失败 --->>> ");
             return false;
         }
-        InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo defaultInstance = InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo pbui_type_meetStreamPlayDetailInfo = defaultInstance.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.queryStreamPlay:  265.查询流播放 --->>> ");
+        InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo pbui_type_meetStreamPlayDetailInfo = InterfaceMain2.pbui_Type_MeetStreamPlayDetailInfo.parseFrom(array);
+        if (mCallListener != null) {
+            mCallListener.callListener(IDivMessage.QUERY_STREAM_PLAY, pbui_type_meetStreamPlayDetailInfo);
+            Log.e("MyLog", "NativeUtil.queryStreamPlay:  265.查询流播放成功 --->>> ");
+        }
         return true;
     }
 
@@ -3353,7 +3277,7 @@ public class NativeUtil {
     public boolean queryMeetStatisticsByTime() {
         InterfaceMain2.pbui_Type_QueryQuarterStatistic.Builder builder = InterfaceMain2.pbui_Type_QueryQuarterStatistic.newBuilder();
         InterfaceMain2.pbui_Type_QueryQuarterStatistic build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC.getNumber(), Pb_METHOD_MEET_INTERFACE_ASK.getNumber(), build.toByteArray());
+        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSTATISTIC.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ASK.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.queryMeetStatisticsByTime:  269.按时间段查询会议统计 --->>> ");
         return true;
     }
@@ -3370,8 +3294,7 @@ public class NativeUtil {
         if (array == null) {
             return false;
         }
-        InterfaceMain2.pbui_Type_FaceConfigInfo defaultInstance = InterfaceMain2.pbui_Type_FaceConfigInfo.getDefaultInstance();
-        InterfaceMain2.pbui_Type_FaceConfigInfo pbui_type_faceConfigInfo = defaultInstance.parseFrom(array);
+        InterfaceMain2.pbui_Type_FaceConfigInfo pbui_type_faceConfigInfo = InterfaceMain2.pbui_Type_FaceConfigInfo.parseFrom(array);
         Log.e("MyLog", "NativeUtil.queryInterFaceConfiguration:  271.查询界面配置 --->>> ");
         return true;
     }
@@ -3506,8 +3429,7 @@ public class NativeUtil {
             return 0;
         switch (type) {
             case 1: //3 高频回调
-                InterfaceMain.pbui_Time defaultInstance = InterfaceMain.pbui_Time.getDefaultInstance();
-                InterfaceMain.pbui_Time pbui_time = defaultInstance.parseFrom(data);
+                InterfaceMain.pbui_Time pbui_time = InterfaceMain.pbui_Time.parseFrom(data);
                 //微秒 转换成毫秒 除以 1000
                 long usec = pbui_time.getUsec() / 1000;
                 String[] date = DateUtil.getGTMDate(usec);
@@ -3518,8 +3440,7 @@ public class NativeUtil {
                 }
                 break;
             case 3://67 高频回调
-                InterfaceMain.pbui_Type_DownloadCb defaultInstance1 = InterfaceMain.pbui_Type_DownloadCb.getDefaultInstance();
-                InterfaceMain.pbui_Type_DownloadCb pbui_type_downloadCb = defaultInstance1.parseFrom(data);
+                InterfaceMain.pbui_Type_DownloadCb pbui_type_downloadCb = InterfaceMain.pbui_Type_DownloadCb.parseFrom(data);
                 int mediaid = pbui_type_downloadCb.getMediaid();
                 int err1 = pbui_type_downloadCb.getErr();
                 int nstate = pbui_type_downloadCb.getNstate();
@@ -3530,74 +3451,63 @@ public class NativeUtil {
                 Log.e("CaseLog", "NativeUtil.callback_method:  67 下载进度回调  -- 高频回调 --->>> " + progress + "   mediaid: " + mediaid);
                 break;
             case 5://68 高频回调
-                InterfaceMain.pbui_Type_PlayPosCb playInform = InterfaceMain.pbui_Type_PlayPosCb.getDefaultInstance();
-                InterfaceMain.pbui_Type_PlayPosCb pbui_type_playPosCb = playInform.parseFrom(data);
+                InterfaceMain.pbui_Type_PlayPosCb pbui_type_playPosCb = InterfaceMain.pbui_Type_PlayPosCb.parseFrom(data);
                 int mediaId = pbui_type_playPosCb.getMediaId();
                 int per = pbui_type_playPosCb.getPer();
                 Log.e("CaseLog", "NativeUtil.callback_method:  68 播放进度通知  -- 高频回调 --->>> mediaId:  " + mediaId + " per: " + per);
                 break;
             case 4://72 高频回调
-                InterfaceMain.pbui_TypeUploadPosCb instance = InterfaceMain.pbui_TypeUploadPosCb.getDefaultInstance();
-                InterfaceMain.pbui_TypeUploadPosCb pbui_typeUploadPosCb = instance.parseFrom(data);
+                InterfaceMain.pbui_TypeUploadPosCb pbui_typeUploadPosCb = InterfaceMain.pbui_TypeUploadPosCb.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.Upload_Progress, pbui_typeUploadPosCb));
                 Log.e("CaseLog", "NativeUtil.callback_method:  72 上传进度通知 -- 高频回调 --->>> ");
                 break;
             case 2: //4  平台初始化完毕
-                InterfaceMain.pbui_Ready Initialized = InterfaceMain.pbui_Ready.getDefaultInstance();
-                InterfaceMain.pbui_Ready pbui_ready = Initialized.parseFrom(data);
+                InterfaceMain.pbui_Ready pbui_ready = InterfaceMain.pbui_Ready.parseFrom(data);
                 int areaid = pbui_ready.getAreaid();
                 Log.e("CaseLog", "NativeUtil.callback_method:  4 平台初始化完毕 --->>> areaid   " + areaid);
                 break;
             case 6: //5   设备寄存器变更通知
-                InterfaceMain.pbui_Type_MeetDeviceBaseInfo DeviceChangeNotification = InterfaceMain.pbui_Type_MeetDeviceBaseInfo.getDefaultInstance();
-                InterfaceMain.pbui_Type_MeetDeviceBaseInfo pbui_type_meetDeviceBaseInfo = DeviceChangeNotification.parseFrom(data);
+                InterfaceMain.pbui_Type_MeetDeviceBaseInfo pbui_type_meetDeviceBaseInfo = InterfaceMain.pbui_Type_MeetDeviceBaseInfo.parseFrom(data);
                 int attribid = pbui_type_meetDeviceBaseInfo.getAttribid();
                 int deviceid = pbui_type_meetDeviceBaseInfo.getDeviceid();
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.DEV_REGISTER_INFORM, pbui_type_meetDeviceBaseInfo));
 //                Log.e("CaseLog", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>> 寄存器ID ： " + attribid + "  设备ID：" + deviceid);
                 break;
             case 7://40
-                InterfaceMain.pbui_meetUrl pbui_meetUrl = InterfaceMain.pbui_meetUrl.getDefaultInstance();
-                InterfaceMain.pbui_meetUrl pbui_meetUrl1 = pbui_meetUrl.parseFrom(data);
+                InterfaceMain.pbui_meetUrl pbui_meetUrl1 = InterfaceMain.pbui_meetUrl.parseFrom(data);
                 String netUrl = new String(pbui_meetUrl1.getUrl().toByteArray());
                 Log.e("CaseLog", "NativeUtil.callback_method:  40 网页变更通知 --->>> netUrl : " + netUrl);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.NETWEB_INFORM, pbui_meetUrl1));
                 break;
             case 8://51-58
-                if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg1 = pbui_meetNotifyMsg.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg1 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                     int id = pbui_meetNotifyMsg1.getId();
                     int opermethod = pbui_meetNotifyMsg1.getOpermethod();
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.ADMIN_NOTIFI_INFORM));
                     Log.e("CaseLog", "NativeUtil.callback_method:  51 管理员变更通知 --->>> opermethod : " + opermethod + "  id : " + id);
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_LOGON.getNumber()) {
-                    InterfaceMain.pbui_Type_AdminLogonStatus pbui_type_adminLogonStatus = InterfaceMain.pbui_Type_AdminLogonStatus.getDefaultInstance();
-                    InterfaceMain.pbui_Type_AdminLogonStatus pbui_type_adminLogonStatus1 = pbui_type_adminLogonStatus.parseFrom(data);
+                    InterfaceMain.pbui_Type_AdminLogonStatus pbui_type_adminLogonStatus1 = InterfaceMain.pbui_Type_AdminLogonStatus.parseFrom(data);
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.LOGIN_BACK, pbui_type_adminLogonStatus1));
                     Log.e("CaseLog", "NativeUtil.callback_method:  58 管理员登陆返回 --->>> ");
                 }
                 break;
             case 9:
-                InterfaceMain.pbui_Type_DeviceControl pbui_type_deviceControl = InterfaceMain.pbui_Type_DeviceControl.getDefaultInstance();
-                InterfaceMain.pbui_Type_DeviceControl pbui_type_deviceControl1 = pbui_type_deviceControl.parseFrom(data);
+                InterfaceMain.pbui_Type_DeviceControl pbui_type_deviceControl1 = InterfaceMain.pbui_Type_DeviceControl.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  63 变更通知 --->>> ");
                 break;
             case 10://73
-                InterfaceMain.pbui_MeetNotifyMsg commonPeopleChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg2 = commonPeopleChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg2 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.QUERY_COMMON_PEOPLE));
                 Log.e("CaseLog", "NativeUtil.callback_method:  73 常用人员变更通知 --->>> ");
                 break;
             case 11://90
-                InterfaceMain.pbui_MeetNotifyMsg attendPeopleChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg5 = attendPeopleChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg5 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.MEMBER_CHANGE_INFORM, pbui_meetNotifyMsg5));
                 Log.e("CaseLog", "NativeUtil.callback_method:  90 参会人员变更通知 --->>> ");
                 break;
             case 12://101
-                InterfaceMain.pbui_MeetNotifyMsg attendPeopleGroupChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                attendPeopleGroupChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  101 参会人员分组变更通知 --->>> ");
                 break;
             case 14://109
@@ -3605,8 +3515,7 @@ public class NativeUtil {
                 Log.e("CaseLog", "NativeUtil.callback_method:  109 设备会议信息变更通知 --->>> ");
                 break;
             case 15://111
-                InterfaceMain.pbui_MeetNotifyMsg placeInfoChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg6 = placeInfoChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg6 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 int id4 = pbui_meetNotifyMsg6.getId();
                 Log.e("CaseLog", "NativeUtil.callback_method:  111 会场信息变更通知 --->>> ");
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.PLACEINFO_CHANGE_INFORM));
@@ -3617,68 +3526,55 @@ public class NativeUtil {
 //                    EventBus.getDefault().post(new EventMessage(IDEventMessage.QUERY_PLACE_BYID,id4));
                 break;
             case 16://119
-                InterfaceMain.pbui_MeetNotifyMsgForDouble placeDeviceInfoChangeInform = InterfaceMain.pbui_MeetNotifyMsgForDouble.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsgForDouble pbui_meetNotifyMsgForDouble1 = placeDeviceInfoChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsgForDouble pbui_meetNotifyMsgForDouble1 = InterfaceMain.pbui_MeetNotifyMsgForDouble.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.PLACE_DEVINFO_CHANGEINFORM, pbui_meetNotifyMsgForDouble1));
                 Log.e("CaseLog", "NativeUtil.callback_method:  119 会场设备信息变更通知 --->>> ");
                 break;
             case 17://257
-                InterfaceMain2.pbui_Type_FilePush filePushInform = InterfaceMain2.pbui_Type_FilePush.getDefaultInstance();
-                filePushInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_FilePush.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  257 文件推送通知 --->>> ");
                 break;
             case 18://259
-                InterfaceMain2.pbui_Type_ReqStreamPush requestPlayStreamWayInform = InterfaceMain2.pbui_Type_ReqStreamPush.getDefaultInstance();
-                InterfaceMain2.pbui_Type_ReqStreamPush pbui_type_reqStreamPush = requestPlayStreamWayInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_ReqStreamPush pbui_type_reqStreamPush = InterfaceMain2.pbui_Type_ReqStreamPush.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  259 请求播放流通道通知 --->>> ");
                 break;
             case 19://261
-                InterfaceMain2.pbui_Type_StreamPush pushStreamInform = InterfaceMain2.pbui_Type_StreamPush.getDefaultInstance();
-                pushStreamInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_StreamPush.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  261 推送流通知 --->>> ");
                 break;
             case 20://127
-                InterfaceMain.pbui_MeetNotifyMsg meetInfoChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg7 = meetInfoChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg7 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.MEETINFO_CHANGE_INFORM, pbui_meetNotifyMsg7));
                 Log.e("CaseLog", "NativeUtil.callback_method:  127 会议信息变更通知 --->>> ");
                 break;
             case 21://33
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg3 = pbui_meetNotifyMsg.parseFrom(data);
-                int id = pbui_meetNotifyMsg.getId();
-                int opermethod = pbui_meetNotifyMsg.getOpermethod();
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg3 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventAgenda());
                 Log.e("CaseLog", "NativeUtil.callback_method:  33 议程变更通知 --->>> ");
                 break;
             case 22://43-50
-                if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain.pbui_MeetNotifyMsg noticeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg1 = noticeInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg1 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                     EventBus.getDefault().post(new EventNotice());
                     Log.e("CaseLog", "NativeUtil.callback_method:  43 公告变更通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_PUBLIST.getNumber()) {
-                    InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo = InterfaceMain.pbui_BulletDetailInfo.getDefaultInstance();
-                    InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo1 = pbui_bulletDetailInfo.parseFrom(data);
+                    InterfaceMain.pbui_BulletDetailInfo pbui_bulletDetailInfo1 = InterfaceMain.pbui_BulletDetailInfo.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  50 发布公告通知 --->>> ");
                 }
                 break;
             case 23://135
-                InterfaceMain.pbui_MeetNotifyMsg meetDirChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg4 = meetDirChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg4 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 int id2 = pbui_meetNotifyMsg4.getId();
 //                EventBus.getDefault().post(new EventMeetDir(id2));
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.MEETDIR_CHANGE_INFORM, pbui_meetNotifyMsg4));
                 Log.e("CaseLog", "NativeUtil.callback_method:  135 会议目录变更通知 --->>> ");
                 break;
             case 24://142-278
-                if (method == Pb_METHOD_MEET_INTERFACE_ADD.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetNewRecordFile newRecordMediaFileInform = InterfaceMain.pbui_Type_MeetNewRecordFile.getDefaultInstance();
-                    InterfaceMain.pbui_Type_MeetNewRecordFile pbui_type_meetNewRecordFile = newRecordMediaFileInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADD.getNumber()) {
+                    InterfaceMain.pbui_Type_MeetNewRecordFile pbui_type_meetNewRecordFile = InterfaceMain.pbui_Type_MeetNewRecordFile.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  278 有新的录音文件媒体文件通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain.pbui_MeetNotifyMsgForDouble meetDirFileChangeInform = InterfaceMain.pbui_MeetNotifyMsgForDouble.getDefaultInstance();
-                    InterfaceMain.pbui_MeetNotifyMsgForDouble pbui_meetNotifyMsgForDouble = meetDirFileChangeInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain.pbui_MeetNotifyMsgForDouble pbui_meetNotifyMsgForDouble = InterfaceMain.pbui_MeetNotifyMsgForDouble.parseFrom(data);
 //                    int id1 = pbui_meetNotifyMsgForDouble.getId();
 //                    EventBus.getDefault().post(new EventMeetDirFile(id1));
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.MEETDIR_FILE_CHANGE_INFORM, pbui_meetNotifyMsgForDouble));
@@ -3686,27 +3582,24 @@ public class NativeUtil {
                 }
                 break;
             case 25://153
-                InterfaceMain.pbui_MeetNotifyMsg meetDirPermissionChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                meetDirPermissionChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  153 会议目录权限变更通知 --->>> ");
                 break;
             case 26://171
-                InterfaceMain.pbui_MeetNotifyMsg meetVedioChangeInfo = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                meetVedioChangeInfo.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg12 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.Meet_vedio_changeInform, pbui_meetNotifyMsg12));
                 Log.e("CaseLog", "NativeUtil.callback_method:  171 会议视频变更通知 --->>> ");
                 break;
             case 27://177
                 Log.e("CaseLog", "NativeUtil.callback_method:  177 会议双屏显示信息变更通知 --->>> ");
                 break;
             case 28://180
-                InterfaceMain.pbui_MeetNotifyMsg meetRankingChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg9 = meetRankingChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg9 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.MeetSeat_Change_Inform, pbui_meetNotifyMsg9));
                 Log.e("CaseLog", "NativeUtil.callback_method:  180 会议排位变更通知 --->>> ");
                 break;
             case 29://184
-                InterfaceMain2.pbui_Type_MeetIM getNewMeetInfo = InterfaceMain2.pbui_Type_MeetIM.getDefaultInstance();
-                InterfaceMain2.pbui_Type_MeetIM pbui_type_meetIM = getNewMeetInfo.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetIM pbui_type_meetIM = InterfaceMain2.pbui_Type_MeetIM.parseFrom(data);
                 if (mCallListener != null) {
                     mCallListener.callListener(IDivMessage.RECEIVE_MEET_IMINFO, pbui_type_meetIM);
                 }
@@ -3714,33 +3607,28 @@ public class NativeUtil {
                 Log.e("CaseLog", "NativeUtil.callback_method:  184 收到新的会议交流信息 --->>> ");
                 break;
             case 30://188
-                InterfaceMain.pbui_MeetNotifyMsg aNewInitiateVoteInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg11 = aNewInitiateVoteInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg11 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.newVote_launch_inform, pbui_meetNotifyMsg11));
                 Log.e("CaseLog", "NativeUtil.callback_method:  188 有新的投票发起通知 --->>> ");
                 break;
             case 31://198
-                InterfaceMain.pbui_MeetNotifyMsg voteChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg queryVote = voteChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg queryVote = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform, queryVote));
                 Log.e("MyLog", "NativeUtil.callback_method:  198 投票变更通知 --->>> ");
                 break;
             case 32://202
-                InterfaceMain.pbui_MeetNotifyMsg voteSubmitterChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg10 = voteSubmitterChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg10 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform, pbui_meetNotifyMsg10));
                 Log.e("CaseLog", "NativeUtil.callback_method:  202 投票提交人变更通知 --->>> ");
                 break;
             case 33://59
-                InterfaceMain.pbui_MeetNotifyMsg placeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg8 = placeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg8 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.MEETADMIN_PLACE_NOTIFIINFROM));
                 Log.e("CaseLog", "NativeUtil.callback_method:  59 会议管理员控制的会场变更通知 --->>> ");
                 break;
             case 34://205
-                if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain.pbui_MeetNotifyMsg signChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg1 = signChangeInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain.pbui_MeetNotifyMsg pbui_meetNotifyMsg1 = InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                     int opermethod1 = pbui_meetNotifyMsg1.getOpermethod();
                     int id1 = pbui_meetNotifyMsg1.getId();
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.SIGN_CHANGE_INFORM, pbui_meetNotifyMsg1));
@@ -3748,87 +3636,71 @@ public class NativeUtil {
                 }
                 break;
             case 35://214-233
-                if (method == Pb_METHOD_MEET_INTERFACE_ASK.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetStartWhiteBoard receiveWhiteBoardOpenOperate = InterfaceMain2.pbui_Type_MeetStartWhiteBoard.getDefaultInstance();
-                    InterfaceMain2.pbui_Type_MeetStartWhiteBoard pbui_type_meetStartWhiteBoard = receiveWhiteBoardOpenOperate.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ASK.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetStartWhiteBoard pbui_type_meetStartWhiteBoard = InterfaceMain2.pbui_Type_MeetStartWhiteBoard.parseFrom(data);
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.OPEN_BOARD, pbui_type_meetStartWhiteBoard));
                     Log.e("CaseLog", "NativeUtil.callback_method:  214 收到白板打开操作 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_REJECT.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetWhiteBoardOper rejectJoinInform = InterfaceMain2.pbui_Type_MeetWhiteBoardOper.getDefaultInstance();
-                    rejectJoinInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REJECT.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetWhiteBoardOper.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  216 拒绝加入通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ENTER.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetWhiteBoardOper agreeJoinInform = InterfaceMain2.pbui_Type_MeetWhiteBoardOper.getDefaultInstance();
-                    agreeJoinInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ENTER.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetWhiteBoardOper.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  218 同意加入通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_EXIT.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetWhiteBoardOper attendExitWhiteBoardInform = InterfaceMain2.pbui_Type_MeetWhiteBoardOper.getDefaultInstance();
-                    attendExitWhiteBoardInform.parseFrom(data);
-                    Log.e("CaseLog", "NativeUtil.callback_method:  219 参会人员退出白板通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_CLEAR.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetClearWhiteBoard whiteBoardClearRecordInform = InterfaceMain2.pbui_Type_MeetClearWhiteBoard.getDefaultInstance();
-                    whiteBoardClearRecordInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_EXIT.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetWhiteBoardOper pbui_type_meetWhiteBoardOper = InterfaceMain2.pbui_Type_MeetWhiteBoardOper.parseFrom(data);
+                    int srcmemid = pbui_type_meetWhiteBoardOper.getSrcmemid();
+                    long srcwbid = pbui_type_meetWhiteBoardOper.getSrcwbid();
+                    Log.e("CaseLog", "NativeUtil.callback_method:  219 参会人员退出白板通知 --->>> srcmemid "+srcmemid+"  srcwbid :"+srcwbid);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLEAR.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetClearWhiteBoard.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  220 白板清空记录通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_DEL.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetClearWhiteBoard whiteBoardDeleteRecordInform = InterfaceMain2.pbui_Type_MeetClearWhiteBoard.getDefaultInstance();
-                    whiteBoardDeleteRecordInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetClearWhiteBoard.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  221 白板删除记录通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetWhiteBoardInkItem addInkInform = InterfaceMain2.pbui_Type_MeetWhiteBoardInkItem.getDefaultInstance();
-                    addInkInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetWhiteBoardInkItem.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  224 添加墨迹通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber()) {
-                    InterfaceMain2.pbui_Item_MeetWBRectDetail addDrawFigureInform = InterfaceMain2.pbui_Item_MeetWBRectDetail.getDefaultInstance();
-                    addDrawFigureInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber()) {
+                    InterfaceMain2.pbui_Item_MeetWBRectDetail.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  227 添加矩形、直线、圆形通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber()) {
-                    InterfaceMain2.pbui_Item_MeetWBTextDetail addTextInform = InterfaceMain2.pbui_Item_MeetWBTextDetail.getDefaultInstance();
-                    addTextInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber()) {
+                    InterfaceMain2.pbui_Item_MeetWBTextDetail.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  230 添加文本通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber()) {
-                    InterfaceMain2.pbui_Item_MeetWBPictureDetail addPictureInform = InterfaceMain2.pbui_Item_MeetWBPictureDetail.getDefaultInstance();
-                    addPictureInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber()) {
+                    InterfaceMain2.pbui_Item_MeetWBPictureDetail.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  233 添加图片通知 --->>> ");
                 }
                 break;
             case 36://236
-                InterfaceMain.pbui_MeetNotifyMsg meetFunctionChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                meetFunctionChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  236 会议功能变更通知 --->>> ");
                 break;
             case 37://100
-                InterfaceMain.pbui_MeetNotifyMsg attendPeoplePermissionsChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                attendPeoplePermissionsChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  100 参会人员权限变更通知 --->>> ");
                 break;
             case 38://79
-                InterfaceMain.pbui_MeetNotifyMsg commonPeopleGroupChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                commonPeopleGroupChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  79 常用人员分组变更通知 --->>> ");
                 break;
             case 39://84-106 // TODO: 2017/12/29 ？？？两个回调一样 
-                InterfaceMain.pbui_MeetNotifyMsgForDouble commonPeopleGroupPeopleChangeInform = InterfaceMain.pbui_MeetNotifyMsgForDouble.getDefaultInstance();
-                commonPeopleGroupPeopleChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsgForDouble.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  84 常用人员分组人员变更通知 --->>> ");
-                if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain.pbui_MeetNotifyMsgForDouble attendPeopleGroupPeopleChangeInform = InterfaceMain.pbui_MeetNotifyMsgForDouble.getDefaultInstance();
-                    attendPeopleGroupPeopleChangeInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain.pbui_MeetNotifyMsgForDouble.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  106 参会人员分组人员变更通知 --->>> ");
                 }
                 break;
             case 40://242
-                InterfaceMain2.pbui_Type_MeetScreenKeyBoardControl mouseOperateInform = InterfaceMain2.pbui_Type_MeetScreenKeyBoardControl.getDefaultInstance();
-                mouseOperateInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetScreenKeyBoardControl.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  242 鼠标操作通知 --->>> ");
                 break;
             case 41://244
-                InterfaceMain2.pbui_Type_MeetScreenKeyBoardControl keyBoardOperateInform = InterfaceMain2.pbui_Type_MeetScreenKeyBoardControl.getDefaultInstance();
-                keyBoardOperateInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetScreenKeyBoardControl.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  244 键盘操作通知 --->>> ");
                 break;
             case 42://10.界面状态变更通知
-                InterfaceMain.pbui_MeetDeviceMeetStatus timeState = InterfaceMain.pbui_MeetDeviceMeetStatus.getDefaultInstance();
-                InterfaceMain.pbui_MeetDeviceMeetStatus pbui_meetDeviceMeetStatus = timeState.parseFrom(data);
+                InterfaceMain.pbui_MeetDeviceMeetStatus pbui_meetDeviceMeetStatus = InterfaceMain.pbui_MeetDeviceMeetStatus.parseFrom(data);
                 int facestatus = pbui_meetDeviceMeetStatus.getFacestatus();
                 int deviceid1 = pbui_meetDeviceMeetStatus.getDeviceid();
                 int meetingid = pbui_meetDeviceMeetStatus.getMeetingid();
@@ -3838,41 +3710,33 @@ public class NativeUtil {
                 break;
             case 43://15-30
                 if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ZOOM.getNumber()) {
-                    InterfaceMain.pbui_MeetZoomResWin zoom = InterfaceMain.pbui_MeetZoomResWin.getDefaultInstance();
-                    InterfaceMain.pbui_MeetZoomResWin pbui_meetZoomResWin = zoom.parseFrom(data);
-                    Log.e("CaseLog", "NativeUtil.callback_method:  15 zoom.getZoomper() --->>> " + zoom.getZoomper());
+                    InterfaceMain.pbui_MeetZoomResWin pbui_meetZoomResWin = InterfaceMain.pbui_MeetZoomResWin.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  15 窗口缩放变更 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ENTER.getNumber()) {
                     Log.e("CaseLog", "NativeUtil.callback_method:  17 辅助签到变更通知 --->>> ");
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.SIGN_EVENT));
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_BROADCAST.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetMemberCastInfo broadcast = InterfaceMain.pbui_Type_MeetMemberCastInfo.getDefaultInstance();
-                    InterfaceMain.pbui_Type_MeetMemberCastInfo pbui_type_meetMemberCastInfo = broadcast.parseFrom(data);
+                    InterfaceMain.pbui_Type_MeetMemberCastInfo pbui_type_meetMemberCastInfo = InterfaceMain.pbui_Type_MeetMemberCastInfo.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  21 收到参会人员数量和签到数量广播通知 --->>> ");
                     if (mCallListener != null) {
                         mCallListener.callListener(IDivMessage.BROADCAST_COUNT_ATTENDEE, pbui_type_meetMemberCastInfo);
                     }
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REQUESTTOMANAGE.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetRequestManageNotify pbui_type_meetRequestManageNotify = InterfaceMain.pbui_Type_MeetRequestManageNotify.getDefaultInstance();
-                    pbui_type_meetRequestManageNotify.parseFrom(data);
+                    InterfaceMain.pbui_Type_MeetRequestManageNotify.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  24 收到请求成为管理员请求 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_RESPONSETOMANAGE.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetRequestManageResponse pbui_type_meetRequestManageResponse = InterfaceMain.pbui_Type_MeetRequestManageResponse.getDefaultInstance();
-                    pbui_type_meetRequestManageResponse.parseFrom(data);
+                    InterfaceMain.pbui_Type_MeetRequestManageResponse.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  26 收到请求成为管理员回复 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REQUESTPRIVELIGE.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetRequestPrivilegeNotify pbui_type_meetRequestPrivilegeNotify = InterfaceMain.pbui_Type_MeetRequestPrivilegeNotify.getDefaultInstance();
-                    pbui_type_meetRequestPrivilegeNotify.parseFrom(data);
+                    InterfaceMain.pbui_Type_MeetRequestPrivilegeNotify.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  28 收到请求参会人员权限请求 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_RESPONSEPRIVELIGE.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetRequestPrivilegeResponse pbui_type_meetRequestPrivilegeResponse = InterfaceMain.pbui_Type_MeetRequestPrivilegeResponse.getDefaultInstance();
-                    pbui_type_meetRequestPrivilegeResponse.parseFrom(data);
+                    InterfaceMain.pbui_Type_MeetRequestPrivilegeResponse.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  30 收到参会人员权限请求回复 --->>> ");
                 }
                 break;
             case 44://250
-                InterfaceMain2.pbui_Type_MeetDBServerOperError dataBackgroundErrorMessage = InterfaceMain2.pbui_Type_MeetDBServerOperError.getDefaultInstance();
-                InterfaceMain2.pbui_Type_MeetDBServerOperError pbui_type_meetDBServerOperError = dataBackgroundErrorMessage.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetDBServerOperError pbui_type_meetDBServerOperError = InterfaceMain2.pbui_Type_MeetDBServerOperError.parseFrom(data);
                 int status = pbui_type_meetDBServerOperError.getStatus();
                 switch (status) {
                     case 0://多条查询记录
@@ -3908,74 +3772,61 @@ public class NativeUtil {
                 }
                 break;
             case 45://251
-                InterfaceMain2.pbui_Type_MeetMediaPlay mediaPlayInform = InterfaceMain2.pbui_Type_MeetMediaPlay.getDefaultInstance();
-                InterfaceMain2.pbui_Type_MeetMediaPlay pbui_type_meetMediaPlay = mediaPlayInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetMediaPlay pbui_type_meetMediaPlay = InterfaceMain2.pbui_Type_MeetMediaPlay.parseFrom(data);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.MEDIA_PLAY_INFORM, pbui_type_meetMediaPlay));
                 Log.e("CaseLog", "NativeUtil.callback_method:  251 媒体播放通知 --->>> ");
                 break;
             case 46://263
-                InterfaceMain2.pbui_Type_MeetStreamPlay streamPlayInform = InterfaceMain2.pbui_Type_MeetStreamPlay.getDefaultInstance();
-                InterfaceMain2.pbui_Type_MeetStreamPlay pbui_type_meetStreamPlay = streamPlayInform.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetStreamPlay pbui_type_meetStreamPlay = InterfaceMain2.pbui_Type_MeetStreamPlay.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  263 流播放通知 --->>> ");
                 break;
             case 47://246-247
-                if (method == Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetStopResWork stopResourceInform = InterfaceMain2.pbui_Type_MeetStopResWork.getDefaultInstance();
-                    InterfaceMain2.pbui_Type_MeetStopResWork pbui_type_meetStopResWork = stopResourceInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetStopResWork pbui_type_meetStopResWork = InterfaceMain2.pbui_Type_MeetStopResWork.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  246 停止资源通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetStopPlay stopPlayInform = InterfaceMain2.pbui_Type_MeetStopPlay.getDefaultInstance();
-                    InterfaceMain2.pbui_Type_MeetStopPlay pbui_type_meetStopPlay = stopPlayInform.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetStopPlay pbui_type_meetStopPlay = InterfaceMain2.pbui_Type_MeetStopPlay.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  247 停止播放通知 --->>> ");
                 }
                 break;
             case 48://239
-                if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain.pbui_MeetNotifyMsg attendPeopleBoardColorChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                    attendPeopleBoardColorChangeInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  239 参会人员白板颜色变更通知 --->>> ");
                 }
                 break;
             case 51://266-268
-                if (method == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetStatisticInfo backQueryMeetStatisticsInform = InterfaceMain2.pbui_Type_MeetStatisticInfo.getDefaultInstance();
-                    backQueryMeetStatisticsInform.parseFrom(data);
+                if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetStatisticInfo.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  266 返回查询会议统计通知 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ASK.getNumber()) {
-                    InterfaceMain2.pbui_Type_MeetQuarterStatisticInfo backQueryMeetStatisticsInformByTime = InterfaceMain2.pbui_Type_MeetQuarterStatisticInfo.getDefaultInstance();
-                    backQueryMeetStatisticsInformByTime.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ASK.getNumber()) {
+                    InterfaceMain2.pbui_Type_MeetQuarterStatisticInfo.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  268 返回按时间段查询的会议统计通知 --->>> ");
                 }
                 break;
             case 52://270
-                InterfaceMain.pbui_MeetNotifyMsg interfaceConfigurationChangeInform = InterfaceMain.pbui_MeetNotifyMsg.getDefaultInstance();
-                interfaceConfigurationChangeInform.parseFrom(data);
+                InterfaceMain.pbui_MeetNotifyMsg.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  270 界面配置变更通知 --->>> ");
                 break;
             case 54://154
                 if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
-                    InterfaceMain.pbui_Type_MeetFileScore backQueryMeetFileScore = InterfaceMain.pbui_Type_MeetFileScore.getDefaultInstance();
-                    backQueryMeetFileScore.parseFrom(data);
+                    InterfaceMain.pbui_Type_MeetFileScore.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  154 返回查询会议文件评分 --->>> ");
-                } else if (method == Pb_METHOD_MEET_INTERFACE_ASK.getNumber()) {
-                    InterfaceMain.pbui_Type_QueryAverageFileScore backQueryMeetFileScoreAverage = InterfaceMain.pbui_Type_QueryAverageFileScore.getDefaultInstance();
-                    backQueryMeetFileScoreAverage.parseFrom(data);
+                } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ASK.getNumber()) {
+                    InterfaceMain.pbui_Type_QueryAverageFileScore.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  155 返回查询会议文件评分的平均分 --->>> ");
                 }
                 break;
             case 55://161
-                InterfaceMain.pbui_Type_MeetingFileEvaluate backQueryMeetFileEvaluate = InterfaceMain.pbui_Type_MeetingFileEvaluate.getDefaultInstance();
-                backQueryMeetFileEvaluate.parseFrom(data);
+                InterfaceMain.pbui_Type_MeetingFileEvaluate.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  161 返回查询会议文件评价  --->>> ");
                 break;
             case 56://165
-                InterfaceMain.pbui_Type_MeetingMeetEvaluate backQueryMeetEvaluate = InterfaceMain.pbui_Type_MeetingMeetEvaluate.getDefaultInstance();
-                backQueryMeetEvaluate.parseFrom(data);
+                InterfaceMain.pbui_Type_MeetingMeetEvaluate.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  165 返回查询会议评价 --->>> ");
                 break;
             case 57://169
-                InterfaceMain2.pbui_Type_MeetingMeetSystemLog backQueryAdminLog = InterfaceMain2.pbui_Type_MeetingMeetSystemLog.getDefaultInstance();
-                backQueryAdminLog.parseFrom(data);
+                InterfaceMain2.pbui_Type_MeetingMeetSystemLog.parseFrom(data);
                 Log.e("CaseLog", "NativeUtil.callback_method:  169 返回查询管理员日志 --->>> ");
                 break;
             default:

@@ -3,18 +3,22 @@ package com.pa.paperless.fragment.meeting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
@@ -30,11 +34,13 @@ import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
+import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.libsdl.app.SDLActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,41 +66,84 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     private Button mStopVideoBtn;
     private Button mPushVideoBtn;
     private Button mProjectorVideoBtn;
+
+    private List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> allStreamDev;
+    public static List<Boolean> checkStreams;
+    private VideoItemAdapter adapter;
+    private int topLeftW;
+    private int topLeftH;
+    private int topLeftX;
+    private int topLeftY;
+    private int topRightW;
+    private int topRightH;
+    private int topRightX;
+    private int topRightY;
+    private int bottomLeftW;
+    private int bottomLeftH;
+    private int bottomLeftX;
+    private int bottomLeftY;
+    private int bottomRightW;
+    private int bottomRightH;
+    private int bottomRightX;
+    private int bottomRightY;
+    private int mPosion;//当前点击的列表的索引
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case IDivMessage.QUERY_DEVICE_INFO:
-                    ArrayList queryDevInfo = msg.getData().getParcelableArrayList("queryDevInfo");
-                    InterfaceMain.pbui_Type_DeviceDetailInfo o = (InterfaceMain.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
-                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(o);
-                    allStreamDev = new ArrayList<>();
-                    for (int i = 0; i < deviceInfos.size(); i++) {
-                        DeviceInfo deviceInfo = deviceInfos.get(i);
-                        int devId = deviceInfo.getDevId();
-                        int i1 = devId & Macro.DEVICE_MEET_CAPTURE;
-                        if (i1 == Macro.DEVICE_MEET_CAPTURE) {
-                            //所有的流采集设备
-                            allStreamDev.add(deviceInfo);
-                        }
+                case IDivMessage.QUERY_MEET_VEDIO://172.查询会议视频
+                    ArrayList queryMeetVedio = msg.getData().getParcelableArrayList("queryMeetVedio");
+                    InterfaceMain.pbui_Type_MeetVideoDetailInfo o1 = (InterfaceMain.pbui_Type_MeetVideoDetailInfo) queryMeetVedio.get(0);
+                    allStreamDev = o1.getItemList();
+                    checkStreams = new ArrayList<>();
+                    for (int i = 0; i < allStreamDev.size(); i++) {
+                        checkStreams.add(false);
+                    }
+                    if (allStreamDev != null) {
+                        adapter = new VideoItemAdapter(allStreamDev);
+                        mVideoLv.setAdapter(adapter);
+                        adapter.setItemListener(new ItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int posion) {
+                                Log.e("MyLog", "VideoFragment.onItemClick 113行:  222222222 --->>> ");
+                                mPosion = posion;
+                                Button player = view.findViewById(R.id.name_tv);
+                                boolean selected = !player.isSelected();
+                                player.setSelected(selected);
+                                for (int i = 0; i < checkStreams.size(); i++) {
+                                    if (i == posion) {
+                                        checkStreams.set(i, selected);
+                                    } else {
+                                        checkStreams.set(i, false);
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                Toast.makeText(getContext(), "点击了视屏播放列表", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                     break;
             }
         }
     };
-    //存放所有流设备
-    private List<DeviceInfo> allStreamDev;
-    private boolean b;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_video, container, false);
         initView(inflate);
+        /** ************ ******  测量 SurfaceView 的起始坐标和宽高  ****** ************ **/
+        getSurfaceViewXYWH();
         initController();
         try {
-            /** ************ ******  6.查询设备信息  ****** ************ **/
-            b = nativeUtil.queryDeviceInfo();
+            //172.查询会议视频
+            nativeUtil.queryMeetVedio();
+
+            /** ************ ******  初始化播放资源  ****** ************ **/
+//            nativeUtil.initvideores(0, topLeftX, topLeftY, topLeftH, topLeftW);
+//            nativeUtil.initvideores(0, topRightX, topRightY, topRightH, topRightW);
+//            nativeUtil.initvideores(0, bottomLeftX, bottomLeftY, bottomLeftH, bottomLeftW);
+//            nativeUtil.initvideores(0, bottomRightX, bottomRightY, bottomRightH, bottomRightW);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -106,10 +155,9 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventMessage.DEV_REGISTER_INFORM:
-                if (!b) {
-                    b = nativeUtil.queryDeviceInfo();
-                }
+            case IDEventMessage.Meet_vedio_changeInform://会议视频变更通知
+                //172.查询会议视频
+                nativeUtil.queryMeetVedio();
                 break;
         }
     }
@@ -128,18 +176,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
 
     private void initView(View inflate) {
         mVideoLv = (RecyclerView) inflate.findViewById(R.id.video_lv);
-        if (allStreamDev != null) {
-            VideoItemAdapter adapter = new VideoItemAdapter(allStreamDev);
-            mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
-            mVideoLv.setAdapter(adapter);
-            adapter.setItemListener(new ItemClickListener() {
-                @Override
-                public void onItemClick(View view, int posion) {
-                    Log.e("MyLog", "VideoFragment.onItemClick 138行:   --->>> ");
-
-                }
-            });
-        }
+        mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mTopLeftVideo = (SurfaceView) inflate.findViewById(R.id.top_left_video);
         mTopLeftVideo.setOnClickListener(this);
@@ -149,6 +186,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         mBottomLeftVideo.setOnClickListener(this);
         mBottomRightVideo = (SurfaceView) inflate.findViewById(R.id.bottom_right_video);
         mBottomRightVideo.setOnClickListener(this);
+
         mLookVideoBtn = (Button) inflate.findViewById(R.id.look_video_btn);
         mLookVideoBtn.setOnClickListener(this);
         mStopVideoBtn = (Button) inflate.findViewById(R.id.stop_video_btn);
@@ -159,21 +197,79 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         mProjectorVideoBtn.setOnClickListener(this);
     }
 
+    /**
+     * 测量 SurfaceView的起始坐标与宽高
+     */
+    private void getSurfaceViewXYWH() {
+        mTopLeftVideo.post(new Runnable() {
+            @Override
+            public void run() {
+                topLeftW = mTopLeftVideo.getWidth();
+                topLeftH = mTopLeftVideo.getHeight();
+                topLeftX = (int) mTopLeftVideo.getX();
+                topLeftY = (int) mTopLeftVideo.getY();
+                Log.e("MyLog", "VideoFragment.run 169行:  左上 --->>> " + topLeftW + "  " + topLeftH + "  " + topLeftX + "  " + topLeftY);
+
+            }
+        });
+        mTopRightVideo.post(new Runnable() {
+            @Override
+            public void run() {
+                topRightW = mTopRightVideo.getWidth();
+                topRightH = mTopRightVideo.getHeight();
+                topRightX = (int) mTopRightVideo.getX();
+                topRightY = (int) mTopRightVideo.getY();
+                Log.e("MyLog", "VideoFragment.run 169行:  右上 --->>> " + topRightW + "  " + topRightH + "  " + topRightX + "  " + topRightY);
+            }
+        });
+        mBottomLeftVideo.post(new Runnable() {
+            @Override
+            public void run() {
+                bottomLeftW = mBottomLeftVideo.getWidth();
+                bottomLeftH = mBottomLeftVideo.getHeight();
+                bottomLeftX = (int) mBottomLeftVideo.getX();
+                bottomLeftY = (int) mBottomLeftVideo.getY();
+                Log.e("MyLog", "VideoFragment.run 169行:  左下 --->>> " + bottomLeftW + "  " + bottomLeftH + "  " + bottomLeftX + "  " + bottomLeftY);
+            }
+        });
+        mBottomRightVideo.post(new Runnable() {
+            @Override
+            public void run() {
+                bottomRightW = mBottomRightVideo.getWidth();
+                bottomRightH = mBottomRightVideo.getHeight();
+                bottomRightX = (int) mBottomRightVideo.getX();
+                bottomRightY = (int) mBottomRightVideo.getY();
+                Log.e("MyLog", "VideoFragment.run 169行:  右下 --->>> " + bottomRightW + "  " + bottomRightH + "  " + bottomRightX + "  " + bottomRightY);
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.look_video_btn:
+            case R.id.look_video_btn://观看直播
+                InterfaceMain.pbui_Item_MeetVideoDetailInfo pbui_item_meetVideoDetailInfo = allStreamDev.get(mPosion);
+                int subid = pbui_item_meetVideoDetailInfo.getSubid();
+                int id = pbui_item_meetVideoDetailInfo.getId();
+                int deviceid = pbui_item_meetVideoDetailInfo.getDeviceid();
+                pbui_item_meetVideoDetailInfo.getAddr();
+
                 List<Integer> res = new ArrayList<>();
                 List<Integer> ids = new ArrayList<>();
+                res.add(id);
+                ids.add(deviceid);
+                // 流播放
+                nativeUtil.streamPlay(o.getDevId(), subid, 0, res, ids);
 //                nativeUtil.streamPlay(o.getDevId(),3,0,res,ids);
                 break;
-            case R.id.stop_video_btn:
+            case R.id.stop_video_btn://停止观看
+                // 停止资源操作
+//                nativeUtil.stopResourceOperate();
+                break;
+            case R.id.push_video_btn://推送视屏
 
                 break;
-            case R.id.push_video_btn:
-
-                break;
-            case R.id.projector_video_btn:
+            case R.id.projector_video_btn://投影视屏
 
                 break;
             case R.id.top_left_video:
@@ -199,7 +295,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
                 InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
                 int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
@@ -208,21 +303,19 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
                     }
                     receiveMeetIMInfos.get(0).setType(true);
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
                 }
                 List<EventBadge> num = new ArrayList<>();
                 num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
+                // TODO: 2018/3/7 通知界面更新 Badge
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
-            case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceMain.pbui_Type_DeviceDetailInfo result1 = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
-                if (result1 != null) {
+            case IDivMessage.QUERY_MEET_VEDIO://172.查询会议视频
+                InterfaceMain.pbui_Type_MeetVideoDetailInfo result2 = (InterfaceMain.pbui_Type_MeetVideoDetailInfo) result;
+                if (result2 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
-                    arrayList.add(result1);
-                    bundle.putParcelableArrayList("queryDevInfo", arrayList);
+                    arrayList.add(result2);
+                    bundle.putParcelableArrayList("queryMeetVedio", arrayList);
                     Message message = new Message();
                     message.what = action;
                     message.setData(bundle);

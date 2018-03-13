@@ -145,7 +145,7 @@ public class SDLActivity extends Activity {
         a.add(0);
         b.add(MeetingActivity.getDevId());
         /** ************ ******  停止资源操作  ****** ************ **/
-        nativeUtil.stopResourceOperate(a,b);
+        nativeUtil.stopResourceOperate(a, b);
         /** ************ ******  释放播放资源  ****** ************ **/
         nativeUtil.mediaDestroy(0);
         Log.e("MyLog", "SDLActivity.onBackPressed:   --->>> ");
@@ -214,7 +214,7 @@ public class SDLActivity extends Activity {
                 a.add(0);
                 b.add(MeetingActivity.getDevId());
                 /** ************ ******  停止资源操作  ****** ************ **/
-                nativeUtil.stopResourceOperate(a,b);
+                nativeUtil.stopResourceOperate(a, b);
                 /** ************ ******  释放播放资源  ****** ************ **/
                 nativeUtil.mediaDestroy(0);
             }
@@ -299,10 +299,10 @@ public class SDLActivity extends Activity {
         //释放播放资源
         nativeUtil.mediaDestroy(0);
         Log.v(TAG, "onDestroy()");
-        Log.e("MyLog","SDLActivity.onDestroy 315行:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onDestroy 315行:   --->>> ");
         if (SDLActivity.mBrokenLibraries) {
             super.onDestroy();
-            Log.e("MyLog","SDLActivity.onDestroy 318行:   --->>> ");
+            Log.e("MyLog", "SDLActivity.onDestroy 318行:   --->>> ");
             // Reset everything in case the user re opens the app
             onNativeSurfaceDestroyed();
             SDLActivity.initialize();
@@ -313,13 +313,13 @@ public class SDLActivity extends Activity {
         SDLActivity.mExitCalledFromJava = true;
 //        SDLActivity.nativeQuit();
         onNativeSurfaceDestroyed();
-        Log.e("MyLog","SDLActivity.onDestroy 327行:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onDestroy 327行:   --->>> ");
 
         // Now wait for the SDL thread to quit
         if (SDLActivity.mSDLThread != null) {
             try {
                 SDLActivity.mSDLThread.join();
-                Log.e("MyLog","SDLActivity.onDestroy 333行:   --->>> ");
+                Log.e("MyLog", "SDLActivity.onDestroy 333行:   --->>> ");
             } catch (Exception e) {
                 Log.v(TAG, "Problem stopping thread: " + e);
             }
@@ -330,7 +330,7 @@ public class SDLActivity extends Activity {
         super.onDestroy();
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
-        Log.e("MyLog","SDLActivity.onDestroy 346行:   --->>> ");
+        Log.e("MyLog", "SDLActivity.onDestroy 346行:   --->>> ");
     }
 
     @Override
@@ -1086,7 +1086,7 @@ class SDLMain implements Runnable {
 
 
         try {
-            fdd.initvideores();
+            fdd.initvideores(0, 0, 0, 1080, 1920);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }

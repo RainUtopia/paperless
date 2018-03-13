@@ -4,25 +4,48 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.listener.ItemClickListener;
+import com.pa.paperless.utils.MyUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.pa.paperless.fragment.meeting.VideoFragment.checkStreams;
 
 /**
  * Created by Administrator on 2017/11/9.
  */
 
 public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder> {
-    private final List<DeviceInfo> mData;
+
+
+    private List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> mDatas;
     private ItemClickListener mListener;
 
-    public VideoItemAdapter(List<DeviceInfo> data) {
-        mData = data;
+    public VideoItemAdapter(List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> data) {
+        mDatas = data;
     }
+
+    /**
+     * 获取选中的流
+     * @return
+     */
+    public List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> getChecked() {
+        List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> checkedStreams = new ArrayList<>();
+        for (int i = 0; i < checkStreams.size(); i++) {
+            if (checkStreams.get(i)) {
+                checkedStreams.add(mDatas.get(i));
+            }
+        }
+        return checkedStreams;
+    }
+
 
     public void setItemListener(ItemClickListener listener) {
         mListener = listener;
@@ -37,7 +60,8 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
     @Override
     public void onBindViewHolder(final VideoItemAdapter.ViewHolder holder, int position) {
-        holder.name_tv.setText(mData.get(position).getDevName());
+        holder.name_tv.setText(MyUtils.getBts(mDatas.get(position).getName()));
+        holder.name_tv.setSelected(checkStreams.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,17 +74,17 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
     @Override
     public int getItemCount() {
-        return mData != null ? mData.size() : 0;
+        return mDatas != null ? mDatas.size() : 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
-        public TextView name_tv;
+        public Button name_tv;
 
         public ViewHolder(View rootView) {
             super(rootView);
             this.rootView = rootView;
-            this.name_tv = (TextView) rootView.findViewById(R.id.name_tv);
+            this.name_tv = (Button) rootView.findViewById(R.id.name_tv);
         }
 
     }

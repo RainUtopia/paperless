@@ -88,5 +88,11 @@ public class IDivMessage {
     public static final int Dev_proById = 1039;
     //查询可加入的同屏会话
     public static final int QUERY_CAN_JOIN = 1040;
+    //126查询会场设备的流通道信息
+    public static final int QUERY_STREAM_INFORM = 1041;
+    //172.查询会议视频
+    public static final int QUERY_MEET_VEDIO = 1042;
+    // 263.查询流播放
+    public static final int QUERY_STREAM_PLAY = 1043;
 
 }

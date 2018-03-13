@@ -79,7 +79,6 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -109,7 +108,6 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
                 mPaintWidth = seekBar.getProgress();
                 mPaletteView.setPenRawSize(mPaintWidth);
                 mPaletteView.setEraserSize(mPaintWidth);
-
             }
         });
 
@@ -119,7 +117,6 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
      * 设置可快捷选择的颜色
      */
     private void initDefaultColor() {
-
         setImageColor(mColorBlack, Color.BLACK);
         setImageColor(mColorGray, Color.GRAY);
         setImageColor(mColorRed, Color.RED);
@@ -204,9 +201,7 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
         mRect = (ImageView) findViewById(R.id.rect);
         mBack = (ImageView) findViewById(R.id.back);
         mClean = (ImageView) findViewById(R.id.clean);
-        // ------------------------- //
         mSeb = (SeekBar) findViewById(R.id.seb);
-        // ------------------------- //
         mColorBlack = (ImageView) findViewById(R.id.color_black);
         mColorGray = (ImageView) findViewById(R.id.color_gray);
         mColorRed = (ImageView) findViewById(R.id.color_red);
@@ -217,12 +212,10 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
         mColorBlue = (ImageView) findViewById(R.id.color_blue);
         mColorCyan = (ImageView) findViewById(R.id.color_cyan);
         mColorGreen = (ImageView) findViewById(R.id.color_green);
-        // ------------------------- //
         mShareStart = (Button) findViewById(R.id.share_start);
         mShareStop = (Button) findViewById(R.id.share_stop);
         mSave = (Button) findViewById(R.id.save);
         mExit = (Button) findViewById(R.id.exit);
-        // ------------------------- //
         mPaletteView = (PaletteView) findViewById(R.id.my_drawingboard);
 
         mPen.setOnClickListener(this);

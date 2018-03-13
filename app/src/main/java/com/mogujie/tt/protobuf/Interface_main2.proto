@@ -310,7 +310,7 @@ message pbui_Type_DoMeetSignIno
 //method: control 
 message pbui_Type_MeetWhiteBoardControl
 {
-	fixed32  operflag=1;//指定操作标志 参见Pb_MeetPostilOperType
+	fixed32  operflag=1;//指定操作标志 参见 Pb_MeetPostilOperType
 	bytes    medianame=2;//白板操作描述
 	fixed32  opermemberid=3;//当前该命令的人员ID
 	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用
@@ -830,8 +830,8 @@ message pbui_Type_MeetStreamPlay
 message pbui_Type_MeetDoStreamPlay
 {
 	fixed32  srcdeviceid=1;//设备ID
-	fixed32  subid=2;//设备子通道
-	fixed32  triggeruserval=3;//触发器标志
+	fixed32  subid=2;//设备子通道    2-屏幕 3-投影机
+	fixed32  triggeruserval=3;//    触发器标志 0
 
 	repeated fixed32 res=4;	  //播放所用的资源,为0表示全部
 	repeated fixed32 deviceid=5;	  //通知的目标设备,为0表示全部

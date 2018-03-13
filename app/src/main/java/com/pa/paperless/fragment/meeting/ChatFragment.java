@@ -153,14 +153,14 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     }
                     break;
                 case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
-                    ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
-                    InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
-                    List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
-                    if (itemList != null) {
-                        String name = MyUtils.getBts(itemList.get(0).getName());
-                        mReceiveMsg.get(mReceiveMsg.size() - 1).setName(name);
-                        Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
-                    }
+//                    ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
+//                    InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
+//                    List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
+//                    if (itemList != null) {
+//                        String name = MyUtils.getBts(itemList.get(0).getName());
+//                        mReceiveMsg.get(mReceiveMsg.size() - 1).setName(name);
+//                        Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
+//                    }
                     break;
                 case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
                     ArrayList devinfo = msg.getData().getParcelableArrayList("devinfo");

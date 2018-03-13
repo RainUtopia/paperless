@@ -6,7 +6,7 @@ package com.pa.paperless.constant;
  */
 
 public class Macro {
-
+    //会议聊天未读消息更新 key
     public static String UPTATE_BADGE = "update_badge_number";
 
     public static int DEVICE_MEET_DB = 0x01000000; //会议数据库(会议后台)
