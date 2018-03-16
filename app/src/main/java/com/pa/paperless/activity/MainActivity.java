@@ -31,6 +31,7 @@ import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.service.PlayService;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.PermissionUtils;
@@ -45,14 +46,10 @@ import org.libsdl.app.SDLActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.libsdl.app.SDLActivity.nativeInit;
+import static com.pa.paperless.utils.MyUtils.handTo;
 
 /**
  * 必须先修改 app/build.gradle中的 jniLibs的路径
- *
- *
- *
- *
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener, CallListener {
 
@@ -135,6 +132,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private int CompereID;
     //是否有会议信息
     private boolean haveDevMeetInfo;
+    private Intent serviceIntent;
 
     /**
      * 展示选择参会人 弹出框
@@ -234,7 +232,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         SDLActivity.nativeInit(arr);
         //  初始化无纸化网络平台
         boolean b = nativeUtil.javaInitSys();
-        Log.e("MyLog","MainActivity.onCreate 236行:  初始化是否成功 --->>> "+b);
+        // 初始化流通道
+        nativeUtil.InitAndCapture(0, 2);
+        nativeUtil.InitAndCapture(0, 3);
+        Log.e("MyLog", "MainActivity.onCreate 236行:  初始化是否成功 --->>> " + b);
         /** ************ ******  8.修改本机界面状态  ****** ************ **/
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
         try {
@@ -246,15 +247,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-                try {
-                    /** ************ ******  110.查询设备会议信息  ****** ************ **/
-                    haveDevMeetInfo = nativeUtil.queryDeviceMeetInfo();
-                } catch (InvalidProtocolBufferException e) {
-                    e.printStackTrace();
-                }
+        try {
+            /** ************ ******  110.查询设备会议信息  ****** ************ **/
+            haveDevMeetInfo = nativeUtil.queryDeviceMeetInfo();
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
 //            }
 //        }, 5000);
         EventBus.getDefault().register(this);
+        serviceIntent = new Intent(this, PlayService.class);
+        startService(serviceIntent);
     }
 
     /**
@@ -314,12 +317,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+		stopService(serviceIntent);
     }
 
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -384,7 +387,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     } catch (InvalidProtocolBufferException e) {
                         e.printStackTrace();
                     }
-                    if(!haveDevMeetInfo) {
+                    if (!haveDevMeetInfo) {
                         //如果没有查找到
                         showDialog();
                     }
@@ -469,85 +472,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }).create().show();
     }
 
-
     @Override
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.UPDATE_TIME://平台时间高频回调
-                String[] str1 = (String[]) result;
-                if (str1 != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putStringArray("datatime", str1);
-                    Message message = new Message();
-                    message.what = IDivMessage.UPDATE_TIME;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                handTo(IDivMessage.UPDATE_TIME,(String[]) result,"datatime",mHandler);
                 break;
             case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
-                InterfaceMain.pbui_Type_DeviceFaceShowDetail devMeetInfos = (InterfaceMain.pbui_Type_DeviceFaceShowDetail) result;
-                if (devMeetInfos != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(devMeetInfos);
-                    bundle.putParcelableArrayList("devMeetInfos", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                handTo(IDivMessage.QUERY_DEVMEET_INFO,(InterfaceMain.pbui_Type_DeviceFaceShowDetail) result,"devMeetInfos",mHandler);
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceMain.pbui_Type_DeviceDetailInfo devInfos = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
-                if (devInfos != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(devInfos);
-                    bundle.putParcelableArrayList("devInfos", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                handTo(IDivMessage.QUERY_DEVICE_INFO,(InterfaceMain.pbui_Type_DeviceDetailInfo)result,"devInfos",mHandler);
                 break;
-            case IDivMessage.QUERY_ATTENDEE:
-                InterfaceMain.pbui_Type_MemberDetailInfo result1 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
-                if (result1 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result1);
-                    bundle.putParcelableArrayList("queryMember_main", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
-                break;/** ************ ******  在会议Activity中接收的  ****** ************ **/
+            case IDivMessage.QUERY_ATTENDEE://查询参会人员
+                handTo(IDivMessage.QUERY_ATTENDEE,(InterfaceMain.pbui_Type_MemberDetailInfo)result,"queryMember_main",mHandler);
+                break;
             case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
-                InterfaceMain2.pbui_Type_MeetSeatDetailInfo result5 = (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) result;
-                if (result5 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result5);
-                    bundle.putParcelableArrayList("queryMeetSeat", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                handTo(IDivMessage.Query_MeetSeat_Inform,(InterfaceMain2.pbui_Type_MeetSeatDetailInfo)result,"queryMeetSeat",mHandler);
                 break;
-            case IDivMessage.QUERY_ATTEND_BYID:
-                InterfaceMain.pbui_Type_MemberDetailInfo result2 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
-                if (result2 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result2);
-                    bundle.putParcelableArrayList("queryAttendeeById", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人员
+                handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMain.pbui_Type_MemberDetailInfo)result, "queryAttendeeById", mHandler);
                 break;
         }
     }

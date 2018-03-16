@@ -31,6 +31,24 @@ public class DateUtil {
     }
 
     /**
+     * 转成时分秒 00::00:00
+     */
+    //time 单位 毫秒
+    public static String convertTime(long ms) {
+        String ret = "";
+        Date date = new Date(ms);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        timeFormat.setTimeZone(TimeZone.getTimeZone("GTM"));
+        ret = timeFormat.format(date);
+        return ret;
+    }
+
+    //time 单位 秒
+    public static String convertTime(int sec) {
+        return convertTime((long) sec * 1000);
+    }
+
+    /**
      * 月、星期、时间
      * day :01月01日  week:  星期四   time:  08:00
      *

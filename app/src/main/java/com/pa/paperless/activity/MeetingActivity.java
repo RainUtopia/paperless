@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -65,7 +69,9 @@ import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.ScreenUtils;
+import com.wind.myapplication.CameraDemo;
 import com.wind.myapplication.NativeUtil;
+import com.wind.myapplication.ScreenRecorder;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -127,6 +133,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public static NativeUtil nativeUtil;
     public static List<ReceiveMeetIMInfo> mReceiveMsg = new ArrayList<>();
 
+	public static int W = 0, H = 0;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -330,100 +337,37 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public static List<Boolean> checkedJoinProjector = new ArrayList<>();
     private PopupWindow joinWatchPop;
 
+	//add by gowcage
+    final int REQUEST_CODE = 1;// >=0
+    private int width, height, dpi, bitrate, VideoQuality = 1;//VideoQuality:1/2/3
+    private float density;
+    private MediaProjectionManager manager;
+    private MediaProjection projection;
+    private ScreenRecorder recorder;
 
     @Override
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
-                InterfaceMain.pbui_Type_MeetMeetInfo result1 = (InterfaceMain.pbui_Type_MeetMeetInfo) result;
-                if (result1 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result1);
-                    bundle.putParcelableArrayList("queryMeetById", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_MEET_BYID, (InterfaceMain.pbui_Type_MeetMeetInfo) result, "queryMeetById", mHandler);
                 break;
             case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
-                InterfaceMain.pbui_Type_MemberDetailInfo result2 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
-                if (result2 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result2);
-                    bundle.putParcelableArrayList("queryAttendById", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMain.pbui_Type_MemberDetailInfo) result, "queryAttendById", mHandler);
                 break;
             case IDivMessage.QUERY_ATTENDEE://查询参会人员
-                InterfaceMain.pbui_Type_MemberDetailInfo result3 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
-                if (result3 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result3);
-                    bundle.putParcelableArrayList("queryMember", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMain.pbui_Type_MemberDetailInfo) result, "queryMember", mHandler);
                 break;
             case IDivMessage.QUERY_Attendee_Property://96.查询参会人员属性
-                InterfaceMain.pbui_Type_MeetMembeProperty result4 = (InterfaceMain.pbui_Type_MeetMembeProperty) result;
-                if (result4 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result4);
-                    bundle.putParcelableArrayList("queryAttendeeProperty", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_Attendee_Property, (InterfaceMain.pbui_Type_MeetMembeProperty) result, "queryAttendeeProperty", mHandler);
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceMain.pbui_Type_DeviceDetailInfo devInfos = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
-                if (devInfos != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(devInfos);
-                    bundle.putParcelableArrayList("devInfos", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceMain.pbui_Type_DeviceDetailInfo) result, "devInfos", mHandler);
                 break;
             case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
-                InterfaceMain2.pbui_Type_MeetSeatDetailInfo result5 = (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) result;
-                if (result5 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result5);
-                    bundle.putParcelableArrayList("queryMeetRanking", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.Query_MeetSeat_Inform, (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) result, "queryMeetRanking", mHandler);
                 break;
             case IDivMessage.QUERY_CAN_JOIN:// 查询可加入的同屏会话
-                InterfaceMain.pbui_Type_DeviceResPlay result6 = (InterfaceMain.pbui_Type_DeviceResPlay) result;
-                if (result6 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result6);
-                    bundle.putParcelableArrayList("queryCanJoin", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_CAN_JOIN, (InterfaceMain.pbui_Type_DeviceResPlay) result, "queryCanJoin", mHandler);
                 break;
         }
     }
@@ -461,6 +405,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
         //注册EventBus
         EventBus.getDefault().register(this);
+		initScreenParam();
     }
 
     /**
@@ -596,6 +541,36 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 //                        InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
                         InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
                 break;
+				case IDEventMessage.START_COLLECTION_STREAM_NOTIFY:
+                switch (message.getType()) {
+                    case 2://屏幕
+                        if (stopRecord()) {
+                            Toast.makeText(this, "屏幕录制已停止", Toast.LENGTH_LONG).show();
+                        } else {
+                            // 1: 拿到 MediaProjectionManager 实例
+                            manager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
+                            // 2: 发起屏幕捕捉请求
+                            Intent intent = manager.createScreenCaptureIntent();
+                            startActivityForResult(intent, REQUEST_CODE);
+                        }
+                        break;
+                    case 3://摄像头
+                        startActivity(new Intent(MeetingActivity.this, CameraDemo.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        break;
+                }
+                break;
+            case IDEventMessage.STOP_COLLECTION_STREAM_NOTIFY:
+                switch (message.getType()) {
+                    case 2:
+                        if (stopRecord()) {
+                            Toast.makeText(this, "屏幕录制已停止", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(this, "屏幕录制停止失败", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                }
+
+
             case IDEventMessage.OPEN_BOARD://收到白板打开操作
                 InterfaceMain2.pbui_Type_MeetStartWhiteBoard object4 = (InterfaceMain2.pbui_Type_MeetStartWhiteBoard) message.getObject();
                 startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
@@ -851,9 +826,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 //                long timeMillis = System.currentTimeMillis();
 //                nativeUtil.coerceStartWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber(),
 //                        "强制打开白板", o.getMemberid(), o.getMemberid(), timeMillis, add);
-                // 收到打开白板操作
-                // IDEventMessage.OPEN_BOARD
                 startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
+
                 break;
             case R.id.chat:
                 showFragment(5);
@@ -1222,15 +1196,17 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 if (allProjectorAdapter != null) {
                     applyProjectionIds = new ArrayList<Integer>();
-//                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
-//                    for (int i = 0; i < checkedIds.size(); i++) {
-//                        applyProjectionIds.add(checkedIds.get(i).getDevId());
-//                    }
+                    List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
+                    //**//
+                    for (int i = 0; i < checkedIds.size(); i++) {
+                        applyProjectionIds.add(checkedIds.get(i).getDevId());
+                    }
+
                     informDev = new ArrayList<Integer>();
-                    applyProjectionIds.add(0);
+//                    applyProjectionIds.add(0);
                     informDev.add(0x1080004);
                     /** ************ ******  流播放  ****** ************ **/
-                    nativeUtil.streamPlay(0x1080004, 3, 0, applyProjectionIds, informDev);
+                    nativeUtil.streamPlay(o.getDevId(), 3, 0, applyProjectionIds, informDev);
                 }
             }
         });
@@ -1420,7 +1396,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 sameMemberDevRrsIds.add(0);
                 sameMemberDevIds.add(0x1080004);
                 /** ************ ******  流播放  ****** ************ **/
-                nativeUtil.streamPlay(0x1080004, 2, 0, sameMemberDevRrsIds, sameMemberDevIds);
+                //nativeUtil.streamPlay(0x1080004, 2, 0, sameMemberDevRrsIds, sameMemberDevIds);
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
             }
         });
@@ -1849,18 +1825,89 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public JoinViewHolder(View rootView) {
             this.rootView = rootView;
             this.join_member_screen = (RecyclerView) rootView.findViewById(R.id.join_member_screen);
-            this.join_member_screen.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
-            if (join_member_screen != null) {
+            if (joinMemberAdapter != null) {
+
+
                 this.join_member_screen.setAdapter(joinMemberAdapter);
+                joinMemberAdapter.setItemListener(new ItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int posion) {
+                        Button player = view.findViewById(R.id.palyer_name);
+                        boolean selected = !player.isSelected();
+                        player.setSelected(selected);
+                        checkedJoinMember.set(posion, selected);
+                        joinMemberAdapter.notifyDataSetChanged();
+                    }
+                });
             }
+            this.join_member_screen.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
+
             this.join_projector_screen = (RecyclerView) rootView.findViewById(R.id.join_projector_screen);
-            this.join_projector_screen.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+
             if (joinProjectorAdapter != null) {
                 this.join_projector_screen.setAdapter(joinProjectorAdapter);
+                joinProjectorAdapter.setItemListener(new ItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int posion) {
+                        Button player = view.findViewById(R.id.palyer_name);
+                        boolean selected = !player.isSelected();
+                        player.setSelected(selected);
+                        checkedJoinProjector.set(posion, selected);
+                        joinProjectorAdapter.notifyDataSetChanged();
+                    }
+                });
             }
+            this.join_projector_screen.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL));
             this.join_watch = (Button) rootView.findViewById(R.id.join_watch);
             this.join_cancel = (Button) rootView.findViewById(R.id.join_cancel);
         }
+	}
 
+    /**
+     * add by gowcage
+     */
+    private final String TAG = "MeetingActivity-->";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK)
+            projection = manager.getMediaProjection(resultCode, data);
+
+        if (projection == null) {
+            Log.e(TAG, "media projection is null");
+            return;
+        }
+
+        recorder = new ScreenRecorder(width, height, bitrate, 1, projection, "");
+        recorder.start();//�启动录屏线程
+        Toast.makeText(this, "屏幕录制中...", Toast.LENGTH_LONG).show();
+    }
+
+    private void initScreenParam() {
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        width = metric.widthPixels; // �屏幕宽度（像素）
+        height = metric.heightPixels; // �屏幕高度（像素）
+        W = width;
+        H = height;
+        Log.i(TAG, "w:" + width + "/h:" + height);
+        density = metric.density; // �屏幕密度（0.75 / 1.0 / 1.5）
+        dpi = metric.densityDpi; // �屏幕密度DPI（120 / 160 / 240）
+        bitrate = width * height * VideoQuality;//�比特率/码率
+    }
+
+    private boolean stopRecord() {
+        if (recorder != null) {
+            Log.d(TAG, "quit");
+            /** ************ ******  停止资源操作  ****** ************ **/
+//            nativeUtil.stopResourceOperate(allRes, devIds);
+            /** ************ ******  释放播放资源  ****** ************ **/
+//            nativeUtil.mediaDestroy(0);
+            recorder.quit();
+            recorder = null;
+            return true;
+        } else return false;
     }
 }
+

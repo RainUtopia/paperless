@@ -93,7 +93,7 @@
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:textSize="20sp"
-            android:textColor="@color/White"
+            android:textColor="@color/white"
             android:background="@drawable/btn_enter"
             android:text="取消" />
 

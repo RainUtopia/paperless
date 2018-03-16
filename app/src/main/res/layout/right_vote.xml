@@ -39,7 +39,7 @@
                 android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/text_refe"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="投票管理" />
 
 
@@ -50,7 +50,7 @@
                 android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/vote_management"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="发起投票" />
 
             <Button
@@ -60,7 +60,7 @@
                 android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/vote_open"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="结束投票" />
 
             <Button
@@ -70,7 +70,7 @@
                 android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/vote_over"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="结果查询" />
 
         </RelativeLayout>
@@ -83,7 +83,7 @@
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/select_btn"
+            android:background="@drawable/select_press"
             android:text="结果导出" />
     </RelativeLayout>
 

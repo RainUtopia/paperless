@@ -11,11 +11,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.Surface;
 
+import com.pa.paperless.activity.MeetingActivity;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -24,10 +27,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ScreenRecorder extends Thread {
 
     private final String TAG = "ScreenRecorder-->";
-    private static final String MIME_TYPE = "video/avc";// h.264����
-    private static final int FRAME_RATE = 15;// ֡��
-    private static final int IFRAME_INTERVAL = 10;// �ؼ�֡���
-    private static final int TIMEOUT_US = 10 * 1000;// ��ʱ
+    private static final String MIME_TYPE = "video/avc";// h.264编码
+    private static final int FRAME_RATE = 15;// 帧率
+    private static final int IFRAME_INTERVAL = 10;// 关键帧间隔
+    private static final int TIMEOUT_US = 10 * 1000;// 超时
 
     private int width;
     private int height;
@@ -36,7 +39,7 @@ public class ScreenRecorder extends Thread {
     private String savePath;
     private AtomicBoolean quit = new AtomicBoolean(false);
     private boolean muxerStarted = false;
-    private int videoTrackIndex = -1;// ��Ƶ�������
+    private int videoTrackIndex = -1;// 视频轨道索引
 
     private NativeUtil jni = NativeUtil.getInstance();
 
@@ -48,10 +51,12 @@ public class ScreenRecorder extends Thread {
     private MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
     private ByteBuffer rawData, encoderData;
 
-    public ScreenRecorder(int width, int height, int bitrate, int dpi,
-                          MediaProjection projection, String savePath) {
+    private final int channelIndex = 2;
+
+    public ScreenRecorder(int width, int height, int bitrate, int dpi, MediaProjection projection, String savePath) {
         Log.d(TAG, "ScreenRecorder: width:" + width + "height:" + height);
 
+        jni.InitAndCapture(0, channelIndex);
         this.width = width;
         this.height = height;
         this.bitrate = bitrate;
@@ -70,83 +75,84 @@ public class ScreenRecorder extends Thread {
         super.run();
         try {
             try {
-                prepareEncoder();// ��ʼ��������
+                prepareEncoder();// 初始化编码器
 //                rawData = getRawData(encoder);
 
-                // Muxer��Ҫ����һ���ļ�·���������������Ƶ�������������ʽ
+                // Muxer需要传入一个文件路径来保存输出的视频，并传入输出格式
 //                muxer = new MediaMuxer(savePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 throw new RuntimeException(e);
             }
-            // 4:����VirtualDisplayʵ��,DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC / DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR
+            // 4:创建VirtualDisplay实例,DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC / DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR
             display = projection.createVirtualDisplay("MainScreen", width, height, dpi,
                     DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mSurface, null, null);
             Log.d(TAG, "created virtual display: " + display);
-           
-            recordVirtualDisplay();// ¼��������Ļ
-           
+
+            recordVirtualDisplay();// 录制虚拟屏幕
+
         } finally {
+
             release();
         }
     }
 
     private BufferedOutputStream outputStream;
-    private void createfile() {
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/test1.h264");
-            if (file.exists()) {
-                file.delete();
-            }
-            try {
-                outputStream = new BufferedOutputStream(new FileOutputStream(file));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
 
-    
+    private void createfile() {
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/test1.h264");
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            outputStream = new BufferedOutputStream(new FileOutputStream(file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /**
-     * ��ʼ��������
+     * 初始化编码器
      *
      * @throws IOException
      */
     private void prepareEncoder() throws IOException {
         Log.e(TAG, "prepareEncoder---------------------------");
-        // ����ý���ʽ
-    	jni.InitAndCapture(0,  2);
+        // 设置媒体格式
         MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, width, height);
-        format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);// ��ɫ��ʽ
-        // COLOR_FormatSurface����������ݽ���һ��graphicBufferԪ����
-        // ��һ��Android surface����mediaCodec����
-        format.setInteger(MediaFormat.KEY_BIT_RATE, bitrate);// ���� Խ��Խ����
-        format.setInteger(MediaFormat.KEY_FRAME_RATE, FRAME_RATE);// ֡�� Խ��Խ����,24���»Ῠ��
-//        format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar);// ������ɫ��ʽ
-        format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, IFRAME_INTERVAL);// �ؼ�֡���ʱ��s
-        // IFRAME_INTERVAL��ָ��֡�������ָ���ǣ��ؼ�֡�ļ��ʱ�䡣ͨ������£����óɶ������ⶼ����
-        // �������ó�10���Ǿ���10��һ���ؼ�֡�����ǣ����������Ҫ����Ƶ��Ԥ������������ó�1
-        // ��Ϊ������ó�10���ᷢ�֣�10���ڵ�Ԥ������һ����ͼ
+        format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);// 颜色格式
+        // COLOR_FormatSurface这里表明数据将是一个graphicBuffer元数据
+        // 将一个Android surface进行mediaCodec编码
+        format.setInteger(MediaFormat.KEY_BIT_RATE, bitrate);// 码率 越高越清晰
+        format.setInteger(MediaFormat.KEY_FRAME_RATE, FRAME_RATE);// 帧数 越高越流畅,24以下会卡顿
+//        format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar);// 设置颜色格式
+        format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, IFRAME_INTERVAL);// 关键帧间隔时间s
+        // IFRAME_INTERVAL是指的帧间隔，它指的是，关键帧的间隔时间。通常情况下，设置成多少问题都不大。
+        // 比如设置成10，那就是10秒一个关键帧。但是，如果有需求要做视频的预览，那最好设置成1
+        // 因为如果设置成10，会发现，10秒内的预览都是一个截图
         Log.d(TAG, "created video format: " + format);
-        // ����MediaCodecʵ��
-        encoder = MediaCodec.createEncoderByType(MIME_TYPE);// ���ﴴ�����Ǳ�����
-        encoder.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);// ���ñ���������
+        // 创建MediaCodec实例
+        encoder = MediaCodec.createEncoderByType(MIME_TYPE);// 这里创建的是编码器�
+        encoder.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);// 配置编码器属性
 
-        mSurface = encoder.createInputSurface();// ��һ���ǳ��ؼ��������õģ���MediaCodec�ı���Դ��Ҳ����˵��Ҫ����Encoder������Щ����
+        mSurface = encoder.createInputSurface();// 这一步非常关键，它设置的，是MediaCodec的编码源，也就是说，要告诉Encoder解码哪些流。
         Log.d(TAG, "created input surface: " + mSurface);
-        encoder.start();// ��ʼ����
+        encoder.start();// 开始编码
         createfile();
     }
 
     public byte[] configbyte;
 
     /**
-     * ¼��������Ļ
+     * 录制虚拟屏幕
      *
      * @throws IOException
      */
     private void recordVirtualDisplay() {
         Log.w(TAG, "recordVirtualDisplay---------------------------");
         while (!quit.get()) {
-            int index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);// �����������ȡ��������,�����ѳɹ���������������������
+            int index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);// 输出流队列中取数据索引,返回已成功解码的输出缓冲区的索引
 
             ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
 
@@ -169,7 +175,7 @@ public class ScreenRecorder extends Thread {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }*/
-                    jni.call(2, keyframe);
+                    jni.call(channelIndex, keyframe);
                     //jni
                 } else {
                    /* try {
@@ -177,7 +183,7 @@ public class ScreenRecorder extends Thread {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }*/
-                    jni.call(2, outData);
+                    jni.call(channelIndex, outData);
                     //jni
                 }
                 encoder.releaseOutputBuffer(index, false);
@@ -227,17 +233,17 @@ public class ScreenRecorder extends Thread {
     }
 
     /**
-     * ���������ʽ
+     * 重置输出格式
      */
     private void resetOutputFormat() {
         Log.e(TAG, "resetOutputFormat---------------------------");
-        // Ӧ���ڽ��ջ�����֮ǰ����������Ӧ��ֻ����һ��
-        if (muxerStarted) {// ���muxer������
-            throw new IllegalStateException("�����ʽ�Ѹ���!");
+        // 应该在接收缓冲区之前发生，并且应该只发生一次
+        if (muxerStarted) {// 如果muxer已启动
+            throw new IllegalStateException("输出格式已更改!");
         }
         MediaFormat newFormat = encoder.getOutputFormat();
-        // �ڴ�Ҳ���Խ���sps��pps�Ļ�ȡ����ȡ��ʽ�μ�����getSpsPpsByteBuffer()
-        Log.i(TAG, "�����ʽ�Ѹ���.\n �¸�ʽ: " + newFormat.toString());
+        //在此也可以进行sps与pps的获取，获取方式参见方法getSpsPpsByteBuffer()
+        Log.i(TAG, "输出格式已更改.\\n 新格式: " + newFormat.toString());
 //        videoTrackIndex = muxer.addTrack(newFormat);
 //        muxer.start();
         muxerStarted = true;
@@ -245,31 +251,31 @@ public class ScreenRecorder extends Thread {
     }
 
     /**
-     * ���뵽��Ƶ���
+     * 编码到视频轨道
      *
-     * @param index �������������
+     * @param index 输出缓冲区索引
      */
     private void encodeToVideoTrack(int index) {
         Log.e(TAG, "encodeToVideoTrack---------------------------");
-        ByteBuffer encodedData = encoder.getOutputBuffer(index);// ��������Ƶ����
+        ByteBuffer encodedData = encoder.getOutputBuffer(index);// 编码后的视频数据
 
-        if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0) {// ���ض���ʽ��Ϣ���������ݣ�����ý������
-            // �����INFO_OUTPUT_FORMAT_CHANGED״̬ʱ����������������ݱ����������͵�muxer�� ��������
-            Log.d(TAG, "���� BUFFER_FLAG_CODEC_CONFIG");
+        if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0) {// 是特定格式信息等配置数据，不是媒体数据
+            // 当获得INFO_OUTPUT_FORMAT_CHANGED状态时，编解码器配置数据被拉出并馈送到muxer。 忽略它。
+            Log.d(TAG, "忽略 BUFFER_FLAG_CODEC_CONFIG");
             bufferInfo.size = 0;
 
         }
         if (bufferInfo.size == 0) {
-            Log.d(TAG, "info.size == 0, ������.");
+            Log.d(TAG, "info.size == 0, 放弃它.");
             encodedData = null;
         } else {
             Log.d(TAG, "got buffer, info: size=" + bufferInfo.size
                     + ", presentationTimeUs=" + bufferInfo.presentationTimeUs
                     + ", offset=" + bufferInfo.offset);
         }
-        if (encodedData != null) {// �б�������
-            encodedData.position(bufferInfo.offset);// �൱��һ���α꣨cursor������¼�����￪ʼд���ݣ������￪ʼ�����ݡ�
-            encodedData.limit(bufferInfo.offset + bufferInfo.size);// ���������ж��������ܹ�ȡ�����߻��������ж����������ڴ�����ݣ�
+        if (encodedData != null) {// 有编码数据
+            encodedData.position(bufferInfo.offset);// 相当于一个游标（cursor），记录从哪里开始写数据，从哪里开始读数据。
+            encodedData.limit(bufferInfo.offset + bufferInfo.size);// 缓冲区还有多少数据能够取出或者缓冲区还有多少容量用于存放数据；
             muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
 
             rawData = null;
@@ -279,7 +285,7 @@ public class ScreenRecorder extends Thread {
     }
 
     /**
-     * �ͷ���Դ
+     * 释放资源
      *
      * @throws IOException
      */
@@ -303,7 +309,7 @@ public class ScreenRecorder extends Thread {
         }
     }
 
-    // ��ȡ����ǰ����
+    // 获取编码前数据
     private ByteBuffer getRawData(MediaCodec encoder) {
         Log.w(TAG,
                 "get ByteBuffers before encoding  ---------------------------");
@@ -316,17 +322,17 @@ public class ScreenRecorder extends Thread {
         return inputBuffer;
     }
 
-    /*// ��ȡ����ǰ�����ݣ�jni�������
+    /*// 获取编码前的数据（jni用这个）
     public ByteBuffer getByteBufferData() {
         return rawData;
     }
 
-    // ��ȡ����������
+    // �获取编码后的数据
     public ByteBuffer getEncoderData() {
         return encoderData;
     }*/
 
-    // ��ȡsps pps��ByteBuffer��ע��˴���sps pps����read-onlyֻ��״̬
+    // 获取sps pps的ByteBuffer，注意此处的sps pps都是read-only只读状态
     private void getSpsPpsByteBuffer(MediaFormat newFormat) {
         ByteBuffer rawSps = newFormat.getByteBuffer("csd-0");
         ByteBuffer rawPps = newFormat.getByteBuffer("csd-1");

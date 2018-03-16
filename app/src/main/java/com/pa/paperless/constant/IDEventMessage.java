@@ -65,7 +65,17 @@ public class IDEventMessage {
     public static final int UpDate_BadgeNumber = 3028;
     // 查询可加入的同屏会话
     public static final int QUERY_CAN_JOIN = 3029;
+
+    // 播放进度通知
+
+    public static final int PLAY_PROGRESS_NOTIFY = 3030;
+    // 流播放通知
+    public static final int PLAY_STREAM_NOTIFY = 3031;
+    // 采集流通知
+    public static final int START_COLLECTION_STREAM_NOTIFY = 3032;
+    // 停止采集流通知
+    public static final int STOP_COLLECTION_STREAM_NOTIFY = 3033;
     // 会议视频变更通知
-    public static final int Meet_vedio_changeInform = 3030;
+    public static final int Meet_vedio_changeInform = 3034;
 
 }

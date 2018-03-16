@@ -94,5 +94,7 @@ public class IDivMessage {
     public static final int QUERY_MEET_VEDIO = 1042;
     // 263.查询流播放
     public static final int QUERY_STREAM_PLAY = 1043;
+    // 获取绘画参数
+    public static final int GET_DRAW_INFO = 1044;
 
 }

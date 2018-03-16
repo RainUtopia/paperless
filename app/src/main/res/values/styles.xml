@@ -9,12 +9,12 @@
     </style>
     <!-- 主页自定义属性 -->
     <style name="TextStyle">
-        <item name="android:textColor">@color/White</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
     </style>
     <!-- 进入会议页面左边列表字体样式 -->
     <style name="TextStyle_Left">
-        <item name="android:textColor">@color/White</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">15sp</item>
     </style>
 
@@ -24,12 +24,32 @@
     </style>
     <!-- popupWindow 打开关闭的动画 -->
     <style name="AnimHorizontal" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
-        <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophide_anim</item>
     </style>
     <!--输入框字体大小-->
     <style name="EdtTextTextStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+    <!--画板界面中 共享批注和停止共享按钮-->
+    <style name="ButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:actionButtonStyle">@drawable/select_press</item>
+    </style>
+    <!--表格样式-->
+    <style name="tableViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginRight">0.5dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Anim_PopupWindow">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
 </resources>

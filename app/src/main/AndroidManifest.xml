@@ -38,8 +38,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="landscape"
             android:launchMode="singleInstance"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,18 +52,18 @@
         <!-- android:windowSoftInputMode="adjustPan" 解决:软件盘压缩整个window，导致输入框部分被压缩。 -->
         <activity
             android:name=".activity.MeetingActivity"
-            android:screenOrientation="landscape"
             android:launchMode="singleTop"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activity.DrawBoardActivity"
-            android:screenOrientation="landscape"
             android:launchMode="singleTop"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.ManageActivity"
-            android:screenOrientation="landscape"
             android:launchMode="singleTop"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity
             android:name=".activity.PermissionActivity"
@@ -72,11 +72,15 @@
             android:name=".activity.DirPermissionActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.SplashActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".activity.ScreenShotActivity"/>
-        <activity android:name="org.libsdl.app.SDLActivity"
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".activity.ScreenShotActivity" />
+        <activity
+            android:name="org.libsdl.app.SDLActivity"
             android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
+        <activity android:name=".activity.WhiteBoardActivity"
             android:screenOrientation="landscape"/>
     </application>
 

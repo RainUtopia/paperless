@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -30,6 +31,7 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.InputDevice;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -45,17 +47,29 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.MessageLite;
+import com.mogujie.tt.protobuf.InterfaceMacro;
+import com.mogujie.tt.protobuf.InterfaceMain;
 import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
+import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.constant.IDEventMessage;
+import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.fragment.meeting.MeetingFileFragment;
+import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.utils.DateUtil;
+import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.NativeUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,12 +80,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY;
+
 /**
  * SDL Activity
  */
 public class SDLActivity extends Activity {
 
     NativeUtil nativeUtil;
+    public static InterfaceMain2.pbui_Type_MeetMediaPlay meetMediaPlay;
+    public static InterfaceMain2.pbui_Type_MeetStreamPlay meetStreamPlay;
 
     public static int getLineNumber(Exception e) {
         StackTraceElement[] trace = e.getStackTrace();
@@ -140,6 +158,12 @@ public class SDLActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        releaseMediaRes();
+        Log.e("MyLog", "SDLActivity.onBackPressed:   --->>> ");
+    }
+
+    public void releaseMediaRes() {
+        Log.v(TAG, "releaseMediaRes: ");
         List<Integer> a = new ArrayList<Integer>();
         List<Integer> b = new ArrayList<Integer>();
         a.add(0);
@@ -148,7 +172,6 @@ public class SDLActivity extends Activity {
         nativeUtil.stopResourceOperate(a, b);
         /** ************ ******  释放播放资源  ****** ************ **/
         nativeUtil.mediaDestroy(0);
-        Log.e("MyLog", "SDLActivity.onBackPressed:   --->>> ");
     }
 
     // Setup
@@ -158,6 +181,25 @@ public class SDLActivity extends Activity {
         Log.v(TAG, "Model: " + Build.MODEL);
         Log.v(TAG, "onCreate(): " + mSingleton);
         super.onCreate(savedInstanceState);
+
+        EventBus.getDefault().post(new EventMessage(1, 1));
+        try {
+            int action = getIntent().getIntExtra("action",0);
+            byte[] data = getIntent().getByteArrayExtra("data");
+            if (data != null && data.length > 0){
+                switch(action){
+                    case IDEventMessage.MEDIA_PLAY_INFORM:
+                        meetMediaPlay = InterfaceMain2.pbui_Type_MeetMediaPlay.parseFrom(data);
+                        break;
+                    case IDEventMessage.PLAY_STREAM_NOTIFY:
+                        meetStreamPlay = InterfaceMain2.pbui_Type_MeetStreamPlay.parseFrom(data);
+                        break;
+                }
+            }
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+
         nativeUtil = NativeUtil.getInstance();
         SDLActivity.initialize();
         // So we can call stuff from static callbacks
@@ -205,18 +247,11 @@ public class SDLActivity extends Activity {
 
         btn.setText("go Camera");
         btn.setTextSize(30);
-        mLayout.addView(btn);
+//        mLayout.addView(btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Integer> a = new ArrayList<Integer>();
-                List<Integer> b = new ArrayList<Integer>();
-                a.add(0);
-                b.add(MeetingActivity.getDevId());
-                /** ************ ******  停止资源操作  ****** ************ **/
-                nativeUtil.stopResourceOperate(a, b);
-                /** ************ ******  释放播放资源  ****** ************ **/
-                nativeUtil.mediaDestroy(0);
+                releaseMediaRes();
             }
         });
         // Get filename from "Open with" of another application
@@ -229,6 +264,8 @@ public class SDLActivity extends Activity {
                 SDLActivity.onNativeDropFile(filename);
             }
         }
+
+        EventBus.getDefault().register(this);
         Log.i("onCreate", "onCreate finish!");
     }
 
@@ -295,9 +332,9 @@ public class SDLActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        EventBus.getDefault().post(new EventMessage(0, 0));
 
-        //释放播放资源
-        nativeUtil.mediaDestroy(0);
+        releaseMediaRes();
         Log.v(TAG, "onDestroy()");
         Log.e("MyLog", "SDLActivity.onDestroy 315行:   --->>> ");
         if (SDLActivity.mBrokenLibraries) {
@@ -330,6 +367,8 @@ public class SDLActivity extends Activity {
         super.onDestroy();
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
+
+        EventBus.getDefault().unregister(this);
         Log.e("MyLog", "SDLActivity.onDestroy 346行:   --->>> ");
     }
 
@@ -1047,6 +1086,18 @@ public class SDLActivity extends Activity {
 
         return dialog;
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
+        switch (message.getAction()) {
+            case IDEventMessage.STOP_PLAY:
+                if (message.getType() == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
+                    releaseMediaRes();
+                    finish();
+                }
+                break;
+        }
+    }
 }
 
 
@@ -1086,7 +1137,7 @@ class SDLMain implements Runnable {
 
 
         try {
-            fdd.initvideores(0, 0, 0, 1080, 1920);
+            fdd.initvideores();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -1101,7 +1152,7 @@ class SDLMain implements Runnable {
  * Because of this, that's where we set up the SDL thread
  */
 class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
-        View.OnKeyListener, View.OnTouchListener, SensorEventListener {
+        View.OnKeyListener, View.OnTouchListener, SensorEventListener, View.OnClickListener, CallListener {
 
     // Sensors
     protected static SensorManager mSensorManager;
@@ -1110,16 +1161,31 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Keep track of the surface size to normalize touch events
     protected static float mWidth, mHeight;
 
+    //add by gowcage
+    private Context context;
+    private PopupWindow popupWindow;
+    private NativeUtil nativeUtil;
+    private boolean isPause = false;
+    // 参见Interface_main.proto中的播放进度通知
+    private int mediaId = 0, status = 2, per = 0,//当前播放的媒体 ID、状态、百分比；
+            sec = 0, time = 0;//当前播放的媒体 播放秒数、文件时长；
+    private SeekBar seekbar;
+    private TextView tv_curTime, tv_totalTime;
+
     // Startup
     public SDLSurface(Context context) {
 
         super(context);
+        this.context = context;
         getHolder().addCallback(this);
         setFocusable(true);
         setFocusableInTouchMode(true);
         requestFocus();
         setOnKeyListener(this);
         setOnTouchListener(this);
+        setOnClickListener(this);
+        EventBus.getDefault().register(this);
+        nativeUtil = NativeUtil.getInstance();
 
         mDisplay = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -1152,6 +1218,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     public void surfaceCreated(SurfaceHolder holder) {
         Log.v("SDL", "surfaceCreated()");
         holder.setType(SurfaceHolder.SURFACE_TYPE_GPU);
+        nativeUtil.setCallListener(this);
+        try {
+            nativeUtil.queryDeviceInfo();
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
     }
 
     // Called when we lose the surface
@@ -1162,6 +1234,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         SDLActivity.handlePause();
         SDLActivity.mIsSurfaceReady = false;
         SDLActivity.onNativeSurfaceDestroyed();
+        EventBus.getDefault().unregister(this);
+        popupWindow = null;
     }
 
     // Called when the surface is resized
@@ -1264,6 +1338,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
             final Thread sdlThread = new Thread(new SDLMain(), "SDLThread");
             enableSensor(Sensor.TYPE_ACCELEROMETER, true);
+            Log.v("SDLActivity-->", "sdlThread start");
             sdlThread.start();
 
             // Set up a listener thread to catch when the native thread ends
@@ -1295,6 +1370,195 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     public void onDraw(Canvas canvas) {
     }
 
+    /**
+     * add by gowcage====================================================================
+     */
+
+    /**
+     * 创建一个popupWindow
+     *
+     * @param parent
+     * @return
+     * @author gowcage
+     */
+    private PopupWindow createBottomPopup(View parent) {
+        View content = LayoutInflater.from(context).inflate(R.layout.popup_ctrl, null);
+        PopupWindow popup = new PopupWindow(content, (int) mWidth, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popup.setTouchable(true);
+        // 此处为popwindow 设置背景，同时做到点击外部区域，popwindow消失
+        // popup.setBackgroundDrawable(getResources().getDrawable(
+        // R.drawable.popupwindow_bg));
+        popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);// 设置焦点
+        popup.setAnimationStyle(R.style.Anim_PopupWindow);
+        popup.showAtLocation(parent, Gravity.BOTTOM, 0, 0); // 将window视图显示在myButton下面
+        //initView
+        seekbar = content.findViewById(R.id.SDL_playCtrl_seekBar);
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                List<Integer> devIds = new ArrayList<Integer>();
+                devIds.add(MeetingActivity.o.getDevId());
+                nativeUtil.setPlayPlace(0, seekBar.getProgress(), devIds);
+            }
+        });
+
+        tv_curTime = content.findViewById(R.id.SDL_playCtrl_tv_curTime);
+        tv_totalTime = content.findViewById(R.id.SDL_playCtrl_tv_totalTime);
+        try {
+            byte[] timedata = nativeUtil.queryFileProperty(InterfaceMacro.Pb_MeetFilePropertyID.Pb_MEETFILE_PROPERTY_TIME.getNumber(), mediaId);
+            InterfaceMain.pbui_CommonInt32uProperty commonInt32uProperty = InterfaceMain.pbui_CommonInt32uProperty.parseFrom(timedata);
+            tv_totalTime.setText("" + DateUtil.convertTime((long) commonInt32uProperty.getPropertyval()));
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+
+        Button btn_pause = content.findViewById(R.id.SDL_playCtrl_btn_pause),
+                btn_stop = content.findViewById(R.id.SDL_playCtrl_btn_stop),
+                btn_shareScreen = content.findViewById(R.id.SDL_playCtrl_btn_shareScreen),
+                btn_stopShare = content.findViewById(R.id.SDL_playCtrl_btn_stopShare),
+                btn_startProjection = content.findViewById(R.id.SDL_playCtrl_btn_startProjection),
+                btn_stopProjection = content.findViewById(R.id.SDL_playCtrl_btn_stopProjection);
+
+        btn_pause.setOnClickListener(onclick);
+        btn_stop.setOnClickListener(onclick);
+        btn_shareScreen.setOnClickListener(onclick);
+        btn_stopShare.setOnClickListener(onclick);
+        btn_startProjection.setOnClickListener(onclick);
+        btn_stopProjection.setOnClickListener(onclick);
+
+        return popup;
+    }
+
+    // Click events
+    @Override
+    public void onClick(View v) {
+        Log.v("SDL-->", "onClick: ");
+        popupWindow = createBottomPopup(v);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
+        switch (message.getAction()) {
+            case IDEventMessage.PLAY_PROGRESS_NOTIFY:
+                InterfaceMain.pbui_Type_PlayPosCb playPos = (InterfaceMain.pbui_Type_PlayPosCb) message.getObject();
+                mediaId = playPos.getMediaId();
+                status = playPos.getStatus();
+                per = playPos.getPer();
+                sec = playPos.getSec();
+                if (seekbar != null)
+                    seekbar.setProgress(per);
+                if (tv_curTime != null)
+                    tv_curTime.setText("" + DateUtil.convertTime(sec));
+                break;
+        }
+    }
+
+    //在线投影机
+    private ArrayList onlineProjectors = new ArrayList();
+    private ArrayList onlineProjectorIds = new ArrayList();
+    private ArrayList onlineClientIds = new ArrayList();
+
+    @Override
+    public void callListener(int action, Object result) {
+        switch (action) {
+            case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
+                InterfaceMain.pbui_Type_DeviceDetailInfo devInfos = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
+                if (devInfos != null) {
+                    InterfaceMain.pbui_Type_DeviceDetailInfo o5 = devInfos;
+                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
+                    onlineProjectors.clear();
+                    List allProjectors = new ArrayList<>();
+                    for (int i = 0; i < deviceInfos.size(); i++) {
+                        DeviceInfo deviceInfo = deviceInfos.get(i);
+                        int netState = deviceInfo.getNetState();
+                        int devId = deviceInfo.getDevId();
+                        //判断是否是投影机
+                        if ((devId & Macro.DEVICE_MEET_PROJECTIVE) == Macro.DEVICE_MEET_PROJECTIVE) {
+                            // 添加所有投影机
+                            allProjectors.add(deviceInfo);
+                            //判断是否是在线状态
+                            if (netState == 1) {
+                                //说明是在线状态的投影机
+                                onlineProjectors.add(deviceInfo);
+                                onlineProjectorIds.add(deviceInfo.getDevId());
+                            }
+                        } else if ((devId & Macro.DEVICE_MEET_CLIENT) == Macro.DEVICE_MEET_CLIENT) {//客户端
+                            if (netState == 1 && devId != MeetingActivity.getDevId()) {
+                                onlineClientIds.add(devId);//添加在线客户端
+//                                for (int j = 0; j < onlineClientIds.size(); j++) {
+//                                    Log.i("SDLSurface-->", "onlienClient: id=" + onlineClientIds.get(j));
+//                                }
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    OnClickListener onclick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            List<Integer> devIds = new ArrayList<Integer>();
+            List<Integer> res = new ArrayList<Integer>();
+            res.add(0);
+            switch (v.getId()) {
+                case R.id.SDL_playCtrl_btn_pause:
+                    devIds.add(MeetingActivity.o.getDevId());
+                    if (isPause) {
+                        Log.i("SDL-->", "resume");
+                        nativeUtil.setPlayRecover(0, devIds);
+                        isPause = false;
+                    } else {
+                        Log.i("SDL-->", "pause");
+                        nativeUtil.setPlayStop(0, devIds);
+                        isPause = true;
+                    }
+                    break;
+                case R.id.SDL_playCtrl_btn_stop:
+                    List<Integer> a = new ArrayList<Integer>();
+                    List<Integer> b = new ArrayList<Integer>();
+                    a.add(0);
+                    b.add(MeetingActivity.getDevId());
+                    /** ************ ******  停止资源操作  ****** ************ **/
+                    nativeUtil.stopResourceOperate(a, b);
+                    /** ************ ******  释放播放资源  ****** ************ **/
+                    nativeUtil.mediaDestroy(0);
+                    SDLActivity.mSingleton.finish();
+                    break;
+                case R.id.SDL_playCtrl_btn_shareScreen:
+                    Log.v("SDL-->", "mediaId=" + mediaId + " per=" + per);
+//                    devIds.add(0x110000c);
+                    nativeUtil.mediaPlayOperate(mediaId, devIds, per);
+                    break;
+                case R.id.SDL_playCtrl_btn_stopShare:
+//                    devIds.add(0x110000c);
+                    nativeUtil.stopResourceOperate(res, onlineClientIds);
+                    break;
+                case R.id.SDL_playCtrl_btn_startProjection:
+                    nativeUtil.mediaPlayOperate(mediaId, onlineProjectorIds, per);//开始投影
+                    break;
+                case R.id.SDL_playCtrl_btn_stopProjection:
+                    nativeUtil.stopResourceOperate(res, onlineProjectorIds);
+                    break;
+            }
+        }
+    };
+
+    /**
+     * add by gowcage====================================================================
+     */
 
     // Key events
     @Override
@@ -1373,6 +1637,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     break;
 
                 case MotionEvent.ACTION_UP:
+                    Log.v("SDL-->", "onTouch: action up");
                 case MotionEvent.ACTION_DOWN:
                     // Primary pointer up/down, the index is always zero
                     i = 0;
@@ -1415,10 +1680,11 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
             }
         }
 
-        return true;
+        return false;
     }
 
     // Sensor events
+
     public void enableSensor(int sensortype, boolean enabled) {
         // TODO: This uses getDefaultSensor - what if we have >1 accels?
         if (enabled) {

@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="确定" />
 
             <Button
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="取消" />
         </LinearLayout>
     </LinearLayout>

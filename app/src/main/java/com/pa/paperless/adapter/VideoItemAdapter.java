@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.MyUtils;
@@ -16,7 +17,7 @@ import com.pa.paperless.utils.MyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.fragment.meeting.VideoFragment.checkStreams;
+//import static com.pa.paperless.fragment.meeting.VideoFragment.checkStreams;
 
 /**
  * Created by Administrator on 2017/11/9.
@@ -25,10 +26,10 @@ import static com.pa.paperless.fragment.meeting.VideoFragment.checkStreams;
 public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder> {
 
 
-    private List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> mDatas;
+    private List<DeviceInfo> mDatas;
     private ItemClickListener mListener;
 
-    public VideoItemAdapter(List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> data) {
+    public VideoItemAdapter(List<DeviceInfo> data) {
         mDatas = data;
     }
 
@@ -36,15 +37,15 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
      * 获取选中的流
      * @return
      */
-    public List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> getChecked() {
-        List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> checkedStreams = new ArrayList<>();
-        for (int i = 0; i < checkStreams.size(); i++) {
-            if (checkStreams.get(i)) {
-                checkedStreams.add(mDatas.get(i));
-            }
-        }
-        return checkedStreams;
-    }
+//    public List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> getChecked() {
+//        List<InterfaceMain.pbui_Item_MeetVideoDetailInfo> checkedStreams = new ArrayList<>();
+//        for (int i = 0; i < checkStreams.size(); i++) {
+//            if (checkStreams.get(i)) {
+//                checkedStreams.add(mDatas.get(i));
+//            }
+//        }
+//        return checkedStreams;
+//    }
 
 
     public void setItemListener(ItemClickListener listener) {
@@ -60,8 +61,8 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
     @Override
     public void onBindViewHolder(final VideoItemAdapter.ViewHolder holder, int position) {
-        holder.name_tv.setText(MyUtils.getBts(mDatas.get(position).getName()));
-        holder.name_tv.setSelected(checkStreams.get(position));
+        holder.name_tv.setText(mDatas.get(position).getDevName());
+//        holder.name_tv.setSelected(checkStreams.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

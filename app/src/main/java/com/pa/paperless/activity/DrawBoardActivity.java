@@ -9,12 +9,16 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.R;
+import com.pa.paperless.bean.DrawPropertyBean;
+import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.GetPicFilePathUtil;
 import com.pa.paperless.utils.ImageUtils;
@@ -28,7 +32,7 @@ import java.util.List;
 import static com.pa.paperless.utils.MyUtils.setAnimator;
 
 
-public class DrawBoardActivity extends BaseActivity implements View.OnClickListener, CallListener {
+public class DrawBoardActivity extends BaseActivity implements View.OnClickListener {
 
     public static int PHOTO_REQUEST_GALLERY = 1;
     private ImageView mPen;
@@ -63,6 +67,8 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
     private List<ImageView> mTopImages;//上方的图片
     private List<ImageView> mBotImages;//下方的图片
     private NativeUtil nativeUtil;
+    //获取绘画时的参数
+    private DrawPropertyBean drawPropertyBean;
 
 
     @Override
@@ -79,7 +85,6 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-        nativeUtil.setCallListener(this);
     }
 
     private void initEvent() {
@@ -111,6 +116,39 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
+        mPaletteView.setListener(new CallListener() {
+            @Override
+            public void callListener(int action, Object result) {
+                if(action == IDivMessage.GET_DRAW_INFO) {
+                    Log.e("MyLog","DrawBoardActivity.callListener 124行:   --->>> ");
+                    long timeMillis = System.currentTimeMillis();
+                    drawPropertyBean = (DrawPropertyBean) result;
+                    switch (drawPropertyBean.getMode()){
+                        case CIRCLE:
+                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ELLIPSE.getNumber());
+                            break;
+                        case LINE:
+                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_LINE.getNumber());
+                            break;
+                        case DRAW:
+                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber());
+                            break;
+                        case RECT:
+                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_RECTANGLE.getNumber());
+                            break;
+                        case TEXT:
+                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber());
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private void addForm(long timeMillis,int type) {
+//        nativeUtil.addDrawFigure(MeetingActivity.o.getMemberid(),
+//                timeMillis,drawPropertyBean.getColor(), type,
+//                drawPropertyBean.getLinesize(),0,MeetingActivity.o.getMemberid(),timeMillis,1);
     }
 
     /**
@@ -459,8 +497,5 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void callListener(int action, Object result) {
 
-    }
 }

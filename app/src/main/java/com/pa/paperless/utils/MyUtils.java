@@ -11,7 +11,10 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -395,5 +398,19 @@ public class MyUtils {
         }
         return content;
     }
+
+    public static void handTo(int action, Object object, String key, Handler handler) {
+        if (object != null) {
+            Bundle bundle = new Bundle();
+            ArrayList arrayList = new ArrayList();
+            arrayList.add(object);
+            bundle.putParcelableArrayList(key, arrayList);
+            Message message = new Message();
+            message.what = action;
+            message.setData(bundle);
+            handler.sendMessage(message);
+        }
+    }
+
 
 }

@@ -13,10 +13,17 @@ import android.graphics.RectF;
 import android.graphics.Xfermode;
 import android.media.audiofx.LoudnessEnhancer;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+
+import com.pa.paperless.bean.DrawPropertyBean;
+import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.listener.CallListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,20 +68,21 @@ public class PaletteView extends View {
     private float upX;
     private float upY;
     private Paint easerPaint;
-
+    private CallListener mListener;
+    private Mode mMode = Mode.DRAW;
+    private float x;
+    private float y;
 
     public enum Mode {
-        DRAW,
-        CIRCLE,
-        RECT,
-        LINE,
-        ERASER
+        DRAW, CIRCLE, RECT, LINE, ERASER, TEXT
     }
 
-    private Mode mMode = Mode.DRAW;
 
-    public PaletteView(Context context) {
-        this(context, null);
+    //获取当前的画笔和路径信息
+    public DrawPropertyBean getDrawPro() {
+        int color = mPaint.getColor();
+        int strokeWidth = (int) mPaint.getStrokeWidth();
+        return new DrawPropertyBean(mMode, strokeWidth, color, downX, downY, moveX, moveY);
     }
 
     public PaletteView(Context context, AttributeSet attrs) {
@@ -95,6 +103,7 @@ public class PaletteView extends View {
     private void init() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
+        //如果该项设置为true，则图像在动画进行中会滤掉对Bitmap图像的优化操作，加快显示速度，本设置项依赖于dither和xfermode的设置。
         mPaint.setFilterBitmap(true);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -125,6 +134,7 @@ public class PaletteView extends View {
 
     private abstract static class DrawingInfo {
         Paint paint;
+
         abstract void draw(Canvas canvas);
     }
 
@@ -326,79 +336,89 @@ public class PaletteView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    public void setListener(CallListener listener) {
+        mListener = listener;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         final int action = event.getAction() & MotionEvent.ACTION_MASK;
-        final float x = event.getX();
-        final float y = event.getY();
+        x = event.getX();
+        y = event.getY();
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                mStartX = x;
-                mStartY = y;
-                downX = event.getX();
-                downY = event.getY();
-                if (mPath == null) {
-                    mPath = new Path();
-                }
-                mPath.moveTo(x, y);
-                invalidate();
+                touchDown(event);
                 break;
             case MotionEvent.ACTION_MOVE:
-                moveX = event.getX();
-                moveY = event.getY();
-
-                float vy = (event.getRawY()) - moveY;
-                float vx = (event.getRawX()) - moveX;
-                if (mMode == Mode.DRAW) {
-                    //这里终点设为两点的中心点的目的在于使绘制的曲线更平滑，如果终点直接设置为x,y，效果和lineto是一样的,实际是折线效果
-                    mPath.quadTo(mStartX, mStartY, (x + mStartX) / 2, (y + mStartY) / 2);
-                } else if (mMode == Mode.CIRCLE) {
-                    mPath.reset();
-                    RectF oval = new RectF(downX, downY, x, y);
-                    mPath.addOval(oval, Path.Direction.CCW);
-                } else if (mMode == Mode.RECT) {
-                    mPath.reset();
-                    RectF rectF = new RectF(downX, downY, x, y);
-                    mPath.addRect(rectF, Path.Direction.CCW);
-
-                } else if (mMode == Mode.LINE) {
-                    mPath.reset();
-                    mPath.moveTo(downX, downY);
-                    mPath.lineTo(moveX, moveY);
-                }
-                if (mBufferBitmap == null) {
-                    initBuffer();
-                }
-//                if (mMode == Mode.ERASER && !mCanEraser) {
-//                    Log.e("MyLog", "PaletteView.onTouchEvent:  进入橡皮差方法 --->>> "+mCanEraser);
-//                    mPath.reset();
-////                    mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-//                    mPath.quadTo(mStartX, mStartY, (x + mStartX) / 2, (y + mStartY) / 2);
-//                    break;
-//                }
-                if (mMode == Mode.DRAW) {
-                    mBufferCanvas.drawPath(mPath, mPaint);
-                }
-                if (mMode == Mode.ERASER) {
-                    mBufferCanvas.drawPath(mPath, mPaint);
-                }
-//                mBufferCanvas.drawPath(mPath, mPaint);
-                mStartX = x;
-                mStartY = y;
-                invalidate();
+                touchMove(event);
                 break;
             case MotionEvent.ACTION_UP:
-                upX = event.getX();
-                upY = event.getY();
-                //保存绘制的Path -- >> 撤销操作
-                saveDrawingPath();
-                mBufferCanvas.drawPath(mPath, mPaint);
-                mPath.reset();
-                invalidate();
+                touchUp(event);
                 break;
         }
         return true;
     }
+
+    private void touchUp(MotionEvent event) {
+        upX = event.getX();
+        upY = event.getY();
+        //保存绘制的Path -- >> 撤销操作
+        saveDrawingPath();
+//        mBufferCanvas.drawPath(mPath, mPaint);
+        mPath.reset();
+        invalidate();
+    }
+
+    private void touchMove(MotionEvent event) {
+        moveX = event.getX();
+        moveY = event.getY();
+        if (mMode == Mode.DRAW) {
+            //这里终点设为两点的中心点的目的在于使绘制的曲线更平滑，如果终点直接设置为x,y，效果和lineto是一样的,实际是折线效果
+            mPath.quadTo(mStartX, mStartY, (x + mStartX) / 2, (y + mStartY) / 2);
+        } else if (mMode == Mode.CIRCLE) {
+            mPath.reset();
+            RectF oval = new RectF(downX, downY, x, y);
+            mPath.addOval(oval, Path.Direction.CCW);
+        } else if (mMode == Mode.RECT) {
+            mPath.reset();
+            RectF rectF = new RectF(downX, downY, x, y);
+            mPath.addRect(rectF, Path.Direction.CCW);
+        } else if (mMode == Mode.LINE) {
+            mPath.reset();
+            mPath.moveTo(downX, downY);
+            mPath.lineTo(moveX, moveY);
+        }
+        if (mBufferBitmap == null) {
+            initBuffer();
+        }
+        if (mMode == Mode.DRAW) {
+            mBufferCanvas.drawPath(mPath, mPaint);
+        }
+        if (mMode == Mode.ERASER) {
+            mBufferCanvas.drawPath(mPath, easerPaint);
+        }
+        mBufferCanvas.drawPath(mPath, mPaint);
+        mStartX = x;
+        mStartY = y;
+        invalidate();
+        mListener.callListener(IDivMessage.GET_DRAW_INFO, getDrawPro());
+    }
+
+    private void touchDown(MotionEvent event) {
+        if (mMode == Mode.TEXT) {
+
+        }
+        mStartX = x;
+        mStartY = y;
+        downX = event.getX();
+        downY = event.getY();
+        if (mPath == null) {
+            mPath = new Path();
+        }
+        mPath.moveTo(x, y);
+        invalidate();
+    }
+
 }

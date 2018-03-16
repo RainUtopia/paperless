@@ -219,7 +219,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                 if (FileUtil.isVideoFile(filename)) {
                     //如果是音频或视频则在线播放
                     startActivity(new Intent(getActivity(), SDLActivity.class));
-                    nativeUtil.mediaPlayOperate(posion, MeetingActivity.getDevId(), 0);
+					List<Integer> devIds = new ArrayList<Integer>();
+                    devIds.add(MeetingActivity.getDevId());
+                    nativeUtil.mediaPlayOperate(posion, devIds, 0);
                 } else {
                     MyUtils.openFile(filename, getView(), nativeUtil, posion, getContext());
                 }

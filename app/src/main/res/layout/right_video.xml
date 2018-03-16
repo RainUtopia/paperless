@@ -82,7 +82,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="观看直播"
                 android:textColor="@color/CardBackgroundColor" />
 
@@ -93,7 +93,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="停止观看"
                 android:textColor="@color/CardBackgroundColor" />
         </LinearLayout>
@@ -113,7 +113,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="推送视屏"
                 android:textColor="@color/CardBackgroundColor" />
 
@@ -124,9 +124,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/select_btn"
+                android:background="@drawable/select_press"
                 android:text="投影视屏"
                 android:textColor="@color/CardBackgroundColor" />
         </LinearLayout>
     </com.zhy.android.percent.support.PercentLinearLayout>
+
 </com.zhy.android.percent.support.PercentLinearLayout>

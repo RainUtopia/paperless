@@ -60,14 +60,14 @@ public class Main extends Activity implements OnClickListener {
 
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
-        width = metric.widthPixels; // ��Ļ��ȣ����أ�
-        height = metric.heightPixels; // ��Ļ�߶ȣ����أ�
+        width = metric.widthPixels; // �屏幕宽度（像素）
+        height = metric.heightPixels; // �屏幕高度（像素）
         Log.i(TAG,"w:"+width+"/h:"+height);
-        density = metric.density; // ��Ļ�ܶȣ�0.75 / 1.0 / 1.5��
-        dpi = metric.densityDpi; // ��Ļ�ܶ�DPI��120 / 160 / 240��
-        bitrate = width * height * VideoQuality;//������/����
+        density = metric.density; // �屏幕密度（0.75 / 1.0 / 1.5）
+        dpi = metric.densityDpi; // �屏幕密度DPI（120 / 160 / 240）
+        bitrate = width * height * VideoQuality;//�比特率/码率
 
-        // 1: �õ� MediaProjectionManager ʵ��
+        // 1: 拿到 MediaProjectionManager 实例
         manager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
     }
 
@@ -78,15 +78,15 @@ public class Main extends Activity implements OnClickListener {
             Log.w(TAG, "quit");
             recorder.quit();
             recorder = null;
-            recordbtn.setText("���¿�ʼ¼��");
+            recordbtn.setText("重新开始录屏");
         } else {
-            // 2: ������Ļ��׽����
+            // 2: 发起屏幕捕捉请求
             Intent intent = manager.createScreenCaptureIntent();
             startActivityForResult(intent, REQUEST_CODE);
         }
     }
 
-    // 3:ͨ�� onActivityResult ���ؽ����ȡ MediaProjection ʵ��
+    // 3:通过 onActivityResult 返回结果获取 MediaProjection 实例
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -103,26 +103,26 @@ public class Main extends Activity implements OnClickListener {
         file = new File(Environment.getExternalStorageDirectory(), "record_"
                 + width + "x" + height + "_" + System.currentTimeMillis() + ".mp4");
         recorder = new ScreenRecorder(width, height, bitrate, 1, projection, file.getAbsolutePath());
-        recorder.start();//����¼���߳�
-        recordbtn.setText("����¼��");
-        Toast.makeText(this, "��Ļ¼����...", Toast.LENGTH_LONG).show();
-        moveTaskToBack(true);//�������Ƶ���̨
+        recorder.start();//�启动录屏线程
+        recordbtn.setText("结束录屏");
+        Toast.makeText(this, "屏幕录制中...", Toast.LENGTH_LONG).show();
+        moveTaskToBack(true);//�将程序移到后台
 //        }
     }
 
     /**
-     * ��ʼ¼��
+     * 开始录制
      */
     public void startRecordScreen() {
         if (recorder == null) {
-            // 2: ����intent����startActivityForResult
+            // 2: 创建intent，并startActivityForResult
             Intent intent = manager.createScreenCaptureIntent();
             startActivityForResult(intent, REQUEST_CODE);
         }
     }
 
     /**
-     * ��ȡ����
+     * 获取数据
      */
     /*public ByteBuffer getScreenRawData() {
         ByteBuffer rawData = null;
@@ -131,14 +131,14 @@ public class Main extends Activity implements OnClickListener {
     }*/
 
     /**
-     * ����¼��
+     * 结束录制
      */
     public void stopRecordScreen() {
         if (recorder != null) {
             Log.w(TAG, "quit");
             recorder.quit();
             recorder = null;
-            recordbtn.setText("���¿�ʼ¼��");
+            recordbtn.setText("重新开始录屏");
         }
     }
 
