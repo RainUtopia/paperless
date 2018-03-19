@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.utils.DateUtil;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

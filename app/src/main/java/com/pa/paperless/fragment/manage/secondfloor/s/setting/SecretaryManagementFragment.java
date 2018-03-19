@@ -3,7 +3,6 @@ package com.pa.paperless.fragment.manage.secondfloor.s.setting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,23 +16,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceAdmin;
+import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.setadapter.SecretaryTopAdapter;
 import com.pa.paperless.adapter.setadapter.VenueLeftAdapter;
-import com.pa.paperless.adapter.setadapter.VenueRightAdapter;
-import com.pa.paperless.bean.AdminInfo;
 import com.pa.paperless.bean.AdminsBean;
 import com.pa.paperless.bean.VenueBean;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.controller.SetController;
-import com.pa.paperless.event.EventAdmin;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
-import com.pa.paperless.utils.Dispose;
 //import com.pa.paperless.utils.RecycleViewDivider;
 import com.wind.myapplication.NativeUtil;
 
@@ -97,7 +92,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
             switch (msg.what) {
                 case IDivMessage.QUERY_ADMIN_INFO://52.查询管理员
                     ArrayList queryAdminInfo = msg.getData().getParcelableArrayList("queryAdminInfo");
-                    InterfaceMain.pbui_TypeAdminDetailInfo o = (InterfaceMain.pbui_TypeAdminDetailInfo) queryAdminInfo.get(0);
+                    InterfaceAdmin.pbui_TypeAdminDetailInfo o = (InterfaceAdmin.pbui_TypeAdminDetailInfo) queryAdminInfo.get(0);
                     adminInfos = o.getItemList();
 
                     mTopAdapter = new SecretaryTopAdapter(getContext(), adminInfos);
@@ -118,7 +113,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                             mSecretaryPasswordEdt.setText(topPasswordTv.getText());
                             mSecretaryNoteEdt.setText(topNoteTv.getText());
                             mTopAdapter.setCheckedId(posion);
-                            InterfaceMain.pbui_Item_AdminDetailInfo pbui_item_adminDetailInfo = adminInfos.get(posion);
+                            InterfaceAdmin.pbui_Item_AdminDetailInfo pbui_item_adminDetailInfo = adminInfos.get(posion);
                             int adminid = pbui_item_adminDetailInfo.getAdminid();
                             Log.e("MyLog", "SecretaryManagementFragment.onItemClick:  adminid --->>> " + adminid);
                             try {
@@ -136,7 +131,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                     break;
                 case IDivMessage.QUERY_ADMIN_PLACE://60.查询会议管理员控制的会场
                     ArrayList queryAdminPlace = msg.getData().getParcelableArrayList("queryAdminPlace");
-                    InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo o1 = (InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo) queryAdminPlace.get(0);
+                    InterfaceAdmin.pbui_Type_MeetManagerRoomDetailInfo o1 = (InterfaceAdmin.pbui_Type_MeetManagerRoomDetailInfo) queryAdminPlace.get(0);
                     //会场ID
                     List<Integer> roomidList = o1.getRoomidList();
                     //管理员ID
@@ -148,7 +143,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                     break;
                 case IDivMessage.QUERY_PLACE_BYID://118.查询指定ID的会场
                     ArrayList queryPlaceById = msg.getData().getParcelableArrayList("queryPlaceById");
-                    InterfaceMain.pbui_Type_MeetRoomDetailInfo o2 = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) queryPlaceById.get(0);
+                    InterfaceRoom.pbui_Type_MeetRoomDetailInfo o2 = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) queryPlaceById.get(0);
                     itemList = o2.getItemList();
                     mLeftAdapter = new VenueLeftAdapter(getContext(), itemList);
                     mSecretaryLeftRl.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -171,7 +166,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                     break;
                 case IDivMessage.QUERY_PLACE_INFO://112.查询会场
                     ArrayList queryPlaceInfo = msg.getData().getParcelableArrayList("queryPlaceInfo");
-                    InterfaceMain.pbui_Type_MeetRoomDetailInfo o3 = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) queryPlaceInfo.get(0);
+                    InterfaceRoom.pbui_Type_MeetRoomDetailInfo o3 = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) queryPlaceInfo.get(0);
                     itemListAll = o3.getItemList();
 
                     mRightAdapter = new VenueLeftAdapter(getContext(), itemListAll);
@@ -195,9 +190,9 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
             }
         }
     };
-    private List<InterfaceMain.pbui_Item_AdminDetailInfo> adminInfos;
-    private List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> itemListAll;
-    private List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> itemList;
+    private List<InterfaceAdmin.pbui_Item_AdminDetailInfo> adminInfos;
+    private List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> itemListAll;
+    private List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> itemList;
 
 
     @Nullable
@@ -316,7 +311,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                 String nameStr = String.valueOf(mSecretaryUsernameEdt.getText());
                 String passwordStr = String.valueOf(mSecretaryPasswordEdt.getText());
                 String noteStr = String.valueOf(mSecretaryNoteEdt.getText());
-                InterfaceMain.pbui_Item_AdminDetailInfo defaultInstance = InterfaceMain.pbui_Item_AdminDetailInfo.getDefaultInstance();
+                InterfaceAdmin.pbui_Item_AdminDetailInfo defaultInstance = InterfaceAdmin.pbui_Item_AdminDetailInfo.getDefaultInstance();
 //                defaultInstance.parseFrom();
                 nativeUtil.addAdmin(defaultInstance);
 //                mTopAdapter.inserted(mTopData.size(), new AdminInfo(nameStr, passwordStr, noteStr));
@@ -346,7 +341,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_ADMIN_INFO:
-                InterfaceMain.pbui_TypeAdminDetailInfo result1 = (InterfaceMain.pbui_TypeAdminDetailInfo) result;
+                InterfaceAdmin.pbui_TypeAdminDetailInfo result1 = (InterfaceAdmin.pbui_TypeAdminDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -359,7 +354,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                 }
                 break;
             case IDivMessage.QUERY_ADMIN_PLACE:
-                InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo result2 = (InterfaceMain.pbui_Type_MeetManagerRoomDetailInfo) result;
+                InterfaceAdmin.pbui_Type_MeetManagerRoomDetailInfo result2 = (InterfaceAdmin.pbui_Type_MeetManagerRoomDetailInfo) result;
                 if (result2 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -372,7 +367,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                 }
                 break;
             case IDivMessage.QUERY_PLACE_BYID:
-                InterfaceMain.pbui_Type_MeetRoomDetailInfo result3 = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) result;
+                InterfaceRoom.pbui_Type_MeetRoomDetailInfo result3 = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) result;
                 if (result3 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -385,7 +380,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
                 }
                 break;
             case IDivMessage.QUERY_PLACE_INFO:
-                InterfaceMain.pbui_Type_MeetRoomDetailInfo result4 = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) result;
+                InterfaceRoom.pbui_Type_MeetRoomDetailInfo result4 = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) result;
                 if (result4 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

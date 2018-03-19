@@ -3,7 +3,6 @@ package com.pa.paperless.fragment.manage.secondfloor.s.setting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,13 +17,13 @@ import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.setadapter.MeetingRoomLeftAdapter;
 import com.pa.paperless.adapter.setadapter.MeetingRoomTopAdapter;
 import com.pa.paperless.bean.DeviceBean;
-import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.PlaceInfo;
 import com.pa.paperless.bean.RoomTopBean;
 import com.pa.paperless.constant.IDEventMessage;
@@ -107,7 +106,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
             switch (msg.what) {
                 case IDivMessage.QUERY_PLACE_INFO://查询会场
                     ArrayList queryPlaceInfo = msg.getData().getParcelableArrayList("queryPlaceInfo");
-                    InterfaceMain.pbui_Type_MeetRoomDetailInfo o = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) queryPlaceInfo.get(0);
+                    InterfaceRoom.pbui_Type_MeetRoomDetailInfo o = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) queryPlaceInfo.get(0);
                     itemList = o.getItemList();
                     mPlaceAdapter = new MeetingRoomTopAdapter(getContext(), itemList);
                     mRoomTopRl.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -131,7 +130,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                             mPosion = posion;
                             mPlaceAdapter.setCheckedId(posion);
                             //获取当前点击item的会场ID
-                            InterfaceMain.pbui_Item_MeetRoomDetailInfo pbui_item_meetRoomDetailInfo = itemList.get(posion);
+                            InterfaceRoom.pbui_Item_MeetRoomDetailInfo pbui_item_meetRoomDetailInfo = itemList.get(posion);
                             int roomid = pbui_item_meetRoomDetailInfo.getRoomid();
 
                             try {
@@ -147,16 +146,16 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                     break;
                 case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
                     ArrayList queryDevInfo = msg.getData().getParcelableArrayList("queryDevInfo");
-                    InterfaceMain.pbui_Type_DeviceDetailInfo o1 = (InterfaceMain.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
+                    InterfaceDevice.pbui_Type_DeviceDetailInfo o1 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
                     pdevList = o1.getPdevList();
                     break;
 
                 case IDivMessage.QUERY_PLACEDEV://122.查询会场设备坐标朝向信息  获取设备ID
                     /** ************ ******  根据设备ID过滤显示该会场绑定的设备  ****** ************ **/
                     ArrayList query_placedev = msg.getData().getParcelableArrayList("query_placedev");
-                    InterfaceMain.pbui_Type_MeetRoomDevPosInfo o3 = (InterfaceMain.pbui_Type_MeetRoomDevPosInfo) query_placedev.get(0);
+                    InterfaceRoom.pbui_Type_MeetRoomDevPosInfo o3 = (InterfaceRoom.pbui_Type_MeetRoomDevPosInfo) query_placedev.get(0);
                     //获取该会场的设备（只能从中获取设备ID）
-                    List<InterfaceMain.pbui_Item_MeetRoomDevPosInfo> itemList = o3.getItemList();
+                    List<InterfaceRoom.pbui_Item_MeetRoomDevPosInfo> itemList = o3.getItemList();
                     //新建一个集合用来存放会场设备
                     placeDev = new ArrayList<>();
                     //存放除去会场设备的所有设备
@@ -165,9 +164,9 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                     Log.e("MyLog", "MeetRoomManagementFragment.handleMessage:  pdevList.size() --->>> " + pdevList.size());
                     for (int i = 0; i < itemList.size(); i++) {
                         for (int j = 0; j < pdevList.size(); j++) {
-                            InterfaceMain.pbui_Item_MeetRoomDevPosInfo pbui_item_meetRoomDevPosInfo = itemList.get(i);
+                            InterfaceRoom.pbui_Item_MeetRoomDevPosInfo pbui_item_meetRoomDevPosInfo = itemList.get(i);
                             int devid = pbui_item_meetRoomDevPosInfo.getDevid();
-                            InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = pdevList.get(j);
+                            InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = pdevList.get(j);
                             int devcieid = pbui_item_deviceDetailInfo.getDevcieid();
                             if (devcieid == devid) {
                                 placeDev.add(pbui_item_deviceDetailInfo);
@@ -218,11 +217,11 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
     };
 
     //  所有的会议室
-    private List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> itemList;
+    private List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> itemList;
     //  所有的设备
-    private List<InterfaceMain.pbui_Item_DeviceDetailInfo> pdevList;
-    private List<InterfaceMain.pbui_Item_DeviceDetailInfo> placeDev;
-    private List<InterfaceMain.pbui_Item_DeviceDetailInfo> allDev;
+    private List<InterfaceDevice.pbui_Item_DeviceDetailInfo> pdevList;
+    private List<InterfaceDevice.pbui_Item_DeviceDetailInfo> placeDev;
+    private List<InterfaceDevice.pbui_Item_DeviceDetailInfo> allDev;
 
     @Nullable
     @Override
@@ -254,7 +253,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                 break;
             case IDEventMessage.PLACE_DEVINFO_CHANGEINFORM:
                 Log.e("MyLog", "MeetRoomManagementFragment.getEventMessage:  会场设备信息变更通知 EventBus --->>> ");
-                InterfaceMain.pbui_MeetNotifyMsgForDouble o = (InterfaceMain.pbui_MeetNotifyMsgForDouble) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsgForDouble o = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
                 int id = o.getId();
                 //122.查询会场设备坐标朝向信息  获取设备ID
                 nativeUtil.queryPlaceDeviceCoordFaceInfo(id);
@@ -304,7 +303,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                 if (SelectedRight && isDeleteRight) {
                     //将右边的item添加到左边
                     //从data中获取的值才是正确，改变过的值
-                    InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = allDev.get(SelectRightPosition);
+                    InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = allDev.get(SelectRightPosition);
                     mLeftAdapter.addItem(allDev.size(), pbui_item_deviceDetailInfo);
                     mRightAdapter.removeItem(SelectRightPosition);
 //                    DeviceBean deviceBean = mDeviceRightDatas.get(SelectRightPosition);
@@ -315,7 +314,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
             case R.id.room_delete_btn:
                 if (SelectedLeft && isDeleteLeft) {
                     //将左边的item添加到右边
-                    InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = placeDev.get(SelectLeftPosition);
+                    InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = placeDev.get(SelectLeftPosition);
                     mRightAdapter.addItem(allDev.size(), pbui_item_deviceDetailInfo);
                     mLeftAdapter.removeItem(SelectLeftPosition);
 //                    DeviceBean deviceBean = mDeviceLeftDatas.get(SelectLeftPosition);
@@ -366,7 +365,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_PLACE_INFO:
-                InterfaceMain.pbui_Type_MeetRoomDetailInfo result1 = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) result;
+                InterfaceRoom.pbui_Type_MeetRoomDetailInfo result1 = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -379,7 +378,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                 }
                 break;
             case IDivMessage.QUERY_DEVICE_INFO:
-                InterfaceMain.pbui_Type_DeviceDetailInfo result2 = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                InterfaceDevice.pbui_Type_DeviceDetailInfo result2 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
                 if (result2 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -393,7 +392,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                 break;
 
             case IDivMessage.QUERY_CONFORM_DEVID:
-                InterfaceMain.pbui_Type_ResMeetRoomDevInfo result3 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) result;
+                InterfaceRoom.pbui_Type_ResMeetRoomDevInfo result3 = (InterfaceRoom.pbui_Type_ResMeetRoomDevInfo) result;
                 if (result3 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -406,7 +405,7 @@ public class MeetRoomManagementFragment extends BaseFragment implements View.OnC
                 }
                 break;
             case IDivMessage.QUERY_PLACEDEV:
-                InterfaceMain.pbui_Type_MeetRoomDevPosInfo result4 = (InterfaceMain.pbui_Type_MeetRoomDevPosInfo) result;
+                InterfaceRoom.pbui_Type_MeetRoomDevPosInfo result4 = (InterfaceRoom.pbui_Type_MeetRoomDevPosInfo) result;
                 if (result4 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.VenueBean;
 import com.pa.paperless.fragment.manage.secondfloor.s.setting.SecretaryManagementFragment;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -24,7 +24,7 @@ import java.util.List;
 public class VenueLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> mData;
+    private final List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> mData;
     private ItemClickListener mListener;
     private int mCheckedPosion;
 
@@ -43,7 +43,7 @@ public class VenueLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     //item的添加
-    public void addItem(int position, InterfaceMain.pbui_Item_MeetRoomDetailInfo data) {
+    public void addItem(int position, InterfaceRoom.pbui_Item_MeetRoomDetailInfo data) {
         mData.add(position, data);
         notifyItemInserted(position);
     }
@@ -53,7 +53,7 @@ public class VenueLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      *
      * @param data
      */
-    public void addAll(List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> data) {
+    public void addAll(List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> data) {
         for (int i = 0; i < data.size(); i++) {
             mData.add(data.get(i));
         }
@@ -72,7 +72,7 @@ public class VenueLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mListener = listener;
     }
 
-    public VenueLeftAdapter(Context context, List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> data) {
+    public VenueLeftAdapter(Context context, List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> data) {
         mContext = context;
         mData = data;
     }
@@ -91,7 +91,7 @@ public class VenueLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        InterfaceMain.pbui_Item_MeetRoomDetailInfo pbui_item_meetRoomDetailInfo = mData.get(position);
+        InterfaceRoom.pbui_Item_MeetRoomDetailInfo pbui_item_meetRoomDetailInfo = mData.get(position);
         String name = new String(pbui_item_meetRoomDetailInfo.getName().toByteArray());
         String addr = new String(pbui_item_meetRoomDetailInfo.getAddr().toByteArray());
         ((ViewHolder) holder).venue_name.setText(name);

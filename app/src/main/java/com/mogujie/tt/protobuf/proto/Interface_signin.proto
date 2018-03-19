@@ -1,0 +1,34 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+
+//会议签到
+message pbui_Item_MeetSignInDetailInfo
+{
+	fixed32		nameId=1; //人员ID
+	fixed64		utcseconds=2;  //日期 时间 单位:秒
+	fixed32		signin_type=3;//签到方式 参见Pb_MeetSignType
+	bytes		password=4;//签到密码
+	bytes		psigndata=5; //如果有图片签到则为png图片数据(二进制转hex编码)
+}
+
+//type:Pb_TYPE_MEET_INTERFACE_MEETSIGN
+//method: query
+message pbui_Type_MeetSignInDetailInfo
+{
+	repeated pbui_Item_MeetSignInDetailInfo item=1;
+}
+
+//发送会议签到
+//type:Pb_TYPE_MEET_INTERFACE_MEETSIGN
+//method: add
+message pbui_Type_DoMeetSignIno
+{
+	fixed32		signin_type=1;//签到方式 参见Pb_MeetSignType
+
+	bytes		password=2;//签到密码
+	bytes		psigndata=3; //如果有图片签到则为png图片数据(二进制转hex编码)
+}

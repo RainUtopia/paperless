@@ -3,7 +3,6 @@ package com.pa.paperless.fragment.manage.secondfloor.s.setting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,13 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfacePerson;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.setadapter.ParticipantsAdapter;
 import com.pa.paperless.bean.AttendeesBean;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.controller.SetController;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.listener.CallListener;
@@ -76,7 +74,7 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
             switch (msg.what) {
                 case IDivMessage.QUERY_COMMON_PEOPLE:
                     ArrayList queryCommonPeople = msg.getData().getParcelableArrayList("queryCommonPeople");
-                    InterfaceMain.pbui_Type_PersonDetailInfo o = (InterfaceMain.pbui_Type_PersonDetailInfo) queryCommonPeople.get(0);
+                    InterfacePerson.pbui_Type_PersonDetailInfo o = (InterfacePerson.pbui_Type_PersonDetailInfo) queryCommonPeople.get(0);
                     itemList = o.getItemList();
 
                     mAdapter = new ParticipantsAdapter(getContext(), itemList);
@@ -88,7 +86,7 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
             }
         }
     };
-    private List<InterfaceMain.pbui_Item_PersonDetailInfo> itemList;
+    private List<InterfacePerson.pbui_Item_PersonDetailInfo> itemList;
 
 
     @Nullable
@@ -225,7 +223,7 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_COMMON_PEOPLE:
-                InterfaceMain.pbui_Type_PersonDetailInfo result1 = (InterfaceMain.pbui_Type_PersonDetailInfo) result;
+                InterfacePerson.pbui_Type_PersonDetailInfo result1 = (InterfacePerson.pbui_Type_PersonDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

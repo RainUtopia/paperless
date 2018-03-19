@@ -1,0 +1,108 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//参会人员
+message pbui_Item_MemberDetailInfo
+{
+	fixed32 personid=1;
+	bytes   name=2;
+	bytes   company=3;
+	bytes   job=4;
+	bytes   comment=5;
+	bytes   phone=6;
+	bytes   email=7;
+	bytes   password=8;
+}
+
+//参会人员
+//call callreturn
+//type:Pb_TYPE_MEET_INTERFACE_MEMBER
+//method: add\del\modify\query
+message pbui_Type_MemberDetailInfo
+{
+	repeated pbui_Item_MemberDetailInfo item=1;
+}
+
+//参会人员属性
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEMBER
+//method: queryproperty
+message pbui_Type_MeetMemberQueryProperty
+{
+	fixed32 propertyid=1;//属性ID 参见 Pb_MemberPropertyID
+	fixed32 parameterval=2;//传入参数 为0表示本机设置定的人员id
+}
+
+//参会人员属性
+//callreturn
+//type: Pb_TYPE_MEET_INTERFACE_MEMBER
+//method: queryproperty
+message pbui_Type_MeetMembeProperty
+{
+	fixed32 propertyval=1;//整数属性值
+	bytes   propertytext=2;//字符串属性值
+}
+
+//参会人员权限
+message pbui_Item_MemberPermission
+{
+	fixed32 memberid=1;//参会人ID
+	fixed32 permission=2;	//参会人权限
+}
+
+//参会人员权限
+//type:Pb_TYPE_MEET_INTERFACE_MEMBERPERMISSION
+//call
+//method: save\query
+message pbui_Type_MemberPermission
+{
+	repeated pbui_Item_MemberPermission item=1;
+}
+
+//参会人员权限
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEMBERPERMISSION
+//method: queryproperty
+message pbui_Type_MeetMemberPermissionQueryProperty
+{
+	fixed32 propertyid=1;//属性ID 参见 Pb_MemberPermissionPropertyID
+	fixed32 memberid=2;//传入参数 为0表示本机设置定的人员id
+}
+
+//参会人员权限
+//type:Pb_TYPE_MEET_INTERFACE_MEMBERPERMISSION
+//callreturn
+//method: queryproperty
+message pbui_Type_MemberPermissionProperty
+{
+	fixed32 propertyval=1;//整数属性值
+}
+
+//参会人员分组
+message pbui_Item_MemberGroupDetailInfo
+{
+	fixed32 groupid=1;
+	bytes   name=2;
+}
+
+//参会人员分组
+//type:Pb_TYPE_MEET_INTERFACE_MEMBERGROUP
+//call
+//method: add\del\modify\query
+message pbui_Type_MemberGroupDetailInfo
+{
+	repeated pbui_Item_MemberGroupDetailInfo item=1;
+}
+
+//参会人员分组人员
+//type:Pb_TYPE_MEET_INTERFACE_MEMBERGROUPITEM
+//call
+//method: save\query
+message pbui_Type_MemberInGroupDetailInfo
+{
+	fixed32			groupid=1;
+	repeated fixed32 memberid=2;
+}

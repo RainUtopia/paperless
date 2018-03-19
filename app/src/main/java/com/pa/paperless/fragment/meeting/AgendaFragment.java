@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceAgenda;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.AgendaAdapter;
 import com.pa.paperless.bean.AgendContext;
@@ -20,7 +20,6 @@ import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventAgenda;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.controller.MeetController;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
@@ -56,7 +55,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                 case IDivMessage.RECEIVE_MEET_IMINFO://收到新的会议交流信息
                     Log.e("MyLog","AgendaFragment.handleMessage 52行:  处理消息 --->>> ");
                     ArrayList resultNewMessage = msg.getData().getParcelableArrayList("resultNewMessage");
-                    InterfaceMain2.pbui_Type_MeetIM newMessage = (InterfaceMain2.pbui_Type_MeetIM) resultNewMessage.get(0);
+                    InterfaceIM.pbui_Type_MeetIM newMessage = (InterfaceIM.pbui_Type_MeetIM) resultNewMessage.get(0);
                     List<ReceiveMeetIMInfo> newMsglist = Dispose.ReceiveMeetIMinfo(newMessage);
                     for (int i = 0; i < newMsglist.size(); i++) {
                         ReceiveMeetIMInfo receiveMeetIMInfo = newMsglist.get(i);
@@ -74,7 +73,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                     ArrayList agenda = msg.getData().getParcelableArrayList("agenda");
                     if (agenda != null) {
                         mData.clear();
-                        InterfaceMain.pbui_meetAgenda o = (InterfaceMain.pbui_meetAgenda) agenda.get(0);
+                        InterfaceAgenda.pbui_meetAgenda o = (InterfaceAgenda.pbui_meetAgenda) agenda.get(0);
                         //议程类型 参见Pb_AgendaType
                         int agendatype = o.getAgendatype();
                         //媒体ID
@@ -84,7 +83,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                         Log.e("MyLog","AgendaFragment.handleMessage:  agendatype --->>> "+agendatype+"   mediaid : "+mediaid+"   text:  "+text);
                         //时间轴式
                         for (int i = 0; i < o.getItemCount(); i++) {
-                            InterfaceMain.pbui_ItemAgendaTimeInfo item = o.getItem(i);
+                            InterfaceAgenda.pbui_ItemAgendaTimeInfo item = o.getItem(i);
                             int agendaid = item.getAgendaid();  //议程ID
                             int status = item.getStatus();      //议程状态
                             int dirid = item.getDirid();        //绑定目录ID
@@ -161,7 +160,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_AGENDA:
-                InterfaceMain.pbui_meetAgenda agenda = (InterfaceMain.pbui_meetAgenda) result;
+                InterfaceAgenda.pbui_meetAgenda agenda = (InterfaceAgenda.pbui_meetAgenda) result;
                 if (agenda != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -175,7 +174,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);

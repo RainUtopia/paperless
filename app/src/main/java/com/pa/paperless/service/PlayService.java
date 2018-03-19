@@ -7,7 +7,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfacePlaymedia;
+import com.mogujie.tt.protobuf.InterfaceStream;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 
@@ -64,7 +65,7 @@ public class PlayService extends Service {
             case IDEventMessage.MEDIA_PLAY_INFORM:
                 if (!SDLIsShow) {
                     Log.e("MyLog", "SigninFragment.getEventMessage:  收到媒体播放通知 打开播放界面 EventBus --->>> ");
-                    InterfaceMain2.pbui_Type_MeetMediaPlay data = (InterfaceMain2.pbui_Type_MeetMediaPlay) message.getObject();
+                    InterfacePlaymedia.pbui_Type_MeetMediaPlay data = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             .putExtra("action", IDEventMessage.MEDIA_PLAY_INFORM)
@@ -74,7 +75,7 @@ public class PlayService extends Service {
             case IDEventMessage.PLAY_STREAM_NOTIFY:
                 if (!SDLIsShow) {
                     Log.e("MyLog", "SigninFragment.getEventMessage:  收到媒体播放通知 打开播放界面 EventBus --->>> ");
-                    InterfaceMain2.pbui_Type_MeetStreamPlay data = (InterfaceMain2.pbui_Type_MeetStreamPlay) message.getObject();
+                    InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             .putExtra("action", IDEventMessage.PLAY_STREAM_NOTIFY)

@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMeet;
 import com.pa.paperless.R;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
@@ -57,8 +56,8 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
             switch (msg.what){
                 case IDivMessage.QUERY_MEET:
                     ArrayList queryMeet = msg.getData().getParcelableArrayList("queryMeet");
-                    InterfaceMain.pbui_Type_MeetMeetInfo o = (InterfaceMain.pbui_Type_MeetMeetInfo) queryMeet.get(0);
-                    List<InterfaceMain.pbui_Item_MeetMeetInfo> itemList = o.getItemList();
+                    InterfaceMeet.pbui_Type_MeetMeetInfo o = (InterfaceMeet.pbui_Type_MeetMeetInfo) queryMeet.get(0);
+                    List<InterfaceMeet.pbui_Item_MeetMeetInfo> itemList = o.getItemList();
                     break;
             }
         }
@@ -201,7 +200,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     public void callListener(int action, Object result) {
         switch (action){
             case IDivMessage.QUERY_MEET:
-                InterfaceMain.pbui_Type_MeetMeetInfo result1 = (InterfaceMain.pbui_Type_MeetMeetInfo) result;
+                InterfaceMeet.pbui_Type_MeetMeetInfo result1 = (InterfaceMeet.pbui_Type_MeetMeetInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

@@ -1,0 +1,38 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//执行下载
+//call
+//type:Pb_TYPE_MEET_INTERFACE_DOWNLOAD
+//method: add
+message pbui_Type_DownloadStart
+{
+	fixed32		mediaid=1;					//下载媒体id
+	fixed32	    newfile=2;				    //设置是否重新下载,0 不覆盖同名文件,重新下载
+	fixed32	    onlyfinish=3;				//1表示只需要结束的通知
+	bytes		pathname=4;//下载媒体全路径名称
+}
+
+//删除一个下载
+//call
+//type:Pb_TYPE_MEET_INTERFACE_DOWNLOAD
+//method: del
+message pbui_Type_DownloadDel
+{
+	fixed32 mediaid =1;	//下载媒体id
+}
+
+//下载进度通知
+//callback
+//type:Pb_TYPE_MEET_INTERFACE_DOWNLOAD
+//method: notify
+message pbui_Type_DownloadCb
+{
+	fixed32	   progress=1;				//下载进度
+	fixed32	   nstate=2;				    //下载状态,参考state flag
+	fixed32	   err=3;						//错误值 ERROR
+	fixed32    mediaid=4;					//下载媒体id
+}

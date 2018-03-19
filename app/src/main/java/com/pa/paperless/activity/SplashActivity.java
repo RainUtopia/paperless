@@ -6,21 +6,10 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
-import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.controller.BaseController;
-import com.pa.paperless.listener.CallListener;
 import com.wind.myapplication.NativeUtil;
-
-import java.util.ArrayList;
 
 public class SplashActivity extends BaseActivity {
 

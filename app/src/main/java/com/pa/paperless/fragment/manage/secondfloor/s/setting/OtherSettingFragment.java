@@ -3,7 +3,6 @@ package com.pa.paperless.fragment.manage.secondfloor.s.setting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceAdmin;
 import com.pa.paperless.R;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
@@ -46,8 +45,8 @@ public class OtherSettingFragment extends BaseFragment implements View.OnClickLi
             switch (msg.what){
                 case IDivMessage.QUERY_ADMIN_INFO://查询管理员
                     ArrayList queryAdmin = msg.getData().getParcelableArrayList("queryAdmin");
-                    InterfaceMain.pbui_TypeAdminDetailInfo o = (InterfaceMain.pbui_TypeAdminDetailInfo) queryAdmin.get(0);
-                    List<InterfaceMain.pbui_Item_AdminDetailInfo> itemList = o.getItemList();
+                    InterfaceAdmin.pbui_TypeAdminDetailInfo o = (InterfaceAdmin.pbui_TypeAdminDetailInfo) queryAdmin.get(0);
+                    List<InterfaceAdmin.pbui_Item_AdminDetailInfo> itemList = o.getItemList();
 
                     break;
             }
@@ -122,7 +121,7 @@ public class OtherSettingFragment extends BaseFragment implements View.OnClickLi
     public void callListener(int action, Object result) {
         switch (action){
             case IDivMessage.QUERY_ADMIN_INFO:
-                InterfaceMain.pbui_TypeAdminDetailInfo result1 = (InterfaceMain.pbui_TypeAdminDetailInfo) result;
+                InterfaceAdmin.pbui_TypeAdminDetailInfo result1 = (InterfaceAdmin.pbui_TypeAdminDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

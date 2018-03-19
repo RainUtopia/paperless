@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.PlaceInfo;
-import com.pa.paperless.bean.RoomTopBean;
 import com.pa.paperless.fragment.manage.secondfloor.s.setting.MeetRoomManagementFragment;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -26,7 +24,7 @@ import java.util.List;
 public class MeetingRoomTopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> mData;
+    private final List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> mData;
     private ItemClickListener mItemClick;
     private int mCheckedPosion;
 
@@ -48,7 +46,7 @@ public class MeetingRoomTopAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public void inserted(int position,InterfaceMain.pbui_Item_MeetRoomDetailInfo data){
+    public void inserted(int position,InterfaceRoom.pbui_Item_MeetRoomDetailInfo data){
         mData.add(position,data);
         notifyItemInserted(position);
     }
@@ -57,7 +55,7 @@ public class MeetingRoomTopAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         mItemClick = listener;
     }
 
-    public MeetingRoomTopAdapter(Context context, List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> data) {
+    public MeetingRoomTopAdapter(Context context, List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> data) {
         mContext = context;
         mData = data;
     }
@@ -72,7 +70,7 @@ public class MeetingRoomTopAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        InterfaceMain.pbui_Item_MeetRoomDetailInfo pbui_item_meetRoomDetailInfo = mData.get(position);
+        InterfaceRoom.pbui_Item_MeetRoomDetailInfo pbui_item_meetRoomDetailInfo = mData.get(position);
         String name = new String(pbui_item_meetRoomDetailInfo.getName().toByteArray());
         String addr = new String(pbui_item_meetRoomDetailInfo.getAddr().toByteArray());
         String comment = new String(pbui_item_meetRoomDetailInfo.getComment().toByteArray());

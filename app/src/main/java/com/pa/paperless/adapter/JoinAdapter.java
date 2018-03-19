@@ -6,9 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.MyUtils;
 
@@ -24,15 +23,15 @@ import static com.pa.paperless.activity.MeetingActivity.checkedJoinProjector;
 
 public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.ViewHolder> {
 
-    private final List<InterfaceMain.pbui_Item_DeviceResPlay> mData;
+    private final List<InterfaceDevice.pbui_Item_DeviceResPlay> mData;
     private ItemClickListener mListener;
 
-    public JoinAdapter(List<InterfaceMain.pbui_Item_DeviceResPlay> data) {
+    public JoinAdapter(List<InterfaceDevice.pbui_Item_DeviceResPlay> data) {
         mData = data;
     }
 
-    public List<InterfaceMain.pbui_Item_DeviceResPlay> getCheckeds(int type) {
-        List<InterfaceMain.pbui_Item_DeviceResPlay> checked = new ArrayList<>();
+    public List<InterfaceDevice.pbui_Item_DeviceResPlay> getCheckeds(int type) {
+        List<InterfaceDevice.pbui_Item_DeviceResPlay> checked = new ArrayList<>();
         if (mData.size() > 0) {
             if (type == 1) {
                 for (int i = 0; i < checkedJoinMember.size(); i++) {

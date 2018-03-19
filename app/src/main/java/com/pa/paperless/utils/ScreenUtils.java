@@ -40,7 +40,7 @@ public class ScreenUtils {
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
+        return outMetrics.heightPixels;
     }
 
     /**
@@ -54,7 +54,7 @@ public class ScreenUtils {
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
+        return outMetrics.widthPixels;
     }
 
     /**
@@ -166,12 +166,4 @@ public class ScreenUtils {
         view.destroyDrawingCache();
         return bp;
     }
-//    public static int getVirtualBarHeigh(Activity activity) {
-//        int titleHeight = 0;
-//        Rect frame = new Rect();
-//        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-//        int statusHeight = frame.top;
-//        titleHeight = activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop() - statusHeight;
-//        return titleHeight;
-//    }
 }

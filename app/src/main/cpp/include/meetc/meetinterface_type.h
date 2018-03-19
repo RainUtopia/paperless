@@ -2053,10 +2053,10 @@ typedef struct
 
 //查询指定文件的某项属性
 //property id
-#define MEETFILE_PROPERTY_NAME   1 //名称 query
-#define MEETFILE_PROPERTY_SIZE	 2 //大小 query
-#define MEETFILE_PROPERTY_TIME   3 //时长 query
-#define MEETFILE_PROPERTY_ATTRIB 4 //文件attrib query
+#define MEETFILE_PROPERTY_NAME   1 //名称 query(text)
+#define MEETFILE_PROPERTY_SIZE	 2 //大小 query(fixed64)
+#define MEETFILE_PROPERTY_TIME   3 //时长 query(fixed32)
+#define MEETFILE_PROPERTY_ATTRIB 4 //文件attrib query(fixed32)
 #define MEETFILE_PROPERTY_AVAILABLE 5 //文件是否可用 query 不存在返回ERROR_MEET_INTERFACE_NOFIND
 
 //method: queryproperty
@@ -2246,11 +2246,13 @@ typedef struct
 	int8u  type;//显示的信息
 }Item_MeetTableCardDetailInfo, *pItem_MeetTableCardDetailInfo;
 
+#define TABLECARD_MODFLAG_SETDEFAULT 0x00000001 //设置为默认
 //type:TYPE_MEET_INTERFACE_MEETTABLECARD
 //method: mod/query
 typedef struct
 {
 	Type_HeaderInfo hdr;
+	int32u   modifyflag;//修改标志
 	int32u   bgphotoid;//底图ID
 	int32u	 num; //必须是3个
 }Type_MeetTableCardDetailInfo, *pType_MeetTableCardDetailInfo;
@@ -3067,11 +3069,13 @@ typedef struct
 
 }Item_MeetFunConfigDetailInfo, *pItem_MeetFunConfigDetailInfo;
 
+#define FUNCONFIG_MODFLAG_SETDEFAULT 0x00000001 //设置为默认
 //type:TYPE_MEET_INTERFACE_FUNCONFIG
 //method: query/save/
 typedef struct
 {
 	Type_HeaderInfo hdr;
+	int32u   modifyflag;//修改标志
 	int32u	 num; //
 }Type_MeetFunConfigDetailInfo, *pType_MeetFunConfigDetailInfo;
 

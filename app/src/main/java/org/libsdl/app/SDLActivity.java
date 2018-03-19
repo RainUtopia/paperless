@@ -52,9 +52,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfacePlaymedia;
+import com.mogujie.tt.protobuf.InterfaceStream;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.bean.DeviceInfo;
@@ -88,8 +90,8 @@ import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_IN
 public class SDLActivity extends Activity {
 
     NativeUtil nativeUtil;
-    public static InterfaceMain2.pbui_Type_MeetMediaPlay meetMediaPlay;
-    public static InterfaceMain2.pbui_Type_MeetStreamPlay meetStreamPlay;
+    public static InterfacePlaymedia.pbui_Type_MeetMediaPlay meetMediaPlay;
+    public static InterfaceStream.pbui_Type_MeetStreamPlay meetStreamPlay;
 
     public static int getLineNumber(Exception e) {
         StackTraceElement[] trace = e.getStackTrace();
@@ -189,10 +191,10 @@ public class SDLActivity extends Activity {
             if (data != null && data.length > 0){
                 switch(action){
                     case IDEventMessage.MEDIA_PLAY_INFORM:
-                        meetMediaPlay = InterfaceMain2.pbui_Type_MeetMediaPlay.parseFrom(data);
+                        meetMediaPlay = InterfacePlaymedia.pbui_Type_MeetMediaPlay.parseFrom(data);
                         break;
                     case IDEventMessage.PLAY_STREAM_NOTIFY:
-                        meetStreamPlay = InterfaceMain2.pbui_Type_MeetStreamPlay.parseFrom(data);
+                        meetStreamPlay = InterfaceStream.pbui_Type_MeetStreamPlay.parseFrom(data);
                         break;
                 }
             }
@@ -1416,7 +1418,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         tv_totalTime = content.findViewById(R.id.SDL_playCtrl_tv_totalTime);
         try {
             byte[] timedata = nativeUtil.queryFileProperty(InterfaceMacro.Pb_MeetFilePropertyID.Pb_MEETFILE_PROPERTY_TIME.getNumber(), mediaId);
-            InterfaceMain.pbui_CommonInt32uProperty commonInt32uProperty = InterfaceMain.pbui_CommonInt32uProperty.parseFrom(timedata);
+            InterfaceBase.pbui_CommonInt32uProperty commonInt32uProperty = InterfaceBase.pbui_CommonInt32uProperty.parseFrom(timedata);
             tv_totalTime.setText("" + DateUtil.convertTime((long) commonInt32uProperty.getPropertyval()));
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -1450,7 +1452,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.PLAY_PROGRESS_NOTIFY:
-                InterfaceMain.pbui_Type_PlayPosCb playPos = (InterfaceMain.pbui_Type_PlayPosCb) message.getObject();
+                InterfacePlaymedia.pbui_Type_PlayPosCb playPos = (InterfacePlaymedia.pbui_Type_PlayPosCb) message.getObject();
                 mediaId = playPos.getMediaId();
                 status = playPos.getStatus();
                 per = playPos.getPer();
@@ -1472,10 +1474,10 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceMain.pbui_Type_DeviceDetailInfo devInfos = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                InterfaceDevice.pbui_Type_DeviceDetailInfo devInfos = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
                 Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
                 if (devInfos != null) {
-                    InterfaceMain.pbui_Type_DeviceDetailInfo o5 = devInfos;
+                    InterfaceDevice.pbui_Type_DeviceDetailInfo o5 = devInfos;
                     List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
                     onlineProjectors.clear();
                     List allProjectors = new ArrayList<>();

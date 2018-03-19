@@ -21,11 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceVote;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VoteAdapter;
 import com.pa.paperless.adapter.VoteInfoPopAdapter;
 import com.pa.paperless.bean.MemberInfo;
@@ -50,11 +51,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import jxl.write.WriteException;
 
 import static com.pa.paperless.activity.MeetingActivity.getMeetName;
 import static com.pa.paperless.activity.MeetingActivity.mBadge;
@@ -84,7 +82,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 case IDivMessage.QUERY_VOTE:
                     mVoteData.clear();
                     ArrayList queryVote = msg.getData().getParcelableArrayList("queryVote");
-                    InterfaceMain2.pbui_Type_MeetVoteDetailInfo o = (InterfaceMain2.pbui_Type_MeetVoteDetailInfo) queryVote.get(0);
+                    InterfaceVote.pbui_Type_MeetVoteDetailInfo o = (InterfaceVote.pbui_Type_MeetVoteDetailInfo) queryVote.get(0);
                     //获取到所有的投票信息
                     mVoteData = Dispose.Vote(o);
                     mVoteAdapter = new VoteAdapter(getContext(), mVoteData);
@@ -124,14 +122,14 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     break;
                 case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
                     ArrayList queryVoteMember = msg.getData().getParcelableArrayList("queryVoteMember");
-                    InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo o1 = (InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo) queryVoteMember.get(0);
-                    List<InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo> itemList = o1.getItemList();
+                    InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo o1 = (InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo) queryVoteMember.get(0);
+                    List<InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo> itemList = o1.getItemList();
                     int voteid = o1.getVoteid();
                     //获取当前选中投票的全部选项信息
                     List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
                     List<VoteBean> voteBeen = new ArrayList<>();
                     for (int i = 0; i < itemList.size(); i++) {
-                        InterfaceMain2.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
+                        InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
                         String chooseText = "";
                         String name = "";
                         int id = pbui_item_meetVoteSignInDetailInfo.getId();
@@ -166,7 +164,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     break;
                 case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                     ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
-                    InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryMember.get(0);
+                    InterfaceMember.pbui_Type_MemberDetailInfo o2 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryMember.get(0);
                     memberInfos = Dispose.MemberInfo(o2);
                     break;
             }
@@ -203,7 +201,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         switch (message.getAction()) {
             case IDEventMessage.Vote_Change_Inform://投票变更通知
                 Log.e("MyLog", "VoteFragment.getEventMessage 213行:  投票变更通知 EventBus --->>> ");
-                InterfaceMain.pbui_MeetNotifyMsg object1 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object1 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int opermethod = object1.getOpermethod();
                 int id1 = object1.getId();
 
@@ -235,7 +233,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
             case IDEventMessage.VoteMember_ChangeInform://203.投票提交人变更通知
                 Log.e("MyLog", "VoteFragment.getEventMessage:  投票提交人变更通知 EventBus --->>> ");
                 int voteid = mVoteData.get(mPosion).getVoteid();
-                InterfaceMain.pbui_MeetNotifyMsg object2 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object2 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int id2 = object2.getId();
                 int opermethod2 = object2.getOpermethod();
                 /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
@@ -245,7 +243,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
-                InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int opermethod1 = object.getOpermethod();
                 int id = object.getId();
                 //判断是否是发起投票方法引起的回调
@@ -610,7 +608,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_VOTE:
-                InterfaceMain2.pbui_Type_MeetVoteDetailInfo result1 = (InterfaceMain2.pbui_Type_MeetVoteDetailInfo) result;
+                InterfaceVote.pbui_Type_MeetVoteDetailInfo result1 = (InterfaceVote.pbui_Type_MeetVoteDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -624,7 +622,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
@@ -646,7 +644,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 break;
 
             case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
-                InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo result2 = (InterfaceMain2.pbui_Type_MeetVoteSignInDetailInfo) result;
+                InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo result2 = (InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo) result;
                 if (result2 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -659,7 +657,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case IDivMessage.QUERY_ATTENDEE:
-                InterfaceMain.pbui_Type_MemberDetailInfo result3 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
+                InterfaceMember.pbui_Type_MemberDetailInfo result3 = (InterfaceMember.pbui_Type_MemberDetailInfo) result;
                 if (result3 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

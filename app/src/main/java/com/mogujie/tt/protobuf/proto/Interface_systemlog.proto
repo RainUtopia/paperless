@@ -1,0 +1,46 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//////////////////////////////////////////////////////////////////////////
+///start systemlog
+message pbui_Item_MeetSystemLog
+{
+	fixed32 stage=1;//操作类别 参见STARG_ENUM
+	fixed32 method=2;//操作方法 参见 METHOD_ENUM
+	fixed32 adminid=3;//管理人员ID
+	fixed32 deviceid=4;//操作的设备ID
+	fixed32 meetingid=5;//操作的会议ID
+	fixed64 logtime=6;//操作utc时间 微秒
+	bytes   logmsg=7;//记录文本
+}
+
+//管理日志 
+//stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+//method:查询(数据库返回)
+message pbui_Type_MeetingMeetSystemLog
+{
+	fixed32   startrow=1;//查询返回用户传过来的开始行
+	fixed32	  isfirst=2;//是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
+	repeated pbui_Item_MeetSystemLog item=3;
+}
+
+//管理日志 
+//stages：Pb_TYPE_MEET_INTERFACE_SYSTEMLOG
+//method:查询
+message pbui_Type_QueryMeetSystemLog
+{
+	fixed32 stage=1;//操作类别 参见STARG_ENUM 可以为0表示所有类别
+	fixed32 method=2;//操作方法  参见 METHOD_ENUM 可以为0表示所有方法
+
+	fixed32 meetingid=3;//会议ID 可以为0表示所有会议
+	fixed32 adminid=4;//管理人员ID 可以为0表示所有管理人员
+	fixed32 deviceid=5;//操作的设备ID 可以为0表示所有设备
+
+	fixed64 startlogtime=6;//查询的起始记录utc时间 微秒 必须有效
+	fixed64 endlogtime=7;//查询的结束记录utc时间 微秒 必须有效
+	fixed32 startrow=8;//查询开始行 实现分页查询 必须有效
+}
+///end systemlog

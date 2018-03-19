@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceBullet;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
@@ -20,7 +20,6 @@ import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.event.EventNotice;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.controller.MeetController;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.NativeUtil;
@@ -52,7 +51,7 @@ public class NoticeFragment extends BaseFragment implements CallListener {
             if (msg.what == IDivMessage.QUERY_LONG_NOTICE) {
                 Log.e("MyLog", "NoticeFragment.handleMessage:  长文本公告 --->>> ");
                 ArrayList notice = msg.getData().getParcelableArrayList("notice");
-                InterfaceMain.pbui_BigBulletDetailInfo o = (InterfaceMain.pbui_BigBulletDetailInfo) notice.get(0);
+                InterfaceBullet.pbui_BigBulletDetailInfo o = (InterfaceBullet.pbui_BigBulletDetailInfo) notice.get(0);
                 String text = new String(o.getText().toByteArray());
                 setContent(text);
             }
@@ -64,7 +63,7 @@ public class NoticeFragment extends BaseFragment implements CallListener {
         switch (action) {
             case IDivMessage.QUERY_LONG_NOTICE:
                 Log.e("MyLog", "NoticeFragment.callListener:  长文本公告 --->>> ");
-                InterfaceMain.pbui_BigBulletDetailInfo notice = (InterfaceMain.pbui_BigBulletDetailInfo) result;
+                InterfaceBullet.pbui_BigBulletDetailInfo notice = (InterfaceBullet.pbui_BigBulletDetailInfo) result;
                 if (notice != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -78,7 +77,7 @@ public class NoticeFragment extends BaseFragment implements CallListener {
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);

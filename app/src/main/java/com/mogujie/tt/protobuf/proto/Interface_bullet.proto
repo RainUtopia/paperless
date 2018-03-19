@@ -1,0 +1,31 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//会议公告
+message pbui_Item_BulletDetailInfo
+{
+	fixed32		bulletid=1;
+	bytes	    title=2; //标题
+	bytes	    content=3; //内容 
+	fixed32		type=4;//类别
+	fixed32		starttime=5; //开始时间
+	fixed32		timeouts=6;  //超时值
+}
+
+//会议公告
+//Pb_TYPE_MEET_INTERFACE_MEETBULLET
+//call
+//method: add,del,modify,query,publish
+message pbui_BulletDetailInfo
+{
+	repeated pbui_Item_BulletDetailInfo  item=1;// 
+}
+
+//会议公告
+message pbui_BigBulletDetailInfo
+{
+	bytes	    text=1; //标题
+}

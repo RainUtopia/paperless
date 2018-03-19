@@ -3,7 +3,6 @@ package com.pa.paperless.fragment.manage.secondfloor.s.setting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,17 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.setadapter.SeatArrangementAdapter;
-import com.pa.paperless.bean.PlaceInfo;
-import com.pa.paperless.bean.RoomTopBean;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventPlace;
 import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
-import com.pa.paperless.utils.Dispose;
 //import com.pa.paperless.utils.RecycleViewDivider;
 import com.wind.myapplication.NativeUtil;
 
@@ -62,7 +58,7 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
             switch (msg.what) {
                 case IDivMessage.QUERY_PLACE_INFO:
                     ArrayList queryPlace = msg.getData().getParcelableArrayList("queryPlace");
-                    InterfaceMain.pbui_Type_MeetRoomDetailInfo o = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) queryPlace.get(0);
+                    InterfaceRoom.pbui_Type_MeetRoomDetailInfo o = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) queryPlace.get(0);
                     itemList = o.getItemList();
                     mAdapter = new SeatArrangementAdapter(getContext(), itemList);
                     mSeatLeftRl.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -80,7 +76,7 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
             }
         }
     };
-    private List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> itemList = new ArrayList<>();
+    private List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> itemList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -151,7 +147,7 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_PLACE_INFO:
-                InterfaceMain.pbui_Type_MeetRoomDetailInfo result1 = (InterfaceMain.pbui_Type_MeetRoomDetailInfo) result;
+                InterfaceRoom.pbui_Type_MeetRoomDetailInfo result1 = (InterfaceRoom.pbui_Type_MeetRoomDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

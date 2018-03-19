@@ -3,8 +3,13 @@ package com.pa.paperless.utils;
 import android.util.Log;
 
 import com.google.protobuf.ByteString;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceAdmin;
+import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceFile;
+import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceRoom;
+import com.mogujie.tt.protobuf.InterfaceVote;
 import com.pa.paperless.bean.AdminInfo;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.IpInfo;
@@ -15,7 +20,6 @@ import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.bean.ResInfo;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
-import com.wind.myapplication.NativeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +42,7 @@ public class Dispose {
     private static List<AdminInfo> adminInfos;
 
 
-    public static List<AdminInfo> AdminInfo(InterfaceMain.pbui_TypeAdminDetailInfo o) {
+    public static List<AdminInfo> AdminInfo(InterfaceAdmin.pbui_TypeAdminDetailInfo o) {
         if (adminInfos != null) {
             adminInfos.clear();
         } else {
@@ -46,7 +50,7 @@ public class Dispose {
         }
         int itemCount = o.getItemCount();
         for (int i = 0; i < itemCount; i++) {
-            InterfaceMain.pbui_Item_AdminDetailInfo item = o.getItem(i);
+            InterfaceAdmin.pbui_Item_AdminDetailInfo item = o.getItem(i);
             int adminid = item.getAdminid();
             String adminName = new String(item.getAdminname().toByteArray());
             String pwd = new String(item.getPw().toByteArray());
@@ -64,7 +68,7 @@ public class Dispose {
      * @param o
      * @return
      */
-    public static List<PlaceInfo> PlaceInfo(InterfaceMain.pbui_Type_MeetRoomDetailInfo o) {
+    public static List<PlaceInfo> PlaceInfo(InterfaceRoom.pbui_Type_MeetRoomDetailInfo o) {
         if (placeInfos != null) {
             placeInfos.clear();
         } else {
@@ -72,7 +76,7 @@ public class Dispose {
         }
         int itemCount = o.getItemCount();
         for (int i = 0; i < itemCount; i++) {
-            InterfaceMain.pbui_Item_MeetRoomDetailInfo item = o.getItem(i);
+            InterfaceRoom.pbui_Item_MeetRoomDetailInfo item = o.getItem(i);
             int roomid = item.getRoomid();
             int roombgpicid = item.getRoombgpicid();
             int managerid = item.getManagerid();
@@ -90,7 +94,7 @@ public class Dispose {
      * @param o
      * @return
      */
-    public static List<ReceiveMeetIMInfo> ReceiveMeetIMinfo(InterfaceMain2.pbui_Type_MeetIM o) {
+    public static List<ReceiveMeetIMInfo> ReceiveMeetIMinfo(InterfaceIM.pbui_Type_MeetIM o) {
         if (rReceiveMeetIMInfo != null) {
             rReceiveMeetIMInfo.clear();
         } else {
@@ -113,7 +117,7 @@ public class Dispose {
      * @param o
      * @return
      */
-    public static List<VoteInfo> Vote(InterfaceMain2.pbui_Type_MeetVoteDetailInfo o) {
+    public static List<VoteInfo> Vote(InterfaceVote.pbui_Type_MeetVoteDetailInfo o) {
         if (rVoteInfo != null) {
             rVoteInfo.clear();
         } else {
@@ -122,7 +126,7 @@ public class Dispose {
         int itemCount = o.getItemCount();
         for (int i = 0; i < itemCount; i++) {
             rVoteOptionsInfo = new ArrayList<>();
-            InterfaceMain2.pbui_Item_MeetVoteDetailInfo item = o.getItem(i);
+            InterfaceVote.pbui_Item_MeetVoteDetailInfo item = o.getItem(i);
             int voteid = item.getVoteid();
             String content = new String(item.getContent().toByteArray());
             int maintype = item.getMaintype();
@@ -131,9 +135,9 @@ public class Dispose {
             int votestate = item.getVotestate();
             int timeouts = item.getTimeouts();
             int selectcount = item.getSelectcount();
-            List<InterfaceMain2.pbui_SubItem_VoteItemInfo> itemList = item.getItemList();
+            List<InterfaceVote.pbui_SubItem_VoteItemInfo> itemList = item.getItemList();
             for (int j = 0; j < itemList.size(); j++) {
-                InterfaceMain2.pbui_SubItem_VoteItemInfo pbui_subItem_voteItemInfo = itemList.get(j);
+                InterfaceVote.pbui_SubItem_VoteItemInfo pbui_subItem_voteItemInfo = itemList.get(j);
                 String text = new String(pbui_subItem_voteItemInfo.getText().toByteArray());
                 int selcnt = pbui_subItem_voteItemInfo.getSelcnt();
                 rVoteOptionsInfo.add(new VoteOptionsInfo(text, selcnt));
@@ -150,14 +154,14 @@ public class Dispose {
      * @param o
      * @return
      */
-    public static List<MeetDirFileInfo> MeetDirFile(InterfaceMain.pbui_Type_MeetDirFileDetailInfo o) {
+    public static List<MeetDirFileInfo> MeetDirFile(InterfaceFile.pbui_Type_MeetDirFileDetailInfo o) {
         if (rMeetDirFileInfo != null) {
             rMeetDirFileInfo.clear();
         } else {
             rMeetDirFileInfo = new ArrayList<>();
         }
         for (int i = 0; i < o.getItemCount(); i++) {
-            InterfaceMain.pbui_Item_MeetDirFileDetailInfo item = o.getItem(i);
+            InterfaceFile.pbui_Item_MeetDirFileDetailInfo item = o.getItem(i);
             int mediaid = item.getMediaid();
             String name = new String(item.getName().toByteArray());
             int uploaderid = item.getUploaderid();
@@ -177,14 +181,14 @@ public class Dispose {
      *
      * @param o
      */
-    public static List<MemberInfo> MemberInfo(InterfaceMain.pbui_Type_MemberDetailInfo o) {
+    public static List<MemberInfo> MemberInfo(InterfaceMember.pbui_Type_MemberDetailInfo o) {
         if (rMemberInfo != null) {
             rMemberInfo.clear();
         } else {
             rMemberInfo = new ArrayList<>();
         }
         for (int i = 0; i < o.getItemCount(); i++) {
-            InterfaceMain.pbui_Item_MemberDetailInfo item = o.getItem(i);
+            InterfaceMember.pbui_Item_MemberDetailInfo item = o.getItem(i);
             int personid = item.getPersonid();
             String name = new String(item.getName().toByteArray());
             String company = new String(item.getCompany().toByteArray());
@@ -203,7 +207,7 @@ public class Dispose {
      *
      * @param devInfos
      */
-    public static List<DeviceInfo> DevInfo(InterfaceMain.pbui_Type_DeviceDetailInfo devInfos) {
+    public static List<DeviceInfo> DevInfo(InterfaceDevice.pbui_Type_DeviceDetailInfo devInfos) {
         if (deviceInfos != null) {
             deviceInfos.clear();
         } else {
@@ -211,7 +215,7 @@ public class Dispose {
         }
         int pdevCount = devInfos.getPdevCount();
         for (int i = 0; i < pdevCount; i++) {
-            InterfaceMain.pbui_Item_DeviceDetailInfo pdev = devInfos.getPdev(i);
+            InterfaceDevice.pbui_Item_DeviceDetailInfo pdev = devInfos.getPdev(i);
             int devcieid = pdev.getDevcieid();
             ByteString devname = pdev.getDevname();
             String devName = new String(devname.toByteArray());
@@ -228,7 +232,7 @@ public class Dispose {
         return deviceInfos;
     }
 
-    private static List<ResInfo> resInfo(InterfaceMain.pbui_Item_DeviceDetailInfo pdev) {
+    private static List<ResInfo> resInfo(InterfaceDevice.pbui_Item_DeviceDetailInfo pdev) {
         if (resInfos != null) {
             resInfos.clear();
         } else {
@@ -236,7 +240,7 @@ public class Dispose {
         }
         int resinfoCount = pdev.getResinfoCount();
         for (int j = 0; j < resinfoCount; j++) {
-            InterfaceMain.pbui_SubItem_DeviceResInfo resinfo = pdev.getResinfo(j);
+            InterfaceDevice.pbui_SubItem_DeviceResInfo resinfo = pdev.getResinfo(j);
             int playstatus = resinfo.getPlaystatus();
             int triggerId = resinfo.getTriggerId();
             int val = resinfo.getVal();
@@ -248,7 +252,7 @@ public class Dispose {
         return resInfos;
     }
 
-    private static List<IpInfo> ipInfo(InterfaceMain.pbui_Item_DeviceDetailInfo pdev) {
+    private static List<IpInfo> ipInfo(InterfaceDevice.pbui_Item_DeviceDetailInfo pdev) {
         if (ipInfos != null) {
             ipInfos.clear();
         } else {
@@ -256,7 +260,7 @@ public class Dispose {
         }
         int ipinfoCount = pdev.getIpinfoCount();
         for (int j = 0; j < ipinfoCount; j++) {
-            InterfaceMain.pbui_SubItem_DeviceIpAddrInfo ipinfo = pdev.getIpinfo(j);
+            InterfaceDevice.pbui_SubItem_DeviceIpAddrInfo ipinfo = pdev.getIpinfo(j);
             String IpStr = new String(ipinfo.getIp().toByteArray());
             int port = ipinfo.getPort();
 //            Log.e("MyLog", "Dispose.ipInfo:  设备IP信息： --->>> " + IpStr + "   端口号：" + port);

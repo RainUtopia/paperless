@@ -1,0 +1,80 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//会议信息
+message pbui_Item_MeetMeetInfo
+{
+	fixed32			id=1; //会议ID
+	bytes			name=2; //名称
+	fixed32			roomId=3; //会场ID，即会议室 
+	fixed32			secrecy=4; //是否为保密会议 1为密保会议
+	fixed64			startTime=5; //开始时间 单位:秒
+	fixed64			endTime=6;   //结束时间 单位:秒
+	fixed32			signin_type=7;//签到类型
+	fixed32			managerid=8;//管理员id
+	bytes			onepsw_signin=9;//会议签到密码 不能超过Pb_SIGNIN_PSW_LEN 定义的限制长度
+	fixed32			status=10;//会议状态，0为未开始会议，1为已开始会议，2为已结束会议
+}
+
+//会议信息
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETINFO
+//method: add/mod/del/query
+message pbui_Type_MeetMeetInfo
+{
+	repeated pbui_Item_MeetMeetInfo	 item=1; //会议
+}
+
+//修改会议状态
+//call
+//type:Pb_TYPE_MEET_INTERFACE_MEETINFO
+//method: modifystatus
+message pbui_Type_MeetModStatus
+{
+	fixed32  meetid=1;			//会议ID
+	fixed32  status=2; //会议状态 参见 Pb_MeetStatus
+}
+
+//////////////////////////////////////////////////////////////////////////
+///start Meetevaluate
+message pbui_Item_MeetEvaluate
+{
+	fixed32 memberid=1;//参会人员ID
+	fixed32 flag=2;//标志 参见file evaluate flag 宏定义
+	fixed64 evaluatetime=3;//评分utc时间 微秒
+	bytes   evaluate=4;//评分的文本
+}
+
+//会议评价 
+//type：Pb_TYPE_MEET_INTERFACE_MEETEVALUATE
+//method:添加、查询(数据库返回)
+message pbui_Type_MeetingMeetEvaluate
+{
+	fixed32   startrow=1;//查询返回用户传过来的开始行
+	fixed32	  isfirst=2;//是否为第一帧,如果评分太多,接下来的帧会在下次接收到后回调
+	repeated pbui_Item_MeetEvaluate item=3; 
+}
+
+//会议评价  查询
+//stages：Pb_TYPE_MEET_INTERFACE_MEETEVALUATE
+//method:查询
+message pbui_Type_QueryMeetEvaluate
+{
+	fixed32 memberid=1;//参会人员ID 可以为0表示所有参会人
+	fixed64 startevaluatetime=2;//查询的起始评价utc时间 微秒 必须有效
+	fixed64 endevaluatetime=3;//查询的结束评分utc时间 微秒 必须有效
+	fixed32 startrow=4;//查询开始行 实现分页查询 必须有效 第一次从0开始
+}
+
+//会议文件评价  删除
+//stages：Pb_TYPE_MEET_INTERFACE_MEETEVALUATE
+//method:删除
+message pbui_Type_DelMeetEvaluate
+{
+	fixed32 memberid=1;//参会人员ID 可以为0表示所有参会人
+	fixed64 evaluatetime=2;//评分utc时间 微秒 当memberid有效时 可以有效表示删除指定的评论
+}
+///end Meetevaluate

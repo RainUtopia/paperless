@@ -4,23 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.mogujie.tt.protobuf.InterfaceMain2;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.ReceiveMeetIMInfo;
-import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.NativeUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/31.

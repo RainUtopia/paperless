@@ -8,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.DeviceInfo;
-import com.pa.paperless.bean.IpInfo;
-import com.pa.paperless.bean.ResInfo;
 import com.pa.paperless.fragment.manage.secondfloor.s.setting.DeviceManagementFragment;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -26,7 +23,7 @@ import static com.pa.paperless.fragment.manage.secondfloor.s.setting.DeviceManag
 
 public class DeviceManageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_DeviceDetailInfo> mData;
+    private final List<InterfaceDevice.pbui_Item_DeviceDetailInfo> mData;
     private ItemClickListener mListener;
     private int mDataCount;
     private int mCheckedPosion;
@@ -49,7 +46,7 @@ public class DeviceManageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
-    public DeviceManageAdapter(Context context, List<InterfaceMain.pbui_Item_DeviceDetailInfo> data) {
+    public DeviceManageAdapter(Context context, List<InterfaceDevice.pbui_Item_DeviceDetailInfo> data) {
         mContext = context;
         mData = data;
     }
@@ -68,19 +65,19 @@ public class DeviceManageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = mData.get(position);
+        InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = mData.get(position);
         ((ViewHolder) holder).device_number.setText(position + 1 + "");
         String name = new String(pbui_item_deviceDetailInfo.getDevname().toByteArray());
         ((ViewHolder) holder).device_name.setText(name);
         //IP信息  先设置第一个
-        InterfaceMain.pbui_SubItem_DeviceIpAddrInfo ipinfo = pbui_item_deviceDetailInfo.getIpinfo(0);
+        InterfaceDevice.pbui_SubItem_DeviceIpAddrInfo ipinfo = pbui_item_deviceDetailInfo.getIpinfo(0);
         String ip = new String(ipinfo.getIp().toByteArray());
         ((ViewHolder) holder).device_ip.setText(ip);
 
         //资料信息
-        List<InterfaceMain.pbui_SubItem_DeviceResInfo> resinfoList = pbui_item_deviceDetailInfo.getResinfoList();
+        List<InterfaceDevice.pbui_SubItem_DeviceResInfo> resinfoList = pbui_item_deviceDetailInfo.getResinfoList();
         for (int i = 0; i < resinfoList.size(); i++) {
-            InterfaceMain.pbui_SubItem_DeviceResInfo pbui_subItem_deviceResInfo = resinfoList.get(i);
+            InterfaceDevice.pbui_SubItem_DeviceResInfo pbui_subItem_deviceResInfo = resinfoList.get(i);
             int playstatus = pbui_subItem_deviceResInfo.getPlaystatus();
             int triggerId = pbui_subItem_deviceResInfo.getTriggerId();
             int val = pbui_subItem_deviceResInfo.getVal();

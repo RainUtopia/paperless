@@ -3,15 +3,13 @@ package com.pa.paperless.adapter.setadapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.DeviceBean;
 import com.pa.paperless.fragment.manage.secondfloor.s.setting.MeetRoomManagementFragment;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -25,7 +23,7 @@ import java.util.List;
 public class MeetingRoomLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ItemClickListener mListener;
-    private List<InterfaceMain.pbui_Item_DeviceDetailInfo> mDatas;
+    private List<InterfaceDevice.pbui_Item_DeviceDetailInfo> mDatas;
     private Context mContext;
     private int mCheckedPosion;
 
@@ -38,7 +36,7 @@ public class MeetingRoomLeftAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         mListener = listener;
     }
 
-    public MeetingRoomLeftAdapter(Context context, List<InterfaceMain.pbui_Item_DeviceDetailInfo> datas) {
+    public MeetingRoomLeftAdapter(Context context, List<InterfaceDevice.pbui_Item_DeviceDetailInfo> datas) {
         mContext = context;
         mDatas = datas;
     }
@@ -58,7 +56,7 @@ public class MeetingRoomLeftAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     //item的添加
-    public void addItem(int position, InterfaceMain.pbui_Item_DeviceDetailInfo data) {
+    public void addItem(int position, InterfaceDevice.pbui_Item_DeviceDetailInfo data) {
         mDatas.add(position, data);
         notifyItemInserted(position);
     }
@@ -72,7 +70,7 @@ public class MeetingRoomLeftAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = mDatas.get(position);
+        InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = mDatas.get(position);
         String name = new String(pbui_item_deviceDetailInfo.getDevname().toByteArray());
         int facestate = pbui_item_deviceDetailInfo.getFacestate();
         if(facestate == 0){

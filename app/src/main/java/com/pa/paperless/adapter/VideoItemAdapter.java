@@ -5,16 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.listener.ItemClickListener;
-import com.pa.paperless.utils.MyUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //import static com.pa.paperless.fragment.meeting.VideoFragment.checkStreams;

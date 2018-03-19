@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
@@ -51,7 +51,7 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
             switch (msg.what) {
                 case IDivMessage.QUERY_NET:
                     ArrayList queryNet = msg.getData().getParcelableArrayList("queryNet");
-                    InterfaceMain.pbui_meetUrl o = (InterfaceMain.pbui_meetUrl) queryNet.get(0);
+                    InterfaceBase.pbui_meetUrl o = (InterfaceBase.pbui_meetUrl) queryNet.get(0);
                     String url = MyUtils.getBts(o.getUrl());
                     Log.e("MyLog", "WebBrowseFragment.handleMessage:  url --->>> " + url);
                     mWebView.loadUrl("http://"+url);
@@ -118,7 +118,7 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_NET:
-                InterfaceMain.pbui_meetUrl result1 = (InterfaceMain.pbui_meetUrl) result;
+                InterfaceBase.pbui_meetUrl result1 = (InterfaceBase.pbui_meetUrl) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -132,7 +132,7 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);

@@ -7,7 +7,6 @@ import android.media.projection.MediaProjectionManager;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 
@@ -28,8 +27,8 @@ import android.widget.Toast;
 
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VideoItemAdapter;
@@ -52,7 +51,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +84,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
             switch (msg.what) {
                 case IDivMessage.QUERY_DEVICE_INFO:
                     ArrayList queryDevInfo = msg.getData().getParcelableArrayList("queryDevInfo");
-                    InterfaceMain.pbui_Type_DeviceDetailInfo o = (InterfaceMain.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
+                    InterfaceDevice.pbui_Type_DeviceDetailInfo o = (InterfaceDevice.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
                     List<DeviceInfo> deviceInfos = Dispose.DevInfo(o);
 
                     allStreamDev = new ArrayList<>();
@@ -306,7 +304,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         switch (action) {
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
@@ -327,7 +325,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceMain.pbui_Type_DeviceDetailInfo result1 = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                InterfaceDevice.pbui_Type_DeviceDetailInfo result1 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

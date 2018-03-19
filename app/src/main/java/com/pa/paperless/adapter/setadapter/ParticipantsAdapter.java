@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfacePerson;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.AttendeesBean;
 import com.pa.paperless.fragment.manage.secondfloor.s.setting.CommonlyParticipantsFragment;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -25,7 +24,7 @@ import java.util.List;
 public class ParticipantsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_PersonDetailInfo> mData;
+    private final List<InterfacePerson.pbui_Item_PersonDetailInfo> mData;
     private ItemClickListener mListener;
     private int mCheckedPosion;
 
@@ -42,7 +41,7 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public ParticipantsAdapter(Context context, List<InterfaceMain.pbui_Item_PersonDetailInfo> data) {
+    public ParticipantsAdapter(Context context, List<InterfacePerson.pbui_Item_PersonDetailInfo> data) {
         mContext = context;
         mData = data;
     }
@@ -62,7 +61,7 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        InterfaceMain.pbui_Item_PersonDetailInfo pbui_item_personDetailInfo = mData.get(position);
+        InterfacePerson.pbui_Item_PersonDetailInfo pbui_item_personDetailInfo = mData.get(position);
         String name = new String(pbui_item_personDetailInfo.getName().toByteArray());
         String job = new String(pbui_item_personDetailInfo.getJob().toByteArray());
         String comment = new String(pbui_item_personDetailInfo.getComment().toByteArray());

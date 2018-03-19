@@ -8,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.protobuf.ByteString;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceAdmin;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.AdminInfo;
-import com.pa.paperless.bean.AdminsBean;
 import com.pa.paperless.fragment.manage.secondfloor.s.setting.SecretaryManagementFragment;
 import com.pa.paperless.listener.ItemClickListener;
 
@@ -24,7 +21,7 @@ import java.util.List;
 
 public class SecretaryTopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_AdminDetailInfo> mData;
+    private final List<InterfaceAdmin.pbui_Item_AdminDetailInfo> mData;
     private ItemClickListener mListener;
     private int mCheckedPosion;
 
@@ -50,12 +47,12 @@ public class SecretaryTopAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
-    public void inserted(int position, InterfaceMain.pbui_Item_AdminDetailInfo data) {
+    public void inserted(int position, InterfaceAdmin.pbui_Item_AdminDetailInfo data) {
         mData.add(position, data);
         notifyItemInserted(position);
     }
 
-    public SecretaryTopAdapter(Context context, List<InterfaceMain.pbui_Item_AdminDetailInfo> data) {
+    public SecretaryTopAdapter(Context context, List<InterfaceAdmin.pbui_Item_AdminDetailInfo> data) {
         mContext = context;
         mData = data;
     }
@@ -69,7 +66,7 @@ public class SecretaryTopAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        InterfaceMain.pbui_Item_AdminDetailInfo pbui_item_adminDetailInfo = mData.get(position);
+        InterfaceAdmin.pbui_Item_AdminDetailInfo pbui_item_adminDetailInfo = mData.get(position);
         String adminName = new String(pbui_item_adminDetailInfo.getAdminname().toByteArray());
         String pwd = new String(pbui_item_adminDetailInfo.getPw().toByteArray());
         String comment = new String(pbui_item_adminDetailInfo.getComment().toByteArray());

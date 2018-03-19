@@ -9,7 +9,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,7 +68,7 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
     private NativeUtil nativeUtil;
     //获取绘画时的参数
     private DrawPropertyBean drawPropertyBean;
-
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,25 +118,25 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
         mPaletteView.setListener(new CallListener() {
             @Override
             public void callListener(int action, Object result) {
-                if(action == IDivMessage.GET_DRAW_INFO) {
-                    Log.e("MyLog","DrawBoardActivity.callListener 124行:   --->>> ");
+                if (action == IDivMessage.GET_DRAW_INFO) {
+                    Log.e("MyLog", "DrawBoardActivity.callListener 124行:   --->>> ");
                     long timeMillis = System.currentTimeMillis();
                     drawPropertyBean = (DrawPropertyBean) result;
-                    switch (drawPropertyBean.getMode()){
+                    switch (drawPropertyBean.getMode()) {
                         case CIRCLE:
-                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ELLIPSE.getNumber());
+                            addForm(count++, timeMillis, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ELLIPSE.getNumber());
                             break;
                         case LINE:
-                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_LINE.getNumber());
+                            addForm(count++, timeMillis, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_LINE.getNumber());
                             break;
                         case DRAW:
-                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber());
+                            addForm(count++, timeMillis, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber());
                             break;
                         case RECT:
-                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_RECTANGLE.getNumber());
+                            addForm(count++, timeMillis, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_RECTANGLE.getNumber());
                             break;
                         case TEXT:
-                            addForm(timeMillis,InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber());
+                            addForm(count++, timeMillis, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber());
                             break;
                     }
                 }
@@ -145,10 +144,11 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-    private void addForm(long timeMillis,int type) {
-//        nativeUtil.addDrawFigure(MeetingActivity.o.getMemberid(),
-//                timeMillis,drawPropertyBean.getColor(), type,
-//                drawPropertyBean.getLinesize(),0,MeetingActivity.o.getMemberid(),timeMillis,1);
+    private void addForm(int count, long timeMillis, int type) {
+        long time = 1000;
+        nativeUtil.addDrawFigure(count, MeetingActivity.o.getMemberid(), MeetingActivity.o.getMemberid(), time, timeMillis,
+                type, drawPropertyBean.getLinesize(), drawPropertyBean.getColor(), drawPropertyBean.getLx(),
+                drawPropertyBean.getLy(), drawPropertyBean.getRx(), drawPropertyBean.getRy());
     }
 
     /**

@@ -1,37 +1,26 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceFile;
+import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfacePlaymedia;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.MeetingFileTypeAdapter;
@@ -47,16 +36,13 @@ import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
-import com.pa.paperless.utils.SDCardUtils;
 import com.wind.myapplication.NativeUtil;
-import com.zhy.android.percent.support.PercentLinearLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.libsdl.app.SDLActivity;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,9 +80,9 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 case IDivMessage.QUERY_MEET_DIR://查询会议目录
                     mDirData.clear();
                     ArrayList queryMeetDir = msg.getData().getParcelableArrayList("queryMeetDir");
-                    InterfaceMain.pbui_Type_MeetDirDetailInfo o = (InterfaceMain.pbui_Type_MeetDirDetailInfo) queryMeetDir.get(0);
+                    InterfaceFile.pbui_Type_MeetDirDetailInfo o = (InterfaceFile.pbui_Type_MeetDirDetailInfo) queryMeetDir.get(0);
                     for (int i = 0; i < o.getItemCount(); i++) {
-                        InterfaceMain.pbui_Item_MeetDirDetailInfo item = o.getItem(i);
+                        InterfaceFile.pbui_Item_MeetDirDetailInfo item = o.getItem(i);
                         String dirName = new String(item.getName().toByteArray());
                         int id = item.getId();
                         int parentid = item.getParentid();
@@ -123,7 +109,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     break;
                 case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件
                     ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("queryMeetDirFile");
-                    InterfaceMain.pbui_Type_MeetDirFileDetailInfo o2 = (InterfaceMain.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
+                    InterfaceFile.pbui_Type_MeetDirFileDetailInfo o2 = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
                     meetDirFileInfos = Dispose.MeetDirFile(o2);
                     //每次点击目录的item时，就展示该目录下的文档类文件
                     if (meetDirFileInfos != null) {
@@ -143,7 +129,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     break;
                 case IDivMessage.QUERY_DEVMEET_INFO://查询设备会议信息
                     ArrayList devMeetInfos = msg.getData().getParcelableArrayList("devMeetInfos");
-                    InterfaceMain.pbui_Type_DeviceFaceShowDetail o3 = (InterfaceMain.pbui_Type_DeviceFaceShowDetail) devMeetInfos.get(0);
+                    InterfaceDevice.pbui_Type_DeviceFaceShowDetail o3 = (InterfaceDevice.pbui_Type_DeviceFaceShowDetail) devMeetInfos.get(0);
                     int deviceid = o3.getDeviceid();
                     break;
             }
@@ -187,11 +173,11 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 nativeUtil.queryMeetDir();
                 break;
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM://142 会议目录文件变更通知
-                InterfaceMain.pbui_MeetNotifyMsgForDouble object1 = (InterfaceMain.pbui_MeetNotifyMsgForDouble) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsgForDouble object1 = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
                 nativeUtil.queryMeetDirFile(object1.getId());
                 break;
             case IDEventMessage.MEDIA_PLAY_INFORM://251 媒体播放通知
-                InterfaceMain2.pbui_Type_MeetMediaPlay object = (InterfaceMain2.pbui_Type_MeetMediaPlay) message.getObject();
+                InterfacePlaymedia.pbui_Type_MeetMediaPlay object = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
                 int res = object.getRes();
                 int triggerid = object.getTriggerid();
                 int triggeruserval = object.getTriggeruserval();
@@ -441,7 +427,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_MEET_DIR://136.查询会议目录
-                InterfaceMain.pbui_Type_MeetDirDetailInfo result1 = (InterfaceMain.pbui_Type_MeetDirDetailInfo) result;
+                InterfaceFile.pbui_Type_MeetDirDetailInfo result1 = (InterfaceFile.pbui_Type_MeetDirDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -454,7 +440,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 }
                 break;
             case IDivMessage.QUERY_MEET_DIR_FILE:
-                InterfaceMain.pbui_Type_MeetDirFileDetailInfo result3 = (InterfaceMain.pbui_Type_MeetDirFileDetailInfo) result;
+                InterfaceFile.pbui_Type_MeetDirFileDetailInfo result3 = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) result;
                 if (result3 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -467,7 +453,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 }
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceMain.pbui_Type_DeviceDetailInfo devInfos = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                InterfaceDevice.pbui_Type_DeviceDetailInfo devInfos = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
                 if (devInfos != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -480,7 +466,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 }
                 break;
             case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
-                InterfaceMain.pbui_Type_DeviceFaceShowDetail devMeetInfos = (InterfaceMain.pbui_Type_DeviceFaceShowDetail) result;
+                InterfaceDevice.pbui_Type_DeviceFaceShowDetail devMeetInfos = (InterfaceDevice.pbui_Type_DeviceFaceShowDetail) result;
                 if (devMeetInfos != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -494,7 +480,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);

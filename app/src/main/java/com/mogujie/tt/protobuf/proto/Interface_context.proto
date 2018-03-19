@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_package = "com.mogujie.tt.protobuf";
+option optimize_for = LITE_RUNTIME;
+
+import "Interface_Macro.proto";
+
+//会议上下文  查询属性数据
+//type: Pb_TYPE_MEET_INTERFACE_MEETCONTEXT
+//method: queryproperty
+message pbui_QueryMeetContextInfo
+{
+	fixed32 propertyid=1;//数据ID
+}
+
+//会议上下文  返回整形数据
+//type: Pb_TYPE_MEET_INTERFACE_MEETCONTEXT
+//method: queryproperty/setproperty
+message pbui_MeetContextInfo
+{
+	fixed32 propertyid=1;//数据ID
+	fixed32 propertyval=2;//值 
+	bytes   propertytext=3;//字符串
+}

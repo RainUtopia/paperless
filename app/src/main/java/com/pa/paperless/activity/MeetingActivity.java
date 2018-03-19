@@ -7,14 +7,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
@@ -36,9 +34,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceContext;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceMeet;
+import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceRoom;
+import com.mogujie.tt.protobuf.InterfaceWhiteboard;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.JoinAdapter;
 import com.pa.paperless.adapter.OnLineProjectorAdapter;
@@ -140,35 +143,35 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             switch (msg.what) {
                 case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
                     ArrayList queryMeetById = msg.getData().getParcelableArrayList("queryMeetById");
-                    InterfaceMain.pbui_Type_MeetMeetInfo o6 = (InterfaceMain.pbui_Type_MeetMeetInfo) queryMeetById.get(0);
-                    List<InterfaceMain.pbui_Item_MeetMeetInfo> itemList = o6.getItemList();
+                    InterfaceMeet.pbui_Type_MeetMeetInfo o6 = (InterfaceMeet.pbui_Type_MeetMeetInfo) queryMeetById.get(0);
+                    List<InterfaceMeet.pbui_Item_MeetMeetInfo> itemList = o6.getItemList();
                     for (int i = 0; i < itemList.size(); i++) {
-                        InterfaceMain.pbui_Item_MeetMeetInfo pbui_item_meetMeetInfo = itemList.get(i);
+                        InterfaceMeet.pbui_Item_MeetMeetInfo pbui_item_meetMeetInfo = itemList.get(i);
                         String name = MyUtils.getBts(pbui_item_meetMeetInfo.getName());
                         Log.e("MyLog", "MeetingActivity.handleMessage:  指定会议的名字： --->>> " + name + "  itemList：" + itemList.size());
                     }
                     break;
                 case IDivMessage.QUERY_COMMON_BYID://91.查询指定ID的参会人员
                     ArrayList queryCommonById = msg.getData().getParcelableArrayList("queryAttendById");
-                    InterfaceMain.pbui_Type_MemberDetailInfo o1 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryCommonById.get(0);
-                    List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList1 = o1.getItemList();
+                    InterfaceMember.pbui_Type_MemberDetailInfo o1 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryCommonById.get(0);
+                    List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList1 = o1.getItemList();
                     for (int i = 0; i < itemList1.size(); i++) {
-                        InterfaceMain.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = itemList1.get(i);
+                        InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = itemList1.get(i);
                         String name = MyUtils.getBts(pbui_item_memberDetailInfo.getName());
                         Log.e("MyLog", "MeetingActivity.handleMessage:  指定ID的参会人员名称： --->>> " + name);
                     }
                     break;
                 case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                     ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
-                    InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryMember.get(0);
+                    InterfaceMember.pbui_Type_MemberDetailInfo o2 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryMember.get(0);
                     memberInfos = Dispose.MemberInfo(o2);
                     break;
                 case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
                     ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
-                    InterfaceMain.pbui_Type_MemberDetailInfo o3 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
-                    List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList2 = o3.getItemList();
+                    InterfaceMember.pbui_Type_MemberDetailInfo o3 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
+                    List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList2 = o3.getItemList();
                     for (int i = 0; i < itemList2.size(); i++) {
-                        InterfaceMain.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = itemList2.get(i);
+                        InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = itemList2.get(i);
                         String memberName = MyUtils.getBts(pbui_item_memberDetailInfo.getName());
                         int personid = pbui_item_memberDetailInfo.getPersonid();
                         Log.e("MyLog", "MeetingActivity.handleMessage:  参会人： --->>> " + memberName);
@@ -176,7 +179,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     break;
                 case IDivMessage.QUERY_Attendee_Property://96.查询参会人员属性(判断是否为主持人)
                     ArrayList queryAttendeeProperty = msg.getData().getParcelableArrayList("queryAttendeeProperty");
-                    InterfaceMain.pbui_Type_MeetMembeProperty o4 = (InterfaceMain.pbui_Type_MeetMembeProperty) queryAttendeeProperty.get(0);
+                    InterfaceMember.pbui_Type_MeetMembeProperty o4 = (InterfaceMember.pbui_Type_MeetMembeProperty) queryAttendeeProperty.get(0);
                     String bts = MyUtils.getBts(o4.getPropertytext());
                     int propertyval = o4.getPropertyval();
                     Log.e("MyLog", "MeetingActivity.handleMessage:  propertyval： --->>> " + propertyval + "  身份：" + bts);
@@ -185,7 +188,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
                     ArrayList devInfos = msg.getData().getParcelableArrayList("devInfos");
                     if (devInfos != null) {
-                        InterfaceMain.pbui_Type_DeviceDetailInfo o5 = (InterfaceMain.pbui_Type_DeviceDetailInfo) devInfos.get(0);
+                        InterfaceDevice.pbui_Type_DeviceDetailInfo o5 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) devInfos.get(0);
                         List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
                         int number = Macro.DEVICE_MEET_PROJECTIVE;
                         onLineMembers = new ArrayList<>();
@@ -241,10 +244,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     break;
                 case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
                     ArrayList queryMeetRanking = msg.getData().getParcelableArrayList("queryMeetRanking");
-                    InterfaceMain2.pbui_Type_MeetSeatDetailInfo o5 = (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) queryMeetRanking.get(0);
-                    List<InterfaceMain2.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
+                    InterfaceRoom.pbui_Type_MeetSeatDetailInfo o5 = (InterfaceRoom.pbui_Type_MeetSeatDetailInfo) queryMeetRanking.get(0);
+                    List<InterfaceRoom.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
                     for (int i = 0; i < itemList3.size(); i++) {
-                        InterfaceMain2.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
+                        InterfaceRoom.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
                         int nameId = pbui_item_meetSeatDetailInfo.getNameId();
                         int role = pbui_item_meetSeatDetailInfo.getRole();
                         int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
@@ -256,13 +259,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     break;
                 case IDivMessage.QUERY_CAN_JOIN: // 查询可加入的同屏会话
                     ArrayList queryCanJoin = msg.getData().getParcelableArrayList("queryCanJoin");
-                    InterfaceMain.pbui_Type_DeviceResPlay o = (InterfaceMain.pbui_Type_DeviceResPlay) queryCanJoin.get(0);
-                    List<InterfaceMain.pbui_Item_DeviceResPlay> pdevList = o.getPdevList();
+                    InterfaceDevice.pbui_Type_DeviceResPlay o = (InterfaceDevice.pbui_Type_DeviceResPlay) queryCanJoin.get(0);
+                    List<InterfaceDevice.pbui_Item_DeviceResPlay> pdevList = o.getPdevList();
 
                     memberJoin = new ArrayList<>();
                     peojectorJoin = new ArrayList<>();
                     for (int i = 0; i < pdevList.size(); i++) {
-                        InterfaceMain.pbui_Item_DeviceResPlay pbui_item_deviceResPlay = pdevList.get(i);
+                        InterfaceDevice.pbui_Item_DeviceResPlay pbui_item_deviceResPlay = pdevList.get(i);
                         int devceid = pbui_item_deviceResPlay.getDevceid();
                         Log.e("MyLog", "MeetingActivity.handleMessage 256行:  可加入设备ID： --->>> " + devceid);
                         int i1 = devceid & Macro.DEVICE_MEET_DB;
@@ -328,8 +331,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private List<Integer> sameMemberDevRrsIds;
     private List<Integer> applyProjectionIds;
     private List<Integer> informDev;
-    private List<InterfaceMain.pbui_Item_DeviceResPlay> memberJoin;
-    private List<InterfaceMain.pbui_Item_DeviceResPlay> peojectorJoin;
+    private List<InterfaceDevice.pbui_Item_DeviceResPlay> memberJoin;
+    private List<InterfaceDevice.pbui_Item_DeviceResPlay> peojectorJoin;
     public static JoinAdapter joinMemberAdapter;
     public static JoinAdapter joinProjectorAdapter;
     //存放是否点中
@@ -349,25 +352,25 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
-                MyUtils.handTo(IDivMessage.QUERY_MEET_BYID, (InterfaceMain.pbui_Type_MeetMeetInfo) result, "queryMeetById", mHandler);
+                MyUtils.handTo(IDivMessage.QUERY_MEET_BYID, (InterfaceMeet.pbui_Type_MeetMeetInfo) result, "queryMeetById", mHandler);
                 break;
             case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
-                MyUtils.handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMain.pbui_Type_MemberDetailInfo) result, "queryAttendById", mHandler);
+                MyUtils.handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryAttendById", mHandler);
                 break;
             case IDivMessage.QUERY_ATTENDEE://查询参会人员
-                MyUtils.handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMain.pbui_Type_MemberDetailInfo) result, "queryMember", mHandler);
+                MyUtils.handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryMember", mHandler);
                 break;
             case IDivMessage.QUERY_Attendee_Property://96.查询参会人员属性
-                MyUtils.handTo(IDivMessage.QUERY_Attendee_Property, (InterfaceMain.pbui_Type_MeetMembeProperty) result, "queryAttendeeProperty", mHandler);
+                MyUtils.handTo(IDivMessage.QUERY_Attendee_Property, (InterfaceMember.pbui_Type_MeetMembeProperty) result, "queryAttendeeProperty", mHandler);
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                MyUtils.handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceMain.pbui_Type_DeviceDetailInfo) result, "devInfos", mHandler);
+                MyUtils.handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceDevice.pbui_Type_DeviceDetailInfo) result, "devInfos", mHandler);
                 break;
             case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
-                MyUtils.handTo(IDivMessage.Query_MeetSeat_Inform, (InterfaceMain2.pbui_Type_MeetSeatDetailInfo) result, "queryMeetRanking", mHandler);
+                MyUtils.handTo(IDivMessage.Query_MeetSeat_Inform, (InterfaceRoom.pbui_Type_MeetSeatDetailInfo) result, "queryMeetRanking", mHandler);
                 break;
             case IDivMessage.QUERY_CAN_JOIN:// 查询可加入的同屏会话
-                MyUtils.handTo(IDivMessage.QUERY_CAN_JOIN, (InterfaceMain.pbui_Type_DeviceResPlay) result, "queryCanJoin", mHandler);
+                MyUtils.handTo(IDivMessage.QUERY_CAN_JOIN, (InterfaceDevice.pbui_Type_DeviceResPlay) result, "queryCanJoin", mHandler);
                 break;
         }
     }
@@ -446,7 +449,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         try {
             //91.查询指定ID的参会人员
 //            nativeUtil.queryAttendPeopleFromId(memberid);
-            /** ************ ******  125.查询符合要求的设备ID  （投影机）  ****** ************ **/
+            //** ************ ******  125.查询符合要求的设备ID  （投影机）  ****** ************ **//
             // TODO: 2018/2/27 回调在签到页面进行的处理
             nativeUtil.queryRequestDeviceId(roomid,
                     Macro.DEVICE_MEET_PROJECTIVE,
@@ -454,7 +457,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
 
             Log.e("MyLog", "MeetingActivity.getIntentBundle:   --->>> devId： " + devId + "  memberid：" + memberid);
-            /** ************ ******  96.查询参会人员属性  ****** ************ **/
+            //** ************ ******  96.查询参会人员属性  ****** ************ **//*
             nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), memberid);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -490,13 +493,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 updataTimeUi(message);
                 break;
             case IDEventMessage.FACESTATUS_CHANGE_INFORM:
-                InterfaceMain.pbui_MeetDeviceMeetStatus o1 = (InterfaceMain.pbui_MeetDeviceMeetStatus) message.getObject();
+                InterfaceDevice.pbui_MeetDeviceMeetStatus o1 = (InterfaceDevice.pbui_MeetDeviceMeetStatus) message.getObject();
                 Log.e("MyLog", "MeetingActivity.getEventMessage: 界面状态变更通知 EventBus --->>> 会议ID：" + o1.getMeetingid() +
                         " 人员ID：" + o1.getMemberid() + " 设备ID：" + o1.getDeviceid() + " 界面状态：" + o1.getFacestatus());
                 //91.查询指定ID的参会人员
                 nativeUtil.queryAttendPeopleFromId(o1.getMemberid());
                 /** ************ ******  96.查询参会人员属性  ****** ************ **/
-                nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), o.getMemberid());
+                //nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), o.getMemberid());
                 //128.查询会议
 //                nativeUtil.queryMeet();
 //              //129.查询指定ID的会议
@@ -504,14 +507,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case IDEventMessage.MEETINFO_CHANGE_INFORM:// 会议信息变更通知
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  会议信息变更通知 EventBus --->>> ");
-                InterfaceMain.pbui_MeetNotifyMsg object1 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object1 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
 //                int id = object1.getId();
 //                int opermethod = object1.getOpermethod();
                 //129.查询指定ID的会议
 //                nativeUtil.queryMeetFromId(id);
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:// 参会人员变更通知
-                InterfaceMain.pbui_MeetNotifyMsg object2 = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object2 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int id1 = object2.getId();
                 int opermethod1 = object2.getOpermethod();
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  参会人员变更通知 EventBus --->>> id:  " + id1 + "  opermethod1：  " + opermethod1);
@@ -520,12 +523,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 //91.查询指定ID的参会人员
 //                nativeUtil.queryAttendPeopleFromId(id1);
                 /** ************ ******  96.查询参会人员属性  ****** ************ **/
-//                nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), 12);
+                nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), 12);
 
                 break;
             case IDEventMessage.MeetSeat_Change_Inform:
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  180.会议排位变更通知 EventBus --->>> ");
-                InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int id = object.getId();
                 int opermethod = object.getOpermethod();
                 /** ************ ******  181.查询会议排位  ****** ************ **/
@@ -572,7 +575,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
 
             case IDEventMessage.OPEN_BOARD://收到白板打开操作
-                InterfaceMain2.pbui_Type_MeetStartWhiteBoard object4 = (InterfaceMain2.pbui_Type_MeetStartWhiteBoard) message.getObject();
+                InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard object4 = (InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard) message.getObject();
                 startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
                 break;
         }
@@ -1480,8 +1483,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.join_watch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<InterfaceMain.pbui_Item_DeviceResPlay> checkedMembers = joinMemberAdapter.getCheckeds(1);
-                List<InterfaceMain.pbui_Item_DeviceResPlay> checkedProjectors = joinProjectorAdapter.getCheckeds(0);
+                List<InterfaceDevice.pbui_Item_DeviceResPlay> checkedMembers = joinMemberAdapter.getCheckeds(1);
+                List<InterfaceDevice.pbui_Item_DeviceResPlay> checkedProjectors = joinProjectorAdapter.getCheckeds(0);
             }
         });
         // 取消

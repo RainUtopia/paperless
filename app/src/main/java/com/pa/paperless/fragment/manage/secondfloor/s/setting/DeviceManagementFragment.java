@@ -12,16 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.setadapter.DeviceManageAdapter;
-import com.pa.paperless.bean.IpInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
@@ -29,7 +27,6 @@ import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.wind.myapplication.NativeUtil;
-import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -68,7 +65,7 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
             switch (msg.what) {
                 case IDivMessage.QUERY_DEVICE_INFO:
                     ArrayList queryDeviceInfo = msg.getData().getParcelableArrayList("queryDeviceInfo");
-                    InterfaceMain.pbui_Type_DeviceDetailInfo o = (InterfaceMain.pbui_Type_DeviceDetailInfo) queryDeviceInfo.get(0);
+                    InterfaceDevice.pbui_Type_DeviceDetailInfo o = (InterfaceDevice.pbui_Type_DeviceDetailInfo) queryDeviceInfo.get(0);
                     pdevList = o.getPdevList();
                     mAdapter = new DeviceManageAdapter(getActivity(), pdevList);
                     mDevrceManageRl.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -98,7 +95,7 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
     };
 
 
-    private List<InterfaceMain.pbui_Item_DeviceDetailInfo> pdevList;
+    private List<InterfaceDevice.pbui_Item_DeviceDetailInfo> pdevList;
     private int checkedDevId;
 
     @Nullable
@@ -124,7 +121,7 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
                 Log.e("MyLog", "DeviceManagementFragment.getEventMessage:  设备寄存器变更 EventBus --->>> ");
                 try {
                     //6.查询设备信息
-                    InterfaceMain.pbui_Type_MeetDeviceBaseInfo object = (InterfaceMain.pbui_Type_MeetDeviceBaseInfo) message.getObject();
+                    InterfaceDevice.pbui_Type_MeetDeviceBaseInfo object = (InterfaceDevice.pbui_Type_MeetDeviceBaseInfo) message.getObject();
                     Log.e("MyLog", "DeviceManagementFragment.getEventMessage:  object.getAttribid() --->>> " + object.getAttribid()
                             + "  object.getDeviceid() ： " + object.getDeviceid());
 
@@ -194,7 +191,7 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_DEVICE_INFO:
-                InterfaceMain.pbui_Type_DeviceDetailInfo result1 = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                InterfaceDevice.pbui_Type_DeviceDetailInfo result1 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

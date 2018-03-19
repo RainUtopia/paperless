@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.PlaceInfo;
-import com.pa.paperless.bean.RoomTopBean;
 import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.List;
@@ -23,7 +21,7 @@ import java.util.List;
 
 public class SeatArrangementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> mData;
+    private final List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> mData;
     private ItemClickListener mListener;
     private int mCheckedPosion;
 
@@ -31,7 +29,7 @@ public class SeatArrangementAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         mCheckedPosion = posion;
         notifyDataSetChanged();
     }
-    public SeatArrangementAdapter(Context context, List<InterfaceMain.pbui_Item_MeetRoomDetailInfo> data) {
+    public SeatArrangementAdapter(Context context, List<InterfaceRoom.pbui_Item_MeetRoomDetailInfo> data) {
         mContext = context;
         mData = data;
     }

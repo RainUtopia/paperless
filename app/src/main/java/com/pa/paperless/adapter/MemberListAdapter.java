@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 
-import com.google.protobuf.ByteString;
-import com.mogujie.tt.protobuf.InterfaceMain;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.CheckedMemberIds;
-import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.utils.MyUtils;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ import java.util.List;
 
 public class MemberListAdapter extends BaseAdapter {
     private final Context mContext;
-    private final List<InterfaceMain.pbui_Item_MemberDetailInfo> datas;
+    private final List<InterfaceMember.pbui_Item_MemberDetailInfo> datas;
     //存放是否选中结果集
     private List<Boolean> itemChecked = new ArrayList<>();
     //存放选中的CheckBox文本
@@ -32,7 +30,7 @@ public class MemberListAdapter extends BaseAdapter {
     private List<CheckedMemberIds> mCheckedMemberIds = new ArrayList<>();
     private List<String> checkName;
 
-    public MemberListAdapter(Context context, List<InterfaceMain.pbui_Item_MemberDetailInfo> data) {
+    public MemberListAdapter(Context context, List<InterfaceMember.pbui_Item_MemberDetailInfo> data) {
         mContext = context;
         datas = data;
         //初始化：设置默认都是未选的
@@ -134,7 +132,7 @@ public class MemberListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        final InterfaceMain.pbui_Item_MemberDetailInfo memberInfo = datas.get(i);
+        final InterfaceMember.pbui_Item_MemberDetailInfo memberInfo = datas.get(i);
         String name = new String(memberInfo.getName().toByteArray());
         holder.chat_item_cb.setText(name);
         holder.chat_item_cb.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +149,7 @@ public class MemberListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void setNames(boolean checked, int i, InterfaceMain.pbui_Item_MemberDetailInfo bean) {
+    public void setNames(boolean checked, int i, InterfaceMember.pbui_Item_MemberDetailInfo bean) {
         String name = new String(bean.getName().toByteArray());
         if (checked) {
             names.set(i, name);

@@ -4,7 +4,6 @@ package com.pa.paperless.fragment.meeting;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,23 +19,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceMeet;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.MulitpleItemAdapter;
 import com.pa.paperless.adapter.MemberListAdapter;
 import com.pa.paperless.bean.CheckedMemberIds;
-import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
-import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
@@ -45,9 +44,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import static com.pa.paperless.activity.MeetingActivity.mBadge;
 import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
@@ -75,12 +72,12 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
             switch (msg.what) {
                 case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                     ArrayList attendee = msg.getData().getParcelableArrayList("attendee");
-                    InterfaceMain.pbui_Type_MemberDetailInfo o = (InterfaceMain.pbui_Type_MemberDetailInfo) attendee.get(0);
+                    InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) attendee.get(0);
                     memberInfos = o.getItemList();
                     break;
                 case IDivMessage.RECEIVE_MEET_IMINFO://184.收到新的会议交流信息
                     ArrayList receiveMeetIMInfo = msg.getData().getParcelableArrayList("receiveMeetIMInfo");
-                    InterfaceMain2.pbui_Type_MeetIM o1 = (InterfaceMain2.pbui_Type_MeetIM) receiveMeetIMInfo.get(0);
+                    InterfaceIM.pbui_Type_MeetIM o1 = (InterfaceIM.pbui_Type_MeetIM) receiveMeetIMInfo.get(0);
                     int msgtype = o1.getMsgtype();
                     switch (msgtype) {
                         case 0://文本消息
@@ -164,20 +161,20 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     break;
                 case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
                     ArrayList devinfo = msg.getData().getParcelableArrayList("devinfo");
-                    InterfaceMain.pbui_Type_DeviceDetailInfo o3 = (InterfaceMain.pbui_Type_DeviceDetailInfo) devinfo.get(0);
+                    InterfaceDevice.pbui_Type_DeviceDetailInfo o3 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) devinfo.get(0);
                     //获取到所有的设备信息，查找在线的设备
-                    List<InterfaceMain.pbui_Item_DeviceDetailInfo> pdevList = o3.getPdevList();
+                    List<InterfaceDevice.pbui_Item_DeviceDetailInfo> pdevList = o3.getPdevList();
                     //用来存放在线的设备
-                    List<InterfaceMain.pbui_Item_MemberDetailInfo> OnLineMembers = new ArrayList<>();
+                    List<InterfaceMember.pbui_Item_MemberDetailInfo> OnLineMembers = new ArrayList<>();
                     for (int i = 0; i < pdevList.size(); i++) {
-                        InterfaceMain.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = pdevList.get(i);
+                        InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = pdevList.get(i);
                         int netstate = pbui_item_deviceDetailInfo.getNetstate();
                         Log.e("MyLog", "ChatFragment.handleMessage 171行:  值为1是在线 ：--->>> " + netstate);
                         if (netstate == 1) {
                             //获取在线状态的设备绑定的人员ID
                             int memberid = pbui_item_deviceDetailInfo.getMemberid();
                             for (int j = 0; j < memberInfos.size(); j++) {
-                                InterfaceMain.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = memberInfos.get(j);
+                                InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = memberInfos.get(j);
                                 if (pbui_item_memberDetailInfo.getPersonid() == memberid) {
                                     //添加在线状态的设备
                                     OnLineMembers.add(pbui_item_memberDetailInfo);
@@ -194,7 +191,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         }
     };
     private List<ReceiveMeetIMInfo> receiveMeetIMInfos = new ArrayList<>();
-    private List<InterfaceMain.pbui_Item_MemberDetailInfo> memberInfos;
+    private List<InterfaceMember.pbui_Item_MemberDetailInfo> memberInfos;
 
     @Nullable
     @Override
@@ -219,7 +216,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         switch (message.getAction()) {
             case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 Log.e("MyLog", "ChatFragment.getEventMessage:  90 参会人员变更通知 EventBus --->>> ");
-                InterfaceMain.pbui_MeetNotifyMsg object = (InterfaceMain.pbui_MeetNotifyMsg) message.getObject();
+                InterfaceBase.pbui_MeetNotifyMsg object = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 Log.e("MyLog", "ChatFragment.getEventMessage:  EventBus 指定ID：--->>> " + object.getId());
                 /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
                 nativeUtil.queryAttendPeopleFromId(object.getId());
@@ -324,7 +321,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_ATTENDEE:
-                InterfaceMain.pbui_Type_MemberDetailInfo result1 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
+                InterfaceMember.pbui_Type_MemberDetailInfo result1 = (InterfaceMember.pbui_Type_MemberDetailInfo) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -339,7 +336,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
             case IDivMessage.RECEIVE_MEET_IMINFO://184.收到新的会议交流信息
                 if (isHidden()) {
                     Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                    InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                    InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                     //获取之前的未读消息个数
                     int badgeNumber1 = mBadge.getBadgeNumber();
                     int all = badgeNumber1 + 1;
@@ -359,7 +356,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     break;
                 } else {
                     Log.e("MyLog", "ChatFragment.callListener 364行:  聊天界面收到会议消息 --->>> ");
-                    InterfaceMain2.pbui_Type_MeetIM result2 = (InterfaceMain2.pbui_Type_MeetIM) result;
+                    InterfaceIM.pbui_Type_MeetIM result2 = (InterfaceIM.pbui_Type_MeetIM) result;
                     if (result2 != null) {
                         Bundle bundle = new Bundle();
                         ArrayList arrayList = new ArrayList();
@@ -373,7 +370,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case IDivMessage.QUERY_ATTEND_BYID:
-                InterfaceMain.pbui_Type_MemberDetailInfo result3 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
+                InterfaceMember.pbui_Type_MemberDetailInfo result3 = (InterfaceMember.pbui_Type_MemberDetailInfo) result;
                 if (result3 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -386,7 +383,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case IDivMessage.QUERY_DEVICE_INFO:
-                InterfaceMain.pbui_Type_DeviceDetailInfo result4 = (InterfaceMain.pbui_Type_DeviceDetailInfo) result;
+                InterfaceDevice.pbui_Type_DeviceDetailInfo result4 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
                 if (result4 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();

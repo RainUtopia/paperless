@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.R;
-import com.pa.paperless.controller.LoginController;
 import com.pa.paperless.listener.CallListener;
 import com.wind.myapplication.NativeUtil;
 

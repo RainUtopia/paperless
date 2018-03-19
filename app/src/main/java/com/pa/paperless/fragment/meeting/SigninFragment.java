@@ -1,7 +1,6 @@
 package com.pa.paperless.fragment.meeting;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,9 +13,12 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMain;
-import com.mogujie.tt.protobuf.InterfaceMain2;
+import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceRoom;
+import com.mogujie.tt.protobuf.InterfaceSignin;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.SigninLvAdapter;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
@@ -67,11 +69,11 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     ArrayList queryAttenda = msg.getData().getParcelableArrayList("queryAttende");
                     if (queryAttenda != null) {
                         mDatas = new ArrayList<>();
-                        InterfaceMain.pbui_Type_MemberDetailInfo o2 = (InterfaceMain.pbui_Type_MemberDetailInfo) queryAttenda.get(0);
-                        List<InterfaceMain.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
+                        InterfaceMember.pbui_Type_MemberDetailInfo o2 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryAttenda.get(0);
+                        List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
                         int itemCount2 = o2.getItemCount();
                         for (int i = 0; i < itemCount2; i++) {
-                            InterfaceMain.pbui_Item_MemberDetailInfo item = o2.getItem(i);
+                            InterfaceMember.pbui_Item_MemberDetailInfo item = o2.getItem(i);
                             String nName = new String(item.getName().toByteArray());
                             int personid = item.getPersonid();
                             String comment = new String(item.getComment().toByteArray());
@@ -88,11 +90,11 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     break;
                 case IDivMessage.QUERY_SIGN://查询签到
                     ArrayList signInfo = msg.getData().getParcelableArrayList("signInfo");
-                    InterfaceMain2.pbui_Type_MeetSignInDetailInfo o = (InterfaceMain2.pbui_Type_MeetSignInDetailInfo) signInfo.get(0);
+                    InterfaceSignin.pbui_Type_MeetSignInDetailInfo o = (InterfaceSignin.pbui_Type_MeetSignInDetailInfo) signInfo.get(0);
                     int itemCount = o.getItemCount();
                     Log.e("MyLog", "SigninFragment.handleMessage 97行:  签到数量 --->>> " + itemCount);
                     for (int i = 0; i < itemCount; i++) {
-                        InterfaceMain2.pbui_Item_MeetSignInDetailInfo item = o.getItem(i);
+                        InterfaceSignin.pbui_Item_MeetSignInDetailInfo item = o.getItem(i);
                         int nameId = item.getNameId();  // 已经签到的人员ID
                         String passWord = new String(item.getPassword().toByteArray());
                         String psignData = new String(item.getPsigndata().toByteArray());
@@ -113,7 +115,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     break;
                 case IDivMessage.QUERY_CONFORM_DEVID://125.查询符合要求的设备ID(查询投影机)
                     ArrayList queryProjector = msg.getData().getParcelableArrayList("queryProjector");
-                    InterfaceMain.pbui_Type_ResMeetRoomDevInfo o5 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) queryProjector.get(0);
+                    InterfaceRoom.pbui_Type_ResMeetRoomDevInfo o5 = (InterfaceRoom.pbui_Type_ResMeetRoomDevInfo) queryProjector.get(0);
                     //获得投影机的设备ID
                     List<Integer> devidList = o5.getDevidList();
                     for (int i = 0; i < devidList.size(); i++) {
@@ -142,9 +144,9 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     ArrayList queryProjector1 = msg.getData().getParcelableArrayList("queryProjectorName");
                     byte[] array = (byte[]) queryProjector1.get(0);
                     // 根据查找的类型 查询的是名称就解析成字符串格式
-                    InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty = InterfaceMain.pbui_DeviceStringProperty.getDefaultInstance();
+                    InterfaceDevice.pbui_DeviceStringProperty pbui_deviceStringProperty = InterfaceDevice.pbui_DeviceStringProperty.getDefaultInstance();
                     try {
-                        InterfaceMain.pbui_DeviceStringProperty pbui_deviceStringProperty1 = pbui_deviceStringProperty.parseFrom(array);
+                        InterfaceDevice.pbui_DeviceStringProperty pbui_deviceStringProperty1 = pbui_deviceStringProperty.parseFrom(array);
                         //获取到投影机的名称
                         String ProName = new String(pbui_deviceStringProperty1.getPropertytext().toByteArray());
                         Log.e("MyLog", "SigninFragment.handleMessage 145行:  投影机名称 --->>> " + ProName);
@@ -271,7 +273,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_SIGN://查询签到
-                InterfaceMain2.pbui_Type_MeetSignInDetailInfo result2 = (InterfaceMain2.pbui_Type_MeetSignInDetailInfo) result;
+                InterfaceSignin.pbui_Type_MeetSignInDetailInfo result2 = (InterfaceSignin.pbui_Type_MeetSignInDetailInfo) result;
                 if (result2 != null) {
                     if (result2 != null) {
                         Bundle bundle = new Bundle();
@@ -286,7 +288,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 }
                 break;
             case IDivMessage.QUERY_ATTENDEE://查询参会人员
-                InterfaceMain.pbui_Type_MemberDetailInfo result3 = (InterfaceMain.pbui_Type_MemberDetailInfo) result;
+                InterfaceMember.pbui_Type_MemberDetailInfo result3 = (InterfaceMember.pbui_Type_MemberDetailInfo) result;
                 if (result3 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -300,7 +302,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceMain2.pbui_Type_MeetIM receiveMsg = (InterfaceMain2.pbui_Type_MeetIM) result;
+                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
@@ -322,7 +324,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 break;
 
             case IDivMessage.QUERY_CONFORM_DEVID: //125.查询符合要求的设备ID
-                InterfaceMain.pbui_Type_ResMeetRoomDevInfo result5 = (InterfaceMain.pbui_Type_ResMeetRoomDevInfo) result;
+                InterfaceRoom.pbui_Type_ResMeetRoomDevInfo result5 = (InterfaceRoom.pbui_Type_ResMeetRoomDevInfo) result;
                 if (result5 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
@@ -335,7 +337,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 }
                 break;
             case IDivMessage.Dev_proById://7.按属性ID查询指定设备属性（投影机）
-                InterfaceMain.pbui_DeviceStringProperty result1 = (InterfaceMain.pbui_DeviceStringProperty) result;
+                InterfaceDevice.pbui_DeviceStringProperty result1 = (InterfaceDevice.pbui_DeviceStringProperty) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
                     ArrayList arrayList = new ArrayList();
