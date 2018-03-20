@@ -3,6 +3,7 @@ package com.pa.paperless.activity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,11 +27,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -83,7 +81,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PeletteActivity extends AppCompatActivity implements View.OnClickListener, CallListener {
+public class PeletteActivity extends Activity implements View.OnClickListener, CallListener {
 
     private final int UPDATE_VIEW = -1;// 更新界面
     private final int SAVE_SUCCESS = 1;// 保存成功
@@ -136,7 +134,6 @@ public class PeletteActivity extends AppCompatActivity implements View.OnClickLi
     private List<ImageView> mTopImages;//上方的图片
     private List<ImageView> mBotImages;//下方的图片
     private LinearLayout mTopView;
-    public static boolean ISSHARE = true;
     private Bitmap tempBmp;
     private Canvas tempCanvas;
     private Bitmap baseBmp;
@@ -193,7 +190,9 @@ public class PeletteActivity extends AppCompatActivity implements View.OnClickLi
                                     MemberInfo memberInfo = memberInfos.get(j);
                                     if (memberInfo.getPersonid() == memberId) {
                                         //查找到在线状态的参会人员
-                                        onLineMembers.add(new DevMember(memberInfo, devId));
+                                        if (devId != MeetingActivity.getDevId()) {//过滤自己的设备
+                                            onLineMembers.add(new DevMember(memberInfo, devId));
+                                        }
                                     }
                                 }
                             }
@@ -216,10 +215,10 @@ public class PeletteActivity extends AppCompatActivity implements View.OnClickLi
     private NativeUtil nativeUtil;
     private int count = 0;
     private int DRAWTYPE = InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber();
-    private boolean ISSCREEN = false;//是否发起了同屏
     private PopupWindow mMemberPop;
     private PopupWindow mChooseMemberPop;
     private List<DevMember> onLineMembers;
+    private boolean ISSCREEN = false;//是否发起了同屏
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +245,6 @@ public class PeletteActivity extends AppCompatActivity implements View.OnClickLi
         imageView.setImageBitmap(baseBmp);
         EventBus.getDefault().register(this);
         imageView.setOnTouchListener(new View.OnTouchListener() {
-
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
@@ -967,7 +965,7 @@ public class PeletteActivity extends AppCompatActivity implements View.OnClickLi
         onLineBoardMemberAdapter.setItemClick(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int posion) {
-                Button player = view.findViewById(R.id.palyer_name);
+                Button player = (Button) view.findViewById(R.id.palyer_name);
                 boolean selected = !player.isSelected();
                 player.setSelected(selected);
                 boardCheck.set(posion, selected);

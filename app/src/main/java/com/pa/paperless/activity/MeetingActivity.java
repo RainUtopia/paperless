@@ -6,10 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -56,6 +59,7 @@ import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.fragment.meeting.AgendaFragment;
 import com.pa.paperless.fragment.meeting.AnnAgendaFragment;
 import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.fragment.meeting.ChatFragment;
@@ -136,7 +140,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public static NativeUtil nativeUtil;
     public static List<ReceiveMeetIMInfo> mReceiveMsg = new ArrayList<>();
 
-	public static int W = 0, H = 0;
+    public static int W = 0, H = 0;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -213,9 +217,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                             if (netState == 1 && memberInfos != null) {
                                 for (int j = 0; j < memberInfos.size(); j++) {
                                     MemberInfo memberInfo = memberInfos.get(j);
-                                    if (memberInfos.get(j).getPersonid() == memberId) {
-                                        //查找到在线状态的参会人员
-                                        onLineMembers.add(new DevMember(memberInfos.get(j), devId));
+                                    int personid = memberInfo.getPersonid();
+                                    if (personid == memberId) {
+                                        //过滤掉自己的设备
+                                        if (devId != o.getDevId()) {
+                                            //查找到在线状态的参会人员
+                                            onLineMembers.add(new DevMember(memberInfos.get(j), devId));
+                                        }
                                     }
                                 }
                             }
@@ -239,7 +247,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         }
                         allProjectorAdapter = new OnLineProjectorAdapter(allProjectors, 1);
                         onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors, 0);
-                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers,0);
+                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers, 0);
                     }
                     break;
                 case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
@@ -340,7 +348,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public static List<Boolean> checkedJoinProjector = new ArrayList<>();
     private PopupWindow joinWatchPop;
 
-	//add by gowcage
+    //add by gowcage
     final int REQUEST_CODE = 1;// >=0
     private int width, height, dpi, bitrate, VideoQuality = 1;//VideoQuality:1/2/3
     private float density;
@@ -357,7 +365,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
                 MyUtils.handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryAttendById", mHandler);
                 break;
-            case IDivMessage.QUERY_ATTENDEE://查询参会人员
+            case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                 MyUtils.handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryMember", mHandler);
                 break;
             case IDivMessage.QUERY_Attendee_Property://96.查询参会人员属性
@@ -373,6 +381,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 MyUtils.handTo(IDivMessage.QUERY_CAN_JOIN, (InterfaceDevice.pbui_Type_DeviceResPlay) result, "queryCanJoin", mHandler);
                 break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
     }
 
 
@@ -408,7 +421,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
         //注册EventBus
         EventBus.getDefault().register(this);
-		initScreenParam();
+        initScreenParam();
     }
 
     /**
@@ -478,7 +491,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.UpDate_BadgeNumber:
-                Log.e("MyLog", "MeetingActivity.getEventMessage 457行:  11111111 --->>> ");
                 List<EventBadge> object3 = (List<EventBadge>) message.getObject();
                 if (object3 != null) {
                     Log.e("MyLog", "MeetingActivity.getEventMessage 459行:  222 --->>> " + object3.get(0).getNum());
@@ -544,7 +556,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 //                        InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
                         InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
                 break;
-				case IDEventMessage.START_COLLECTION_STREAM_NOTIFY:
+            case IDEventMessage.START_COLLECTION_STREAM_NOTIFY:
                 switch (message.getType()) {
                     case 2://屏幕
                         if (stopRecord()) {
@@ -553,7 +565,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                             // 1: 拿到 MediaProjectionManager 实例
                             manager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
                             // 2: 发起屏幕捕捉请求
-                            Intent intent = manager.createScreenCaptureIntent();
+                            Intent intent = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                intent = manager.createScreenCaptureIntent();
+                            }
                             startActivityForResult(intent, REQUEST_CODE);
                         }
                         break;
@@ -567,7 +582,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     case 2:
                         if (stopRecord()) {
                             Toast.makeText(this, "屏幕录制已停止", Toast.LENGTH_LONG).show();
-                        }else{
+                        } else {
                             Toast.makeText(this, "屏幕录制停止失败", Toast.LENGTH_LONG).show();
                         }
                         break;
@@ -1864,7 +1879,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             this.join_watch = (Button) rootView.findViewById(R.id.join_watch);
             this.join_cancel = (Button) rootView.findViewById(R.id.join_cancel);
         }
-	}
+    }
 
     /**
      * add by gowcage
@@ -1875,7 +1890,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK)
-            projection = manager.getMediaProjection(resultCode, data);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                projection = manager.getMediaProjection(resultCode, data);
+            }
 
         if (projection == null) {
             Log.e(TAG, "media projection is null");

@@ -3557,8 +3557,9 @@ public class NativeUtil {
                 //微秒 转换成毫秒 除以 1000
                 long usec = pbui_time.getUsec() / 1000;
                 String[] date = DateUtil.getGTMDate(usec);
+                EventMessage eventMessage = new EventMessage(IDEventMessage.DATE_TIME, usec);
                 if (mCallListener != null) {
-                    mCallListener.callListener(IDivMessage.UPDATE_TIME, date);
+                    mCallListener.callListener(IDivMessage.UPDATE_TIME, eventMessage);
                     //EventBus发布消息
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.MEET_DATE, date));
                 }

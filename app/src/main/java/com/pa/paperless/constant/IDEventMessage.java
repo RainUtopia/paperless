@@ -79,5 +79,7 @@ public class IDEventMessage {
     public static final int Meet_vedio_changeInform = 3034;
     // 添加绘画通知
     public static final int ADD_DRAW_INFORM = 3035;
+    // 改善时间回调
+    public static final int DATE_TIME = 3036;
 
 }

@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -58,6 +59,7 @@ import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.service.PlayService;
+import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.PermissionUtils;
@@ -89,6 +91,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView mMainUnit;
     private TextView mMainMemberName;
     private TextView mMainMemberJob;
+
     /*handle接收*/
     public Handler mHandler = new Handler() {
         @Override
@@ -96,8 +99,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             super.handleMessage(msg);
             switch (msg.what) {
                 case IDivMessage.UPDATE_TIME:
-                    String[] datatimes = msg.getData().getStringArray("datatime");
-                    upDateMainTimeUI(datatimes);
+//                    String[] datatimes = (String[]) msg.getData().getStringArray("datatime");
+//                    upDateMainTimeUI(datatimes);
+                    ArrayList datatime = msg.getData().getParcelableArrayList("datatime");
+                    EventMessage o2 = (EventMessage) datatime.get(0);
+                    long object = (long) o2.getObject();
+                    String[] date = DateUtil.getGTMDate(object);
+                    upDateMainTimeUI(date);
                     break;
                 case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
                     ArrayList devMeetInfos = msg.getData().getParcelableArrayList("devMeetInfos");
@@ -396,6 +404,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMainMemberJob = (TextView) findViewById(R.id.main_memberJob);
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -455,8 +464,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 //进入其它页面后 nativeUtil对象就改变了，当返回主界面后就要重新设置
                 Log.e("MyLog", "MainActivity.onActivityResult:  进入了onActivityResult方法 --->>> ");
                 startActivity(new Intent(this, MainActivity.class));
-//                nativeUtil = NativeUtil.getInstance();
-//                nativeUtil.setCallListener(this);
+                nativeUtil = NativeUtil.getInstance();
+                nativeUtil.setCallListener(this);
                 break;
         }
     }
@@ -502,7 +511,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.UPDATE_TIME://平台时间高频回调
-                handTo(IDivMessage.UPDATE_TIME,(String[]) result,"datatime",mHandler);
+                handTo(IDivMessage.UPDATE_TIME,(EventMessage) result,"datatime",mHandler);
                 break;
             case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
                 handTo(IDivMessage.QUERY_DEVMEET_INFO,(InterfaceDevice.pbui_Type_DeviceFaceShowDetail) result,"devMeetInfos",mHandler);

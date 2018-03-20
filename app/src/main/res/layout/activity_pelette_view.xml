@@ -84,6 +84,7 @@
                 android:clickable="true"
                 android:scaleType="centerInside"
                 android:src="@drawable/select_sline" />
+
             <ImageView
                 android:id="@+id/ellpse"
                 android:layout_width="0dp"
@@ -293,8 +294,8 @@
         <ImageView
             android:id="@+id/whiteboard_imageview"
             android:layout_width="match_parent"
-            android:background="@drawable/view_bg"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@drawable/view_bg" />
 
         <ImageView
             android:id="@+id/whiteboard_temp_imageview"
