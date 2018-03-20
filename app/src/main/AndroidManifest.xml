@@ -82,6 +82,9 @@
             android:screenOrientation="landscape" />
         <activity android:name=".activity.WhiteBoardActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".activity.PeletteActivity"
+            android:screenOrientation="landscape"/>
+        <service android:name=".service.PlayService"/>
     </application>
 
 </manifest>

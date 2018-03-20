@@ -16,6 +16,8 @@ android {
                 abiFilters 'armeabi'
             }
         }
+        //开启multidex支持：解决方法数超过65536的问题1
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -61,6 +63,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'q.rorbin:badgeview:1.1.3'
     testCompile 'junit:junit:4.12'
+    //解决调用方法数超过65536个问题2
+    compile 'com.android.support:multidex:1.0.0'
     //画板
     compile 'com.yinghe:whiteboardlib:1.1.1'
 }

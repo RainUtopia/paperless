@@ -346,7 +346,6 @@ public class DrawBoardActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.color_gray:
                 setAnimator(mColorGray);
-
                 mPaletteView.setPenColor(Color.GRAY);
                 break;
             case R.id.color_red:

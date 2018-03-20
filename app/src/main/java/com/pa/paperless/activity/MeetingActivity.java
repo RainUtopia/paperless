@@ -239,7 +239,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         }
                         allProjectorAdapter = new OnLineProjectorAdapter(allProjectors, 1);
                         onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors, 0);
-                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers);
+                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers,0);
                     }
                     break;
                 case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
@@ -829,7 +829,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 //                long timeMillis = System.currentTimeMillis();
 //                nativeUtil.coerceStartWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber(),
 //                        "强制打开白板", o.getMemberid(), o.getMemberid(), timeMillis, add);
-                startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
+                startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
 
                 break;
             case R.id.chat:

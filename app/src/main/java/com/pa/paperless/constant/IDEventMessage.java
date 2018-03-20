@@ -77,5 +77,7 @@ public class IDEventMessage {
     public static final int STOP_COLLECTION_STREAM_NOTIFY = 3033;
     // 会议视频变更通知
     public static final int Meet_vedio_changeInform = 3034;
+    // 添加绘画通知
+    public static final int ADD_DRAW_INFORM = 3035;
 
 }

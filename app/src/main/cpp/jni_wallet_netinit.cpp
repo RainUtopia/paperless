@@ -142,7 +142,7 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 	if(datalen <= 0)
 		return 0;
 	
-	if (type != TYPE_MEET_INTERFACE_TIME && type != TYPE_MEET_INTERFACE_MEDIAPLAYPOSINFO)
+	/*if (type != TYPE_MEET_INTERFACE_TIME && type != TYPE_MEET_INTERFACE_MEDIAPLAYPOSINFO)
 	{
 		switch (type)
 		{
@@ -150,7 +150,7 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 			LOGI("demoCb:%d:%s, %d:%s!\n", type, meetcore_GettypeStr(type), method, meetcore_GetMethodStr(method));
 			break;
 		}
-	}
+	}*/
 
 	int status, battach = 0;
 	JNIEnv *env = NULL;
@@ -166,6 +166,13 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 		}
 		battach = 1;
 	}
+
+    /*if(datalen > 4)
+    {
+        char* ptmppp = (char*)pdata;
+        LOGI("logprintf:%d,%d datalen: %d 0x%02x%02x%02x%02x!\n", type, method, datalen, ptmppp[datalen - 4], ptmppp[datalen - 3], ptmppp[datalen - 2], ptmppp[datalen - 1]);
+    }*/
+
 	//JNIEnv*		env = Adapter_GetEnv();
 	jbyteArray barray = env->NewByteArray(datalen);
 	env->SetByteArrayRegion(barray, 0, datalen, (const jbyte*) pdata);
@@ -175,6 +182,7 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 	if(battach)
 		g_pinternalparam->javavm->DetachCurrentThread();
 
+    //LOGI("logprintf:%d,%d datalen: %d finish!\n", type, method, datalen);
 	return 0;
 }
 

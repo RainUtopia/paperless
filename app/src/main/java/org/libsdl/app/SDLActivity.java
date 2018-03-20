@@ -186,10 +186,10 @@ public class SDLActivity extends Activity {
 
         EventBus.getDefault().post(new EventMessage(1, 1));
         try {
-            int action = getIntent().getIntExtra("action",0);
+            int action = getIntent().getIntExtra("action", 0);
             byte[] data = getIntent().getByteArrayExtra("data");
-            if (data != null && data.length > 0){
-                switch(action){
+            if (data != null && data.length > 0) {
+                switch (action) {
                     case IDEventMessage.MEDIA_PLAY_INFORM:
                         meetMediaPlay = InterfacePlaymedia.pbui_Type_MeetMediaPlay.parseFrom(data);
                         break;

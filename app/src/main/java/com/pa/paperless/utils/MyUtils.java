@@ -46,6 +46,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.Charset;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -200,7 +201,7 @@ public class MyUtils {
      * @param popupWindow
      */
     public static void setPopAnimal(PopupWindow popupWindow) {
-        popupWindow.setAnimationStyle(R.style.AnimHorizontal);
+        popupWindow.setAnimationStyle(R.style.Anim_PopupWindow);
     }
 
     /**
@@ -412,5 +413,19 @@ public class MyUtils {
         }
     }
 
+    //将一个Double的数 转换成百分比字符串显示
+    public static String getPercentage(double d) {
+        java.text.NumberFormat percentInstance = NumberFormat.getPercentInstance();
+        percentInstance.setMaximumFractionDigits(2);//最大小数位数
+        percentInstance.setMaximumIntegerDigits(2);//最大整数位数
+        percentInstance.setMinimumFractionDigits(1);//最小小数位数
+        percentInstance.setMinimumIntegerDigits(1);//最小整数位数
+        String format = percentInstance.format(d);
+        return format;
+    }
+    //将一个百分比的字符串转换成一个数
+    public static float getPerNumber(String perStr) {
+        return new Float(perStr.substring(0, perStr.indexOf("%"))) / 100;
+    }
 
 }

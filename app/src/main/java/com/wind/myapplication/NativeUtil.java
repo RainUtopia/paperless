@@ -2913,7 +2913,8 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean addDrawFigure(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int type, int size, int color,
+    public boolean addDrawFigure(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp,
+                                 int type, int size, int color,
                                  float lx, float ly, float rx, float ry) {
         InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builder = InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.newBuilder();
         builder.setOperid(operid);
@@ -3548,8 +3549,8 @@ public class NativeUtil {
         if (datalen <= 0)
             return 0;
 
-        if(datalen > 4)
-            Log.e("CaseLog", "logprintf: " + type + "," + method + "data:" + byte2HexStr(data) + "length:" + data.length + "," + datalen);
+        //if(datalen > 4)
+        //    Log.e("CaseLog", "logprintf: " + type + "," + method + "data:" + byte2HexStr(data) + "length:" + data.length + "," + datalen);
         switch (type) {
             case 1: //3 高频回调
                 InterfaceBase.pbui_Time pbui_time = InterfaceBase.pbui_Time.parseFrom(data);
@@ -3786,6 +3787,7 @@ public class NativeUtil {
                     Log.e("CaseLog", "NativeUtil.callback_method:  224 添加墨迹通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber()) {
                     InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_INFORM,InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  227 添加矩形、直线、圆形通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber()) {
                     InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.parseFrom(data);

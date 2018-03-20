@@ -2,7 +2,6 @@ package com.pa.paperless.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,14 @@ import android.widget.Button;
 
 import com.pa.paperless.R;
 import com.pa.paperless.bean.DevMember;
-import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.pa.paperless.activity.MeetingActivity.checks;
+import static com.pa.paperless.activity.PeletteActivity.boardCheck;
+
 
 /**
  * Created by Administrator on 2017/11/9.
@@ -25,12 +25,14 @@ import static com.pa.paperless.activity.MeetingActivity.checks;
 
 public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private int KEY;
     private List<DevMember> mData;
     private ItemClickListener mListener;
 
 
-    public ScreenControlAdapter(List<DevMember> datas) {
+    public ScreenControlAdapter(List<DevMember> datas, int key) {
         mData = datas;
+        KEY = key;
     }
 
     /**
@@ -40,35 +42,24 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     public List<DevMember> getCheckedIds() {
         List<DevMember> checkedId = new ArrayList<>();
-        if(mData.size()>0) {
-            for (int i = 0; i < checks.size(); i++) {
-                if (checks.get(i)) {
-                    checkedId.add(mData.get(i));
+        if (KEY == 0) {
+            if (mData.size() > 0) {
+                for (int i = 0; i < checks.size(); i++) {
+                    if (checks.get(i)) {
+                        checkedId.add(mData.get(i));
+                    }
+                }
+            }
+        } else if (KEY == 1) {
+            if (mData.size() > 0) {
+                for (int i = 0; i < boardCheck.size(); i++) {
+                    if (boardCheck.get(i)) {
+                        checkedId.add(mData.get(i));
+                    }
                 }
             }
         }
         return checkedId;
-    }
-
-
-    /**
-     * 全选 按钮监听
-     */
-    public boolean setAllChecked() {
-        //只要集合中包含false，就将该索引的位置改为true
-        if (checks.contains(false)) {
-            for (int i = 0; i < checks.size(); i++) {
-                checks.set(i, true);
-            }
-            notifyDataSetChanged();
-            return true;
-        } else {//全部已经选中状态（true），就全设为false
-            for (int i = 0; i < checks.size(); i++) {
-                checks.set(i, false);
-            }
-            notifyDataSetChanged();
-            return false;
-        }
     }
 
 
@@ -83,10 +74,12 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-
         ((ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
-        ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
-
+        if (KEY == 0) {
+            ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
+        } else {
+            ((ViewHolder) holder).play_btn.setSelected(boardCheck.get(position));
+        }
         ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
