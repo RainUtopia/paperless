@@ -92,7 +92,6 @@ public class ScreenRecorder extends Thread {
             recordVirtualDisplay();// 录制虚拟屏幕
 
         } finally {
-
             release();
         }
     }

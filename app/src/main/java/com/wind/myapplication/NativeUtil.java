@@ -164,7 +164,6 @@ public class NativeUtil {
         builder.setW(1920);
         InterfacePlaymedia.pbui_Type_MeetInitPlayRes build = builder.build();
         call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEDIAPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_INIT.getNumber(), build.toByteArray());
-
         Log.e("MyLog", "NativeUtil.initvideores:  初始化资源 --->>> ");
         return true;
     }
@@ -230,7 +229,7 @@ public class NativeUtil {
         builder.setPropertyval(value);
         InterfaceContext.pbui_MeetContextInfo build = builder.build();
         byte[] bytes = build.toByteArray();
-        Log.e("MyLog","NativeUtil.setInterfaceState:  InterfaceMacro.Pb_ContextPropertyID.Pb_MEETCONTEXT_PROPERTY_ROLE.getNumber(): --->>> "+InterfaceMacro.Pb_ContextPropertyID.Pb_MEETCONTEXT_PROPERTY_ROLE.getNumber()+"  value: "+value);
+        Log.e("MyLog", "NativeUtil.setInterfaceState:  InterfaceMacro.Pb_ContextPropertyID.Pb_MEETCONTEXT_PROPERTY_ROLE.getNumber(): --->>> " + InterfaceMacro.Pb_ContextPropertyID.Pb_MEETCONTEXT_PROPERTY_ROLE.getNumber() + "  value: " + value);
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETCONTEXT.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SETPROPERTY.getNumber(), bytes);
         Log.e("MyLog", "NativeUtil.setInterfaceState:  8.修改本机界面状态  为 --->>> " + value);
         return true;
@@ -2914,8 +2913,7 @@ public class NativeUtil {
      * @return
      */
     public boolean addDrawFigure(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp,
-                                 int type, int size, int color,
-                                 float lx, float ly, float rx, float ry) {
+                                 int type, int size, int color, List<Float> allpt) {
         InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builder = InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.newBuilder();
         builder.setOperid(operid);
         builder.setOpermemberid(opermemberid);
@@ -2925,10 +2923,7 @@ public class NativeUtil {
         builder.setFiguretype(type);
         builder.setLinesize(size);
         builder.setArgb(color);
-        builder.addPt(lx);
-        builder.addPt(ly);
-        builder.addPt(rx);
-        builder.addPt(ry);
+        builder.addAllPt(allpt);
         InterfaceWhiteboard.pbui_Item_MeetWBRectDetail build = builder.build();
         call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addDrawFigure:  228.添加矩形、直线、圆形 --->>> ");
@@ -3301,11 +3296,11 @@ public class NativeUtil {
     /**
      * 264.流播放
      *
-     * @param srcdeviceid
-     * @param subid
-     * @param triggeruserval
-     * @param allres
-     * @param alldeviceid
+     * @param srcdeviceid    要抓取屏幕的设备ID 一般是本机
+     * @param subid          2：抓取屏幕 3：摄像头
+     * @param triggeruserval 一般写 0
+     * @param allres         播放所用的资源
+     * @param alldeviceid    通知的目标设备  要同屏观看屏幕的人员ID
      * @return
      */
     public boolean streamPlay(int srcdeviceid, int subid, int triggeruserval, List<Integer> allres, List<Integer> alldeviceid) {
@@ -3523,17 +3518,16 @@ public class NativeUtil {
 
     /**
      * bytes转换成十六进制字符串
+     *
      * @param byte[] b byte数组
      * @return String 每个Byte值之间空格分隔
      */
-    public static String byte2HexStr(byte[] b)
-    {
-        String stmp="";
+    public static String byte2HexStr(byte[] b) {
+        String stmp = "";
         StringBuilder sb = new StringBuilder("");
-        for (int n= b.length - 4;n<b.length;n++)
-        {
+        for (int n = b.length - 4; n < b.length; n++) {
             stmp = Integer.toHexString(b[n] & 0xFF);
-            sb.append((stmp.length()==1)? "0"+stmp : stmp);
+            sb.append((stmp.length() == 1) ? "0" + stmp : stmp);
             sb.append(" ");
         }
         return sb.toString().toUpperCase().trim();
@@ -3787,8 +3781,7 @@ public class NativeUtil {
                     InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.parseFrom(data);
                     Log.e("CaseLog", "NativeUtil.callback_method:  224 添加墨迹通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber()) {
-                    InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data);
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_INFORM,InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_INFORM, InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  227 添加矩形、直线、圆形通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber()) {
                     InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.parseFrom(data);

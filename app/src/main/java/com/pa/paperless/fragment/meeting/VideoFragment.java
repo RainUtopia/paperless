@@ -174,18 +174,10 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_video, container, false);
         initView(inflate);
-
-
         initController();
         try {
-
-
             /** ************ ******  6.查询设备信息  ****** ************ **/
             b = nativeUtil.queryDeviceInfo();
-
-
-
-
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -204,8 +196,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
                 if (!b) {
                     b = nativeUtil.queryDeviceInfo();
                 }
-
-
                 break;
         }
     }

@@ -56,11 +56,6 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".activity.DrawBoardActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".activity.ManageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
@@ -72,16 +67,11 @@
             android:name=".activity.DirPermissionActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".activity.LoginActivity" />
-        <activity
-            android:name=".activity.SplashActivity"
-            android:screenOrientation="landscape" />
         <activity android:name=".activity.ScreenShotActivity" />
         <activity
             android:name="org.libsdl.app.SDLActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="landscape" />
-        <activity android:name=".activity.WhiteBoardActivity"
-            android:screenOrientation="landscape"/>
         <activity android:name=".activity.PeletteActivity"
             android:screenOrientation="landscape"/>
         <service android:name=".service.PlayService"/>

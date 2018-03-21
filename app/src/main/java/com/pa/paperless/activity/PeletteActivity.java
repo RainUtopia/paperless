@@ -29,6 +29,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -54,8 +55,10 @@ import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceWhiteboard;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.ScreenControlAdapter;
+import com.pa.paperless.adapter.setadapter.BoardAdapter;
 import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MemberInfo;
@@ -77,9 +80,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.pa.paperless.activity.MeetingActivity.o;
 
 public class PeletteActivity extends Activity implements View.OnClickListener, CallListener {
 
@@ -105,32 +111,11 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private String drawText = "";// 保存要绘制的文本
 
     public static int PHOTO_REQUEST_GALLERY = 1;
-    private ImageView mPen;
-    private ImageView mEraser;
-    private ImageView mPalette;
-    private ImageView mText;
-    private ImageView mPic;
-    private ImageView mSline;
-    private ImageView mEllpse;
-    private ImageView mRect;
-    private ImageView mBack;
-    private ImageView mClean;
+    private ImageView mPen, mEraser, mPalette, mText, mPic, mSline, mEllpse, mRect, mBack, mClean;
     private SeekBar mSeb;
     private int mPaintWidth = 10; // 设置画笔的默认宽度是 10
-    private ImageView mColorBlack;
-    private ImageView mColorGray;
-    private ImageView mColorRed;
-    private ImageView mColorOrange;
-    private ImageView mColorYellow;
-    private ImageView mColorBrown;
-    private ImageView mColorPurple;
-    private ImageView mColorBlue;
-    private ImageView mColorCyan;
-    private ImageView mColorGreen;
-    private Button mShareStart;
-    private Button mShareStop;
-    private Button mSave;
-    private Button mExit;
+    private ImageView mColorBlack, mColorGray, mColorRed, mColorOrange, mColorYellow, mColorBrown, mColorPurple, mColorBlue, mColorCyan, mColorGreen;
+    private Button mShareStart, mShareStop, mSave, mExit;
     private List<ImageView> mTopImages;//上方的图片
     private List<ImageView> mBotImages;//下方的图片
     private LinearLayout mTopView;
@@ -153,7 +138,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     int startX, startY;
     int endX, endY;
     private List<MemberInfo> memberInfos;
-    public static ScreenControlAdapter onLineBoardMemberAdapter;
+    public static BoardAdapter onLineBoardMemberAdapter;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -203,14 +188,12 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                         for (int k = 0; k < onLineMembers.size(); k++) {
                             boardCheck.add(false);
                         }
-                        onLineBoardMemberAdapter = new ScreenControlAdapter(onLineMembers, 1);
+                        onLineBoardMemberAdapter = new BoardAdapter(onLineMembers);
                     }
                     break;
             }
         }
     };
-    private int width = 1;
-    private int height = 1;
     public static PeletteActivity context;
     private NativeUtil nativeUtil;
     private int count = 0;
@@ -219,6 +202,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private PopupWindow mChooseMemberPop;
     private List<DevMember> onLineMembers;
     private boolean ISSCREEN = false;//是否发起了同屏
+    private int mWidth;
+    private int mHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,21 +214,40 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         Log.e("MyLog", "PeletteActivity.onCreate 161行:   --->>> " + display);
         initNativeUtil();
         initView();
+        initEvent();
         initImages();
         initDefaultColor();
         context = this;
-        initEvent();
+        EventBus.getDefault().register(this);
+    }
+
+    /**
+     * onWindowFocusChanged（）方法是在onLayout（）之后执行的，所以getWidth（）与getHeight（）会得到具体的数值
+     * 想要测量出 ImageView （控件）的宽高，必须在 onWindowFocusChanged 方法中
+     *
+     * @param hasFocus
+     */
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        mWidth = imageView.getWidth();
+        mHeight = imageView.getHeight();
+        //绘画
+        draw();
+        Log.e("MyLog", "PeletteActivity.onWindowFocusChanged :   --->>> 宽：" + mWidth + " 高：" + mHeight);
+    }
+
+    private void draw() {
         // 创建一个临时的用于显示橡皮擦图片的bitmap
-        tempBmp = Bitmap.createBitmap(2048, 1041, Bitmap.Config.ARGB_8888);
+        tempBmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
         tempCanvas = new Canvas(tempBmp);
         tempImageView.setImageBitmap(tempBmp);
         // 创建一个可以被修改的bitmap
-        baseBmp = Bitmap.createBitmap(2048, 1041, Bitmap.Config.ARGB_8888);
+        baseBmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(baseBmp);
         dstbmp = ((BitmapDrawable) imageView.getBackground()).getBitmap();
         pathList = new ArrayList<>();
         imageView.setImageBitmap(baseBmp);
-        EventBus.getDefault().register(this);
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -338,16 +342,42 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                         }
                         clearTempCanvas();
                         imageView.setImageBitmap(baseBmp);
-                        String perW = MyUtils.getPercentage(startX / width);
-                        String perH = MyUtils.getPercentage(startY / height);
-                        Log.e("MyLog", "PeletteActivity.onTouch 278行:   --->>> " + perW + "   " + perH);
+                        judge();//超过边界就归位
+                        double pw = MyUtils.div(startX, mWidth, 2);
+                        double py = MyUtils.div(startY, mHeight, 2);
+                        Log.e("MyLog", "PeletteActivity.onTouch 345行:   --->>> " + pw + "   " + py);
+                        Log.e("MyLog", "PeletteActivity.onTouch 346行:   --->>> " + startX + "  " + startY +
+                                "  " + mWidth + "  " + mHeight);
+                        String perW = MyUtils.getPercentage(pw);
+                        String perH = MyUtils.getPercentage(py);
+                        Log.e("MyLog", "PeletteActivity.onTouch 347行:   --->>> " + perW + "   " + perH);
+                        List<Float> allpt = new ArrayList<Float>();
+                        allpt.add((float) startX);
+                        allpt.add((float) startY);
+                        allpt.add((float) endX);
+                        allpt.add((float) endY);
                         // 发送添加绘画方法
-                        addDrawShape(DRAWTYPE);
+                        addDrawShape(DRAWTYPE, allpt);
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void judge() {
+        if (startX > mWidth) {
+            startX = mWidth;
+        }
+        if (startX < 0) {
+            startX = 0;
+        }
+        if (startY > mHeight) {
+            startY = mHeight;
+        }
+        if (startY < 0) {
+            startY = 0;
+        }
     }
 
     private void initNativeUtil() {
@@ -367,6 +397,17 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 //6.查询设备信息
                 nativeUtil.queryDeviceInfo();
                 break;
+            case IDEventMessage.ADD_DRAW_INFORM://添加矩形、直线、圆形通知
+                InterfaceWhiteboard.pbui_Item_MeetWBRectDetail object = (InterfaceWhiteboard.pbui_Item_MeetWBRectDetail) message.getObject();
+                Log.e("MyLog", "PeletteActivity.getEventMessage 400行:   --->>> " + object.getSrcmemid());
+                List<Float> ptList = object.getPtList();
+                for (int i = 0; i < ptList.size(); i++) {
+                    Float aFloat = ptList.get(i);
+                    double v = aFloat.doubleValue();
+
+                    Log.e("MyLog", "PeletteActivity.getEventMessage 403行:   --->>> " + aFloat);
+                }
+                break;
         }
     }
 
@@ -377,13 +418,12 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     }
 
     //添加圆形、矩形
-    private void addDrawShape(int type) {
+    private void addDrawShape(int type, List<Float> allpt) {
         long timeMillis = System.currentTimeMillis();
         long time = 100;
         count++;
         nativeUtil.addDrawFigure(count, MeetingActivity.getDevId(), MeetingActivity.getDevId(),
-                time, timeMillis, type, (int) paint.getStrokeWidth(), paint.getColor(), startX,
-                startY, endX, endY);
+                time, timeMillis, type, (int) paint.getStrokeWidth(), paint.getColor(), allpt);
     }
 
     @Override
@@ -518,11 +558,13 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         public Path path;
     }
 
+
     private void initEvent() {
         /**
          * 监听 SeekBar 的值 设置画笔的大小
          */
         mSeb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -543,19 +585,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 mPaintWidth = seekBar.getProgress();
             }
         });
-        ViewTreeObserver viewTreeObserver = imageView.getViewTreeObserver();
-        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                width = imageView.getWidth();
-                height = imageView.getHeight();
-                Log.e("MyLog", "PeletteActivity.onPreDraw :   --->>> 控件的宽：" + width + " 高：" + height);
-                //调用一次后需要注销这个监听，否则会阻塞ui线程。
-                imageView.getViewTreeObserver().removeOnPreDrawListener(this);
-                return true;
-            }
-        });
     }
+
 
     /**
      * 初始化画笔
@@ -925,7 +956,31 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         holder.board_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //实现共享批注
+                ArrayList<Integer> devIds = new ArrayList<Integer>();
+//                if(onLineBoardMemberAdapter!=null) {
+//                    List<DevMember> checkedIds = onLineBoardMemberAdapter.getCheckedIds();
+//                    for (int i = 0; i < checkedIds.size(); i++) {
+//                        devIds.add(checkedIds.get(i).getDevId());
+//                    }
+//                }
+
+                ArrayList<Integer> sameMemberDevRrsIds = new ArrayList<Integer>();
+//                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
+//                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
+//                    for (int i = 0; i < checkedIds.size(); i++) {
+//                        sameMemberDevIds.add(checkedIds.get(i).getDevId());
+//                    }
+//                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
+//                    for (int i = 0; i < checkedIds1.size(); i++) {
+//                        sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
+//                    }
+//                }
+                sameMemberDevRrsIds.add(0);
+                devIds.add(0x1100003);//要播放的屏幕源  要同屏的人员
+                /** ************ ******  流播放  ******0x1080004 ************ **/
+                nativeUtil.streamPlay(o.getDevId(), 2, 0,
+                        sameMemberDevRrsIds, devIds);
+
 
             }
         });
@@ -1043,7 +1098,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 Drawable drawable = new BitmapDrawable(dstbmp);
                 imageView.setBackground(drawable);
             }
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -1084,8 +1138,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             Paint p = new Paint();
             dst = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());// 屏幕>>目标矩形
             // 要先画一次背景图片
-            canvas.drawBitmap(dstbmp, null, dst, p);// 画背景图 参数二：null为显示整个图片
-            // 再画canvas的内容
+            canvas.drawBitmap(dstbmp, null, dst, p);// 画背景图 参数二：null 为显示整个图片
+            // 再画 canvas 的内容
             srcbmp = BitmapFactory.decodeFile(savePath);// 获取之前保存的画布图片
             canvas.drawBitmap(srcbmp, null, dst, p);// 画画布图片
             handler.sendEmptyMessage(UPDATE_VIEW);
@@ -1159,13 +1213,12 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             this.boardAllCheck = (CheckBox) rootView.findViewById(R.id.board_all_check);
             this.boardMemberRl = (RecyclerView) rootView.findViewById(R.id.board_member_rl);
 //            this.boardMemberRl.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL));
-            this.boardMemberRl.setLayoutManager(new LinearLayoutManager(context));
+            this.boardMemberRl.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             if (onLineBoardMemberAdapter != null) {
                 this.boardMemberRl.setAdapter(onLineBoardMemberAdapter);
             }
             this.boardEnsureBtn = (Button) rootView.findViewById(R.id.board_ensure_btn);
             this.boardCancelBtn = (Button) rootView.findViewById(R.id.board_cancel_btn);
         }
-
     }
 }

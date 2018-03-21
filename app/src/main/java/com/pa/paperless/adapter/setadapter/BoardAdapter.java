@@ -1,4 +1,4 @@
-package com.pa.paperless.adapter;
+package com.pa.paperless.adapter.setadapter;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +23,13 @@ import static com.pa.paperless.activity.PeletteActivity.boardCheck;
  * 同屏控制Adapter 参与人 和 投影机
  */
 
-public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class BoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<DevMember> mData;
     private ItemClickListener mListener;
 
-    public ScreenControlAdapter(List<DevMember> datas) {
+
+    public BoardAdapter(List<DevMember> datas) {
         mData = datas;
     }
 
@@ -41,8 +41,8 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
     public List<DevMember> getCheckedIds() {
         List<DevMember> checkedId = new ArrayList<>();
         if (mData.size() > 0) {
-            for (int i = 0; i < checks.size(); i++) {
-                if (checks.get(i)) {
+            for (int i = 0; i < boardCheck.size(); i++) {
+                if (boardCheck.get(i)) {
                     checkedId.add(mData.get(i));
                 }
             }
@@ -63,7 +63,7 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
-        ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
+        ((ViewHolder) holder).play_btn.setSelected(boardCheck.get(position));
         ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

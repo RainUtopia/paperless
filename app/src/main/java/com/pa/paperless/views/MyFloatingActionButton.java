@@ -20,28 +20,36 @@ public class MyFloatingActionButton extends FloatingActionButton {
     private int screenWidthHalf;
     private int statusHeight;
     private int virtualHeight;
+
     public MyFloatingActionButton(Context context) {
         super(context);
         init();
     }
+
     public MyFloatingActionButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
+
     public MyFloatingActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
+
     private void init() {
         screenWidth = ScreenUtils.getScreenWidth(getContext());
         screenWidthHalf = screenWidth / 2;
         screenHeight = ScreenUtils.getScreenHeight(getContext());
         statusHeight = ScreenUtils.getStatusHeight(getContext());
-        virtualHeight=ScreenUtils.getVirtualBarHeigh(getContext());
+        virtualHeight = ScreenUtils.getVirtualBarHeigh(getContext());
+        Log.e("MyLog", "MyFloatingActionButton.init 45行:   --->>> 屏幕宽:" + screenWidth + "  屏幕高：" + screenHeight + "  状态栏高：" + statusHeight + "  " +
+                "虚拟功能键高：" + virtualHeight);
     }
+
     private int lastX;
     private int lastY;
     private boolean isDrag;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int rawX = (int) event.getRawX();
@@ -60,10 +68,10 @@ public class MyFloatingActionButton extends FloatingActionButton {
                 int dx = rawX - lastX;
                 int dy = rawY - lastY;
                 //这里修复一些手机无法触发点击事件的问题
-                int distance= (int) Math.sqrt(dx*dx+dy*dy);
-                Log.e("distance---->",distance+"");
-                if(distance<3){//给个容错范围，不然有部分手机还是无法点击
-                    isDrag=false;
+                int distance = (int) Math.sqrt(dx * dx + dy * dy);
+                Log.e("distance---->", distance + "");
+                if (distance < 3) {//给个容错范围，不然有部分手机还是无法点击
+                    isDrag = false;
                     break;
                 }
                 float x = getX() + dx;
@@ -71,17 +79,17 @@ public class MyFloatingActionButton extends FloatingActionButton {
                 //检测是否到达边缘 左上右下
                 x = x < 0 ? 0 : x > screenWidth - getWidth() ? screenWidth - getWidth() : x;
                 // y = y < statusHeight ? statusHeight : (y + getHeight() >= screenHeight ? screenHeight - getHeight() : y);
-                if (y<0){
-                    y=0;
+                if (y < 0) {
+                    y = 0;
                 }
-                if (y>screenHeight-statusHeight-getHeight()){
-                    y=screenHeight-statusHeight-getHeight();
+                if (y > screenHeight - statusHeight - getHeight()) {
+                    y = screenHeight - statusHeight - getHeight();
                 }
                 setX(x);
                 setY(y);
                 lastX = rawX;
                 lastY = rawY;
-                Log.e("move---->", "getX=" + getX() + "；screenWidthHalf=" + screenWidthHalf + " " + isDrag+" statusHeight="+statusHeight+ " virtualHeight"+virtualHeight+ " screenHeight"+ screenHeight+" getHeight="+getHeight()+" y"+y);
+                Log.e("move---->", "getX=" + getX() + "；screenWidthHalf=" + screenWidthHalf + " " + isDrag + " statusHeight=" + statusHeight + " virtualHeight" + virtualHeight + " screenHeight" + screenHeight + " getHeight=" + getHeight() + " y" + y);
                 break;
             case MotionEvent.ACTION_UP:
                 if (isDrag) {
@@ -100,7 +108,7 @@ public class MyFloatingActionButton extends FloatingActionButton {
                         oa.start();
                     }
                 }
-                Log.e("up---->",isDrag+"");
+                Log.e("up---->", isDrag + "");
                 break;
         }
         //如果是拖拽则消耗事件，否则正常传递即可。

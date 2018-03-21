@@ -133,29 +133,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     List<InterfaceRoom.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
                     for (int i = 0; i < itemList3.size(); i++) {
                         InterfaceRoom.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
-                        int nameId = pbui_item_meetSeatDetailInfo.getNameId();
-                        int role = pbui_item_meetSeatDetailInfo.getRole();
-                        int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
+                        int nameId = pbui_item_meetSeatDetailInfo.getNameId();//参会人员ID
+                        int role = pbui_item_meetSeatDetailInfo.getRole();// 身份：等于3则说明是主持人
+                        int seatid = pbui_item_meetSeatDetailInfo.getSeatid();//设备ID
+                        Log.e("MyLog", "MeetingActivity.handleMessage:  人员ID： --->>> " + nameId + "  角色ID：" + role + "  设备ID：" + seatid);
                         if (role == 3) {
                             //如果当前人员是主持人
                             CompereID = nameId;
                             try {
                                 /** ************ ******  91.查询指定ID的参会人员  ****** ************ **/
                                 nativeUtil.queryAttendPeopleFromId(CompereID);
+                                Log.e("MyLog", "MainActivity.handleMessage:  这个ID就是主持人 --->>> " + nameId);
                             } catch (InvalidProtocolBufferException e) {
                                 e.printStackTrace();
                             }
-                            Log.e("MyLog", "MainActivity.handleMessage:  这个ID就是主持人 --->>> " + nameId);
                         }
-                        Log.e("MyLog", "MeetingActivity.handleMessage:  人员ID： --->>> " + nameId + "  角色ID：" + role + "  设备ID：" + seatid);
                     }
                     break;
                 case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
                     ArrayList queryAttendeeById = msg.getData().getParcelableArrayList("queryAttendeeById");
                     InterfaceMember.pbui_Type_MemberDetailInfo o1 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryAttendeeById.get(0);
                     List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList = o1.getItemList();
-                    compereName = MyUtils.getBts(itemList.get(0).getName());
-                    Log.e("MyLog", "MainActivity.handleMessage:  主持人姓名： --->>> " + compereName);
+                    CompereInfo = itemList.get(0);
+                    compereName = MyUtils.getBts(CompereInfo.getName());
+                    int personid = CompereInfo.getPersonid();
+                    Log.e("MyLog", "MainActivity.handleMessage:  主持人姓名： --->>> " + compereName + "  personid： " + personid);
                     break;
             }
         }
@@ -167,6 +169,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     //是否有会议信息
     private boolean haveDevMeetInfo;
     private Intent serviceIntent;
+    private static InterfaceMember.pbui_Item_MemberDetailInfo CompereInfo;//主持人的信息
+
+    /**
+     * 获取主持人的信息
+     * @return
+     */
+    public static InterfaceMember.pbui_Item_MemberDetailInfo getCompereInfo() {
+        return CompereInfo != null ? CompereInfo : null;
+    }
 
     /**
      * 展示选择参会人 弹出框
@@ -351,7 +362,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-		stopService(serviceIntent);
+        stopService(serviceIntent);
     }
 
     @Override
@@ -511,22 +522,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.UPDATE_TIME://平台时间高频回调
-                handTo(IDivMessage.UPDATE_TIME,(EventMessage) result,"datatime",mHandler);
+                handTo(IDivMessage.UPDATE_TIME, (EventMessage) result, "datatime", mHandler);
                 break;
             case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
-                handTo(IDivMessage.QUERY_DEVMEET_INFO,(InterfaceDevice.pbui_Type_DeviceFaceShowDetail) result,"devMeetInfos",mHandler);
+                handTo(IDivMessage.QUERY_DEVMEET_INFO, (InterfaceDevice.pbui_Type_DeviceFaceShowDetail) result, "devMeetInfos", mHandler);
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                handTo(IDivMessage.QUERY_DEVICE_INFO,(InterfaceDevice.pbui_Type_DeviceDetailInfo)result,"devInfos",mHandler);
+                handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceDevice.pbui_Type_DeviceDetailInfo) result, "devInfos", mHandler);
                 break;
             case IDivMessage.QUERY_ATTENDEE://查询参会人员
-                handTo(IDivMessage.QUERY_ATTENDEE,(InterfaceMember.pbui_Type_MemberDetailInfo)result,"queryMember_main",mHandler);
+                handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryMember_main", mHandler);
                 break;
             case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
-                handTo(IDivMessage.Query_MeetSeat_Inform,(InterfaceRoom.pbui_Type_MeetSeatDetailInfo)result,"queryMeetSeat",mHandler);
+                handTo(IDivMessage.Query_MeetSeat_Inform, (InterfaceRoom.pbui_Type_MeetSeatDetailInfo) result, "queryMeetSeat", mHandler);
                 break;
             case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人员
-                handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMember.pbui_Type_MemberDetailInfo)result, "queryAttendeeById", mHandler);
+                handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryAttendeeById", mHandler);
                 break;
         }
     }

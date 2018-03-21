@@ -247,7 +247,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         }
                         allProjectorAdapter = new OnLineProjectorAdapter(allProjectors, 1);
                         onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors, 0);
-                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers, 0);
+                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers);
                     }
                     break;
                 case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
@@ -591,7 +591,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
             case IDEventMessage.OPEN_BOARD://收到白板打开操作
                 InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard object4 = (InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard) message.getObject();
-                startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
+                startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
                 break;
         }
     }
@@ -1071,7 +1071,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 setAnimator(holder.whiteplatePop);
                 // TODO: 2018/3/10 需要调用打开白板进行通知
-                startActivity(new Intent(MeetingActivity.this, DrawBoardActivity.class));
+                startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
             }
         });
     }
@@ -1401,20 +1401,21 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 sameMemberDevRrsIds = new ArrayList<Integer>();
                 sameMemberDevIds = new ArrayList<Integer>();
-//                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
-//                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
-//                    for (int i = 0; i < checkedIds.size(); i++) {
-//                        sameMemberDevIds.add(checkedIds.get(i).getDevId());
-//                    }
-//                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
-//                    for (int i = 0; i < checkedIds1.size(); i++) {
-//                        sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
-//                    }
-//                }
+                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
+                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
+                    for (int i = 0; i < checkedIds.size(); i++) {
+                        sameMemberDevIds.add(checkedIds.get(i).getDevId());
+                    }
+                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
+                    for (int i = 0; i < checkedIds1.size(); i++) {
+                        sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
+                    }
+                }
                 sameMemberDevRrsIds.add(0);
-                sameMemberDevIds.add(0x1080004);
-                /** ************ ******  流播放  ****** ************ **/
-                //nativeUtil.streamPlay(0x1080004, 2, 0, sameMemberDevRrsIds, sameMemberDevIds);
+                sameMemberDevIds.add(0x1100003);//要播放的屏幕源  要同屏的人员
+                /** ************ ******  流播放  ******0x1080004 ************ **/
+                nativeUtil.streamPlay(o.getDevId(), 2, 0,
+                        sameMemberDevRrsIds, sameMemberDevIds);
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
             }
         });
