@@ -1,6 +1,9 @@
 package com.pa.paperless.constant;
 
 
+import android.os.Environment;
+
+
 /**
  * Created by Administrator on 2018/2/5.
  */
@@ -16,7 +19,9 @@ public class Macro {
     public static int DEVICE_MEET_CLIENT = 0x01100000;  //会议客户端
     public static int DEVICE_MEET_ONEKEYSHARE = 0x01200000; //会议一键同屏
 
-    /** ************ ******  上传文件  ****** ************ **/
+    /**
+     * *********** ******  上传文件  ****** ************
+     **/
     //  大类
     public static int MEDIA_FILETYPE_AUDIO = 0x00000000; //音频
     public static int MEDIA_FILETYPE_VIDEO = 0x20000000; //视频
@@ -33,17 +38,18 @@ public class Macro {
     public static int MEDIA_FILETYPE_ADPCM = 0x03000000;//WAV文件
     public static int MEDIA_FILETYPE_FLAC = 0x04000000;    //FLAC文件
     public static int MEDIA_FILETYPE_MP4 = 0x07000000; //MP4文件
-
     public static int MEDIA_FILETYPE_MKV = 0x08000000;  //MKV文件
     public static int MEDIA_FILETYPE_RMVB = 0x09000000;  //RMVB文件
     public static int MEDIA_FILETYPE_RM = 0x0a000000; //RM文件
     public static int MEDIA_FILETYPE_AVI = 0x0b000000; //AVI文件
-
     public static int MEDIA_FILETYPE_BMP = 0x0c000000; //bmp文件
     public static int MEDIA_FILETYPE_JPEG = 0x0d000000; //jpeg文件
     public static int MEDIA_FILETYPE_PNG = 0x0e000000; //png文件
-
     public static int MEDIA_FILETYPE_OTHERSUB = 0x10000000; //其它文件
     public static int SUBTYPEBITMASK = 0x1f000000;
+
+    public static String INITFILESDPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/NETCONFIG";//app各类文件存放路径
+    public static String FILENAME = "client.ini";
+    public static String FILENAME_DEV = "client.dev";
 
 }

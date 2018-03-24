@@ -1,6 +1,8 @@
 package com.pa.paperless.fragment.meeting;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
@@ -53,8 +56,8 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
                     ArrayList queryNet = msg.getData().getParcelableArrayList("queryNet");
                     InterfaceBase.pbui_meetUrl o = (InterfaceBase.pbui_meetUrl) queryNet.get(0);
                     String url = MyUtils.getBts(o.getUrl());
-                    Log.e("MyLog", "WebBrowseFragment.handleMessage:  url --->>> " + url);
-                    mWebView.loadUrl("http://"+url);
+                    Log.e("MyLog", "WebBrowseFragment.handleMessage:  查找到的网址： --->>> " + url);
+                    mWebView.loadUrl("http://" + url);
                     break;
             }
         }
@@ -78,7 +81,6 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -86,16 +88,15 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
-
         nativeUtil.setCallListener(this);
-        Log.e("MyLog","WebBrowseFragment.onAttach:   --->>> ");
+        Log.e("MyLog", "WebBrowseFragment.onAttach:   --->>> ");
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.NETWEB_INFORM:
-                Log.e("MyLog", "WebBrowseFragment.getEventMessage:  11111 --->>> ");
+                Log.e("MyLog", "WebBrowseFragment.getEventMessage:  网页查询EventBus --->>> ");
                 nativeUtil.webQuery();
                 break;
         }
@@ -110,8 +111,18 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
 
     private void initView(View inflate) {
         mWebView = (WebView) inflate.findViewById(R.id.web_view);
-        mWebView = new WebView(getContext());
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient());
 //        mWebView.loadUrl("http://wap.baidu.com");
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden){
+            Log.e("MyLog","WebBrowseFragment.onHiddenChanged 122行:  界面不可见 --->>> ");
+        }else {
+            Log.e("MyLog","WebBrowseFragment.onHiddenChanged 124行:  界面可见 --->>> ");
+        }
     }
 
     @Override
@@ -136,7 +147,7 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all =  badgeNumber1 + 1;
+                int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {

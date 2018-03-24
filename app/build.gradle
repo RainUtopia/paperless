@@ -62,4 +62,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //解决调用方法数超过65536个问题2
     compile 'com.android.support:multidex:1.0.0'
+    //android 6.0动态权限申请
+    compile  'pub.devrel:easypermissions:0.3.0'
 }

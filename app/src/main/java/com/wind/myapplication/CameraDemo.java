@@ -1,7 +1,6 @@
 package com.wind.myapplication;
 
 
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -30,51 +29,35 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class CameraDemo extends Activity implements SurfaceHolder.Callback,
         PreviewCallback {
 
     private final String TAG = "CameraDemo -->";
-
     private SurfaceView surfaceview;
-
     private SurfaceHolder surfaceHolder;
-
-
     private Camera camera;
-
-
     private Parameters parameters;
 
-
-    public static int width = 1920;
-    public static int height = 1080;
+    public static int width = 1920;//2048
+    public static int height = 1080;//1536
     int framerate = 25;
     int biterate = width * height * 3;
+    private int imageFormat = -1;
     private static int yuvqueuesize = 10;
-
 
     public static final ArrayBlockingQueue<byte[]> YUVQueue = new ArrayBlockingQueue<byte[]>(
             yuvqueuesize); // ԭʼ֡����
 
-
     private AvcEncoder avcCodec;
 
-
-
-
-
-
-    //private JNIHandler jni = new JNIHandler();
-
+//    private JNIHandler jni = new JNIHandler();
 
 
     private NativeUtil nativeUtil;
     private ArrayList allRes = new ArrayList(), devIds = new ArrayList();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +68,8 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
         surfaceHolder.addCallback(this);
         nativeUtil = NativeUtil.getInstance();
         EventBus.getDefault().register(this);
-        //jni.InitAndCapture(0,  2);
-        Log.i(TAG, "---------------------------------------support avcCodec:" + SupportAvcCodec());
+//        jni.InitAndCapture(0,  2);
+//        Log.i(TAG, "---------------------------------------support avcCodec:" + SupportAvcCodec());
     }
 
 
@@ -95,8 +78,7 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
         camera = getBackCamera();
         startcamera(camera);
         try {
-
-            avcCodec = new AvcEncoder(width, height, framerate, biterate);
+            avcCodec = new AvcEncoder(width, height, framerate, biterate, imageFormat);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -139,19 +121,10 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
         // TODO Auto-generated method stub
+        Log.v(TAG, "rawDataLen=" + data.length);
         putYUVData(data, data.length);
     }
 
@@ -174,6 +147,9 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
                 MediaCodecInfo codecInfo = MediaCodecList.getCodecInfoAt(j);
 
                 String[] types = codecInfo.getSupportedTypes();
+                for (String type : types) {
+                    Log.i(TAG, "SupportAvcCodec:" + type);
+                }
                 for (int i = 0; i < types.length; i++) {
                     if (types[i].equalsIgnoreCase("video/avc")) {
                         return true;
@@ -182,31 +158,20 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
             }
         }
 
-
-
-
-
         return false;
     }
 
-
-    // �����ֻ�֧�ֵ�Ԥ���ߴ�
     private void loopSupportSize() {
         for (int num = 0; num < parameters.getSupportedPreviewSizes().size(); num++) {
             Log.d(TAG, parameters.getSupportedPreviewSizes().get(num).width
                     + "*"
-
                     + parameters.getSupportedPreviewSizes().get(num).height);
         }
     }
 
-
-
-    // ��ʼ���������ʼԤ��
     private void startcamera(Camera mCamera) {
         if (mCamera != null) {
             try {
-
                 mCamera.setPreviewCallback(this);
 //				 mCamera.setDisplayOrientation(90);
                 if (parameters == null) {
@@ -215,19 +180,18 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
 
                 loopSupportSize();
 
-
                 parameters = mCamera.getParameters();
-                parameters
-                        .setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);// �����Խ�
-                parameters
-                        .setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);// ��ƽ�⣺�Զ�
+                parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);// �����Խ�
+                parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);// ��ƽ�⣺�Զ�
                 parameters.setFlashMode(Parameters.FLASH_MODE_ON);// �����ģʽ���Զ�
                 parameters.setSceneMode(Parameters.SCENE_MODE_AUTO);// ����ģʽ���Զ�
                 parameters.setPreviewFrameRate(30);
-                parameters.setPreviewFormat(ImageFormat.NV21);// ����Ԥ����ʽ
-                parameters.setPreviewSize(width, height);// Ԥ���ߴ�
+                checkSupportColorFormat();
+                Log.v(TAG, "Camera PreviewFormat=" + (imageFormat == ImageFormat.NV21 ? "NV21" : imageFormat == ImageFormat.YV12 ? "YV12" : imageFormat));
+                parameters.setPreviewFormat(imageFormat);//NV21 YV12
+                parameters.setPreviewSize(width, height);
                 mCamera.setParameters(parameters);
-                mCamera.setPreviewDisplay(surfaceHolder);// ����Ԥ����ʾ
+                mCamera.setPreviewDisplay(surfaceHolder);
                 mCamera.startPreview();
 
             } catch (IOException e) {
@@ -236,8 +200,17 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
         }
     }
 
-
-
+    private void checkSupportColorFormat() {
+        List<Integer> previewFormatsSizes = parameters.getSupportedPreviewFormats();
+        if (-1 != previewFormatsSizes.indexOf(ImageFormat.YV12)) {
+            imageFormat = ImageFormat.YV12;
+        } else if (-1 != previewFormatsSizes.indexOf(ImageFormat.NV21)) {
+            imageFormat = ImageFormat.NV21;
+        } else {
+            imageFormat = -1;
+            return;
+        }
+    }
 
     // ��ȡcamera����ʵ���İ�ȫ����
     @TargetApi(9)
@@ -246,7 +219,6 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
         Log.i(TAG, "camera num:" + cameras);
         Camera c = null;
         try {
-
             c = Camera.open(0); // ��ȡcameraʵ��
             setCameraOrientation(c);
             c.cancelAutoFocus();// �Զ��Խ�

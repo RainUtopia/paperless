@@ -1,8 +1,11 @@
 package com.pa.paperless.activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
@@ -23,6 +26,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -93,6 +97,7 @@ import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
 import static com.pa.paperless.utils.MyUtils.setAnimator;
+import static com.pa.paperless.utils.MyUtils.setBackgroundAlpha;
 
 
 public class MeetingActivity extends BaseActivity implements View.OnClickListener, CallListener {
@@ -355,6 +360,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private MediaProjectionManager manager;
     private MediaProjection projection;
     private ScreenRecorder recorder;
+    private MeetingActivity context;
 
     @Override
     public void callListener(int action, Object result) {
@@ -398,6 +404,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         initController();
         initView();
         initImages();
+        context = this;
         mFm = getSupportFragmentManager();
         //设置默认点击第一项
         showFragment(0);
@@ -482,6 +489,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         return o.getDevId();
     }
 
+    //获取当前设备的人员ID
+    public static int getMemberId() {
+        return o.getMemberid();
+    }
+
     //获取当前的会议名称
     public static String getMeetName() {
         return o.getMeetingname();
@@ -557,6 +569,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
                 break;
             case IDEventMessage.START_COLLECTION_STREAM_NOTIFY:
+                Log.e("MyLog","MeetingActivity.getEventMessage 565行:  1111111 --->>> ");
                 switch (message.getType()) {
                     case 2://屏幕
                         if (stopRecord()) {
@@ -578,6 +591,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case IDEventMessage.STOP_COLLECTION_STREAM_NOTIFY:
+                Log.e("MyLog","MeetingActivity.getEventMessage 587行:  22222222 --->>> ");
                 switch (message.getType()) {
                     case 2:
                         if (stopRecord()) {
@@ -587,11 +601,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         }
                         break;
                 }
-
-
             case IDEventMessage.OPEN_BOARD://收到白板打开操作
                 InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard object4 = (InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard) message.getObject();
-                startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
+                // 同意加入
+//                nativeUtil.agreeJoin( object4.getOperflag(),object4.getSrcmemid(), object4.getSrcwbid());
+//                startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
                 break;
         }
     }
@@ -838,14 +852,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 setImgSelect(3);
                 break;
             case R.id.whiteboard://跳转到画板
-//                nativeUtil.inquiryStartWhiteBoard();
-//                List<Integer> add = new ArrayList<>();
-//                add.add(o.getMemberid());
-//                long timeMillis = System.currentTimeMillis();
-//                nativeUtil.coerceStartWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber(),
-//                        "强制打开白板", o.getMemberid(), o.getMemberid(), timeMillis, add);
                 startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
-
                 break;
             case R.id.chat:
                 showFragment(5);
@@ -1087,6 +1094,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mNotePop.setTouchable(true);
         mNotePop.setFocusable(true);
         mNotePop.setOutsideTouchable(true);
+        setBackgroundAlpha(context,0.5f);//设置背景半透明
         final NoteViewHolder holder = new NoteViewHolder(popupView);
         NoteHolderEvent(holder);
         //当弹出框隐藏时就会调用
@@ -1094,10 +1102,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onDismiss() {
                 mNoteCentent = holder.edtNote.getText().toString();
+                setBackgroundAlpha(context,1.0f);//恢复背景透明度
             }
         });
         mNotePop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
+
 
     /**
      * 会议笔记 pop事件监听
@@ -1105,6 +1115,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      * @param holder
      */
     private void NoteHolderEvent(final NoteViewHolder holder) {
+        holder.edtNote.setBackgroundColor(Color.WHITE);
         //返回
         holder.noteBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1414,6 +1425,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 sameMemberDevRrsIds.add(0);
                 sameMemberDevIds.add(0x1100003);//要播放的屏幕源  要同屏的人员
                 /** ************ ******  流播放  ******0x1080004 ************ **/
+                Log.e("MyLog", "MeetingActivity.onClick 1417行:   --->>> /** ************ ******    ****** ************ **/");
                 nativeUtil.streamPlay(o.getDevId(), 2, 0,
                         sameMemberDevRrsIds, sameMemberDevIds);
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
@@ -1815,7 +1827,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         public Button noteImport;
         public Button noteSave;
         public Button noteBack;
-        public Button empty;
+        public TextView empty;
 
         public NoteViewHolder(View rootView) {
             this.rootView = rootView;
@@ -1825,7 +1837,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 this.edtNote.setText(mNoteCentent);
             }
             this.noteImport = (Button) rootView.findViewById(R.id.note_import);
-            this.empty = (Button) rootView.findViewById(R.id.empty);
+            this.empty = (TextView) rootView.findViewById(R.id.empty);
             this.noteSave = (Button) rootView.findViewById(R.id.note_save);
             this.noteBack = (Button) rootView.findViewById(R.id.note_back);
         }
@@ -1899,8 +1911,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             Log.e(TAG, "media projection is null");
             return;
         }
-
-        recorder = new ScreenRecorder(width, height, bitrate, 1, projection, "");
+        recorder = new ScreenRecorder(width, height, bitrate, dpi, projection, "");
+        Log.e("MyLog", "MeetingActivity.onActivityResult 1905行:   --->>> " + width + "  " + height + "  " + bitrate + "  " + dpi);
         recorder.start();//�启动录屏线程
         Toast.makeText(this, "屏幕录制中...", Toast.LENGTH_LONG).show();
     }
@@ -1910,6 +1922,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         width = metric.widthPixels; // �屏幕宽度（像素）
         height = metric.heightPixels; // �屏幕高度（像素）
+        Log.v(TAG, "ScreenSize: width=" + width + " height=" + height);
+        if (width > 1920)
+            width = 1920;
+        if (height > 1080)
+            height = 1080;
         W = width;
         H = height;
         Log.i(TAG, "w:" + width + "/h:" + height);

@@ -23,6 +23,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
@@ -445,5 +446,34 @@ public class MyUtils {
         BigDecimal b1 = new BigDecimal(Double.toString(v1));
         BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+    /**
+     * bytes转换成十六进制字符串
+     *
+     * @param  b byte数组
+     * @return String 每个Byte值之间空格分隔
+     */
+    public static String byte2HexStr(byte[] b) {
+        String stmp = "";
+        StringBuilder sb = new StringBuilder("");
+        for (int n = b.length - 4; n < b.length; n++) {
+            stmp = Integer.toHexString(b[n] & 0xFF);
+            sb.append((stmp.length() == 1) ? "0" + stmp : stmp);
+            sb.append(" ");
+        }
+        return sb.toString().toUpperCase().trim();
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *      屏幕透明度0.0-1.0 1表示完全不透明
+     * @param context
+     * @param bgAlpha
+     */
+    public static void setBackgroundAlpha(Context context,float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) context).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) context).getWindow().setAttributes(lp);
     }
 }

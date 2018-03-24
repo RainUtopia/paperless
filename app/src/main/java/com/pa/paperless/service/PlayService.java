@@ -74,7 +74,7 @@ public class PlayService extends Service {
                 break;
             case IDEventMessage.PLAY_STREAM_NOTIFY:
                 if (!SDLIsShow) {
-                    Log.e("MyLog", "SigninFragment.getEventMessage:  收到媒体播放通知 打开播放界面 EventBus --->>> ");
+                    Log.e("MyLog", "SigninFragment.getEventMessage:  收到流播放通知 打开播放界面 EventBus --->>> ");
                     InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

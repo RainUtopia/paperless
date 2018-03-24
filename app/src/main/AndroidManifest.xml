@@ -4,7 +4,6 @@
 
     <!-- 文件的读写权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 向SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 账号密码检查权限 -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -72,9 +71,12 @@
             android:name="org.libsdl.app.SDLActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="landscape" />
-        <activity android:name=".activity.PeletteActivity"
-            android:screenOrientation="landscape"/>
-        <service android:name=".service.PlayService"/>
+        <activity
+            android:name=".activity.PeletteActivity"
+            android:screenOrientation="landscape" />
+
+        <service android:name=".service.PlayService" />
+        <activity android:name="com.wind.myapplication.CameraDemo"/>
     </application>
 
 </manifest>

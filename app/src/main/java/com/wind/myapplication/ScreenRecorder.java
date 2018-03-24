@@ -11,14 +11,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.Surface;
 
-import com.pa.paperless.activity.MeetingActivity;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -55,7 +52,6 @@ public class ScreenRecorder extends Thread {
 
     public ScreenRecorder(int width, int height, int bitrate, int dpi, MediaProjection projection, String savePath) {
         Log.d(TAG, "ScreenRecorder: width:" + width + "height:" + height);
-
         jni.InitAndCapture(0, channelIndex);
         this.width = width;
         this.height = height;
@@ -149,14 +145,12 @@ public class ScreenRecorder extends Thread {
      * @throws IOException
      */
     private void recordVirtualDisplay() {
-        Log.w(TAG, "recordVirtualDisplay---------------------------");
+        Log.d(TAG, "recordVirtualDisplay---------------------------");
         while (!quit.get()) {
             int index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);// 输出流队列中取数据索引,返回已成功解码的输出缓冲区的索引
-
             ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
-
             while (index >= 0) {
-                //Log.i("AvcEncoder", "Get H264 Buffer Success! flag = " + bufferInfo.flags + ",pts = " + bufferInfo.presentationTimeUs + "");
+                Log.i(TAG, "Get H264 Buffer Success! flag = " + bufferInfo.flags + ",pts = " + bufferInfo.presentationTimeUs + "");
                 ByteBuffer outputBuffer = outputBuffers[index];
                 byte[] outData = new byte[bufferInfo.size];
                 outputBuffer.get(outData);
@@ -289,7 +283,7 @@ public class ScreenRecorder extends Thread {
      * @throws IOException
      */
     private void release() {
-        Log.e(TAG, "release---------------------------");
+        Log.d(TAG, "release---------------------------");
         if (encoder != null) {
             encoder.stop();
             encoder.release();

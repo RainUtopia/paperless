@@ -81,5 +81,7 @@ public class IDEventMessage {
     public static final int ADD_DRAW_INFORM = 3035;
     // 改善时间回调
     public static final int DATE_TIME = 3036;
+    // 同意加入通知
+    public static final int AGREED_JOIN = 3037;
 
 }

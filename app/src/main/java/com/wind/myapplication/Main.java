@@ -62,7 +62,7 @@ public class Main extends Activity implements OnClickListener {
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         width = metric.widthPixels; // �屏幕宽度（像素）
         height = metric.heightPixels; // �屏幕高度（像素）
-        Log.i(TAG,"w:"+width+"/h:"+height);
+        Log.i(TAG, "w:" + width + "/h:" + height);
         density = metric.density; // �屏幕密度（0.75 / 1.0 / 1.5）
         dpi = metric.densityDpi; // �屏幕密度DPI（120 / 160 / 240）
         bitrate = width * height * VideoQuality;//�比特率/码率

@@ -5,10 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaCodecInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,50 +20,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceAgenda;
-import com.mogujie.tt.protobuf.InterfaceAdmin;
-import com.mogujie.tt.protobuf.InterfaceAgenda;
 import com.mogujie.tt.protobuf.InterfaceBase;
-import com.mogujie.tt.protobuf.InterfaceBullet;
-import com.mogujie.tt.protobuf.InterfaceContext;
 import com.mogujie.tt.protobuf.InterfaceDevice;
-import com.mogujie.tt.protobuf.InterfaceDownload;
-import com.mogujie.tt.protobuf.InterfaceFaceconfig;
-import com.mogujie.tt.protobuf.InterfaceFile;
-import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMeet;
-import com.mogujie.tt.protobuf.InterfaceContext;
-import com.mogujie.tt.protobuf.InterfaceMeetfunction;
 import com.mogujie.tt.protobuf.InterfaceMember;
-import com.mogujie.tt.protobuf.InterfacePerson;
-import com.mogujie.tt.protobuf.InterfacePlaymedia;
 import com.mogujie.tt.protobuf.InterfaceRoom;
-import com.mogujie.tt.protobuf.InterfaceSignin;
-import com.mogujie.tt.protobuf.InterfaceStatistic;
-import com.mogujie.tt.protobuf.InterfaceStop;
-import com.mogujie.tt.protobuf.InterfaceStream;
-import com.mogujie.tt.protobuf.InterfaceTablecard;
-import com.mogujie.tt.protobuf.InterfaceUpload;
-import com.mogujie.tt.protobuf.InterfaceVideo;
-import com.mogujie.tt.protobuf.InterfaceVote;
-import com.mogujie.tt.protobuf.InterfaceWhiteboard;
-import com.mogujie.tt.protobuf.InterfaceSystemlog;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.MainMemberAdapter;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.service.PlayService;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
-import com.pa.paperless.utils.PermissionUtils;
+import com.wind.myapplication.AvcEncoder;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
@@ -71,15 +50,24 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.libsdl.app.SDLActivity;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
 import static com.pa.paperless.utils.MyUtils.handTo;
 
 /**
  * 必须先修改 app/build.gradle中的 jniLibs的路径
  */
-public class MainActivity extends BaseActivity implements View.OnClickListener, CallListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, CallListener, EasyPermissions.PermissionCallbacks {
 
     public static TextView mCompanyName;
     private TextView mMainNowTime;
@@ -143,7 +131,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             try {
                                 /** ************ ******  91.查询指定ID的参会人员  ****** ************ **/
                                 nativeUtil.queryAttendPeopleFromId(CompereID);
-                                Log.e("MyLog", "MainActivity.handleMessage:  这个ID就是主持人 --->>> " + nameId);
+                                Log.e("MyLog", "MainActivity.handleMessage:  主持人的ID为： --->>> " + nameId);
                             } catch (InvalidProtocolBufferException e) {
                                 e.printStackTrace();
                             }
@@ -163,16 +151,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
     };
     private PopupWindow mPopupWindow;
-    private InterfaceDevice.pbui_Type_DeviceFaceShowDetail nowDivMeetInfo;
+    public static InterfaceDevice.pbui_Type_DeviceFaceShowDetail nowDivMeetInfo;
     private String compereName;
     private int CompereID;
     //是否有会议信息
     private boolean haveDevMeetInfo;
     private Intent serviceIntent;
     private static InterfaceMember.pbui_Item_MemberDetailInfo CompereInfo;//主持人的信息
+    public MainActivity mContext;
 
     /**
      * 获取主持人的信息
+     *
      * @return
      */
     public static InterfaceMember.pbui_Item_MemberDetailInfo getCompereInfo() {
@@ -219,6 +209,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+
     public static class MemberViewHolder {
         public View rootView;
         public TextView pop_tv_title;
@@ -252,7 +243,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String meetingName = MyUtils.getBts(nowDivMeetInfo.getMeetingname());
         int deviceid = nowDivMeetInfo.getDeviceid();
         int memberid = nowDivMeetInfo.getMemberid();
-        Log.e("MyLog", "MainActivity.upDateMainUI:   --->>> deviceid:" + deviceid + "  memberid" + memberid);
+        Log.e("MyLog", "MainActivity.upDateMainUI:   --->>> 本机设备ID: " + deviceid + "  本机人员ID：" + memberid);
         mCompanyName.setText(company);
         mMainMeetName.setText(meetingName);
         mMainMemberJob.setText(job);
@@ -265,22 +256,41 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
     }
 
+    public static InterfaceDevice.pbui_Type_DeviceFaceShowDetail getLocalInfo() {
+        return nowDivMeetInfo != null ? nowDivMeetInfo : null;
+    }
+
+    private static final int RC_CAMERA_PERM = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //  动态申请权限
-        initPermissions();
+        mContext = this;
+        //  动态申请权限 如果设备是6.0或以上 则动态申请权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            initPermissions();
+        }
+        // 192.168.1.208
+        initConfFile();
         initController();
         initView();
         String[] arr = {};
         SDLActivity.nativeInit(arr);
         //  初始化无纸化网络平台
-        boolean b = nativeUtil.javaInitSys();
+        nativeUtil.javaInitSys();
         // 初始化流通道
+        int format = AvcEncoder.selectColorFormat(AvcEncoder.selectCodec("video/avc"), "video/avc");
+        switch (format) {
+            case MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar:
+                NativeUtil.COLOR_FORMAT = 0;
+                break;
+            case MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar:
+                NativeUtil.COLOR_FORMAT = 1;
+                break;
+        }
         nativeUtil.InitAndCapture(0, 2);
         nativeUtil.InitAndCapture(0, 3);
-        Log.e("MyLog", "MainActivity.onCreate 236行:  初始化是否成功 --->>> " + b);
         /** ************ ******  8.修改本机界面状态  ****** ************ **/
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
         try {
@@ -289,21 +299,77 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
         try {
             /** ************ ******  110.查询设备会议信息  ****** ************ **/
             haveDevMeetInfo = nativeUtil.queryDeviceMeetInfo();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-//            }
-//        }, 5000);
         EventBus.getDefault().register(this);
         serviceIntent = new Intent(this, PlayService.class);
         startService(serviceIntent);
     }
+
+    /**
+     * *********** ******    ****** ************
+     **/
+    // 复制ini、dev文件
+    private void initConfFile() {
+        //拷贝配置文件
+        File path = new File(Macro.INITFILESDPATH + "/" + Macro.FILENAME);
+        if (!path.exists()) {
+            copyTo("client.ini", Macro.INITFILESDPATH, Macro.FILENAME);
+        } else {
+            path.delete();
+            copyTo("client.ini", Macro.INITFILESDPATH, Macro.FILENAME);
+        }
+        File path_class = new File(Macro.INITFILESDPATH + "/" + Macro.FILENAME_DEV);
+        if (!path_class.exists()) {
+            copyTo("client.dev", Macro.INITFILESDPATH, Macro.FILENAME_DEV);
+        } else {
+            path_class.delete();
+            copyTo("client.dev", Macro.INITFILESDPATH, Macro.FILENAME_DEV);
+        }
+    }
+
+    // 复制文件
+    private void copyTo(String fromPath, String toPath, String fileName) {
+        // 复制位置
+        // opPath：mnt/sdcard/lcuhg/health/
+        // mnt/sdcard：表示sdcard
+        File toFile = new File(toPath);
+        // 如果不存在，创建文件夹
+        if (!toFile.exists()) {
+            boolean isCreate = toFile.mkdirs();
+            // 打印创建结果
+            Log.i("create dir", String.valueOf(isCreate));
+        }
+
+        try {
+            // 根据文件名获取assets文件夹下的该文件的inputstream
+            InputStream fromFileIs = mContext.getResources().getAssets().open(fromPath);
+            int length = fromFileIs.available(); // 获取文件的字节数
+            byte[] buffer = new byte[length]; // 创建byte数组
+            FileOutputStream fileOutputStream = new FileOutputStream(toFile + "/" + fileName); // 字节输入流
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(
+                    fromFileIs);
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
+                    fileOutputStream);
+            int len = bufferedInputStream.read(buffer);
+            while (len != -1) {
+                bufferedOutputStream.write(buffer, 0, len);
+                len = bufferedInputStream.read(buffer);
+            }
+            bufferedInputStream.close();
+            bufferedOutputStream.close();
+            fromFileIs.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    /** ************ ******    ****** ************ **/
 
     /**
      * 处理EventBus 发送的信息
@@ -316,7 +382,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case IDEventMessage.MEETINFO_CHANGE_INFORM:
                 Log.e("MyLog", "MainActivity.getEventMessage:  127.会议信息变更通知 EventBus --->>> ");
                 /** ************ ******  110.查询设备会议信息  ****** ************ **/
-//                nativeUtil.queryDeviceMeetInfo();
+                nativeUtil.queryDeviceMeetInfo();
                 break;
             case IDEventMessage.DEV_REGISTER_INFORM:
                 Log.e("MyLog", "MainActivity.getEventMessage:  设备寄存器变更 EventBus --->>> ");
@@ -374,30 +440,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     /**
      * 动态权限申请
      */
+    @AfterPermissionGranted(RC_CAMERA_PERM)
     private void initPermissions() {
-        String[] permissions = {
+        String[] PERMISSIONS = {
                 Manifest.permission.READ_CONTACTS,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.READ_CONTACTS,
                 Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.CAMERA
-        };
-        PermissionUtils.checkAndRequestMorePermissions(this, permissions, IDivMessage.PERMISSION_REQUEST_CODE, new PermissionUtils.PermissionRequestSuccessCallBack() {
-            @Override
-            public void onHasPermission() {
-                Log.e("MyLog", "MainActivity.onHasPermission:  已授予权限 --->>> ");
-            }
-        });
+                Manifest.permission.CAMERA};
+        if (!EasyPermissions.hasPermissions(this, PERMISSIONS)) {
+            EasyPermissions.requestPermissions(this, "需要获取该权限！", RC_CAMERA_PERM, PERMISSIONS);
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == IDivMessage.PERMISSION_REQUEST_CODE) {
-            Log.e("MyLog", "MainActivity.onRequestPermissionsResult:  true --->>> ");
-        } else {
-            Log.e("MyLog", "MainActivity.onRequestPermissionsResult:  false --->>> ");
-        }
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        new AppSettingsDialog.Builder(this)
+                .setTitle("请求权限")
+                .setRationale("需要开启该权限才能继续下去！")
+                .build()
+                .show();
     }
 
     private void initView() {
