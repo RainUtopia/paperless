@@ -384,11 +384,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 /** ************ ******  110.查询设备会议信息  ****** ************ **/
                 nativeUtil.queryDeviceMeetInfo();
                 break;
-            case IDEventMessage.DEV_REGISTER_INFORM:
-                Log.e("MyLog", "MainActivity.getEventMessage:  设备寄存器变更 EventBus --->>> ");
-                /** ************ ******  6.查询设备信息  ****** ************ **/
-//                nativeUtil.queryDeviceInfo();
-                break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:
                 Log.e("MyLog", "MainActivity.getEventMessage:  参会人员变更通知 EventBus --->>> ");
                 /** ************ ******  92.查询参会人员  ****** ************ **/

@@ -118,11 +118,11 @@ public class WebBrowseFragment extends BaseFragment implements CallListener {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        if(hidden){
-            Log.e("MyLog","WebBrowseFragment.onHiddenChanged 122行:  界面不可见 --->>> ");
-        }else {
-            Log.e("MyLog","WebBrowseFragment.onHiddenChanged 124行:  界面可见 --->>> ");
+        if (!hidden) {
+            nativeUtil = NativeUtil.getInstance();
+            nativeUtil.setCallListener(this);
         }
+
     }
 
     @Override

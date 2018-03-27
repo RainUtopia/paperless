@@ -263,11 +263,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         checkButton();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
 
     @Override
     public void callListener(int action, Object result) {

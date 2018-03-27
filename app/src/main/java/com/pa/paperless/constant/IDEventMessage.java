@@ -83,5 +83,11 @@ public class IDEventMessage {
     public static final int DATE_TIME = 3036;
     // 同意加入通知
     public static final int AGREED_JOIN = 3037;
+    // 拒绝加入通知
+    public static final int REJECT_JOIN = 3038;
+    // 参会人员退出白板通知
+    public static final int EXIT_WHITE_BOARD = 3039;
+    // 添加文本通知
+    public static final int ADD_DRAW_TEXT = 3040;
 
 }

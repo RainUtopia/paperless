@@ -399,8 +399,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting);
-        //获取到之前写得会议笔记文本
-        mNoteCentent = Export.readText(new File("/sdcard/会议笔记文本.txt"));
+        //获取到之前写得会议笔记存档
+        mNoteCentent = Export.readText(new File("/sdcard/会议笔记存档.txt"));
         initController();
         initView();
         initImages();
@@ -509,17 +509,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     mBadge.setBadgeNumber(object3.get(0).getNum());
                 }
                 break;
-            case IDEventMessage.DEV_REGISTER_INFORM:
-                Log.e("MyLog", "MeetingActivity.getEventMessage:  设备寄存器变更通知 EventBus --->>> ");
-                break;
             case IDEventMessage.MEET_DATE:
                 //更新时间UI
                 updataTimeUi(message);
                 break;
             case IDEventMessage.FACESTATUS_CHANGE_INFORM:
                 InterfaceDevice.pbui_MeetDeviceMeetStatus o1 = (InterfaceDevice.pbui_MeetDeviceMeetStatus) message.getObject();
-                Log.e("MyLog", "MeetingActivity.getEventMessage: 界面状态变更通知 EventBus --->>> 会议ID：" + o1.getMeetingid() +
-                        " 人员ID：" + o1.getMemberid() + " 设备ID：" + o1.getDeviceid() + " 界面状态：" + o1.getFacestatus());
+//                Log.e("MyLog", "MeetingActivity.getEventMessage: 界面状态变更通知 EventBus --->>> 会议ID：" + o1.getMeetingid() +
+//                        " 人员ID：" + o1.getMemberid() + " 设备ID：" + o1.getDeviceid() + " 界面状态：" + o1.getFacestatus());
                 //91.查询指定ID的参会人员
                 nativeUtil.queryAttendPeopleFromId(o1.getMemberid());
                 /** ************ ******  96.查询参会人员属性  ****** ************ **/
@@ -622,7 +619,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         super.onDestroy();
         Log.e("MyLog", "MeetingActivity.onDestroy 548行:   --->>> ");
         //将会议笔记的文本保存到本地
-        Export.ToNoteText(mNoteCentent, "会议笔记文本");
+        Export.ToNoteText(mNoteCentent, "会议笔记存档");
         //取消注册事件
         EventBus.getDefault().unregister(this);
     }
@@ -766,6 +763,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
         if (mNotationFragment != null) {
             ft.hide(mNotationFragment);
+        }
+        if (mWebbrowseFragment != null) {
+            ft.hide(mWebbrowseFragment);
         }
 
     }
