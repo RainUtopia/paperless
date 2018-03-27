@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView mMainMemberName;
     private TextView mMainMemberJob;
 
+
     /*handle接收*/
     public Handler mHandler = new Handler() {
         @Override

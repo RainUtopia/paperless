@@ -34,7 +34,7 @@ android {
 
     sourceSets {
         main {
-            jniLibs.srcDirs = ['E:\\wuzihua\\Paperless\\app\\src\\main\\jniLibs']
+            jniLibs.srcDirs = ['D:\\MeetAndroid\\Paperless\\app\\src\\main\\jniLibs']
         }
     }
 }
