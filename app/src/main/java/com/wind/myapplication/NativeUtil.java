@@ -3726,25 +3726,25 @@ public class NativeUtil {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.EXIT_WHITE_BOARD,InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  219 参会人员退出白板通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLEAR.getNumber()) {
-                    InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.WHITEBOARD_EMPTY_RECORDINFORM,InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  220 白板清空记录通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber()) {
-                    InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.WHITEBROADE_DELETE_RECOREINFORM,InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  221 白板删除记录通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber()) {
-                    InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.parseFrom(data);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_INK_INFORM,InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  224 添加墨迹通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber()) {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_INFORM, InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data)));
-                    Log.e("MyLog", "NativeUtil.callback_method:  227 添加矩形、直线、圆形通知 --->>> ");
+                    Log.e("CaseLog", "NativeUtil.callback_method:  227 添加矩形、直线、圆形通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber()) {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_TEXT,InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  230 添加文本通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber()) {
-                    InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.parseFrom(data);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_PIC_INFORM,InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  233 添加图片通知 --->>> ");
                 }
-                Log.e("MyLog", "NativeUtil.callback_method 3760行:  收到那个通知 --->>> ");
+                Log.e("MyLog", "NativeUtil.callback_method 3760行:  收到了某个画板操作通知 --->>> ");
                 break;
             case 36://236
                 InterfaceBase.pbui_MeetNotifyMsg.parseFrom(data);

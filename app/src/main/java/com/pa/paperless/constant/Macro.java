@@ -47,7 +47,7 @@ public class Macro {
     public static int MEDIA_FILETYPE_PNG = 0x0e000000; //png文件
     public static int MEDIA_FILETYPE_OTHERSUB = 0x10000000; //其它文件
     public static int SUBTYPEBITMASK = 0x1f000000;
-
+    //assets 文件存放目录
     public static String INITFILESDPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/NETCONFIG";//app各类文件存放路径
     public static String FILENAME = "client.ini";
     public static String FILENAME_DEV = "client.dev";

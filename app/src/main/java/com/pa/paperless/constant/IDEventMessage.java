@@ -89,5 +89,13 @@ public class IDEventMessage {
     public static final int EXIT_WHITE_BOARD = 3039;
     // 添加文本通知
     public static final int ADD_DRAW_TEXT = 3040;
+    // 添加图片通知
+    public static final int ADD_PIC_INFORM = 3041;
+    // 添加墨迹通知
+    public static final int ADD_INK_INFORM = 3042;
+    // 白板删除记录通知
+    public static final int WHITEBROADE_DELETE_RECOREINFORM = 3043;
+    // 白板清空记录通知
+    public static final int WHITEBOARD_EMPTY_RECORDINFORM = 3044;
 
 }
