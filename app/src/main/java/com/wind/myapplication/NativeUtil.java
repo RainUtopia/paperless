@@ -491,12 +491,12 @@ public class NativeUtil {
     public boolean webQuery() throws InvalidProtocolBufferException {
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEFAULTURL.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), null);
         if (array == null) {
-            Log.e("MyLog","NativeUtil.webQuery 494行:  41.网页查询 --->>> 失败");
+            Log.e("MyLog", "NativeUtil.webQuery 494行:  41.网页查询 --->>> 失败");
             return false;
         }
         if (mCallListener != null) {
             mCallListener.callListener(IDivMessage.QUERY_NET, InterfaceBase.pbui_meetUrl.getDefaultInstance().parseFrom(array));
-            Log.e("MyLog","NativeUtil.webQuery 498行:  41.网页查询 --->>> 成功");
+            Log.e("MyLog", "NativeUtil.webQuery 498行:  41.网页查询 --->>> 成功");
         }
         return true;
     }
@@ -2783,7 +2783,7 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean rejectJoin(int opermemberid,int srcmemid,long srcwbid) {
+    public boolean rejectJoin(int opermemberid, int srcmemid, long srcwbid) {
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.Builder builder = InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.newBuilder();
         builder.setOpermemberid(opermemberid);
         builder.setSrcmemid(srcmemid);
@@ -2805,7 +2805,7 @@ public class NativeUtil {
         builder.setSrcwbid(srcwbid);
         builder.setOpermemberid(opermemberid);
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ENTER.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ENTER.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.agreeJoin:  217.同意加入 --->>> ");
         return true;
     }
@@ -2816,10 +2816,16 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean whiteBoardClearRecord() {
+    public boolean whiteBoardClearRecord(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int figuretype) {
         InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.Builder builder = InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.newBuilder();
+        builder.setOperid(operid);
+        builder.setOpermemberid(opermemberid);
+        builder.setSrcmemid(srcmemid);
+        builder.setSrcwbid(srcwbid);
+        builder.setUtcstamp(utcstamp);
+        builder.setFiguretype(figuretype);
         InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DELALL.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DELALL.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.whiteBoardClearInform:  222.白板清空记录 --->>> ");
         return true;
     }
@@ -2829,10 +2835,16 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean whiteBoardDeleteRecord() {
+    public boolean whiteBoardDeleteRecord(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int figuretype) {
         InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.Builder builder = InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.newBuilder();
+        builder.setOperid(operid);
+        builder.setOpermemberid(opermemberid);
+        builder.setSrcmemid(srcmemid);
+        builder.setSrcwbid(srcwbid);
+        builder.setUtcstamp(utcstamp);
+        builder.setFiguretype(figuretype);
         InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.whiteBoardDeleteRecord:  223.白板删除记录 --->>> ");
         return true;
     }
@@ -2843,8 +2855,8 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean addInk(int operid,int opermemberid,int srcmemid,long srcwbid,long utcstamp,
-                          int figuretype,int linesize,int argb,List<Float> allpinklist) {
+    public boolean addInk(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp,
+                          int figuretype, int linesize, int argb, List<Float> allpinklist) {
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.Builder builder = InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.newBuilder();
         builder.setOperid(operid);
         builder.setOpermemberid(opermemberid);
@@ -2856,7 +2868,7 @@ public class NativeUtil {
         builder.setArgb(argb);
         builder.addAllPinklist(allpinklist);
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addInk:  225.添加墨迹 --->>> ");
         return true;
     }
@@ -2872,10 +2884,11 @@ public class NativeUtil {
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery build = builder.build();
         byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber(), build.toByteArray());
         if (array == null) {
+            Log.e("MyLog", "NativeUtil.queryInk 2887行:  查询墨迹失败 --->>> ");
             return false;
         }
         InterfaceWhiteboard.pbui_Type_MeetWBInkDetail.parseFrom(array);
-        Log.e("MyLog", "NativeUtil.queryInk:  226.查询墨迹 --->>> ");
+        Log.e("MyLog", "NativeUtil.queryInk 2891行:  查询墨迹成功 --->>> ");
         return true;
     }
 
@@ -2926,8 +2939,8 @@ public class NativeUtil {
      *
      * @return
      */
-    public boolean addText(int operid,int opermemberid,int srcmemid,long srcwbid,long utcstamp,int figuretype,int fontsize,int fontflag,
-                           int argb,String fontname,float lx,float ly,String ptext) {
+    public boolean addText(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int figuretype, int fontsize, int fontflag,
+                           int argb, String fontname, float lx, float ly, String ptext) {
         InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builder = InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.newBuilder();
         builder.setOperid(operid);
         builder.setOpermemberid(opermemberid);
@@ -2974,10 +2987,19 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean addPictureInform2() throws InvalidProtocolBufferException {
+    public boolean addPicture(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int figuretype, float lx, float ly, String picdata) throws InvalidProtocolBufferException {
         InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builder = InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.newBuilder();
+        builder.setOperid(operid);
+        builder.setOpermemberid(opermemberid);
+        builder.setSrcmemid(srcmemid);
+        builder.setSrcwbid(srcwbid);
+        builder.setUtcstamp(utcstamp);
+        builder.setFiguretype(figuretype);
+        builder.setLx(lx);
+        builder.setLy(ly);
+        builder.setPicdata(MyUtils.getStb(picdata));
         InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addPictureInform:  234.添加图片通知 --->>> ");
         return true;
     }
@@ -3717,31 +3739,31 @@ public class NativeUtil {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.OPEN_BOARD, InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  214 收到白板打开操作 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REJECT.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.REJECT_JOIN,InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.REJECT_JOIN, InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  216 拒绝加入通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ENTER.getNumber()) {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.AGREED_JOIN, InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  218 同意加入通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_EXIT.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.EXIT_WHITE_BOARD,InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.EXIT_WHITE_BOARD, InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  219 参会人员退出白板通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLEAR.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.WHITEBOARD_EMPTY_RECORDINFORM,InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.WHITEBOARD_EMPTY_RECORDINFORM, InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  220 白板清空记录通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_DEL.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.WHITEBROADE_DELETE_RECOREINFORM,InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.WHITEBROADE_DELETE_RECOREINFORM, InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  221 白板删除记录通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_INK_INFORM,InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_INK_INFORM, InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  224 添加墨迹通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDRECT.getNumber()) {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_INFORM, InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  227 添加矩形、直线、圆形通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDTEXT.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_TEXT,InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_DRAW_TEXT, InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  230 添加文本通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber()) {
-                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_PIC_INFORM,InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.parseFrom(data)));
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_PIC_INFORM, InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  233 添加图片通知 --->>> ");
                 }
                 Log.e("MyLog", "NativeUtil.callback_method 3760行:  收到了某个画板操作通知 --->>> ");

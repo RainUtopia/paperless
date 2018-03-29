@@ -256,6 +256,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * 获取本机的设备会议信息
+     * @return
+     */
     public static InterfaceDevice.pbui_Type_DeviceFaceShowDetail getLocalInfo() {
         return nowDivMeetInfo != null ? nowDivMeetInfo : null;
     }
