@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -227,6 +228,143 @@ public class MyUtils {
     }
 
     /**
+     * 字符串转二进制
+     *
+     * @param str 要转换的字符串
+     * @return 转换后的二进制数组
+     */
+    public static byte[] hex2byte(String str) { // 字符串转二进制
+        if (str == null)
+            return null;
+        str = str.trim();
+        int len = str.length();
+        if (len == 0 || len % 2 == 1)
+            return null;
+        byte[] b = new byte[len / 2];
+        try {
+            for (int i = 0; i < str.length(); i += 2) {
+                b[i / 2] = (byte) Integer.decode("0X" + str.substring(i, i + 2)).intValue();
+            }
+            return b;
+        } catch (Exception e) {
+            return null;
+
+        }
+    }
+    private static final char[] HEX_CHAR = {'0', '1', '2', '3', '4', '5',
+            '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
+    /**
+     * 方法一：
+     * byte[] to hex string
+     *
+     * @param bytes
+     * @return
+     */
+    public static String bytesToHexFun1(byte[] bytes) {
+        // 一个byte为8位，可用两个十六进制位标识
+        char[] buf = new char[bytes.length * 2];
+        int a = 0;
+        int index = 0;
+        for(byte b : bytes) { // 使用除与取余进行转换
+            if(b < 0) {
+                a = 256 + b;
+            } else {
+                a = b;
+            }
+
+            buf[index++] = HEX_CHAR[a / 16];
+            buf[index++] = HEX_CHAR[a % 16];
+        }
+
+        return new String(buf);
+    }
+
+    /**
+     * 二进制转字符串
+     *
+     * @param b
+     * @return
+     */
+    public static String byte2hex2(byte[] b) // 二进制转字符串
+    {
+        StringBuffer sb = new StringBuffer();
+        String stmp = "";
+        for (int n = 0; n < b.length; n++) {
+            stmp = Integer.toHexString(b[n] & 0XFF);
+            if (stmp.length() == 1) {
+                sb.append("0" + stmp);
+            } else {
+                sb.append(stmp);
+            }
+        }
+        return sb.toString();
+    }
+    /**
+     * 将图片转换成十六进制字符串
+     *
+     * @return
+     */
+    public static String sendPhoto(Bitmap bitmap) {
+//        Drawable d = photo.getDrawable();
+//        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);// (0 - 100)压缩文件
+        byte[] bt = stream.toByteArray();
+        String photoStr = byte2hex(bt);
+        return photoStr;
+    }
+
+    /**
+     * 二进制转字符串
+     *
+     * @return
+     */
+    public static String byte2hex(byte[] b) {
+        StringBuffer sb = new StringBuffer();
+        String stmp = "";
+        for (int n = 0; n < b.length; n++) {
+            stmp = Integer.toHexString(b[n] & 0XFF);
+            if (stmp.length() == 1) {
+                sb.append("0" + stmp);
+            } else {
+                sb.append(stmp);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * byte数组转换成十六进制字符串
+     *
+     * @param bArray
+     * @return HexString
+     */
+    public static final String bytesToHexString(byte[] bArray) {
+        StringBuffer sb = new StringBuffer(bArray.length);
+        String sTemp;
+        for (int i = 0; i < bArray.length; i++) {
+            sTemp = Integer.toHexString(0xFF & bArray[i]);
+            if (sTemp.length() < 2)
+                sb.append(0);
+            sb.append(sTemp.toUpperCase());
+        }
+        return sb.toString();
+    }
+
+    public static final byte[] input2byte(InputStream inStream)
+            throws IOException {
+        ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
+        byte[] buff = new byte[100];
+        int rc = 0;
+        while ((rc = inStream.read(buff, 0, 100)) > 0) {
+            swapStream.write(buff, 0, rc);
+        }
+        byte[] in2b = swapStream.toByteArray();
+        return in2b;
+    }
+
+    /**
      * 更改按钮选择颜色
      *
      * @param index
@@ -425,18 +563,21 @@ public class MyUtils {
         String format = percentInstance.format(d);
         return format;
     }
+
     //将一个百分比的字符串转换成一个数
     public static float getPerNumber(String perStr) {
         return new Float(perStr.substring(0, perStr.indexOf("%"))) / 100;
     }
+
     /**
      * 提供（相对）精确的除法运算。当发生除不尽的情况时，由scale参数指
      * 定精度，以后的数字四舍五入。
-     * @param v1 被除数
-     * @param v2 除数
+     *
+     * @param v1    被除数
+     * @param v2    除数
      * @param scale 表示表示需要精确到小数点以后几位。
      * @return 两个参数的商
-     *          调用时判断除不为0
+     * 调用时判断除不为0
      */
     public static double div(double v1, double v2, int scale) {
         if (scale < 0) {
@@ -447,10 +588,11 @@ public class MyUtils {
         BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+
     /**
      * bytes转换成十六进制字符串
      *
-     * @param  b byte数组
+     * @param b byte数组
      * @return String 每个Byte值之间空格分隔
      */
     public static String byte2HexStr(byte[] b) {
@@ -466,11 +608,12 @@ public class MyUtils {
 
     /**
      * 设置添加屏幕的背景透明度
-     *      屏幕透明度0.0-1.0 1表示完全不透明
+     * 屏幕透明度0.0-1.0 1表示完全不透明
+     *
      * @param context
      * @param bgAlpha
      */
-    public static void setBackgroundAlpha(Context context,float bgAlpha) {
+    public static void setBackgroundAlpha(Context context, float bgAlpha) {
         WindowManager.LayoutParams lp = ((Activity) context).getWindow()
                 .getAttributes();
         lp.alpha = bgAlpha;

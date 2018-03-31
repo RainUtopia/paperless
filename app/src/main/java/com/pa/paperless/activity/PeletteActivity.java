@@ -1,7 +1,6 @@
 package com.pa.paperless.activity;
 
 
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,10 +15,10 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -52,8 +51,8 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
+import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMember;
@@ -78,10 +77,14 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -127,7 +130,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private AlertDialog editDialog;
     private Thread thread;
     private Rect dst;
-    int startX, startY, endX, endY;
+    float startX, startY, endX, endY;
     private List<MemberInfo> memberInfos;
     public static BoardAdapter onLineBoardMemberAdapter;
     private boolean isHasData = false;//是否有数据
@@ -142,7 +145,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private boolean isSharing = false;//是否共享中
     private List<DrawPath> beforeList;//用来保存共享之前绘制的信息
     private List<DrawPath> afterPath = new ArrayList<>();//用来保存共享中所绘制的信息
-    private int sx, sy;
+    private float sx, sy;
     private int launchPersonId = MainActivity.getLocalInfo().getMemberid();//默认发起的人员ID是本机
     private Handler handler = new Handler() {
         @Override
@@ -178,7 +181,10 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         }
     };
     private long mSrcwbid;//发起人的白板标识
-    private int joinCount = 0;//存取加入共享的人数
+    private List<PointF> points;
+    private PointF pointF;
+    private PointF p1;
+    private PointF p2;
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
@@ -197,7 +203,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 receiveOpenWhiteBoard(message);
                 break;
             case IDEventMessage.AGREED_JOIN://同意加入通知
-                joinCount++;//保存同意加入的人员数量
                 agreedJoin(message);
                 break;
             case IDEventMessage.REJECT_JOIN://拒绝加入通知
@@ -205,11 +210,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 break;
             case IDEventMessage.EXIT_WHITE_BOARD://参会人员退出白板通知
                 whoToast(((InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper) message.getObject()).getOpermemberid(), " 退出了共享");
-                joinCount--;
-                if (joinCount <= 0) {//如果没有了在共享中的人了，就设置自身不在共享中
-                    showToast("当前没有人在共享状态中了");
-                    isSharing = false;
-                }
                 break;
             case IDEventMessage.ADD_DRAW_INFORM://添加矩形、直线、圆形通知
                 receiveAddLine(message);
@@ -224,29 +224,42 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 receiveAddInk(message);
                 break;
             case IDEventMessage.WHITEBROADE_DELETE_RECOREINFORM://白板删除记录通知
-                receiveDeleteEmptyRecore(message);
+                receiveDeleteEmptyRecore(message,1);
                 break;
             case IDEventMessage.WHITEBOARD_EMPTY_RECORDINFORM://白板清空记录通知
-                receiveDeleteEmptyRecore(message);
+                receiveDeleteEmptyRecore(message,2);
                 break;
         }
     }
-
 
     /**
      * 收到删除/清空记录操作
      *
      * @param message
      */
-    private void receiveDeleteEmptyRecore(EventMessage message) {
+    private void receiveDeleteEmptyRecore(EventMessage message,int type) {
         InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard object = (InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard) message.getObject();
-        Log.e("MyLog", "PeletteActivity.receiveDeleteEmptyRecore :  白板删除清空记录通知EventBus --->>> ");
+        Log.e("MyLog", "PeletteActivity.receiveDeleteEmptyRecore :  白板删除记录通知EventBus --->>> ");
         int operid = object.getOperid();
         int opermemberid = object.getOpermemberid();
         int srcmemid = object.getSrcmemid();
         long srcwbid = object.getSrcwbid();
         long utcstamp = object.getUtcstamp();
         int figuretype = object.getFiguretype();
+        if(type == 1){
+            //删除
+
+
+
+
+
+
+
+
+        }else {
+            //清空
+
+        }
     }
 
     /**
@@ -257,36 +270,55 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private void receiveAddInk(EventMessage message) {
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem object = (InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem) message.getObject();
         Log.e("MyLog", "PeletteActivity.receiveAddInk :  收到添加墨迹操作EventBus --->>> ");
-        int operid = object.getOperid();
-        int opermemberid = object.getOpermemberid();
-        int srcmemid = object.getSrcmemid();
-        long srcwbid = object.getSrcwbid();
-        long utcstamp = object.getUtcstamp();
         int figuretype = object.getFiguretype();
         int linesize = object.getLinesize();
         int argb = object.getArgb();
         List<Float> pinklistList = object.getPinklistList();
+        Log.e("MyLog", "PeletteActivity.receiveAddInk 266行:   接收到的xy个数--->>> " + object.getPinklistCount());
+        if (points == null) {
+            points = new ArrayList<>();
+        } else {
+            points.clear();
+        }
+        for (int i = 0; i < pinklistList.size(); i++) {
+            Float aFloat = pinklistList.get(i);
+            if (i % 2 == 0) {
+                pointF = new PointF();
+//                pointF.x = aFloat * mWidth;
+                pointF.x = aFloat;
+            } else {
+//                pointF.y = aFloat * mHeight;
+                pointF.y = aFloat;
+                points.add(pointF);
+            }
+        }
+        Log.e("MyLog", "PeletteActivity.receiveAddInk 266行:   接收到的点个数--->>> " + points.size());
+
         //新建 paint 和 path
         Paint newPaint = getNewPaint(linesize, argb);
-        Path newPath = new Path();
-        //计算出相对比例坐标
-        float[] allPoint = getFloats(pinklistList);
+        p1 = new PointF();
+        p2 = new PointF();
         //绘画
         if (figuretype == InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber()) {
-//            newPath.quadTo(allPoint[0], allPoint[1], (allPoint[0] + allPoint[2]) / 2,
-//                    (allPoint[1] + allPoint[3]) / 2);
-            newPath.moveTo(allPoint[0], allPoint[1]);
-            newPath.lineTo(allPoint[2], allPoint[3]);
-            canvas.drawPath(newPath, newPaint);
+            p1.x = points.get(0).x;
+            p1.y = points.get(0).y;
+            Path newPath = new Path();
+            newPath.moveTo(p1.x, p1.y);
+            for (int i = 1; i < points.size() - 1; i++) {
+                p2.x = points.get(i).x;
+                p2.y = points.get(i).y;
+                newPath.quadTo((points.get(i - 1).x + p2.x) / 2, (points.get(i - 1).y + p2.y) / 2, p2.x, p2.y);
+                canvas.drawPath(newPath, newPaint);
+
+                DrawPath drawPath = new DrawPath();
+                drawPath.paint = newPaint;
+                drawPath.path = newPath;
+                //将路径保存到共享中绘画信息
+                pathList.add(drawPath);
+            }
+            points.clear();
         }
-        //实时更新界面
-//        clearTempCanvas();
         imageView.setImageBitmap(baseBmp);
-        DrawPath drawPath = new DrawPath();
-        drawPath.paint = newPaint;
-        drawPath.path = newPath;
-        //将路径保存到共享中绘画信息
-        afterPath.add(drawPath);
 
     }
 
@@ -306,10 +338,12 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         int figuretype = object.getFiguretype();
         float lx = object.getLx();
         float ly = object.getLy();
+
         ByteString picdata = object.getPicdata();
-        String bts = MyUtils.getBts(picdata);
-        byte[] bytes = bts.getBytes();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        String utf = picdata.toStringUtf8();
+        byte[] bytes = MyUtils.hex2byte(utf);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
         Drawable drawable = new BitmapDrawable(bitmap);
         imageView.setBackground(drawable);
     }
@@ -330,15 +364,17 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         int figuretype = object.getFiguretype();
         int fontsize = object.getFontsize();
         int fontflag = object.getFontflag();
+
         if (figuretype == InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber()) {
             int argb = object.getArgb();
             String fontname = MyUtils.getBts(object.getFontname());
             float lx = object.getLx();
             float ly = object.getLy();
             String ptext = MyUtils.getBts(object.getPtext());
+            Log.e("MyLog","PeletteActivity.receiveAddText 360行:   --->>> "+ptext);
             /** ************ ******    ****** ************ **/
-            int x = (int) (lx * mWidth);
-            int y = (int) (ly * mHeight);
+            int x = (int) (lx );
+            int y = (int) (ly );
             Paint newPaint = getNewPaint(fontsize, argb);
 
             newPaint.setTextSize(fontsize);
@@ -587,7 +623,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                     finish();
                 } else {
                     finish();
-                    joinCount = 0;
                 }
                 break;
         }
@@ -603,7 +638,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         nativeUtil.broadcastStopWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_EXIT.getNumber(),
                 "退出白板", MeetingActivity.getMemberId(), launchPersonId, mSrcwbid, alluserid);
         isSharing = false;
-        joinCount = 0;
         mSrcwbid = 0;
     }
 
@@ -618,6 +652,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         dstbmp = ((BitmapDrawable) imageView.getBackground()).getBitmap();
         pathList = new ArrayList<>();
         imageView.setImageBitmap(baseBmp);
+        points = new ArrayList<>();
+        Log.i("MyLog", "new points arraylist");
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -627,10 +663,17 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                         paintWidth = mPaintWidth;
                         setPaint();
                         // 获取手按下时的坐标
-                        startX = (int) event.getX();
-                        startY = (int) event.getY();
+                        startX = event.getX();
+                        startY = event.getY();
                         sx = startX;
                         sy = startY;
+                        //添加按下时的点坐标
+                        float sxf = (float) MyUtils.div(sx, mWidth, 2);
+                        float syf = (float) MyUtils.div(sy, mHeight, 2);
+//                        points.add(new PointF(sxf, syf));
+                        points.add(new PointF(sx, sy));
+                        Log.e("MyLog", "PeletteActivity.onTouch 658行:   --->>> " + sxf + "   " + syf);
+//                        points.add(new PointF(sx, sy));
                         drawPath = new DrawPath();
                         switch (paintMode) {
                             case MODE_ERASER:
@@ -659,6 +702,13 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                                 startY = (int) event.getY();
                                 break;
                             case MODE_PAINT:
+                                //添加移动时的点坐标
+                                judge();
+                                float mxf = (float) MyUtils.div(endX, mWidth, 2);
+                                float myf = (float) MyUtils.div(endY, mHeight, 2);
+//                                points.add(new PointF(mxf, myf));
+                                points.add(new PointF(endX, endY));
+                                Log.e("MyLog", "PeletteActivity.onTouch 693行:   --->>> " + mxf + "   " + myf);
                                 int dx = (int) Math.abs(endX - startX);
                                 int dy = (int) Math.abs(endY - startY);
                                 if (dx > 3 || dy > 3) {
@@ -677,7 +727,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                                 drawSquare(startX, startY, endX, endY);
                                 break;
                             case MODE_CIRCLE:
-                                int r = (endX - startX) / 2;
+                                float r = (endX - startX) / 2;
                                 drawCircle(startX, startY, r);
 //                                drawOval(startX, startY, endX, endY);
                                 break;
@@ -696,7 +746,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                                 canvas.drawPath(path, paint);
                                 break;
                             case MODE_CIRCLE:
-                                int distance = (endX - startX) / 2;
+                                float distance = (endX - startX) / 2;
                                 clearTempCanvas();
                                 path.addCircle(startX, startY, distance, Path.Direction.CW);
 //                                path.addOval(startX, startX, endX, endX, Path.Direction.CW);
@@ -707,6 +757,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                                 clearTempCanvas();
                                 canvas.drawPath(path, paint);
                                 break;
+                            case MODE_PAINT:
+                                break;
                         }
                         if (paintMode != MODE_TEXT) {
                             pathList.add(drawPath);
@@ -715,7 +767,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                         imageView.setImageBitmap(baseBmp);
                         judge();
                         //只有在同屏状态中才发送
-                        if (isSharing) {//
+                        if (isSharing) {
                             List<Float> allpt = new ArrayList<Float>();
                             allpt.add((float) MyUtils.div(sx, mWidth, 2));
                             allpt.add((float) MyUtils.div(sy, mHeight, 2));
@@ -737,10 +789,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                                     addDrawShape(InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ELLIPSE.getNumber(), allpt);
                                     break;
                                 case MODE_PAINT:
-                                    addInk(allpt);
-                                    break;
-                                case MODE_TEXT://添加文本方法
-                                    addText();
+                                    addInk(points);
+                                    points.clear();
                                     break;
                             }
                         }
@@ -751,19 +801,20 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         });
     }
 
-    private void addText() {
+    private void addText(float endX, float endY) {
         long time = System.currentTimeMillis();
         int operid = (int) (time / 10);
         double divX = MyUtils.div(endX, mWidth, 2);
         double divY = MyUtils.div(endY, mHeight, 2);
         nativeUtil.addText(operid, MeetingActivity.getMemberId(), launchPersonId,
                 mSrcwbid, time, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber(),
-                30, 1, paintColor, "字体", (float) divX, (float) divY, "随便输入的文本");
+                30, 0, paintColor, "字体", endX, endY, "随便输入的文本");
     }
 
-    private void addInk(List<Float> allpt) {
+    private void addInk(List<PointF> allpt) {
         long time = System.currentTimeMillis();
         int operid = (int) (time / 10);
+        Log.e("MyLog", "PeletteActivity.addInk 790行:  发送点个数 --->>> " + allpt.size());
         nativeUtil.addInk(operid, MeetingActivity.getMemberId(),
                 launchPersonId, mSrcwbid, time,
                 InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber(), paintWidth,
@@ -848,9 +899,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             Log.e("MyLog", "PeletteActivity.receiveOpenWhiteBoard 619行:   --->>> 这是强制式打开白板");
             //强制打开白板  直接强制同意加入
             nativeUtil.agreeJoin(opermemberid, srcmemid, srcwbidd);
-            if (!isSharing) {//如果当时自身不在共享状态就加一
-                joinCount++;
-            }
             isSharing = true;//如果同意加入就设置已经在共享中
             mSrcwbid = srcwbidd;
             launchPersonId = srcmemid;//设置发起的人员ID
@@ -961,7 +1009,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 isSharing = true;//如果同意加入就设置已经在共享中
                 launchPersonId = srcmemid;//设置发起的人员ID
                 mSrcwbid = srcwbidd;
-                joinCount++;
                 dialog.dismiss();
             }
         });
@@ -1005,11 +1052,11 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
      * @param x
      * @param y
      */
-    private void DrawText(int x, int y) {
+    private void DrawText(final float x, final float y) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         final EditText drawEdt = new EditText(context);
-        int ex = x;
-        int ey = y;
+        float ex = x;
+        float ey = y;
         int size;
         //控制文本的大小（不能太小）
         if (paintWidth < 30) {
@@ -1018,7 +1065,6 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             size = paintWidth;
         }
         //控制文本完全显示出来（小于某个值顶部会隐藏）
-//        ey = y + height;
         if (y < 50) {
             if (size == 30) {
                 ey = 30;
@@ -1028,12 +1074,11 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 ey = 80;
             }
         }
-
         builder.setView(drawEdt);
-        //当点击Dialog外部时/隐藏时调用
         final int finalSize = size;
-        final int fx = ex;
-        final int fy = ey;
+        final float fx = ex;
+        final float fy = ey;
+        //当点击Dialog外部时/隐藏时调用
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -1041,29 +1086,39 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 if (!drawText.equals("")) {
                     paint.setTextSize(finalSize);
                     paint.setStyle(Paint.Style.FILL);
-//                canvas.drawText(drawText, fx, fy, paint);
-
                     Rect rect = new Rect();
                     paint.getTextBounds(drawText, 0, drawText.length(), rect);
                     int width = rect.width();//输入的所有文本的宽度
                     int height = rect.height();//文本的高度（用于换行显示）
-                    int remainWidth = mWidth - fx;//可容许显示文本的宽度
+                    float remainWidth = mWidth - fx;//可容许显示文本的宽度
                     Log.e("MyLog", "PeletteActivity.DrawText 935行:   --->>> 字符串的宽度： " + width + "  可容许显示的宽度："
                             + remainWidth + "  字符串的高度：" + height + "  输入的文本：" + drawText + "  字符串的个数：" + drawText.length());
 
                     int ilka = width / drawText.length();//每个文本的宽度
-                    int canSee = remainWidth / ilka;//可以显示的文本个数
+                    int canSee = (int) (remainWidth / ilka);//可以显示的文本个数
                     if (remainWidth < width) {// 小于所有文本的宽度（不够显示）
                         funDraw(height, canSee - 1, fx, fy, drawText);
+                    } else {
+                        canvas.drawText(drawText, fx, fy, paint);
                     }
                     imageView.setImageBitmap(baseBmp);
+                    if (isSharing) {//如果当前在共享中，则发送添加字体
+//                        addText(x, y);
+                        long time = System.currentTimeMillis();
+                        int operid = (int) (time / 10);
+                        double divX = MyUtils.div(x, mWidth, 2);
+                        double divY = MyUtils.div(y, mHeight, 2);
+                        nativeUtil.addText(operid, MeetingActivity.getMemberId(), launchPersonId, mSrcwbid,
+                                time, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber(),
+                                finalSize, 1, paintColor, "Agency FB", x, y, drawText);
+                    }
                 }
             }
         });
         builder.create().show();
     }
 
-    private void funDraw(int height, int canSee, int fx, int fy, String text) {
+    private void funDraw(float height, int canSee, float fx, float fy, String text) {
         if (text.length() > canSee) {
             String canSeeText = text.substring(0, canSee);
             canvas.drawText(canSeeText, fx, fy, paint);
@@ -1125,7 +1180,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     /**
      * 在临时画布上绘制橡皮擦图片
      */
-    private void drawEraser(int x, int y) {
+    private void drawEraser(float x, float y) {
         clearTempCanvas();
         tempPaint = new Paint();
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),
@@ -1138,7 +1193,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     /**
      * 在临时画布上绘制直线
      */
-    private void drawLine(int startX, int startY, int endX, int endY) {
+    private void drawLine(float startX, float startY, float endX, float endY) {
         clearTempCanvas();
         tempCanvas.drawLine(startX, startY, endX, endY, paint);
         int strokeWidth = (int) paint.getStrokeWidth();
@@ -1147,7 +1202,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     /**
      * 在临时画布上绘制方框
      */
-    private void drawSquare(int startX, int startY, int endX, int endY) {
+    private void drawSquare(float startX, float startY, float endX, float endY) {
         clearTempCanvas();
         tempCanvas.drawRect(startX, startY, endX, endY, paint);
     }
@@ -1155,7 +1210,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     /**
      * 在临时画布上绘制圆
      */
-    private void drawCircle(int cx, int cy, int radius) {
+    private void drawCircle(float cx, float cy, float radius) {
         clearTempCanvas();
 //         tempCanvas.drawOval(startX, startY, endX, endY, paint); //API 21
         tempCanvas.drawCircle(cx, cy, radius, paint);
@@ -1258,16 +1313,17 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             case MODE_CIRCLE:
             case MODE_SQUARE:
             default:
-                paint.setStyle(Paint.Style.STROKE);// 画笔样式：实线
-                paint.setStrokeWidth(paintWidth);// 线宽
-                paint.setColor(paintColor);// 颜色
-                PorterDuffXfermode mode2 = new PorterDuffXfermode(
-                        PorterDuff.Mode.DST_OVER);
-                paint.setXfermode(null);// 转换模式
-                paint.setAntiAlias(true);// 抗锯齿
-                paint.setDither(true);// 防抖动
-                paint.setStrokeJoin(Paint.Join.ROUND);// 设置线段连接处的样式为圆弧连接
-                paint.setStrokeCap(Paint.Cap.ROUND);// 设置两端的线帽为圆的
+                paint = getNewPaint(paintWidth, paintColor);
+//                paint.setStyle(Paint.Style.STROKE);// 画笔样式：实线
+//                paint.setStrokeWidth(paintWidth);// 线宽
+//                paint.setColor(paintColor);// 颜色
+//                PorterDuffXfermode mode2 = new PorterDuffXfermode(
+//                        PorterDuff.Mode.DST_OVER);
+//                paint.setXfermode(null);// 转换模式
+//                paint.setAntiAlias(true);// 抗锯齿
+//                paint.setDither(true);// 防抖动
+//                paint.setStrokeJoin(Paint.Join.ROUND);// 设置线段连接处的样式为圆弧连接
+//                paint.setStrokeCap(Paint.Cap.ROUND);// 设置两端的线帽为圆的
                 break;
         }
     }
@@ -1298,6 +1354,12 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                     canvas.drawPath(dp.path, dp.paint);
                 }
             }
+        }
+        if (isSharing) {
+            long time = System.currentTimeMillis();
+            int operid = (int) (time / 10);
+            nativeUtil.whiteBoardDeleteRecord(operid, MeetingActivity.getMemberId(), launchPersonId, mSrcwbid, time,
+                    InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ZERO.getNumber());
         }
     }
 
@@ -1479,8 +1541,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 if (onLineBoardMemberAdapter != null) {
                     List<DevMember> checkedIds = onLineBoardMemberAdapter.getCheckedIds();
                     for (int i = 0; i < checkedIds.size(); i++) {
-//                        devIds.add(checkedIds.get(i).getMemberInfos().getPersonid());
-                        devIds.add(checkedIds.get(i).getDevId());
+                        devIds.add(checkedIds.get(i).getMemberInfos().getPersonid());
+//                        devIds.add(checkedIds.get(i).getDevId());
                     }
                 }
                 if (devIds.size() > 0) {
@@ -1572,8 +1634,24 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         holder.boardEnsureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<DevMember> checkedIds = onLineBoardMemberAdapter.getCheckedIds();
-                Log.e("MyLog", "PeletteActivity.onClick 1220行:   --->>> 选中参会人个数： " + checkedIds.size());
+                ArrayList<Integer> devIds = new ArrayList<Integer>();
+                if (onLineBoardMemberAdapter != null) {
+                    List<DevMember> checkedIds = onLineBoardMemberAdapter.getCheckedIds();
+                    for (int i = 0; i < checkedIds.size(); i++) {
+                        devIds.add(checkedIds.get(i).getMemberInfos().getPersonid());
+//                        devIds.add(checkedIds.get(i).getDevId());
+                    }
+                }
+                if (devIds.size() > 0) {
+                    // 发起共享批注  强制：Pb_MEETPOTIL_FLAG_FORCEOPEN  Pb_MEETPOTIL_FLAG_REQUESTOPEN
+                    if (mSrcwbid == 0) {
+                        mSrcwbid = System.currentTimeMillis();
+                    }
+                    Log.e("MyLog", "PeletteActivity.onClick 1260行:  发起时的白板标识 --->>> " + mSrcwbid);
+                    nativeUtil.coerceStartWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber(),
+                            MyUtils.getBts(MainActivity.getLocalInfo().getMembername()), MeetingActivity.getMemberId(),
+                            MeetingActivity.getMemberId(), mSrcwbid, devIds);
+                }
                 mChooseMemberPop.dismiss();
             }
         });
@@ -1615,17 +1693,19 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 Drawable drawable = new BitmapDrawable(dstbmp);
                 imageView.setBackground(drawable);
                 if (isSharing) {
-                    //将bitmap对象转换成byte数组
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    dstbmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                    byte[] bytes = baos.toByteArray();
-                    String picdata = bytes.toString();
-                    long time = System.currentTimeMillis();
-                    int operid = (int) (time / 10);
                     try {
+                        //将bitmap对象转换成byte数组
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        dstbmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] bytes = baos.toByteArray();
+                        String s = MyUtils.bytesToHexFun1(bytes);
+                        ByteString bts1 = ByteString.copyFrom(s, "UTF-8");
+
+                        long time = System.currentTimeMillis();
+                        int operid = (int) (time / 10);
                         nativeUtil.addPicture(operid, MeetingActivity.getMemberId(), launchPersonId, mSrcwbid, time,
-                                InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_PICTURE.getNumber(), 1, 1, picdata);
-                    } catch (InvalidProtocolBufferException e) {
+                                InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_PICTURE.getNumber(), 0, 0, bts1);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

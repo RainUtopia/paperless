@@ -1,12 +1,12 @@
 package com.wind.myapplication;
 
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceAgenda;
 import com.mogujie.tt.protobuf.InterfaceAdmin;
+import com.mogujie.tt.protobuf.InterfaceAgenda;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceBullet;
 import com.mogujie.tt.protobuf.InterfaceContext;
@@ -15,6 +15,7 @@ import com.mogujie.tt.protobuf.InterfaceDownload;
 import com.mogujie.tt.protobuf.InterfaceFaceconfig;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMeet;
 import com.mogujie.tt.protobuf.InterfaceMeetfunction;
 import com.mogujie.tt.protobuf.InterfaceMember;
@@ -25,31 +26,31 @@ import com.mogujie.tt.protobuf.InterfaceSignin;
 import com.mogujie.tt.protobuf.InterfaceStatistic;
 import com.mogujie.tt.protobuf.InterfaceStop;
 import com.mogujie.tt.protobuf.InterfaceStream;
+import com.mogujie.tt.protobuf.InterfaceSystemlog;
 import com.mogujie.tt.protobuf.InterfaceTablecard;
 import com.mogujie.tt.protobuf.InterfaceUpload;
 import com.mogujie.tt.protobuf.InterfaceVideo;
 import com.mogujie.tt.protobuf.InterfaceVote;
 import com.mogujie.tt.protobuf.InterfaceWhiteboard;
-import com.mogujie.tt.protobuf.InterfaceSystemlog;
 import com.pa.paperless.activity.MeetingActivity;
-//import com.pa.paperless.bean.CheckedChatIds;
 import com.pa.paperless.bean.PlaceInfo;
 import com.pa.paperless.bean.SubmitVoteBean;
 import com.pa.paperless.constant.IDEventMessage;
+import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventAgenda;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.event.EventNotice;
-import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.MyUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.security.acl.LastOwnerException;
 import java.util.List;
 
 import static com.pa.paperless.utils.MyUtils.getStb;
+
+//import com.pa.paperless.bean.CheckedChatIds;
 
 /**
  * Created by Administrator on 2017/12/6.
@@ -2737,10 +2738,10 @@ public class NativeUtil {
         tmp3.setOpermemberid(operMemberid);
         tmp3.setSrcmemid(srcmemId);
         tmp3.setSrcwbid(srcwbId);
-//        tmp3.addAllUserid(allUserId);
+        tmp3.addAllUserid(allUserId);
         tmp3.setOperflag(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber());
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl build = tmp3.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CONTROL.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CONTROL.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.coerceStartBoard:  209.发起白板 --->>> ");
         return true;
     }
@@ -2856,7 +2857,7 @@ public class NativeUtil {
      * @return
      */
     public boolean addInk(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp,
-                          int figuretype, int linesize, int argb, List<Float> allpinklist) {
+                          int figuretype, int linesize, int argb, List<PointF> allpinklist) {
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.Builder builder = InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.newBuilder();
         builder.setOperid(operid);
         builder.setOpermemberid(opermemberid);
@@ -2866,7 +2867,12 @@ public class NativeUtil {
         builder.setFiguretype(figuretype);
         builder.setLinesize(linesize);
         builder.setArgb(argb);
-        builder.addAllPinklist(allpinklist);
+        for (int i = 0; i < allpinklist.size(); i++) {
+            builder.addPinklist(allpinklist.get(i).x);
+            builder.addPinklist(allpinklist.get(i).y);
+        }
+        Log.e("MyLog", "NativeUtil.addInk 2874行:   发送的xy个数--->>> " + builder.getPinklistCount());
+//        builder.addAllPinklist(allpinklist);
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem build = builder.build();
         call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDINK.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addInk:  225.添加墨迹 --->>> ");
@@ -2987,7 +2993,7 @@ public class NativeUtil {
      * @return
      * @throws InvalidProtocolBufferException
      */
-    public boolean addPicture(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int figuretype, float lx, float ly, String picdata) throws InvalidProtocolBufferException {
+    public boolean addPicture(int operid, int opermemberid, int srcmemid, long srcwbid, long utcstamp, int figuretype, float lx, float ly, ByteString picdata) throws InvalidProtocolBufferException {
         InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builder = InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.newBuilder();
         builder.setOperid(operid);
         builder.setOpermemberid(opermemberid);
@@ -2997,7 +3003,7 @@ public class NativeUtil {
         builder.setFiguretype(figuretype);
         builder.setLx(lx);
         builder.setLy(ly);
-        builder.setPicdata(MyUtils.getStb(picdata));
+        builder.setPicdata(picdata);
         InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail build = builder.build();
         call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_WHITEBOARD.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ADDPICTURE.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.addPictureInform:  234.添加图片通知 --->>> ");
@@ -3766,7 +3772,6 @@ public class NativeUtil {
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.ADD_PIC_INFORM, InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  233 添加图片通知 --->>> ");
                 }
-                Log.e("MyLog", "NativeUtil.callback_method 3760行:  收到了某个画板操作通知 --->>> ");
                 break;
             case 36://236
                 InterfaceBase.pbui_MeetNotifyMsg.parseFrom(data);
