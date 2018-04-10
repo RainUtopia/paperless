@@ -271,16 +271,16 @@ public class PaletteView extends View {
     }
 
     /**
-     * 清除
-     */
-    public void clear() {
-        if (mBufferBitmap != null) {
-            if (mDrawingList != null) {
-                mDrawingList.clear();
-            }
-            if (mRemovedList != null) {
-                mRemovedList.clear();
-            }
+             * 清除
+             */
+        public void clear() {
+            if (mBufferBitmap != null) {
+                if (mDrawingList != null) {
+                    mDrawingList.clear();
+                }
+                if (mRemovedList != null) {
+                    mRemovedList.clear();
+                }
             mCanEraser = false;
             mBufferBitmap.eraseColor(Color.TRANSPARENT);
             invalidate();

@@ -345,73 +345,73 @@ public final class InterfaceAgenda {
       return size;
     }
 
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_ItemAgendaTimeInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_ItemAgendaTimeInfo parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_ItemAgendaTimeInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -422,7 +422,7 @@ public final class InterfaceAgenda {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_ItemAgendaTimeInfo prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -431,9 +431,9 @@ public final class InterfaceAgenda {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_ItemAgendaTimeInfo, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_ItemAgendaTimeInfo)
-        pbui_ItemAgendaTimeInfoOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfoOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -652,13 +652,13 @@ public final class InterfaceAgenda {
 
       // @@protoc_insertion_point(builder_scope:pbui_ItemAgendaTimeInfo)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_ItemAgendaTimeInfo();
+          return new com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -671,7 +671,7 @@ public final class InterfaceAgenda {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_ItemAgendaTimeInfo other = (pbui_ItemAgendaTimeInfo) arg1;
+          com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo other = (com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo) arg1;
           agendaid_ = visitor.visitInt(agendaid_ != 0, agendaid_,
               other.agendaid_ != 0, other.agendaid_);
           status_ = visitor.visitInt(status_ != 0, status_,
@@ -684,7 +684,7 @@ public final class InterfaceAgenda {
               other.endutctime_ != 0L, other.endutctime_);
           desctext_ = visitor.visitByteString(desctext_ != com.google.protobuf.ByteString.EMPTY, desctext_,
               other.desctext_ != com.google.protobuf.ByteString.EMPTY, other.desctext_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -754,7 +754,7 @@ public final class InterfaceAgenda {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_ItemAgendaTimeInfo.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -768,13 +768,13 @@ public final class InterfaceAgenda {
 
 
     // @@protoc_insertion_point(class_scope:pbui_ItemAgendaTimeInfo)
-    private static final pbui_ItemAgendaTimeInfo DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_ItemAgendaTimeInfo();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_ItemAgendaTimeInfo getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -823,7 +823,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    java.util.List<pbui_ItemAgendaTimeInfo>
+    java.util.List<com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo> 
         getItemList();
     /**
      * <pre>
@@ -832,7 +832,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    pbui_ItemAgendaTimeInfo getItem(int index);
+    com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo getItem(int index);
     /**
      * <pre>
      * 时间轴式议程
@@ -972,7 +972,7 @@ public final class InterfaceAgenda {
     }
 
     public static final int ITEM_FIELD_NUMBER = 4;
-    private com.google.protobuf.Internal.ProtobufList<pbui_ItemAgendaTimeInfo> item_;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo> item_;
     /**
      * <pre>
      * 时间轴式议程
@@ -980,7 +980,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    public java.util.List<pbui_ItemAgendaTimeInfo> getItemList() {
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo> getItemList() {
       return item_;
     }
     /**
@@ -990,7 +990,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    public java.util.List<? extends pbui_ItemAgendaTimeInfoOrBuilder>
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfoOrBuilder> 
         getItemOrBuilderList() {
       return item_;
     }
@@ -1011,7 +1011,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    public pbui_ItemAgendaTimeInfo getItem(int index) {
+    public com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo getItem(int index) {
       return item_.get(index);
     }
     /**
@@ -1021,7 +1021,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    public pbui_ItemAgendaTimeInfoOrBuilder getItemOrBuilder(
+    public com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfoOrBuilder getItemOrBuilder(
         int index) {
       return item_.get(index);
     }
@@ -1040,7 +1040,7 @@ public final class InterfaceAgenda {
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
     private void setItem(
-        int index, pbui_ItemAgendaTimeInfo value) {
+        int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -1055,7 +1055,7 @@ public final class InterfaceAgenda {
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
     private void setItem(
-        int index, pbui_ItemAgendaTimeInfo.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.Builder builderForValue) {
       ensureItemIsMutable();
       item_.set(index, builderForValue.build());
     }
@@ -1066,7 +1066,7 @@ public final class InterfaceAgenda {
      *
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
-    private void addItem(pbui_ItemAgendaTimeInfo value) {
+    private void addItem(com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -1081,7 +1081,7 @@ public final class InterfaceAgenda {
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
     private void addItem(
-        int index, pbui_ItemAgendaTimeInfo value) {
+        int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -1096,7 +1096,7 @@ public final class InterfaceAgenda {
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
     private void addItem(
-        pbui_ItemAgendaTimeInfo.Builder builderForValue) {
+        com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(builderForValue.build());
     }
@@ -1108,7 +1108,7 @@ public final class InterfaceAgenda {
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
     private void addItem(
-        int index, pbui_ItemAgendaTimeInfo.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(index, builderForValue.build());
     }
@@ -1120,7 +1120,7 @@ public final class InterfaceAgenda {
      * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
      */
     private void addAllItem(
-        Iterable<? extends pbui_ItemAgendaTimeInfo> values) {
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo> values) {
       ensureItemIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, item_);
@@ -1188,73 +1188,73 @@ public final class InterfaceAgenda {
       return size;
     }
 
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_meetAgenda parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_meetAgenda parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_meetAgenda parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_meetAgenda parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_meetAgenda parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1265,7 +1265,7 @@ public final class InterfaceAgenda {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_meetAgenda prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -1282,9 +1282,9 @@ public final class InterfaceAgenda {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_meetAgenda, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_meetAgenda)
-        pbui_meetAgendaOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgendaOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -1403,7 +1403,7 @@ public final class InterfaceAgenda {
        *
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
-      public java.util.List<pbui_ItemAgendaTimeInfo> getItemList() {
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo> getItemList() {
         return java.util.Collections.unmodifiableList(
             instance.getItemList());
       }
@@ -1423,7 +1423,7 @@ public final class InterfaceAgenda {
        *
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
-      public pbui_ItemAgendaTimeInfo getItem(int index) {
+      public com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo getItem(int index) {
         return instance.getItem(index);
       }
       /**
@@ -1434,7 +1434,7 @@ public final class InterfaceAgenda {
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
       public Builder setItem(
-          int index, pbui_ItemAgendaTimeInfo value) {
+          int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo value) {
         copyOnWrite();
         instance.setItem(index, value);
         return this;
@@ -1447,7 +1447,7 @@ public final class InterfaceAgenda {
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
       public Builder setItem(
-          int index, pbui_ItemAgendaTimeInfo.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.Builder builderForValue) {
         copyOnWrite();
         instance.setItem(index, builderForValue);
         return this;
@@ -1459,7 +1459,7 @@ public final class InterfaceAgenda {
        *
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
-      public Builder addItem(pbui_ItemAgendaTimeInfo value) {
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo value) {
         copyOnWrite();
         instance.addItem(value);
         return this;
@@ -1472,7 +1472,7 @@ public final class InterfaceAgenda {
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
       public Builder addItem(
-          int index, pbui_ItemAgendaTimeInfo value) {
+          int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo value) {
         copyOnWrite();
         instance.addItem(index, value);
         return this;
@@ -1485,7 +1485,7 @@ public final class InterfaceAgenda {
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
       public Builder addItem(
-          pbui_ItemAgendaTimeInfo.Builder builderForValue) {
+          com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(builderForValue);
         return this;
@@ -1498,7 +1498,7 @@ public final class InterfaceAgenda {
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
       public Builder addItem(
-          int index, pbui_ItemAgendaTimeInfo.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(index, builderForValue);
         return this;
@@ -1511,7 +1511,7 @@ public final class InterfaceAgenda {
        * <code>repeated .pbui_ItemAgendaTimeInfo item = 4;</code>
        */
       public Builder addAllItem(
-          Iterable<? extends pbui_ItemAgendaTimeInfo> values) {
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo> values) {
         copyOnWrite();
         instance.addAllItem(values);
         return this;
@@ -1543,13 +1543,13 @@ public final class InterfaceAgenda {
 
       // @@protoc_insertion_point(builder_scope:pbui_meetAgenda)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_meetAgenda();
+          return new com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -1563,7 +1563,7 @@ public final class InterfaceAgenda {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_meetAgenda other = (pbui_meetAgenda) arg1;
+          com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda other = (com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda) arg1;
           agendatype_ = visitor.visitInt(agendatype_ != 0, agendatype_,
               other.agendatype_ != 0, other.agendatype_);
           mediaid_ = visitor.visitInt(mediaid_ != 0, mediaid_,
@@ -1571,7 +1571,7 @@ public final class InterfaceAgenda {
           text_ = visitor.visitByteString(text_ != com.google.protobuf.ByteString.EMPTY, text_,
               other.text_ != com.google.protobuf.ByteString.EMPTY, other.text_);
           item_= visitor.visitList(item_, other.item_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
           }
@@ -1617,7 +1617,7 @@ public final class InterfaceAgenda {
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
                   }
                   item_.add(
-                      input.readMessage(pbui_ItemAgendaTimeInfo.parser(), extensionRegistry));
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceAgenda.pbui_ItemAgendaTimeInfo.parser(), extensionRegistry));
                   break;
                 }
               }
@@ -1636,7 +1636,7 @@ public final class InterfaceAgenda {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_meetAgenda.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -1650,13 +1650,13 @@ public final class InterfaceAgenda {
 
 
     // @@protoc_insertion_point(class_scope:pbui_meetAgenda)
-    private static final pbui_meetAgenda DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_meetAgenda();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_meetAgenda getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceAgenda.pbui_meetAgenda getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 

@@ -67,7 +67,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/device_name_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            style="@style/TextStyle"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/mian_into_meeting"
@@ -86,7 +96,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_btn"
-            android:text="秘书管理"
+            android:text="系统设置"
             android:textColor="@color/white" />
 
     </RelativeLayout>

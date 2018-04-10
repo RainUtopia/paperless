@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_ipdialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="输入新的IP地址 :"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/ip_pop_edt1"
+            style="@style/ipPopEdt" />
+
+        <TextView style="@style/ipPopTv" />
+
+        <EditText
+            android:id="@+id/ip_pop_edt2"
+            style="@style/ipPopEdt" />
+
+        <TextView style="@style/ipPopTv" />
+
+        <EditText
+            android:id="@+id/ip_pop_edt3"
+            style="@style/ipPopEdt" />
+
+        <TextView style="@style/ipPopTv" />
+
+        <EditText
+            android:id="@+id/ip_pop_edt4"
+            style="@style/ipPopEdt" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ip_pop_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/ip_pop_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="确定" />
+    </LinearLayout>
+</LinearLayout>

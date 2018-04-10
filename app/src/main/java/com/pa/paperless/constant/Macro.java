@@ -3,6 +3,8 @@ package com.pa.paperless.constant;
 
 import android.os.Environment;
 
+import com.pa.paperless.utils.SDCardUtils;
+
 
 /**
  * Created by Administrator on 2018/2/5.
@@ -48,8 +50,25 @@ public class Macro {
     public static int MEDIA_FILETYPE_OTHERSUB = 0x10000000; //其它文件
     public static int SUBTYPEBITMASK = 0x1f000000;
     //assets 文件存放目录
-    public static String INITFILESDPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/NETCONFIG";//app各类文件存放路径
+    public static String INITFILESDPATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/NETCONFIG";//app各类文件存放路径 SD卡下
     public static String FILENAME = "client.ini";
     public static String FILENAME_DEV = "client.dev";
-
+    //下载的文件存放目录
+    public static final String MEETFILE = SDCardUtils.getSDCardPath()+"/MEETFILE/";
+    public static final String MEETMATERIAL = MEETFILE+"MeetMaterial/";//会议资料
+    public static final String SHAREMATERIAL = MEETFILE+"ShareMaterial/";//共享资料
+    public static final String POSTILFILE = MEETFILE+"PostilFile/";//批注文件
+    public static final String VOTERESULT = MEETFILE+"VoteResult/";//投票结果
+    //自定义 Fragment索引
+    public static final int Pb_MEET_FUNCODE_AGENDA_BULLETIN = 0;    //会议议程
+    public static final int Pb_MEET_FUNCODE_MATERIAL = 1;    //会议资料
+    public static final int Pb_MEET_FUNCODE_SHAREDFILE = 2;    //	共享文件
+    public static final int Pb_MEET_FUNCODE_POSTIL = 3;    //批注文件
+    public static final int Pb_MEET_FUNCODE_MESSAGE = 4;    //会议交流
+    public static final int Pb_MEET_FUNCODE_VIDEOSTREAM = 5;    //视频直播
+    public static final int Pb_MEET_FUNCODE_WHITEBOARD = 6;    //白板
+    public static final int Pb_MEET_FUNCODE_WEBBROWSER = 7;    //网页
+    public static final int Pb_MEET_FUNCODE_VOTERESULT = 8;    //投票
+    public static final int Pb_MEET_FUNCODE_SIGNINRESULT = 9;    //签到
+    public static final int Pb_MEET_FUNCODE_DOCUMENT = 10;    //外部文档
 }

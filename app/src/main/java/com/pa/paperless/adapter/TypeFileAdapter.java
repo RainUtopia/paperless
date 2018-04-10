@@ -56,7 +56,7 @@ public class TypeFileAdapter extends BaseAdapter {
         /**
          * 这一步是重点，括号中的值是获取到item的准确索引
          */
-        MeetDirFileInfo bean = (MeetDirFileInfo) mDatas.get(i + ITEM_COUNT * PAGE_NOW);
+        final MeetDirFileInfo bean = (MeetDirFileInfo) mDatas.get(i + ITEM_COUNT * PAGE_NOW);
         holder.document_item_number.setText(i + 1 + "");
         holder.document_item_filename.setText(bean.getFileName());
         holder.document_item_filesize.setText(bean.getSize() + "");
@@ -69,7 +69,7 @@ public class TypeFileAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (mLookListener != null) {
                     //下载媒体id
-                    mLookListener.onLookListener(mediaId, fileName);
+                    mLookListener.onLookListener(mediaId, fileName,bean.getSize());
                 }
             }
         });
@@ -77,7 +77,7 @@ public class TypeFileAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 if (mDownListener != null) {
-                    mDownListener.onDownListener(mediaId, fileName);
+                    mDownListener.onDownListener(mediaId, fileName,bean.getSize());
                 }
             }
         });
@@ -93,11 +93,11 @@ public class TypeFileAdapter extends BaseAdapter {
     }
 
     public interface setLookListener {
-        void onLookListener(int posion, String filename);
+        void onLookListener(int posion, String filename,long filesize);
     }
 
     public interface setDownListener {
-        void onDownListener(int posion, String filename);
+        void onDownListener(int posion, String filename,long filesize);
     }
 
     public static class ViewHolder {

@@ -47,6 +47,15 @@ public final class InterfaceBase {
      * <code>fixed32 programtype = 4;</code>
      */
     int getProgramtype();
+
+    /**
+     * <pre>
+     *程序唯一标识串，为空表示接口自动计算
+     * </pre>
+     *
+     * <code>bytes keystr = 5;</code>
+     */
+    com.google.protobuf.ByteString getKeystr();
   }
   /**
    * <pre>
@@ -64,6 +73,7 @@ public final class InterfaceBase {
       pbui_MeetCore_InitParamOrBuilder {
     private pbui_MeetCore_InitParam() {
       pconfigpathname_ = com.google.protobuf.ByteString.EMPTY;
+      keystr_ = com.google.protobuf.ByteString.EMPTY;
     }
     public static final int PCONFIGPATHNAME_FIELD_NUMBER = 1;
     private com.google.protobuf.ByteString pconfigpathname_;
@@ -208,6 +218,44 @@ public final class InterfaceBase {
       programtype_ = 0;
     }
 
+    public static final int KEYSTR_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString keystr_;
+    /**
+     * <pre>
+     *程序唯一标识串，为空表示接口自动计算
+     * </pre>
+     *
+     * <code>bytes keystr = 5;</code>
+     */
+    public com.google.protobuf.ByteString getKeystr() {
+      return keystr_;
+    }
+    /**
+     * <pre>
+     *程序唯一标识串，为空表示接口自动计算
+     * </pre>
+     *
+     * <code>bytes keystr = 5;</code>
+     */
+    private void setKeystr(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      keystr_ = value;
+    }
+    /**
+     * <pre>
+     *程序唯一标识串，为空表示接口自动计算
+     * </pre>
+     *
+     * <code>bytes keystr = 5;</code>
+     */
+    private void clearKeystr() {
+      
+      keystr_ = getDefaultInstance().getKeystr();
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!pconfigpathname_.isEmpty()) {
@@ -221,6 +269,9 @@ public final class InterfaceBase {
       }
       if (programtype_ != 0) {
         output.writeFixed32(4, programtype_);
+      }
+      if (!keystr_.isEmpty()) {
+        output.writeBytes(5, keystr_);
       }
     }
 
@@ -245,77 +296,81 @@ public final class InterfaceBase {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(4, programtype_);
       }
+      if (!keystr_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, keystr_);
+      }
       memoizedSerializedSize = size;
       return size;
     }
 
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetCore_InitParam parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetCore_InitParam parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetCore_InitParam parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetCore_InitParam parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetCore_InitParam parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -326,7 +381,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_MeetCore_InitParam prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -341,9 +396,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_MeetCore_InitParam, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_MeetCore_InitParam)
-        pbui_MeetCore_InitParamOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParamOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -490,15 +545,50 @@ public final class InterfaceBase {
         return this;
       }
 
+      /**
+       * <pre>
+       *程序唯一标识串，为空表示接口自动计算
+       * </pre>
+       *
+       * <code>bytes keystr = 5;</code>
+       */
+      public com.google.protobuf.ByteString getKeystr() {
+        return instance.getKeystr();
+      }
+      /**
+       * <pre>
+       *程序唯一标识串，为空表示接口自动计算
+       * </pre>
+       *
+       * <code>bytes keystr = 5;</code>
+       */
+      public Builder setKeystr(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setKeystr(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *程序唯一标识串，为空表示接口自动计算
+       * </pre>
+       *
+       * <code>bytes keystr = 5;</code>
+       */
+      public Builder clearKeystr() {
+        copyOnWrite();
+        instance.clearKeystr();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:pbui_MeetCore_InitParam)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_MeetCore_InitParam();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -511,7 +601,7 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_MeetCore_InitParam other = (pbui_MeetCore_InitParam) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam) arg1;
           pconfigpathname_ = visitor.visitByteString(pconfigpathname_ != com.google.protobuf.ByteString.EMPTY, pconfigpathname_,
               other.pconfigpathname_ != com.google.protobuf.ByteString.EMPTY, other.pconfigpathname_);
           logtofile_ = visitor.visitInt(logtofile_ != 0, logtofile_,
@@ -520,7 +610,9 @@ public final class InterfaceBase {
               other.streamnum_ != 0, other.streamnum_);
           programtype_ = visitor.visitInt(programtype_ != 0, programtype_,
               other.programtype_ != 0, other.programtype_);
-          if (visitor == MergeFromVisitor
+          keystr_ = visitor.visitByteString(keystr_ != com.google.protobuf.ByteString.EMPTY, keystr_,
+              other.keystr_ != com.google.protobuf.ByteString.EMPTY, other.keystr_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -564,6 +656,11 @@ public final class InterfaceBase {
                   programtype_ = input.readFixed32();
                   break;
                 }
+                case 42: {
+
+                  keystr_ = input.readBytes();
+                  break;
+                }
               }
             }
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -580,7 +677,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_MeetCore_InitParam.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -594,13 +691,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_MeetCore_InitParam)
-    private static final pbui_MeetCore_InitParam DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_MeetCore_InitParam();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_MeetCore_InitParam getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCore_InitParam getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -696,73 +793,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Ready parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Ready parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Ready parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Ready parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Ready parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -773,7 +870,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Ready prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -789,9 +886,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Ready, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Ready)
-        pbui_ReadyOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_ReadyOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -835,13 +932,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_Ready)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Ready();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -854,10 +951,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Ready other = (pbui_Ready) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready) arg1;
           areaid_ = visitor.visitInt(areaid_ != 0, areaid_,
               other.areaid_ != 0, other.areaid_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -902,7 +999,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Ready.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -916,13 +1013,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Ready)
-    private static final pbui_Ready DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Ready();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Ready getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Ready getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1018,73 +1115,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Time parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Time parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Time parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Time parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Time parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1095,7 +1192,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Time prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_Time prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -1111,9 +1208,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Time, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Time, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Time)
-        pbui_TimeOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_TimeOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_Time.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -1157,13 +1254,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_Time)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Time();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_Time();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -1176,10 +1273,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Time other = (pbui_Time) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Time other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Time) arg1;
           usec_ = visitor.visitLong(usec_ != 0L, usec_,
               other.usec_ != 0L, other.usec_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -1224,7 +1321,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Time.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_Time.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -1238,13 +1335,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Time)
-    private static final pbui_Time DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_Time DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Time();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Time getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Time getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1391,73 +1488,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetCacheOper parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetCacheOper parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetCacheOper parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetCacheOper parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetCacheOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1468,7 +1565,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_MeetCacheOper prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -1484,9 +1581,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_MeetCacheOper, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_MeetCacheOper)
-        pbui_MeetCacheOperOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOperOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -1565,13 +1662,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_MeetCacheOper)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_MeetCacheOper();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -1584,12 +1681,12 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_MeetCacheOper other = (pbui_MeetCacheOper) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper) arg1;
           cacheflag_ = visitor.visitInt(cacheflag_ != 0, cacheflag_,
               other.cacheflag_ != 0, other.cacheflag_);
           id_ = visitor.visitInt(id_ != 0, id_,
               other.id_ != 0, other.id_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -1639,7 +1736,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_MeetCacheOper.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -1653,13 +1750,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_MeetCacheOper)
-    private static final pbui_MeetCacheOper DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_MeetCacheOper();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_MeetCacheOper getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetCacheOper getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1857,73 +1954,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_PageReqQueryInfo parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_PageReqQueryInfo parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_PageReqQueryInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_PageReqQueryInfo parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_PageReqQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1934,7 +2031,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_PageReqQueryInfo prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -1950,9 +2047,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_PageReqQueryInfo, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_PageReqQueryInfo)
-        pbui_PageReqQueryInfoOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfoOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -2066,13 +2163,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_PageReqQueryInfo)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_PageReqQueryInfo();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -2085,14 +2182,14 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_PageReqQueryInfo other = (pbui_PageReqQueryInfo) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo) arg1;
           pageindex_ = visitor.visitInt(pageindex_ != 0, pageindex_,
               other.pageindex_ != 0, other.pageindex_);
           pagenum_ = visitor.visitInt(pagenum_ != 0, pagenum_,
               other.pagenum_ != 0, other.pagenum_);
           idval_ = visitor.visitInt(idval_ != 0, idval_,
               other.idval_ != 0, other.idval_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -2147,7 +2244,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_PageReqQueryInfo.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -2161,13 +2258,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_PageReqQueryInfo)
-    private static final pbui_PageReqQueryInfo DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_PageReqQueryInfo();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_PageReqQueryInfo getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageReqQueryInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2467,73 +2564,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_PageResQueryInfo parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_PageResQueryInfo parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_PageResQueryInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_PageResQueryInfo parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_PageResQueryInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2544,7 +2641,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_PageResQueryInfo prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -2560,9 +2657,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_PageResQueryInfo, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_PageResQueryInfo)
-        pbui_PageResQueryInfoOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfoOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -2746,13 +2843,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_PageResQueryInfo)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_PageResQueryInfo();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -2765,7 +2862,7 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_PageResQueryInfo other = (pbui_PageResQueryInfo) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo) arg1;
           pageindex_ = visitor.visitInt(pageindex_ != 0, pageindex_,
               other.pageindex_ != 0, other.pageindex_);
           pagenum_ = visitor.visitInt(pagenum_ != 0, pagenum_,
@@ -2776,7 +2873,7 @@ public final class InterfaceBase {
               other.totalnum_ != 0, other.totalnum_);
           idval_ = visitor.visitInt(idval_ != 0, idval_,
               other.idval_ != 0, other.idval_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -2841,7 +2938,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_PageResQueryInfo.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -2855,13 +2952,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_PageResQueryInfo)
-    private static final pbui_PageResQueryInfo DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_PageResQueryInfo();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_PageResQueryInfo getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_PageResQueryInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2957,73 +3054,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByID parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByID parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_QueryInfoByID parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByID parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3034,7 +3131,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_QueryInfoByID prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -3050,9 +3147,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_QueryInfoByID, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_QueryInfoByID)
-        pbui_QueryInfoByIDOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByIDOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -3096,13 +3193,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_QueryInfoByID)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_QueryInfoByID();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -3115,10 +3212,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_QueryInfoByID other = (pbui_QueryInfoByID) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID) arg1;
           id_ = visitor.visitInt(id_ != 0, id_,
               other.id_ != 0, other.id_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -3163,7 +3260,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_QueryInfoByID.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -3177,13 +3274,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_QueryInfoByID)
-    private static final pbui_QueryInfoByID DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_QueryInfoByID();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_QueryInfoByID getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByID getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3267,73 +3364,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByName parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByName parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_QueryInfoByName parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByName parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3344,7 +3441,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_QueryInfoByName prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -3360,9 +3457,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_QueryInfoByName, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_QueryInfoByName)
-        pbui_QueryInfoByNameOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByNameOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -3394,13 +3491,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_QueryInfoByName)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_QueryInfoByName();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -3413,10 +3510,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_QueryInfoByName other = (pbui_QueryInfoByName) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName) arg1;
           name_ = visitor.visitByteString(name_ != com.google.protobuf.ByteString.EMPTY, name_,
               other.name_ != com.google.protobuf.ByteString.EMPTY, other.name_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -3461,7 +3558,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_QueryInfoByName.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -3475,13 +3572,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_QueryInfoByName)
-    private static final pbui_QueryInfoByName DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_QueryInfoByName();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_QueryInfoByName getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByName getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3596,73 +3693,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_QueryInfoByDoubleID parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByDoubleID parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_QueryInfoByDoubleID parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3673,7 +3770,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_QueryInfoByDoubleID prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -3689,9 +3786,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_QueryInfoByDoubleID, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_QueryInfoByDoubleID)
-        pbui_QueryInfoByDoubleIDOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleIDOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -3746,13 +3843,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_QueryInfoByDoubleID)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_QueryInfoByDoubleID();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -3765,12 +3862,12 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_QueryInfoByDoubleID other = (pbui_QueryInfoByDoubleID) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID) arg1;
           id1_ = visitor.visitInt(id1_ != 0, id1_,
               other.id1_ != 0, other.id1_);
           id2_ = visitor.visitInt(id2_ != 0, id2_,
               other.id2_ != 0, other.id2_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -3820,7 +3917,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_QueryInfoByDoubleID.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -3834,13 +3931,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_QueryInfoByDoubleID)
-    private static final pbui_QueryInfoByDoubleID DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_QueryInfoByDoubleID();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_QueryInfoByDoubleID getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_QueryInfoByDoubleID getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3959,73 +4056,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_DoubleQueryInfoByName parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_DoubleQueryInfoByName parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_DoubleQueryInfoByName parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4036,7 +4133,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_DoubleQueryInfoByName prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -4052,9 +4149,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_DoubleQueryInfoByName, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_DoubleQueryInfoByName)
-        pbui_DoubleQueryInfoByNameOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByNameOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -4109,13 +4206,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_DoubleQueryInfoByName)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_DoubleQueryInfoByName();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -4128,12 +4225,12 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_DoubleQueryInfoByName other = (pbui_DoubleQueryInfoByName) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName) arg1;
           id1_ = visitor.visitInt(id1_ != 0, id1_,
               other.id1_ != 0, other.id1_);
           name_ = visitor.visitByteString(name_ != com.google.protobuf.ByteString.EMPTY, name_,
               other.name_ != com.google.protobuf.ByteString.EMPTY, other.name_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -4183,7 +4280,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_DoubleQueryInfoByName.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -4197,13 +4294,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_DoubleQueryInfoByName)
-    private static final pbui_DoubleQueryInfoByName DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_DoubleQueryInfoByName();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_DoubleQueryInfoByName getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_DoubleQueryInfoByName getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4349,73 +4446,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsg parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsg parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsg parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetNotifyMsg parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetNotifyMsg parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4426,7 +4523,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_MeetNotifyMsg prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -4441,9 +4538,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_MeetNotifyMsg, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_MeetNotifyMsg)
-        pbui_MeetNotifyMsgOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -4522,13 +4619,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_MeetNotifyMsg)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_MeetNotifyMsg();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -4541,12 +4638,12 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_MeetNotifyMsg other = (pbui_MeetNotifyMsg) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg) arg1;
           opermethod_ = visitor.visitInt(opermethod_ != 0, opermethod_,
               other.opermethod_ != 0, other.opermethod_);
           id_ = visitor.visitInt(id_ != 0, id_,
               other.id_ != 0, other.id_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -4596,7 +4693,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_MeetNotifyMsg.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -4610,13 +4707,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_MeetNotifyMsg)
-    private static final pbui_MeetNotifyMsg DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_MeetNotifyMsg();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_MeetNotifyMsg getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsg getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4813,73 +4910,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsgForDouble parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetNotifyMsgForDouble parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_MeetNotifyMsgForDouble parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4890,7 +4987,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_MeetNotifyMsgForDouble prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -4905,9 +5002,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_MeetNotifyMsgForDouble, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_MeetNotifyMsgForDouble)
-        pbui_MeetNotifyMsgForDoubleOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDoubleOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -5021,13 +5118,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_MeetNotifyMsgForDouble)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_MeetNotifyMsgForDouble();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -5040,14 +5137,14 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_MeetNotifyMsgForDouble other = (pbui_MeetNotifyMsgForDouble) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble) arg1;
           opermethod_ = visitor.visitInt(opermethod_ != 0, opermethod_,
               other.opermethod_ != 0, other.opermethod_);
           id_ = visitor.visitInt(id_ != 0, id_,
               other.id_ != 0, other.id_);
           subid_ = visitor.visitInt(subid_ != 0, subid_,
               other.subid_ != 0, other.subid_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -5102,7 +5199,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_MeetNotifyMsgForDouble.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -5116,13 +5213,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_MeetNotifyMsgForDouble)
-    private static final pbui_MeetNotifyMsgForDouble DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_MeetNotifyMsgForDouble();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_MeetNotifyMsgForDouble getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_MeetNotifyMsgForDouble getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5268,73 +5365,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonQueryProperty parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonQueryProperty parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonQueryProperty parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonQueryProperty parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonQueryProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5345,7 +5442,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_CommonQueryProperty prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -5360,9 +5457,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_CommonQueryProperty, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_CommonQueryProperty)
-        pbui_CommonQueryPropertyOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryPropertyOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -5441,13 +5538,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_CommonQueryProperty)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_CommonQueryProperty();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -5460,12 +5557,12 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_CommonQueryProperty other = (pbui_CommonQueryProperty) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty) arg1;
           propertyid_ = visitor.visitInt(propertyid_ != 0, propertyid_,
               other.propertyid_ != 0, other.propertyid_);
           parameterval_ = visitor.visitInt(parameterval_ != 0, parameterval_,
               other.parameterval_ != 0, other.parameterval_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -5515,7 +5612,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_CommonQueryProperty.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -5529,13 +5626,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_CommonQueryProperty)
-    private static final pbui_CommonQueryProperty DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_CommonQueryProperty();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_CommonQueryProperty getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonQueryProperty getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5631,73 +5728,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonInt32uProperty parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonInt32uProperty parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonInt32uProperty parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonInt32uProperty parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonInt32uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5708,7 +5805,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_CommonInt32uProperty prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -5724,9 +5821,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_CommonInt32uProperty, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_CommonInt32uProperty)
-        pbui_CommonInt32uPropertyOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uPropertyOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -5770,13 +5867,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_CommonInt32uProperty)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_CommonInt32uProperty();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -5789,10 +5886,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_CommonInt32uProperty other = (pbui_CommonInt32uProperty) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty) arg1;
           propertyval_ = visitor.visitInt(propertyval_ != 0, propertyval_,
               other.propertyval_ != 0, other.propertyval_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -5837,7 +5934,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_CommonInt32uProperty.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -5851,13 +5948,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_CommonInt32uProperty)
-    private static final pbui_CommonInt32uProperty DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_CommonInt32uProperty();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_CommonInt32uProperty getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt32uProperty getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5953,73 +6050,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonInt64uProperty parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonInt64uProperty parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonInt64uProperty parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonInt64uProperty parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonInt64uProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6030,7 +6127,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_CommonInt64uProperty prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -6046,9 +6143,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_CommonInt64uProperty, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_CommonInt64uProperty)
-        pbui_CommonInt64uPropertyOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uPropertyOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -6092,13 +6189,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_CommonInt64uProperty)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_CommonInt64uProperty();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -6111,10 +6208,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_CommonInt64uProperty other = (pbui_CommonInt64uProperty) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty) arg1;
           propertyval_ = visitor.visitLong(propertyval_ != 0L, propertyval_,
               other.propertyval_ != 0L, other.propertyval_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -6159,7 +6256,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_CommonInt64uProperty.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -6173,13 +6270,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_CommonInt64uProperty)
-    private static final pbui_CommonInt64uProperty DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_CommonInt64uProperty();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_CommonInt64uProperty getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonInt64uProperty getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6279,73 +6376,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonTextProperty parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_CommonTextProperty parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonTextProperty parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonTextProperty parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_CommonTextProperty parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6356,7 +6453,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_CommonTextProperty prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -6372,9 +6469,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_CommonTextProperty, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_CommonTextProperty)
-        pbui_CommonTextPropertyOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextPropertyOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -6418,13 +6515,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_CommonTextProperty)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_CommonTextProperty();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -6437,10 +6534,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_CommonTextProperty other = (pbui_CommonTextProperty) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty) arg1;
           propertyval_ = visitor.visitByteString(propertyval_ != com.google.protobuf.ByteString.EMPTY, propertyval_,
               other.propertyval_ != com.google.protobuf.ByteString.EMPTY, other.propertyval_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -6485,7 +6582,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_CommonTextProperty.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -6499,13 +6596,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_CommonTextProperty)
-    private static final pbui_CommonTextProperty DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_CommonTextProperty();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_CommonTextProperty getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_CommonTextProperty getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6588,73 +6685,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_meetUrl parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_meetUrl parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_meetUrl parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_meetUrl parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_meetUrl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6665,7 +6762,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_meetUrl prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -6680,9 +6777,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_meetUrl, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_meetUrl)
-        pbui_meetUrlOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrlOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -6714,13 +6811,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_meetUrl)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_meetUrl();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -6733,10 +6830,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_meetUrl other = (pbui_meetUrl) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl) arg1;
           url_ = visitor.visitByteString(url_ != com.google.protobuf.ByteString.EMPTY, url_,
               other.url_ != com.google.protobuf.ByteString.EMPTY, other.url_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -6781,7 +6878,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_meetUrl.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -6795,13 +6892,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_meetUrl)
-    private static final pbui_meetUrl DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_meetUrl();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_meetUrl getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_meetUrl getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6897,73 +6994,73 @@ public final class InterfaceBase {
       return size;
     }
 
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetDBServerOperError parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetDBServerOperError parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetDBServerOperError parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6974,7 +7071,7 @@ public final class InterfaceBase {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetDBServerOperError prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -6990,9 +7087,9 @@ public final class InterfaceBase {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetDBServerOperError, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetDBServerOperError)
-        pbui_Type_MeetDBServerOperErrorOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperErrorOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -7036,13 +7133,13 @@ public final class InterfaceBase {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetDBServerOperError)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetDBServerOperError();
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -7055,10 +7152,10 @@ public final class InterfaceBase {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetDBServerOperError other = (pbui_Type_MeetDBServerOperError) arg1;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError) arg1;
           status_ = visitor.visitInt(status_ != 0, status_,
               other.status_ != 0, other.status_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -7103,7 +7200,7 @@ public final class InterfaceBase {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetDBServerOperError.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -7117,13 +7214,13 @@ public final class InterfaceBase {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetDBServerOperError)
-    private static final pbui_Type_MeetDBServerOperError DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetDBServerOperError();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetDBServerOperError getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 

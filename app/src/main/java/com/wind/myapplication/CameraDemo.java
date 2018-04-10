@@ -163,7 +163,7 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
 
     private void loopSupportSize() {
         for (int num = 0; num < parameters.getSupportedPreviewSizes().size(); num++) {
-            Log.d(TAG, parameters.getSupportedPreviewSizes().get(num).width
+            Log.i(TAG, parameters.getSupportedPreviewSizes().get(num).width
                     + "*"
                     + parameters.getSupportedPreviewSizes().get(num).height);
         }
@@ -182,12 +182,12 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
 
                 parameters = mCamera.getParameters();
                 parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);// �����Խ�
-                parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);// ��ƽ�⣺�Զ�
-                parameters.setFlashMode(Parameters.FLASH_MODE_ON);// �����ģʽ���Զ�
-                parameters.setSceneMode(Parameters.SCENE_MODE_AUTO);// ����ģʽ���Զ�
+                //parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);// ��ƽ�⣺�Զ�
+                //parameters.setFlashMode(Parameters.FLASH_MODE_ON);// �����ģʽ���Զ�
+                //parameters.setSceneMode(Parameters.SCENE_MODE_AUTO);// ����ģʽ���Զ�
                 parameters.setPreviewFrameRate(30);
                 checkSupportColorFormat();
-                Log.v(TAG, "Camera PreviewFormat=" + (imageFormat == ImageFormat.NV21 ? "NV21" : imageFormat == ImageFormat.YV12 ? "YV12" : imageFormat));
+                Log.i(TAG, "Camera PreviewFormat=" + (imageFormat == ImageFormat.NV21 ? "NV21" : imageFormat == ImageFormat.YV12 ? "YV12" : imageFormat));
                 parameters.setPreviewFormat(imageFormat);//NV21 YV12
                 parameters.setPreviewSize(width, height);
                 mCamera.setParameters(parameters);
@@ -202,6 +202,7 @@ public class CameraDemo extends Activity implements SurfaceHolder.Callback,
 
     private void checkSupportColorFormat() {
         List<Integer> previewFormatsSizes = parameters.getSupportedPreviewFormats();
+
         if (-1 != previewFormatsSizes.indexOf(ImageFormat.YV12)) {
             imageFormat = ImageFormat.YV12;
         } else if (-1 != previewFormatsSizes.indexOf(ImageFormat.NV21)) {

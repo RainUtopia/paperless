@@ -71,7 +71,7 @@ message pbui_Type_MeetDoStreamPlay
 {
 	fixed32  srcdeviceid=1;//设备ID 采集端的设备ID
 	fixed32  subid=2;//设备子通道 这个是设备注册的流通索引 eg:如设置的桌面流通索引是2 摄像流通道是3
-	fixed32  triggeruserval=3;//参见Interface_Macro.proto文件中的 Pb_TriggerUsedef 定义
+	fixed32  triggeruserval=3;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
 
 	repeated fixed32 res=4;	  //播放所用的资源,为空表示全部
 	repeated fixed32 deviceid=5;	  //通知的目标设备,为空表示全部

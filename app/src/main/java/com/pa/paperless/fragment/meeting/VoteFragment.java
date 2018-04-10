@@ -106,17 +106,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                             int type = mVoteData.get(mPosion).getType();
                             Log.e("MyLog", "VoteFragment.onItemClick 103行:  item点击时选中的投票ID --->>> " + voteid + "  当前的状态:" + type);
                             isClicked = true;
-//                            int mode = mVoteData.get(mPosion).getMode();
-//                            int votestate = mVoteData.get(mPosion).getVotestate();
-                            //需要记名 和 已经发起或结束的状态
-//                            if (mode == 1 && votestate != 0) {
-//                                try {
-//                                    /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
-//                                    nativeUtil.queryOneVoteSubmitter(voteid);
-//                                } catch (InvalidProtocolBufferException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
                         }
                     });
                     break;
@@ -127,7 +116,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                     int voteid = o1.getVoteid();
                     //获取当前选中投票的全部选项信息
                     List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
-                    List<VoteBean> voteBeen = new ArrayList<>();
+                    List<VoteBean> SomeOneVoteInfo = new ArrayList<>();
                     for (int i = 0; i < itemList.size(); i++) {
                         InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
                         String chooseText = "";
@@ -158,9 +147,9 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                                 }
                             }
                         }
-                        voteBeen.add(new VoteBean(name, chooseText));
-                        showDetailVoteInfo(voteBeen);
+                        SomeOneVoteInfo.add(new VoteBean(name, chooseText));
                     }
+                    showDetailVoteInfo(SomeOneVoteInfo);
                     break;
                 case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                     ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
@@ -204,9 +193,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 InterfaceBase.pbui_MeetNotifyMsg object1 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int opermethod = object1.getOpermethod();
                 int id1 = object1.getId();
-
                 nativeUtil.queryVote();
-
                 if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
                     //操作方法为 查询投票 时
                     Log.e("MyLog", "VoteFragment.getEventMessage:  投票变更通知 EventBus --->>> 200.查询投票");

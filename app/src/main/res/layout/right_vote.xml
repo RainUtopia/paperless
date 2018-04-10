@@ -22,15 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/text_refe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="10dp"
-                android:text="主持人功能" />
-
             <Button
                 android:id="@+id/vote_management"
                 android:layout_width="wrap_content"
@@ -38,10 +29,8 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@id/text_refe"
                 android:background="@drawable/select_press"
                 android:text="投票管理" />
-
 
             <Button
                 android:id="@+id/vote_open"

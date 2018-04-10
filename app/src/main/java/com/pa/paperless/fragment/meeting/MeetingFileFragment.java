@@ -1,14 +1,11 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +30,7 @@ import com.pa.paperless.bean.MeetingFileTypeBean;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
@@ -101,6 +99,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     if (mDirData.size() > 0 && isFirstIn) {
                         Log.e("MyLog", "MeetingFileFragment.initData:  第一次进入了 --->>> ");
                         try {
+                            //查询会议目录文件
                             nativeUtil.queryMeetDirFile(mDirData.get(0).getDirId());
                         } catch (InvalidProtocolBufferException e) {
                             e.printStackTrace();
@@ -108,7 +107,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     }
                     //设置默认点击第一个按钮
                     rightmeetfile_document.performClick();
-
                     break;
                 case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件
                     ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("queryMeetDirFile");
@@ -130,16 +128,10 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                         setBtnSelect(0);
                     }
                     break;
-                case IDivMessage.QUERY_DEVMEET_INFO://查询设备会议信息
-                    ArrayList devMeetInfos = msg.getData().getParcelableArrayList("devMeetInfos");
-                    InterfaceDevice.pbui_Type_DeviceFaceShowDetail o3 = (InterfaceDevice.pbui_Type_DeviceFaceShowDetail) devMeetInfos.get(0);
-                    int deviceid = o3.getDeviceid();
-                    break;
             }
         }
     };
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
-    private int devID;
     //播放时的媒体ID
     public static int mMediaid;
 
@@ -155,12 +147,9 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         try {
             //136.查询会议目录
             nativeUtil.queryMeetDir();
-//            nativeUtil.placeDeviceRankingInfo()
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        //获得传递过来的ID
-        devID = MeetingActivity.getDevId();
         EventBus.getDefault().register(this);
         return inflate;
     }
@@ -232,7 +221,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         //打开文件
         dataAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
-            public void onLookListener(final int mediaId, final String filename) {
+            public void onLookListener(final int mediaId, final String filename,long filesize) {
                 mMediaid = mediaId;
                 // TODO: 2018/1/29 如果是视屏文件可在线观看
                 if (FileUtil.isVideoFile(filename)) {
@@ -242,15 +231,15 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     devIds.add(MeetingActivity.getDevId());
                     nativeUtil.mediaPlayOperate(mediaId, devIds, 0);
                 } else {
-                    MyUtils.openFile(filename, getView(), nativeUtil, mediaId, getContext());
+                    MyUtils.openFile(Macro.MEETMATERIAL,filename, getView(), nativeUtil, mediaId, getContext(),filesize);
                 }
             }
         });
         //下载文件
         dataAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
             @Override
-            public void onDownListener(int mediaId, String filename) {
-                MyUtils.downLoadFile(filename, getView(), getContext(), mediaId, nativeUtil);
+            public void onDownListener(int mediaId, String filename,long filesize) {
+                MyUtils.downLoadFile(Macro.MEETMATERIAL,filename, getView(), getContext(), mediaId, nativeUtil,filesize);
             }
         });
     }

@@ -85,7 +85,8 @@ public class IDivMessage {
     public static final int Query_MeetSeat_Inform = 1037;
     //203.查询指定投票的提交人
     public static final int QUERY_MEMBER_BYVOTE = 1038;
-    public static final int Dev_proById = 1039;
+    //7.按属性ID查询指定设备属性
+    public static final int DEV_PROBYID = 1039;
     //查询可加入的同屏会话
     public static final int QUERY_CAN_JOIN = 1040;
     //126查询会场设备的流通道信息
@@ -96,5 +97,9 @@ public class IDivMessage {
     public static final int QUERY_STREAM_PLAY = 1043;
     // 获取绘画参数
     public static final int GET_DRAW_INFO = 1044;
+    // 按属性ID查询指定上下文属性
+    public static final int QUERY_CONTEXT = 1045;
+    //238.查询会议功能
+    public static final int QUERY_MEET_FUNCTION = 1046;
 
 }

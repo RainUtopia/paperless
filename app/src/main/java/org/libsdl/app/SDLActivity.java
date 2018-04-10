@@ -1167,7 +1167,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     private Context context;
     private PopupWindow popupWindow;
     private NativeUtil nativeUtil;
-    private boolean isPause = false;
+    private boolean isPause = false, isShare = false;//isShare,是否处于共享中
     // 参见Interface_main.proto中的播放进度通知
     private int mediaId = 0, status = 2, per = 0,//当前播放的媒体 ID、状态、百分比；
             sec = 0, time = 0;//当前播放的媒体 播放秒数、文件时长；
@@ -1409,7 +1409,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 List<Integer> devIds = new ArrayList<Integer>();
-                devIds.add(MeetingActivity.o.getDevId());
+                if (!isShare)
+                    devIds.add(MeetingActivity.DevMeetInfo.getDeviceid());
                 nativeUtil.setPlayPlace(0, seekBar.getProgress(), devIds);
             }
         });
@@ -1517,7 +1518,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
             res.add(0);
             switch (v.getId()) {
                 case R.id.SDL_playCtrl_btn_pause:
-                    devIds.add(MeetingActivity.o.getDevId());
+                    if(!isShare)
+                        devIds.add(MeetingActivity.DevMeetInfo.getDeviceid());
                     if (isPause) {
                         Log.i("SDL-->", "resume");
                         nativeUtil.setPlayRecover(0, devIds);
@@ -1532,7 +1534,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     List<Integer> a = new ArrayList<Integer>();
                     List<Integer> b = new ArrayList<Integer>();
                     a.add(0);
-                    b.add(MeetingActivity.getDevId());
+                    if(!isShare)
+                        b.add(MeetingActivity.getDevId());
                     /** ************ ******  停止资源操作  ****** ************ **/
                     nativeUtil.stopResourceOperate(a, b);
                     /** ************ ******  释放播放资源  ****** ************ **/
@@ -1541,17 +1544,25 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     break;
                 case R.id.SDL_playCtrl_btn_shareScreen:
                     Log.v("SDL-->", "mediaId=" + mediaId + " per=" + per);
+                    isShare = true;
 //                    devIds.add(0x110000c);
                     nativeUtil.mediaPlayOperate(mediaId, devIds, per);
                     break;
                 case R.id.SDL_playCtrl_btn_stopShare:
+                    if(!isShare)
+                        break;
+                    isShare = false;
 //                    devIds.add(0x110000c);
-                    nativeUtil.stopResourceOperate(res, onlineClientIds);
+                    nativeUtil.stopResourceOperate(res, devIds);
                     break;
                 case R.id.SDL_playCtrl_btn_startProjection:
+                    isShare = true;
                     nativeUtil.mediaPlayOperate(mediaId, onlineProjectorIds, per);//开始投影
                     break;
                 case R.id.SDL_playCtrl_btn_stopProjection:
+                    if(!isShare)
+                        break;
+                    isShare = false;
                     nativeUtil.stopResourceOperate(res, onlineProjectorIds);
                     break;
             }

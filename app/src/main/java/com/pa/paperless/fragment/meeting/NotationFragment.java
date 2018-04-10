@@ -1,5 +1,6 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,16 +19,19 @@ import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.PostilActivity;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
+import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.SDCardUtils;
 import com.wind.myapplication.NativeUtil;
 
@@ -57,7 +61,6 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     private Button mDocument;
     private Button mPicture;
     private List<Button> mBtns;
-//    private NativeUtil nativeUtil;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -89,10 +92,6 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
     private List<MeetDirFileInfo> mData = new ArrayList<>();
 
-    //当前的页码 默认第0页
-    //public static int PAGE_NOW = 0;
-    //设置每一页的item个数 可以随意设置
-    //public static int ITEM_COUNT = 6;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -115,7 +114,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
-        switch (message.getAction()){
+        switch (message.getAction()) {
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM:
                 InterfaceBase.pbui_MeetNotifyMsgForDouble object = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
                 nativeUtil.queryMeetDirFile(object.getId());
@@ -132,7 +131,6 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
 
@@ -154,14 +152,14 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         mNotaLv.setAdapter(mAdapter);
         mAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
-            public void onLookListener(int posion, String filename) {
-                OpenFile(posion, filename);
+            public void onLookListener(int posion, String filename, long filesize) {
+                OpenFile(Macro.POSTILFILE, posion, filename, filesize);
             }
         });
         mAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
             @Override
-            public void onDownListener(int posion, String filename) {
-                downLoadFile(posion, filename);
+            public void onDownListener(int posion, String filename, long filesize) {
+                downLoadFile(Macro.POSTILFILE, posion, filename, filesize);
             }
         });
         mNotaPrepage = (Button) inflate.findViewById(R.id.nota_prepage);
@@ -177,42 +175,60 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
 
     /**
      * 打开文件操作
+     *
      * @param posion
      * @param filename
      */
-    private void OpenFile(final int posion, final String filename) {
+    private void OpenFile(String dir, final int posion, final String filename, long filesize) {
         //点击查看文件 如果手机上没有就得先下载下来
         if (SDCardUtils.isSDCardEnable()) {
-            String file = SDCardUtils.getSDCardPath();
-            file += filename;
-            File file1 = new File(file);
-            if (!file1.exists()) {
-                final String finalFile = file;
-                Snackbar.make(getView(), " 文件不存在，是否先下载？ ", Snackbar.LENGTH_LONG)
-                        .setAction(" 下载 ", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
-                            }
-                        }).show();
+            MyUtils.CreateFile(dir);
+            dir += filename;
+            File file1 = new File(dir);
+            if (!file1.exists()) {//文件不存在
+                final String finalFile = dir;
+                hintDownload(posion, finalFile, "文件不存在，是否先下载？");
+            } else if (file1.length() != filesize) {//文件大小与服务器中不同
+                file1.delete();//目前采用删除再下载
+                final String finalFile = dir;
+                hintDownload(posion, finalFile, "本地文件与当前文件不符，是否重新下载？");
             } else {
-                //已经存在才打开文件
-                FileUtil.openFile(getContext(), file1);
+                if (FileUtil.isPictureFile(filename)) {
+                    //已经存在才打开文件
+                    Intent intent = new Intent(getActivity().getBaseContext(), PostilActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("filepath", dir);
+                    intent.putExtra("postil", bundle);
+                    startActivity(intent);
+                } else {
+                    FileUtil.openFile(getContext(), file1);
+                }
             }
         }
     }
 
+    private void hintDownload(final int posion, final String finalFile, String showMeg) {
+        Snackbar.make(getView(), showMeg, Snackbar.LENGTH_LONG)
+                .setAction(" 下载 ", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
+                    }
+                }).show();
+    }
+
     /**
      * 下载文件操作
+     *
      * @param posion
      * @param filename
      */
-    private void downLoadFile(int posion, String filename) {
+    private void downLoadFile(String dir, int posion, String filename, long filesize) {
         if (SDCardUtils.isSDCardEnable()) {
-            String sdCardPath = SDCardUtils.getSDCardPath();
-            sdCardPath += filename;
-            final File file = new File(sdCardPath);
-            if (file.exists()) {
+            MyUtils.CreateFile(dir);
+            dir += filename;
+            final File file = new File(dir);
+            if (file.exists() && file.length() == filesize) {
                 Snackbar.make(getView(), "  文件已经存在是否直接打开？  ", Snackbar.LENGTH_LONG)
                         .setAction("打开", new View.OnClickListener() {
                             @Override
@@ -223,8 +239,8 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                             }
                         }).show();
             } else {
-                Log.e("MyLog", "MeetingFileFragment.onLookListener: 下载操作： 文件的绝对路径： --->>> " + sdCardPath);
-                nativeUtil.creationFileDownload(sdCardPath, posion, 0, 0);
+                Log.e("MyLog", "MeetingFileFragment.onLookListener: 下载操作： 文件的绝对路径： --->>> " + dir);
+                nativeUtil.creationFileDownload(dir, posion, 0, 0);
             }
         }
     }
@@ -326,7 +342,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all =  badgeNumber1 + 1;
+                int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
@@ -344,6 +360,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                 break;
         }
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {

@@ -26,4 +26,14 @@
     <string name="secretary_management">秘书管理</string>
     <string name="frequently_used_attendees">常用参会人</string>
     <string name="other_setting">其它设置</string>
+    <!--批注页面-->
+    <string name="postil_1">保存本地</string>
+    <string name="postil_2">保存服务器</string>
+    <string name="postil_3">截图批注</string>
+    <string name="postil_4">发起同屏</string>
+    <string name="postil_5">停止同屏</string>
+    <string name="postil_6">发起投影</string>
+    <string name="postil_7">停止投影</string>
+    <string name="postil_8">上一张</string>
+    <string name="postil_9">下一张</string>
 </resources>

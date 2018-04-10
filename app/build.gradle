@@ -34,34 +34,39 @@ android {
 
     sourceSets {
         main {
-            jniLibs.srcDirs = ['D:\\MeetAndroid\\Paperless\\app\\src\\main\\jniLibs']
+//            jniLibs.srcDirs = ['D:\\MeetAndroid\\Paperless\\app\\src\\main\\jniLibs']
+            jniLibs.srcDirs = ['src/main/jniLibs']     //设置目标的so存放路径
+            jni.srcDirs = [] //禁用自动调用ndk-build
         }
     }
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-//    compile files('libs/universal-image-loader-1.9.5.jar')
+    //    compile files('libs/universal-image-loader-1.9.5.jar')
     compile files('libs/protobuf-java-3.3.0.jar')
     //内存泄漏检测工具 LeakCanary
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //百分比布局
+    //卡片布局
+    // 未读消息
+    //解决调用方法数超过65536个问题 步骤二
+    //android 6.0动态权限申请
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    //百分比布局
     compile 'com.zhy:percent-support-extends:1.0.1'
-    //卡片布局
     compile 'com.android.support:cardview-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'org.greenrobot:eventbus:3.0.0'
-    // 未读消息
     compile 'q.rorbin:badgeview:1.1.3'
-    testCompile 'junit:junit:4.12'
-    //解决调用方法数超过65536个问题 步骤二
     compile 'com.android.support:multidex:1.0.0'
-    //android 6.0动态权限申请
-    compile  'pub.devrel:easypermissions:0.3.0'
+    compile 'pub.devrel:easypermissions:0.3.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/ini4j-0.5.2.jar')
 }

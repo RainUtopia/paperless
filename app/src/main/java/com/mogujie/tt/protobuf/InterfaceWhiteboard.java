@@ -141,73 +141,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -218,7 +218,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Item_MeetMemberColorDetailInfo prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -231,9 +231,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Item_MeetMemberColorDetailInfo, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Item_MeetMemberColorDetailInfo)
-        pbui_Item_MeetMemberColorDetailInfoOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfoOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -312,13 +312,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetMemberColorDetailInfo)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Item_MeetMemberColorDetailInfo();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -331,12 +331,12 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Item_MeetMemberColorDetailInfo other = (pbui_Item_MeetMemberColorDetailInfo) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo) arg1;
           memberid_ = visitor.visitInt(memberid_ != 0, memberid_,
               other.memberid_ != 0, other.memberid_);
           rgb_ = visitor.visitInt(rgb_ != 0, rgb_,
               other.rgb_ != 0, other.rgb_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -386,7 +386,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Item_MeetMemberColorDetailInfo.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -400,13 +400,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Item_MeetMemberColorDetailInfo)
-    private static final pbui_Item_MeetMemberColorDetailInfo DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Item_MeetMemberColorDetailInfo();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Item_MeetMemberColorDetailInfo getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -424,12 +424,12 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    java.util.List<pbui_Item_MeetMemberColorDetailInfo>
+    java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo> 
         getItemList();
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    pbui_Item_MeetMemberColorDetailInfo getItem(int index);
+    com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo getItem(int index);
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
@@ -454,17 +454,17 @@ public final class InterfaceWhiteboard {
       item_ = emptyProtobufList();
     }
     public static final int ITEM_FIELD_NUMBER = 1;
-    private com.google.protobuf.Internal.ProtobufList<pbui_Item_MeetMemberColorDetailInfo> item_;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo> item_;
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    public java.util.List<pbui_Item_MeetMemberColorDetailInfo> getItemList() {
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo> getItemList() {
       return item_;
     }
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    public java.util.List<? extends pbui_Item_MeetMemberColorDetailInfoOrBuilder>
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfoOrBuilder> 
         getItemOrBuilderList() {
       return item_;
     }
@@ -477,13 +477,13 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    public pbui_Item_MeetMemberColorDetailInfo getItem(int index) {
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo getItem(int index) {
       return item_.get(index);
     }
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    public pbui_Item_MeetMemberColorDetailInfoOrBuilder getItemOrBuilder(
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfoOrBuilder getItemOrBuilder(
         int index) {
       return item_.get(index);
     }
@@ -498,7 +498,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetMemberColorDetailInfo value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -509,14 +509,14 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
       ensureItemIsMutable();
       item_.set(index, builderForValue.build());
     }
     /**
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
-    private void addItem(pbui_Item_MeetMemberColorDetailInfo value) {
+    private void addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -527,7 +527,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetMemberColorDetailInfo value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -538,7 +538,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
     private void addItem(
-        pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(builderForValue.build());
     }
@@ -546,7 +546,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(index, builderForValue.build());
     }
@@ -554,7 +554,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
      */
     private void addAllItem(
-        Iterable<? extends pbui_Item_MeetMemberColorDetailInfo> values) {
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo> values) {
       ensureItemIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, item_);
@@ -593,73 +593,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetMemberColorDetailInfo parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -670,7 +670,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetMemberColorDetailInfo prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -686,9 +686,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetMemberColorDetailInfo, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetMemberColorDetailInfo)
-        pbui_Type_MeetMemberColorDetailInfoOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfoOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -698,7 +698,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
-      public java.util.List<pbui_Item_MeetMemberColorDetailInfo> getItemList() {
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo> getItemList() {
         return java.util.Collections.unmodifiableList(
             instance.getItemList());
       }
@@ -710,14 +710,14 @@ public final class InterfaceWhiteboard {
       }/**
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
-      public pbui_Item_MeetMemberColorDetailInfo getItem(int index) {
+      public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo getItem(int index) {
         return instance.getItem(index);
       }
       /**
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetMemberColorDetailInfo value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo value) {
         copyOnWrite();
         instance.setItem(index, value);
         return this;
@@ -726,7 +726,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
         copyOnWrite();
         instance.setItem(index, builderForValue);
         return this;
@@ -734,7 +734,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
-      public Builder addItem(pbui_Item_MeetMemberColorDetailInfo value) {
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo value) {
         copyOnWrite();
         instance.addItem(value);
         return this;
@@ -743,7 +743,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetMemberColorDetailInfo value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo value) {
         copyOnWrite();
         instance.addItem(index, value);
         return this;
@@ -752,7 +752,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
       public Builder addItem(
-          pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(builderForValue);
         return this;
@@ -761,7 +761,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(index, builderForValue);
         return this;
@@ -770,7 +770,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetMemberColorDetailInfo item = 1;</code>
        */
       public Builder addAllItem(
-          Iterable<? extends pbui_Item_MeetMemberColorDetailInfo> values) {
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo> values) {
         copyOnWrite();
         instance.addAllItem(values);
         return this;
@@ -794,13 +794,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetMemberColorDetailInfo)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetMemberColorDetailInfo();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -814,9 +814,9 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetMemberColorDetailInfo other = (pbui_Type_MeetMemberColorDetailInfo) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo) arg1;
           item_= visitor.visitList(item_, other.item_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -846,7 +846,7 @@ public final class InterfaceWhiteboard {
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
                   }
                   item_.add(
-                      input.readMessage(pbui_Item_MeetMemberColorDetailInfo.parser(), extensionRegistry));
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetMemberColorDetailInfo.parser(), extensionRegistry));
                   break;
                 }
               }
@@ -865,7 +865,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetMemberColorDetailInfo.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -879,13 +879,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetMemberColorDetailInfo)
-    private static final pbui_Type_MeetMemberColorDetailInfo DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetMemberColorDetailInfo();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetMemberColorDetailInfo getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetMemberColorDetailInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -952,7 +952,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated fixed32 userid = 6;</code>
      */
-    java.util.List<Integer> getUseridList();
+    java.util.List<java.lang.Integer> getUseridList();
     /**
      * <pre>
      *参会人员
@@ -1178,7 +1178,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated fixed32 userid = 6;</code>
      */
-    public java.util.List<Integer>
+    public java.util.List<java.lang.Integer>
         getUseridList() {
       return userid_;
     }
@@ -1239,7 +1239,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated fixed32 userid = 6;</code>
      */
     private void addAllUserid(
-        Iterable<? extends Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> values) {
       ensureUseridIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, userid_);
@@ -1313,73 +1313,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardControl parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1390,7 +1390,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWhiteBoardControl prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -1407,9 +1407,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWhiteBoardControl, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWhiteBoardControl)
-        pbui_Type_MeetWhiteBoardControlOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControlOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -1598,7 +1598,7 @@ public final class InterfaceWhiteboard {
        *
        * <code>repeated fixed32 userid = 6;</code>
        */
-      public java.util.List<Integer>
+      public java.util.List<java.lang.Integer>
           getUseridList() {
         return java.util.Collections.unmodifiableList(
             instance.getUseridList());
@@ -1656,7 +1656,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated fixed32 userid = 6;</code>
        */
       public Builder addAllUserid(
-          Iterable<? extends Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         copyOnWrite();
         instance.addAllUserid(values);
         return this;
@@ -1676,13 +1676,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWhiteBoardControl)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWhiteBoardControl();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -1696,7 +1696,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWhiteBoardControl other = (pbui_Type_MeetWhiteBoardControl) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl) arg1;
           operflag_ = visitor.visitInt(operflag_ != 0, operflag_,
               other.operflag_ != 0, other.operflag_);
           medianame_ = visitor.visitByteString(medianame_ != com.google.protobuf.ByteString.EMPTY, medianame_,
@@ -1708,7 +1708,7 @@ public final class InterfaceWhiteboard {
           srcwbid_ = visitor.visitLong(srcwbid_ != 0L, srcwbid_,
               other.srcwbid_ != 0L, other.srcwbid_);
           userid_= visitor.visitIntList(userid_, other.userid_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
           }
@@ -1796,7 +1796,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWhiteBoardControl.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -1810,13 +1810,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWhiteBoardControl)
-    private static final pbui_Type_MeetWhiteBoardControl DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWhiteBoardControl();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWhiteBoardControl getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardControl getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2120,73 +2120,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetStartWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2197,7 +2197,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetStartWhiteBoard prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -2213,9 +2213,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetStartWhiteBoard, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetStartWhiteBoard)
-        pbui_Type_MeetStartWhiteBoardOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoardOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -2399,13 +2399,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetStartWhiteBoard)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetStartWhiteBoard();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -2418,7 +2418,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetStartWhiteBoard other = (pbui_Type_MeetStartWhiteBoard) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard) arg1;
           operflag_ = visitor.visitInt(operflag_ != 0, operflag_,
               other.operflag_ != 0, other.operflag_);
           medianame_ = visitor.visitByteString(medianame_ != com.google.protobuf.ByteString.EMPTY, medianame_,
@@ -2429,7 +2429,7 @@ public final class InterfaceWhiteboard {
               other.srcmemid_ != 0, other.srcmemid_);
           srcwbid_ = visitor.visitLong(srcwbid_ != 0L, srcwbid_,
               other.srcwbid_ != 0L, other.srcwbid_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -2494,7 +2494,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetStartWhiteBoard.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -2508,13 +2508,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetStartWhiteBoard)
-    private static final pbui_Type_MeetStartWhiteBoard DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetStartWhiteBoard();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetStartWhiteBoard getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2713,73 +2713,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardOper parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2790,7 +2790,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWhiteBoardOper prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -2807,9 +2807,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWhiteBoardOper, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWhiteBoardOper)
-        pbui_Type_MeetWhiteBoardOperOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOperOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -2923,13 +2923,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWhiteBoardOper)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWhiteBoardOper();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -2942,14 +2942,14 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWhiteBoardOper other = (pbui_Type_MeetWhiteBoardOper) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper) arg1;
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
               other.opermemberid_ != 0, other.opermemberid_);
           srcmemid_ = visitor.visitInt(srcmemid_ != 0, srcmemid_,
               other.srcmemid_ != 0, other.srcmemid_);
           srcwbid_ = visitor.visitLong(srcwbid_ != 0L, srcwbid_,
               other.srcwbid_ != 0L, other.srcwbid_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -3004,7 +3004,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWhiteBoardOper.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -3018,13 +3018,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWhiteBoardOper)
-    private static final pbui_Type_MeetWhiteBoardOper DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWhiteBoardOper();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWhiteBoardOper getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardOper getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3375,73 +3375,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3452,7 +3452,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetClearWhiteBoard prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -3468,9 +3468,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetClearWhiteBoard, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetClearWhiteBoard)
-        pbui_Type_MeetClearWhiteBoardOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoardOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -3689,13 +3689,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetClearWhiteBoard)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetClearWhiteBoard();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -3708,7 +3708,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetClearWhiteBoard other = (pbui_Type_MeetClearWhiteBoard) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard) arg1;
           operid_ = visitor.visitInt(operid_ != 0, operid_,
               other.operid_ != 0, other.operid_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
@@ -3721,7 +3721,7 @@ public final class InterfaceWhiteboard {
               other.utcstamp_ != 0L, other.utcstamp_);
           figuretype_ = visitor.visitInt(figuretype_ != 0, figuretype_,
               other.figuretype_ != 0, other.figuretype_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -3791,7 +3791,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetClearWhiteBoard.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -3805,13 +3805,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetClearWhiteBoard)
-    private static final pbui_Type_MeetClearWhiteBoard DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetClearWhiteBoard();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetClearWhiteBoard getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4213,73 +4213,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetDoClearWhiteBoard parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4290,7 +4290,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetDoClearWhiteBoard prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -4306,9 +4306,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetDoClearWhiteBoard, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetDoClearWhiteBoard)
-        pbui_Type_MeetDoClearWhiteBoardOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoardOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -4562,13 +4562,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetDoClearWhiteBoard)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetDoClearWhiteBoard();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -4581,7 +4581,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetDoClearWhiteBoard other = (pbui_Type_MeetDoClearWhiteBoard) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard) arg1;
           memberid_ = visitor.visitInt(memberid_ != 0, memberid_,
               other.memberid_ != 0, other.memberid_);
           operid_ = visitor.visitInt(operid_ != 0, operid_,
@@ -4596,7 +4596,7 @@ public final class InterfaceWhiteboard {
               other.utcstamp_ != 0L, other.utcstamp_);
           figuretype_ = visitor.visitInt(figuretype_ != 0, figuretype_,
               other.figuretype_ != 0, other.figuretype_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -4671,7 +4671,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetDoClearWhiteBoard.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -4685,13 +4685,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetDoClearWhiteBoard)
-    private static final pbui_Type_MeetDoClearWhiteBoard DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetDoClearWhiteBoard();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetDoClearWhiteBoard getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetDoClearWhiteBoard getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4889,73 +4889,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4966,7 +4966,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWhiteBoardQuery prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -4982,9 +4982,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWhiteBoardQuery, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWhiteBoardQuery)
-        pbui_Type_MeetWhiteBoardQueryOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQueryOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -5098,13 +5098,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWhiteBoardQuery)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWhiteBoardQuery();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -5117,14 +5117,14 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWhiteBoardQuery other = (pbui_Type_MeetWhiteBoardQuery) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery) arg1;
           srcmemid_ = visitor.visitInt(srcmemid_ != 0, srcmemid_,
               other.srcmemid_ != 0, other.srcmemid_);
           srcwbid_ = visitor.visitLong(srcwbid_ != 0L, srcwbid_,
               other.srcwbid_ != 0L, other.srcwbid_);
           figuretype_ = visitor.visitInt(figuretype_ != 0, figuretype_,
               other.figuretype_ != 0, other.figuretype_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -5179,7 +5179,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWhiteBoardQuery.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -5193,13 +5193,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWhiteBoardQuery)
-    private static final pbui_Type_MeetWhiteBoardQuery DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWhiteBoardQuery();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWhiteBoardQuery getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardQuery getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5448,73 +5448,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5525,7 +5525,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWhiteBoardComplexQuery prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -5541,9 +5541,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWhiteBoardComplexQuery, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWhiteBoardComplexQuery)
-        pbui_Type_MeetWhiteBoardComplexQueryOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQueryOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -5692,13 +5692,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWhiteBoardComplexQuery)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWhiteBoardComplexQuery();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -5711,7 +5711,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWhiteBoardComplexQuery other = (pbui_Type_MeetWhiteBoardComplexQuery) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery) arg1;
           srcmemid_ = visitor.visitInt(srcmemid_ != 0, srcmemid_,
               other.srcmemid_ != 0, other.srcmemid_);
           srcwbid_ = visitor.visitLong(srcwbid_ != 0L, srcwbid_,
@@ -5720,7 +5720,7 @@ public final class InterfaceWhiteboard {
               other.figuretype_ != 0, other.figuretype_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
               other.opermemberid_ != 0, other.opermemberid_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -5780,7 +5780,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWhiteBoardComplexQuery.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -5794,13 +5794,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWhiteBoardComplexQuery)
-    private static final pbui_Type_MeetWhiteBoardComplexQuery DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWhiteBoardComplexQuery();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWhiteBoardComplexQuery getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardComplexQuery getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5894,7 +5894,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated float pinklist = 9;</code>
      */
-    java.util.List<Float> getPinklistList();
+    java.util.List<java.lang.Float> getPinklistList();
     /**
      * <pre>
      *ink point Num, float[2 * ptnum](x,y依次排列)	
@@ -6221,7 +6221,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated float pinklist = 9;</code>
      */
-    public java.util.List<Float>
+    public java.util.List<java.lang.Float>
         getPinklistList() {
       return pinklist_;
     }
@@ -6282,7 +6282,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated float pinklist = 9;</code>
      */
     private void addAllPinklist(
-        Iterable<? extends Float> values) {
+        java.lang.Iterable<? extends java.lang.Float> values) {
       ensurePinklistIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, pinklist_);
@@ -6377,73 +6377,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWhiteBoardInkItem parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6454,7 +6454,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWhiteBoardInkItem prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -6471,9 +6471,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWhiteBoardInkItem, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWhiteBoardInkItem)
-        pbui_Type_MeetWhiteBoardInkItemOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItemOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -6767,7 +6767,7 @@ public final class InterfaceWhiteboard {
        *
        * <code>repeated float pinklist = 9;</code>
        */
-      public java.util.List<Float>
+      public java.util.List<java.lang.Float>
           getPinklistList() {
         return java.util.Collections.unmodifiableList(
             instance.getPinklistList());
@@ -6825,7 +6825,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated float pinklist = 9;</code>
        */
       public Builder addAllPinklist(
-          Iterable<? extends Float> values) {
+          java.lang.Iterable<? extends java.lang.Float> values) {
         copyOnWrite();
         instance.addAllPinklist(values);
         return this;
@@ -6845,13 +6845,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWhiteBoardInkItem)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWhiteBoardInkItem();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -6865,7 +6865,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWhiteBoardInkItem other = (pbui_Type_MeetWhiteBoardInkItem) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem) arg1;
           operid_ = visitor.visitInt(operid_ != 0, operid_,
               other.operid_ != 0, other.operid_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
@@ -6883,7 +6883,7 @@ public final class InterfaceWhiteboard {
           argb_ = visitor.visitInt(argb_ != 0, argb_,
               other.argb_ != 0, other.argb_);
           pinklist_= visitor.visitFloatList(pinklist_, other.pinklist_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
           }
@@ -6986,7 +6986,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWhiteBoardInkItem.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -7000,13 +7000,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWhiteBoardInkItem)
-    private static final pbui_Type_MeetWhiteBoardInkItem DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWhiteBoardInkItem();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWhiteBoardInkItem getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7073,7 +7073,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated float pinklist = 6;</code>
      */
-    java.util.List<Float> getPinklistList();
+    java.util.List<java.lang.Float> getPinklistList();
     /**
      * <pre>
      *ink point Num, float[2 * ptnum](x,y依次排列)
@@ -7294,7 +7294,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated float pinklist = 6;</code>
      */
-    public java.util.List<Float>
+    public java.util.List<java.lang.Float>
         getPinklistList() {
       return pinklist_;
     }
@@ -7355,7 +7355,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated float pinklist = 6;</code>
      */
     private void addAllPinklist(
-        Iterable<? extends Float> values) {
+        java.lang.Iterable<? extends java.lang.Float> values) {
       ensurePinklistIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, pinklist_);
@@ -7429,73 +7429,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBInkDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBInkDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7506,7 +7506,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Item_MeetWBInkDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -7522,9 +7522,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Item_MeetWBInkDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Item_MeetWBInkDetail)
-        pbui_Item_MeetWBInkDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -7713,7 +7713,7 @@ public final class InterfaceWhiteboard {
        *
        * <code>repeated float pinklist = 6;</code>
        */
-      public java.util.List<Float>
+      public java.util.List<java.lang.Float>
           getPinklistList() {
         return java.util.Collections.unmodifiableList(
             instance.getPinklistList());
@@ -7771,7 +7771,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated float pinklist = 6;</code>
        */
       public Builder addAllPinklist(
-          Iterable<? extends Float> values) {
+          java.lang.Iterable<? extends java.lang.Float> values) {
         copyOnWrite();
         instance.addAllPinklist(values);
         return this;
@@ -7791,13 +7791,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetWBInkDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Item_MeetWBInkDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -7811,7 +7811,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Item_MeetWBInkDetail other = (pbui_Item_MeetWBInkDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail) arg1;
           operid_ = visitor.visitInt(operid_ != 0, operid_,
               other.operid_ != 0, other.operid_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
@@ -7823,7 +7823,7 @@ public final class InterfaceWhiteboard {
           argb_ = visitor.visitInt(argb_ != 0, argb_,
               other.argb_ != 0, other.argb_);
           pinklist_= visitor.visitFloatList(pinklist_, other.pinklist_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
           }
@@ -7911,7 +7911,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Item_MeetWBInkDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -7925,13 +7925,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Item_MeetWBInkDetail)
-    private static final pbui_Item_MeetWBInkDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Item_MeetWBInkDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Item_MeetWBInkDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7949,12 +7949,12 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    java.util.List<pbui_Item_MeetWBInkDetail>
+    java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail> 
         getItemList();
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    pbui_Item_MeetWBInkDetail getItem(int index);
+    com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail getItem(int index);
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
@@ -7972,17 +7972,17 @@ public final class InterfaceWhiteboard {
       item_ = emptyProtobufList();
     }
     public static final int ITEM_FIELD_NUMBER = 1;
-    private com.google.protobuf.Internal.ProtobufList<pbui_Item_MeetWBInkDetail> item_;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail> item_;
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    public java.util.List<pbui_Item_MeetWBInkDetail> getItemList() {
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail> getItemList() {
       return item_;
     }
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    public java.util.List<? extends pbui_Item_MeetWBInkDetailOrBuilder>
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetailOrBuilder> 
         getItemOrBuilderList() {
       return item_;
     }
@@ -7995,13 +7995,13 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBInkDetail getItem(int index) {
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail getItem(int index) {
       return item_.get(index);
     }
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBInkDetailOrBuilder getItemOrBuilder(
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetailOrBuilder getItemOrBuilder(
         int index) {
       return item_.get(index);
     }
@@ -8016,7 +8016,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBInkDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -8027,14 +8027,14 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBInkDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.set(index, builderForValue.build());
     }
     /**
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
-    private void addItem(pbui_Item_MeetWBInkDetail value) {
+    private void addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -8045,7 +8045,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBInkDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -8056,7 +8056,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
     private void addItem(
-        pbui_Item_MeetWBInkDetail.Builder builderForValue) {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(builderForValue.build());
     }
@@ -8064,7 +8064,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBInkDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(index, builderForValue.build());
     }
@@ -8072,7 +8072,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
      */
     private void addAllItem(
-        Iterable<? extends pbui_Item_MeetWBInkDetail> values) {
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail> values) {
       ensureItemIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, item_);
@@ -8111,73 +8111,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBInkDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBInkDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBInkDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8188,7 +8188,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWBInkDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -8197,9 +8197,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWBInkDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWBInkDetail)
-        pbui_Type_MeetWBInkDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -8209,7 +8209,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
-      public java.util.List<pbui_Item_MeetWBInkDetail> getItemList() {
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail> getItemList() {
         return java.util.Collections.unmodifiableList(
             instance.getItemList());
       }
@@ -8221,14 +8221,14 @@ public final class InterfaceWhiteboard {
       }/**
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
-      public pbui_Item_MeetWBInkDetail getItem(int index) {
+      public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail getItem(int index) {
         return instance.getItem(index);
       }
       /**
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBInkDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail value) {
         copyOnWrite();
         instance.setItem(index, value);
         return this;
@@ -8237,7 +8237,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBInkDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.Builder builderForValue) {
         copyOnWrite();
         instance.setItem(index, builderForValue);
         return this;
@@ -8245,7 +8245,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
-      public Builder addItem(pbui_Item_MeetWBInkDetail value) {
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail value) {
         copyOnWrite();
         instance.addItem(value);
         return this;
@@ -8254,7 +8254,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBInkDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail value) {
         copyOnWrite();
         instance.addItem(index, value);
         return this;
@@ -8263,7 +8263,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
       public Builder addItem(
-          pbui_Item_MeetWBInkDetail.Builder builderForValue) {
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(builderForValue);
         return this;
@@ -8272,7 +8272,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBInkDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(index, builderForValue);
         return this;
@@ -8281,7 +8281,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBInkDetail item = 1;</code>
        */
       public Builder addAllItem(
-          Iterable<? extends pbui_Item_MeetWBInkDetail> values) {
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail> values) {
         copyOnWrite();
         instance.addAllItem(values);
         return this;
@@ -8305,13 +8305,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWBInkDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWBInkDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -8325,9 +8325,9 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWBInkDetail other = (pbui_Type_MeetWBInkDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail) arg1;
           item_= visitor.visitList(item_, other.item_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -8357,7 +8357,7 @@ public final class InterfaceWhiteboard {
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
                   }
                   item_.add(
-                      input.readMessage(pbui_Item_MeetWBInkDetail.parser(), extensionRegistry));
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBInkDetail.parser(), extensionRegistry));
                   break;
                 }
               }
@@ -8376,7 +8376,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWBInkDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -8390,13 +8390,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWBInkDetail)
-    private static final pbui_Type_MeetWBInkDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWBInkDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWBInkDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBInkDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8490,7 +8490,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated float pt = 9;</code>
      */
-    java.util.List<Float> getPtList();
+    java.util.List<java.lang.Float> getPtList();
     /**
      * <pre>
      *(lx,ly,rx,ry 左上角,右下角坐标)
@@ -8817,7 +8817,7 @@ public final class InterfaceWhiteboard {
      *
      * <code>repeated float pt = 9;</code>
      */
-    public java.util.List<Float>
+    public java.util.List<java.lang.Float>
         getPtList() {
       return pt_;
     }
@@ -8878,7 +8878,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated float pt = 9;</code>
      */
     private void addAllPt(
-        Iterable<? extends Float> values) {
+        java.lang.Iterable<? extends java.lang.Float> values) {
       ensurePtIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, pt_);
@@ -8973,73 +8973,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBRectDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBRectDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9050,7 +9050,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Item_MeetWBRectDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -9067,9 +9067,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Item_MeetWBRectDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Item_MeetWBRectDetail)
-        pbui_Item_MeetWBRectDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -9363,7 +9363,7 @@ public final class InterfaceWhiteboard {
        *
        * <code>repeated float pt = 9;</code>
        */
-      public java.util.List<Float>
+      public java.util.List<java.lang.Float>
           getPtList() {
         return java.util.Collections.unmodifiableList(
             instance.getPtList());
@@ -9421,7 +9421,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated float pt = 9;</code>
        */
       public Builder addAllPt(
-          Iterable<? extends Float> values) {
+          java.lang.Iterable<? extends java.lang.Float> values) {
         copyOnWrite();
         instance.addAllPt(values);
         return this;
@@ -9441,13 +9441,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetWBRectDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Item_MeetWBRectDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -9461,7 +9461,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Item_MeetWBRectDetail other = (pbui_Item_MeetWBRectDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail) arg1;
           operid_ = visitor.visitInt(operid_ != 0, operid_,
               other.operid_ != 0, other.operid_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
@@ -9479,7 +9479,7 @@ public final class InterfaceWhiteboard {
           argb_ = visitor.visitInt(argb_ != 0, argb_,
               other.argb_ != 0, other.argb_);
           pt_= visitor.visitFloatList(pt_, other.pt_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
           }
@@ -9582,7 +9582,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Item_MeetWBRectDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -9596,13 +9596,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Item_MeetWBRectDetail)
-    private static final pbui_Item_MeetWBRectDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Item_MeetWBRectDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Item_MeetWBRectDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9620,12 +9620,12 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    java.util.List<pbui_Item_MeetWBRectDetail>
+    java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail> 
         getItemList();
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    pbui_Item_MeetWBRectDetail getItem(int index);
+    com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail getItem(int index);
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
@@ -9651,17 +9651,17 @@ public final class InterfaceWhiteboard {
       item_ = emptyProtobufList();
     }
     public static final int ITEM_FIELD_NUMBER = 1;
-    private com.google.protobuf.Internal.ProtobufList<pbui_Item_MeetWBRectDetail> item_;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail> item_;
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    public java.util.List<pbui_Item_MeetWBRectDetail> getItemList() {
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail> getItemList() {
       return item_;
     }
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    public java.util.List<? extends pbui_Item_MeetWBRectDetailOrBuilder>
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetailOrBuilder> 
         getItemOrBuilderList() {
       return item_;
     }
@@ -9674,13 +9674,13 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBRectDetail getItem(int index) {
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail getItem(int index) {
       return item_.get(index);
     }
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBRectDetailOrBuilder getItemOrBuilder(
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetailOrBuilder getItemOrBuilder(
         int index) {
       return item_.get(index);
     }
@@ -9695,7 +9695,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBRectDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -9706,14 +9706,14 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBRectDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.set(index, builderForValue.build());
     }
     /**
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
-    private void addItem(pbui_Item_MeetWBRectDetail value) {
+    private void addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -9724,7 +9724,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBRectDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -9735,7 +9735,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
     private void addItem(
-        pbui_Item_MeetWBRectDetail.Builder builderForValue) {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(builderForValue.build());
     }
@@ -9743,7 +9743,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBRectDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(index, builderForValue.build());
     }
@@ -9751,7 +9751,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
      */
     private void addAllItem(
-        Iterable<? extends pbui_Item_MeetWBRectDetail> values) {
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail> values) {
       ensureItemIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, item_);
@@ -9790,73 +9790,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBRectDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBRectDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBRectDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9867,7 +9867,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWBRectDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -9884,9 +9884,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWBRectDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWBRectDetail)
-        pbui_Type_MeetWBRectDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -9896,7 +9896,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
-      public java.util.List<pbui_Item_MeetWBRectDetail> getItemList() {
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail> getItemList() {
         return java.util.Collections.unmodifiableList(
             instance.getItemList());
       }
@@ -9908,14 +9908,14 @@ public final class InterfaceWhiteboard {
       }/**
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
-      public pbui_Item_MeetWBRectDetail getItem(int index) {
+      public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail getItem(int index) {
         return instance.getItem(index);
       }
       /**
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBRectDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail value) {
         copyOnWrite();
         instance.setItem(index, value);
         return this;
@@ -9924,7 +9924,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBRectDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builderForValue) {
         copyOnWrite();
         instance.setItem(index, builderForValue);
         return this;
@@ -9932,7 +9932,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
-      public Builder addItem(pbui_Item_MeetWBRectDetail value) {
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail value) {
         copyOnWrite();
         instance.addItem(value);
         return this;
@@ -9941,7 +9941,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBRectDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail value) {
         copyOnWrite();
         instance.addItem(index, value);
         return this;
@@ -9950,7 +9950,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
       public Builder addItem(
-          pbui_Item_MeetWBRectDetail.Builder builderForValue) {
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(builderForValue);
         return this;
@@ -9959,7 +9959,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBRectDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(index, builderForValue);
         return this;
@@ -9968,7 +9968,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBRectDetail item = 1;</code>
        */
       public Builder addAllItem(
-          Iterable<? extends pbui_Item_MeetWBRectDetail> values) {
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail> values) {
         copyOnWrite();
         instance.addAllItem(values);
         return this;
@@ -9992,13 +9992,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWBRectDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWBRectDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -10012,9 +10012,9 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWBRectDetail other = (pbui_Type_MeetWBRectDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail) arg1;
           item_= visitor.visitList(item_, other.item_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -10044,7 +10044,7 @@ public final class InterfaceWhiteboard {
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
                   }
                   item_.add(
-                      input.readMessage(pbui_Item_MeetWBRectDetail.parser(), extensionRegistry));
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBRectDetail.parser(), extensionRegistry));
                   break;
                 }
               }
@@ -10063,7 +10063,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWBRectDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -10077,13 +10077,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWBRectDetail)
-    private static final pbui_Type_MeetWBRectDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWBRectDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWBRectDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBRectDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10783,73 +10783,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBTextDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBTextDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10860,7 +10860,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Item_MeetWBTextDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -10876,9 +10876,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Item_MeetWBTextDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Item_MeetWBTextDetail)
-        pbui_Item_MeetWBTextDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -11330,13 +11330,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetWBTextDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Item_MeetWBTextDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -11349,7 +11349,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Item_MeetWBTextDetail other = (pbui_Item_MeetWBTextDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail) arg1;
           operid_ = visitor.visitInt(operid_ != 0, operid_,
               other.operid_ != 0, other.operid_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
@@ -11376,7 +11376,7 @@ public final class InterfaceWhiteboard {
               other.ly_ != 0F, other.ly_);
           ptext_ = visitor.visitByteString(ptext_ != com.google.protobuf.ByteString.EMPTY, ptext_,
               other.ptext_ != com.google.protobuf.ByteString.EMPTY, other.ptext_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -11481,7 +11481,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Item_MeetWBTextDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -11495,13 +11495,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Item_MeetWBTextDetail)
-    private static final pbui_Item_MeetWBTextDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Item_MeetWBTextDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Item_MeetWBTextDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -11519,12 +11519,12 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    java.util.List<pbui_Item_MeetWBTextDetail>
+    java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail> 
         getItemList();
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    pbui_Item_MeetWBTextDetail getItem(int index);
+    com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail getItem(int index);
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
@@ -11542,17 +11542,17 @@ public final class InterfaceWhiteboard {
       item_ = emptyProtobufList();
     }
     public static final int ITEM_FIELD_NUMBER = 1;
-    private com.google.protobuf.Internal.ProtobufList<pbui_Item_MeetWBTextDetail> item_;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail> item_;
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    public java.util.List<pbui_Item_MeetWBTextDetail> getItemList() {
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail> getItemList() {
       return item_;
     }
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    public java.util.List<? extends pbui_Item_MeetWBTextDetailOrBuilder>
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetailOrBuilder> 
         getItemOrBuilderList() {
       return item_;
     }
@@ -11565,13 +11565,13 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBTextDetail getItem(int index) {
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail getItem(int index) {
       return item_.get(index);
     }
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBTextDetailOrBuilder getItemOrBuilder(
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetailOrBuilder getItemOrBuilder(
         int index) {
       return item_.get(index);
     }
@@ -11586,7 +11586,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBTextDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -11597,14 +11597,14 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBTextDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.set(index, builderForValue.build());
     }
     /**
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
-    private void addItem(pbui_Item_MeetWBTextDetail value) {
+    private void addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -11615,7 +11615,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBTextDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -11626,7 +11626,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
     private void addItem(
-        pbui_Item_MeetWBTextDetail.Builder builderForValue) {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(builderForValue.build());
     }
@@ -11634,7 +11634,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBTextDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(index, builderForValue.build());
     }
@@ -11642,7 +11642,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
      */
     private void addAllItem(
-        Iterable<? extends pbui_Item_MeetWBTextDetail> values) {
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail> values) {
       ensureItemIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, item_);
@@ -11681,73 +11681,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBTextDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBTextDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBTextDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -11758,7 +11758,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWBTextDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -11767,9 +11767,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWBTextDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWBTextDetail)
-        pbui_Type_MeetWBTextDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -11779,7 +11779,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
-      public java.util.List<pbui_Item_MeetWBTextDetail> getItemList() {
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail> getItemList() {
         return java.util.Collections.unmodifiableList(
             instance.getItemList());
       }
@@ -11791,14 +11791,14 @@ public final class InterfaceWhiteboard {
       }/**
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
-      public pbui_Item_MeetWBTextDetail getItem(int index) {
+      public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail getItem(int index) {
         return instance.getItem(index);
       }
       /**
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBTextDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail value) {
         copyOnWrite();
         instance.setItem(index, value);
         return this;
@@ -11807,7 +11807,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBTextDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builderForValue) {
         copyOnWrite();
         instance.setItem(index, builderForValue);
         return this;
@@ -11815,7 +11815,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
-      public Builder addItem(pbui_Item_MeetWBTextDetail value) {
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail value) {
         copyOnWrite();
         instance.addItem(value);
         return this;
@@ -11824,7 +11824,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBTextDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail value) {
         copyOnWrite();
         instance.addItem(index, value);
         return this;
@@ -11833,7 +11833,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
       public Builder addItem(
-          pbui_Item_MeetWBTextDetail.Builder builderForValue) {
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(builderForValue);
         return this;
@@ -11842,7 +11842,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBTextDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(index, builderForValue);
         return this;
@@ -11851,7 +11851,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBTextDetail item = 1;</code>
        */
       public Builder addAllItem(
-          Iterable<? extends pbui_Item_MeetWBTextDetail> values) {
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail> values) {
         copyOnWrite();
         instance.addAllItem(values);
         return this;
@@ -11875,13 +11875,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWBTextDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWBTextDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -11895,9 +11895,9 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWBTextDetail other = (pbui_Type_MeetWBTextDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail) arg1;
           item_= visitor.visitList(item_, other.item_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -11927,7 +11927,7 @@ public final class InterfaceWhiteboard {
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
                   }
                   item_.add(
-                      input.readMessage(pbui_Item_MeetWBTextDetail.parser(), extensionRegistry));
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBTextDetail.parser(), extensionRegistry));
                   break;
                 }
               }
@@ -11946,7 +11946,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWBTextDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -11960,13 +11960,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWBTextDetail)
-    private static final pbui_Type_MeetWBTextDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWBTextDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWBTextDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBTextDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12474,73 +12474,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBPictureDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBPictureDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Item_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -12551,7 +12551,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Item_MeetWBPictureDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -12567,9 +12567,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Item_MeetWBPictureDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Item_MeetWBPictureDetail)
-        pbui_Item_MeetWBPictureDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -12893,13 +12893,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetWBPictureDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Item_MeetWBPictureDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -12912,7 +12912,7 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Item_MeetWBPictureDetail other = (pbui_Item_MeetWBPictureDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail) arg1;
           operid_ = visitor.visitInt(operid_ != 0, operid_,
               other.operid_ != 0, other.operid_);
           opermemberid_ = visitor.visitInt(opermemberid_ != 0, opermemberid_,
@@ -12931,7 +12931,7 @@ public final class InterfaceWhiteboard {
               other.ly_ != 0F, other.ly_);
           picdata_ = visitor.visitByteString(picdata_ != com.google.protobuf.ByteString.EMPTY, picdata_,
               other.picdata_ != com.google.protobuf.ByteString.EMPTY, other.picdata_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -13016,7 +13016,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Item_MeetWBPictureDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -13030,13 +13030,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Item_MeetWBPictureDetail)
-    private static final pbui_Item_MeetWBPictureDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Item_MeetWBPictureDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Item_MeetWBPictureDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -13054,12 +13054,12 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    java.util.List<pbui_Item_MeetWBPictureDetail>
+    java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail> 
         getItemList();
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    pbui_Item_MeetWBPictureDetail getItem(int index);
+    com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail getItem(int index);
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
@@ -13077,17 +13077,17 @@ public final class InterfaceWhiteboard {
       item_ = emptyProtobufList();
     }
     public static final int ITEM_FIELD_NUMBER = 1;
-    private com.google.protobuf.Internal.ProtobufList<pbui_Item_MeetWBPictureDetail> item_;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail> item_;
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    public java.util.List<pbui_Item_MeetWBPictureDetail> getItemList() {
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail> getItemList() {
       return item_;
     }
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    public java.util.List<? extends pbui_Item_MeetWBPictureDetailOrBuilder>
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetailOrBuilder> 
         getItemOrBuilderList() {
       return item_;
     }
@@ -13100,13 +13100,13 @@ public final class InterfaceWhiteboard {
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBPictureDetail getItem(int index) {
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail getItem(int index) {
       return item_.get(index);
     }
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    public pbui_Item_MeetWBPictureDetailOrBuilder getItemOrBuilder(
+    public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetailOrBuilder getItemOrBuilder(
         int index) {
       return item_.get(index);
     }
@@ -13121,7 +13121,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBPictureDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -13132,14 +13132,14 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
     private void setItem(
-        int index, pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.set(index, builderForValue.build());
     }
     /**
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
-    private void addItem(pbui_Item_MeetWBPictureDetail value) {
+    private void addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -13150,7 +13150,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBPictureDetail value) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -13161,7 +13161,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
     private void addItem(
-        pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(builderForValue.build());
     }
@@ -13169,7 +13169,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
     private void addItem(
-        int index, pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
+        int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
       ensureItemIsMutable();
       item_.add(index, builderForValue.build());
     }
@@ -13177,7 +13177,7 @@ public final class InterfaceWhiteboard {
      * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
      */
     private void addAllItem(
-        Iterable<? extends pbui_Item_MeetWBPictureDetail> values) {
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail> values) {
       ensureItemIsMutable();
       com.google.protobuf.AbstractMessageLite.addAll(
           values, item_);
@@ -13216,73 +13216,73 @@ public final class InterfaceWhiteboard {
       return size;
     }
 
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(byte[] data)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBPictureDetail parseDelimitedFrom(java.io.InputStream input)
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBPictureDetail parseDelimitedFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageLite.parseFrom(
           DEFAULT_INSTANCE, input);
     }
-    public static pbui_Type_MeetWBPictureDetail parseFrom(
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13293,7 +13293,7 @@ public final class InterfaceWhiteboard {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(pbui_Type_MeetWBPictureDetail prototype) {
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
@@ -13302,9 +13302,9 @@ public final class InterfaceWhiteboard {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          pbui_Type_MeetWBPictureDetail, Builder> implements
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail, Builder> implements
         // @@protoc_insertion_point(builder_implements:pbui_Type_MeetWBPictureDetail)
-        pbui_Type_MeetWBPictureDetailOrBuilder {
+        com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetailOrBuilder {
       // Construct using com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail.newBuilder()
       private Builder() {
         super(DEFAULT_INSTANCE);
@@ -13314,7 +13314,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
-      public java.util.List<pbui_Item_MeetWBPictureDetail> getItemList() {
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail> getItemList() {
         return java.util.Collections.unmodifiableList(
             instance.getItemList());
       }
@@ -13326,14 +13326,14 @@ public final class InterfaceWhiteboard {
       }/**
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
-      public pbui_Item_MeetWBPictureDetail getItem(int index) {
+      public com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail getItem(int index) {
         return instance.getItem(index);
       }
       /**
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBPictureDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail value) {
         copyOnWrite();
         instance.setItem(index, value);
         return this;
@@ -13342,7 +13342,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
       public Builder setItem(
-          int index, pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
         copyOnWrite();
         instance.setItem(index, builderForValue);
         return this;
@@ -13350,7 +13350,7 @@ public final class InterfaceWhiteboard {
       /**
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
-      public Builder addItem(pbui_Item_MeetWBPictureDetail value) {
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail value) {
         copyOnWrite();
         instance.addItem(value);
         return this;
@@ -13359,7 +13359,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBPictureDetail value) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail value) {
         copyOnWrite();
         instance.addItem(index, value);
         return this;
@@ -13368,7 +13368,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
       public Builder addItem(
-          pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(builderForValue);
         return this;
@@ -13377,7 +13377,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
       public Builder addItem(
-          int index, pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
+          int index, com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.Builder builderForValue) {
         copyOnWrite();
         instance.addItem(index, builderForValue);
         return this;
@@ -13386,7 +13386,7 @@ public final class InterfaceWhiteboard {
        * <code>repeated .pbui_Item_MeetWBPictureDetail item = 1;</code>
        */
       public Builder addAllItem(
-          Iterable<? extends pbui_Item_MeetWBPictureDetail> values) {
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail> values) {
         copyOnWrite();
         instance.addAllItem(values);
         return this;
@@ -13410,13 +13410,13 @@ public final class InterfaceWhiteboard {
 
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetWBPictureDetail)
     }
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
     protected final Object dynamicMethod(
-        MethodToInvoke method,
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
         Object arg0, Object arg1) {
       switch (method) {
         case NEW_MUTABLE_INSTANCE: {
-          return new pbui_Type_MeetWBPictureDetail();
+          return new com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail();
         }
         case IS_INITIALIZED: {
           return DEFAULT_INSTANCE;
@@ -13430,9 +13430,9 @@ public final class InterfaceWhiteboard {
         }
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
-          pbui_Type_MeetWBPictureDetail other = (pbui_Type_MeetWBPictureDetail) arg1;
+          com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail other = (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail) arg1;
           item_= visitor.visitList(item_, other.item_);
-          if (visitor == MergeFromVisitor
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
           return this;
@@ -13462,7 +13462,7 @@ public final class InterfaceWhiteboard {
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
                   }
                   item_.add(
-                      input.readMessage(pbui_Item_MeetWBPictureDetail.parser(), extensionRegistry));
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail.parser(), extensionRegistry));
                   break;
                 }
               }
@@ -13481,7 +13481,7 @@ public final class InterfaceWhiteboard {
           return DEFAULT_INSTANCE;
         }
         case GET_PARSER: {
-          if (PARSER == null) {    synchronized (pbui_Type_MeetWBPictureDetail.class) {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail.class) {
               if (PARSER == null) {
                 PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
               }
@@ -13495,13 +13495,13 @@ public final class InterfaceWhiteboard {
 
 
     // @@protoc_insertion_point(class_scope:pbui_Type_MeetWBPictureDetail)
-    private static final pbui_Type_MeetWBPictureDetail DEFAULT_INSTANCE;
+    private static final com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new pbui_Type_MeetWBPictureDetail();
       DEFAULT_INSTANCE.makeImmutable();
     }
 
-    public static pbui_Type_MeetWBPictureDetail getDefaultInstance() {
+    public static com.mogujie.tt.protobuf.InterfaceWhiteboard.pbui_Type_MeetWBPictureDetail getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 

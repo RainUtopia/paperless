@@ -107,7 +107,8 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                         int id = item.getId();
                         int parentid = item.getParentid();
                         // 过滤掉共享文件和批注文件
-                        if (!dirName.equals("共享文件") && !dirName.equals("批注文件")) {
+//                        if (!dirName.equals("共享文件") && !dirName.equals("批注文件")) {
+                        if (dirName.equals("共享文件")) {
                             Log.e("MyLog", "SharedFileFragment.handleMessage 102行:  136.查询会议目录  --->>> 文件名：" + dirName + "  目录ID ：" + id + " 父级ID： " + parentid);
                             meetDirInfos.add(new MeetDirBean(dirName, id, parentid));
                         }
@@ -217,22 +218,22 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
 
         mAllAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
-            public void onLookListener(int posion, String filename) {
+            public void onLookListener(int posion, String filename, long filesize) {
                 if (FileUtil.isVideoFile(filename)) {
                     //如果是音频或视频则在线播放
                     startActivity(new Intent(getActivity(), SDLActivity.class));
-					List<Integer> devIds = new ArrayList<Integer>();
+                    List<Integer> devIds = new ArrayList<Integer>();
                     devIds.add(MeetingActivity.getDevId());
                     nativeUtil.mediaPlayOperate(posion, devIds, 0);
                 } else {
-                    MyUtils.openFile(filename, getView(), nativeUtil, posion, getContext());
+                    MyUtils.openFile(Macro.SHAREMATERIAL, filename, getView(), nativeUtil, posion, getContext(), filesize);
                 }
             }
         });
         mAllAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
             @Override
-            public void onDownListener(int posion, String filename) {
-                MyUtils.downLoadFile(filename, getView(), getContext(), posion, nativeUtil);
+            public void onDownListener(int posion, String filename, long filesize) {
+                MyUtils.downLoadFile(Macro.SHAREMATERIAL, filename, getView(), getContext(), posion, nativeUtil, filesize);
             }
         });
 
@@ -343,6 +344,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, 1);
     }
+
     String path;
 
     @Override
@@ -685,7 +687,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all =  badgeNumber1 + 1;
+                int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
@@ -716,6 +718,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                 break;
         }
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {

@@ -16,6 +16,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
+import com.mogujie.tt.protobuf.InterfaceMeetfunction;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfaceRoom;
 import com.mogujie.tt.protobuf.InterfaceSignin;
@@ -32,6 +33,7 @@ import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
+import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -140,7 +142,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                         }
                     }
                     break;
-                case IDivMessage.Dev_proById: //7.按属性ID查询指定设备属性（投影机）
+                case IDivMessage.DEV_PROBYID: //7.按属性ID查询指定设备属性（投影机）
                     ArrayList queryProjector1 = msg.getData().getParcelableArrayList("queryProjectorName");
                     byte[] array = (byte[]) queryProjector1.get(0);
                     // 根据查找的类型 查询的是名称就解析成字符串格式
@@ -153,6 +155,42 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     } catch (InvalidProtocolBufferException e) {
                         e.printStackTrace();
                     }
+                    break;
+                case IDivMessage.QUERY_MEET_FUNCTION://查询会议功能
+                    ArrayList queryMeetFunction = msg.getData().getParcelableArrayList("queryMeetFunction");
+                    InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo o7 = (InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo) queryMeetFunction.get(0);
+                    List<InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo> itemList4 = o7.getItemList();
+                    for (int i = 0; i < itemList4.size(); i++) {
+                        InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo function = itemList4.get(i);
+                        int funcode = function.getFuncode();
+                        int position = function.getPosition();
+                        Log.e("MyLog", "SigninFragment.handleMessage 166行:   --->>> funcode： " + funcode + "   position ： " + position);
+
+                        if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_AGENDA_BULLETIN.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_MATERIAL.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_SHAREDFILE.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_POSTIL.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_MESSAGE.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_VIDEOSTREAM.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_WHITEBOARD.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_WEBBROWSER.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_VOTERESULT.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_SIGNINRESULT.getNumber()) {
+
+                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_DOCUMENT.getNumber()) {
+
+                        }
+                    }
+
                     break;
             }
         }
@@ -301,7 +339,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
                 Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all =  badgeNumber1 + 1;
+                int all = badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
                     if (mReceiveMsg == null) {
@@ -331,7 +369,7 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     mHandler.sendMessage(message);
                 }
                 break;
-            case IDivMessage.Dev_proById://7.按属性ID查询指定设备属性（投影机）
+            case IDivMessage.DEV_PROBYID://7.按属性ID查询指定设备属性（投影机）
                 InterfaceDevice.pbui_DeviceStringProperty result1 = (InterfaceDevice.pbui_DeviceStringProperty) result;
                 if (result1 != null) {
                     Bundle bundle = new Bundle();
@@ -344,8 +382,13 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                     mHandler.sendMessage(message);
                 }
                 break;
+            case IDivMessage.QUERY_MEET_FUNCTION://查询会议功能
+                MyUtils.handTo(IDivMessage.QUERY_MEET_FUNCTION, (InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo) result, "queryMeetFunction", mHandler);
+                Log.e("MyLog", "SigninFragment.callListener 362行:  iiiiiiiiiiiiiiiii --->>> ");
+                break;
         }
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {

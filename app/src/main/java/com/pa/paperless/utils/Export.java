@@ -6,6 +6,7 @@ import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
+import com.pa.paperless.constant.Macro;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,7 +28,6 @@ import jxl.write.WriteException;
 
 /**
  * Created by Administrator on 2018/2/28.
- *
  */
 
 public class Export {
@@ -112,9 +112,13 @@ public class Export {
      */
     public static boolean ToVoteResultExcel(String content, String fileName, String SheetName, String[] titles, List<VoteBean> datas) {
         boolean succeed = true;
+        MyUtils.CreateFile(Macro.VOTERESULT);
         // 1.创建Excel文件
-        File file = new File("/sdcard/" + fileName + ".xls");
+        File file = new File(Macro.VOTERESULT + content + fileName + ".xls");
         try {
+            if (file.exists()) {
+                file.delete();
+            }
             file.createNewFile();
             // 2.创建工作薄
             WritableWorkbook workbook = Workbook.createWorkbook(file);
@@ -178,9 +182,13 @@ public class Export {
      */
     public static boolean ToVoteExcel(String meetName, String fileName, String SheetName, String[] titles, List<VoteInfo> datas) {
         boolean succeed = true;
+        MyUtils.CreateFile(Macro.VOTERESULT);
         //1.创建Excel文件
-        File file = new File("/sdcard/" + fileName + ".xls");
+        File file = new File(Macro.VOTERESULT + meetName + fileName + ".xls");
         try {
+            if (file.exists()) {
+                file.delete();
+            }
             file.createNewFile();
             //2.创建工作簿
             WritableWorkbook workbook = Workbook.createWorkbook(file);
@@ -392,15 +400,16 @@ public class Export {
 
     /**
      * 读取TXT文本文件
+     *
      * @param file
      * @return 返回字符串形式
      */
-    public static String readText(File file){
+    public static String readText(File file) {
         StringBuffer sb = new StringBuffer();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = "";
-            while ((line = br.readLine())!=null){
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
             br.close();
@@ -409,7 +418,7 @@ public class Export {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.e("MyLog","Export.readText 412行:  读取txt文件内容 --->>> "+sb.toString());
+        Log.e("MyLog", "Export.readText 412行:  读取txt文件内容 --->>> " + sb.toString());
         return sb.toString();
     }
 

@@ -12,6 +12,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.pa.paperless.constant.Macro;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
@@ -120,24 +123,28 @@ public class ScreenUtils {
      * 获取当前屏幕截图，包含状态栏
      */
     public static Bitmap snapShotWithStatusBar(Activity activity) {
-        View view = activity.getWindow().getDecorView();
+        Window window = activity.getWindow();
+        View view = window.getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
         Bitmap bmp = view.getDrawingCache();
         int width = getScreenWidth(activity);
         int height = getScreenHeight(activity);
+        Log.e("MyLog","ScreenUtils.snapShotWithStatusBar 133行:  截图的宽高 --->>> "+width+"  "+height);
         Bitmap bp = null;
         bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
         view.destroyDrawingCache();
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
-        String name = "/sdcard/" + sdf.format(new Date()) + ".png";
+        File file = new File(Macro.MEETFILE);
+        if(!file.exists()){
+            file.mkdir();
+        }
+        String name = Macro.MEETFILE + sdf.format(new Date()) + ".png";
         if (null != bp) {
             try {
                 FileOutputStream fos = new FileOutputStream(name);
                 bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
-                Toast.makeText(activity, "截图成功", Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

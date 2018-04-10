@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.pa.paperless.activity.PostilActivity">
+
+    <ImageView
+        android:id="@+id/postil_image"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8" />
+
+    <!--android:background="#80caf0"-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/bg"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/postil_save_local"
+            style="@style/postil_button"
+            android:text="@string/postil_1" />
+
+        <Button
+            android:id="@+id/postil_save_server"
+            style="@style/postil_button"
+            android:text="@string/postil_2" />
+
+        <Button
+            android:id="@+id/postil_pic"
+            style="@style/postil_button"
+            android:text="@string/postil_3" />
+
+        <Button
+            android:id="@+id/postil_start_screen"
+            style="@style/postil_button"
+            android:text="@string/postil_4" />
+
+        <Button
+            android:id="@+id/postil_stop_screen"
+            style="@style/postil_button"
+            android:text="@string/postil_5" />
+
+        <Button
+            android:id="@+id/postil_start_projection"
+            style="@style/postil_button"
+            android:text="@string/postil_6" />
+
+        <Button
+            android:id="@+id/postil_stop_projection"
+            style="@style/postil_button"
+            android:text="@string/postil_7" />
+
+        <Button
+            android:id="@+id/postil_pre"
+            style="@style/postil_button"
+            android:text="@string/postil_8" />
+
+        <Button
+            android:id="@+id/postil_next"
+            style="@style/postil_button"
+            android:text="@string/postil_9" />
+    </LinearLayout>
+
+</LinearLayout>

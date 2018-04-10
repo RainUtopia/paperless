@@ -62,7 +62,6 @@ public class NoticeFragment extends BaseFragment implements CallListener {
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_LONG_NOTICE:
-                Log.e("MyLog", "NoticeFragment.callListener:  长文本公告 --->>> ");
                 InterfaceBullet.pbui_BigBulletDetailInfo notice = (InterfaceBullet.pbui_BigBulletDetailInfo) result;
                 if (notice != null) {
                     Bundle bundle = new Bundle();
@@ -80,7 +79,6 @@ public class NoticeFragment extends BaseFragment implements CallListener {
                 InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
                 //获取之前的未读消息个数
                 int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
                 int all =  badgeNumber1 + 1;
                 if (receiveMsg != null) {
                     List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
@@ -89,12 +87,9 @@ public class NoticeFragment extends BaseFragment implements CallListener {
                     }
                     receiveMeetIMInfos.get(0).setType(true);
                     mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
                 }
                 List<EventBadge> num = new ArrayList<>();
                 num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
                 break;
         }
@@ -140,7 +135,6 @@ public class NoticeFragment extends BaseFragment implements CallListener {
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
         nativeUtil.setCallListener(this);
     }
     private void initView(View inflate) {

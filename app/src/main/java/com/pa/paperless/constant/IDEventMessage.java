@@ -97,5 +97,7 @@ public class IDEventMessage {
     public static final int WHITEBROADE_DELETE_RECOREINFORM = 3043;
     // 白板清空记录通知
     public static final int WHITEBOARD_EMPTY_RECORDINFORM = 3044;
+    // 236.会议功能变更通知
+    public static final int MEET_FUNCTION_CHANGEINFO = 3045;
 
 }

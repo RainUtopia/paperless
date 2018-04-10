@@ -27,7 +27,7 @@ message pbui_Type_MeetMemberColorDetailInfo
 //method: control 
 message pbui_Type_MeetWhiteBoardControl
 {
-	fixed32  operflag=1;//指定操作标志 参见 Pb_MeetPostilOperType
+	fixed32  operflag=1;//指定操作标志 参见Pb_MeetPostilOperType
 	bytes    medianame=2;//白板操作描述
 	fixed32  opermemberid=3;//当前该命令的人员ID
 	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用
@@ -41,7 +41,7 @@ message pbui_Type_MeetWhiteBoardControl
 //method: ask 
 message pbui_Type_MeetStartWhiteBoard
 {
-	fixed32  operflag=1;//指定操作标志 参见 Pb_MeetPostilOperType
+	fixed32  operflag=1;//指定操作标志 参见Pb_MeetPostilOperType
 	bytes    medianame=2;//白板操作描述
 	fixed32  opermemberid=3;//当前该命令的人员ID
 	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用
@@ -171,7 +171,7 @@ message pbui_Item_MeetWBRectDetail
 	fixed64  srcwbid=4;//发起人的白板标识 取微秒级的时间作标识 白板标识使用
 
 	fixed64  utcstamp=5;	//时间戳  微秒
-	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于 figuretype 的白板操作
+	fixed32  figuretype=6;	//图形类型 为0表示清除所有等于figuretype的白板操作
 
 	fixed32  linesize=7;			//线条宽度
 	fixed32  Argb=8;			//线条颜色

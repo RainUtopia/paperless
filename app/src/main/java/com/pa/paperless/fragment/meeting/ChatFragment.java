@@ -261,7 +261,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         chat_left = (PercentRelativeLayout) inflate.findViewById(R.id.rightchat_left);
         chat_left.setOnClickListener(this);
         chat_edt = (EditText) inflate.findViewById(R.id.rightchat_edt);
-        chat_edt.setOnClickListener(this);
         chat_send = (TextView) inflate.findViewById(R.id.rightchat_send);
         chat_send.setOnClickListener(this);
     }
@@ -309,9 +308,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 } else {
                     Toast.makeText(getActivity(), "请输入内容", Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.rightchat_edt: //编辑
-
                 break;
         }
     }

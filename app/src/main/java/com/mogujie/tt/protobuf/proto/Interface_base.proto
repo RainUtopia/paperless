@@ -13,6 +13,7 @@ message	pbui_MeetCore_InitParam
 	fixed32		logtofile=2;//保存日志到文件
 	fixed32		streamnum=3;//初始化的流通道数
 	fixed32		programtype=4;//程序类型 用于区分程序来初始化接口数据 参见Interface_Macro.proto--> Pb_ProgramType
+	bytes       keystr=5;//程序唯一标识串，为空表示接口自动计算
 }
 
 //平台网络和数据初始化成功
