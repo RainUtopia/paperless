@@ -136,36 +136,6 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
                 holder.vote_option_5.setText(option);
             }
         }
-//        holder.vote_option_1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "点击了一" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        holder.vote_option_2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "点击了二" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        holder.vote_option_3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "点击了三" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        holder.vote_option_4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "点击了四" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        holder.vote_option_5.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "点击了五" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

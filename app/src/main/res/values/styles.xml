@@ -43,7 +43,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
-
+    <!--PopupWindow进入退出动画-->
     <style name="Anim_PopupWindow">
         <item name="android:windowEnterAnimation">@anim/pop_in</item>
         <item name="android:windowExitAnimation">@anim/pop_out</item>
@@ -85,5 +85,14 @@
         <item name="android:clickable">true</item>
         <item name="android:scaleType">centerInside</item>
         <item name="android:layout_weight">1</item>
+    </style>
+    <!--视屏直播页面四个按钮-->
+    <style name="VideoFragmentBtn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/selector_shape_video</item>
     </style>
 </resources>

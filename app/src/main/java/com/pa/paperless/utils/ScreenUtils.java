@@ -134,21 +134,22 @@ public class ScreenUtils {
         Bitmap bp = null;
         bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
         view.destroyDrawingCache();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
-        File file = new File(Macro.MEETFILE);
-        if(!file.exists()){
-            file.mkdir();
-        }
-        String name = Macro.MEETFILE + sdf.format(new Date()) + ".png";
-        if (null != bp) {
-            try {
-                FileOutputStream fos = new FileOutputStream(name);
-                bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        /** **** **  保存到本地  ** **** **/
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
+//        File file = new File(Macro.MEETFILE);
+//        if(!file.exists()){
+//            file.mkdir();
+//        }
+//        String name = Macro.MEETFILE + sdf.format(new Date()) + ".png";
+//        if (null != bp) {
+//            try {
+//                FileOutputStream fos = new FileOutputStream(name);
+//                bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//                Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
         return bp;
 
     }

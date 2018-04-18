@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:layout_margin="2dp"
-        android:background="@drawable/select_rect_btn"
+        android:background="@drawable/selector_shape_stream"
         android:text="xuanze" />
 </LinearLayout>

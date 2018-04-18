@@ -116,14 +116,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         }
                     }
                     break;
-//                case IDivMessage.QUERY_ATTENDEE:
-//                    ArrayList queryMember_main = msg.getData().getParcelableArrayList("queryMember_main");
-//                    InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) queryMember_main.get(0);
-//                    List<MemberInfo> memberInfos = Dispose.MemberInfo(o);
-//
-//                    //将参会人信息 diaLog展示
-////                    showCheckMemberDialog(memberInfos);
-//                    break;
                 case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
                     ArrayList queryMeetSeat = msg.getData().getParcelableArrayList("queryMeetSeat");
                     InterfaceRoom.pbui_Type_MeetSeatDetailInfo o5 = (InterfaceRoom.pbui_Type_MeetSeatDetailInfo) queryMeetSeat.get(0);

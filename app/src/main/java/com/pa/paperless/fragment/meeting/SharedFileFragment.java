@@ -40,6 +40,7 @@ import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfaceUpload;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
@@ -47,11 +48,9 @@ import com.pa.paperless.adapter.ChooseDirDialogAdapter;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirBean;
 import com.pa.paperless.bean.MeetDirFileInfo;
-import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
-import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
@@ -69,8 +68,6 @@ import org.libsdl.app.SDLActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.mBadge;
-import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -91,7 +88,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     private List<Button> mBtns;
     private TypeFileAdapter mAllAdapter;
 
-    private List<MeetDirFileInfo> mData = new ArrayList<>();
+    private List<MeetDirFileInfo> mData = new ArrayList<>();//用于临时存放不同类型的文件
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
     private Handler mHandler = new Handler() {
         @Override
@@ -107,7 +104,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                         int id = item.getId();
                         int parentid = item.getParentid();
                         // 过滤掉共享文件和批注文件
-//                        if (!dirName.equals("共享文件") && !dirName.equals("批注文件")) {
                         if (dirName.equals("共享文件")) {
                             Log.e("MyLog", "SharedFileFragment.handleMessage 102行:  136.查询会议目录  --->>> 文件名：" + dirName + "  目录ID ：" + id + " 父级ID： " + parentid);
                             meetDirInfos.add(new MeetDirBean(dirName, id, parentid));
@@ -151,7 +147,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         setBtnSelect(0);
         try {
             //136.查询会议目录
-            nativeUtil.queryMeetDir();
+//            nativeUtil.queryMeetDir();
             //143.查询会议目录文件（直接查询 共享资料(id 是固定为 1 )的文件）
             nativeUtil.queryMeetDirFile(1);
         } catch (InvalidProtocolBufferException e) {
@@ -165,8 +161,10 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM://142 会议目录文件变更通知
-                InterfaceBase.pbui_MeetNotifyMsgForDouble object = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
-                nativeUtil.queryMeetDirFile(object.getId());
+                if (!isHidden()) {
+                    InterfaceBase.pbui_MeetNotifyMsgForDouble object = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
+                    nativeUtil.queryMeetDirFile(object.getId());
+                }
                 break;
             case IDEventMessage.DOWN_FINISH://67 下载进度回调
                 Toast.makeText(getActivity(), "  下载完成！ ", Toast.LENGTH_SHORT).show();
@@ -177,6 +175,11 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             case IDEventMessage.Upload_Progress://73 上传进度通知
                 InterfaceUpload.pbui_TypeUploadPosCb object1 = (InterfaceUpload.pbui_TypeUploadPosCb) message.getObject();
                 Log.e("MyLog", "SharedFileFragment.getEventMessage 174行:  当前进度 --->>> " + object1.getPer());
+                break;
+            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
+                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
                 break;
         }
     }
@@ -681,28 +684,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     mHandler.sendMessage(message);
                 }
                 break;
-            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
-                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
-                //获取之前的未读消息个数
-                int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all = badgeNumber1 + 1;
-                if (receiveMsg != null) {
-                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
-                    if (mReceiveMsg == null) {
-                        mReceiveMsg = new ArrayList<>();
-                    }
-                    receiveMeetIMInfos.get(0).setType(true);
-                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
-                }
-                List<EventBadge> num = new ArrayList<>();
-                num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
-                break;
             case IDivMessage.QUERY_MEET_DIR://136.查询会议目录
                 InterfaceFile.pbui_Type_MeetDirDetailInfo result1 = (InterfaceFile.pbui_Type_MeetDirDetailInfo) result;
                 if (result1 != null) {
@@ -716,14 +697,26 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     mHandler.sendMessage(message);
                 }
                 break;
+            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
+                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
+                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
+                break;
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
+                break;
         }
     }
+
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            nativeUtil = NativeUtil.getInstance();
-            nativeUtil.setCallListener(this);
+            initController();
+            try {
+                nativeUtil.queryMeetDirFile(1);
+            } catch (InvalidProtocolBufferException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

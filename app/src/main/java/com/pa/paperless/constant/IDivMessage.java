@@ -73,8 +73,6 @@ public class IDivMessage {
     public static final int QUERY_MEET_BYID = 1031;
     //122.查询会场设备坐标朝向信息
     public static final int QUERY_PLACEDEV = 1032;
-    //74.查询指定ID的常用人员
-    public static final int QUERY_COMMON_BYID = 1033;
     //41.网页查询
     public static final int QUERY_NET = 1034;
     //209.打开白板的唯一标识

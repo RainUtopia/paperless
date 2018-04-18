@@ -1,6 +1,7 @@
 package com.pa.paperless.fragment.meeting;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
@@ -17,7 +18,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,22 +27,23 @@ import android.widget.Toast;
 
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VideoItemAdapter;
 import com.pa.paperless.bean.DeviceInfo;
-import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
-import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
 
+import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 import com.wind.myapplication.ScreenRecorder;
 
@@ -56,8 +57,6 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MEDIA_PROJECTION_SERVICE;
-import static com.pa.paperless.activity.MeetingActivity.mBadge;
-import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 
 /**
@@ -69,10 +68,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
 
     private NativeUtil nativeUtil;
     private RecyclerView mVideoLv;
-    private SurfaceView mTopLeftVideo;
-    private SurfaceView mTopRightVideo;
-    private SurfaceView mBottomLeftVideo;
-    private SurfaceView mBottomRightVideo;
     private Button mLookVideoBtn;
     private Button mStopVideoBtn;
     private Button mPushVideoBtn;
@@ -82,20 +77,29 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case IDivMessage.QUERY_DEVICE_INFO:
+                case IDivMessage.QUERY_DEVICE_INFO://查询设备信息
                     ArrayList queryDevInfo = msg.getData().getParcelableArrayList("queryDevInfo");
                     InterfaceDevice.pbui_Type_DeviceDetailInfo o = (InterfaceDevice.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
                     List<DeviceInfo> deviceInfos = Dispose.DevInfo(o);
-
                     allStreamDev = new ArrayList<>();
                     for (int i = 0; i < deviceInfos.size(); i++) {
                         DeviceInfo deviceInfo = deviceInfos.get(i);
                         int devId = deviceInfo.getDevId();
                         int i1 = devId & Macro.DEVICE_MEET_CAPTURE;
                         if (i1 == Macro.DEVICE_MEET_CAPTURE) {
+                            Log.e("MyLog", "VideoFragment.handleMessage 98行:  添加所有的流采集设备 --->>> ");
                             //所有的流采集设备
                             allStreamDev.add(deviceInfo);
                         }
+                        adapter = new VideoItemAdapter(cxt, allStreamDev);
+                        mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
+                        mVideoLv.setAdapter(adapter);
+                        adapter.setItemListener(new ItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int posion) {
+                                Log.e("MyLog", "VideoFragment.onItemClick 100行:  item点击了 --->>> " + posion);
+                            }
+                        });
                     }
                     break;
             }
@@ -103,7 +107,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     };
     //存放所有流设备
     private List<DeviceInfo> allStreamDev;
-    private boolean b;
 
     /**
      * add by gowcage
@@ -119,6 +122,8 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     private ScreenRecorder recorder;
 
     private ArrayList allRes = new ArrayList(), devIds = new ArrayList();
+    private VideoItemAdapter adapter;
+    private Context cxt;
 
     private void initScreenParam() {
         DisplayMetrics metric = new DisplayMetrics();
@@ -175,9 +180,10 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         View inflate = inflater.inflate(R.layout.right_video, container, false);
         initView(inflate);
         initController();
+        cxt = getContext();
         try {
             /** ************ ******  6.查询设备信息  ****** ************ **/
-            b = nativeUtil.queryDeviceInfo();
+            nativeUtil.queryDeviceInfo();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -193,9 +199,12 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.DEV_REGISTER_INFORM:
-                if (!b) {
-                    b = nativeUtil.queryDeviceInfo();
-                }
+                nativeUtil.queryDeviceInfo();
+                break;
+            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
+                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
                 break;
         }
     }
@@ -215,28 +224,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
 
     private void initView(View inflate) {
         mVideoLv = (RecyclerView) inflate.findViewById(R.id.video_lv);
-        if (allStreamDev != null) {
-            VideoItemAdapter adapter = new VideoItemAdapter(allStreamDev);
-            mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
-            mVideoLv.setAdapter(adapter);
-            adapter.setItemListener(new ItemClickListener() {
-                @Override
-                public void onItemClick(View view, int posion) {
-                    Log.e("MyLog", "VideoFragment.onItemClick 138行:   --->>> ");
-
-                }
-            });
-        }
-
-        mTopLeftVideo = inflate.findViewById(R.id.top_left_video);
-        mTopLeftVideo.setOnClickListener(this);
-        mTopRightVideo = (SurfaceView) inflate.findViewById(R.id.top_right_video);
-        mTopRightVideo.setOnClickListener(this);
-        mBottomLeftVideo = (SurfaceView) inflate.findViewById(R.id.bottom_left_video);
-        mBottomLeftVideo.setOnClickListener(this);
-        mBottomRightVideo = (SurfaceView) inflate.findViewById(R.id.bottom_right_video);
-        mBottomRightVideo.setOnClickListener(this);
-
         mLookVideoBtn = (Button) inflate.findViewById(R.id.look_video_btn);
         mLookVideoBtn.setOnClickListener(this);
         mStopVideoBtn = (Button) inflate.findViewById(R.id.stop_video_btn);
@@ -274,18 +261,6 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
             case R.id.projector_video_btn:
 
                 break;
-            case R.id.top_left_video:
-
-                break;
-            case R.id.top_right_video:
-
-                break;
-            case R.id.bottom_left_video:
-
-                break;
-            case R.id.bottom_right_video:
-
-                break;
         }
     }
 
@@ -293,40 +268,14 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
-                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
-                //获取之前的未读消息个数
-                int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all = badgeNumber1 + 1;
-                if (receiveMsg != null) {
-                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
-                    if (mReceiveMsg == null) {
-                        mReceiveMsg = new ArrayList<>();
-                    }
-                    receiveMeetIMInfos.get(0).setType(true);
-                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
-                }
-                List<EventBadge> num = new ArrayList<>();
-                num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
+                Log.e("MyLog", "VideoFragment.callListener 296行:  收到会议消息 --->>> ");
+                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
+                break;
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
                 break;
             case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceDevice.pbui_Type_DeviceDetailInfo result1 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
-                if (result1 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result1);
-                    bundle.putParcelableArrayList("queryDevInfo", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
-
+                MyUtils.handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceDevice.pbui_Type_DeviceDetailInfo) result, "queryDevInfo", mHandler);
                 break;
         }
     }

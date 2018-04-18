@@ -5,14 +5,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 
-import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.controller.BaseController;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.IModelChangeListener;
-import com.wind.myapplication.NativeUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/5/18 0018.
@@ -46,4 +41,5 @@ public abstract class BaseFragment extends Fragment implements IModelChangeListe
     public void callListener(int action, Object result) {
         mHandler.obtainMessage(action, result).sendToTarget();
     }
+
 }

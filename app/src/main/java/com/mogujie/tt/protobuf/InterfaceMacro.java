@@ -7886,6 +7886,22 @@ public final class InterfaceMacro {
      * <code>Pb_MEETSEAT_PROPERTY_DEVICEIDBYROLE = 8;</code>
      */
     Pb_MEETSEAT_PROPERTY_DEVICEIDBYROLE(8),
+    /**
+     * <pre>
+     *返回当前会议主持人的人员ID query(fixed32)
+     * </pre>
+     *
+     * <code>Pb_MEETSEAT_PROPERTY_COMPEEMEMID = 9;</code>
+     */
+    Pb_MEETSEAT_PROPERTY_COMPEEMEMID(9),
+    /**
+     * <pre>
+     *返回当前会议主持人的设备ID query(fixed32)
+     * </pre>
+     *
+     * <code>Pb_MEETSEAT_PROPERTY_COMPEEDEVID = 10;</code>
+     */
+    Pb_MEETSEAT_PROPERTY_COMPEEDEVID(10),
     UNRECOGNIZED(-1),
     ;
 
@@ -7957,6 +7973,22 @@ public final class InterfaceMacro {
      * <code>Pb_MEETSEAT_PROPERTY_DEVICEIDBYROLE = 8;</code>
      */
     public static final int Pb_MEETSEAT_PROPERTY_DEVICEIDBYROLE_VALUE = 8;
+    /**
+     * <pre>
+     *返回当前会议主持人的人员ID query(fixed32)
+     * </pre>
+     *
+     * <code>Pb_MEETSEAT_PROPERTY_COMPEEMEMID = 9;</code>
+     */
+    public static final int Pb_MEETSEAT_PROPERTY_COMPEEMEMID_VALUE = 9;
+    /**
+     * <pre>
+     *返回当前会议主持人的设备ID query(fixed32)
+     * </pre>
+     *
+     * <code>Pb_MEETSEAT_PROPERTY_COMPEEDEVID = 10;</code>
+     */
+    public static final int Pb_MEETSEAT_PROPERTY_COMPEEDEVID_VALUE = 10;
 
 
     public final int getNumber() {
@@ -7986,6 +8018,8 @@ public final class InterfaceMacro {
         case 6: return Pb_MEETSEAT_PROPERTY_ISCOMPEREEBYDEVICEID;
         case 7: return Pb_MEETSEAT_PROPERTY_MEMBERIDBYROLE;
         case 8: return Pb_MEETSEAT_PROPERTY_DEVICEIDBYROLE;
+        case 9: return Pb_MEETSEAT_PROPERTY_COMPEEMEMID;
+        case 10: return Pb_MEETSEAT_PROPERTY_COMPEEDEVID;
         default: return null;
       }
     }

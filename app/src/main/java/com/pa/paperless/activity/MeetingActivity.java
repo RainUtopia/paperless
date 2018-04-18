@@ -1,20 +1,20 @@
 package com.pa.paperless.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +42,7 @@ import com.bumptech.glide.Glide;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
+import com.mogujie.tt.protobuf.InterfaceDownload;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMeet;
 import com.mogujie.tt.protobuf.InterfaceMeetfunction;
@@ -62,12 +62,11 @@ import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.fragment.manage.secondfloor.s.prepare.Meetting_FileFragment;
 import com.pa.paperless.fragment.meeting.AnnAgendaFragment;
-import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.fragment.meeting.ChatFragment;
 import com.pa.paperless.fragment.meeting.MeetingFileFragment;
 import com.pa.paperless.fragment.meeting.NotationFragment;
+import com.pa.paperless.fragment.meeting.OverviewDocFragment;
 import com.pa.paperless.fragment.meeting.SharedFileFragment;
 import com.pa.paperless.fragment.meeting.SigninFragment;
 import com.pa.paperless.fragment.meeting.VideoFragment;
@@ -77,6 +76,7 @@ import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
+import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.utils.ScreenUtils;
 import com.wind.myapplication.CameraDemo;
@@ -90,14 +90,13 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.LineNumberReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
-import static com.pa.paperless.constant.Macro.Pb_MEET_FUNCODE_MATERIAL;
 import static com.pa.paperless.utils.MyUtils.setAnimator;
 import static com.pa.paperless.utils.MyUtils.setBackgroundAlpha;
 
@@ -106,15 +105,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     private ImageButton mMeetingMessage, mMeetingChatOnline;
     private TextView mMeetingNowTime, mMeetingNowDate, mMeetingNowWeek, mMeetingTheme, mMeetingCompanyName;
-    private LinearLayout mTheNowDate;
-    public static TextView mAttendee;
-    public static TextView mCompere;
-    private LinearLayout mLeftLayout;
-    private FrameLayout mRightLayout;
+    private PopupWindow mFabPop, mProjectorPop, mProRlPop, mFunctionMsgPop, mNotePop, joinWatchPop, mScreenPop, mPlayerPop;
+    //动态添加的ImageView控件
+    private ImageView WhiteBoardIV, VideoIV, MeetChatIV, PostilIV, ShareFileIV, MeetFileIV, DocumentIV, SigninIV, VoteIV, AgendaIV, WebIV;
+    private List<ImageView> mImages;
+    public static TextView mAttendee, mCompere;//参会人，主持人
     private FloatingActionButton mFab;
-    private PopupWindow mPopupWindow;//fab popup
-    private PopupWindow mScreenPopupWindow;//同屏控制 popup
-    private PopupWindow mPlayerPopupWindow;// 同屏控制 中的选择参会人
     private FragmentManager mFm;
     private SigninFragment mSigninFragment;
     private AnnAgendaFragment mAnnAgendaFragment;
@@ -125,330 +121,281 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private VoteFragment mVoteFragment;
     private NotationFragment mNotationFragment;
     private WebBrowseFragment mWebbrowseFragment;
+    private OverviewDocFragment mOverViewDocFragment;
     public static NativeUtil nativeUtil;
     public static List<ReceiveMeetIMInfo> mReceiveMsg = new ArrayList<>();
-
-    public static int W = 0, H = 0;
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
-                    ArrayList queryMeetById = msg.getData().getParcelableArrayList("queryMeetById");
-                    InterfaceMeet.pbui_Type_MeetMeetInfo o6 = (InterfaceMeet.pbui_Type_MeetMeetInfo) queryMeetById.get(0);
-                    List<InterfaceMeet.pbui_Item_MeetMeetInfo> itemList = o6.getItemList();
-                    for (int i = 0; i < itemList.size(); i++) {
-                        InterfaceMeet.pbui_Item_MeetMeetInfo pbui_item_meetMeetInfo = itemList.get(i);
-                        String name = MyUtils.getBts(pbui_item_meetMeetInfo.getName());
-                        Log.e("MyLog", "MeetingActivity.handleMessage:  指定会议的名字： --->>> " + name + "  itemList：" + itemList.size());
-                    }
-                    break;
-                case IDivMessage.QUERY_COMMON_BYID://91.查询指定ID的参会人员
-                    ArrayList queryCommonById = msg.getData().getParcelableArrayList("queryAttendById");
-                    InterfaceMember.pbui_Type_MemberDetailInfo o1 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryCommonById.get(0);
-                    List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList1 = o1.getItemList();
-                    for (int i = 0; i < itemList1.size(); i++) {
-                        InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = itemList1.get(i);
-                        String name = MyUtils.getBts(pbui_item_memberDetailInfo.getName());
-                        Log.e("MyLog", "MeetingActivity.handleMessage:  指定ID的参会人员名称： --->>> " + name);
-                    }
-                    break;
-                case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
-                    ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
-                    InterfaceMember.pbui_Type_MemberDetailInfo o2 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryMember.get(0);
-                    memberInfos = Dispose.MemberInfo(o2);
-                    break;
-                case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
-                    ArrayList queryAttendById = msg.getData().getParcelableArrayList("queryAttendById");
-                    InterfaceMember.pbui_Type_MemberDetailInfo o3 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryAttendById.get(0);
-                    List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList2 = o3.getItemList();
-                    for (int i = 0; i < itemList2.size(); i++) {
-                        InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = itemList2.get(i);
-                        String memberName = MyUtils.getBts(pbui_item_memberDetailInfo.getName());
-                        int personid = pbui_item_memberDetailInfo.getPersonid();
-                        Log.e("MyLog", "MeetingActivity.handleMessage:  参会人： --->>> " + memberName);
-                    }
-                    break;
-                case IDivMessage.QUERY_Attendee_Property://96.查询参会人员属性(判断是否为主持人)
-                    ArrayList queryAttendeeProperty = msg.getData().getParcelableArrayList("queryAttendeeProperty");
-                    InterfaceMember.pbui_Type_MeetMembeProperty o4 = (InterfaceMember.pbui_Type_MeetMembeProperty) queryAttendeeProperty.get(0);
-                    String bts = MyUtils.getBts(o4.getPropertytext());
-                    int propertyval = o4.getPropertyval();
-                    Log.e("MyLog", "MeetingActivity.handleMessage:  propertyval： --->>> " + propertyval + "  身份：" + bts);
-                    break;
-                case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息(查找在线状态的投影机)
-                    Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
-                    ArrayList devInfos = msg.getData().getParcelableArrayList("devInfos");
-                    if (devInfos != null) {
-                        InterfaceDevice.pbui_Type_DeviceDetailInfo o5 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) devInfos.get(0);
-                        List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
-                        int number = Macro.DEVICE_MEET_PROJECTIVE;
-                        onLineMembers = new ArrayList<>();
-                        onLineProjectors = new ArrayList<>();
-                        allProjectors = new ArrayList<>();
-                        for (int i = 0; i < deviceInfos.size(); i++) {
-                            DeviceInfo deviceInfo = deviceInfos.get(i);
-                            int netState = deviceInfo.getNetState();
-                            int devId = deviceInfo.getDevId();
-                            int memberId = deviceInfo.getMemberId();
-                            int i1 = devId & number;
-                            //判断是否是投影机
-                            if (i1 == number) {
-                                // 添加所有投影机
-                                allProjectors.add(deviceInfo);
-                                //判断是否是在线状态
-                                if (netState == 1) {
-                                    //说明是在线状态的投影机
-                                    onLineProjectors.add(deviceInfo);
-                                }
-                            }
-                            if (netState == 1 && memberInfos != null) {
-                                for (int j = 0; j < memberInfos.size(); j++) {
-                                    MemberInfo memberInfo = memberInfos.get(j);
-                                    int personid = memberInfo.getPersonid();
-                                    if (personid == memberId) {
-                                        //过滤掉自己的设备
-                                        if (devId != DevMeetInfo.getDeviceid()) {
-                                            //查找到在线状态的参会人员
-                                            onLineMembers.add(new DevMember(memberInfos.get(j), devId));
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        //初始化投影机是否选中集合
-                        checkProAll = new ArrayList<>();
-                        //初始化 全部设为false
-                        for (int k = 0; k < allProjectors.size(); k++) {
-                            checkProAll.add(false);
-                        }
-                        //初始化同屏控制是否选中集合
-                        checks = new ArrayList<>();
-                        //初始化 全部设为false
-                        for (int k = 0; k < onLineMembers.size(); k++) {
-                            checks.add(false);
-                        }
-                        //初始化同屏控制投影机选择集合
-                        checkProOL = new ArrayList<>();
-                        for (int i = 0; i < onLineProjectors.size(); i++) {
-                            checkProOL.add(false);
-                        }
-                        allProjectorAdapter = new OnLineProjectorAdapter(allProjectors, 1);
-                        onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors, 0);
-                        onLineMemberAdapter = new ScreenControlAdapter(onLineMembers);
-                    }
-                    break;
-                case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
-                    ArrayList queryMeetRanking = msg.getData().getParcelableArrayList("queryMeetRanking");
-                    InterfaceRoom.pbui_Type_MeetSeatDetailInfo o5 = (InterfaceRoom.pbui_Type_MeetSeatDetailInfo) queryMeetRanking.get(0);
-                    List<InterfaceRoom.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
-                    for (int i = 0; i < itemList3.size(); i++) {
-                        InterfaceRoom.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
-                        int nameId = pbui_item_meetSeatDetailInfo.getNameId();
-                        int role = pbui_item_meetSeatDetailInfo.getRole();
-                        int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
-                        if (role == 3 && DevMeetInfo.getMemberid() == nameId) {
-                            //身份为主持人
-                            VoteFragment.isCompere = true;
-                        }
-                    }
-                    break;
-                case IDivMessage.QUERY_CAN_JOIN: // 查询可加入的同屏会话
-                    ArrayList queryCanJoin = msg.getData().getParcelableArrayList("queryCanJoin");
-                    InterfaceDevice.pbui_Type_DeviceResPlay o = (InterfaceDevice.pbui_Type_DeviceResPlay) queryCanJoin.get(0);
-                    List<InterfaceDevice.pbui_Item_DeviceResPlay> pdevList = o.getPdevList();
-
-                    memberJoin = new ArrayList<>();
-                    peojectorJoin = new ArrayList<>();
-                    for (int i = 0; i < pdevList.size(); i++) {
-                        InterfaceDevice.pbui_Item_DeviceResPlay pbui_item_deviceResPlay = pdevList.get(i);
-                        int devceid = pbui_item_deviceResPlay.getDevceid();
-                        Log.e("MyLog", "MeetingActivity.handleMessage 256行:  可加入设备ID： --->>> " + devceid);
-                        int i1 = devceid & Macro.DEVICE_MEET_DB;
-                        int i2 = devceid & Macro.DEVICE_MEET_SERVICE;
-                        int i3 = devceid & Macro.DEVICE_MEET_PROJECTIVE;
-                        int i4 = devceid & Macro.DEVICE_MEET_CAPTURE;
-                        int i5 = devceid & Macro.DEVICE_MEET_CLIENT;
-                        int i6 = devceid & Macro.DEVICE_MEET_ONEKEYSHARE;
-
-                        if (i1 == Macro.DEVICE_MEET_DB || i2 == Macro.DEVICE_MEET_SERVICE || i4 == Macro.DEVICE_MEET_CAPTURE
-                                || i5 == Macro.DEVICE_MEET_CLIENT || i6 == Macro.DEVICE_MEET_ONEKEYSHARE) {
-                            Log.e("MyLog", "MeetingActivity.handleMessage 268行:  其它类型的设备 --->>> ");
-                        } else if (i3 == Macro.DEVICE_MEET_PROJECTIVE) {
-                            // 投影机
-                            checkedJoinProjector.add(false);
-                            peojectorJoin.add(pbui_item_deviceResPlay);
-                            Log.e("MyLog", "MeetingActivity.handleMessage 271行:  有一个投影机 --->>> ");
-                        } else {
-                            //参会人
-                            checkedJoinMember.add(false);
-                            memberJoin.add(pbui_item_deviceResPlay);
-                            int memberid = pbui_item_deviceResPlay.getMemberid();
-                            String name = MyUtils.getBts(pbui_item_deviceResPlay.getName());
-                            Log.e("MyLog", "MeetingActivity.handleMessage 276行:  名称 --->>> " + name + "  参会人ID：" + memberid);
-                        }
-                    }
-                    if (memberJoin.size() > 0) {
-                        joinMemberAdapter = new JoinAdapter(memberJoin);
-                    }
-                    if (peojectorJoin.size() > 0) {
-                        joinProjectorAdapter = new JoinAdapter(peojectorJoin);
-                    }
-                    break;
-                case IDivMessage.QUERY_MEET_FUNCTION://查询会议功能
-                    ArrayList queryMeetFunction = msg.getData().getParcelableArrayList("queryMeetFunction");
-                    InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo o7 = (InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo) queryMeetFunction.get(0);
-                    List<InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo> itemList4 = o7.getItemList();
-                    mFragments = new ArrayList<>();
-                    mImages = new ArrayList<>();
-                    for (int i = 0; i < itemList4.size(); i++) {
-                        InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo function = itemList4.get(i);
-                        int funcode = function.getFuncode();
-                        int position = function.getPosition();
-                        Log.e("MyLog", "MeetingActivity.handleMessage 300行:   --->>>  funcode： " + funcode + "   position ： " + position);
-                        if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_AGENDA_BULLETIN.getNumber()) {
-                            AgendaIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            AgendaIV.setBackground(resources.getDrawable(R.drawable.selector_announce_agenda));
-                            fragment_layout.addView(AgendaIV);
-                            mImages.add(AgendaIV);
-                            mFragments.add(0);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_MATERIAL.getNumber()) {
-                            mFragments.add(1);
-                            MeetFileIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            MeetFileIV.setBackground(resources.getDrawable(R.drawable.selector_meetingfile));
-                            fragment_layout.addView(MeetFileIV);
-                            mImages.add(MeetFileIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_SHAREDFILE.getNumber()) {
-                            mFragments.add(2);
-                            ShareFileIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            ShareFileIV.setBackground(resources.getDrawable(R.drawable.selector_sharedfile));
-                            fragment_layout.addView(ShareFileIV);
-                            mImages.add(ShareFileIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_POSTIL.getNumber()) {
-//                            mFragments.add(new NotationFragment());
-                            mFragments.add(3);
-                            PostilIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            PostilIV.setBackground(resources.getDrawable(R.drawable.selector_postil));
-                            fragment_layout.addView(PostilIV);
-                            mImages.add(PostilIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_MESSAGE.getNumber()) {
-                            mFragments.add(4);
-                            MeetChatIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            MeetChatIV.setBackground(resources.getDrawable(R.drawable.selector_chat));
-                            fragment_layout.addView(MeetChatIV);
-                            mImages.add(MeetChatIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_VIDEOSTREAM.getNumber()) {
-                            mFragments.add(5);
-                            VideoIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            VideoIV.setBackground(resources.getDrawable(R.drawable.selector_video));
-                            fragment_layout.addView(VideoIV);
-                            mImages.add(VideoIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_WHITEBOARD.getNumber()) {
-                            WhiteBoardIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            WhiteBoardIV.setBackground(resources.getDrawable(R.drawable.selector_whiteboard));
-                            fragment_layout.addView(WhiteBoardIV);
-                            mFragments.add(6);
-                            mImages.add(WhiteBoardIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_WEBBROWSER.getNumber()) {
-                            mFragments.add(7);
-                            WebIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            WebIV.setBackground(resources.getDrawable(R.drawable.selector_web));
-                            fragment_layout.addView(WebIV);
-                            mImages.add(WebIV);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_VOTERESULT.getNumber()) {
-                            VoteIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            VoteIV.setBackground(resources.getDrawable(R.drawable.selector_vote));
-                            fragment_layout.addView(VoteIV);
-                            mImages.add(VoteIV);
-                            mFragments.add(8);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_SIGNINRESULT.getNumber()) {
-                            SigninIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            SigninIV.setBackground(resources.getDrawable(R.drawable.selector_signin));
-                            fragment_layout.addView(SigninIV);
-                            mImages.add(SigninIV);
-                            mFragments.add(9);
-                        } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_DOCUMENT.getNumber()) {
-                            DocumentIV = new ImageView(context, null, R.style.MeetBottomImageView);
-                            DocumentIV.setBackground(resources.getDrawable(R.drawable.selector_document));
-                            fragment_layout.addView(DocumentIV);
-                            mImages.add(DocumentIV);
-                            mFragments.add(10);
-                        }
-                    }
-                    if (mImages.size() > 0 && mFragments.size() > 0) {
-                        //设置默认点击第一项
-                        showFragment(mFragments.get(0));
-                        setImgSelect(0);
-                        initImages(mImages, mFragments);
-                    }
-                    break;
-            }
-        }
-    };
-    //动态添加的ImageView控件
-    private ImageView WhiteBoardIV, VideoIV, MeetChatIV, PostilIV, ShareFileIV,
-            MeetFileIV, DocumentIV, SigninIV, VoteIV, AgendaIV, WebIV;
-    private List<ImageView> mImages;
-
-
     private ScreenControlAdapter onLineMemberAdapter;
-    private LinearLayout mMeetActivityLayout;
-    private PopupWindow mProjectorPop;
-    private PopupWindow mProRlPop;
-    private PopupWindow mFunctionMsgPop;
-    //用来存放在线状态的投影机设备
-    private List<DeviceInfo> onLineProjectors;
     private List<MemberInfo> memberInfos;
-    //用来存放在线状态的参会人员
-//    private List<MemberInfo> onLineMembers;
     private List<DevMember> onLineMembers;
-    private OnLineProjectorAdapter onLineProjectorAdapter;
-    //用来存放所有的投影机设备
-    private List<DeviceInfo> allProjectors;
-    private OnLineProjectorAdapter allProjectorAdapter;
+    private OnLineProjectorAdapter onLineProjectorAdapter, allProjectorAdapter;
+    //用来存放所有/在线的投影机设备
+    private List<DeviceInfo> allProjectors, onLineProjectors;
     public static Badge mBadge; //未读消息提示
     public static String mNoteCentent;
-    private PopupWindow mNotePop;
-
-    public static List<Boolean> checks;
-    public static ArrayList<Boolean> checkProAll;
-    public static List<Boolean> checkProOL;
-    private List<Integer> sameMemberDevIds;
-    private List<Integer> sameMemberDevRrsIds;
-    private List<Integer> applyProjectionIds;
-    private List<Integer> informDev;
-    private List<InterfaceDevice.pbui_Item_DeviceResPlay> memberJoin;
-    private List<InterfaceDevice.pbui_Item_DeviceResPlay> peojectorJoin;
-    public static JoinAdapter joinMemberAdapter;
-    public static JoinAdapter joinProjectorAdapter;
+    public static List<Boolean> checks, checkProOL, checkProAll;
+    private List<Integer> sameMemberDevIds, sameMemberDevRrsIds, applyProjectionIds, informDev, mFunIndexs;
+    private List<InterfaceDevice.pbui_Item_DeviceResPlay> memberJoin, peojectorJoin;
+    public static JoinAdapter joinMemberAdapter, joinProjectorAdapter;
     //存放是否点中
     public static List<Boolean> checkedJoinMember = new ArrayList<>();
     public static List<Boolean> checkedJoinProjector = new ArrayList<>();
-    private PopupWindow joinWatchPop;
-
     //add by gowcage
     final int REQUEST_CODE = 1;// >=0
     private int width, height, dpi, bitrate, VideoQuality = 1;//VideoQuality:1/2/3
+    public static int W = 0, H = 0;
     private float density;
     private MediaProjectionManager manager;
     private MediaProjection projection;
     private ScreenRecorder recorder;
     private MeetingActivity context;
-    public static InterfaceDevice.pbui_Type_DeviceFaceShowDetail DevMeetInfo;//设备会议信息
-    public static InterfaceMember.pbui_Item_MemberDetailInfo mComperInfo;//主持人信息
-    //    private List<BaseFragment> mFragments;
-    private List<Integer> mFragments;
+    public static InterfaceDevice.pbui_Type_DeviceFaceShowDetail DevMeetInfo = MainActivity.getLocalInfo();//设备会议信息
+    public static InterfaceMember.pbui_Item_MemberDetailInfo mComperInfo = MainActivity.getCompereInfo();//主持人信息
     private LinearLayout fragment_layout;
     private Resources resources;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
+                    ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
+                    InterfaceMember.pbui_Type_MemberDetailInfo o2 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryMember.get(0);
+                    memberInfos = Dispose.MemberInfo(o2);
+                    break;
+                case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息(查找在线状态的投影机)
+                    Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
+                    DisposeDevInfo(msg);
+                    break;
+                case IDivMessage.Query_MeetSeat_Inform://181.查询会议排位
+                    DisposeIsCompere(msg);
+                    break;
+                case IDivMessage.QUERY_CAN_JOIN: // 查询可加入的同屏会话
+                    DisposeCanJoin(msg);
+                    break;
+                case IDivMessage.QUERY_MEET_FUNCTION://查询会议功能
+                    DisposeMeetFun(msg);
+                    break;
+            }
+        }
+    };
+
+    //设置投票页面当前设备是否是主持人
+    private void DisposeIsCompere(Message msg) {
+        ArrayList queryMeetRanking = msg.getData().getParcelableArrayList("queryMeetRanking");
+        InterfaceRoom.pbui_Type_MeetSeatDetailInfo o5 = (InterfaceRoom.pbui_Type_MeetSeatDetailInfo) queryMeetRanking.get(0);
+        List<InterfaceRoom.pbui_Item_MeetSeatDetailInfo> itemList3 = o5.getItemList();
+        for (int i = 0; i < itemList3.size(); i++) {
+            InterfaceRoom.pbui_Item_MeetSeatDetailInfo pbui_item_meetSeatDetailInfo = itemList3.get(i);
+            int nameId = pbui_item_meetSeatDetailInfo.getNameId();
+            int role = pbui_item_meetSeatDetailInfo.getRole();
+            int seatid = pbui_item_meetSeatDetailInfo.getSeatid();
+            if (role == 3 && DevMeetInfo.getMemberid() == nameId) {
+                //身份为主持人
+                VoteFragment.isCompere = true;
+            }
+        }
+    }
+
+    //处理可加入的同屏绘画
+    private void DisposeCanJoin(Message msg) {
+        ArrayList queryCanJoin = msg.getData().getParcelableArrayList("queryCanJoin");
+        InterfaceDevice.pbui_Type_DeviceResPlay o = (InterfaceDevice.pbui_Type_DeviceResPlay) queryCanJoin.get(0);
+        List<InterfaceDevice.pbui_Item_DeviceResPlay> pdevList = o.getPdevList();
+        memberJoin = new ArrayList<>();
+        peojectorJoin = new ArrayList<>();
+        for (int i = 0; i < pdevList.size(); i++) {
+            InterfaceDevice.pbui_Item_DeviceResPlay pbui_item_deviceResPlay = pdevList.get(i);
+            int devceid = pbui_item_deviceResPlay.getDevceid();
+            Log.e("MyLog", "MeetingActivity.handleMessage 256行:  可加入设备ID： --->>> " + devceid);
+            int i1 = devceid & Macro.DEVICE_MEET_DB;
+            int i2 = devceid & Macro.DEVICE_MEET_SERVICE;
+            int i3 = devceid & Macro.DEVICE_MEET_PROJECTIVE;
+            int i4 = devceid & Macro.DEVICE_MEET_CAPTURE;
+            int i5 = devceid & Macro.DEVICE_MEET_CLIENT;
+            int i6 = devceid & Macro.DEVICE_MEET_ONEKEYSHARE;
+
+            if (i1 == Macro.DEVICE_MEET_DB || i2 == Macro.DEVICE_MEET_SERVICE || i4 == Macro.DEVICE_MEET_CAPTURE
+                    || i5 == Macro.DEVICE_MEET_CLIENT || i6 == Macro.DEVICE_MEET_ONEKEYSHARE) {
+                Log.e("MyLog", "MeetingActivity.handleMessage 268行:  其它类型的设备 --->>> ");
+            } else if (i3 == Macro.DEVICE_MEET_PROJECTIVE) {
+                // 投影机
+                checkedJoinProjector.add(false);
+                peojectorJoin.add(pbui_item_deviceResPlay);
+                Log.e("MyLog", "MeetingActivity.handleMessage 271行:  有一个投影机 --->>> ");
+            } else {
+                //参会人
+                checkedJoinMember.add(false);
+                memberJoin.add(pbui_item_deviceResPlay);
+                int memberid = pbui_item_deviceResPlay.getMemberid();
+                String name = MyUtils.getBts(pbui_item_deviceResPlay.getName());
+                Log.e("MyLog", "MeetingActivity.handleMessage 276行:  名称 --->>> " + name + "  参会人ID：" + memberid);
+            }
+        }
+        if (memberJoin.size() > 0) {
+            joinMemberAdapter = new JoinAdapter(memberJoin);
+        }
+        if (peojectorJoin.size() > 0) {
+            joinProjectorAdapter = new JoinAdapter(peojectorJoin);
+        }
+    }
+
+    //查找在线的投影机和参会人
+    private void DisposeDevInfo(Message msg) {
+        ArrayList devInfos = msg.getData().getParcelableArrayList("devInfos");
+        if (devInfos != null) {
+            InterfaceDevice.pbui_Type_DeviceDetailInfo o5 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) devInfos.get(0);
+            List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
+            int number = Macro.DEVICE_MEET_PROJECTIVE;
+            onLineMembers = new ArrayList<>();
+            onLineProjectors = new ArrayList<>();
+            allProjectors = new ArrayList<>();
+            for (int i = 0; i < deviceInfos.size(); i++) {
+                DeviceInfo deviceInfo = deviceInfos.get(i);
+                int netState = deviceInfo.getNetState();
+                int devId = deviceInfo.getDevId();
+                int memberId = deviceInfo.getMemberId();
+                int i1 = devId & number;
+                //判断是否是投影机
+                if (i1 == number) {
+                    // 添加所有投影机
+                    allProjectors.add(deviceInfo);
+                    //判断是否是在线状态
+                    if (netState == 1) {
+                        //说明是在线状态的投影机
+                        onLineProjectors.add(deviceInfo);
+                    }
+                }
+                if (netState == 1 && memberInfos != null) {
+                    for (int j = 0; j < memberInfos.size(); j++) {
+                        MemberInfo memberInfo = memberInfos.get(j);
+                        int personid = memberInfo.getPersonid();
+                        if (personid == memberId) {
+                            //过滤掉自己的设备
+                            if (devId != DevMeetInfo.getDeviceid()) {
+                                //查找到在线状态的参会人员
+                                onLineMembers.add(new DevMember(memberInfos.get(j), devId));
+                            }
+                        }
+                    }
+                }
+            }
+            //初始化投影机是否选中集合
+            checkProAll = new ArrayList<>();
+            //初始化 全部设为false
+            for (int k = 0; k < allProjectors.size(); k++) {
+                checkProAll.add(false);
+            }
+            //初始化同屏控制是否选中集合
+            checks = new ArrayList<>();
+            //初始化 全部设为false
+            for (int k = 0; k < onLineMembers.size(); k++) {
+                checks.add(false);
+            }
+            //初始化同屏控制投影机选择集合
+            checkProOL = new ArrayList<>();
+            for (int i = 0; i < onLineProjectors.size(); i++) {
+                checkProOL.add(false);
+            }
+            allProjectorAdapter = new OnLineProjectorAdapter(allProjectors, 1);
+            onLineProjectorAdapter = new OnLineProjectorAdapter(onLineProjectors, 0);
+            onLineMemberAdapter = new ScreenControlAdapter(onLineMembers);
+        }
+    }
+
+    //获得会议功能
+    private void DisposeMeetFun(Message msg) {
+        ArrayList queryMeetFunction = msg.getData().getParcelableArrayList("queryMeetFunction");
+        InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo o7 = (InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo) queryMeetFunction.get(0);
+        List<InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo> itemList4 = o7.getItemList();
+        mFunIndexs = new ArrayList<>();
+        mImages = new ArrayList<>();
+        for (int i = 0; i < itemList4.size(); i++) {
+            InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo function = itemList4.get(i);
+            int funcode = function.getFuncode();
+            int position = function.getPosition();
+            Log.e("MyLog", "MeetingActivity.handleMessage 300行:   --->>>  funcode： " + funcode + "   position ： " + position);
+            if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_AGENDA_BULLETIN.getNumber()) {
+                AgendaIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                AgendaIV.setBackground(resources.getDrawable(R.drawable.selector_announce_agenda));
+                fragment_layout.addView(AgendaIV);
+                mImages.add(AgendaIV);
+                mFunIndexs.add(0);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_MATERIAL.getNumber()) {
+                mFunIndexs.add(1);
+                MeetFileIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                MeetFileIV.setBackground(resources.getDrawable(R.drawable.selector_meetingfile));
+                fragment_layout.addView(MeetFileIV);
+                mImages.add(MeetFileIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_SHAREDFILE.getNumber()) {
+                mFunIndexs.add(2);
+                ShareFileIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                ShareFileIV.setBackground(resources.getDrawable(R.drawable.selector_sharedfile));
+                fragment_layout.addView(ShareFileIV);
+                mImages.add(ShareFileIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_POSTIL.getNumber()) {
+//                            mFunIndexs.add(new NotationFragment());
+                mFunIndexs.add(3);
+                PostilIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                PostilIV.setBackground(resources.getDrawable(R.drawable.selector_postil));
+                fragment_layout.addView(PostilIV);
+                mImages.add(PostilIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_MESSAGE.getNumber()) {
+                mFunIndexs.add(4);
+                MeetChatIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                MeetChatIV.setBackground(resources.getDrawable(R.drawable.selector_chat));
+                fragment_layout.addView(MeetChatIV);
+                mImages.add(MeetChatIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_VIDEOSTREAM.getNumber()) {
+                mFunIndexs.add(5);
+                VideoIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                VideoIV.setBackground(resources.getDrawable(R.drawable.selector_video));
+                fragment_layout.addView(VideoIV);
+                mImages.add(VideoIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_WHITEBOARD.getNumber()) {
+                WhiteBoardIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                WhiteBoardIV.setBackground(resources.getDrawable(R.drawable.selector_whiteboard));
+                fragment_layout.addView(WhiteBoardIV);
+                mFunIndexs.add(6);
+                mImages.add(WhiteBoardIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_WEBBROWSER.getNumber()) {
+                mFunIndexs.add(7);
+                WebIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                WebIV.setBackground(resources.getDrawable(R.drawable.selector_web));
+                fragment_layout.addView(WebIV);
+                mImages.add(WebIV);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_VOTERESULT.getNumber()) {
+                VoteIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                VoteIV.setBackground(resources.getDrawable(R.drawable.selector_vote));
+                fragment_layout.addView(VoteIV);
+                mImages.add(VoteIV);
+                mFunIndexs.add(8);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_SIGNINRESULT.getNumber()) {
+                SigninIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                SigninIV.setBackground(resources.getDrawable(R.drawable.selector_signin));
+                fragment_layout.addView(SigninIV);
+                mImages.add(SigninIV);
+                mFunIndexs.add(9);
+            } else if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_DOCUMENT.getNumber()) {
+                DocumentIV = new ImageView(context, null, R.style.MeetBottomImageView);
+                DocumentIV.setBackground(resources.getDrawable(R.drawable.selector_document));
+                fragment_layout.addView(DocumentIV);
+                mImages.add(DocumentIV);
+                mFunIndexs.add(10);
+            }
+        }
+        if (mImages.size() > 0 && mFunIndexs.size() > 0) {
+            //设置默认点击第一项
+            showFragment(mFunIndexs.get(0));
+            setImgSelect(0);
+            initImages(mImages, mFunIndexs);
+        }
+    }
 
     @Override
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_MEET_BYID://129.查询指定ID的会议
                 MyUtils.handTo(IDivMessage.QUERY_MEET_BYID, (InterfaceMeet.pbui_Type_MeetMeetInfo) result, "queryMeetById", mHandler);
-                break;
-            case IDivMessage.QUERY_ATTEND_BYID://91.查询指定ID的参会人员
-                MyUtils.handTo(IDivMessage.QUERY_ATTEND_BYID, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryAttendById", mHandler);
                 break;
             case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
                 MyUtils.handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryMember", mHandler);
@@ -467,7 +414,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case IDivMessage.QUERY_MEET_FUNCTION://查询会议功能
                 MyUtils.handTo(IDivMessage.QUERY_MEET_FUNCTION, (InterfaceMeetfunction.pbui_Type_MeetFunConfigDetailInfo) result, "queryMeetFunction", mHandler);
-                Log.e("MyLog", "MeetingActivity.callListener 380行:  1111111111111111111111111 --->>> ");
                 break;
         }
     }
@@ -476,7 +422,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     protected void onSaveInstanceState(Bundle outState) {
 //        super.onSaveInstanceState(outState);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -489,12 +434,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         resources = context.getResources();
         initView();
         mFm = getSupportFragmentManager();
-
         //8.修改本机界面状态
         nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber());
-
-        DevMeetInfo = MainActivity.getLocalInfo();
-        mComperInfo = MainActivity.getCompereInfo();
         try {
             //238.查询会议功能
             nativeUtil.queryMeetFunction();
@@ -516,21 +457,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     /**
      * 获取从MainActivity中传递过来的参数
      */
-    private void getIntentBundle() {//
-//        Intent intent = getIntent();
-//        Bundle putId = intent.getBundleExtra("putId");
-//        ArrayList devMeetInfo = putId.getParcelableArrayList("devMeetInfo");
-//
-//        int devId = (int) devMeetInfo.get(0);
-//        int meetingid = (int) devMeetInfo.get(1);
-//        int memberid = (int) devMeetInfo.get(2);
-//        int roomid = (int) devMeetInfo.get(3);
-//        int signin_type = (int) devMeetInfo.get(4);
-//        String meetingname = (String) devMeetInfo.get(5);
-//        String membername = (String) devMeetInfo.get(6);
-//        String company = (String) devMeetInfo.get(7);
-//        String job = (String) devMeetInfo.get(8);
-//        String compereName = (String) devMeetInfo.get(9);
+    private void getIntentBundle() {
         if (DevMeetInfo != null) {
             mMeetingCompanyName.setText(MyUtils.getBts(DevMeetInfo.getCompany()));
             mMeetingTheme.setText(MyUtils.getBts(DevMeetInfo.getMeetingname()));
@@ -540,17 +467,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             mCompere.setText(MyUtils.getBts(mComperInfo.getName()));
         }
         try {
-            //91.查询指定ID的参会人员
-//            nativeUtil.queryAttendPeopleFromId(memberid);
             //** ************ ******  125.查询符合要求的设备ID  （投影机）  ****** ************ **//
             // TODO: 2018/2/27 回调在签到页面进行的处理
             nativeUtil.queryRequestDeviceId(DevMeetInfo.getRoomid(),
                     Macro.DEVICE_MEET_PROJECTIVE,
 //                    InterfaceMacro.Pb_RoomDeviceFilterFlag.Pb_MEET_ROOMDEVICE_FLAG_PROJECTIVE.getNumber(),
                     InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
-
-            Log.e("MyLog", "MeetingActivity.getIntentBundle:   --->>> devId： " + DevMeetInfo.getDeviceid() + "  memberid：" + DevMeetInfo.getMemberid());
-            //** ************ ******  96.查询参会人员属性  ****** ************ **//*
+            //96.查询参会人员属性
             nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), DevMeetInfo.getMemberid());
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
@@ -586,27 +509,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 //更新时间UI
                 updataTimeUi(message);
                 break;
-            case IDEventMessage.FACESTATUS_CHANGE_INFORM:
-                InterfaceDevice.pbui_MeetDeviceMeetStatus o1 = (InterfaceDevice.pbui_MeetDeviceMeetStatus) message.getObject();
-//                Log.e("MyLog", "MeetingActivity.getEventMessage: 界面状态变更通知 EventBus --->>> 会议ID：" + o1.getMeetingid() +
-//                        " 人员ID：" + o1.getMemberid() + " 设备ID：" + o1.getDeviceid() + " 界面状态：" + o1.getFacestatus());
-                //91.查询指定ID的参会人员
-                nativeUtil.queryAttendPeopleFromId(o1.getMemberid());
-                /** ************ ******  96.查询参会人员属性  ****** ************ **/
-                //nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), o.getMemberid());
-                //128.查询会议
-//                nativeUtil.queryMeet();
-//              //129.查询指定ID的会议
-//                nativeUtil.queryMeetFromId(meetingid);
-                break;
-            case IDEventMessage.MEETINFO_CHANGE_INFORM:// 会议信息变更通知
-                Log.e("MyLog", "MeetingActivity.getEventMessage:  会议信息变更通知 EventBus --->>> ");
-                InterfaceBase.pbui_MeetNotifyMsg object1 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-//                int id = object1.getId();
-//                int opermethod = object1.getOpermethod();
-                //129.查询指定ID的会议
-//                nativeUtil.queryMeetFromId(id);
-                break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:// 参会人员变更通知
                 InterfaceBase.pbui_MeetNotifyMsg object2 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int id1 = object2.getId();
@@ -614,17 +516,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  参会人员变更通知 EventBus --->>> id:  " + id1 + "  opermethod1：  " + opermethod1);
                 //92.查询参会人员
                 nativeUtil.queryAttendPeople();
-                //91.查询指定ID的参会人员
-//                nativeUtil.queryAttendPeopleFromId(id1);
-                /** ************ ******  96.查询参会人员属性  ****** ************ **/
-                nativeUtil.queryAttendPeopleProperties(InterfaceMacro.Pb_MemberPropertyID.Pb_MEETMEMBER_PROPERTY_JOB.getNumber(), 12);
-
                 break;
             case IDEventMessage.MeetSeat_Change_Inform:
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  180.会议排位变更通知 EventBus --->>> ");
                 InterfaceBase.pbui_MeetNotifyMsg object = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-                int id = object.getId();
-                int opermethod = object.getOpermethod();
                 /** ************ ******  181.查询会议排位  ****** ************ **/
                 nativeUtil.queryMeetRanking();
                 break;
@@ -639,7 +534,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
                 break;
             case IDEventMessage.START_COLLECTION_STREAM_NOTIFY:
-                Log.e("MyLog", "MeetingActivity.getEventMessage 565行:  1111111 --->>> ");
+                Log.e("MyLog","MeetingActivity.getEventMessage 538行:  1111111 --->>> ");
                 switch (message.getType()) {
                     case 2://屏幕
                         if (stopRecord()) {
@@ -671,12 +566,16 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         }
                         break;
                 }
-            case IDEventMessage.OPEN_BOARD://收到白板打开操作
-                InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard object4 = (InterfaceWhiteboard.pbui_Type_MeetStartWhiteBoard) message.getObject();
                 break;
             case IDEventMessage.MEET_FUNCTION_CHANGEINFO:
                 /** **** **  238.查询会议功能  ** **** **/
                 nativeUtil.queryMeetFunction();
+                break;
+            case IDEventMessage.DOWN_FINISH://下载完成通知
+                InterfaceDownload.pbui_Type_DownloadCb object1 = (InterfaceDownload.pbui_Type_DownloadCb) message.getObject();
+                int mediaid = object1.getMediaid();//下载完成的媒体ID
+                Log.e("MyLog", "MeetingActivity.getEventMessage 577行:  下载完成的媒体ID --->>> ");
+                Toast.makeText(context, "下载完成！", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -811,6 +710,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 }
                 ft.show(mWebbrowseFragment);
                 break;
+            case Macro.Pb_MEET_FUNCODE_DOCUMENT:
+                if (mOverViewDocFragment == null) {
+                    mOverViewDocFragment = new OverviewDocFragment();
+                    ft.add(R.id.right_layout, mOverViewDocFragment);
+                }
+                ft.show(mOverViewDocFragment);
+                break;
         }
         ft.commit();
     }
@@ -849,12 +755,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         if (mWebbrowseFragment != null) {
             ft.hide(mWebbrowseFragment);
         }
+        if (mOverViewDocFragment != null) {
+            ft.hide(mOverViewDocFragment);
+        }
 
     }
 
     private void initView() {
         mMeetingCompanyName = (TextView) findViewById(R.id.meeting_company_name);
-        mMeetActivityLayout = (LinearLayout) findViewById(R.id.meetActivity_layout);
         mMeetingTheme = (TextView) findViewById(R.id.meeting_theme);
         mMeetingMessage = (ImageButton) findViewById(R.id.meeting_message);
         /** ************ ******  设置未读消息展示  ****** ************ **/
@@ -865,22 +773,17 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mBadge.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
             @Override
             public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-
+                //只需要空实现，就可以拖拽消除未读消息
             }
         });
-
         mMeetingChatOnline = (ImageButton) findViewById(R.id.meeting_chat_online);
         mMeetingNowTime = (TextView) findViewById(R.id.meeting_now_time);
         mMeetingNowDate = (TextView) findViewById(R.id.meeting_now_date);
         mMeetingNowWeek = (TextView) findViewById(R.id.meeting_now_week);
-        mTheNowDate = (LinearLayout) findViewById(R.id.the_now_date);
         mAttendee = (TextView) findViewById(R.id.meeting_participate_name);
         mCompere = (TextView) findViewById(R.id.meeting_host_name);
-        mLeftLayout = (LinearLayout) findViewById(R.id.left_layout);
-        mRightLayout = (FrameLayout) findViewById(R.id.right_layout);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         fragment_layout = (LinearLayout) findViewById(R.id.fragment_layout);
-
         mMeetingMessage.setOnClickListener(this);
         mMeetingChatOnline.setOnClickListener(this);
         mFab.setOnClickListener(this);
@@ -890,51 +793,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.meeting_message:
-//                setImgSelect(5,mImages);
                 showFragment(4);
+                MeetChatIV.setSelected(true);
                 break;
             case R.id.meeting_chat_online:
                 // TODO: 2018/2/7 打开发送服务选项
                 showSendFunctionMsg();
                 break;
-//            case R.id.signin:
-//                setImgSelect(0);
-//                showFragment(0);
-//                break;
-//            case R.id.agenda:
-//                showFragment(1);
-//                setImgSelect(1);
-//                break;
-//            case R.id.meetingfile:
-//                showFragment(2);
-//                setImgSelect(2);
-//                break;
-//            case R.id.sharedfile:
-//                showFragment(3);
-//                setImgSelect(3);
-//                break;
-//            case R.id.whiteboard://跳转到画板
-//                startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
-//                break;
-//            case R.id.chat:
-//                showFragment(5);
-//                setImgSelect(5);
-//                break;
-//            case R.id.video:
-//                showFragment(6);
-//                setImgSelect(6);
-//                break;
-//            case R.id.vote:
-//                showFragment(7);
-//                setImgSelect(7);
-//                break;
-//            case R.id.postil:
-//                showFragment(8);
-//                setImgSelect(8);
-//                break;
-//            case R.id.webbrowse:
-//                showFragment(9);
-//                break;
             case R.id.fab:
                 showFabPop();
                 break;
@@ -1048,26 +913,15 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      */
     public void showFabPop() {
         View popupView = getLayoutInflater().inflate(R.layout.pop_meeting, null);
-        mPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        mFabPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
         //设置动画
-        mPopupWindow.setAnimationStyle(R.style.AnimHorizontal);
-
-//        try {
-//            //92.查询参会人员
-//            nativeUtil.queryAttendPeople();
-//            //181.查询会议排位
-//            nativeUtil.queryMeetRanking();
-//            //6.查询设备信息
-//            nativeUtil.queryDeviceInfo();
-//        } catch (InvalidProtocolBufferException e) {
-//            e.printStackTrace();
-//        }
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-        mPopupWindow.setTouchable(true);
-        mPopupWindow.setOutsideTouchable(true);
+        mFabPop.setAnimationStyle(R.style.AnimHorizontal);
+        mFabPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mFabPop.setTouchable(true);
+        mFabPop.setOutsideTouchable(true);
         FabViewHolder holder = new FabViewHolder(popupView);
         Fab_Event(holder);
-        mPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+        mFabPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
     /**
@@ -1095,10 +949,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 setAnimator(holder.screens);
-                mPopupWindow.dismiss();
-                Bitmap bitmap = ScreenUtils.snapShotWithStatusBar(context);
+                mFabPop.dismiss();
+                Intent intent = new Intent(MeetingActivity.this, PostilActivity.class);
+                //截图并将得到的bitmap转为byte数组传递给批注页面
+                intent.putExtra("screenshot", FileUtil.Bitmap2bytes(ScreenUtils.snapShotWithStatusBar(context)));
+                startActivity(intent);
                 //截图预览
-                previewPic(bitmap);
+//                MyUtils.previewPic(context,ScreenUtils.snapShotWithStatusBar(context),findViewById(R.id.meeting_layout_id));
             }
         });
         //同屏控制
@@ -1106,7 +963,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 setAnimator(holder.oneScreen);
-                mPopupWindow.dismiss();
+                mFabPop.dismiss();
                 //打开同屏控制弹出框
                 // TODO: 2018/2/6 打开同屏控制
                 showScreensPop();
@@ -1117,7 +974,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 setAnimator(holder.backPop);
-                mPopupWindow.dismiss();
+                mFabPop.dismiss();
             }
         });
         //投影控制
@@ -1156,35 +1013,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         });
     }
 
-    private void previewPic(Bitmap bitmap) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        Log.e("MyLog", "MeetingActivity.previewPic 1160行:   得到的截图宽高--->>> " + width + "   " + height);
-        float scale = 0.5f;
-//        Matrix matrix = new Matrix();
-//        matrix.setScale(scale, scale);
-//        Bitmap newBmp = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-
-        View inflate = LayoutInflater.from(context).inflate(R.layout.preview_pop, null);
-        PopupWindow preViewPop = new PopupWindow(inflate,
-                PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-        preViewPop.setBackgroundDrawable(new BitmapDrawable(context.getResources(), (Bitmap) null));
-        preViewPop.setTouchable(true);
-        preViewPop.setFocusable(true);
-        preViewPop.setOutsideTouchable(true);
-        ImageView previewIV = inflate.findViewById(R.id.preview_iv);
-        //需要先将BitMap转为字节
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] bytes = baos.toByteArray();
-        Glide.with(context)
-                .load(bytes)
-                .override((int) (width * scale), (int) (height * scale))
-                .into(previewIV);
-        preViewPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.BOTTOM, 0, 0);
-    }
-
-
     /**
      * 打开会议笔记
      */
@@ -1196,7 +1024,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mNotePop.setTouchable(true);
         mNotePop.setFocusable(true);
         mNotePop.setOutsideTouchable(true);
-        setBackgroundAlpha(context, 0.5f);//设置背景半透明
+//        setBackgroundAlpha(context, 0.5f);//设置背景半透明
         final NoteViewHolder holder = new NoteViewHolder(popupView);
         NoteHolderEvent(holder);
         //当弹出框隐藏时就会调用
@@ -1297,7 +1125,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * 投影控制 事件监听
-     *
      * @param holder
      */
     private void Pro_Event(final ProViewHolder holder) {
@@ -1449,14 +1276,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      */
     private void showScreensPop() {
         View popupView = getLayoutInflater().inflate(R.layout.pop_sscreen, null);
-        mScreenPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-        MyUtils.setPopAnimal(mScreenPopupWindow);
-        mScreenPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-        mScreenPopupWindow.setTouchable(true);
-        mScreenPopupWindow.setOutsideTouchable(true);
+        mScreenPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setPopAnimal(mScreenPop);
+        mScreenPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mScreenPop.setTouchable(true);
+        mScreenPop.setOutsideTouchable(true);
         ScreenViewHolder holder = new ScreenViewHolder(popupView);
         Screen_Event(holder);
-        mScreenPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+        mScreenPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
     /**
@@ -1472,9 +1299,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     for (int i = 0; i < checks.size(); i++) {
                         checks.set(i, true);
                     }
-                    //直接获取全部的数据 onLineMembers
-                    // TODO: 2018/2/2 获取到选中的人员
-                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
                 }
             }
         });
@@ -1497,7 +1321,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     for (int i = 0; i < checkProOL.size(); i++) {
                         checkProOL.set(i, true);
                     }
-                    List<DeviceInfo> checkedIds = onLineProjectorAdapter.getCheckedIds(0);
                 }
             }
         });
@@ -1514,20 +1337,19 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 sameMemberDevRrsIds = new ArrayList<Integer>();
                 sameMemberDevIds = new ArrayList<Integer>();
-                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
-                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
-                    for (int i = 0; i < checkedIds.size(); i++) {
-                        sameMemberDevIds.add(checkedIds.get(i).getDevId());
-                    }
-                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
-                    for (int i = 0; i < checkedIds1.size(); i++) {
-                        sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
-                    }
-                }
+//                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
+//                    List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
+//                    for (int i = 0; i < checkedIds.size(); i++) {
+//                        sameMemberDevIds.add(checkedIds.get(i).getDevId());
+//                    }
+//                    List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
+//                    for (int i = 0; i < checkedIds1.size(); i++) {
+//                        sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
+//                    }
+//                }
                 sameMemberDevRrsIds.add(0);
                 sameMemberDevIds.add(0x1100003);//要播放的屏幕源  要同屏的人员
                 /** ************ ******  流播放  ******0x1080004 ************ **/
-                Log.e("MyLog", "MeetingActivity.onClick 1417行:   --->>> /** ************ ******    ****** ************ **/");
                 nativeUtil.streamPlay(DevMeetInfo.getDeviceid(), 2, 0,
                         sameMemberDevRrsIds, sameMemberDevIds);
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
@@ -1554,7 +1376,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mScreenPopupWindow.dismiss();
+                mScreenPop.dismiss();
             }
         });
 
@@ -1613,8 +1435,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.join_watch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<InterfaceDevice.pbui_Item_DeviceResPlay> checkedMembers = joinMemberAdapter.getCheckeds(1);
-                List<InterfaceDevice.pbui_Item_DeviceResPlay> checkedProjectors = joinProjectorAdapter.getCheckeds(0);
             }
         });
         // 取消
@@ -1645,7 +1465,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             this.stop_pro = (Button) rootView.findViewById(R.id.stop_pro);
             this.pro_cancel = (Button) rootView.findViewById(R.id.pro_cancel);
         }
-
     }
 
     //同屏控制
@@ -1671,7 +1490,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             this.join_btn = (Button) rootView.findViewById(R.id.join_btn);
             this.cancel_btn = (Button) rootView.findViewById(R.id.cancel_btn);
         }
-
     }
 
     /**
@@ -1679,11 +1497,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
      */
     private void showPlayerPop() {
         View popupView = getLayoutInflater().inflate(R.layout.player_pop, null);
-        mPlayerPopupWindow = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-        MyUtils.setPopAnimal(mPlayerPopupWindow);
-        mPlayerPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-        mPlayerPopupWindow.setTouchable(true);
-        mPlayerPopupWindow.setOutsideTouchable(true);
+        mPlayerPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        MyUtils.setPopAnimal(mPlayerPop);
+        mPlayerPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mPlayerPop.setTouchable(true);
+        mPlayerPop.setOutsideTouchable(true);
         try {
             //6.查询设备信息（查找在线的投影机）
             nativeUtil.queryDeviceInfo();
@@ -1692,7 +1510,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         }
         PlayerViewHolder holder = new PlayerViewHolder(popupView);
         Player_Event(holder);
-        mPlayerPopupWindow.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+        mPlayerPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
     /**
@@ -1792,7 +1610,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
                     Log.e("MyLog", "MeetingActivity.onClick 1266行:  选中投影机数量 --->>> " + checkedIds1.size());
                 }
-                mPlayerPopupWindow.dismiss();
+                mPlayerPop.dismiss();
                 onLineMemberAdapter.notifyDataSetChanged();
                 onLineProjectorAdapter.notifyDataSetChanged();
             }
@@ -1801,7 +1619,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         holder.playerPopCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPlayerPopupWindow.dismiss();
+                mPlayerPop.dismiss();
             }
         });
     }

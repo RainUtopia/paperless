@@ -590,6 +590,8 @@ Pb_MEETSEAT_PROPERTY_ISCOMPEREEBYMEMBERID=		5; //按人员ID判断当前人员�
 Pb_MEETSEAT_PROPERTY_ISCOMPEREEBYDEVICEID=		6; //按设备ID判断当前人员是不是主持人 query(fixed32)
 Pb_MEETSEAT_PROPERTY_MEMBERIDBYROLE=	7; //返回等于role的人员ID query(fixed32)
 Pb_MEETSEAT_PROPERTY_DEVICEIDBYROLE=	8; //返回等于role的设备ID query(fixed32)
+Pb_MEETSEAT_PROPERTY_COMPEEMEMID=	9; //返回当前会议主持人的人员ID query(fixed32)
+Pb_MEETSEAT_PROPERTY_COMPEEDEVID=	10; //返回当前会议主持人的设备ID query(fixed32)
 }
 
 //会议交流信息

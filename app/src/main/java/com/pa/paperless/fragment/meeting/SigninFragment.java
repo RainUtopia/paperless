@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
@@ -223,10 +224,16 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 /** ************ ******  206.查询签到  ****** ************ **/
                 nativeUtil.querySign();
                 break;
-            case IDEventMessage.MEMBER_CHANGE_INFORM:
-                Log.e("MyLog", "SigninFragment.getEventMessage:  参会人员变更通知 EventBus --->>> ");
-                /** ************ ******  92.查询参会人员  ****** ************ **/
+//            case IDEventMessage.MEMBER_CHANGE_INFORM:
+//                Log.e("MyLog", "SigninFragment.getEventMessage:  参会人员变更通知 EventBus --->>> ");
+//                /** ************ ******  92.查询参会人员  ****** ************ **/
+//                nativeUtil.queryAttendPeople();
+//                break;
+            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 nativeUtil.queryAttendPeople();
+                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
                 break;
         }
     }
@@ -335,25 +342,11 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
-                //获取之前的未读消息个数
-                int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all = badgeNumber1 + 1;
-                if (receiveMsg != null) {
-                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
-                    if (mReceiveMsg == null) {
-                        mReceiveMsg = new ArrayList<>();
-                    }
-                    receiveMeetIMInfos.get(0).setType(true);
-                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
-                }
-                List<EventBadge> num = new ArrayList<>();
-                num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
+                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result,nativeUtil);
+                break;
+            // TODO: 2018/4/11 使用对比可以获得名字
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
                 break;
 
             case IDivMessage.QUERY_CONFORM_DEVID: //125.查询符合要求的设备ID

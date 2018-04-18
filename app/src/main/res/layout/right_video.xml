@@ -1,54 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.zhy.android.percent.support.PercentRelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        android:layout_weight="7">
 
-        <SurfaceView
-            android:id="@+id/top_left_video"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="1dp"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%" />
-
-        <SurfaceView
-            android:id="@+id/top_right_video"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="1dp"
-            android:layout_toRightOf="@id/top_left_video"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%" />
-
-        <SurfaceView
-            android:id="@+id/bottom_left_video"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_below="@id/top_left_video"
-            android:layout_margin="1dp"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%" />
-
-        <SurfaceView
-            android:id="@+id/bottom_right_video"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_below="@id/top_right_video"
-            android:layout_margin="1dp"
-            android:layout_toRightOf="@id/bottom_left_video"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%" />
-    </com.zhy.android.percent.support.PercentRelativeLayout>
-
-    <com.zhy.android.percent.support.PercentLinearLayout
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="2dp"
@@ -58,44 +16,32 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="视屏直播列表"
-            app:layout_heightPercent="10%" />
+            android:text="视屏直播列表" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/video_lv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_heightPercent="60%" />
+            android:layout_weight="6" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_heightPercent="10%">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/look_video_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/select_press"
-                android:text="观看直播"
-                android:textColor="@color/CardBackgroundColor" />
+                style="@style/VideoFragmentBtn"
+                android:text="观看直播" />
 
             <Button
                 android:id="@+id/stop_video_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/select_press"
-                android:text="停止观看"
-                android:textColor="@color/CardBackgroundColor" />
+                style="@style/VideoFragmentBtn"
+                android:text="停止观看" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,31 +49,18 @@
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_heightPercent="10%">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/push_video_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/select_press"
-                android:text="推送视屏"
-                android:textColor="@color/CardBackgroundColor" />
+                style="@style/VideoFragmentBtn"
+                android:text="推送视屏" />
 
             <Button
                 android:id="@+id/projector_video_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/select_press"
-                android:text="投影视屏"
-                android:textColor="@color/CardBackgroundColor" />
+                style="@style/VideoFragmentBtn"
+                android:text="投影视屏" />
         </LinearLayout>
-    </com.zhy.android.percent.support.PercentLinearLayout>
-
-</com.zhy.android.percent.support.PercentLinearLayout>
+    </LinearLayout>
+</LinearLayout>

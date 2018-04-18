@@ -19,9 +19,7 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,13 +32,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Xml;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -53,7 +47,6 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
-import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceMacro;
@@ -66,11 +59,13 @@ import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
+import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.fragment.meeting.OverviewDocFragment;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
-import com.pa.paperless.utils.Convert;
 import com.pa.paperless.utils.Dispose;
+import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.views.ColorPickerDialog;
 import com.wind.myapplication.NativeUtil;
@@ -83,13 +78,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -146,6 +137,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private static int IMAGE_CODE = 1;
     private boolean isSharing = false;//是否共享中
     private int launchPersonId = MainActivity.getLocalInfo().getMemberid();//默认发起的人员ID是本机
+    public static boolean ISFROMDOCUMENTFRAGMENT = false;//初始化是否从外部文档打开
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -185,6 +177,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private PointF p1;
     private PointF p2;
     private List<DrawPath> pathList;
+    private byte[] screenshot;
+    private byte[] documentfragmentPic;
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
@@ -286,10 +280,10 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                 if (next.path != null) {
                     canvas.drawPath(next.path, next.paint);
                 } else if (next.text != null) {
-                    if(next.lw <next.rw) {
+                    if (next.lw < next.rw) {
                         addfunDraw(next.paint, next.height, next.cansee, (int) next.pointF.x, (int) next.pointF.y, next.text);
-                    }else {
-                        canvas.drawText(next.text,next.pointF.x,next.pointF.y,next.paint);
+                    } else {
+                        canvas.drawText(next.text, next.pointF.x, next.pointF.y, next.paint);
                     }
                 }
             }
@@ -567,6 +561,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         initImages();
         initDefaultColor();
         context = this;
+        getIntentData();
         imageView.post(new Runnable() {
             @Override
             public void run() {
@@ -576,6 +571,15 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             }
         });
         EventBus.getDefault().register(this);
+    }
+
+    /**
+     * 获取到传递其它页面过来的数据
+     */
+    private void getIntentData() {
+        Intent intent = getIntent();
+        screenshot = intent.getByteArrayExtra("postilpic");
+        documentfragmentPic = intent.getByteArrayExtra("documentfragment");
     }
 
     /**
@@ -780,9 +784,20 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         baseBmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(baseBmp);
         dstbmp = ((BitmapDrawable) imageView.getBackground()).getBitmap();
-        pathList = new ArrayList<>();
+        //判断打开画板的时候，是否是从外部文档打开的
+        if (ISFROMDOCUMENTFRAGMENT) {
+//            File file = new File(Macro.MEETFILE, OverviewDocFragment.now_time + ".jpg");
+            Bitmap bitmap = BitmapFactory.decodeFile(Macro.MEETFILE + OverviewDocFragment.now_time + ".jpg");
+            canvas.drawBitmap(bitmap, 0, 0, new Paint());
+            ISFROMDOCUMENTFRAGMENT = false;
+        }
+        if (screenshot != null) {
+            canvas.drawBitmap(FileUtil.bytes2Bitmap(screenshot), 0, 0, new Paint());
+        }
         imageView.setImageBitmap(baseBmp);
+        pathList = new ArrayList<>();
         points = new ArrayList<>();
+
         Log.i("MyLog", "new points arraylist");
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override

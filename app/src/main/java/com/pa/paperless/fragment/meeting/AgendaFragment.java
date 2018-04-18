@@ -12,19 +12,21 @@ import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceAgenda;
+import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.AgendaAdapter;
 import com.pa.paperless.bean.AgendContext;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.event.EventAgenda;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
+import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -123,16 +125,21 @@ public class AgendaFragment extends BaseFragment implements CallListener {
         return inflate;
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getEventAgenda(EventAgenda eventAgenda) {
-        Log.e("MyLog","AgendaFragment.getEventAgenda:  查询议程 EventBus --->>> ");
-        nativeUtil = NativeUtil.getInstance();
-        try {
-            nativeUtil.queryAgenda();
-        } catch (InvalidProtocolBufferException e) {
-            e.printStackTrace();
+    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
+        switch (message.getAction()) {
+            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
+                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
+                break;
+            case IDEventMessage.AGENDA_CHANGE_INFO:
+                nativeUtil.queryAgenda();
+                break;
         }
     }
+
 
     @Override
     public void onDestroy() {
@@ -174,28 +181,14 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
-                //获取之前的未读消息个数
-                int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all =  badgeNumber1 + 1;
-                if (receiveMsg != null) {
-                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
-                    if (mReceiveMsg == null) {
-                        mReceiveMsg = new ArrayList<>();
-                    }
-                    receiveMeetIMInfos.get(0).setType(true);
-                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
-                }
-                List<EventBadge> num = new ArrayList<>();
-                num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
+                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result,nativeUtil);
+                break;
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
                 break;
         }
     }
+
 
     @Override
     public void onHiddenChanged(boolean hidden) {

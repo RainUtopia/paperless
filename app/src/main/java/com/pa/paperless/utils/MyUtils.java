@@ -1,5 +1,7 @@
 package com.pa.paperless.utils;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
@@ -27,14 +29,26 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.PeletteActivity;
+import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.Macro;
+import com.pa.paperless.event.EventBadge;
+import com.pa.paperless.event.EventMessage;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -59,6 +73,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.pa.paperless.activity.MeetingActivity.mBadge;
+import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
+import static com.pa.paperless.activity.PeletteActivity.context;
 import static com.pa.paperless.utils.FileUtil.getMIMEType;
 
 /**
@@ -66,6 +83,52 @@ import static com.pa.paperless.utils.FileUtil.getMIMEType;
  */
 
 public class MyUtils {
+
+
+    /**
+     * 收到会议消息 发送EventBus通知
+     *
+     * @param result
+     */
+    public static void receiveMessage(InterfaceIM.pbui_Type_MeetIM result, NativeUtil nativeUtil) {
+        InterfaceIM.pbui_Type_MeetIM receiveMsg = result;
+        //获取之前的未读消息个数
+        int badgeNumber1 = mBadge.getBadgeNumber();
+        Log.e("MyLog", "MyUtils.receiveMessage :  原来的个数 --->>> " + badgeNumber1);
+        int all = badgeNumber1 + 1;
+        if (receiveMsg != null) {
+            List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
+            receiveMeetIMInfos.get(0).setType(true);
+            mReceiveMsg.add(receiveMeetIMInfos.get(0));
+            try {
+                //查询指定ID的参会人  获取名称
+                nativeUtil.queryAttendPeopleFromId(receiveMeetIMInfos.get(0).getMemberid());
+            } catch (InvalidProtocolBufferException e) {
+                e.printStackTrace();
+            }
+            Log.e("MyLog", "MyUtils.receiveMessage : 收到的信息个数：  --->>> " + mReceiveMsg.size());
+        }
+        List<EventBadge> num = new ArrayList<>();
+        num.add(new EventBadge(all));
+        // TODO: 2018/3/7 通知界面更新
+        Log.e("MyLog", "MyUtils.receiveMessage :  传递过去的个数 --->>> " + all);
+        EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
+    }
+
+    /**
+     * case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+     * MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
+     * break;
+     */
+    public static void queryName(InterfaceMember.pbui_Type_MemberDetailInfo result) {
+        InterfaceMember.pbui_Type_MemberDetailInfo o2 = result;
+        List<InterfaceMember.pbui_Item_MemberDetailInfo> itemList = o2.getItemList();
+        if (itemList != null) {
+            String name = MyUtils.getBts(itemList.get(0).getName());
+            mReceiveMsg.get(mReceiveMsg.size() - 1).setName(name);
+            Log.e("MyLog", "ChatFragment.handleMessage:  指定参会人名称： --->>> " + name);
+        }
+    }
 
     /**
      * 检查网络是否可用
@@ -238,19 +301,71 @@ public class MyUtils {
         }
     }
 
+    /**
+     * 在MEETFILE目录下创建文件
+     *
+     * @param dir
+     */
     public static void CreateFile(String dir) {
         File file2 = new File(Macro.MEETFILE);
         File file3 = new File(dir);
+        if(file3.exists()){
+            return;
+        }
         if (!file2.exists()) {
             boolean mkdir = file2.mkdir();
-            if(mkdir) {
+            if (mkdir) {
                 file3.mkdir();
             }
-        }else {
+        } else {
             file3.mkdir();
         }
     }
 
+    /**
+     * 截图预览
+     *
+     * @param bitmap
+     */
+    public static void previewPic(Context context, Bitmap bitmap, View parent) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float scale = 0.4f;
+        final View inflate = LayoutInflater.from(context).inflate(R.layout.preview_pop, null);
+        final PopupWindow preViewPop = new PopupWindow(inflate,
+                PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
+        preViewPop.setBackgroundDrawable(new BitmapDrawable(context.getResources(), (Bitmap) null));
+        preViewPop.setTouchable(true);
+        preViewPop.setFocusable(true);
+        preViewPop.setOutsideTouchable(true);
+        ImageView previewIV = inflate.findViewById(R.id.preview_iv);
+        //需要先将BitMap转为字节
+        final byte[] bytes = FileUtil.Bitmap2bytes(bitmap);
+        Glide.with(context)
+                .load(bytes)
+                .override((int) (width * scale), (int) (height * scale))
+                .into(previewIV);
+        final ObjectAnimator animator = ObjectAnimator.ofFloat(previewIV, "alpha", 1.0f, 0.0f);
+        animator.setDuration(5000);
+        animator.start();
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                preViewPop.dismiss();
+            }
+        });
+        previewIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("MyLog", "MyUtils.onClick 352行:  点击了预览图片 --->>> ");
+//                Intent intent = new Intent(MeetingActivity.this, PostilActivity.class);
+//                intent.putExtra("bitmap", bytes);
+//                startActivity(intent);
+            }
+        });
+        preViewPop.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+    }
 
     /**
      * 设置popupWindow 的动画

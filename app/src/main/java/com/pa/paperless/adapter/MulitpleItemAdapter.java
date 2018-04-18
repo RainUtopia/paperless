@@ -2,6 +2,7 @@ package com.pa.paperless.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class MulitpleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             long utcsecond = receiveMeetIMInfo.getUtcsecond();
             String time = DateUtil.getTim(utcsecond);
             String name = receiveMeetIMInfo.getName();
+            Log.e("MyLog","MulitpleItemAdapter.onBindViewHolder 59行:  发送人的名字 --->>> "+name);
             ((LeftViewHolder) holder).left_name.setText(name + "  " + time );
             ((LeftViewHolder) holder).left_send_message.setText(msg);
         } else {

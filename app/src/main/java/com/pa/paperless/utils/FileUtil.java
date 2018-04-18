@@ -3,12 +3,17 @@ package com.pa.paperless.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +22,48 @@ import java.util.List;
  */
 
 public class FileUtil {
+
+    /**
+     * 将BitMap转为byte数组
+     * @param bitmap
+     * @return
+     */
+    public static byte[] Bitmap2bytes(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
+    /**
+     * byte数组转bitmap
+     * @param bytes
+     * @return
+     */
+    public static Bitmap bytes2Bitmap(byte[] bytes) {
+        if (bytes != null) {
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 将BitMap保存到指定目录下
+     * @param bitmap
+     * @param file
+     */
+    public static void saveBitmap(Bitmap bitmap,File file){
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 判断是否为视频文件
@@ -130,22 +177,22 @@ public class FileUtil {
      * @return
      */
     public List<String> getFileDir(String filePath, String type) {
-        List<String> picList = new ArrayList<String>();
+        List<String> PathList = new ArrayList<String>();
         try {
             File f = new File(filePath);
-            File[] files = f.listFiles();// 列出所有文件
-            // 将所有的文件存入ArrayList中,并过滤所有图片格式的文件
+            File[] files = f.listFiles();// 列出目录下所有的文件
+            // 将所有的文件存入ArrayList中,并过滤所有type格式的文件路径
             for (int i = 0; i < files.length; i++) {
                 File file = files[i];
                 if (checkIsImageFile(file.getPath(), type)) {
-                    picList.add(file.getPath());
+                    PathList.add(file.getPath());
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        // 返回得到的图片列表
-        return picList;
+        // 返回得到的路径列表
+        return PathList;
     }
 
     // 检查扩展名，得到图片格式的文件
@@ -165,23 +212,6 @@ public class FileUtil {
 
     }
 
-    /**
-     * 如果文件不存在，就创建文件
-     *
-     * @param path 文件路径
-     * @return
-     */
-    public static String createIfNotExist(String path) {
-        File file = new File(path);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return path;
-    }
 
     /**
      * 向文件中写入数据
@@ -223,43 +253,6 @@ public class FileUtil {
         return null;
 
     }
-
-    /**
-     * 向文件中写入字符串String类型的内容
-     *
-     * @param file    文件路径
-     * @param content 文件内容
-     * @param charset 写入时候所使用的字符集
-     */
-    public static void writeString(String file, String content, String charset) {
-        try {
-            byte[] data = content.getBytes(charset);
-            writeBytes(file, data);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    /**
-     * 从文件中读取数据，返回类型是字符串String类型
-     *
-     * @param file    文件路径
-     * @param charset 读取文件时使用的字符集，如utf-8、GBK等
-     * @return
-     */
-    public static String readString(String file, String charset) {
-        byte[] data = readBytes(file);
-        String ret = null;
-
-        try {
-            ret = new String(data, charset);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return ret;
-    }
-
 
     /**
      * 打开文件
@@ -310,23 +303,6 @@ public class FileUtil {
         }
         return type;
 
-    }
-
-    /**
-     * 打开 WPS 文件
-     *
-     * @param context
-     * @param file
-     */
-    public static void openFileByWps(Context context, File file) {
-        Intent intent = new Intent();
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setClassName("cn.wps.moffice", "cn.wps.moffice.documentmanager.PreStartActivity");
-        Uri uri = Uri.fromFile(file);
-        intent.setData(uri);
-        context.startActivity(intent);
     }
 
     //建立一个MIME类型与文件后缀名的匹配表

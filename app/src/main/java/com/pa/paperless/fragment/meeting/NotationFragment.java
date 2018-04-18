@@ -1,6 +1,5 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,15 +17,13 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.PostilActivity;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
-import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
-import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
@@ -43,8 +40,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.mBadge;
-import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -65,8 +60,8 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case IDivMessage.QUERY_MEET_DIR_FILE:
-                    ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("queryMeetDirFile");
+                case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件 批注文件的索引是2
+                    ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("notationqueryMeetDirFile");
                     InterfaceFile.pbui_Type_MeetDirFileDetailInfo o = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
                     meetDirFileInfos = Dispose.MeetDirFile(o);
                     if (meetDirFileInfos != null) {
@@ -89,7 +84,9 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
 
         }
     };
+    //所有批注文件
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
+    //用于临时存放不同类型的文件
     private List<MeetDirFileInfo> mData = new ArrayList<>();
 
     @Nullable
@@ -102,7 +99,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         mBtns.add(mDocument);
         mBtns.add(mPicture);
         try {
-            nativeUtil.queryMeetDir();
+//            nativeUtil.queryMeetDir();
             //136.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
             nativeUtil.queryMeetDirFile(2);
         } catch (InvalidProtocolBufferException e) {
@@ -116,8 +113,14 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM:
-                InterfaceBase.pbui_MeetNotifyMsgForDouble object = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
-                nativeUtil.queryMeetDirFile(object.getId());
+                if (!isHidden()) {
+                    nativeUtil.queryMeetDirFile(2);
+                }
+                break;
+            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
+                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
                 break;
         }
     }
@@ -187,31 +190,25 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
             File file1 = new File(dir);
             if (!file1.exists()) {//文件不存在
                 final String finalFile = dir;
-                hintDownload(posion, finalFile, "文件不存在，是否先下载？");
-            } else if (file1.length() != filesize) {//文件大小与服务器中不同
-                file1.delete();//目前采用删除再下载
+                hintDownload(posion, finalFile, "文件不存在，是否先下载？", file1);
+            } else if (file1.length() != filesize) {//文件不是最新文件
                 final String finalFile = dir;
-                hintDownload(posion, finalFile, "本地文件与当前文件不符，是否重新下载？");
-            } else {
-                if (FileUtil.isPictureFile(filename)) {
-                    //已经存在才打开文件
-                    Intent intent = new Intent(getActivity().getBaseContext(), PostilActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("filepath", dir);
-                    intent.putExtra("postil", bundle);
-                    startActivity(intent);
-                } else {
-                    FileUtil.openFile(getContext(), file1);
-                }
+                hintDownload(posion, finalFile, "本地文件与当前文件不符，是否重新下载？", file1);
+            } else {//文件是最新文件
+                FileUtil.openFile(getContext(), file1);
             }
         }
     }
 
-    private void hintDownload(final int posion, final String finalFile, String showMeg) {
+    private void hintDownload(final int posion, final String finalFile, String showMeg, final File oldFile) {
         Snackbar.make(getView(), showMeg, Snackbar.LENGTH_LONG)
                 .setAction(" 下载 ", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (oldFile.exists()) {
+                            //点击了下载才删除
+                            oldFile.delete();//目前采用删除再下载
+                        }
                         nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
                     }
                 }).show();
@@ -324,39 +321,14 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_MEET_DIR_FILE:
-                InterfaceFile.pbui_Type_MeetDirFileDetailInfo result1 = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) result;
-                if (result1 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result1);
-                    bundle.putParcelableArrayList("queryMeetDirFile", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_MEET_DIR_FILE, (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) result, "notationqueryMeetDirFile", mHandler);
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                InterfaceIM.pbui_Type_MeetIM receiveMsg = (InterfaceIM.pbui_Type_MeetIM) result;
-                //获取之前的未读消息个数
-                int badgeNumber1 = mBadge.getBadgeNumber();
-                Log.e("MyLog", "SigninFragment.callListener 307行:  原来的个数 --->>> " + badgeNumber1);
-                int all = badgeNumber1 + 1;
-                if (receiveMsg != null) {
-                    List<ReceiveMeetIMInfo> receiveMeetIMInfos = Dispose.ReceiveMeetIMinfo(receiveMsg);
-                    if (mReceiveMsg == null) {
-                        mReceiveMsg = new ArrayList<>();
-                    }
-                    receiveMeetIMInfos.get(0).setType(true);
-                    mReceiveMsg.add(receiveMeetIMInfos.get(0));
-                    Log.e("MyLog", "SigninFragment.callListener: 收到的信息个数：  --->>> " + mReceiveMsg.size());
-                }
-                List<EventBadge> num = new ArrayList<>();
-                num.add(new EventBadge(all));
-                // TODO: 2018/3/7 通知界面更新
-                Log.e("MyLog", "SigninFragment.callListener 319行:  传递过去的个数 --->>> " + all);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.UpDate_BadgeNumber, num));
+                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
+                break;
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
                 break;
         }
     }
@@ -364,8 +336,13 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            nativeUtil = NativeUtil.getInstance();
-            nativeUtil.setCallListener(this);
+            initController();
+            try {
+                //136.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
+                nativeUtil.queryMeetDirFile(2);
+            } catch (InvalidProtocolBufferException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
