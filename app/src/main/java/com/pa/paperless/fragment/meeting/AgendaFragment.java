@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceAgenda;
@@ -16,15 +17,12 @@ import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
-import com.pa.paperless.adapter.AgendaAdapter;
 import com.pa.paperless.bean.AgendContext;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
@@ -36,9 +34,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.mBadge;
-import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
-
 /**
  * Created by Administrator on 2017/11/1.
  * 公告议程-议程
@@ -47,7 +42,7 @@ import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 public class AgendaFragment extends BaseFragment implements CallListener {
 
     private NativeUtil nativeUtil;
-    private ListView agenda_lv;
+    private TextView agenda_tv;
     List<AgendContext> mData;
     private Handler mHandler = new Handler() {
         @Override
@@ -81,31 +76,29 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                         //媒体ID
                         int mediaid = o.getMediaid();
                         //议程文本
-                        String text = new String(o.getText().toByteArray());
-                        Log.e("MyLog","AgendaFragment.handleMessage:  agendatype --->>> "+agendatype+"   mediaid : "+mediaid+"   text:  "+text);
+                        String  text = new String(o.getText().toByteArray());
+                        Log.e("MyLog","AgendaFragment.handleMessage:  agendatype --->>> "+agendatype+"   mediaid : "+mediaid+"   text:  "+ text);
                         //时间轴式
-                        for (int i = 0; i < o.getItemCount(); i++) {
-                            InterfaceAgenda.pbui_ItemAgendaTimeInfo item = o.getItem(i);
-                            int agendaid = item.getAgendaid();  //议程ID
-                            int status = item.getStatus();      //议程状态
-                            int dirid = item.getDirid();        //绑定目录ID
-                            long startutctime = item.getStartutctime();
-                            long endutctime = item.getEndutctime();
-                            String sTime = DateUtil.getTime(startutctime);
-                            String eTime = DateUtil.getTime(endutctime);
-                            String time = sTime + "-" + eTime;  // 8:00-9:00
-                            String descText = new String(item.getDesctext().toByteArray());//描述内容
-                        }
-                        mData.add(new AgendContext(mediaid+"", text));
+//                        for (int i = 0; i < o.getItemCount(); i++) {
+//                            InterfaceAgenda.pbui_ItemAgendaTimeInfo item = o.getItem(i);
+//                            int agendaid = item.getAgendaid();  //议程ID
+//                            int status = item.getStatus();      //议程状态
+//                            int dirid = item.getDirid();        //绑定目录ID
+//                            long startutctime = item.getStartutctime();
+//                            long endutctime = item.getEndutctime();
+//                            String sTime = DateUtil.getTime(startutctime);
+//                            String eTime = DateUtil.getTime(endutctime);
+//                            String time = sTime + "-" + eTime;  // 8:00-9:00
+//                            String descText = new String(item.getDesctext().toByteArray());//描述内容
+//                        }
+//                        mData.add(new AgendContext(mediaid+"", text));
                         //设置数据
-                        setData(mData);
-                        agendaAdapter.notifyDataSetChanged();
+                        agenda_tv.setText(text);
                     }
                     break;
             }
         }
     };
-    private AgendaAdapter agendaAdapter;
 
     @Nullable
     @Override
@@ -114,14 +107,13 @@ public class AgendaFragment extends BaseFragment implements CallListener {
         initController();
         initView(inflate);
         mData = new ArrayList<>();
-        setData(mData);
+        EventBus.getDefault().register(this);
         try {
             //查询议程 -- 获取议程信息
             nativeUtil.queryAgenda();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
     }
 
@@ -154,30 +146,15 @@ public class AgendaFragment extends BaseFragment implements CallListener {
     }
 
     private void initView(View inflate) {
-        agenda_lv = (ListView) inflate.findViewById(R.id.agenda_lv);
+        agenda_tv = (TextView) inflate.findViewById(R.id.agenda_text);
     }
 
-    public void setData(List<AgendContext> data) {
-        Log.e("MyLog", "AgendaFragment.setData:  获取到了议程数据 --->>> ");
-        agendaAdapter = new AgendaAdapter(getContext(), data);
-        agenda_lv.setAdapter(agendaAdapter);
-    }
 
     @Override
     public void callListener(int action, Object result) {
         switch (action) {
             case IDivMessage.QUERY_AGENDA:
-                InterfaceAgenda.pbui_meetAgenda agenda = (InterfaceAgenda.pbui_meetAgenda) result;
-                if (agenda != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(agenda);
-                    bundle.putParcelableArrayList("agenda", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_AGENDA,(InterfaceAgenda.pbui_meetAgenda) result,"agenda",mHandler);
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");

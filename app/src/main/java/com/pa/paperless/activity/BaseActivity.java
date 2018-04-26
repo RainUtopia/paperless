@@ -1,7 +1,10 @@
 package com.pa.paperless.activity;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +12,7 @@ import android.widget.Toast;
 import com.pa.paperless.controller.BaseController;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.IModelChangeListener;
+import com.pa.paperless.utils.Convert;
 import com.wind.myapplication.NativeUtil;
 
 
@@ -19,7 +23,14 @@ import com.wind.myapplication.NativeUtil;
 public class BaseActivity extends AppCompatActivity implements IModelChangeListener {
 
     protected BaseController mController;
-    protected NativeUtil nativeUtil ;
+//    protected NativeUtil nativeUtil ;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        nativeUtil = NativeUtil.getInstance();
+//        nativeUtil.setCallListener(this);
+    }
 
     private Handler mHandler = new Handler() {
         @Override

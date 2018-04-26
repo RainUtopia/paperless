@@ -107,6 +107,12 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                         if (dirName.equals("共享文件")) {
                             Log.e("MyLog", "SharedFileFragment.handleMessage 102行:  136.查询会议目录  --->>> 文件名：" + dirName + "  目录ID ：" + id + " 父级ID： " + parentid);
                             meetDirInfos.add(new MeetDirBean(dirName, id, parentid));
+                            try {
+                                //查询会议目录文件
+                                nativeUtil.queryMeetDirFile(id);
+                            } catch (InvalidProtocolBufferException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     break;
@@ -147,9 +153,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         setBtnSelect(0);
         try {
             //136.查询会议目录
-//            nativeUtil.queryMeetDir();
+            nativeUtil.queryMeetDir();
             //143.查询会议目录文件（直接查询 共享资料(id 是固定为 1 )的文件）
-            nativeUtil.queryMeetDirFile(1);
+//            nativeUtil.queryMeetDirFile(1);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -165,9 +171,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     InterfaceBase.pbui_MeetNotifyMsgForDouble object = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
                     nativeUtil.queryMeetDirFile(object.getId());
                 }
-                break;
-            case IDEventMessage.DOWN_FINISH://67 下载进度回调
-                Toast.makeText(getActivity(), "  下载完成！ ", Toast.LENGTH_SHORT).show();
                 break;
             case IDEventMessage.MEETDIR_CHANGE_INFORM://135 会议目录变更通知
                 nativeUtil.queryMeetDir();
@@ -356,20 +359,18 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             Uri uri = data.getData();
             if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
                 path = uri.getPath();
-                Log.e("MyLog", "SharedFileFragment.onActivityResult 316行:  选中文件的path路径 --->>> " + path);
-                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
                 showDialog(path);
                 return;
             }
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {//4.4以后
                 path = getPath(getContext(), uri);
-                Log.e("MyLog", "SharedFileFragment.onActivityResult 322行:  选中文件的path路径 --->>> " + path);
-                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
             } else {//4.4以下下系统调用方法
                 path = getRealPathFromURI(uri);
-                Log.e("MyLog", "SharedFileFragment.onActivityResult 326行:  选中文件的path路径 --->>> " + path);
-                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
             }
+            Log.e("MyLog", "SharedFileFragment.onActivityResult 370行:  选中文件的path路径 --->>> " + path);
             showDialog(path);
         }
     }
@@ -713,7 +714,10 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         if (!hidden) {
             initController();
             try {
-                nativeUtil.queryMeetDirFile(1);
+                Log.e("MyLog", "SharedFileFragment.onHiddenChanged 716行:  不隐藏状态 --->>> ");
+                nativeUtil.queryMeetDir();
+//                nativeUtil.queryMeetDirFile(1);
+//                btn_document.performClick();
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }

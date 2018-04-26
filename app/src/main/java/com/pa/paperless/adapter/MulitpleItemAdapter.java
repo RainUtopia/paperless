@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.utils.DateUtil;
+import com.pa.paperless.utils.MyUtils;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MulitpleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<ReceiveMeetIMInfo> data;
 
 
-    public  enum ITEM_TYPE {
+    public enum ITEM_TYPE {
         SEND,       //发送
         RECEIVW     //接收
     }
@@ -57,23 +58,23 @@ public class MulitpleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             long utcsecond = receiveMeetIMInfo.getUtcsecond();
             String time = DateUtil.getTim(utcsecond);
             String name = receiveMeetIMInfo.getName();
-            Log.e("MyLog","MulitpleItemAdapter.onBindViewHolder 59行:  发送人的名字 --->>> "+name);
-            ((LeftViewHolder) holder).left_name.setText(name + "  " + time );
+            Log.e("MyLog", "MulitpleItemAdapter.onBindViewHolder 59行:  发送人的名字 --->>> " + name);
+            ((LeftViewHolder) holder).left_name.setText(name + "  " + time);
             ((LeftViewHolder) holder).left_send_message.setText(msg);
         } else {
-            String name = receiveMeetIMInfo.getName();
             List<String> strings = receiveMeetIMInfo.getNames();
             String time = DateUtil.getTim(receiveMeetIMInfo.getUtcsecond());
-            String receiveNames = name;
-            if(strings!=null){
-            for (int i = 0; i < strings.size(); i++) {
-                if (i < strings.size() - 1) {
-                    receiveNames += strings.get(i) + "，";
-                } else {
-                    receiveNames += strings.get(i);
+            String receiveNames = "";
+            if (strings != null) {
+                for (int i = 0; i < strings.size(); i++) {
+                    if (i < strings.size() - 1) {
+                        receiveNames += strings.get(i) + "，";
+                    } else {
+                        receiveNames += strings.get(i);
+                    }
                 }
-            }}
-            ((RightViewHolder) holder).right_name.setText("发给 【" + receiveNames + "】  " + receiveNames);
+            }
+            ((RightViewHolder) holder).right_name.setText("发给 【" + receiveNames + "】 " + time);
             ((RightViewHolder) holder).right_send_message.setText(receiveMeetIMInfo.getMsg());
         }
     }

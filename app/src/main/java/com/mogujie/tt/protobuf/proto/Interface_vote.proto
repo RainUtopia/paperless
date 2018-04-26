@@ -70,10 +70,10 @@ message pbui_Item_MeetVoteDetailInfo
 {
 	fixed32		voteid=1;
 	bytes		content=2; //投票内容 
-	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见Pb_MeetVoteType
+	fixed32			maintype=3;//类别 投票 选举 调查问卷 参见 Pb_MeetVoteType
 	fixed32			mode=4; //匿名投票 记名投票 参见Pb_MeetVoteMode
-	fixed32			type=5; //多选 单选 参见Pb_MeetVote_SelType
-	fixed32			votestate=6; //投票状态 参见Pb_MeetVoteStatus
+	fixed32			type=5; //多选 单选 参见 Pb_MeetVote_SelType
+	fixed32			votestate=6; //投票状态 参见 Pb_MeetVoteStatus
 	fixed32		timeouts=7;  //超时值
 	fixed32						selectcount=8; //有效选项
 	repeated pbui_SubItem_VoteItemInfo		item=9;  //选项描述文字

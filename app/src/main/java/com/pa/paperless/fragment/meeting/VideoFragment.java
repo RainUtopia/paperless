@@ -198,7 +198,8 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventMessage.DEV_REGISTER_INFORM:
+            case IDEventMessage.DEV_REGISTER_INFORM://设备寄存器变更通知
+                //查询设备信息
                 nativeUtil.queryDeviceInfo();
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知

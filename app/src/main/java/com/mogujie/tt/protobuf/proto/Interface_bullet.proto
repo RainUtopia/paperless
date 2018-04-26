@@ -24,7 +24,10 @@ message pbui_BulletDetailInfo
 	repeated pbui_Item_BulletDetailInfo  item=1;// 
 }
 
-//会议公告
+//会议长文本公告
+//Pb_TYPE_MEET_INTERFACE_MEETBULLET
+//call,callback
+//method: request(获取),update(修改)
 message pbui_BigBulletDetailInfo
 {
 	bytes	    text=1; //标题

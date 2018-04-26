@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
@@ -84,6 +85,21 @@ import static com.pa.paperless.utils.FileUtil.getMIMEType;
 
 public class MyUtils {
 
+    // 缩放图片
+    public static Bitmap zoomImg(Bitmap bm, int newWidth ,int newHeight){
+        // 获得图片的宽高
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        // 计算缩放比例
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+        return newbm;
+    }
 
     /**
      * 收到会议消息 发送EventBus通知
@@ -280,24 +296,29 @@ public class MyUtils {
                             }
                         }).show();
             } else {
-                //已经存在才打开文件
-                Intent intent = new Intent();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //设置intent的Action属性
-                intent.setAction(Intent.ACTION_VIEW);
-                //获取文件file的MIME类型
-                //Collection mimeTypes = getMimeTypes(file);
-                //String type = mimeTypes.toString();
-                String type = getMIMEType(file1);
-                //设置intent的data和Type属性。
-                intent.setDataAndType(/*uri*/Uri.fromFile(file1), type);
-                //跳转
-                try {
-                    context.startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                OpenThisFile(context, file1);
+
             }
+        }
+    }
+
+    public static void OpenThisFile(Context context, File file1) {
+        //已经存在才打开文件
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //设置intent的Action属性
+        intent.setAction(Intent.ACTION_VIEW);
+        //获取文件file的MIME类型
+        //Collection mimeTypes = getMimeTypes(file);
+        //String type = mimeTypes.toString();
+        String type = getMIMEType(file1);
+        //设置intent的data和Type属性。
+        intent.setDataAndType(/*uri*/Uri.fromFile(file1), type);
+        //跳转
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

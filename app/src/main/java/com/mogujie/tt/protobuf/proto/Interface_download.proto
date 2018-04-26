@@ -31,7 +31,7 @@ message pbui_Type_DownloadDel
 //method: notify
 message pbui_Type_DownloadCb
 {
-	fixed32	   progress=1;				//下载进度
+	fixed32	   progress=1;				    //下载进度
 	fixed32	   nstate=2;				    //下载状态,参考state flag
 	fixed32	   err=3;						//错误值 ERROR
 	fixed32    mediaid=4;					//下载媒体id

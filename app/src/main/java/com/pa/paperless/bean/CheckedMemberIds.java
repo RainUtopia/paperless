@@ -18,7 +18,6 @@ public class CheckedMemberIds  {
     }
 
     public CheckedMemberIds(int checkid) {
-
         Checkid = checkid;
     }
 }

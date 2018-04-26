@@ -39,7 +39,7 @@ message pbui_Type_AdminModifyPwd
 //method: logon
 message pbui_Type_AdminLogon
 {
-	fixed32			isascill=1;//是否已经md5加密
+	fixed32			isascill=1;//=0md5字符密码 =1明文密码
 	bytes			adminname=2;//用户名
 	bytes			adminpwd=3;//用户密码(ascill/md5ascill)
 }
@@ -49,7 +49,7 @@ message pbui_Type_AdminLogon
 //method: logon
 message pbui_Type_AdminLogonStatus
 {
-	fixed32			err=1;//
+	fixed32			err=1;// 参见 Pb_AdminLogonStatus
 	fixed32			sessionid=2;//会话ID
 	fixed32			adminid=3;//会话ID
 	bytes			adminname=4;

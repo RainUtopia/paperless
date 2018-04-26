@@ -26,6 +26,7 @@ import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMeet;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.MainActivity;
 import com.pa.paperless.adapter.MulitpleItemAdapter;
 import com.pa.paperless.adapter.MemberListAdapter;
 import com.pa.paperless.bean.CheckedMemberIds;
@@ -178,9 +179,11 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                             int memberid = pbui_item_deviceDetailInfo.getMemberid();
                             for (int j = 0; j < memberInfos.size(); j++) {
                                 InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = memberInfos.get(j);
-                                if (pbui_item_memberDetailInfo.getPersonid() == memberid) {
-                                    //添加在线状态的设备
-                                    OnLineMembers.add(pbui_item_memberDetailInfo);
+                                if (pbui_item_memberDetailInfo.getPersonid() != MainActivity.getLocalInfo().getMemberid()) {//先过滤自己的设备
+                                    if (pbui_item_memberDetailInfo.getPersonid() == memberid) {
+                                        //添加在线状态的设备
+                                        OnLineMembers.add(pbui_item_memberDetailInfo);
+                                    }
                                 }
                             }
                         }
@@ -280,9 +283,10 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     CheckedMemberIds checkedMemberIds = checkedId.get(i);
                     //将ID添加到 List<Integer> 集合中，List实现了Iterable，泛型对应的是Integer
                     ids.add(checkedMemberIds.getCheckid());
+                    Log.e("MyLog", "ChatFragment.onClick 283行:  选中的ID --->>> " + checkedMemberIds.getCheckid());
                 }
                 String string = chat_edt.getText().toString();
-                if (!TextUtils.isEmpty(string) && ids.size() > 0) {
+                if (!TextUtils.isEmpty(string) /*&& ids.size() > 0*/) {
                     //185.发送会议交流信息
                     if (string.length() <= 300) {
                         boolean b = nativeUtil.sendMeetChatInfo(string, InterfaceMacro.Pb_String_LenLimit.Pb_MEETIM_CHAR_MSG_MAXLEN.getNumber(), ids);
@@ -330,7 +334,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
             case IDivMessage.RECEIVE_MEET_IMINFO://184.收到新的会议交流信息
                 if (isHidden()) {
                     Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                    MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result,nativeUtil);
+                    MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
                     break;
                 } else {
                     Log.e("MyLog", "ChatFragment.callListener 364行:  聊天界面收到会议消息 --->>> ");
@@ -388,7 +392,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         } else {
             //显示时：
             Log.e("MyLog", "ChatFragment.onHiddenChanged 416行:  显示状态 --->>> ");
-            nativeUtil=NativeUtil.getInstance();
+            nativeUtil = NativeUtil.getInstance();
             nativeUtil.setCallListener(this);
             if (chatAdapter != null) {
                 chatAdapter.notifyDataSetChanged();

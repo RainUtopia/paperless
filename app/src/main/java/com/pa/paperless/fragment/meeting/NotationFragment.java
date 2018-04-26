@@ -60,10 +60,26 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case IDivMessage.QUERY_MEET_DIR://查询会议目录
+                    ArrayList queryMeetDir = msg.getData().getParcelableArrayList("queryMeetDir");
+                    InterfaceFile.pbui_Type_MeetDirDetailInfo o = (InterfaceFile.pbui_Type_MeetDirDetailInfo) queryMeetDir.get(0);
+                    List<InterfaceFile.pbui_Item_MeetDirDetailInfo> itemList = o.getItemList();
+                    for (int i = 0; i < itemList.size(); i++) {
+                        String dirName = MyUtils.getBts(itemList.get(i).getName());
+                        if (dirName.equals("批注文件")) {//如果查找到 批注文件 这个目录
+                            //136.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
+                            try {
+                                nativeUtil.queryMeetDirFile(itemList.get(i).getId());
+                            } catch (InvalidProtocolBufferException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    break;
                 case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件 批注文件的索引是2
                     ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("notationqueryMeetDirFile");
-                    InterfaceFile.pbui_Type_MeetDirFileDetailInfo o = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
-                    meetDirFileInfos = Dispose.MeetDirFile(o);
+                    InterfaceFile.pbui_Type_MeetDirFileDetailInfo o1 = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
+                    meetDirFileInfos = Dispose.MeetDirFile(o1);
                     if (meetDirFileInfos != null) {
                         mData.clear();
                         for (int i = 0; i < meetDirFileInfos.size(); i++) {
@@ -99,9 +115,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         mBtns.add(mDocument);
         mBtns.add(mPicture);
         try {
-//            nativeUtil.queryMeetDir();
-            //136.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
-            nativeUtil.queryMeetDirFile(2);
+            nativeUtil.queryMeetDir();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -112,10 +126,15 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM:
+            case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM://会议目录文件变更通知
                 if (!isHidden()) {
-                    nativeUtil.queryMeetDirFile(2);
+                    InterfaceBase.pbui_MeetNotifyMsgForDouble object = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
+                    nativeUtil.queryMeetDirFile(object.getId());//批注文件的目录ID  固定为 2
                 }
+                break;
+            case IDEventMessage.MEETDIR_CHANGE_INFORM://135 会议目录变更通知
+                Log.e("MyLog", "NotationFragment.getEventMessage 135行:  会议目录变更通知EventBus --->>> ");
+                nativeUtil.queryMeetDir();
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
@@ -330,6 +349,9 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
             case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
                 MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
                 break;
+            case IDivMessage.QUERY_MEET_DIR://查询会议目录
+                MyUtils.handTo(IDivMessage.QUERY_MEET_DIR, (InterfaceFile.pbui_Type_MeetDirDetailInfo) result, "queryMeetDir", mHandler);
+                break;
         }
     }
 
@@ -338,8 +360,10 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         if (!hidden) {
             initController();
             try {
+                Log.e("MyLog", "NotationFragment.onHiddenChanged 341行:  不隐藏状态 --->>> ");
                 //136.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
-                nativeUtil.queryMeetDirFile(2);
+                nativeUtil.queryMeetDir();
+//                nativeUtil.queryMeetDirFile(2);
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainactivity_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mainactivity_id"
-    android:orientation="vertical"
     android:background="@drawable/bg"
     tools:context="com.pa.paperless.activity.MainActivity">
 
-    <include layout="@layout/include_main_top"/>
-    <include layout="@layout/include_main_bottom"/>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_main_top" />
+
+        <include layout="@layout/include_main_bottom" />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_centerInParent="true"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
 

@@ -25,7 +25,7 @@ message pbui_Type_MeetIM
 message pbui_Type_SendMeetIM
 {
 	fixed32	    msgtype=1;//消息类型 参见 Pb_MeetIMMSG_TYPE
-	bytes		msg=2;//消息文本  长度 Pb_MEETIM_CHAR_MSG_MAXLEN
+	bytes		msg=2;//消息文本 长度 Pb_MEETIM_CHAR_MSG_MAXLEN
 	repeated fixed32      userids=3; //为0表示当前会议全部 如果是会议服务类请求为0
 }
 

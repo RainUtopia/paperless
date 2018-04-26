@@ -135,8 +135,8 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     public static int W = 0;
     public static int H = 0;
     private static int IMAGE_CODE = 1;
-    private boolean isSharing = false;//是否共享中
-    private int launchPersonId = MainActivity.getLocalInfo().getMemberid();//默认发起的人员ID是本机
+    public static boolean isSharing = false;//是否共享中
+    public static int launchPersonId = MainActivity.getLocalInfo().getMemberid();//默认发起的人员ID是本机
     public static boolean ISFROMDOCUMENTFRAGMENT = false;//初始化是否从外部文档打开
     private Handler handler = new Handler() {
         @Override
@@ -171,7 +171,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             }
         }
     };
-    private long mSrcwbid;//发起人的白板标识
+    public static long mSrcwbid;//发起人的白板标识
     private List<PointF> points;
     private PointF pointF;
     private PointF p1;
@@ -179,6 +179,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
     private List<DrawPath> pathList;
     private byte[] screenshot;
     private byte[] documentfragmentPic;
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
@@ -328,16 +329,29 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         p1 = new PointF();
         p2 = new PointF();
         //绘画
+        float sx;
+        float sy;
         if (figuretype == InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber()) {
             p1.x = points.get(0).x;
             p1.y = points.get(0).y;
             Path newPath = new Path();
+            sx = p1.x;
+            sy = p1.y;
             newPath.moveTo(p1.x, p1.y);
             for (int i = 1; i < points.size() - 1; i++) {
                 p2.x = points.get(i).x;
                 p2.y = points.get(i).y;
-                newPath.quadTo((points.get(i - 1).x + p2.x) / 2, (points.get(i - 1).y + p2.y) / 2, p2.x, p2.y);
+                float dx = Math.abs(p2.x - sx);
+                float dy = Math.abs(p2.y - sy);
+                if (dx >= 3 || dy >= 3) {
+                    float cx = (p2.x + sx) / 2;
+                    float cy = (p2.y + sy) / 2;
+                    newPath.quadTo(sx, sy, cx, cy);
+                }
                 canvas.drawPath(newPath, newPaint);
+                sx = p2.x;
+                sy = p2.y;
+//                newPath.quadTo((points.get(i - 1).x + p2.x) / 2, (points.get(i - 1).y + p2.y) / 2, p2.x, p2.y);
                 allInkPath.addPath(newPath);
             }
             DrawPath drawPath = new DrawPath();
@@ -374,36 +388,73 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
+        Log.e("MyLog", "PeletteActivity.receiveAddPic 391行:  没使用前宽高 --->>> " + width + "," + height);
         // 执行操作
-        if (height > mHeight) {
-            float scaleH = (float) mHeight / height;
-            float scaleW = 1;
-            Matrix matrix = new Matrix();
-            if (width > mWidth) {
-                scaleW = (float) mWidth / width;
-            }
-            matrix.postScale(scaleW, scaleH);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+//        if (height > mHeight) {
+//            float scaleH = (float) mHeight / height;
+//            float scaleW = 1;
+//            Matrix matrix = new Matrix();
+//            if (width > mWidth) {
+//                scaleW = (float) mWidth / width;
+//            }
+//            matrix.postScale(scaleW, scaleH);
+//            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+//        }
+//        if (width > mHeight) {
+//            float scaleW = (float) mWidth / width;
+//            float scaleH = 1;
+//            Matrix matrix = new Matrix();
+//            if (height > mHeight) {
+//                scaleH = (float) mHeight / height;
+//            }
+//            matrix.postScale(scaleW, scaleH);
+//            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+//        }
+//
+//        if (/*width <= (mWidth / 2) ||*/ height <= (mHeight / 2)) {
+////            float w = (float) (mWidth / 2) / width;
+//            float h = (float) (mHeight / 2) / height;
+//            Matrix matrix = new Matrix();
+//            matrix.postScale(h, h);
+//            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+//        }
+        /** **** **    ** **** **/
+        float cw = 1;
+        float ch = 1;
+        float newWidth = mWidth / 2 + (mWidth / 3);
+        float newHeight = mHeight / 2 + (mHeight / 3);
+        if (width > mWidth && height > mHeight) {
+            Log.e("MyLog", "PeletteActivity.onActivityResult 1809行:  1111 --->>> ");
+            cw = newWidth / width;
+            ch = newHeight / height;
+        } else if (width > mWidth) {
+            Log.e("MyLog", "PeletteActivity.onActivityResult 1830行:  22222 --->>> ");
+            cw = newWidth / width;
+            ch = cw;
+        } else if (height > mHeight) {
+            Log.e("MyLog", "PeletteActivity.onActivityResult 1834行:  33333333 --->>> ");
+            ch = newHeight / height;
+            cw = ch;
         }
-        if (width > mHeight) {
-            float scaleW = (float) mWidth / width;
-            float scaleH = 1;
-            Matrix matrix = new Matrix();
-            if (height > mHeight) {
-                scaleH = (float) mHeight / height;
-            }
-            matrix.postScale(scaleW, scaleH);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-        }
-
-        if (/*width <= (mWidth / 2) ||*/ height <= (mHeight / 2)) {
-//            float w = (float) (mWidth / 2) / width;
-            float h = (float) (mHeight / 2) / height;
-            Matrix matrix = new Matrix();
-            matrix.postScale(h, h);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-        }
-        canvas.drawBitmap(bitmap, lx, ly, new Paint());
+//        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(cw, ch);
+        // 得到新的图片
+        bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        /** **** **    ** **** **/
+        /** **** **    ** **** **/
+        width = bitmap.getWidth();
+        height = bitmap.getHeight();
+        Log.e("MyLog", "PeletteActivity.receiveAddPic 424行:  使用后宽高 --->>> " + width + "," + height);
+        /** **** **  居中显示：屏幕宽高的一半、减去图片宽高的各一半  ** **** **/
+        Log.e("MyLog", "PeletteActivity.receiveAddPic 407行:   --->>>画板的宽 mWidth:" + mWidth + " 高 mHeight:" + mHeight);
+        int x = (mWidth / 2) - (width / 2);
+        int y = (mHeight / 2) - (height / 2);
+        Log.e("MyLog", "PeletteActivity.receiveAddPic 415行:  图片最终的左上角坐标 --->>> " + x + "," + y);
+//        canvas.drawBitmap(bitmap, x, y, new Paint());
+        Rect rect1 = new Rect(0, 0, width, height);
+        Rect rect2 = new Rect(x, y, x + width, y + height);
+        canvas.drawBitmap(bitmap, rect1, rect2, new Paint());
         imageView.setImageBitmap(baseBmp);
 //        Drawable drawable = new BitmapDrawable(bitmap);
 //        imageView.setBackground(drawable);
@@ -555,6 +606,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         DisplayMetrics display = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(display);
         Log.e("MyLog", "PeletteActivity.onCreate 161行:   --->>> " + display);
+        Log.e("MyLog", "PeletteActivity.onCreate 558行:   --->>> " + isSharing + "    " + launchPersonId + "   " + mSrcwbid);
         initNativeUtil();
         initView();
         getSeekBar();
@@ -567,6 +619,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             public void run() {
                 mWidth = imageView.getWidth();
                 mHeight = imageView.getHeight();
+                Log.e("MyLog", "PeletteActivity.run 573行:  初始化时画板的宽高 --->>> " + mWidth + "  " + mHeight);
                 draw();
             }
         });
@@ -775,6 +828,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         mSrcwbid = 0;
     }
 
+
     private void draw() {
         // 创建一个临时的用于显示橡皮擦图片的bitmap
         tempBmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
@@ -786,13 +840,16 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
         dstbmp = ((BitmapDrawable) imageView.getBackground()).getBitmap();
         //判断打开画板的时候，是否是从外部文档打开的
         if (ISFROMDOCUMENTFRAGMENT) {
-//            File file = new File(Macro.MEETFILE, OverviewDocFragment.now_time + ".jpg");
             Bitmap bitmap = BitmapFactory.decodeFile(Macro.MEETFILE + OverviewDocFragment.now_time + ".jpg");
             canvas.drawBitmap(bitmap, 0, 0, new Paint());
             ISFROMDOCUMENTFRAGMENT = false;
         }
         if (screenshot != null) {
-            canvas.drawBitmap(FileUtil.bytes2Bitmap(screenshot), 0, 0, new Paint());
+            Bitmap bitmap = FileUtil.bytes2Bitmap(screenshot);
+            int halfW = bitmap.getWidth() / 2;
+            int halfH = bitmap.getHeight() / 2;
+            Log.e("MyLog", "PeletteActivity.draw 808行:  图片的宽高 --->>> " + bitmap.getWidth() + "," + bitmap.getHeight());
+            canvas.drawBitmap(bitmap, mWidth / 2 - halfW, mHeight / 2 - halfH, new Paint());
         }
         imageView.setImageBitmap(baseBmp);
         pathList = new ArrayList<>();
@@ -846,7 +903,7 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
                                 startY = event.getY();
                                 break;
                             case MODE_PAINT:
-                                //添加移动时的点坐标
+                                // 添加移动时的点坐标
                                 judge();
 //                                float mxf = (float) MyUtils.div(endX, mWidth, 2);
 //                                float myf = (float) MyUtils.div(endY, mHeight, 2);
@@ -1755,11 +1812,41 @@ public class PeletteActivity extends Activity implements View.OnClickListener, C
             if (realPath == null) {
                 Toast.makeText(context, "获取该文件的路径失败", Toast.LENGTH_LONG).show();
             } else {
+                // TODO: 2018/4/25 进行缩放绘制到画板正中心处
                 // 执行操作
                 dstbmp = BitmapFactory.decodeFile(realPath);
-//                Drawable drawable = new BitmapDrawable(dstbmp);
-//                imageView.setBackground(drawable);
-                canvas.drawBitmap(dstbmp, 0, 0, new Paint());
+                int width = dstbmp.getWidth();
+                int height = dstbmp.getHeight();
+                /** **** **    ** **** **/
+                float cw = 1;
+                float ch = 1;
+                float newWidth = mWidth / 2 + (mWidth / 3);
+                float newHeight = mHeight / 2 + (mHeight / 3);
+                if (width > mWidth && height > mHeight) {
+                    Log.e("MyLog", "PeletteActivity.onActivityResult 1809行:  1111 --->>> ");
+                    cw = newWidth / width;
+                    ch = newHeight / height;
+                } else if (width > mWidth) {
+                    Log.e("MyLog", "PeletteActivity.onActivityResult 1830行:  22222 --->>> ");
+                    cw = newWidth / width;
+                    ch = cw;
+                } else if (height > mHeight) {
+                    Log.e("MyLog", "PeletteActivity.onActivityResult 1834行:  33333333 --->>> ");
+                    ch = newHeight / height;
+                    cw = ch;
+                }
+                // 取得想要缩放的matrix参数
+                Matrix matrix = new Matrix();
+                matrix.postScale(cw, ch);
+                // 得到新的图片
+                dstbmp = Bitmap.createBitmap(dstbmp, 0, 0, width, height, matrix, true);
+                width = dstbmp.getWidth();
+                height = dstbmp.getHeight();
+                int x = (mWidth / 2) - (width / 2);
+                int y = (mHeight / 2) - (height / 2);
+                Rect rect1 = new Rect(0, 0, width, height);
+                Rect rect2 = new Rect(x, y, x + width, y + height);
+                canvas.drawBitmap(dstbmp, rect1, rect2, new Paint());
                 imageView.setImageBitmap(baseBmp);
                 if (isSharing) {
                     try {

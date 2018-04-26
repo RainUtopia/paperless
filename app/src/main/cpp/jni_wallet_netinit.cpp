@@ -139,9 +139,6 @@ void CBLogInfo(int loglevel, const char* pmsg, void* puser)
 
 int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* puser)
 {
-	if(datalen <= 0)
-		return 0;
-	
 	/*if (type != TYPE_MEET_INTERFACE_TIME && type != TYPE_MEET_INTERFACE_MEDIAPLAYPOSINFO)
 	{
 		switch (type)
@@ -167,22 +164,20 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 		battach = 1;
 	}
 
-    /*if(datalen > 4)
-    {
-        char* ptmppp = (char*)pdata;
-        LOGI("logprintf:%d,%d datalen: %d 0x%02x%02x%02x%02x!\n", type, method, datalen, ptmppp[datalen - 4], ptmppp[datalen - 3], ptmppp[datalen - 2], ptmppp[datalen - 1]);
-    }*/
-
-	//JNIEnv*		env = Adapter_GetEnv();
-	jbyteArray barray = env->NewByteArray(datalen);
-	env->SetByteArrayRegion(barray, 0, datalen, (const jbyte*) pdata);
-	env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)type, (jint)method, barray, (jint)datalen);
-	env->DeleteLocalRef(barray);
+    if(datalen > 0)
+	{
+		jbyteArray barray = env->NewByteArray(datalen);
+		env->SetByteArrayRegion(barray, 0, datalen, (const jbyte*) pdata);
+		env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)type, (jint)method, barray, (jint)datalen);
+		env->DeleteLocalRef(barray);
+	}
+	else
+	{
+		env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)type, (jint)method, NULL, 0);
+	}
 
 	if(battach)
 		g_pinternalparam->javavm->DetachCurrentThread();
-
-    //LOGI("logprintf:%d,%d datalen: %d finish!\n", type, method, datalen);
 	return 0;
 }
 
