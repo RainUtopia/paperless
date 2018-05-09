@@ -16,14 +16,10 @@ import com.mogujie.tt.protobuf.InterfaceBullet;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
-import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.event.EventNotice;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
 import com.wind.myapplication.NativeUtil;
 
@@ -32,10 +28,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static com.pa.paperless.activity.MeetingActivity.mBadge;
-import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 
 /**
  * Created by Administrator on 2017/11/1.

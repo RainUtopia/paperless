@@ -18,6 +18,7 @@ import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceUpload;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
@@ -56,6 +57,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     private Button mDocument;
     private Button mPicture;
     private List<Button> mBtns;
+    private final String TAG ="NotationFragment -->>";
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -140,6 +142,14 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                 InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
                 nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
+                break;
+            case IDEventMessage.Upload_Progress://73 上传进度通知
+                InterfaceUpload.pbui_TypeUploadPosCb object1 = (InterfaceUpload.pbui_TypeUploadPosCb) message.getObject();
+                Log.e(TAG, "com.pa.paperless.fragment.meeting_NotationFragment.getEventMessage :  批注页面上传进度通知 --->>> "+object1.getPer());
+                if(object1.getPer() == 100){
+                    nativeUtil.setCallListener(this);
+                    nativeUtil.queryMeetDir();
+                }
                 break;
         }
     }

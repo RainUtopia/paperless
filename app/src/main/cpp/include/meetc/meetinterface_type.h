@@ -154,7 +154,8 @@
 #define TYPE_MEET_INTERFACE_FILEEVALUATE  55  //会议文件评价相关
 #define TYPE_MEET_INTERFACE_MEETEVALUATE  56   //会议评价相关
 #define TYPE_MEET_INTERFACE_SYSTEMLOG     57 //管理员操作日志相关
-
+#define TYPE_MEET_INTERFACE_DEVICEVALIDATE 58 //设备ID校验
+#define TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT 59 //平台功能限制
 
 //注：这里所有的字符串都约定为utf8编码
 #define DEFAULT_NAME_MAXLEN   48 //默认名称长度
@@ -190,6 +191,48 @@ typedef struct
 	Type_HeaderInfo hdr;
 	int32u			areaid;//连接上的区域服务器ID
 }Type_Ready, *pType_Ready;
+
+//平台设备校验
+//type:TYPE_MEET_INTERFACE_DEVICEVALIDATE
+//method: notify
+//callback
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	//参考basemacro.h的宏定义
+	int32u      valflag;
+	int32u      val[32];
+	int64u		user64bitdef[2];
+}Type_DeviceValidate, *pType_DeviceValidate;
+
+#define SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE 0 //查询功能是否可用 query,parameter(传入的功能ID 参见systemfuncion.h的功能ID定义),propertyval(返回是否可用1=可用,0=不可用)
+#define SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM 1 //查询总数 query,parameter(0),returnval(返回总数)
+
+//平台功能限制
+//type:TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+//method: queryproperty
+//call
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u propertyid;
+	int32u parameter;
+	int32u propertyval;
+}Type_SystemFuntionLimitsProperty, *pType_SystemFuntionLimitsProperty;
+
+//平台功能限制
+//type:TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+//method: query queryproperty
+//call
+typedef struct
+{
+	Type_HeaderInfo hdr;
+	
+	int      num;
+	//int32u      functionids[num];//参见systemfuncion.h的功能ID定义
+}Type_SystemFuntionLimits, *pType_SystemFuntionLimits;
 
 //平台时间
 //type:TYPE_MEET_INTERFACE_TIME
@@ -344,6 +387,7 @@ typedef struct
 	int32u	facestate;//界面状态 参见MemState_MainFace 定义
 	int32u  memberid;//当前人员
 	int32u  meetingid;//当前会议
+	int8u   liftgroupres[2];//0升降机组ID 1升降话筒组ID
 }Item_DeviceDetailInfo, *pItem_DeviceDetailInfo;
 
 //type:TYPE_MEET_INTERFACE_DEVICEINFO
@@ -387,6 +431,8 @@ typedef struct
 #define MEETMEMBER_PROPERTY_MEETINGID			8 //当前会议ID query
 #define MEETMEMBER_PROPERTY_TRIGGERID			9 //当前正在执行的触发器ID query paramterval(res地址索引)
 #define MEETMEMBER_PROPERTY_STREAMNAME			10 //设备的流通道名称 query paramterval=查询的流通道号
+#define MEETMEMBER_PROPERTY_RESOPERTORID		11 //获取资源操作的设备ID query paramterval(res地址索引)
+#define MEETMEMBER_PROPERTY_TYPEAVAILABLE		12 //某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
 
 #define MEET_DEVICESTRING_MAXLEN 260
 //type:TYPE_MEET_INTERFACE_DEVICEINFO
@@ -2294,6 +2340,8 @@ typedef struct
 #define MEETSEAT_PROPERTY_ISCOMPEREEBYDEVICEID		6 //按设备ID判断当前人员是不是主持人 query
 #define MEETSEAT_PROPERTY_MEMBERIDBYROLE	7 //返回等于role的人员ID query
 #define MEETSEAT_PROPERTY_DEVICEIDBYROLE	8 //返回等于role的设备ID query
+#define MEETSEAT_PROPERTY_COMPEEMEMID	9 //返回当前会议主持人的人员ID query
+#define MEETSEAT_PROPERTY_COMPEEDEVID	10 //返回当前会议主持人的设备ID query
 
 //method: queryproperty
 typedef struct
@@ -2333,6 +2381,12 @@ typedef struct
 	int32u	    memberid;//发送者ID
 	char		msg[MEETIM_CHAR_MSG_MAXLEN];//消息文本
 	int64u	    utcsecond;//发送UTC时间
+
+	//针对会议茶水服务提供的
+	char meetname[DEFAULT_DESCRIBE_LENG];//会议名称
+	char roomname[DEFAULT_DESCRIBE_LENG];//会议室名
+	char membername[DEFAULT_DESCRIBE_LENG];//人员名称
+	char seatename[DEFAULT_DESCRIBE_LENG];//席位名
 }Type_MeetIM, *pType_MeetIM;
 
 //call
@@ -3060,6 +3114,9 @@ typedef struct
 #define MEET_FUNCODE_MEETNOTE       13  // 会议笔记
 #define MEET_FUNCODE_WINDESK        14  // 桌面浏览
 #define MEET_FUNCODE_OTHERFUNC      15  // 其他功能
+
+#define MEET_FUNCODE_QUESTIONNAIRE  30  // 问卷调查
+#define MEET_FUNCODE_SCORE          31  // 文件评分
 
 //会议功能
 typedef struct

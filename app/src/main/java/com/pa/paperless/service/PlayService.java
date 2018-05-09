@@ -63,8 +63,9 @@ public class PlayService extends Service {
         }
         switch (message.getAction()) {
             case IDEventMessage.MEDIA_PLAY_INFORM:
+                Log.e(TAG, "PlayService.getEventMessage 66行:  媒体播放通知EventBus --->>> ");
                 if (!SDLIsShow) {
-                    Log.e("MyLog", "SigninFragment.getEventMessage:  收到媒体播放通知 打开播放界面 EventBus --->>> ");
+                    Log.e(TAG, "com.pa.paperless.service_PlayService.getEventMessage :  收到媒体播放通知 打开播放界面 EventBus --->>> ");
                     InterfacePlaymedia.pbui_Type_MeetMediaPlay data = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -73,8 +74,9 @@ public class PlayService extends Service {
                 }
                 break;
             case IDEventMessage.PLAY_STREAM_NOTIFY:
+                Log.e(TAG, "PlayService.getEventMessage 76行:  流播放通知EventBus --->>> ");
                 if (!SDLIsShow) {
-                    Log.e("MyLog", "SigninFragment.getEventMessage:  收到流播放通知 打开播放界面 EventBus --->>> ");
+                    Log.e(TAG, "com.pa.paperless.service_PlayService.getEventMessage :  收到流播放通知 打开播放界面 EventBus --->>> ");
                     InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

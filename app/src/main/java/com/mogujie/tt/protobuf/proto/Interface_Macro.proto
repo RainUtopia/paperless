@@ -97,7 +97,8 @@ Pb_TYPE_MEET_INTERFACE_FILESCORE=     54;    //会议文件评分相关
 Pb_TYPE_MEET_INTERFACE_FILEEVALUATE=  55;  //会议文件评价相关
 Pb_TYPE_MEET_INTERFACE_MEETEVALUATE = 56;   //会议评价相关
 Pb_TYPE_MEET_INTERFACE_SYSTEMLOG=     57; //管理员操作日志相关
-
+Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE= 58; //设备ID校验
+Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT=59;//平台功能限制
  }
 
  //操作方法
@@ -804,6 +805,83 @@ enum Pb_FileEvaluateFlag
 {
 Pb_FILEEVALUATE_FLAG_ZERO=0;
 Pb_FILEEVALUATE_FLAG_SECRETARY= 0x00000001; //该标志为1表示评价对外不可见
+}
+
+////设备ID的类型
+enum Pb_DeviceIDType
+{
+	Pb_DeviceIDType_zero=0;
+	//Pb_DeviceIDType_AreaServer=0xff000000;//区域服务器
+	//Pb_DeviceIDType_MediaServer=0xfe000000;//媒体服务器
+	//Pb_DeviceIDType_StreamServer=0xfd000000;//流服务器
+	Pb_DeviceIDType_MeetDBServer=0x01000000;//会议数据库设备
+	Pb_DeviceIDType_MeetService=0x01040000;//会议茶水设备
+	Pb_DeviceIDType_MeetProjective=0x01080000;//投影设备
+	Pb_DeviceIDType_MeetCapture=0x010c0000;//会议流采集设备
+	Pb_DeviceIDType_MeetClient=0x01100000;//会议终端设备
+	Pb_DeviceIDType_MeetShare=0x01200000;//会议一键同屏设备
+}
+
+////设备的ID校验错误码
+enum Pb_ValidateErrorCode
+{
+//error code
+Pb_PARSER_ERROR_NONE=			0;//操作成功
+Pb_PARSER_ERROR_EXPIRATION=		1;//过期了
+Pb_PARSER_ERROR_OPER=			2;//程序出错
+Pb_PARSER_ERROR_ENTERPRISE=		3;//不允许接入的企业
+Pb_PARSER_ERROR_NODEVICEID=		4;//没有多余的设备ID了
+Pb_PARSER_ERROR_FILEERROR=		6;//文件数据错误
+Pb_PARSER_ERROR_NOALLOWIN=		5;//不允许接入的设备
+Pb_PARSER_ERROR_INVALID=		7;//非法的设备
+Pb_PARSER_ERROR_IDOCCUPY=		8;//设备ID已经被使用了
+Pb_PARSER_ERROR_NOTBEING=		9;//不存在需要的资源
+Pb_PARSER_ERROR_ONLYDEVICEID=   10;//文件数据错误,但可以解析出原设备ID
+Pb_PARSER_ERROR_DEVICETYPENOMATCH= 11;//指定设备与设备类型不匹配
+}
+
+////设备的ID校验错误码
+enum Pb_ValidateFlagBit
+{
+//validate status bit pos
+Pb_VALIDATE_FLAG_ZERO=0;
+Pb_VALIDATE_FLAG_AREAID	=	   0x00000001; //区域服务器ID
+Pb_VALIDATE_FLAG_DEVICEID=		   0x00000002; //设备ID
+Pb_VALIDATE_FLAG_STATUS	=	   0x00000004; //状态码 参见Pb_ValidateErrorCode
+Pb_VALIDATE_FLAG_EXPIRATIONTIME=   0x00000008; //到期时间 eg:0x07e2 05 05(表示2018 05 05)
+Pb_VALIDATE_FLAG_ENTERPISEID =     0x00000010; //企业ID
+Pb_VALIDATE_FLAG_NETCOMMONVER =    0x00000020; //协议版本
+Pb_VALIDATE_FLAG_USERDEF32UBIT =   0x00000040; //注册时自定义的32位整数值
+Pb_VALIDATE_FLAG_CURNUM		=   0x00000080; //当前在线设备数
+Pb_VALIDATE_FLAG_MAXNUM		=   0x00000100; //最大在线设备数
+}
+
+//系统限制功能属性ID
+enum Pb_SystemFuncionPropertyId
+{
+Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE= 0; //查询功能是否可用 query,parameter(传入的功能ID 参见systemfuncion.h的功能ID定义),propertyval(返回是否可用1=可用,0=不可用)
+Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM= 1; //查询总数 query,parameter(0),returnval(返回总数)
+}
+
+//系统限制功能ID
+enum Pb_SystemFuncionId
+{
+//系统功能定义 不设置功能数限制
+Pb_FUNCTION_ZERO=0;
+Pb_FUNCTION_DESKTOP_CAPTURE=		1; //屏屏采集
+Pb_FUNCTION_VIDEO_PLAY		=		2; //视频播放
+Pb_FUNCTION_AUDIO_PLAY		=		3; //播放音频
+Pb_FUNCTION_CAMARA_PLAY		=	4; //播放实时视频流
+Pb_FUNCTION_CAMARA_CAPTURE	=		5; //摄像头采集
+Pb_FUNCTION_AUDIOOUTPUT_CAPTURE=	6; //音频输出回放采集
+Pb_FUNCTION_PDF_VIEW		=		7; //pdf文档查看
+Pb_FUNCTION_OFFICE_VIEW		=	8; //office文档查看
+Pb_FUNCTION_PICTURE_VIEW	=		9; //图片文档查看
+Pb_FUNCTION_MEDIA_DOWNLOAD	=		10; //文件下载
+Pb_FUNCTION_MEDIA_UPLOAD	=		11; //文件上传
+Pb_FUNCTION_DESKTOP_SHARE	=		12; //屏幕共享
+Pb_FUNCTION_WHITEBOARD		=		13; //多人白板
+Pb_FUNCTION_VIDEO_RECORD	=		14; //视频录制
 }
 
 //系统保留使用的目录ID,用作特别用途

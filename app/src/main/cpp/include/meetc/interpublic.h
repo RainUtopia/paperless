@@ -28,5 +28,6 @@
 #define IS_DEVPROJECTIVE(x)     (((x) & DEVICE_MEET_ID_MASK) == DEVICE_MEET_PROJECTIVE) //该设备ID是否投影设备
 #define IS_DEVVIDEOCAPTURE(x)     (((x) & DEVICE_MEET_ID_MASK) == DEVICE_MEET_CAPTURE) //该设备ID是否流采集设备
 #define IS_MEET_CLIENT(x)     (((x) & DEVICE_MEET_ID_MASK) == DEVICE_MEET_CLIENT) //该设备ID是会议PC终端设备
+#define IS_MEET_ONEKEYSHARE(x)     (((x) & DEVICE_MEET_ID_MASK) == DEVICE_MEET_ONEKEYSHARE) //该设备ID是会议PC终端设备
 
 #endif

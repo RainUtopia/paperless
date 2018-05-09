@@ -6,17 +6,20 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -25,6 +28,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -37,11 +41,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceDownload;
+import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMeet;
 import com.mogujie.tt.protobuf.InterfaceMeetfunction;
@@ -56,6 +62,7 @@ import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.bean.VideoInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
@@ -87,13 +94,21 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
+import static com.pa.paperless.utils.MyUtils.getMediaid;
 import static com.pa.paperless.utils.MyUtils.setAnimator;
 import static com.pa.paperless.utils.MyUtils.setBackgroundAlpha;
 
@@ -113,10 +128,10 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private AnnAgendaFragment mAnnAgendaFragment;
     private MeetingFileFragment mMeetingFileFragment;
     private SharedFileFragment mSharedFileFragment;
+    private NotationFragment mNotationFragment;
     private ChatFragment mChatFragment;
     private VideoFragment mVideoFragment;
     private VoteFragment mVoteFragment;
-    private NotationFragment mNotationFragment;
     private WebBrowseFragment mWebbrowseFragment;
     private OverviewDocFragment mOverViewDocFragment;
     public static List<ReceiveMeetIMInfo> mReceiveMsg = new ArrayList<>();
@@ -143,12 +158,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private MediaProjectionManager manager;
     private MediaProjection projection;
     private ScreenRecorder recorder;
-    private MeetingActivity context;
     public static InterfaceDevice.pbui_Type_DeviceFaceShowDetail DevMeetInfo = MainActivity.getLocalInfo();//设备会议信息
     public static InterfaceMember.pbui_Item_MemberDetailInfo mComperInfo = MainActivity.getCompereInfo();//主持人信息
     private LinearLayout fragment_layout;
     private Resources resources;
     public NativeUtil nativeUtil;
+    public static MeetingActivity context;
 
 
     private Handler meetHandler = new Handler() {
@@ -186,10 +201,43 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 case IDivMessage.DEV_PROBYID: //7.按属性ID查询指定设备属性（投影机）
                     queryProjectorName(msg);
                     break;
+                case IDivMessage.RECEIVE_MEET_IMINFO://收到新的会议交流信息
+                    Log.e("MyLog", "MeetingActivity.handleMessage 190行:  处理消息 --->>> ");
+                    ArrayList resultNewMessage = msg.getData().getParcelableArrayList("resultNewMessage");
+                    InterfaceIM.pbui_Type_MeetIM newMessage = (InterfaceIM.pbui_Type_MeetIM) resultNewMessage.get(0);
+                    List<ReceiveMeetIMInfo> newMsglist = Dispose.ReceiveMeetIMinfo(newMessage);
+                    for (int i = 0; i < newMsglist.size(); i++) {
+                        ReceiveMeetIMInfo receiveMeetIMInfo = newMsglist.get(i);
+                        //设置成接收到的消息
+                        receiveMeetIMInfo.setType(true);
+                    }
+                    break;
             }
         }
     };
     private List<DeviceInfo> deviceInfos;
+    private int MSG_TYPE;
+    //用来传递数据
+    private ITransfer mTransfer;
+    private List<VideoInfo> videoInfos;
+    private boolean fromVideo = false;
+    private boolean openProjector = false;
+    private List<File> filesss;//存放顺序文件
+    private List<File> imgs;//存放排好后的文件
+    private List<ImageView> ivs;
+    private boolean isLastPage = false;//批注页面 ViewPager是否滑动到最后一页
+    private boolean isDragPage = false;//批注页面 手指是否是按下状态
+    private boolean isFirstPage = true;//批注页面 当前是否是首页
+    private PagerAdapter pagerAdapter;
+    private int pagerPosition;//存放当前所在的ViewPager索引
+
+    public void setListener(ITransfer transfer) {
+        mTransfer = transfer;
+    }
+
+    public interface ITransfer {
+        void to(int action, Object data);
+    }
 
     @Override
     public void callListener(int action, Object result) {
@@ -222,6 +270,13 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             case IDivMessage.DEV_PROBYID://7.按属性ID查询指定设备属性（投影机）
                 MyUtils.handTo(IDivMessage.DEV_PROBYID, (byte[]) result, "queryProjectorName", meetHandler);
                 break;
+            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
+                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
+                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
+                break;
+            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
+                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
+                break;
         }
     }
 
@@ -237,12 +292,15 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case IDEventMessage.MEET_DATE:
                 //更新时间UI
+                /** **** **  因为EventBus在主线程，所以可以刷新界面  ** **** **/
                 updataTimeUi(message);
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:// 参会人员变更通知
                 InterfaceBase.pbui_MeetNotifyMsg object2 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 int id1 = object2.getId();
                 int opermethod1 = object2.getOpermethod();
+                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
+                nativeUtil.queryAttendPeopleFromId(id1);
                 Log.e("MyLog", "MeetingActivity.getEventMessage:  参会人员变更通知 EventBus --->>> id:  " + id1 + "  opermethod1：  " + opermethod1);
                 //92.查询参会人员
                 nativeUtil.queryAttendPeople();
@@ -264,11 +322,9 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MemFace.getNumber(), 0);
                 break;
             case IDEventMessage.START_COLLECTION_STREAM_NOTIFY://收集流
-                Log.e("MyLog", "MeetingActivity.getEventMessage 538行:  1111111 --->>> ");
                 enentCollectionStream(message);
                 break;
             case IDEventMessage.STOP_COLLECTION_STREAM_NOTIFY:
-                Log.e("MyLog", "MeetingActivity.getEventMessage 587行:  22222222 --->>> ");
                 switch (message.getType()) {
                     case 2:
                         if (stopRecord()) {
@@ -293,16 +349,27 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 eventOpenBoard(message);
                 break;
             case IDEventMessage.DEV_REGISTER_INFORM://设备寄存器变更通知（监听参会人退出）
-                Log.e("MyLog","MeetingActivity.getEventMessage 296行:  设备寄存器变更通知EventBus --->>> ");
-                initController();
+                Log.i(TAG, "com.pa.paperless.activity_MeetingActivity.getEventMessage :  设备寄存器变更通知EventBus --->>> ");
+//                initController();
+                nativeUtil.setCallListener(this);
                 //查询参会人信息
                 nativeUtil.queryAttendPeople();
                 break;
-            case IDEventMessage.SIGN_CHANGE_INFORM://签到变更通知(监听参会人进入会议界面)
-                Log.e("MyLog","MeetingActivity.getEventMessage 307行:  签到变更通知EventBus --->>> ");
-                initController();
-                //查询参会人信息
+            case IDEventMessage.FACESTATUS_CHANGE_INFORM://界面状态变更通知
+                Log.i(TAG, "com.pa.paperless.activity_MeetingActivity.getEventMessage :  界面状态变更通知EventBus --->>> ");
+//                initController();
+                nativeUtil.setCallListener(this);
                 nativeUtil.queryAttendPeople();
+                break;
+            case IDEventMessage.open_screenspop://从视屏直播页面收到打开同屏控制
+                fromVideo = true;
+                videoInfos = (List<VideoInfo>) message.getObject();
+                showScreensPop();
+                break;
+            case IDEventMessage.open_projector://从视屏直播页面收到打开投影控制
+                openProjector = true;
+                videoInfos = (List<VideoInfo>) message.getObject();
+                showProjector();
                 break;
         }
     }
@@ -507,10 +574,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             deviceInfos = Dispose.DevInfo(o5);
             int number = Macro.DEVICE_MEET_PROJECTIVE;
             initData();
-            Log.e("MyLog", "MeetingActivity.DisposeDevInfo 507行:   --->>> " + memberInfos.size());
+            Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.DisposeDevInfo :  查询得到的参会人总数 --->>> " + memberInfos.size());
             for (int i = 0; i < deviceInfos.size(); i++) {
                 DeviceInfo deviceInfo = deviceInfos.get(i);
                 int netState = deviceInfo.getNetState();
+                int faceState = deviceInfo.getFaceState();
                 int devId = deviceInfo.getDevId();
                 int memberId = deviceInfo.getMemberId();
                 int i1 = devId & number;
@@ -524,8 +592,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                         onLineProjectors.add(deviceInfo);
                     }
                 }
-                //判断是否是在线的参会人
-                if (netState == 1 && memberInfos != null) {
+                //判断是否是在线的并且界面状态为1的参会人
+                if (faceState == 1 && memberInfos != null && netState == 1) {
                     for (int j = 0; j < memberInfos.size(); j++) {
                         MemberInfo memberInfo = memberInfos.get(j);
                         int personid = memberInfo.getPersonid();
@@ -539,19 +607,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                     }
                 }
             }
-            Log.e("MyLog", "MeetingActivity.DisposeDevInfo 538行:   --->>> " + onLineMembers.size());
-            Log.e("MyLog", "MeetingActivity.DisposeDevInfo 539行:   --->>> " + memberInfos.size());
+            Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.DisposeDevInfo :  onLineMembers.size() --->>> " + onLineMembers.size());
             initCheckedList();
             initAdapter();
             /** **** **  刷新Adapter  ** **** **/
-            if (Looper.myLooper() == Looper.getMainLooper()) { // UI主线程
-                Log.e("MyLog", "MeetingActivity.DisposeDevInfo 572行:  在UI主线程中 --->>> ");
-            } else { // 非UI主线程
-                Log.e("MyLog", "MeetingActivity.DisposeDevInfo 562行:  不在UI主线程中 --->>> ");
-            }
             allProjectorAdapter.notifyDataSetChanged();
             onLineProjectorAdapter.notifyDataSetChanged();
             onLineMemberAdapter.notifyDataSetChanged();
+            EventBus.getDefault().post(new EventMessage(IDEventMessage.updata_chat_onLineMember));
         }
     }
 
@@ -626,7 +689,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         for (int i = 0; i < itemList4.size(); i++) {
             InterfaceMeetfunction.pbui_Item_MeetFunConfigDetailInfo function = itemList4.get(i);
             int funcode = function.getFuncode();
-            int position = function.getPosition();
             if (funcode == InterfaceMacro.Pb_Meet_FunctionCode.Pb_MEET_FUNCODE_AGENDA_BULLETIN.getNumber()) {
                 AgendaIV = new ImageView(context, null, R.style.MeetBottomImageView);
                 AgendaIV.setBackground(resources.getDrawable(R.drawable.selector_announce_agenda));
@@ -710,7 +772,11 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             }
             getIntentBundle();
             //设置默认点击第一项
-            showFragment(mFunIndexs.get(0));
+            if(mFunIndexs.contains(Macro.Pb_MEET_FUNCODE_POSTIL)){
+                showFragment(Macro.Pb_MEET_FUNCODE_POSTIL);
+            }else {
+                showFragment(0);
+            }
             setImgSelect(0);
             initImages(mImages, mFunIndexs);
         }
@@ -1036,6 +1102,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     private void Function_Event(final FunViewHolder holder) {
         final List<Integer> arr = new ArrayList<>();
         arr.add(0);
+        MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Other.getNumber();
         // TODO: 2018/2/7 服务功能事件 发送会议交流信息
         //纸
         holder.paper_msg.setOnClickListener(new View.OnClickListener() {
@@ -1043,8 +1110,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
 //                /** ************ ******  185.发送会议交流信息  ****** ************ **/
-//                nativeUtil.sendMeetChatInfo("纸", InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Paper.getNumber(), arr);
-                holder.edt_msg.setText("我需要纸");
+                holder.edt_msg.setText("纸巾");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Paper.getNumber();
             }
         });
         //笔
@@ -1053,6 +1120,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
                 holder.edt_msg.setText("我需要一支笔");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Pen.getNumber();
             }
         });
         //茶水
@@ -1060,7 +1128,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
-                holder.edt_msg.setText("茶水");
+                holder.edt_msg.setText("茶");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Tea.getNumber();
             }
         });
         //矿泉水
@@ -1069,6 +1138,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
                 holder.edt_msg.setText("矿泉水");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Water.getNumber();
             }
         });
         //计算器
@@ -1077,6 +1147,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
                 holder.edt_msg.setText("计算器");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Other.getNumber();
             }
         });
         //服务员
@@ -1085,6 +1156,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
                 holder.edt_msg.setText("服务员");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Waiter.getNumber();
             }
         });
         //清扫
@@ -1093,6 +1165,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
                 holder.edt_msg.setText("清扫");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Other.getNumber();
             }
         });
         //技术员
@@ -1101,6 +1174,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 MyUtils.setAnimator(view);
                 holder.edt_msg.setText("技术员");
+                MSG_TYPE = InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Technical.getNumber();
             }
         });
         //发送
@@ -1108,7 +1182,8 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 String string = holder.edt_msg.getText().toString();
-                nativeUtil.sendMeetChatInfo(string, InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Message.getNumber(), arr);
+                nativeUtil.sendMeetChatInfo(string, MSG_TYPE, arr);
+                /** **** **  发送后清空输入框  ** **** **/
                 holder.edt_msg.setText("");
             }
         });
@@ -1157,12 +1232,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 setAnimator(holder.screens);
                 mFabPop.dismiss();
-                Intent intent = new Intent(MeetingActivity.this, PostilActivity.class);
-                //截图并将得到的bitmap转为byte数组传递给批注页面
-                intent.putExtra("screenshot", FileUtil.Bitmap2bytes(ScreenUtils.snapShotWithStatusBar(context)));
-                startActivity(intent);
-                //截图预览
-//                MyUtils.previewPic(context,ScreenUtils.snapShotWithStatusBar(context),findViewById(R.id.meeting_layout_id));
+                Bitmap bitmap = ScreenUtils.snapShotWithStatusBar(context);
+                /** **** **  将截图保存到文件中  ** **** **/
+//                File file1 = new File(MyUtils.CreateFile(Macro.POSTILFILE) + "/" + System.currentTimeMillis() + ".jpg");
+//                FileUtil.saveBitmap(bitmap, file1);
+//                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onClick :   --->>> " + file1.getAbsolutePath());
+                //打开批注页面
+                byte[] bytes = FileUtil.Bitmap2bytes(bitmap);
+                showPostil(bytes);
             }
         });
         //同屏控制
@@ -1218,6 +1295,326 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(MeetingActivity.this, PeletteActivity.class));
             }
         });
+    }
+
+    /**
+     * 打开批注页面
+     *
+     * @param bytes
+     */
+    private void showPostil(byte[] bytes) {
+        View popupView = getLayoutInflater().inflate(R.layout.activity_postil, null);
+        PopupWindow PostilPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.MATCH_PARENT, true);
+        PostilPop.setAnimationStyle(R.style.AnimHorizontal);
+        PostilPop.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        PostilPop.setTouchable(true);
+        setBackgroundAlpha(context, 0.3f);
+        PostilPop.setOutsideTouchable(true);
+        PostilViewHolder holder = new PostilViewHolder(popupView);
+        PostilHolderEvent(holder, bytes);
+        PostilPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(context, 1.0f);
+            }
+        });
+        PostilPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
+    }
+
+    private void PostilHolderEvent(PostilViewHolder holder, final byte[] bytes) {
+        /** **** **  将截取屏幕的图片展示到ViewPager  ** **** **/
+//        initPager(holder.postil_image);
+        /** **** **  将截取的屏幕图片展示到ImageView  ** **** **/
+        Glide.with(context).load(bytes).into(holder.postil_image);
+        //保存本地
+        holder.postil_save_local.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImportFileNamePop(1, bytes);
+            }
+        });
+        //保存到服务器
+        holder.postil_save_server.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImportFileNamePop(2, bytes);
+            }
+        });
+        //截图批注
+        holder.postil_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PeletteActivity.class);
+                intent.putExtra("postilpic", bytes);
+                context.startActivity(intent);
+            }
+        });
+        //发起同屏
+        holder.postil_start_screen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /** **** **  打开同屏控制pop  ** **** **/
+                showScreensPop();
+            }
+        });
+        //停止同屏
+        holder.postil_stop_screen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sameMemberDevIds != null && sameMemberDevRrsIds != null) {
+                    /** ************ ******  停止资源操作  ****** ************ **/
+                    nativeUtil.stopResourceOperate(sameMemberDevRrsIds, sameMemberDevIds);
+                }
+            }
+        });
+        //发起投影
+        holder.postil_start_projection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProjector();
+            }
+        });
+        //停止投影
+        holder.postil_stop_projection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (applyProjectionIds != null && informDev != null) {
+                    /** ************ ******  停止资源操作  ****** ************ **/
+                    nativeUtil.stopResourceOperate(informDev, applyProjectionIds);
+                }
+            }
+        });
+        //删除
+        holder.postil_pre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                File file = imgs.get(pagerPosition);
+//                file.delete();
+//                initImgFilepath();
+//                pagerAdapter.notifyDataSetChanged();
+            }
+        });
+        //文件命名
+        holder.postil_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                File file = imgs.get(pagerPosition);
+//                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onClick :   --->>> " + file.getAbsolutePath() + " , " + file.getParentFile().getAbsolutePath());
+//                String newName = FileUtil.EdtNewFileName(context, ".jpg");
+//                File ne = new File(file.getParentFile().getAbsolutePath() + "/" + newName);
+//                try {
+//                    ne.createNewFile();//创建新的文件
+//                    file.delete();//删除原来的
+//                    initImgFilepath();
+//                    pagerAdapter.notifyDataSetChanged();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+            }
+        });
+    }
+
+    private void initPager(final ViewPager pager) {
+        initImgFilepath();
+        pagerAdapter = new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return ivs != null ? ivs.size() : 0;
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                Glide.with(context).load(imgs.get(position)).into(ivs.get(position));
+                container.addView(ivs.get(position));
+                return ivs.get(position);
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView(ivs.get(position));
+            }
+
+        };
+        pager.setPageTransformer(true, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                imitateQQ(page, position);
+            }
+        });
+//        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//
+//            /**
+//             * 在屏幕滚动过程中不断被调用
+//             * @param position
+//             * @param positionOffset 是当前页面滑动比例，如果页面向右翻动，这个值不断变大，最后在趋近1的情况后突变为0。
+//             *                       如果页面向左翻动，这个值不断变小，最后变为0
+//             * @param positionOffsetPixels 是当前页面滑动像素，变化情况和positionOffset一致
+//             */
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onPageScrolled :  position --->>> " + position
+//                        + ",positionOffsetPixels:" + positionOffsetPixels
+//                        + ",isLastPage:" + isLastPage + ",isDragPage:" + isDragPage + ",ivs.size():" + ivs.size());
+//                if (isLastPage && isDragPage && positionOffsetPixels == 0 && position == ivs.size() - 1) {
+//                    //当前页是最后一页，并且是拖动状态，并且像素偏移量为0
+//                    Toast.makeText(MeetingActivity.this, "已经是最后一页，将跳转到首页", Toast.LENGTH_SHORT).show();
+//                    pager.setCurrentItem(0, false);
+//                } else if (isFirstPage && isDragPage && positionOffsetPixels == 0 && position == 0) {
+//                    Toast.makeText(MeetingActivity.this, "已经是首页，将跳转到最后一页", Toast.LENGTH_SHORT).show();
+//                    pager.setCurrentItem(ivs.size() - 1, false);
+//                }
+//            }
+//
+//            /**
+//             * 哪个页面被选中 -->当前页面
+//             * @param position
+//             */
+//            @Override
+//            public void onPageSelected(int position) {
+//                pagerPosition = position;
+//                isLastPage = position == ivs.size() - 1;
+//                isFirstPage = position == 0;
+//                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onPageSelected :  isLastPage --->>> "
+//                        + isLastPage + "，isFirstPage:" + isFirstPage + "，当前索引：" + position
+//                        + ",ivs.size():" + ivs.size());
+//            }
+//
+//            /**
+//             * 在手指操作屏幕的时候发生变化 :
+//             * @param state 有三个值：0（END）,1(PRESS) , 2(UP)
+//             */
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                isDragPage = state == 1;
+//                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onPageScrollStateChanged :  state --->>> " +
+//                        state + ",isDragPage:" + isDragPage + ",ivs.size():" + ivs.size());
+//                // 这里主要是解决在onPageScrolled出现的闪屏问题
+//                // (positionOffset为0的时候，并不一定是切换完成，所以动画还在执行，强制再次切换，就会闪屏)
+//                switch (state) {
+//                    case ViewPager.SCROLL_STATE_IDLE:// 0 空闲状态，没有任何滚动正在进行（表明完成滚动）
+//                        break;
+//                    case ViewPager.SCROLL_STATE_DRAGGING:// 1 正在拖动page状态
+//                        break;
+//                    case ViewPager.SCROLL_STATE_SETTLING:// 2 手指已离开屏幕，自动完成剩余的动画效果
+//                        break;
+//                }
+//            }
+//        });
+        pager.setAdapter(pagerAdapter);
+    }
+
+    /**
+     * 仿QQ的缩放动画效果
+     */
+    public void imitateQQ(View view, float position) {
+        if (position >= -1 && position <= 1) {
+            view.setPivotX(position > 0 ? 0 : view.getWidth() / 2);
+            //view.setPivotY(view.getHeight()/2);
+            view.setScaleX((float) ((1 - Math.abs(position) < 0.5) ? 0.5 : (1 - Math.abs(position))));
+            view.setScaleY((float) ((1 - Math.abs(position) < 0.5) ? 0.5 : (1 - Math.abs(position))));
+        }
+    }
+
+
+    private void initImgFilepath() {
+        if (imgs == null) {
+            imgs = new ArrayList<>();
+        } else {
+            imgs.clear();
+        }
+        if (filesss == null) {
+            filesss = new ArrayList<>();
+        } else {
+            filesss.clear();
+        }
+        if (ivs == null) {
+            ivs = new ArrayList<>();
+        } else {
+            ivs.clear();
+        }
+        File file = new File(Macro.POSTILFILE);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File[] files = file.listFiles();
+        if (files == null || files.length == 0) {
+            Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.initImgFilepath :  PostilFile文件夹下没有文件 --->>> ");
+        } else {
+            for (File f : files) {
+                if (!f.isDirectory()) {
+                    if (f.getName().endsWith(".jpg")) {
+                        //将图片文件添加进去：这里排在索引最后的位置才是最新创建的
+                        filesss.add(f);
+                        ivs.add(new ImageView(context));
+                    }
+                }
+            }
+        }
+        /** **** **  将排放的位置倒过来放到新的集合中  ** **** **/
+        if (filesss.size() > 0) {
+            for (int i = filesss.size() - 1; i >= 0; i--) {
+                imgs.add(filesss.get(i));
+            }
+            Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.initImgFilepath :  filesss.size() --->>> " +
+                    filesss.size() + " , imgs.size(): " + imgs.size());
+        }
+    }
+
+    /**
+     * 将该截图保存到手机或者上传到服务器
+     */
+    private void showImportFileNamePop(final int type, final byte[] bytes) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("输入文件名：");
+        final EditText edt = new EditText(context);
+        edt.setText(System.currentTimeMillis() + "");
+        builder.setView(edt);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Bitmap bitmap = FileUtil.bytes2Bitmap(bytes);
+                MyUtils.CreateFile(Macro.POSTILFILE);
+                String strName = edt.getText().toString();
+                if (strName.equals("")) {
+                    Toast.makeText(context, "请先填写文件名", Toast.LENGTH_SHORT).show();
+                } else {
+                    File file = new File(Macro.POSTILFILE + strName + ".jpg");
+                    try {
+                        if (type == 1) {//保存到本地
+                            file.createNewFile();
+                            FileUtil.saveBitmap(bitmap, file);
+                        } else if (type == 2) {//保存到服务器
+                            if (!file.exists()) {
+                                file.createNewFile();
+                                FileUtil.saveBitmap(bitmap, file);
+                            }
+                            String path = file.getPath();
+                            int mediaid = getMediaid(path);
+                            String fileEnd = path.substring(path.lastIndexOf(".") + 1, path.length()).toLowerCase();
+                            nativeUtil.uploadFile(InterfaceMacro.Pb_Upload_Flag.Pb_MEET_UPLOADFLAG_ONLYENDCALLBACK.getNumber(),
+                                    2, 0, strName + "." + fileEnd, path, 0, mediaid);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //完成操作隐藏对话框
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
     }
 
     /**
@@ -1357,21 +1754,32 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         });
         //申请投影
         holder.start_pro.setOnClickListener(new View.OnClickListener() {
+
+            private int subid;
+            private int srcdeviceid;
+
             @Override
             public void onClick(View view) {
+                applyProjectionIds = new ArrayList<Integer>();
+                informDev = new ArrayList<Integer>();
+                if (openProjector) {
+                    srcdeviceid = videoInfos.get(0).getVideoInfo().getDeviceid();
+                    subid = videoInfos.get(0).getVideoInfo().getSubid();
+//                    informDev.add(srcdeviceid);
+                    applyProjectionIds.add(MeetingActivity.getDevId());
+                } else {
+                    subid = 2;
+                    srcdeviceid = DevMeetInfo.getDeviceid();
+                }
                 if (allProjectorAdapter != null) {
-                    applyProjectionIds = new ArrayList<Integer>();
                     List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
-                    //**//
                     for (int i = 0; i < checkedIds.size(); i++) {
                         applyProjectionIds.add(checkedIds.get(i).getDevId());
                     }
-
-                    informDev = new ArrayList<Integer>();
-//                    applyProjectionIds.add(0);
-                    informDev.add(0x1080004);
-                    /** ************ ******  流播放  ****** ************ **/
-                    nativeUtil.streamPlay(DevMeetInfo.getDeviceid(), 3, 0, applyProjectionIds, informDev);
+                    informDev.add(0);
+                    applyProjectionIds.add(0);
+                    /** ************ ******  流播放  0x1080004****** ************ **/
+                    nativeUtil.streamPlay(srcdeviceid, subid, 0, informDev, applyProjectionIds);
                 }
             }
         });
@@ -1381,7 +1789,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 if (applyProjectionIds != null && informDev != null) {
                     /** ************ ******  停止资源操作  ****** ************ **/
-                    nativeUtil.stopResourceOperate(applyProjectionIds, informDev);
+                    nativeUtil.stopResourceOperate(informDev, applyProjectionIds);
                 }
             }
         });
@@ -1389,6 +1797,12 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 mProjectorPop.dismiss();
+            }
+        });
+        mProjectorPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                openProjector = false;
             }
         });
 
@@ -1404,12 +1818,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mProRlPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mProRlPop.setTouchable(true);
         mProRlPop.setOutsideTouchable(true);
-//        try {
-//            //6.查询设备信息
-//            nativeUtil.queryDeviceInfo();
-//        } catch (InvalidProtocolBufferException e) {
-//            e.printStackTrace();
-//        }
         ProRlViewHolder holder = new ProRlViewHolder(popupView);
         ProRl_Enent(holder);
         mProRlPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
@@ -1481,7 +1889,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     /**
      * 同屏控制
      */
-    private void showScreensPop() {
+    public void showScreensPop() {
         View popupView = getLayoutInflater().inflate(R.layout.pop_sscreen, null);
         mScreenPop = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
         MyUtils.setPopAnimal(mScreenPop);
@@ -1540,24 +1948,43 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         });
         //同屏控制按钮
         holder.screens_btn.setOnClickListener(new View.OnClickListener() {
+
+            private int subid;  // 2：屏幕 3：摄像头
+            private int srcdeviceid;//需要采集的设备ID
+
             @Override
             public void onClick(View view) {
                 sameMemberDevRrsIds = new ArrayList<Integer>();
                 sameMemberDevIds = new ArrayList<Integer>();
-                if (onLineMemberAdapter != null && onLineProjectorAdapter != null) {
+                /** **** **  在线的参会人  ** **** **/
+                if (onLineMemberAdapter != null) {
                     List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
                     for (int i = 0; i < checkedIds.size(); i++) {
                         sameMemberDevIds.add(checkedIds.get(i).getDevId());
                     }
+                }
+                /** **** **  在线的投影机  ** **** **/
+                if (onLineProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
                     for (int i = 0; i < checkedIds1.size(); i++) {
                         sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
                     }
                 }
+                /** **** **  如果是从视屏直播列表点击：  ** **** **/
+                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onClick :  fromVideo --->>> " + fromVideo);
+                if (fromVideo) {
+                    srcdeviceid = videoInfos.get(0).getVideoInfo().getDeviceid();
+                    subid = videoInfos.get(0).getVideoInfo().getSubid();
+                    sameMemberDevIds.add(MeetingActivity.getDevId());
+                } else {
+                    srcdeviceid = DevMeetInfo.getDeviceid();
+                    subid = 2;
+                }
+                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onClick :  subid --->>> " + subid);
                 sameMemberDevRrsIds.add(0);
-                sameMemberDevIds.add(0x1100003);//要播放的屏幕源  要同屏的人员
-                /** ************ ******  流播放  ******0x1080004 ************ **/
-                nativeUtil.streamPlay(DevMeetInfo.getDeviceid(), 2, 0,
+                sameMemberDevIds.add(0);//要播放的屏幕源(需要看的设备ID)
+                /** ************ ******  流播放  ******0x1080004  0x1100003************ **/
+                nativeUtil.streamPlay(srcdeviceid, subid, 0,
                         sameMemberDevRrsIds, sameMemberDevIds);
                 Toast.makeText(MeetingActivity.this, "同屏控制", Toast.LENGTH_SHORT).show();
             }
@@ -1584,6 +2011,14 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 mScreenPop.dismiss();
+            }
+        });
+
+        mScreenPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Log.e(TAG, "com.pa.paperless.activity_MeetingActivity.onDismiss :  同屏pop隐藏了 --->>> ");
+                fromVideo = false;
             }
         });
 
@@ -1710,12 +2145,6 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
         mPlayerPop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
         mPlayerPop.setTouchable(true);
         mPlayerPop.setOutsideTouchable(true);
-//        try {
-//            //6.查询设备信息（查找在线的投影机）
-//            nativeUtil.queryDeviceInfo();
-//        } catch (InvalidProtocolBufferException e) {
-//            e.printStackTrace();
-//        }
         PlayerViewHolder holder = new PlayerViewHolder(popupView);
         Player_Event(holder);
         mPlayerPop.showAtLocation(findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
@@ -2024,7 +2453,7 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
     /**
      * add by gowcage
      */
-    private final String TAG = "MeetingActivity-->";
+    public static final String TAG = "MeetingActivity-->";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -2073,6 +2502,37 @@ public class MeetingActivity extends BaseActivity implements View.OnClickListene
             recorder = null;
             return true;
         } else return false;
+    }
+
+    public static class PostilViewHolder {
+        public View rootView;
+        public ImageView postil_image;
+        public Button postil_save_local;
+        public Button postil_save_server;
+        public Button postil_pic;
+        public Button postil_start_screen;
+        public Button postil_stop_screen;
+        public Button postil_start_projection;
+        public Button postil_stop_projection;
+        public Button postil_pre;
+        public Button postil_next;
+        public LinearLayout postil_layout_id;
+
+        public PostilViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.postil_image = (ImageView) rootView.findViewById(R.id.postil_image);
+            this.postil_save_local = (Button) rootView.findViewById(R.id.postil_save_local);
+            this.postil_save_server = (Button) rootView.findViewById(R.id.postil_save_server);
+            this.postil_pic = (Button) rootView.findViewById(R.id.postil_pic);
+            this.postil_start_screen = (Button) rootView.findViewById(R.id.postil_start_screen);
+            this.postil_stop_screen = (Button) rootView.findViewById(R.id.postil_stop_screen);
+            this.postil_start_projection = (Button) rootView.findViewById(R.id.postil_start_projection);
+            this.postil_stop_projection = (Button) rootView.findViewById(R.id.postil_stop_projection);
+            this.postil_pre = (Button) rootView.findViewById(R.id.postil_pre);
+            this.postil_next = (Button) rootView.findViewById(R.id.postil_next);
+            this.postil_layout_id = (LinearLayout) rootView.findViewById(R.id.postil_layout_id);
+        }
+
     }
 }
 

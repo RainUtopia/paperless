@@ -4,6 +4,7 @@ package com.pa.paperless.fragment.meeting;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import com.pa.paperless.controller.BaseController;
 import com.pa.paperless.listener.CallListener;
@@ -32,6 +33,9 @@ public abstract class BaseFragment extends Fragment implements IModelChangeListe
 
     }
 
+    protected void ShowToast(String msg){
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 
     protected void initController() {
 

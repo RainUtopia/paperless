@@ -1379,7 +1379,10 @@ public final class InterfaceBullet {
   }
   /**
    * <pre>
-   *会议公告
+   *会议长文本公告
+   *Pb_TYPE_MEET_INTERFACE_MEETBULLET
+   *call,callback
+   *method: request(获取),update(修改)
    * </pre>
    *
    * Protobuf type {@code pbui_BigBulletDetailInfo}
@@ -1533,7 +1536,10 @@ public final class InterfaceBullet {
 
     /**
      * <pre>
-     *会议公告
+     *会议长文本公告
+     *Pb_TYPE_MEET_INTERFACE_MEETBULLET
+     *call,callback
+     *method: request(获取),update(修改)
      * </pre>
      *
      * Protobuf type {@code pbui_BigBulletDetailInfo}

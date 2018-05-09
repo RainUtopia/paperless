@@ -25,6 +25,37 @@ message	pbui_Ready
 	fixed32		    areaid=1;//连接上的区域服务器ID
 }
 
+//平台设备校验
+//type:Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE
+//method: notify
+//callback
+message	pbui_Type_DeviceValidate
+{
+	fixed32      valflag =1; //参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+	repeated	     fixed32 val=2; //valflag对于有效位的数 只返回valflag依次对应的有效位
+	repeated 		 fixed64 user64bitdef=3;//注册时自定义的64位整数
+}
+
+//查询平台功能限制属性
+//type:Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+//method: queryproperty
+//call
+message	pbui_Type_SystemFuntionLimitsProperty
+{
+	fixed32 propertyid=1;//属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+	fixed32 parameter=2;//传入参数值
+	fixed32 propertyval=3;//对应属性返回的值
+}
+
+//查询平台功能限制
+//type:Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+//method: query
+//call
+message	pbui_Type_SystemFuntionLimits
+{
+	repeated	     fixed32    functionids=1; //参见Pb_SystemFuncionId 
+}
+
 //平台时间
 //type:Pb_TYPE_MEET_INTERFACE_TIME
 //method: notify

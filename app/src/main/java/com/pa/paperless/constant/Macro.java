@@ -11,8 +11,6 @@ import com.pa.paperless.utils.SDCardUtils;
  */
 
 public class Macro {
-    //会议聊天未读消息更新 key
-    public static String UPTATE_BADGE = "update_badge_number";
 
     public static int DEVICE_MEET_DB = 0x01000000; //会议数据库(会议后台)
     public static int DEVICE_MEET_SERVICE = 0x01040000; //会议茶水服务
@@ -54,10 +52,10 @@ public class Macro {
     public static String FILENAME = "client.ini";
     public static String FILENAME_DEV = "client.dev";
     //下载的文件存放目录
-    public static final String MEETFILE = SDCardUtils.getSDCardPath()+"/MEETFILE/";
+    public static final String MEETFILE = SDCardUtils.getSDCardPath() + "/MEETFILE/";
     public static final String MEETMATERIAL = MEETFILE;//+"MeetMaterial/";//会议资料
     public static final String SHAREMATERIAL = MEETFILE;//+"ShareMaterial/";//共享资料
-    public static final String POSTILFILE = MEETFILE;//+"PostilFile/";//批注文件
+    public static final String POSTILFILE = MEETFILE + "PostilFile/";//批注文件
     public static final String VOTERESULT = MEETFILE;//+"VoteResult/";//投票结果
     //自定义 Fragment索引
     public static final int Pb_MEET_FUNCODE_AGENDA_BULLETIN = 0;    //会议议程

@@ -191,9 +191,11 @@ public class SDLActivity extends Activity {
             if (data != null && data.length > 0) {
                 switch (action) {
                     case IDEventMessage.MEDIA_PLAY_INFORM:
+                        Log.e(TAG, "org.libsdl.app_SDLActivity.onCreate :  媒体播放通知EventBus --->>> ");
                         meetMediaPlay = InterfacePlaymedia.pbui_Type_MeetMediaPlay.parseFrom(data);
                         break;
                     case IDEventMessage.PLAY_STREAM_NOTIFY:
+                        Log.e(TAG, "org.libsdl.app_SDLActivity.onCreate :  流播放通知EventBus --->>> ");
                         meetStreamPlay = InterfaceStream.pbui_Type_MeetStreamPlay.parseFrom(data);
                         break;
                 }
@@ -287,7 +289,6 @@ public class SDLActivity extends Activity {
     @Override
     protected void onResume() {
         Log.v(TAG, "onResume()");
-        Log.e("MyLog", "SDLActivity.onResume:   --->>> ");
         super.onResume();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -414,7 +415,7 @@ public class SDLActivity extends Activity {
      * every time we get one of those events, only if it comes after surfaceDestroyed
      */
     public static void handleResume() {
-        Log.i("handleResume", "handleResume finish!");
+        Log.i(TAG, "SDLActivity.handleResume :  finish!  ");
         if (SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady && SDLActivity.mHasFocus) {
             SDLActivity.mIsPaused = false;
             SDLActivity.nativeResume();

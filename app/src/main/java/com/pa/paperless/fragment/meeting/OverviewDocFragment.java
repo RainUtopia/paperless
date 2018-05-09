@@ -236,6 +236,8 @@ public class OverviewDocFragment extends BaseFragment implements CallListener, S
         public void onOpened(@NonNull CameraDevice camera) {
             mCameraDevice = camera;
             mImageReader = ImageReader.newInstance(mCameraView.getWidth(), mCameraView.getHeight(), ImageFormat.JPEG, 7);
+            Log.e("mCameraView", "com.pa.paperless.fragment.meeting_CameraCallBack.onOpened :  mCameraView.getWidth() --->>> "+mCameraView.getWidth()
+            +"mCameraView.getHeight()："+mCameraView.getHeight());
             mImageReader.setOnImageAvailableListener(this, null);
             try {
                 mRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);

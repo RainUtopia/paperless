@@ -56,6 +56,42 @@ public final class InterfaceIM {
      * <code>fixed64 utcsecond = 5;</code>
      */
     long getUtcsecond();
+
+    /**
+     * <pre>
+     *会议名称
+     * </pre>
+     *
+     * <code>bytes meetname = 6;</code>
+     */
+    com.google.protobuf.ByteString getMeetname();
+
+    /**
+     * <pre>
+     *会议室名
+     * </pre>
+     *
+     * <code>bytes roomname = 7;</code>
+     */
+    com.google.protobuf.ByteString getRoomname();
+
+    /**
+     * <pre>
+     *人员名称
+     * </pre>
+     *
+     * <code>bytes membername = 8;</code>
+     */
+    com.google.protobuf.ByteString getMembername();
+
+    /**
+     * <pre>
+     *席位名
+     * </pre>
+     *
+     * <code>bytes seatename = 9;</code>
+     */
+    com.google.protobuf.ByteString getSeatename();
   }
   /**
    * <pre>
@@ -74,6 +110,10 @@ public final class InterfaceIM {
       pbui_Type_MeetIMOrBuilder {
     private pbui_Type_MeetIM() {
       msg_ = com.google.protobuf.ByteString.EMPTY;
+      meetname_ = com.google.protobuf.ByteString.EMPTY;
+      roomname_ = com.google.protobuf.ByteString.EMPTY;
+      membername_ = com.google.protobuf.ByteString.EMPTY;
+      seatename_ = com.google.protobuf.ByteString.EMPTY;
     }
     public static final int MSGTYPE_FIELD_NUMBER = 1;
     private int msgtype_;
@@ -253,6 +293,158 @@ public final class InterfaceIM {
       utcsecond_ = 0L;
     }
 
+    public static final int MEETNAME_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString meetname_;
+    /**
+     * <pre>
+     *会议名称
+     * </pre>
+     *
+     * <code>bytes meetname = 6;</code>
+     */
+    public com.google.protobuf.ByteString getMeetname() {
+      return meetname_;
+    }
+    /**
+     * <pre>
+     *会议名称
+     * </pre>
+     *
+     * <code>bytes meetname = 6;</code>
+     */
+    private void setMeetname(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      meetname_ = value;
+    }
+    /**
+     * <pre>
+     *会议名称
+     * </pre>
+     *
+     * <code>bytes meetname = 6;</code>
+     */
+    private void clearMeetname() {
+      
+      meetname_ = getDefaultInstance().getMeetname();
+    }
+
+    public static final int ROOMNAME_FIELD_NUMBER = 7;
+    private com.google.protobuf.ByteString roomname_;
+    /**
+     * <pre>
+     *会议室名
+     * </pre>
+     *
+     * <code>bytes roomname = 7;</code>
+     */
+    public com.google.protobuf.ByteString getRoomname() {
+      return roomname_;
+    }
+    /**
+     * <pre>
+     *会议室名
+     * </pre>
+     *
+     * <code>bytes roomname = 7;</code>
+     */
+    private void setRoomname(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      roomname_ = value;
+    }
+    /**
+     * <pre>
+     *会议室名
+     * </pre>
+     *
+     * <code>bytes roomname = 7;</code>
+     */
+    private void clearRoomname() {
+      
+      roomname_ = getDefaultInstance().getRoomname();
+    }
+
+    public static final int MEMBERNAME_FIELD_NUMBER = 8;
+    private com.google.protobuf.ByteString membername_;
+    /**
+     * <pre>
+     *人员名称
+     * </pre>
+     *
+     * <code>bytes membername = 8;</code>
+     */
+    public com.google.protobuf.ByteString getMembername() {
+      return membername_;
+    }
+    /**
+     * <pre>
+     *人员名称
+     * </pre>
+     *
+     * <code>bytes membername = 8;</code>
+     */
+    private void setMembername(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      membername_ = value;
+    }
+    /**
+     * <pre>
+     *人员名称
+     * </pre>
+     *
+     * <code>bytes membername = 8;</code>
+     */
+    private void clearMembername() {
+      
+      membername_ = getDefaultInstance().getMembername();
+    }
+
+    public static final int SEATENAME_FIELD_NUMBER = 9;
+    private com.google.protobuf.ByteString seatename_;
+    /**
+     * <pre>
+     *席位名
+     * </pre>
+     *
+     * <code>bytes seatename = 9;</code>
+     */
+    public com.google.protobuf.ByteString getSeatename() {
+      return seatename_;
+    }
+    /**
+     * <pre>
+     *席位名
+     * </pre>
+     *
+     * <code>bytes seatename = 9;</code>
+     */
+    private void setSeatename(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      seatename_ = value;
+    }
+    /**
+     * <pre>
+     *席位名
+     * </pre>
+     *
+     * <code>bytes seatename = 9;</code>
+     */
+    private void clearSeatename() {
+      
+      seatename_ = getDefaultInstance().getSeatename();
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (msgtype_ != 0) {
@@ -269,6 +461,18 @@ public final class InterfaceIM {
       }
       if (utcsecond_ != 0L) {
         output.writeFixed64(5, utcsecond_);
+      }
+      if (!meetname_.isEmpty()) {
+        output.writeBytes(6, meetname_);
+      }
+      if (!roomname_.isEmpty()) {
+        output.writeBytes(7, roomname_);
+      }
+      if (!membername_.isEmpty()) {
+        output.writeBytes(8, membername_);
+      }
+      if (!seatename_.isEmpty()) {
+        output.writeBytes(9, seatename_);
       }
     }
 
@@ -296,6 +500,22 @@ public final class InterfaceIM {
       if (utcsecond_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed64Size(5, utcsecond_);
+      }
+      if (!meetname_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, meetname_);
+      }
+      if (!roomname_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, roomname_);
+      }
+      if (!membername_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, membername_);
+      }
+      if (!seatename_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, seatename_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -578,6 +798,146 @@ public final class InterfaceIM {
         return this;
       }
 
+      /**
+       * <pre>
+       *会议名称
+       * </pre>
+       *
+       * <code>bytes meetname = 6;</code>
+       */
+      public com.google.protobuf.ByteString getMeetname() {
+        return instance.getMeetname();
+      }
+      /**
+       * <pre>
+       *会议名称
+       * </pre>
+       *
+       * <code>bytes meetname = 6;</code>
+       */
+      public Builder setMeetname(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setMeetname(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议名称
+       * </pre>
+       *
+       * <code>bytes meetname = 6;</code>
+       */
+      public Builder clearMeetname() {
+        copyOnWrite();
+        instance.clearMeetname();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *会议室名
+       * </pre>
+       *
+       * <code>bytes roomname = 7;</code>
+       */
+      public com.google.protobuf.ByteString getRoomname() {
+        return instance.getRoomname();
+      }
+      /**
+       * <pre>
+       *会议室名
+       * </pre>
+       *
+       * <code>bytes roomname = 7;</code>
+       */
+      public Builder setRoomname(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setRoomname(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议室名
+       * </pre>
+       *
+       * <code>bytes roomname = 7;</code>
+       */
+      public Builder clearRoomname() {
+        copyOnWrite();
+        instance.clearRoomname();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *人员名称
+       * </pre>
+       *
+       * <code>bytes membername = 8;</code>
+       */
+      public com.google.protobuf.ByteString getMembername() {
+        return instance.getMembername();
+      }
+      /**
+       * <pre>
+       *人员名称
+       * </pre>
+       *
+       * <code>bytes membername = 8;</code>
+       */
+      public Builder setMembername(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setMembername(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *人员名称
+       * </pre>
+       *
+       * <code>bytes membername = 8;</code>
+       */
+      public Builder clearMembername() {
+        copyOnWrite();
+        instance.clearMembername();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *席位名
+       * </pre>
+       *
+       * <code>bytes seatename = 9;</code>
+       */
+      public com.google.protobuf.ByteString getSeatename() {
+        return instance.getSeatename();
+      }
+      /**
+       * <pre>
+       *席位名
+       * </pre>
+       *
+       * <code>bytes seatename = 9;</code>
+       */
+      public Builder setSeatename(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setSeatename(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *席位名
+       * </pre>
+       *
+       * <code>bytes seatename = 9;</code>
+       */
+      public Builder clearSeatename() {
+        copyOnWrite();
+        instance.clearSeatename();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:pbui_Type_MeetIM)
     }
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -610,6 +970,14 @@ public final class InterfaceIM {
               other.msg_ != com.google.protobuf.ByteString.EMPTY, other.msg_);
           utcsecond_ = visitor.visitLong(utcsecond_ != 0L, utcsecond_,
               other.utcsecond_ != 0L, other.utcsecond_);
+          meetname_ = visitor.visitByteString(meetname_ != com.google.protobuf.ByteString.EMPTY, meetname_,
+              other.meetname_ != com.google.protobuf.ByteString.EMPTY, other.meetname_);
+          roomname_ = visitor.visitByteString(roomname_ != com.google.protobuf.ByteString.EMPTY, roomname_,
+              other.roomname_ != com.google.protobuf.ByteString.EMPTY, other.roomname_);
+          membername_ = visitor.visitByteString(membername_ != com.google.protobuf.ByteString.EMPTY, membername_,
+              other.membername_ != com.google.protobuf.ByteString.EMPTY, other.membername_);
+          seatename_ = visitor.visitByteString(seatename_ != com.google.protobuf.ByteString.EMPTY, seatename_,
+              other.seatename_ != com.google.protobuf.ByteString.EMPTY, other.seatename_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
@@ -657,6 +1025,26 @@ public final class InterfaceIM {
                 case 41: {
 
                   utcsecond_ = input.readFixed64();
+                  break;
+                }
+                case 50: {
+
+                  meetname_ = input.readBytes();
+                  break;
+                }
+                case 58: {
+
+                  roomname_ = input.readBytes();
+                  break;
+                }
+                case 66: {
+
+                  membername_ = input.readBytes();
+                  break;
+                }
+                case 74: {
+
+                  seatename_ = input.readBytes();
                   break;
                 }
               }

@@ -1,5 +1,8 @@
 package com.pa.paperless.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import java.io.BufferedReader;
@@ -16,6 +19,33 @@ import java.util.Map;
  */
 
 public class NetworkUtil {
+
+
+    /**
+     * 检查网络是否可用
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isNetworkAvailable(Context context) {
+
+        ConnectivityManager manager = (ConnectivityManager) context
+                .getApplicationContext().getSystemService(
+                        Context.CONNECTIVITY_SERVICE);
+
+        if (manager == null) {
+            return false;
+        }
+
+        NetworkInfo networkinfo = manager.getActiveNetworkInfo();
+
+        if (networkinfo == null || !networkinfo.isAvailable()) {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * 通过HttpURLConnection实现一个get请求
      * @param urlStr

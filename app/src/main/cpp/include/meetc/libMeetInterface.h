@@ -19,6 +19,7 @@ extern "C" {
 #define MEET_PROGRAM_TYPE_STREAMCAPTURE  3 //流采集软件
 #define MEET_PROGRAM_TYPE_SERVICE		 4 //茶水服务软件
 #define MEET_PROGRAM_TYPE_ANDROIDAPP	 5 //android APP
+#define MEET_PROGRAM_TYPE_CLIENTDEBUG	 6 //TCP客户端调试
 
 	//会议模块回调数据接口
 	//phdr 回调的数据 数据结构是 Type_HeaderInfo + 后接上真实的数据
@@ -30,6 +31,10 @@ extern "C" {
 #define MEETCORE_LOGLEVEL_COMMON    2//信息
 #define MEETCORE_LOGLEVEL_WARNING   3//警告
 #define MEETCORE_LOGLEVEL_DEBUG     4//调试
+
+	//logflag
+#define MEETLOG_FLAG_LOGTOFILE  0x00000001 //保存到日志文件
+#define MEETLOG_FLAG_PRINTFOUNT 0x00000002 //输出到console
 
 	//loglevel 日志等级
 	//pmsg 回调的数据
@@ -43,7 +48,7 @@ extern "C" {
 		void*		   puser;//用户指针 回调函数中会通过 void* puser 返回该指针
 		MEETCORE_CB    pfunc;//回调函数
 
-		int			   blogtofile;//=1将日志保存到文件
+		int			   blogtofile;//参见 logflag
 		MEETCORE_LOGCB plogfunc;//日志回调函数
 
 		int			usekeystr;//使用传入的程序标识,
@@ -76,6 +81,12 @@ extern "C" {
 
 	//获取method 对应的字符串 eg:method=METHOD_MEET_INTERFACE_NOTIFY --> "METHOD_MEET_INTERFACE_NOTIFY"
 	const char* meetcore_GetMethodStr(int32u method);
+
+	//获取error 对应的字符串 eg:error=ERROR_MEET_INTERFACE_NOTINIT --> "ERROR_MEET_INTERFACE_NOTINIT"
+	const char* meetcore_GetErrorStr(int32u err);
+
+	//获取status 对应的字符串 eg:status=STATUS_ACCESSDENIED --> "STATUS_ACCESSDENIED"
+	const char* meetcore_GetStatusMsg(int32u status);
 
 	//输出日志,如果设置了日志回调函数,将日志回调给用户设置的回调函数
 	void meetcore_printf(int loglevel, const char *pszFmt, ...);

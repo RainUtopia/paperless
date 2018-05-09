@@ -104,4 +104,5 @@ public class IDivMessage {
     //平台初始化完毕通知
     public static final int PLATFORM_INITIALIZATION = 1048;
 
+
 }

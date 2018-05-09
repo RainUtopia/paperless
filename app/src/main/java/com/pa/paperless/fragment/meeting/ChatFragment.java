@@ -23,17 +23,16 @@ import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMeet;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MainActivity;
 import com.pa.paperless.adapter.MulitpleItemAdapter;
 import com.pa.paperless.adapter.MemberListAdapter;
 import com.pa.paperless.bean.CheckedMemberIds;
+import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
-import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.utils.Dispose;
@@ -50,6 +49,8 @@ import java.util.List;
 
 import static com.pa.paperless.activity.MeetingActivity.mBadge;
 import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
+import static com.pa.paperless.adapter.MemberListAdapter.itemChecked;
+import static com.pa.paperless.adapter.MemberListAdapter.names;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -73,9 +74,16 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
+                    Log.i("MyLog", "com.pa.paperless.fragment.meeting_ChatFragment.handleMessage : 查询参会人Handle  --->>> ");
                     ArrayList attendee = msg.getData().getParcelableArrayList("attendee");
                     InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) attendee.get(0);
                     memberInfos = o.getItemList();
+                    try {
+                        /** ************ ******  6.查询设备信息  ****** ************ **/
+                        nativeUtil.queryDeviceInfo();
+                    } catch (InvalidProtocolBufferException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case IDivMessage.RECEIVE_MEET_IMINFO://184.收到新的会议交流信息
                     ArrayList receiveMeetIMInfo = msg.getData().getParcelableArrayList("receiveMeetIMInfo");
@@ -99,58 +107,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                             //刷新
                             chatAdapter.notifyDataSetChanged();
                             break;
-//                        case 1://多媒体链接
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  多媒体链接 --->>> " + 1);
-//                            break;
-//                        case 2://水
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  水 --->>> " + 2);
-//                            break;
-//                        case 3://茶
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  茶 --->>> " + 3);
-//                            break;
-//                        case 4://咖啡
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  咖啡 --->>> " + 4);
-//                            break;
-//                        case 5://笔
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  笔 --->>> " + 5);
-//                            break;
-//                        case 6://纸
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  纸 --->>> " + 6);
-//                            break;
-//                        case 7://技术员
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  技术员 --->>> " + 7);
-//                            break;
-//                        case 8://服务员
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  服务员 --->>> " + 8);
-//                            break;
-//                        case 9://其它服务
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  其它服务 --->>> " + 9);
-//                            break;
-//                        case 10://申请主持
-//                            Log.e("MyLog", "ChatFragment.handleMessage:  申请主持 --->>> " + 10);
-//                            break;
-//                    }
-                        //参会人员角色
-//                    int role = o1.getRole();
-//                    if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_member_nouser.getNumber()){
-//                        //未使用
-//
-//                    }else if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_member_normal.getNumber()){
-//                        //一般参会人员
-//
-//                    }else if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_member_compere.getNumber()){
-//                        //主持人
-//
-//                    }else if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_member_secretary.getNumber()){
-//                        //秘书
-//
-//                    }else if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_device_projector.getNumber()){
-//                        //投影仪
-//
-//                    }else if(role == InterfaceMacro.Pb_MeetMemberRole.Pb_role_admin.getNumber()){
-//                        //管理员
-//
-//                    }
                     }
                     break;
                 case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
@@ -169,28 +125,65 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                     //获取到所有的设备信息，查找在线的设备
                     List<InterfaceDevice.pbui_Item_DeviceDetailInfo> pdevList = o3.getPdevList();
                     //用来存放在线的设备
-                    List<InterfaceMember.pbui_Item_MemberDetailInfo> OnLineMembers = new ArrayList<>();
+                    if (mOnLineMembers == null) {
+                        mOnLineMembers = new ArrayList<>();
+                    } else {
+                        mOnLineMembers.clear();
+                    }
                     for (int i = 0; i < pdevList.size(); i++) {
                         InterfaceDevice.pbui_Item_DeviceDetailInfo pbui_item_deviceDetailInfo = pdevList.get(i);
                         int netstate = pbui_item_deviceDetailInfo.getNetstate();
-                        Log.e("MyLog", "ChatFragment.handleMessage 171行:  值为1是在线 ：--->>> " + netstate);
-                        if (netstate == 1) {
+                        int facestate = pbui_item_deviceDetailInfo.getFacestate();
+                        if (facestate == 1 && netstate == 1) {//界面状态是1并且是在线的
                             //获取在线状态的设备绑定的人员ID
                             int memberid = pbui_item_deviceDetailInfo.getMemberid();
                             for (int j = 0; j < memberInfos.size(); j++) {
                                 InterfaceMember.pbui_Item_MemberDetailInfo pbui_item_memberDetailInfo = memberInfos.get(j);
-                                if (pbui_item_memberDetailInfo.getPersonid() != MainActivity.getLocalInfo().getMemberid()) {//先过滤自己的设备
+                                /** **** **  过滤自己的设备  ** **** **/
+                                if (pbui_item_memberDetailInfo.getPersonid() != MainActivity.getLocalInfo().getMemberid()) {
                                     if (pbui_item_memberDetailInfo.getPersonid() == memberid) {
                                         //添加在线状态的设备
-                                        OnLineMembers.add(pbui_item_memberDetailInfo);
+                                        mOnLineMembers.add(pbui_item_memberDetailInfo);
                                     }
                                 }
                             }
                         }
                     }
+                    Log.e("MyLog", "com.pa.paperless.fragment.meeting_ChatFragment.handleMessage :" +
+                            "  在线参会人数量 --->>> " + mOnLineMembers.size());
+                    /**
+                     * 一下代码逻辑：
+                        首次查询后就绑定lv
+                        当查询的结果和之前的有变更
+                        有新的参会人加入
+                            添加新的默认项
+                        有参会人退出
+                            删除原来的数据从新设置初始化
+                        最后进行Adapter刷新
+                     */
                     //将在线状态的设备进行Adapter绑定
-                    mMemberAdapter = new MemberListAdapter(getActivity(), OnLineMembers);
-                    chat_lv.setAdapter(mMemberAdapter);
+                    if (mMemberAdapter == null) {
+                        mMemberAdapter = new MemberListAdapter(getActivity(), mOnLineMembers);
+                        chat_lv.setAdapter(mMemberAdapter);
+                    } else {
+                        if (mOnLineMembers.size() > memberSize) {
+                            for (int i = 0; i < mOnLineMembers.size() - memberSize; i++) {
+                                itemChecked.add(false);
+                                names.add(i, "");
+                            }
+                        } else if (mOnLineMembers.size() < memberSize) {
+                            itemChecked.clear();
+                            names.clear();
+                            for (int i = 0; i < mOnLineMembers.size(); i++) {
+                                itemChecked.add(false);
+                                names.add(i, "");
+                            }
+                        }
+                    }
+                    mMemberAdapter.notifyDataSetChanged();
+                    memberSize = itemChecked.size();
+                    Log.e("MyLog", "com.pa.paperless.fragment.meeting_ChatFragment.handleMessage :   " +
+                            "--->>> " + mOnLineMembers.size() + ":" + itemChecked.size());
                     break;
 
             }
@@ -198,6 +191,10 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
     };
     private List<ReceiveMeetIMInfo> receiveMeetIMInfos = new ArrayList<>();
     private List<InterfaceMember.pbui_Item_MemberDetailInfo> memberInfos;
+    private List<DevMember> mChatonLineMember;
+    private List<InterfaceMember.pbui_Item_MemberDetailInfo> mOnLineMembers = new ArrayList<>();
+    private int memberSize;
+
 
     @Nullable
     @Override
@@ -208,14 +205,13 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
         try {
             //92.查询参会人员
             nativeUtil.queryAttendPeople();
-            /** ************ ******  6.查询设备信息  ****** ************ **/
-            nativeUtil.queryDeviceInfo();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
         EventBus.getDefault().register(this);
         return inflate;
     }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
@@ -226,6 +222,12 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 Log.e("MyLog", "ChatFragment.getEventMessage:  EventBus 指定ID：--->>> " + object.getId());
                 /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
                 nativeUtil.queryAttendPeopleFromId(object.getId());
+                break;
+            case IDEventMessage.updata_chat_onLineMember://收到会议Activity的更新数据
+                Log.e("MyLog", "ChatFragment.getEventMessage 183行:  收到会议Activity的更新数据EventBus --->>> ");
+//                initController();
+                nativeUtil.setCallListener(this);
+                nativeUtil.queryAttendPeople();
                 break;
         }
     }
@@ -289,7 +291,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener, 
                 if (!TextUtils.isEmpty(string) /*&& ids.size() > 0*/) {
                     //185.发送会议交流信息
                     if (string.length() <= 300) {
-                        boolean b = nativeUtil.sendMeetChatInfo(string, InterfaceMacro.Pb_String_LenLimit.Pb_MEETIM_CHAR_MSG_MAXLEN.getNumber(), ids);
+                        boolean b = nativeUtil.sendMeetChatInfo(string, InterfaceMacro.Pb_MeetIMMSG_TYPE.Pb_MEETIM_CHAT_Message.getNumber(), ids);
                         if (b) { //发送成功
                             //RecyclerView 更新聊天的界面
                             List<String> checkedName = mMemberAdapter.getCheckedName();

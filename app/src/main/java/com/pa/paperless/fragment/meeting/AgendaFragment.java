@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -78,20 +77,6 @@ public class AgendaFragment extends BaseFragment implements CallListener {
                         //议程文本
                         String  text = new String(o.getText().toByteArray());
                         Log.e("MyLog","AgendaFragment.handleMessage:  agendatype --->>> "+agendatype+"   mediaid : "+mediaid+"   text:  "+ text);
-                        //时间轴式
-//                        for (int i = 0; i < o.getItemCount(); i++) {
-//                            InterfaceAgenda.pbui_ItemAgendaTimeInfo item = o.getItem(i);
-//                            int agendaid = item.getAgendaid();  //议程ID
-//                            int status = item.getStatus();      //议程状态
-//                            int dirid = item.getDirid();        //绑定目录ID
-//                            long startutctime = item.getStartutctime();
-//                            long endutctime = item.getEndutctime();
-//                            String sTime = DateUtil.getTime(startutctime);
-//                            String eTime = DateUtil.getTime(endutctime);
-//                            String time = sTime + "-" + eTime;  // 8:00-9:00
-//                            String descText = new String(item.getDesctext().toByteArray());//描述内容
-//                        }
-//                        mData.add(new AgendContext(mediaid+"", text));
                         //设置数据
                         agenda_tv.setText(text);
                     }
@@ -108,6 +93,7 @@ public class AgendaFragment extends BaseFragment implements CallListener {
         initView(inflate);
         mData = new ArrayList<>();
         EventBus.getDefault().register(this);
+
         try {
             //查询议程 -- 获取议程信息
             nativeUtil.queryAgenda();

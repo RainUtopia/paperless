@@ -1030,6 +1030,1753 @@ public final class InterfaceBase {
     }
   }
 
+  public interface pbui_Type_DeviceValidateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_DeviceValidate)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+     * </pre>
+     *
+     * <code>fixed32 valflag = 1;</code>
+     */
+    int getValflag();
+
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    java.util.List<java.lang.Integer> getValList();
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    int getValCount();
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    int getVal(int index);
+
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    java.util.List<java.lang.Long> getUser64BitdefList();
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    int getUser64BitdefCount();
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    long getUser64Bitdef(int index);
+  }
+  /**
+   * <pre>
+   *平台设备校验
+   *type:Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE
+   *method: notify
+   *callback
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_DeviceValidate}
+   */
+  public  static final class pbui_Type_DeviceValidate extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_DeviceValidate, pbui_Type_DeviceValidate.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_DeviceValidate)
+      pbui_Type_DeviceValidateOrBuilder {
+    private pbui_Type_DeviceValidate() {
+      val_ = emptyIntList();
+      user64Bitdef_ = emptyLongList();
+    }
+    private int bitField0_;
+    public static final int VALFLAG_FIELD_NUMBER = 1;
+    private int valflag_;
+    /**
+     * <pre>
+     *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+     * </pre>
+     *
+     * <code>fixed32 valflag = 1;</code>
+     */
+    public int getValflag() {
+      return valflag_;
+    }
+    /**
+     * <pre>
+     *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+     * </pre>
+     *
+     * <code>fixed32 valflag = 1;</code>
+     */
+    private void setValflag(int value) {
+      
+      valflag_ = value;
+    }
+    /**
+     * <pre>
+     *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+     * </pre>
+     *
+     * <code>fixed32 valflag = 1;</code>
+     */
+    private void clearValflag() {
+      
+      valflag_ = 0;
+    }
+
+    public static final int VAL_FIELD_NUMBER = 2;
+    private com.google.protobuf.Internal.IntList val_;
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getValList() {
+      return val_;
+    }
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    public int getValCount() {
+      return val_.size();
+    }
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    public int getVal(int index) {
+      return val_.getInt(index);
+    }
+    private void ensureValIsMutable() {
+      if (!val_.isModifiable()) {
+        val_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(val_);
+       }
+    }
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    private void setVal(
+        int index, int value) {
+      ensureValIsMutable();
+      val_.setInt(index, value);
+    }
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    private void addVal(int value) {
+      ensureValIsMutable();
+      val_.addInt(value);
+    }
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    private void addAllVal(
+        java.lang.Iterable<? extends java.lang.Integer> values) {
+      ensureValIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, val_);
+    }
+    /**
+     * <pre>
+     *valflag对于有效位的数 只返回valflag依次对应的有效位
+     * </pre>
+     *
+     * <code>repeated fixed32 val = 2;</code>
+     */
+    private void clearVal() {
+      val_ = emptyIntList();
+    }
+
+    public static final int USER64BITDEF_FIELD_NUMBER = 3;
+    private com.google.protobuf.Internal.LongList user64Bitdef_;
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    public java.util.List<java.lang.Long>
+        getUser64BitdefList() {
+      return user64Bitdef_;
+    }
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    public int getUser64BitdefCount() {
+      return user64Bitdef_.size();
+    }
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    public long getUser64Bitdef(int index) {
+      return user64Bitdef_.getLong(index);
+    }
+    private void ensureUser64BitdefIsMutable() {
+      if (!user64Bitdef_.isModifiable()) {
+        user64Bitdef_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(user64Bitdef_);
+       }
+    }
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    private void setUser64Bitdef(
+        int index, long value) {
+      ensureUser64BitdefIsMutable();
+      user64Bitdef_.setLong(index, value);
+    }
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    private void addUser64Bitdef(long value) {
+      ensureUser64BitdefIsMutable();
+      user64Bitdef_.addLong(value);
+    }
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    private void addAllUser64Bitdef(
+        java.lang.Iterable<? extends java.lang.Long> values) {
+      ensureUser64BitdefIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, user64Bitdef_);
+    }
+    /**
+     * <pre>
+     *注册时自定义的64位整数
+     * </pre>
+     *
+     * <code>repeated fixed64 user64bitdef = 3;</code>
+     */
+    private void clearUser64Bitdef() {
+      user64Bitdef_ = emptyLongList();
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (valflag_ != 0) {
+        output.writeFixed32(1, valflag_);
+      }
+      for (int i = 0; i < val_.size(); i++) {
+        output.writeFixed32(2, val_.getInt(i));
+      }
+      for (int i = 0; i < user64Bitdef_.size(); i++) {
+        output.writeFixed64(3, user64Bitdef_.getLong(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (valflag_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, valflag_);
+      }
+      {
+        int dataSize = 0;
+        dataSize = 4 * getValList().size();
+        size += dataSize;
+        size += 1 * getValList().size();
+      }
+      {
+        int dataSize = 0;
+        dataSize = 8 * getUser64BitdefList().size();
+        size += dataSize;
+        size += 1 * getUser64BitdefList().size();
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *平台设备校验
+     *type:Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE
+     *method: notify
+     *callback
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_DeviceValidate}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_DeviceValidate)
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidateOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+       * </pre>
+       *
+       * <code>fixed32 valflag = 1;</code>
+       */
+      public int getValflag() {
+        return instance.getValflag();
+      }
+      /**
+       * <pre>
+       *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+       * </pre>
+       *
+       * <code>fixed32 valflag = 1;</code>
+       */
+      public Builder setValflag(int value) {
+        copyOnWrite();
+        instance.setValflag(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参见 Pb_ValidateFlagBit 参考basemacro.h的宏定义
+       * </pre>
+       *
+       * <code>fixed32 valflag = 1;</code>
+       */
+      public Builder clearValflag() {
+        copyOnWrite();
+        instance.clearValflag();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getValList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getValList());
+      }
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public int getValCount() {
+        return instance.getValCount();
+      }
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public int getVal(int index) {
+        return instance.getVal(index);
+      }
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public Builder setVal(
+          int index, int value) {
+        copyOnWrite();
+        instance.setVal(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public Builder addVal(int value) {
+        copyOnWrite();
+        instance.addVal(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public Builder addAllVal(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        copyOnWrite();
+        instance.addAllVal(values);
+        return this;
+      }
+      /**
+       * <pre>
+       *valflag对于有效位的数 只返回valflag依次对应的有效位
+       * </pre>
+       *
+       * <code>repeated fixed32 val = 2;</code>
+       */
+      public Builder clearVal() {
+        copyOnWrite();
+        instance.clearVal();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public java.util.List<java.lang.Long>
+          getUser64BitdefList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getUser64BitdefList());
+      }
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public int getUser64BitdefCount() {
+        return instance.getUser64BitdefCount();
+      }
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public long getUser64Bitdef(int index) {
+        return instance.getUser64Bitdef(index);
+      }
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public Builder setUser64Bitdef(
+          int index, long value) {
+        copyOnWrite();
+        instance.setUser64Bitdef(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public Builder addUser64Bitdef(long value) {
+        copyOnWrite();
+        instance.addUser64Bitdef(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public Builder addAllUser64Bitdef(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        copyOnWrite();
+        instance.addAllUser64Bitdef(values);
+        return this;
+      }
+      /**
+       * <pre>
+       *注册时自定义的64位整数
+       * </pre>
+       *
+       * <code>repeated fixed64 user64bitdef = 3;</code>
+       */
+      public Builder clearUser64Bitdef() {
+        copyOnWrite();
+        instance.clearUser64Bitdef();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_DeviceValidate)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          val_.makeImmutable();
+          user64Bitdef_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate) arg1;
+          valflag_ = visitor.visitInt(valflag_ != 0, valflag_,
+              other.valflag_ != 0, other.valflag_);
+          val_= visitor.visitIntList(val_, other.val_);
+          user64Bitdef_= visitor.visitLongList(user64Bitdef_, other.user64Bitdef_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+            bitField0_ |= other.bitField0_;
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  valflag_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+                  if (!val_.isModifiable()) {
+                    val_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(val_);
+                  }
+                  val_.addInt(input.readFixed32());
+                  break;
+                }
+                case 18: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!val_.isModifiable() && input.getBytesUntilLimit() > 0) {
+                    final int currentSize = val_.size();
+                    val_ = val_.mutableCopyWithCapacity(
+                        currentSize + (length/4));
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    val_.addInt(input.readFixed32());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+                case 25: {
+                  if (!user64Bitdef_.isModifiable()) {
+                    user64Bitdef_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(user64Bitdef_);
+                  }
+                  user64Bitdef_.addLong(input.readFixed64());
+                  break;
+                }
+                case 26: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!user64Bitdef_.isModifiable() && input.getBytesUntilLimit() > 0) {
+                    final int currentSize = user64Bitdef_.size();
+                    user64Bitdef_ = user64Bitdef_.mutableCopyWithCapacity(
+                        currentSize + (length/8));
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    user64Bitdef_.addLong(input.readFixed64());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_DeviceValidate)
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_DeviceValidate();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_DeviceValidate getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_DeviceValidate> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_DeviceValidate> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Type_SystemFuntionLimitsPropertyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_SystemFuntionLimitsProperty)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+     * </pre>
+     *
+     * <code>fixed32 propertyid = 1;</code>
+     */
+    int getPropertyid();
+
+    /**
+     * <pre>
+     *传入参数值
+     * </pre>
+     *
+     * <code>fixed32 parameter = 2;</code>
+     */
+    int getParameter();
+
+    /**
+     * <pre>
+     *对应属性返回的值
+     * </pre>
+     *
+     * <code>fixed32 propertyval = 3;</code>
+     */
+    int getPropertyval();
+  }
+  /**
+   * <pre>
+   *查询平台功能限制属性
+   *type:Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+   *method: queryproperty
+   *call
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_SystemFuntionLimitsProperty}
+   */
+  public  static final class pbui_Type_SystemFuntionLimitsProperty extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_SystemFuntionLimitsProperty, pbui_Type_SystemFuntionLimitsProperty.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_SystemFuntionLimitsProperty)
+      pbui_Type_SystemFuntionLimitsPropertyOrBuilder {
+    private pbui_Type_SystemFuntionLimitsProperty() {
+    }
+    public static final int PROPERTYID_FIELD_NUMBER = 1;
+    private int propertyid_;
+    /**
+     * <pre>
+     *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+     * </pre>
+     *
+     * <code>fixed32 propertyid = 1;</code>
+     */
+    public int getPropertyid() {
+      return propertyid_;
+    }
+    /**
+     * <pre>
+     *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+     * </pre>
+     *
+     * <code>fixed32 propertyid = 1;</code>
+     */
+    private void setPropertyid(int value) {
+      
+      propertyid_ = value;
+    }
+    /**
+     * <pre>
+     *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+     * </pre>
+     *
+     * <code>fixed32 propertyid = 1;</code>
+     */
+    private void clearPropertyid() {
+      
+      propertyid_ = 0;
+    }
+
+    public static final int PARAMETER_FIELD_NUMBER = 2;
+    private int parameter_;
+    /**
+     * <pre>
+     *传入参数值
+     * </pre>
+     *
+     * <code>fixed32 parameter = 2;</code>
+     */
+    public int getParameter() {
+      return parameter_;
+    }
+    /**
+     * <pre>
+     *传入参数值
+     * </pre>
+     *
+     * <code>fixed32 parameter = 2;</code>
+     */
+    private void setParameter(int value) {
+      
+      parameter_ = value;
+    }
+    /**
+     * <pre>
+     *传入参数值
+     * </pre>
+     *
+     * <code>fixed32 parameter = 2;</code>
+     */
+    private void clearParameter() {
+      
+      parameter_ = 0;
+    }
+
+    public static final int PROPERTYVAL_FIELD_NUMBER = 3;
+    private int propertyval_;
+    /**
+     * <pre>
+     *对应属性返回的值
+     * </pre>
+     *
+     * <code>fixed32 propertyval = 3;</code>
+     */
+    public int getPropertyval() {
+      return propertyval_;
+    }
+    /**
+     * <pre>
+     *对应属性返回的值
+     * </pre>
+     *
+     * <code>fixed32 propertyval = 3;</code>
+     */
+    private void setPropertyval(int value) {
+      
+      propertyval_ = value;
+    }
+    /**
+     * <pre>
+     *对应属性返回的值
+     * </pre>
+     *
+     * <code>fixed32 propertyval = 3;</code>
+     */
+    private void clearPropertyval() {
+      
+      propertyval_ = 0;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (propertyid_ != 0) {
+        output.writeFixed32(1, propertyid_);
+      }
+      if (parameter_ != 0) {
+        output.writeFixed32(2, parameter_);
+      }
+      if (propertyval_ != 0) {
+        output.writeFixed32(3, propertyval_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (propertyid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, propertyid_);
+      }
+      if (parameter_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, parameter_);
+      }
+      if (propertyval_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(3, propertyval_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *查询平台功能限制属性
+     *type:Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+     *method: queryproperty
+     *call
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_SystemFuntionLimitsProperty}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_SystemFuntionLimitsProperty)
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsPropertyOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+       * </pre>
+       *
+       * <code>fixed32 propertyid = 1;</code>
+       */
+      public int getPropertyid() {
+        return instance.getPropertyid();
+      }
+      /**
+       * <pre>
+       *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+       * </pre>
+       *
+       * <code>fixed32 propertyid = 1;</code>
+       */
+      public Builder setPropertyid(int value) {
+        copyOnWrite();
+        instance.setPropertyid(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *属性ID 详细用法参见 Pb_SystemFuncionPropertyId
+       * </pre>
+       *
+       * <code>fixed32 propertyid = 1;</code>
+       */
+      public Builder clearPropertyid() {
+        copyOnWrite();
+        instance.clearPropertyid();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *传入参数值
+       * </pre>
+       *
+       * <code>fixed32 parameter = 2;</code>
+       */
+      public int getParameter() {
+        return instance.getParameter();
+      }
+      /**
+       * <pre>
+       *传入参数值
+       * </pre>
+       *
+       * <code>fixed32 parameter = 2;</code>
+       */
+      public Builder setParameter(int value) {
+        copyOnWrite();
+        instance.setParameter(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *传入参数值
+       * </pre>
+       *
+       * <code>fixed32 parameter = 2;</code>
+       */
+      public Builder clearParameter() {
+        copyOnWrite();
+        instance.clearParameter();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *对应属性返回的值
+       * </pre>
+       *
+       * <code>fixed32 propertyval = 3;</code>
+       */
+      public int getPropertyval() {
+        return instance.getPropertyval();
+      }
+      /**
+       * <pre>
+       *对应属性返回的值
+       * </pre>
+       *
+       * <code>fixed32 propertyval = 3;</code>
+       */
+      public Builder setPropertyval(int value) {
+        copyOnWrite();
+        instance.setPropertyval(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *对应属性返回的值
+       * </pre>
+       *
+       * <code>fixed32 propertyval = 3;</code>
+       */
+      public Builder clearPropertyval() {
+        copyOnWrite();
+        instance.clearPropertyval();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_SystemFuntionLimitsProperty)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty) arg1;
+          propertyid_ = visitor.visitInt(propertyid_ != 0, propertyid_,
+              other.propertyid_ != 0, other.propertyid_);
+          parameter_ = visitor.visitInt(parameter_ != 0, parameter_,
+              other.parameter_ != 0, other.parameter_);
+          propertyval_ = visitor.visitInt(propertyval_ != 0, propertyval_,
+              other.propertyval_ != 0, other.propertyval_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  propertyid_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+
+                  parameter_ = input.readFixed32();
+                  break;
+                }
+                case 29: {
+
+                  propertyval_ = input.readFixed32();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_SystemFuntionLimitsProperty)
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_SystemFuntionLimitsProperty();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsProperty getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_SystemFuntionLimitsProperty> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_SystemFuntionLimitsProperty> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Type_SystemFuntionLimitsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_SystemFuntionLimits)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    java.util.List<java.lang.Integer> getFunctionidsList();
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    int getFunctionidsCount();
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    int getFunctionids(int index);
+  }
+  /**
+   * <pre>
+   *查询平台功能限制
+   *type:Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+   *method: query
+   *call
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_SystemFuntionLimits}
+   */
+  public  static final class pbui_Type_SystemFuntionLimits extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_SystemFuntionLimits, pbui_Type_SystemFuntionLimits.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_SystemFuntionLimits)
+      pbui_Type_SystemFuntionLimitsOrBuilder {
+    private pbui_Type_SystemFuntionLimits() {
+      functionids_ = emptyIntList();
+    }
+    public static final int FUNCTIONIDS_FIELD_NUMBER = 1;
+    private com.google.protobuf.Internal.IntList functionids_;
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getFunctionidsList() {
+      return functionids_;
+    }
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    public int getFunctionidsCount() {
+      return functionids_.size();
+    }
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    public int getFunctionids(int index) {
+      return functionids_.getInt(index);
+    }
+    private void ensureFunctionidsIsMutable() {
+      if (!functionids_.isModifiable()) {
+        functionids_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(functionids_);
+       }
+    }
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    private void setFunctionids(
+        int index, int value) {
+      ensureFunctionidsIsMutable();
+      functionids_.setInt(index, value);
+    }
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    private void addFunctionids(int value) {
+      ensureFunctionidsIsMutable();
+      functionids_.addInt(value);
+    }
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    private void addAllFunctionids(
+        java.lang.Iterable<? extends java.lang.Integer> values) {
+      ensureFunctionidsIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, functionids_);
+    }
+    /**
+     * <pre>
+     *参见Pb_SystemFuncionId 
+     * </pre>
+     *
+     * <code>repeated fixed32 functionids = 1;</code>
+     */
+    private void clearFunctionids() {
+      functionids_ = emptyIntList();
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < functionids_.size(); i++) {
+        output.writeFixed32(1, functionids_.getInt(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        dataSize = 4 * getFunctionidsList().size();
+        size += dataSize;
+        size += 1 * getFunctionidsList().size();
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *查询平台功能限制
+     *type:Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT
+     *method: query
+     *call
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_SystemFuntionLimits}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_SystemFuntionLimits)
+        com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimitsOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getFunctionidsList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getFunctionidsList());
+      }
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public int getFunctionidsCount() {
+        return instance.getFunctionidsCount();
+      }
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public int getFunctionids(int index) {
+        return instance.getFunctionids(index);
+      }
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public Builder setFunctionids(
+          int index, int value) {
+        copyOnWrite();
+        instance.setFunctionids(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public Builder addFunctionids(int value) {
+        copyOnWrite();
+        instance.addFunctionids(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public Builder addAllFunctionids(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        copyOnWrite();
+        instance.addAllFunctionids(values);
+        return this;
+      }
+      /**
+       * <pre>
+       *参见Pb_SystemFuncionId 
+       * </pre>
+       *
+       * <code>repeated fixed32 functionids = 1;</code>
+       */
+      public Builder clearFunctionids() {
+        copyOnWrite();
+        instance.clearFunctionids();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_SystemFuntionLimits)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          functionids_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits) arg1;
+          functionids_= visitor.visitIntList(functionids_, other.functionids_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+                  if (!functionids_.isModifiable()) {
+                    functionids_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(functionids_);
+                  }
+                  functionids_.addInt(input.readFixed32());
+                  break;
+                }
+                case 10: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!functionids_.isModifiable() && input.getBytesUntilLimit() > 0) {
+                    final int currentSize = functionids_.size();
+                    functionids_ = functionids_.mutableCopyWithCapacity(
+                        currentSize + (length/4));
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    functionids_.addInt(input.readFixed32());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_SystemFuntionLimits)
+    private static final com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_SystemFuntionLimits();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_SystemFuntionLimits getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_SystemFuntionLimits> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_SystemFuntionLimits> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface pbui_TimeOrBuilder extends
       // @@protoc_insertion_point(interface_extends:pbui_Time)
       com.google.protobuf.MessageLiteOrBuilder {

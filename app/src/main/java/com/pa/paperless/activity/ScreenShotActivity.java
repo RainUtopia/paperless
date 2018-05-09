@@ -13,6 +13,7 @@ import com.pa.paperless.utils.Shotter;
 
 /**
  * Created by Administrator on 2018/2/5.
+ *
  */
 
 public class ScreenShotActivity extends Activity {

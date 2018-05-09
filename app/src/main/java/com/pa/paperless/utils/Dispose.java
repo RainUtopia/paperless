@@ -9,6 +9,7 @@ import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfaceRoom;
+import com.mogujie.tt.protobuf.InterfaceVideo;
 import com.mogujie.tt.protobuf.InterfaceVote;
 import com.pa.paperless.bean.AdminInfo;
 import com.pa.paperless.bean.DeviceInfo;
@@ -40,7 +41,6 @@ public class Dispose {
     private static List<DeviceInfo> deviceInfos;
     private static List<PlaceInfo> placeInfos;
     private static List<AdminInfo> adminInfos;
-
 
     public static List<AdminInfo> AdminInfo(InterfaceAdmin.pbui_TypeAdminDetailInfo o) {
         if (adminInfos != null) {

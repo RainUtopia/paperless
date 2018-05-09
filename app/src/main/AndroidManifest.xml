@@ -80,8 +80,6 @@
         <service android:name=".service.PlayService" />
 
         <activity android:name="com.wind.myapplication.CameraDemo" />
-        <activity android:name=".activity.PostilActivity"
-            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

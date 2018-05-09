@@ -147,7 +147,7 @@ public class ScreenRecorder extends Thread {
     private void recordVirtualDisplay() {
         Log.d(TAG, "recordVirtualDisplay---------------------------");
         while (!quit.get()) {
-            int index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);// 输出流队列中取数据索引,返回已成功解码的输出缓冲区的索引
+            int index = encoder.dequeueOutputBuffer(bufferInfo,TIMEOUT_US );// 输出流队列中取数据索引,返回已成功解码的输出缓冲区的索引
             ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
             while (index >= 0) {
                 Log.i(TAG, "Get H264 Buffer Success! flag = " + bufferInfo.flags + ",pts = " + bufferInfo.presentationTimeUs + "");

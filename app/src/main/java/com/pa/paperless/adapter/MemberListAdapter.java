@@ -1,6 +1,7 @@
 package com.pa.paperless.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,9 @@ public class MemberListAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<InterfaceMember.pbui_Item_MemberDetailInfo> datas;
     //存放是否选中结果集
-    private List<Boolean> itemChecked = new ArrayList<>();
+    public static List<Boolean> itemChecked = new ArrayList<>();
     //存放选中的CheckBox文本
-    private List<String> names = new ArrayList<>();
+    public static List<String> names = new ArrayList<>();
     private List<CheckedMemberIds> mCheckedMemberIds = new ArrayList<>();
     private List<String> checkName;
 
@@ -144,8 +145,12 @@ public class MemberListAdapter extends BaseAdapter {
                 setNames(itemChecked.get(i), i, memberInfo);
             }
         });
-        holder.chat_item_cb.setChecked(itemChecked.get(i));
-        setNames(holder.chat_item_cb.isChecked(), i, memberInfo);
+        Log.e("MemberAd", "com.pa.paperless.adapter_MemberListAdapter.getView :" +
+                "   --->>>itemChecked.size() " + itemChecked.size() + "   当前的索引：" + i);
+        if (itemChecked.size() > 0) {
+            holder.chat_item_cb.setChecked(itemChecked.get(i));
+            setNames(holder.chat_item_cb.isChecked(), i, memberInfo);
+        }
         return view;
     }
 

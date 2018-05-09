@@ -27,7 +27,7 @@ message pbui_Type_MeetSignInDetailInfo
 //method: add
 message pbui_Type_DoMeetSignIno
 {
-	fixed32		signin_type=1;//签到方式 参见 Pb_MeetSignType
+	fixed32		signin_type=1;//签到方式 参见Pb_MeetSignType
 
 	bytes		password=2;//签到密码
 	bytes		psigndata=3; //如果有图片签到则为png图片数据(二进制转hex编码)

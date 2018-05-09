@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.mogujie.tt.protobuf.InterfaceVideo;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.DeviceInfo;
+import com.pa.paperless.bean.VideoInfo;
 import com.pa.paperless.listener.ItemClickListener;
+import com.pa.paperless.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +26,21 @@ import java.util.List;
 public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder> {
 
 
-    private List<DeviceInfo> mDatas;
+    private List<VideoInfo> mDatas;
     private ItemClickListener mListener;
     private final Context mCxt;
     //存放是否选中结果集
-    private List<Boolean> VideoStreamChecked;
+    public static List<Boolean> VideoStreamChecked;
+    private int mCheckedPosion;
 
-    public VideoItemAdapter(Context cxt, List<DeviceInfo> data) {
+    public void setCheckedId(int posion) {
+        mCheckedPosion = posion;
+        notifyDataSetChanged();
+    }
+
+    public VideoItemAdapter(Context cxt, List<VideoInfo> data) {
         mDatas = data;
         mCxt = cxt;
-        if (mDatas != null) {
-            if (VideoStreamChecked == null) {
-                VideoStreamChecked = new ArrayList<>();
-            }
-            //初始化 选中集
-            for (int i = 0; i < mDatas.size(); i++) {
-                VideoStreamChecked.add(false);
-            }
-        }
     }
 
     public void setItemListener(ItemClickListener listener) {
@@ -56,32 +56,41 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
     @Override
     public void onBindViewHolder(final VideoItemAdapter.ViewHolder holder, final int position) {
-        holder.name_tv.setText(mDatas.get(position).getDevName());
+        holder.name_tv.setText(mDatas.get(position).getName() + " | " + MyUtils.getBts(mDatas.get(position).getVideoInfo().getName()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
                     mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
                     //一点击就设置反值
-                    VideoStreamChecked.set(position, !VideoStreamChecked.get(position));
-                    //设置点击后的效果
-                    holder.name_tv.setSelected(VideoStreamChecked.get(position));
+//                    VideoStreamChecked.set(position, !VideoStreamChecked.get(position));
                 }
             }
         });
-        /** ************ ******  name_tv 设置选中效果  ****** ************ **/
-        holder.name_tv.setSelected(VideoStreamChecked.get(position));
+        /** ************ ******  item设置选中效果  ****** ************ **/
+        if (position == mCheckedPosion) {
+            holder.name_tv.setSelected(true);
+            VideoStreamChecked.set(position, true);
+            for (int i = 0; i < VideoStreamChecked.size(); i++) {
+                if (i != position) {
+                    VideoStreamChecked.set(i, false);
+                }
+            }
+        } else {
+            holder.name_tv.setSelected(false);
+        }
     }
 
 
     /**
      * 获取所有选中的流
+     *
      * @return
      */
-    public List<DeviceInfo> getCheckedItemInfo() {
-        List<DeviceInfo> checkedItemInfo = new ArrayList<>();
+    public List<VideoInfo> getCheckedItemInfo() {
+        List<VideoInfo> checkedItemInfo = new ArrayList<>();
         for (int i = 0; i < VideoStreamChecked.size(); i++) {
-            if(VideoStreamChecked.get(i)){//如果当前的是选中的
+            if (VideoStreamChecked.get(i)) {//如果当前的是选中的
                 checkedItemInfo.add(mDatas.get(i));
             }
         }

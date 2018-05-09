@@ -85,8 +85,68 @@ import static com.pa.paperless.utils.FileUtil.getMIMEType;
 
 public class MyUtils {
 
+    public static int getMediaid(String path) {
+        //其它
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_OTHER | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_RECORD | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_UPDATE | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MEDIA_FILETYPE_TEMP | Macro.MEDIA_FILETYPE_OTHERSUB;
+        }
+        //
+        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
+            return Macro.MAINTYPEBITMASK | Macro.SUBTYPEBITMASK;
+        }
+        //音频
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_PCM;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_MP3;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_ADPCM;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_FLAC;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_MP4;
+        }
+        //视屏
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_MKV;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_RMVB;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_AVI;
+        }
+        if (FileUtil.isVideoFile(path)) {
+            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_RM;
+        }
+        //图片
+        if (FileUtil.isPictureFile(path)) {
+            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_BMP;
+        }
+        if (FileUtil.isPictureFile(path)) {
+            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_JPEG;
+        }
+        if (FileUtil.isPictureFile(path)) {
+            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_PNG;
+        }
+        return 0;
+    }
+
     // 缩放图片
-    public static Bitmap zoomImg(Bitmap bm, int newWidth ,int newHeight){
+    public static Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
         // 获得图片的宽高
         int width = bm.getWidth();
         int height = bm.getHeight();
@@ -327,20 +387,12 @@ public class MyUtils {
      *
      * @param dir
      */
-    public static void CreateFile(String dir) {
-        File file2 = new File(Macro.MEETFILE);
-        File file3 = new File(dir);
-        if(file3.exists()){
-            return;
+    public static String CreateFile(String dir) {
+        File file = new File(dir);
+        if (!file.exists()) {
+            file.mkdirs();
         }
-        if (!file2.exists()) {
-            boolean mkdir = file2.mkdir();
-            if (mkdir) {
-                file3.mkdir();
-            }
-        } else {
-            file3.mkdir();
-        }
+        return file.getAbsolutePath();
     }
 
     /**

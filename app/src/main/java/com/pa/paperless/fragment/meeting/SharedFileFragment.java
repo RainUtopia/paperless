@@ -68,6 +68,8 @@ import org.libsdl.app.SDLActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pa.paperless.utils.MyUtils.getMediaid;
+
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -178,6 +180,11 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             case IDEventMessage.Upload_Progress://73 上传进度通知
                 InterfaceUpload.pbui_TypeUploadPosCb object1 = (InterfaceUpload.pbui_TypeUploadPosCb) message.getObject();
                 Log.e("MyLog", "SharedFileFragment.getEventMessage 174行:  当前进度 --->>> " + object1.getPer());
+                if(object1.getPer() == 100) {
+                    //上传完成后刷新界面
+                    nativeUtil.setCallListener(this);
+                    nativeUtil.queryMeetDir();
+                }
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
@@ -359,6 +366,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
             Uri uri = data.getData();
             if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
                 path = uri.getPath();
+                Log.e("MyLog", "com.pa.paperless.fragment.meeting_SharedFileFragment.onActivityResult :  路径 --->>> " + path);
 //                Toast.makeText(getContext(), path, Toast.LENGTH_SHORT).show();
                 showDialog(path);
                 return;
@@ -409,75 +417,13 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         }).show();
     }
 
-    private int getMediaid(String path) {
-        //其它
-        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
-            return Macro.MEDIA_FILETYPE_OTHER | Macro.MEDIA_FILETYPE_OTHERSUB;
-        }
-        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
-            return Macro.MEDIA_FILETYPE_RECORD | Macro.MEDIA_FILETYPE_OTHERSUB;
-        }
-        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
-            return Macro.MEDIA_FILETYPE_UPDATE | Macro.MEDIA_FILETYPE_OTHERSUB;
-        }
-        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
-            return Macro.MEDIA_FILETYPE_TEMP | Macro.MEDIA_FILETYPE_OTHERSUB;
-        }
-        //
-        if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
-            return Macro.MAINTYPEBITMASK | Macro.SUBTYPEBITMASK;
-        }
-        //音频
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_PCM;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_MP3;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_ADPCM;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_FLAC;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_AUDIO | Macro.MEDIA_FILETYPE_MP4;
-        }
-        //视屏
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_MKV;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_RMVB;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_AVI;
-        }
-        if (FileUtil.isVideoFile(path)) {
-            return Macro.MEDIA_FILETYPE_VIDEO | Macro.MEDIA_FILETYPE_RM;
-        }
-        //图片
-        if (FileUtil.isPictureFile(path)) {
-            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_BMP;
-        }
-        if (FileUtil.isPictureFile(path)) {
-            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_JPEG;
-        }
-        if (FileUtil.isPictureFile(path)) {
-            return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_PNG;
-        }
-
-        return 0;
-    }
 
     public void showChooseDir(final String newName, final String path) {
         View popupView = LayoutInflater.from(getContext()).inflate(R.layout.pop_filedir, null);
-
         RecyclerView fileDirRl = popupView.findViewById(R.id.fileDir_rl);
         fileDirRl.setLayoutManager(new LinearLayoutManager(getContext()));
         ChooseDirDialogAdapter adapter = new ChooseDirDialogAdapter(getContext(), meetDirInfos);
         fileDirRl.setAdapter(adapter);
-
         final PopupWindow mDirPopView = new PopupWindow(popupView, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
         MyUtils.setPopAnimal(mDirPopView);
         mDirPopView.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
@@ -686,17 +632,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                 }
                 break;
             case IDivMessage.QUERY_MEET_DIR://136.查询会议目录
-                InterfaceFile.pbui_Type_MeetDirDetailInfo result1 = (InterfaceFile.pbui_Type_MeetDirDetailInfo) result;
-                if (result1 != null) {
-                    Bundle bundle = new Bundle();
-                    ArrayList arrayList = new ArrayList();
-                    arrayList.add(result1);
-                    bundle.putParcelableArrayList("queryMeetDir", arrayList);
-                    Message message = new Message();
-                    message.what = action;
-                    message.setData(bundle);
-                    mHandler.sendMessage(message);
-                }
+                MyUtils.handTo(IDivMessage.QUERY_MEET_DIR,(InterfaceFile.pbui_Type_MeetDirDetailInfo) result,"queryMeetDir",mHandler);
                 break;
             case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
                 Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
@@ -712,8 +648,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            initController();
+//            initController();
             try {
+                nativeUtil.setCallListener(this);
                 Log.e("MyLog", "SharedFileFragment.onHiddenChanged 716行:  不隐藏状态 --->>> ");
                 nativeUtil.queryMeetDir();
 //                nativeUtil.queryMeetDirFile(1);

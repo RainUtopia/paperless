@@ -7,7 +7,7 @@ import "Interface_Macro.proto";
 //会议功能
 message pbui_Item_MeetFunConfigDetailInfo
 {
-	fixed32	funcode=1;	//功能标识码 参见 Pb_Meet_FunctionCode
+	fixed32	funcode=1;	//功能标识码 参见Pb_Meet_FunctionCode
 	fixed32	position=2;	//位置标识码
 }
 

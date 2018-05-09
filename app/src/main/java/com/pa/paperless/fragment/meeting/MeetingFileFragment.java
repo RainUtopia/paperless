@@ -127,20 +127,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     nativeUtil.queryMeetDirFile(object1.getId());
                 }
                 break;
-            case IDEventMessage.MEDIA_PLAY_INFORM://251 媒体播放通知
-                InterfacePlaymedia.pbui_Type_MeetMediaPlay object = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
-                int res = object.getRes();
-                int triggerid = object.getTriggerid();
-                int triggeruserval = object.getTriggeruserval();
-                int createdeviceid = object.getCreatedeviceid();
-                int mediaid = object.getMediaid();
-                Log.e("MyLog", "MeetingFileFragment.getEventMessage:  object.getMediaid() --->>> " + mediaid + " createdeviceid： " + createdeviceid
-                        + "  triggeruserval " + triggeruserval + "  triggerid : " + triggerid + "  res: " + res);
-                break;
-            case IDEventMessage.STOP_PLAY:
-                //248.停止资源操作
-//                nativeUtil.stopResourceOperate(0, devID);
-                break;
             case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 InterfaceBase.pbui_MeetNotifyMsg object2 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
                 /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
@@ -198,14 +184,14 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
             Log.e("MyLog", "MeetingFileFragment.initData:  第一次进入了 --->>> ");
             try {
                 mDirId = mDirData.get(0).getDirId();
+                /** **** **  设置默认点击第一个item  ** **** **/
+                mDirAdapter.setCheck(0);
                 //查询会议目录文件
                 nativeUtil.queryMeetDirFile(mDirId);
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }
         }
-        //设置默认点击第一个按钮
-//        rightmeetfile_document.performClick();
     }
 
     private void queryMeetDirFileU(Message msg) {
@@ -271,7 +257,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 mMediaid = mediaId;
                 // TODO: 2018/1/29 如果是视屏文件可在线观看
                 if (FileUtil.isVideoFile(filename)) {
-                    startActivity(new Intent(getActivity(), SDLActivity.class));
                     //媒体播放操作
                     List<Integer> devIds = new ArrayList<Integer>();
                     devIds.add(MeetingActivity.getDevId());
@@ -467,8 +452,10 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                 //136.查询会议目录
                 nativeUtil.queryMeetDir();
                 nativeUtil.queryMeetDirFile(mDirId);
+                //设置默认点击第一个目录item
+
                 //设置默认点击第一个按钮
-                rightmeetfile_document.performClick();
+//                rightmeetfile_document.performClick();
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }

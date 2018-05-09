@@ -2,11 +2,14 @@ package com.pa.paperless.utils;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -23,8 +26,31 @@ import java.util.List;
 
 public class FileUtil {
 
+    private static String name = null;
+
+    public static String EdtNewFileName(Context context, final String postfix) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("请输入新的文件名");
+        final EditText edt = new EditText(context);
+        edt.setHint("输入新的文件名");
+        builder.setView(edt);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String s = edt.getText().toString();
+                if (s.equals("") && s.length() > 0) {
+                    name = s + postfix;
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.create().show();
+        return name;
+    }
+
     /**
      * 将BitMap转为byte数组
+     *
      * @param bitmap
      * @return
      */
@@ -36,6 +62,7 @@ public class FileUtil {
 
     /**
      * byte数组转bitmap
+     *
      * @param bytes
      * @return
      */
@@ -49,20 +76,26 @@ public class FileUtil {
 
     /**
      * 将BitMap保存到指定目录下
+     *
      * @param bitmap
      * @param file
      */
-    public static void saveBitmap(Bitmap bitmap,File file){
+    public static boolean saveBitmap(Bitmap bitmap, File file) {
+        boolean b = false;
         try {
             FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
+            b = true;
         } catch (FileNotFoundException e) {
+            b = false;
             e.printStackTrace();
         } catch (IOException e) {
+            b = false;
             e.printStackTrace();
         }
+        return b;
     }
 
     /**

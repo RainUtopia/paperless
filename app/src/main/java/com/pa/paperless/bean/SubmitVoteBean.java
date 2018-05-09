@@ -1,6 +1,5 @@
 package com.pa.paperless.bean;
 
-import java.util.List;
 
 /**
  * 提交投票结果

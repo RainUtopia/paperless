@@ -48,6 +48,7 @@ import com.pa.paperless.service.PlayService;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.MyUtils;
+import com.pa.paperless.utils.NetworkUtil;
 import com.wind.myapplication.AvcEncoder;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
@@ -317,7 +318,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("MyLog","MainActivity.onCreate 318行:   --->>> "+getApplication().getPackageName());
+        Log.e("MyLog", "MainActivity.onCreate 318行:   --->>> " + getApplication().getPackageName());
         mContext = this;
         //  动态申请权限 如果设备是6.0或以上 则动态申请权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -329,35 +330,44 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         initConfFile();
         initController();
         initView();
-        pb = (ProgressBar) findViewById(R.id.pb);
         String[] arr = {};
         SDLActivity.nativeInit(arr);
-        //  初始化无纸化网络平台
-        nativeUtil.javaInitSys();
-        // 初始化流通道
-        int format = AvcEncoder.selectColorFormat(AvcEncoder.selectCodec("video/avc"), "video/avc");
-        switch (format) {
-            case MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar:
-                NativeUtil.COLOR_FORMAT = 0;
-                break;
-            case MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar:
-                NativeUtil.COLOR_FORMAT = 1;
-                break;
+//        while (!NetworkUtil.isNetworkAvailable(mContext)) {
+//            if (pb.getVisibility() == View.VISIBLE) {
+//                pb.setVisibility(View.GONE);
+//                Toast.makeText(mContext, "请检查网络连接", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+        if (NetworkUtil.isNetworkAvailable(mContext)) {
+            //  初始化无纸化网络平台
+            nativeUtil.javaInitSys();
+            // 初始化流通道
+            int format = AvcEncoder.selectColorFormat(AvcEncoder.selectCodec("video/avc"), "video/avc");
+            switch (format) {
+                case MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar:
+                    NativeUtil.COLOR_FORMAT = 0;
+                    break;
+                case MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar:
+                    NativeUtil.COLOR_FORMAT = 1;
+                    break;
+            }
+            nativeUtil.InitAndCapture(0, 2);
+            nativeUtil.InitAndCapture(0, 3);
+            //8.修改本机界面状态
+            nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
+            try {
+                //31.按属性ID查询指定上下文属性
+                nativeUtil.queryContextProperty(InterfaceMacro.Pb_ContextPropertyID.Pb_MEETCONTEXT_PROPERTY_SELFID.getNumber());
+            } catch (InvalidProtocolBufferException e) {
+                e.printStackTrace();
+            }
+            EventBus.getDefault().register(this);
+            serviceIntent = new Intent(this, PlayService.class);
+            startService(serviceIntent);
+        } else if (pb.getVisibility() == View.VISIBLE) {
+            pb.setVisibility(View.GONE);
+            Toast.makeText(mContext, "请检查网络连接", Toast.LENGTH_SHORT).show();
         }
-        nativeUtil.InitAndCapture(0, 2);
-        nativeUtil.InitAndCapture(0, 3);
-        //8.修改本机界面状态
-        nativeUtil.setInterfaceState(InterfaceMacro.Pb_MeetFaceStatus.Pb_MemState_MainFace.getNumber());
-        try {
-            //31.按属性ID查询指定上下文属性
-            nativeUtil.queryContextProperty(InterfaceMacro.Pb_ContextPropertyID.Pb_MEETCONTEXT_PROPERTY_SELFID.getNumber());
-        } catch (InvalidProtocolBufferException e) {
-            e.printStackTrace();
-        }
-        EventBus.getDefault().register(this);
-        serviceIntent = new Intent(this, PlayService.class);
-        startService(serviceIntent);
-
     }
 
 
@@ -431,6 +441,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 boolean b = nativeUtil.queryDeviceMeetInfo();
                 if (!b && pb.getVisibility() == View.VISIBLE) {
                     pb.setVisibility(View.GONE);
+                    Toast.makeText(mContext, "没有查找到会议", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:
@@ -478,7 +489,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         stopService(serviceIntent);
-        Log.e("MyLog","MainActivity.onDestroy 481行:   --->>> ");
+        Log.e("MyLog", "MainActivity.onDestroy 481行:   --->>> ");
     }
 
     @Override
@@ -542,6 +553,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMainMemberName = (TextView) findViewById(R.id.main_memberName);
         mMainMemberJob = (TextView) findViewById(R.id.main_memberJob);
         mDeviceNameId = (TextView) findViewById(R.id.device_name_id);
+        pb = (ProgressBar) findViewById(R.id.pb);
     }
 
 
@@ -641,7 +653,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void reStartApp() {
         Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
         PendingIntent restartIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager mgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 50, restartIntent);
         android.os.Process.killProcess(android.os.Process.myPid());
     }

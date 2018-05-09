@@ -1782,7 +1782,7 @@ public final class InterfaceAdmin {
 
     /**
      * <pre>
-     *是否已经md5加密
+     *=0md5字符密码 =1明文密码
      * </pre>
      *
      * <code>fixed32 isascill = 1;</code>
@@ -1829,7 +1829,7 @@ public final class InterfaceAdmin {
     private int isascill_;
     /**
      * <pre>
-     *是否已经md5加密
+     *=0md5字符密码 =1明文密码
      * </pre>
      *
      * <code>fixed32 isascill = 1;</code>
@@ -1839,7 +1839,7 @@ public final class InterfaceAdmin {
     }
     /**
      * <pre>
-     *是否已经md5加密
+     *=0md5字符密码 =1明文密码
      * </pre>
      *
      * <code>fixed32 isascill = 1;</code>
@@ -1850,7 +1850,7 @@ public final class InterfaceAdmin {
     }
     /**
      * <pre>
-     *是否已经md5加密
+     *=0md5字符密码 =1明文密码
      * </pre>
      *
      * <code>fixed32 isascill = 1;</code>
@@ -2073,7 +2073,7 @@ public final class InterfaceAdmin {
 
       /**
        * <pre>
-       *是否已经md5加密
+       *=0md5字符密码 =1明文密码
        * </pre>
        *
        * <code>fixed32 isascill = 1;</code>
@@ -2083,7 +2083,7 @@ public final class InterfaceAdmin {
       }
       /**
        * <pre>
-       *是否已经md5加密
+       *=0md5字符密码 =1明文密码
        * </pre>
        *
        * <code>fixed32 isascill = 1;</code>
@@ -2095,7 +2095,7 @@ public final class InterfaceAdmin {
       }
       /**
        * <pre>
-       *是否已经md5加密
+       *=0md5字符密码 =1明文密码
        * </pre>
        *
        * <code>fixed32 isascill = 1;</code>
@@ -2296,6 +2296,7 @@ public final class InterfaceAdmin {
 
     /**
      * <pre>
+     * 参见 Pb_AdminLogonStatus
      * </pre>
      *
      * <code>fixed32 err = 1;</code>
@@ -2346,6 +2347,7 @@ public final class InterfaceAdmin {
     private int err_;
     /**
      * <pre>
+     * 参见 Pb_AdminLogonStatus
      * </pre>
      *
      * <code>fixed32 err = 1;</code>
@@ -2355,6 +2357,7 @@ public final class InterfaceAdmin {
     }
     /**
      * <pre>
+     * 参见 Pb_AdminLogonStatus
      * </pre>
      *
      * <code>fixed32 err = 1;</code>
@@ -2365,6 +2368,7 @@ public final class InterfaceAdmin {
     }
     /**
      * <pre>
+     * 参见 Pb_AdminLogonStatus
      * </pre>
      *
      * <code>fixed32 err = 1;</code>
@@ -2614,6 +2618,7 @@ public final class InterfaceAdmin {
 
       /**
        * <pre>
+       * 参见 Pb_AdminLogonStatus
        * </pre>
        *
        * <code>fixed32 err = 1;</code>
@@ -2623,6 +2628,7 @@ public final class InterfaceAdmin {
       }
       /**
        * <pre>
+       * 参见 Pb_AdminLogonStatus
        * </pre>
        *
        * <code>fixed32 err = 1;</code>
@@ -2634,6 +2640,7 @@ public final class InterfaceAdmin {
       }
       /**
        * <pre>
+       * 参见 Pb_AdminLogonStatus
        * </pre>
        *
        * <code>fixed32 err = 1;</code>

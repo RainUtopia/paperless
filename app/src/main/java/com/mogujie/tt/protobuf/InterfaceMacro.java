@@ -1003,6 +1003,22 @@ public final class InterfaceMacro {
      * <code>Pb_TYPE_MEET_INTERFACE_SYSTEMLOG = 57;</code>
      */
     Pb_TYPE_MEET_INTERFACE_SYSTEMLOG(57),
+    /**
+     * <pre>
+     *设备ID校验
+     * </pre>
+     *
+     * <code>Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE = 58;</code>
+     */
+    Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE(58),
+    /**
+     * <pre>
+     *平台功能限制
+     * </pre>
+     *
+     * <code>Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT = 59;</code>
+     */
+    Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT(59),
     UNRECOGNIZED(-1),
     ;
 
@@ -1470,6 +1486,22 @@ public final class InterfaceMacro {
      * <code>Pb_TYPE_MEET_INTERFACE_SYSTEMLOG = 57;</code>
      */
     public static final int Pb_TYPE_MEET_INTERFACE_SYSTEMLOG_VALUE = 57;
+    /**
+     * <pre>
+     *设备ID校验
+     * </pre>
+     *
+     * <code>Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE = 58;</code>
+     */
+    public static final int Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE_VALUE = 58;
+    /**
+     * <pre>
+     *平台功能限制
+     * </pre>
+     *
+     * <code>Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT = 59;</code>
+     */
+    public static final int Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT_VALUE = 59;
 
 
     public final int getNumber() {
@@ -1548,6 +1580,8 @@ public final class InterfaceMacro {
         case 55: return Pb_TYPE_MEET_INTERFACE_FILEEVALUATE;
         case 56: return Pb_TYPE_MEET_INTERFACE_MEETEVALUATE;
         case 57: return Pb_TYPE_MEET_INTERFACE_SYSTEMLOG;
+        case 58: return Pb_TYPE_MEET_INTERFACE_DEVICEVALIDATE;
+        case 59: return Pb_TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT;
         default: return null;
       }
     }
@@ -10850,6 +10884,1069 @@ public final class InterfaceMacro {
     }
 
     // @@protoc_insertion_point(enum_scope:Pb_FileEvaluateFlag)
+  }
+
+  /**
+   * <pre>
+   *&#47;/设备ID的类型
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_DeviceIDType}
+   */
+  public enum Pb_DeviceIDType
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <code>Pb_DeviceIDType_zero = 0;</code>
+     */
+    Pb_DeviceIDType_zero(0),
+    /**
+     * <pre>
+     *Pb_DeviceIDType_AreaServer=0xff000000;//区域服务器
+     *Pb_DeviceIDType_MediaServer=0xfe000000;//媒体服务器
+     *Pb_DeviceIDType_StreamServer=0xfd000000;//流服务器
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetDBServer = 16777216;</code>
+     */
+    Pb_DeviceIDType_MeetDBServer(16777216),
+    /**
+     * <pre>
+     *会议茶水设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetService = 17039360;</code>
+     */
+    Pb_DeviceIDType_MeetService(17039360),
+    /**
+     * <pre>
+     *投影设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetProjective = 17301504;</code>
+     */
+    Pb_DeviceIDType_MeetProjective(17301504),
+    /**
+     * <pre>
+     *会议流采集设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetCapture = 17563648;</code>
+     */
+    Pb_DeviceIDType_MeetCapture(17563648),
+    /**
+     * <pre>
+     *会议终端设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetClient = 17825792;</code>
+     */
+    Pb_DeviceIDType_MeetClient(17825792),
+    /**
+     * <pre>
+     *会议一键同屏设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetShare = 18874368;</code>
+     */
+    Pb_DeviceIDType_MeetShare(18874368),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>Pb_DeviceIDType_zero = 0;</code>
+     */
+    public static final int Pb_DeviceIDType_zero_VALUE = 0;
+    /**
+     * <pre>
+     *Pb_DeviceIDType_AreaServer=0xff000000;//区域服务器
+     *Pb_DeviceIDType_MediaServer=0xfe000000;//媒体服务器
+     *Pb_DeviceIDType_StreamServer=0xfd000000;//流服务器
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetDBServer = 16777216;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetDBServer_VALUE = 16777216;
+    /**
+     * <pre>
+     *会议茶水设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetService = 17039360;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetService_VALUE = 17039360;
+    /**
+     * <pre>
+     *投影设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetProjective = 17301504;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetProjective_VALUE = 17301504;
+    /**
+     * <pre>
+     *会议流采集设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetCapture = 17563648;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetCapture_VALUE = 17563648;
+    /**
+     * <pre>
+     *会议终端设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetClient = 17825792;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetClient_VALUE = 17825792;
+    /**
+     * <pre>
+     *会议一键同屏设备
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetShare = 18874368;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetShare_VALUE = 18874368;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_DeviceIDType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_DeviceIDType forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_DeviceIDType_zero;
+        case 16777216: return Pb_DeviceIDType_MeetDBServer;
+        case 17039360: return Pb_DeviceIDType_MeetService;
+        case 17301504: return Pb_DeviceIDType_MeetProjective;
+        case 17563648: return Pb_DeviceIDType_MeetCapture;
+        case 17825792: return Pb_DeviceIDType_MeetClient;
+        case 18874368: return Pb_DeviceIDType_MeetShare;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_DeviceIDType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_DeviceIDType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_DeviceIDType>() {
+            public Pb_DeviceIDType findValueByNumber(int number) {
+              return Pb_DeviceIDType.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_DeviceIDType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_DeviceIDType)
+  }
+
+  /**
+   * <pre>
+   *&#47;/设备的ID校验错误码
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_ValidateErrorCode}
+   */
+  public enum Pb_ValidateErrorCode
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <pre>
+     *error code
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NONE = 0;</code>
+     */
+    Pb_PARSER_ERROR_NONE(0),
+    /**
+     * <pre>
+     *过期了
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_EXPIRATION = 1;</code>
+     */
+    Pb_PARSER_ERROR_EXPIRATION(1),
+    /**
+     * <pre>
+     *程序出错
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_OPER = 2;</code>
+     */
+    Pb_PARSER_ERROR_OPER(2),
+    /**
+     * <pre>
+     *不允许接入的企业
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_ENTERPRISE = 3;</code>
+     */
+    Pb_PARSER_ERROR_ENTERPRISE(3),
+    /**
+     * <pre>
+     *没有多余的设备ID了
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NODEVICEID = 4;</code>
+     */
+    Pb_PARSER_ERROR_NODEVICEID(4),
+    /**
+     * <pre>
+     *文件数据错误
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_FILEERROR = 6;</code>
+     */
+    Pb_PARSER_ERROR_FILEERROR(6),
+    /**
+     * <pre>
+     *不允许接入的设备
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NOALLOWIN = 5;</code>
+     */
+    Pb_PARSER_ERROR_NOALLOWIN(5),
+    /**
+     * <pre>
+     *非法的设备
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_INVALID = 7;</code>
+     */
+    Pb_PARSER_ERROR_INVALID(7),
+    /**
+     * <pre>
+     *设备ID已经被使用了
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_IDOCCUPY = 8;</code>
+     */
+    Pb_PARSER_ERROR_IDOCCUPY(8),
+    /**
+     * <pre>
+     *不存在需要的资源
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NOTBEING = 9;</code>
+     */
+    Pb_PARSER_ERROR_NOTBEING(9),
+    /**
+     * <pre>
+     *文件数据错误,但可以解析出原设备ID
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_ONLYDEVICEID = 10;</code>
+     */
+    Pb_PARSER_ERROR_ONLYDEVICEID(10),
+    /**
+     * <pre>
+     *指定设备与设备类型不匹配
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_DEVICETYPENOMATCH = 11;</code>
+     */
+    Pb_PARSER_ERROR_DEVICETYPENOMATCH(11),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     *error code
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NONE = 0;</code>
+     */
+    public static final int Pb_PARSER_ERROR_NONE_VALUE = 0;
+    /**
+     * <pre>
+     *过期了
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_EXPIRATION = 1;</code>
+     */
+    public static final int Pb_PARSER_ERROR_EXPIRATION_VALUE = 1;
+    /**
+     * <pre>
+     *程序出错
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_OPER = 2;</code>
+     */
+    public static final int Pb_PARSER_ERROR_OPER_VALUE = 2;
+    /**
+     * <pre>
+     *不允许接入的企业
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_ENTERPRISE = 3;</code>
+     */
+    public static final int Pb_PARSER_ERROR_ENTERPRISE_VALUE = 3;
+    /**
+     * <pre>
+     *没有多余的设备ID了
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NODEVICEID = 4;</code>
+     */
+    public static final int Pb_PARSER_ERROR_NODEVICEID_VALUE = 4;
+    /**
+     * <pre>
+     *文件数据错误
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_FILEERROR = 6;</code>
+     */
+    public static final int Pb_PARSER_ERROR_FILEERROR_VALUE = 6;
+    /**
+     * <pre>
+     *不允许接入的设备
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NOALLOWIN = 5;</code>
+     */
+    public static final int Pb_PARSER_ERROR_NOALLOWIN_VALUE = 5;
+    /**
+     * <pre>
+     *非法的设备
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_INVALID = 7;</code>
+     */
+    public static final int Pb_PARSER_ERROR_INVALID_VALUE = 7;
+    /**
+     * <pre>
+     *设备ID已经被使用了
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_IDOCCUPY = 8;</code>
+     */
+    public static final int Pb_PARSER_ERROR_IDOCCUPY_VALUE = 8;
+    /**
+     * <pre>
+     *不存在需要的资源
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_NOTBEING = 9;</code>
+     */
+    public static final int Pb_PARSER_ERROR_NOTBEING_VALUE = 9;
+    /**
+     * <pre>
+     *文件数据错误,但可以解析出原设备ID
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_ONLYDEVICEID = 10;</code>
+     */
+    public static final int Pb_PARSER_ERROR_ONLYDEVICEID_VALUE = 10;
+    /**
+     * <pre>
+     *指定设备与设备类型不匹配
+     * </pre>
+     *
+     * <code>Pb_PARSER_ERROR_DEVICETYPENOMATCH = 11;</code>
+     */
+    public static final int Pb_PARSER_ERROR_DEVICETYPENOMATCH_VALUE = 11;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_ValidateErrorCode valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_ValidateErrorCode forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_PARSER_ERROR_NONE;
+        case 1: return Pb_PARSER_ERROR_EXPIRATION;
+        case 2: return Pb_PARSER_ERROR_OPER;
+        case 3: return Pb_PARSER_ERROR_ENTERPRISE;
+        case 4: return Pb_PARSER_ERROR_NODEVICEID;
+        case 6: return Pb_PARSER_ERROR_FILEERROR;
+        case 5: return Pb_PARSER_ERROR_NOALLOWIN;
+        case 7: return Pb_PARSER_ERROR_INVALID;
+        case 8: return Pb_PARSER_ERROR_IDOCCUPY;
+        case 9: return Pb_PARSER_ERROR_NOTBEING;
+        case 10: return Pb_PARSER_ERROR_ONLYDEVICEID;
+        case 11: return Pb_PARSER_ERROR_DEVICETYPENOMATCH;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_ValidateErrorCode>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_ValidateErrorCode> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_ValidateErrorCode>() {
+            public Pb_ValidateErrorCode findValueByNumber(int number) {
+              return Pb_ValidateErrorCode.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_ValidateErrorCode(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_ValidateErrorCode)
+  }
+
+  /**
+   * <pre>
+   *&#47;/设备的ID校验错误码
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_ValidateFlagBit}
+   */
+  public enum Pb_ValidateFlagBit
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <pre>
+     *validate status bit pos
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_ZERO = 0;</code>
+     */
+    Pb_VALIDATE_FLAG_ZERO(0),
+    /**
+     * <pre>
+     *区域服务器ID
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_AREAID = 1;</code>
+     */
+    Pb_VALIDATE_FLAG_AREAID(1),
+    /**
+     * <pre>
+     *设备ID
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_DEVICEID = 2;</code>
+     */
+    Pb_VALIDATE_FLAG_DEVICEID(2),
+    /**
+     * <pre>
+     *状态码 参见Pb_ValidateErrorCode
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_STATUS = 4;</code>
+     */
+    Pb_VALIDATE_FLAG_STATUS(4),
+    /**
+     * <pre>
+     *到期时间 eg:0x07e2 05 05(表示2018 05 05)
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_EXPIRATIONTIME = 8;</code>
+     */
+    Pb_VALIDATE_FLAG_EXPIRATIONTIME(8),
+    /**
+     * <pre>
+     *企业ID
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_ENTERPISEID = 16;</code>
+     */
+    Pb_VALIDATE_FLAG_ENTERPISEID(16),
+    /**
+     * <pre>
+     *协议版本
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_NETCOMMONVER = 32;</code>
+     */
+    Pb_VALIDATE_FLAG_NETCOMMONVER(32),
+    /**
+     * <pre>
+     *注册时自定义的32位整数值
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_USERDEF32UBIT = 64;</code>
+     */
+    Pb_VALIDATE_FLAG_USERDEF32UBIT(64),
+    /**
+     * <pre>
+     *当前在线设备数
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_CURNUM = 128;</code>
+     */
+    Pb_VALIDATE_FLAG_CURNUM(128),
+    /**
+     * <pre>
+     *最大在线设备数
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_MAXNUM = 256;</code>
+     */
+    Pb_VALIDATE_FLAG_MAXNUM(256),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     *validate status bit pos
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_ZERO = 0;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_ZERO_VALUE = 0;
+    /**
+     * <pre>
+     *区域服务器ID
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_AREAID = 1;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_AREAID_VALUE = 1;
+    /**
+     * <pre>
+     *设备ID
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_DEVICEID = 2;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_DEVICEID_VALUE = 2;
+    /**
+     * <pre>
+     *状态码 参见Pb_ValidateErrorCode
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_STATUS = 4;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_STATUS_VALUE = 4;
+    /**
+     * <pre>
+     *到期时间 eg:0x07e2 05 05(表示2018 05 05)
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_EXPIRATIONTIME = 8;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_EXPIRATIONTIME_VALUE = 8;
+    /**
+     * <pre>
+     *企业ID
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_ENTERPISEID = 16;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_ENTERPISEID_VALUE = 16;
+    /**
+     * <pre>
+     *协议版本
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_NETCOMMONVER = 32;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_NETCOMMONVER_VALUE = 32;
+    /**
+     * <pre>
+     *注册时自定义的32位整数值
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_USERDEF32UBIT = 64;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_USERDEF32UBIT_VALUE = 64;
+    /**
+     * <pre>
+     *当前在线设备数
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_CURNUM = 128;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_CURNUM_VALUE = 128;
+    /**
+     * <pre>
+     *最大在线设备数
+     * </pre>
+     *
+     * <code>Pb_VALIDATE_FLAG_MAXNUM = 256;</code>
+     */
+    public static final int Pb_VALIDATE_FLAG_MAXNUM_VALUE = 256;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_ValidateFlagBit valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_ValidateFlagBit forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_VALIDATE_FLAG_ZERO;
+        case 1: return Pb_VALIDATE_FLAG_AREAID;
+        case 2: return Pb_VALIDATE_FLAG_DEVICEID;
+        case 4: return Pb_VALIDATE_FLAG_STATUS;
+        case 8: return Pb_VALIDATE_FLAG_EXPIRATIONTIME;
+        case 16: return Pb_VALIDATE_FLAG_ENTERPISEID;
+        case 32: return Pb_VALIDATE_FLAG_NETCOMMONVER;
+        case 64: return Pb_VALIDATE_FLAG_USERDEF32UBIT;
+        case 128: return Pb_VALIDATE_FLAG_CURNUM;
+        case 256: return Pb_VALIDATE_FLAG_MAXNUM;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_ValidateFlagBit>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_ValidateFlagBit> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_ValidateFlagBit>() {
+            public Pb_ValidateFlagBit findValueByNumber(int number) {
+              return Pb_ValidateFlagBit.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_ValidateFlagBit(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_ValidateFlagBit)
+  }
+
+  /**
+   * <pre>
+   *系统限制功能属性ID
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_SystemFuncionPropertyId}
+   */
+  public enum Pb_SystemFuncionPropertyId
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <pre>
+     *查询功能是否可用 query,parameter(传入的功能ID 参见systemfuncion.h的功能ID定义),propertyval(返回是否可用1=可用,0=不可用)
+     * </pre>
+     *
+     * <code>Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE = 0;</code>
+     */
+    Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE(0),
+    /**
+     * <pre>
+     *查询总数 query,parameter(0),returnval(返回总数)
+     * </pre>
+     *
+     * <code>Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM = 1;</code>
+     */
+    Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     *查询功能是否可用 query,parameter(传入的功能ID 参见systemfuncion.h的功能ID定义),propertyval(返回是否可用1=可用,0=不可用)
+     * </pre>
+     *
+     * <code>Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE = 0;</code>
+     */
+    public static final int Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE_VALUE = 0;
+    /**
+     * <pre>
+     *查询总数 query,parameter(0),returnval(返回总数)
+     * </pre>
+     *
+     * <code>Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM = 1;</code>
+     */
+    public static final int Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_SystemFuncionPropertyId valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_SystemFuncionPropertyId forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_ISENABLE;
+        case 1: return Pb_SYSTEMFUNCTIONLIMIT_PROPERTY_TOTALNUM;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_SystemFuncionPropertyId>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_SystemFuncionPropertyId> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_SystemFuncionPropertyId>() {
+            public Pb_SystemFuncionPropertyId findValueByNumber(int number) {
+              return Pb_SystemFuncionPropertyId.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_SystemFuncionPropertyId(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_SystemFuncionPropertyId)
+  }
+
+  /**
+   * <pre>
+   *系统限制功能ID
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_SystemFuncionId}
+   */
+  public enum Pb_SystemFuncionId
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <pre>
+     *系统功能定义 不设置功能数限制
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_ZERO = 0;</code>
+     */
+    Pb_FUNCTION_ZERO(0),
+    /**
+     * <pre>
+     *屏屏采集
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_DESKTOP_CAPTURE = 1;</code>
+     */
+    Pb_FUNCTION_DESKTOP_CAPTURE(1),
+    /**
+     * <pre>
+     *视频播放
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_VIDEO_PLAY = 2;</code>
+     */
+    Pb_FUNCTION_VIDEO_PLAY(2),
+    /**
+     * <pre>
+     *播放音频
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_AUDIO_PLAY = 3;</code>
+     */
+    Pb_FUNCTION_AUDIO_PLAY(3),
+    /**
+     * <pre>
+     *播放实时视频流
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_CAMARA_PLAY = 4;</code>
+     */
+    Pb_FUNCTION_CAMARA_PLAY(4),
+    /**
+     * <pre>
+     *摄像头采集
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_CAMARA_CAPTURE = 5;</code>
+     */
+    Pb_FUNCTION_CAMARA_CAPTURE(5),
+    /**
+     * <pre>
+     *音频输出回放采集
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_AUDIOOUTPUT_CAPTURE = 6;</code>
+     */
+    Pb_FUNCTION_AUDIOOUTPUT_CAPTURE(6),
+    /**
+     * <pre>
+     *pdf文档查看
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_PDF_VIEW = 7;</code>
+     */
+    Pb_FUNCTION_PDF_VIEW(7),
+    /**
+     * <pre>
+     *office文档查看
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_OFFICE_VIEW = 8;</code>
+     */
+    Pb_FUNCTION_OFFICE_VIEW(8),
+    /**
+     * <pre>
+     *图片文档查看
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_PICTURE_VIEW = 9;</code>
+     */
+    Pb_FUNCTION_PICTURE_VIEW(9),
+    /**
+     * <pre>
+     *文件下载
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_MEDIA_DOWNLOAD = 10;</code>
+     */
+    Pb_FUNCTION_MEDIA_DOWNLOAD(10),
+    /**
+     * <pre>
+     *文件上传
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_MEDIA_UPLOAD = 11;</code>
+     */
+    Pb_FUNCTION_MEDIA_UPLOAD(11),
+    /**
+     * <pre>
+     *屏幕共享
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_DESKTOP_SHARE = 12;</code>
+     */
+    Pb_FUNCTION_DESKTOP_SHARE(12),
+    /**
+     * <pre>
+     *多人白板
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_WHITEBOARD = 13;</code>
+     */
+    Pb_FUNCTION_WHITEBOARD(13),
+    /**
+     * <pre>
+     *视频录制
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_VIDEO_RECORD = 14;</code>
+     */
+    Pb_FUNCTION_VIDEO_RECORD(14),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     *系统功能定义 不设置功能数限制
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_ZERO = 0;</code>
+     */
+    public static final int Pb_FUNCTION_ZERO_VALUE = 0;
+    /**
+     * <pre>
+     *屏屏采集
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_DESKTOP_CAPTURE = 1;</code>
+     */
+    public static final int Pb_FUNCTION_DESKTOP_CAPTURE_VALUE = 1;
+    /**
+     * <pre>
+     *视频播放
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_VIDEO_PLAY = 2;</code>
+     */
+    public static final int Pb_FUNCTION_VIDEO_PLAY_VALUE = 2;
+    /**
+     * <pre>
+     *播放音频
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_AUDIO_PLAY = 3;</code>
+     */
+    public static final int Pb_FUNCTION_AUDIO_PLAY_VALUE = 3;
+    /**
+     * <pre>
+     *播放实时视频流
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_CAMARA_PLAY = 4;</code>
+     */
+    public static final int Pb_FUNCTION_CAMARA_PLAY_VALUE = 4;
+    /**
+     * <pre>
+     *摄像头采集
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_CAMARA_CAPTURE = 5;</code>
+     */
+    public static final int Pb_FUNCTION_CAMARA_CAPTURE_VALUE = 5;
+    /**
+     * <pre>
+     *音频输出回放采集
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_AUDIOOUTPUT_CAPTURE = 6;</code>
+     */
+    public static final int Pb_FUNCTION_AUDIOOUTPUT_CAPTURE_VALUE = 6;
+    /**
+     * <pre>
+     *pdf文档查看
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_PDF_VIEW = 7;</code>
+     */
+    public static final int Pb_FUNCTION_PDF_VIEW_VALUE = 7;
+    /**
+     * <pre>
+     *office文档查看
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_OFFICE_VIEW = 8;</code>
+     */
+    public static final int Pb_FUNCTION_OFFICE_VIEW_VALUE = 8;
+    /**
+     * <pre>
+     *图片文档查看
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_PICTURE_VIEW = 9;</code>
+     */
+    public static final int Pb_FUNCTION_PICTURE_VIEW_VALUE = 9;
+    /**
+     * <pre>
+     *文件下载
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_MEDIA_DOWNLOAD = 10;</code>
+     */
+    public static final int Pb_FUNCTION_MEDIA_DOWNLOAD_VALUE = 10;
+    /**
+     * <pre>
+     *文件上传
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_MEDIA_UPLOAD = 11;</code>
+     */
+    public static final int Pb_FUNCTION_MEDIA_UPLOAD_VALUE = 11;
+    /**
+     * <pre>
+     *屏幕共享
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_DESKTOP_SHARE = 12;</code>
+     */
+    public static final int Pb_FUNCTION_DESKTOP_SHARE_VALUE = 12;
+    /**
+     * <pre>
+     *多人白板
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_WHITEBOARD = 13;</code>
+     */
+    public static final int Pb_FUNCTION_WHITEBOARD_VALUE = 13;
+    /**
+     * <pre>
+     *视频录制
+     * </pre>
+     *
+     * <code>Pb_FUNCTION_VIDEO_RECORD = 14;</code>
+     */
+    public static final int Pb_FUNCTION_VIDEO_RECORD_VALUE = 14;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_SystemFuncionId valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_SystemFuncionId forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_FUNCTION_ZERO;
+        case 1: return Pb_FUNCTION_DESKTOP_CAPTURE;
+        case 2: return Pb_FUNCTION_VIDEO_PLAY;
+        case 3: return Pb_FUNCTION_AUDIO_PLAY;
+        case 4: return Pb_FUNCTION_CAMARA_PLAY;
+        case 5: return Pb_FUNCTION_CAMARA_CAPTURE;
+        case 6: return Pb_FUNCTION_AUDIOOUTPUT_CAPTURE;
+        case 7: return Pb_FUNCTION_PDF_VIEW;
+        case 8: return Pb_FUNCTION_OFFICE_VIEW;
+        case 9: return Pb_FUNCTION_PICTURE_VIEW;
+        case 10: return Pb_FUNCTION_MEDIA_DOWNLOAD;
+        case 11: return Pb_FUNCTION_MEDIA_UPLOAD;
+        case 12: return Pb_FUNCTION_DESKTOP_SHARE;
+        case 13: return Pb_FUNCTION_WHITEBOARD;
+        case 14: return Pb_FUNCTION_VIDEO_RECORD;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_SystemFuncionId>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_SystemFuncionId> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_SystemFuncionId>() {
+            public Pb_SystemFuncionId findValueByNumber(int number) {
+              return Pb_SystemFuncionId.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_SystemFuncionId(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_SystemFuncionId)
   }
 
 

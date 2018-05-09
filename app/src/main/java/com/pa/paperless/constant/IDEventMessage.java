@@ -67,7 +67,6 @@ public class IDEventMessage {
     public static final int QUERY_CAN_JOIN = 3029;
 
     // 播放进度通知
-
     public static final int PLAY_PROGRESS_NOTIFY = 3030;
     // 流播放通知
     public static final int PLAY_STREAM_NOTIFY = 3031;
@@ -103,5 +102,10 @@ public class IDEventMessage {
     public static final int AGENDA_CHANGE_INFO = 3046;
     // 公告变更通知
     public static final int NOTICE_CHANGE_INFO = 3047;
-
+    // 会议界面更新后发送消息给聊天界面
+    public static final int updata_chat_onLineMember = 3048;
+    // 在视屏直播页面通知会议界面打开同屏控制
+    public static final int open_screenspop = 3049;
+    // 在视屏直播界面通知会议界面打开投影控制
+    public static final int open_projector = 3050;
 }

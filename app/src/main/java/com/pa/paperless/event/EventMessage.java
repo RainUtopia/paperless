@@ -7,7 +7,13 @@ package com.pa.paperless.event;
 public class EventMessage {
     int action;
     int type;
+    String key;
     Object object;
+
+    public EventMessage(String key, Object object) {
+        this.key = key;
+        this.object = object;
+    }
     public EventMessage(int action) {
         this.action = action;
     }

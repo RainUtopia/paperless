@@ -105,7 +105,7 @@ public class Main extends Activity implements OnClickListener {
         recorder = new ScreenRecorder(width, height, bitrate, 1, projection, file.getAbsolutePath());
         recorder.start();//�启动录屏线程
         recordbtn.setText("结束录屏");
-        Toast.makeText(this, "屏幕录制中...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Main.java屏幕录制中...", Toast.LENGTH_LONG).show();
         moveTaskToBack(true);//�将程序移到后台
 //        }
     }

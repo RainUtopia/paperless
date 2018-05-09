@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,11 +31,14 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceIM;
+import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.mogujie.tt.protobuf.InterfaceMember;
+import com.mogujie.tt.protobuf.InterfaceVideo;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VideoItemAdapter;
 import com.pa.paperless.bean.DeviceInfo;
+import com.pa.paperless.bean.VideoInfo;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
@@ -57,6 +61,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MEDIA_PROJECTION_SERVICE;
+import static com.pa.paperless.adapter.VideoItemAdapter.VideoStreamChecked;
 
 
 /**
@@ -77,36 +82,72 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case IDivMessage.QUERY_MEET_VEDIO://查询会议视频
+                    Log.e(TAG, "com.pa.paperless.fragment.meeting_VideoFragment.handleMessage :  进入方法了 --->>> ");
+                    ArrayList queryDevInfo = msg.getData().getParcelableArrayList("queryMeetVideo");
+                    InterfaceVideo.pbui_Type_MeetVideoDetailInfo o = (InterfaceVideo.pbui_Type_MeetVideoDetailInfo) queryDevInfo.get(0);
+                    List<InterfaceVideo.pbui_Item_MeetVideoDetailInfo> itemList = o.getItemList();
+                    if (itemList == null) {
+                        Log.e(TAG, "com.pa.paperless.fragment.meeting_VideoFragment.handleMessage :  没有查到东西 --->>> ");
+                        break;
+                    }
+                    if (videoInfos == null) {
+                        videoInfos = new ArrayList<>();
+                    } else {
+                        videoInfos.clear();
+                    }
+                    for (int i = 0; i < itemList.size(); i++) {
+                        videoInfos.add(new VideoInfo(itemList.get(i)));
+                    }
+                    try {
+                        //查询设备信息
+                        nativeUtil.queryDeviceInfo();
+                    } catch (InvalidProtocolBufferException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case IDivMessage.QUERY_DEVICE_INFO://查询设备信息
-                    ArrayList queryDevInfo = msg.getData().getParcelableArrayList("queryDevInfo");
-                    InterfaceDevice.pbui_Type_DeviceDetailInfo o = (InterfaceDevice.pbui_Type_DeviceDetailInfo) queryDevInfo.get(0);
-                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(o);
-                    allStreamDev = new ArrayList<>();
-                    for (int i = 0; i < deviceInfos.size(); i++) {
-                        DeviceInfo deviceInfo = deviceInfos.get(i);
-                        int devId = deviceInfo.getDevId();
-                        int i1 = devId & Macro.DEVICE_MEET_CAPTURE;
-                        if (i1 == Macro.DEVICE_MEET_CAPTURE) {
-                            Log.e("MyLog", "VideoFragment.handleMessage 98行:  添加所有的流采集设备 --->>> ");
-                            //所有的流采集设备
-                            allStreamDev.add(deviceInfo);
+                    ArrayList queryDevInfo1 = msg.getData().getParcelableArrayList("queryDevInfo");
+                    InterfaceDevice.pbui_Type_DeviceDetailInfo o1 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) queryDevInfo1.get(0);
+                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(o1);
+                    if (videoInfos == null || deviceInfos == null) {
+                        Log.e(TAG, "com.pa.paperless.fragment.meeting_VideoFragment.handleMessage :   --->>> ");
+                        break;
+                    }
+                    for (int i = 0; i < videoInfos.size(); i++) {
+                        for (int j = 0; j < deviceInfos.size(); j++) {
+                            if (videoInfos.get(i).getVideoInfo().getDeviceid() == deviceInfos.get(j).getDevId()) {
+                                Log.e(TAG, "com.pa.paperless.fragment.meeting_VideoFragment.handleMessage :  设置名字 --->>> ");
+                                videoInfos.get(i).setName(deviceInfos.get(j).getDevName());
+                            }
                         }
-                        adapter = new VideoItemAdapter(cxt, allStreamDev);
+                    }
+                    /** **** **  每次更新时都同步索引  ** **** **/
+                    if (VideoStreamChecked == null) {
+                        VideoStreamChecked = new ArrayList<>();
+                    } else {
+                        VideoStreamChecked.clear();
+                    }
+                    for (int j = 0; j < videoInfos.size(); j++) {
+                        VideoStreamChecked.add(false);
+                    }
+                    if (adapter == null) {
+                        adapter = new VideoItemAdapter(cxt, videoInfos);
                         mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
                         mVideoLv.setAdapter(adapter);
-                        adapter.setItemListener(new ItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int posion) {
-                                Log.e("MyLog", "VideoFragment.onItemClick 100行:  item点击了 --->>> " + posion);
-                            }
-                        });
                     }
+                    adapter.notifyDataSetChanged();
+                    adapter.setItemListener(new ItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int posion) {
+                            Log.e("MyLog", "VideoFragment.onItemClick 100行:  item点击了 --->>> " + posion);
+                            adapter.setCheckedId(posion);
+                        }
+                    });
                     break;
             }
         }
     };
-    //存放所有流设备
-    private List<DeviceInfo> allStreamDev;
 
     /**
      * add by gowcage
@@ -124,6 +165,9 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     private ArrayList allRes = new ArrayList(), devIds = new ArrayList();
     private VideoItemAdapter adapter;
     private Context cxt;
+    private List<VideoInfo> videoInfos;
+    private List<Integer> res;
+    private List<Integer> ids;
 
     private void initScreenParam() {
         DisplayMetrics metric = new DisplayMetrics();
@@ -166,6 +210,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         initScreenParam();
         if (recorder != null) recorder = null;
         recorder = new ScreenRecorder(width, height, bitrate, 1, projection, "");
+        Log.d(TAG, "VideoFragment.onActivityResult 169行:   --->>> " + recorder.toString());
         allRes.add(0);
         nativeUtil.streamPlay(MeetingActivity.getDevId(), 2, 0, allRes, devIds);
         recorder.start();//�启动录屏线程
@@ -182,8 +227,7 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
         initController();
         cxt = getContext();
         try {
-            /** ************ ******  6.查询设备信息  ****** ************ **/
-            nativeUtil.queryDeviceInfo();
+            nativeUtil.queryMeetVedio();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -198,9 +242,10 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventMessage.DEV_REGISTER_INFORM://设备寄存器变更通知
+            case IDEventMessage.Meet_vedio_changeInform://会议视频变更通知
                 //查询设备信息
-                nativeUtil.queryDeviceInfo();
+                nativeUtil.setCallListener(this);
+                nativeUtil.queryMeetVedio();
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
                 InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
@@ -238,29 +283,48 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.look_video_btn:
-                List<Integer> res = new ArrayList<>();
-                List<Integer> ids = new ArrayList<>();
-//                nativeUtil.streamPlay(o.getDevId(),3,0,res,ids);
+            case R.id.look_video_btn://观看直播
+                res = new ArrayList<>();
+                ids = new ArrayList<>();
+                List<VideoInfo> checkedItemInfo = adapter.getCheckedItemInfo();
+                VideoInfo videoInfo = checkedItemInfo.get(0);
+                int deviceid = videoInfo.getVideoInfo().getDeviceid();
+                int subid = videoInfo.getVideoInfo().getSubid();
+                Log.e(TAG, "com.pa.paperless.fragment.meeting_VideoFragment.onClick :  subid --->>> " + subid);
+                res.add(0);
+                ids.add(MeetingActivity.getDevId());
+                nativeUtil.streamPlay(deviceid, subid, 0, res, ids);
                 break;
-            case R.id.stop_video_btn:
-
+            case R.id.stop_video_btn://停止观看
+//                if (res != null && ids != null) {
+//                    nativeUtil.stopResourceOperate(res, ids);
+//                }
                 break;
-            case R.id.push_video_btn:
-                if (stopRecord()) {
-                    Toast.makeText(getActivity(), "屏幕录制已停止", Toast.LENGTH_LONG).show();
+            case R.id.push_video_btn://推送视屏
+//                if (stopRecord()) {
+//                    Toast.makeText(getActivity(), "屏幕录制已停止", Toast.LENGTH_LONG).show();
+//                } else {
+//                    // 2: 发起屏幕捕捉请求
+//                    Intent intent = null;
+//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+//                        intent = manager.createScreenCaptureIntent();
+//                    }
+//                    startActivityForResult(intent, REQUEST_CODE);
+//                }
+                List<VideoInfo> checkedItemInfo1 = adapter.getCheckedItemInfo();
+                if (checkedItemInfo1 != null) {
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.open_screenspop, checkedItemInfo1));
                 } else {
-                    // 2: 发起屏幕捕捉请求
-                    Intent intent = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                        intent = manager.createScreenCaptureIntent();
-                    }
-                    startActivityForResult(intent, REQUEST_CODE);
+                    Toast.makeText(cxt, "请先选择", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
-            case R.id.projector_video_btn:
-
+            case R.id.projector_video_btn://投影视屏
+                List<VideoInfo> checkedItemInfo2 = adapter.getCheckedItemInfo();
+                if (checkedItemInfo2 != null) {
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.open_projector, checkedItemInfo2));
+                } else {
+                    Toast.makeText(cxt, "请先选择", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -275,7 +339,10 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener,
             case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
                 MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
                 break;
-            case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
+            case IDivMessage.QUERY_MEET_VEDIO://查询会议视频
+                MyUtils.handTo(IDivMessage.QUERY_MEET_VEDIO, (InterfaceVideo.pbui_Type_MeetVideoDetailInfo) result, "queryMeetVideo", mHandler);
+                break;
+            case IDivMessage.QUERY_DEVICE_INFO://查询设备信息
                 MyUtils.handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceDevice.pbui_Type_DeviceDetailInfo) result, "queryDevInfo", mHandler);
                 break;
         }
