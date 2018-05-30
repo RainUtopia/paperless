@@ -8,9 +8,9 @@ public class MeetingFileTypeBean {
     int dirId;  //目录ID
     int parentid;  //父级ID
     String fileName;//文件的名称
-    String fileCount;//有多少个item就有多少个文件
+    int fileCount;//有多少个item就有多少个文件
 
-    public MeetingFileTypeBean(int dirId, int parentid, String fileName, String fileCount) {
+    public MeetingFileTypeBean(int dirId, int parentid, String fileName, int fileCount) {
         this.dirId = dirId;
         this.parentid = parentid;
         this.fileName = fileName;
@@ -41,11 +41,11 @@ public class MeetingFileTypeBean {
         this.fileName = fileName;
     }
 
-    public String getFileCount() {
+    public int getFileCount() {
         return fileCount;
     }
 
-    public void setFileCount(String fileCount) {
+    public void setFileCount(int fileCount) {
         this.fileCount = fileCount;
     }
 }

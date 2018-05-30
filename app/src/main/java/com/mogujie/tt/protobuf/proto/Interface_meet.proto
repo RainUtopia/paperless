@@ -17,6 +17,7 @@ message pbui_Item_MeetMeetInfo
 	fixed32			managerid=8;//管理员id
 	bytes			onepsw_signin=9;//会议签到密码 不能超过Pb_SIGNIN_PSW_LEN 定义的限制长度
 	fixed32			status=10;//会议状态，0为未开始会议，1为已开始会议，2为已结束会议
+	bytes			ordername=11; //会议预约人
 }
 
 //会议信息

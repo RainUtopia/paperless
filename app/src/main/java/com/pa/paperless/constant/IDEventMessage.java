@@ -108,4 +108,6 @@ public class IDEventMessage {
     public static final int open_screenspop = 3049;
     // 在视屏直播界面通知会议界面打开投影控制
     public static final int open_projector = 3050;
+    //  回调无返回记录 没有查找到设备会议信息
+    public static final int not_bound = 3051;
 }

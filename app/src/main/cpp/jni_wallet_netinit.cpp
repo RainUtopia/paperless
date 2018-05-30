@@ -164,6 +164,9 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 		battach = 1;
 	}
 
+	if(type == TYPE_MEET_INTERFACE_MEETIM){
+    LOGI("MeetChat Adapter_GetEnv get status2 return  %d",type);
+	}
     if(datalen > 0)
 	{
 		jbyteArray barray = env->NewByteArray(datalen);

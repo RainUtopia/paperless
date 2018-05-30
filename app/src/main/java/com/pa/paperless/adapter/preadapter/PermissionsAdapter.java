@@ -20,13 +20,15 @@ import java.util.List;
  */
 
 public class PermissionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private final Context mContext;
     private final List<PermissionBean> mData;
     private ItemClickListener mListener;
 
-    public void setListener(ItemClickListener listener){
+    public void setListener(ItemClickListener listener) {
         mListener = listener;
     }
+
     public PermissionsAdapter(Context context, List<PermissionBean> data) {
         mContext = context;
         mData = data;
@@ -41,17 +43,17 @@ public class PermissionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).permission_item_number.setText(position+1+"");
-        ((ViewHolder)holder).permission_item_number.setChecked(PermissionActivity.checkeds.get(position));
-        ((ViewHolder)holder).permission_item_name.setText(mData.get(position).getName());
-        ((ViewHolder)holder).permission_item_screen.setText(mData.get(position).getScreen());
-        ((ViewHolder)holder).permission_item_projection.setText(mData.get(position).getProjection());
-        ((ViewHolder)holder).permission_item_upload.setText(mData.get(position).getUpload());
-        ((ViewHolder)holder).permission_item_download.setText(mData.get(position).getDownload());
+        ((ViewHolder) holder).permission_item_number.setText(position + 1 + "");
+        ((ViewHolder) holder).permission_item_number.setChecked(PermissionActivity.checkeds.get(position));
+        ((ViewHolder) holder).permission_item_name.setText(mData.get(position).getName());
+        ((ViewHolder) holder).permission_item_screen.setText(mData.get(position).getScreen());
+        ((ViewHolder) holder).permission_item_projection.setText(mData.get(position).getProjection());
+        ((ViewHolder) holder).permission_item_upload.setText(mData.get(position).getUpload());
+        ((ViewHolder) holder).permission_item_download.setText(mData.get(position).getDownload());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onItemClick(holder.itemView,holder.getLayoutPosition());
+                mListener.onItemClick(holder.itemView, holder.getLayoutPosition());
             }
         });
     }
@@ -82,4 +84,5 @@ public class PermissionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
     }
+
 }

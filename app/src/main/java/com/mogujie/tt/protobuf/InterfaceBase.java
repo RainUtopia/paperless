@@ -8662,10 +8662,28 @@ public final class InterfaceBase {
 
     /**
      * <pre>
+     *参见 Pb_Type
+     * </pre>
+     *
+     * <code>fixed32 type = 1;</code>
+     */
+    int getType();
+
+    /**
+     * <pre>
+     *参见 Pb_Method
+     * </pre>
+     *
+     * <code>fixed32 method = 2;</code>
+     */
+    int getMethod();
+
+    /**
+     * <pre>
      *参见 Pb_DB_StatusCode
      * </pre>
      *
-     * <code>fixed32 status = 1;</code>
+     * <code>fixed32 status = 3;</code>
      */
     int getStatus();
   }
@@ -8686,14 +8704,84 @@ public final class InterfaceBase {
       pbui_Type_MeetDBServerOperErrorOrBuilder {
     private pbui_Type_MeetDBServerOperError() {
     }
-    public static final int STATUS_FIELD_NUMBER = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <pre>
+     *参见 Pb_Type
+     * </pre>
+     *
+     * <code>fixed32 type = 1;</code>
+     */
+    public int getType() {
+      return type_;
+    }
+    /**
+     * <pre>
+     *参见 Pb_Type
+     * </pre>
+     *
+     * <code>fixed32 type = 1;</code>
+     */
+    private void setType(int value) {
+      
+      type_ = value;
+    }
+    /**
+     * <pre>
+     *参见 Pb_Type
+     * </pre>
+     *
+     * <code>fixed32 type = 1;</code>
+     */
+    private void clearType() {
+      
+      type_ = 0;
+    }
+
+    public static final int METHOD_FIELD_NUMBER = 2;
+    private int method_;
+    /**
+     * <pre>
+     *参见 Pb_Method
+     * </pre>
+     *
+     * <code>fixed32 method = 2;</code>
+     */
+    public int getMethod() {
+      return method_;
+    }
+    /**
+     * <pre>
+     *参见 Pb_Method
+     * </pre>
+     *
+     * <code>fixed32 method = 2;</code>
+     */
+    private void setMethod(int value) {
+      
+      method_ = value;
+    }
+    /**
+     * <pre>
+     *参见 Pb_Method
+     * </pre>
+     *
+     * <code>fixed32 method = 2;</code>
+     */
+    private void clearMethod() {
+      
+      method_ = 0;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 3;
     private int status_;
     /**
      * <pre>
      *参见 Pb_DB_StatusCode
      * </pre>
      *
-     * <code>fixed32 status = 1;</code>
+     * <code>fixed32 status = 3;</code>
      */
     public int getStatus() {
       return status_;
@@ -8703,7 +8791,7 @@ public final class InterfaceBase {
      *参见 Pb_DB_StatusCode
      * </pre>
      *
-     * <code>fixed32 status = 1;</code>
+     * <code>fixed32 status = 3;</code>
      */
     private void setStatus(int value) {
       
@@ -8714,7 +8802,7 @@ public final class InterfaceBase {
      *参见 Pb_DB_StatusCode
      * </pre>
      *
-     * <code>fixed32 status = 1;</code>
+     * <code>fixed32 status = 3;</code>
      */
     private void clearStatus() {
       
@@ -8723,8 +8811,14 @@ public final class InterfaceBase {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (type_ != 0) {
+        output.writeFixed32(1, type_);
+      }
+      if (method_ != 0) {
+        output.writeFixed32(2, method_);
+      }
       if (status_ != 0) {
-        output.writeFixed32(1, status_);
+        output.writeFixed32(3, status_);
       }
     }
 
@@ -8733,9 +8827,17 @@ public final class InterfaceBase {
       if (size != -1) return size;
 
       size = 0;
+      if (type_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, type_);
+      }
+      if (method_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, method_);
+      }
       if (status_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(1, status_);
+          .computeFixed32Size(3, status_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -8845,10 +8947,80 @@ public final class InterfaceBase {
 
       /**
        * <pre>
+       *参见 Pb_Type
+       * </pre>
+       *
+       * <code>fixed32 type = 1;</code>
+       */
+      public int getType() {
+        return instance.getType();
+      }
+      /**
+       * <pre>
+       *参见 Pb_Type
+       * </pre>
+       *
+       * <code>fixed32 type = 1;</code>
+       */
+      public Builder setType(int value) {
+        copyOnWrite();
+        instance.setType(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参见 Pb_Type
+       * </pre>
+       *
+       * <code>fixed32 type = 1;</code>
+       */
+      public Builder clearType() {
+        copyOnWrite();
+        instance.clearType();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *参见 Pb_Method
+       * </pre>
+       *
+       * <code>fixed32 method = 2;</code>
+       */
+      public int getMethod() {
+        return instance.getMethod();
+      }
+      /**
+       * <pre>
+       *参见 Pb_Method
+       * </pre>
+       *
+       * <code>fixed32 method = 2;</code>
+       */
+      public Builder setMethod(int value) {
+        copyOnWrite();
+        instance.setMethod(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参见 Pb_Method
+       * </pre>
+       *
+       * <code>fixed32 method = 2;</code>
+       */
+      public Builder clearMethod() {
+        copyOnWrite();
+        instance.clearMethod();
+        return this;
+      }
+
+      /**
+       * <pre>
        *参见 Pb_DB_StatusCode
        * </pre>
        *
-       * <code>fixed32 status = 1;</code>
+       * <code>fixed32 status = 3;</code>
        */
       public int getStatus() {
         return instance.getStatus();
@@ -8858,7 +9030,7 @@ public final class InterfaceBase {
        *参见 Pb_DB_StatusCode
        * </pre>
        *
-       * <code>fixed32 status = 1;</code>
+       * <code>fixed32 status = 3;</code>
        */
       public Builder setStatus(int value) {
         copyOnWrite();
@@ -8870,7 +9042,7 @@ public final class InterfaceBase {
        *参见 Pb_DB_StatusCode
        * </pre>
        *
-       * <code>fixed32 status = 1;</code>
+       * <code>fixed32 status = 3;</code>
        */
       public Builder clearStatus() {
         copyOnWrite();
@@ -8900,6 +9072,10 @@ public final class InterfaceBase {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError other = (com.mogujie.tt.protobuf.InterfaceBase.pbui_Type_MeetDBServerOperError) arg1;
+          type_ = visitor.visitInt(type_ != 0, type_,
+              other.type_ != 0, other.type_);
+          method_ = visitor.visitInt(method_ != 0, method_,
+              other.method_ != 0, other.method_);
           status_ = visitor.visitInt(status_ != 0, status_,
               other.status_ != 0, other.status_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
@@ -8927,6 +9103,16 @@ public final class InterfaceBase {
                   break;
                 }
                 case 13: {
+
+                  type_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+
+                  method_ = input.readFixed32();
+                  break;
+                }
+                case 29: {
 
                   status_ = input.readFixed32();
                   break;

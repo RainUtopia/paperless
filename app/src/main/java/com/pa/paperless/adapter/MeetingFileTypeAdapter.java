@@ -16,22 +16,25 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/11/2.
- *  会议资料左边 文件夹 item
+ * 会议资料左边 文件夹 item
  */
 
 public class MeetingFileTypeAdapter extends BaseAdapter {
 
+    public static final String TAG = "MeetingFileTypeAdapter-->";
     private int SelePosion;
 
     public MeetingFileTypeAdapter(Context context, List<MeetingFileTypeBean> data) {
         super(context);
         mDatas = data;
     }
-    public void setCheck(int i){
+
+    public void setCheck(int i) {
         SelePosion = i;
         //不刷新则无效
         notifyDataSetChanged();
     }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
@@ -39,15 +42,15 @@ public class MeetingFileTypeAdapter extends BaseAdapter {
             view = mInflater.inflate(R.layout.item_meeting_lv, viewGroup, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) view.getTag();
         }
         MeetingFileTypeBean bean = (MeetingFileTypeBean) mDatas.get(i);
         holder.meeting_item_filename.setText(bean.getFileName());
-        holder.meeting_filecount.setText(bean.getFileCount());
-        if(i == SelePosion){
+        holder.meeting_filecount.setText("数量：" + bean.getFileCount() + "");
+        if (i == SelePosion) {
             holder.img.setSelected(true);
-        }else {
+        } else {
             holder.img.setSelected(false);
         }
         return view;
@@ -58,6 +61,7 @@ public class MeetingFileTypeAdapter extends BaseAdapter {
         public TextView meeting_item_filename;
         public TextView meeting_filecount;
         public ImageView img;
+
         public ViewHolder(View rootView) {
             this.rootView = rootView;
             this.img = rootView.findViewById(R.id.img);

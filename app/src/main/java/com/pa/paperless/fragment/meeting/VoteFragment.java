@@ -3,8 +3,6 @@ package com.pa.paperless.fragment.meeting;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,9 +20,7 @@ import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
-import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMacro;
-import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfaceVote;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MainActivity;
@@ -35,15 +31,12 @@ import com.pa.paperless.bean.SubmitVoteBean;
 import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
+import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
-import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
 import com.pa.paperless.utils.MyUtils;
-import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -54,16 +47,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.pa.paperless.activity.MeetingActivity.getMeetName;
+import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
 
 /**
  * Created by Administrator on 2017/10/31.
  * 投票查询
  */
 
-public class VoteFragment extends BaseFragment implements View.OnClickListener, CallListener {
+public class VoteFragment extends BaseFragment implements View.OnClickListener {
 
     public static final String TAG = "VoteFragment-->>";
-    private NativeUtil nativeUtil;
     private RecyclerView mVoteRl;
     private Button mVoteQuery;
     private Button mVoteExport;
@@ -93,7 +86,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_vote, container, false);
-        initController();
         initView(inflate);
         try {
             //200.查询投票
@@ -106,48 +98,31 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         return inflate;
     }
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case IDivMessage.QUERY_VOTE://查询投票
-                    queryVote(msg);
-                    break;
-                case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
-                    queryVoterById(msg);
-                    break;
-                case IDivMessage.QUERY_ATTENDEE://92.查询参会人员
-                    queryMember(msg);
-                    break;
-            }
-        }
-    };
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
+            case IDEventF.you_are_compere:// 变成主持人了
+                mVoteManagement.setVisibility(View.VISIBLE);
+                manageBtnisOpen = true;
+                break;
+            case IDEventF.you_not_compere:// 被取消主持人资格了
+                mVoteManagement.setVisibility(View.GONE);
+                mVoteOpen.setVisibility(View.GONE);
+                mVoteOver.setVisibility(View.GONE);
+                mVoteQuery.setVisibility(View.GONE);
+                break;
+            case IDEventF.post_vote://收到投票数据
+                reveiveVote(message);
+                break;
+            case IDEventF.post_member_byVote:// 收到指定投票提交人数据
+                receiveMemberByVote(message);
+                break;
+            case IDEventF.post_member_toSignin://收到参会人数据
+                memberInfos = (List<MemberInfo>) message.getObject();
+                break;
             case IDEventMessage.Vote_Change_Inform://投票变更通知
-                InterfaceBase.pbui_MeetNotifyMsg object1 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-                int opermethod = object1.getOpermethod();
-                int id1 = object1.getId();
-                Log.e(TAG, "VoteFragment.getEventMessage 129行:   --->>> 投票变更通知EventBus 方法ID：" + opermethod + "   投票ID：" + id1);
-                initController();
                 nativeUtil.queryVote();
-                if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
-                    //操作方法为 查询投票 时
-                    Log.e(TAG, "VoteFragment.getEventMessage 135行:  投票变更通知EventBus --->>> 200.查询投票");
-//                    nativeUtil.queryVote();
-                }
-                if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_STOP.getNumber()) {
-                    //操作方法为 停止投票 时
-                    Log.e(TAG, "VoteFragment.getEventMessage 149行:   --->>> 投票变更通知EventBus --->>> 195.停止投票   " + id1);
-//                    nativeUtil.queryVote();
-                }
-                if (opermethod == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_SUBMIT.getNumber()) {
-                    //操作方法为 停止投票 时
-                    Log.e(TAG, "VoteFragment.getEventMessage 158行:   --->>> 投票变更通知EventBus --->>> 196.提交投票   " + id1);
-//                    nativeUtil.queryVote();
-                }
                 break;
             case IDEventMessage.VoteMember_ChangeInform://203.投票提交人变更通知
                 Log.e(TAG, "VoteFragment.getEventMessage 164行:   --->>> 投票提交人变更通知");
@@ -156,72 +131,30 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
                 /** ************ ******  203.查询指定投票的提交人  ****** ************ **/
                 if (opermethod2 == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_QUERY.getNumber()) {
                     /** **** **  查询指定投票的提交人  ** **** **/
-                    Log.e(TAG, "VoteFragment.getEventMessage 170行:   --->>> 查询指定投票的提交人");
+                    Log.e(TAG, "VoteFragment.getEventMessage :  查询指定投票的提交人 --->>> ");
                     isFind = nativeUtil.queryOneVoteSubmitter(SelectedVoteid);
-//                    if (!isFind) {//如果多次查找都没有找到，说明没有人投过
-//                        showChoose(voteInfo);
-//                    }
                 }
-                break;
             case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
-                InterfaceBase.pbui_MeetNotifyMsg object = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-                int opermethod1 = object.getOpermethod();
-                int id = object.getId();
-                //判断是否是发起投票方法引起的回调
-                Log.e(TAG, "VoteFragment.getEventMessage 185行:   --->>> 发起投票 EventBus  方法 --->>> " + opermethod1 + "   投票ID：" + id);
                 if (isClicked && localClick) {//判断是本人操作
                     showChoose(voteInfo, true);
-                }else {
-                    initController();
+                } else {
                     nativeUtil.queryVote();
                 }
                 break;
-            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
-                nativeUtil.queryAttendPeople();
-                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
-                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
-                break;
         }
     }
 
-    @Override
-    public void callListener(int action, Object result) {
-        switch (action) {
-            case IDivMessage.QUERY_VOTE://投票查询
-                MyUtils.handTo(IDivMessage.QUERY_VOTE, (InterfaceVote.pbui_Type_MeetVoteDetailInfo) result, "queryVote", mHandler);
-                break;
-            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
-                Log.e(TAG, "VoteFragment.callListener 209行:   --->>> 收到会议消息");
-                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
-                break;
-            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
-                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
-                break;
-            case IDivMessage.QUERY_MEMBER_BYVOTE://203.查询指定投票的提交人
-                MyUtils.handTo(IDivMessage.QUERY_MEMBER_BYVOTE, (InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo) result, "queryVoteMember", mHandler);
-                break;
-            case IDivMessage.QUERY_ATTENDEE://查询参会人员
-                MyUtils.handTo(IDivMessage.QUERY_ATTENDEE, (InterfaceMember.pbui_Type_MemberDetailInfo) result, "queryMember", mHandler);
-                break;
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-
-    private void queryVoterById(Message msg) {
-        ArrayList queryVoteMember = msg.getData().getParcelableArrayList("queryVoteMember");
-        InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo o1 = (InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo) queryVoteMember.get(0);
-        List<InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo> itemList = o1.getItemList();
+    private void receiveMemberByVote(EventMessage message) {
+        InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo object = (InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo) message.getObject();
+        List<InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo> itemList = object.getItemList();
         //获取当前选中投票的全部选项信息
         List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
-        someOneVoteInfo = new ArrayList<>();
         List<Integer> ids = new ArrayList<>();
+        if (someOneVoteInfo == null) {
+            someOneVoteInfo = new ArrayList<>();
+        } else {
+            someOneVoteInfo.clear();
+        }
         for (int i = 0; i < itemList.size(); i++) {
             InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
             String chooseText = "";
@@ -268,26 +201,14 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    private void showTip(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
-    private void queryVote(Message msg) {
-        if (mVoteData == null) {
-            mVoteData = new ArrayList<>();
-        } else {
-            mVoteData.clear();
-        }
-        ArrayList queryVote = msg.getData().getParcelableArrayList("queryVote");
-        InterfaceVote.pbui_Type_MeetVoteDetailInfo o = (InterfaceVote.pbui_Type_MeetVoteDetailInfo) queryVote.get(0);
-        //获取到所有的投票信息
-        mVoteData = Dispose.Vote(o);
-        /** **** **  每次查找后，得到了新的数据都要重新刷新adapter  ** **** **/
+    private void reveiveVote(EventMessage message) {
+        mVoteData = (List<VoteInfo>) message.getObject();
         if (mVoteAdapter == null) {
             mVoteAdapter = new VoteAdapter(getContext(), mVoteData);
             mVoteRl.setAdapter(mVoteAdapter);
+        } else {
+            mVoteAdapter.notifyDataSetChanged();
         }
-        mVoteAdapter.notifyDataSetChanged();
         mVoteAdapter.setItemListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, final int posion) {
@@ -325,16 +246,14 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         });
     }
 
-    private void queryMember(Message msg) {
-        ArrayList queryMember = msg.getData().getParcelableArrayList("queryMember");
-        InterfaceMember.pbui_Type_MemberDetailInfo o2 = (InterfaceMember.pbui_Type_MemberDetailInfo) queryMember.get(0);
-        memberInfos = Dispose.MemberInfo(o2);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-        nativeUtil.setCallListener(this);
+    private void showTip(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     private void initView(View inflate) {
@@ -347,8 +266,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         mVoteOpen = (Button) inflate.findViewById(R.id.vote_open);
         mVoteOver = (Button) inflate.findViewById(R.id.vote_over);
         mHostFunction = (RelativeLayout) inflate.findViewById(R.id.host_function);
-
-
         if (isCompere) {
             mVoteManagement.setVisibility(View.VISIBLE);
             manageBtnisOpen = true;
@@ -358,7 +275,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
         mVoteOpen.setVisibility(View.GONE);
         mVoteOver.setVisibility(View.GONE);
         mVoteQuery.setVisibility(View.GONE);
-
         mVoteOpen.setOnClickListener(this);
         mVoteOver.setOnClickListener(this);
         mVoteManagement.setOnClickListener(this);
@@ -756,7 +672,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            initController();
             try {
                 nativeUtil.queryVote();
             } catch (InvalidProtocolBufferException e) {

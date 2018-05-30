@@ -102,7 +102,6 @@ public class Attendees_Fragment extends BaseFragment implements View.OnClickList
         }
         adapter = new AttendAdapter(getContext(), mData);
         mAttendeesRl.setLayoutManager(new LinearLayoutManager(getContext()));
-//        mAttendeesRl.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.HORIZONTAL));
         adapter.setListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int posion) {

@@ -10,6 +10,7 @@ message pbui_Item_MeetDirDetailInfo
 	fixed32			id=1; //目录ID
 	bytes			name=2; //名称
 	fixed32			parentid=3; //父目录ID
+	fixed32			filenum=4; //该目录下的文件数量
 }
 
 //会议目录
@@ -19,6 +20,20 @@ message pbui_Item_MeetDirDetailInfo
 message pbui_Type_MeetDirDetailInfo
 {
 	repeated pbui_Item_MeetDirDetailInfo	 item=1; //会议
+}
+
+message pbui_Item_MeetingDirPosItem
+{
+	fixed32 dirid=1;  //会议目录
+	fixed32 pos=2;    //序号
+}
+
+//修改会议目录排序
+//type:Pb_TYPE_MEET_INTERFACE_MEETDIRECTORY
+//method: set
+message pbui_Type_ModMeetDirPos
+{
+	repeated pbui_Item_MeetingDirPosItem	 item=1; //会议
 }
 
 //会议目录文件

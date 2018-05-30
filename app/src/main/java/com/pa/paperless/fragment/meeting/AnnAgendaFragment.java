@@ -21,20 +21,18 @@ import java.util.ArrayList;
  * 公告议程
  */
 
-public class AnnAgendaFragment extends BaseFragment implements View.OnClickListener, CallListener {
+public class AnnAgendaFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageView mAgendaImgbtn;
     private ImageView mAnnouncementImgbtn;
     private FrameLayout mAgendaLl;
     private ArrayList<BaseFragment> mFragments;
     private ArrayList<ImageView> mImgbtns;
-    private NativeUtil nativeUtil;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_announce_agenda, container, false);
-        initController();
         initView(inflate);
         initImageBtns();
         initFragments();
@@ -43,11 +41,6 @@ public class AnnAgendaFragment extends BaseFragment implements View.OnClickListe
         return inflate;
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initImageBtns() {
         mImgbtns = new ArrayList<>();

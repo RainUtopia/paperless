@@ -19,11 +19,8 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -33,25 +30,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.mogujie.tt.protobuf.InterfaceBase;
-import com.mogujie.tt.protobuf.InterfaceIM;
-import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.PeletteActivity;
-import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
-import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.MyUtils;
-import com.wind.myapplication.NativeUtil;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
@@ -63,9 +44,8 @@ import java.util.Arrays;
  * 外部文档
  */
 
-public class OverviewDocFragment extends BaseFragment implements CallListener, SurfaceHolder.Callback, View.OnClickListener {
+public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.Callback, View.OnClickListener {
 
-    private NativeUtil nativeUtil;
     private SurfaceView mCameraView;
     private CameraManager mCameraManager;
     private Context context;
@@ -80,54 +60,27 @@ public class OverviewDocFragment extends BaseFragment implements CallListener, S
     private Button no_save;
     public static long now_time;
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-
-            }
-        }
-    };
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.overviewdoc_fragment, container, false);
-        initController();
         initView(inflate);
         context = getContext();
         mCameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
         mSurfaceHolder = mCameraView.getHolder();
         mSurfaceHolder.addCallback(this);
-        EventBus.getDefault().register(this);
         return inflate;
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
-        switch (message.getAction()) {
-            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
-                InterfaceBase.pbui_MeetNotifyMsg MrmberName = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
-                nativeUtil.queryAttendPeopleFromId(MrmberName.getId());
-                break;
-        }
-    }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initView(View inflate) {
         mCameraView = inflate.findViewById(R.id.camera_surfaceView);
@@ -137,31 +90,6 @@ public class OverviewDocFragment extends BaseFragment implements CallListener, S
         boottom_linear.setVisibility(View.GONE);
         open_drawboard = inflate.findViewById(R.id.open_drawboard);
         no_save = inflate.findViewById(R.id.no_save);
-    }
-
-
-    @Override
-    public void callListener(int action, Object result) {
-        switch (action) {
-            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
-                Log.e("MyLog", "OverviewDocFragment.callListener 140行:  在外部文档收到会议消息 --->>> ");
-                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
-                break;
-            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
-                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
-                break;
-        }
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if (hidden) {
-            Log.e("MyLog","OverviewDocFragment.onHiddenChanged 159行:  隐藏状态 --->>> ");
-            onDestroy();
-        } else {
-//            nativeUtil = NativeUtil.getInstance();
-//            nativeUtil.setCallListener(this);
-        }
     }
 
     @Override

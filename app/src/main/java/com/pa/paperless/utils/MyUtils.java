@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,8 +43,10 @@ import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.PeletteActivity;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
+import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.Macro;
+import com.pa.paperless.constant.WpsModel;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
 import com.wind.myapplication.NativeUtil;
@@ -76,7 +79,6 @@ import java.util.Locale;
 
 import static com.pa.paperless.activity.MeetingActivity.mBadge;
 import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
-import static com.pa.paperless.activity.PeletteActivity.context;
 import static com.pa.paperless.utils.FileUtil.getMIMEType;
 
 /**
@@ -84,7 +86,9 @@ import static com.pa.paperless.utils.FileUtil.getMIMEType;
  */
 
 public class MyUtils {
+    public static final String TAG = "MyUtils-->";
 
+    public static File mFile;
     public static int getMediaid(String path) {
         //其它
         if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
@@ -143,6 +147,14 @@ public class MyUtils {
             return Macro.MEDIA_FILETYPE_PICTURE | Macro.MEDIA_FILETYPE_PNG;
         }
         return 0;
+    }
+
+    public static File getmFile(){
+        return mFile;
+    }
+
+    public static void setFile(File f){
+        mFile = f;
     }
 
     // 缩放图片
@@ -293,18 +305,11 @@ public class MyUtils {
         }
     }
 
-    /**
-     * 吐丝
-     *
-     * @param c
-     * @param msg
-     */
     public static void showMsg(Context c, String msg) {
         Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
     }
 
-
-    public static void downLoadFile(String dir, String filename, View coordinatorLayout, final Context context, int posion, NativeUtil nativeUtil, long filesize) {
+    public static void downLoadFile(String dir, String filename, final Context context, int posion, NativeUtil nativeUtil, long filesize) {
         if (SDCardUtils.isSDCardEnable()) {
             CreateFile(dir);
             dir += filename;
@@ -312,13 +317,15 @@ public class MyUtils {
             Log.e("MyLog", "MyUtils.downLoadFile 205行:  文件的大小 --->>> " + filesize + "  文件目录：" + dir);
             if (file.exists()) {//文件已存在
                 if (file.length() == filesize) {//该文件的大小与服务器中一致，已经是最新的
-                    Snackbar.make(coordinatorLayout, "  文件已经存在是否直接打开？  ", Snackbar.LENGTH_LONG)
-                            .setAction("打开查看", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    FileUtil.openFile(context, file);
-                                }
-                            }).show();
+//                    Snackbar.make(coordinatorLayout, "  文件已经存在是否直接打开？  ", Snackbar.LENGTH_LONG)
+//                            .setAction("打开查看", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    FileUtil.openFile(context, file);
+//                                }
+//                            }).show();
+//                    FileUtil.openFile(context, file);
+                    OpenThisFile(context,file);
                 } else {//没下载完成，或者是旧的文件
                     //目前采用，删除未完成的再重新下载
                     file.delete();
@@ -331,16 +338,7 @@ public class MyUtils {
         }
     }
 
-    /**
-     * 打开文件
-     *
-     * @param filename
-     * @param coordinatorLayout
-     * @param nativeUtil
-     * @param posion
-     * @param context
-     */
-    public static void openFile(String dir, String filename, View coordinatorLayout, final NativeUtil nativeUtil, final int posion, Context context, long filesize) {
+    public static void openFile(String dir, String filename, final NativeUtil nativeUtil, final int posion, Context context, long filesize) {
         if (SDCardUtils.isSDCardEnable()) {
             //先创建好目录
             CreateFile(dir);
@@ -348,39 +346,79 @@ public class MyUtils {
             File file1 = new File(dir);
             if (!file1.exists() || file1.length() != filesize) {
                 final String finalFile = dir;
-                Snackbar.make(coordinatorLayout, " 文件不存在，是否立即下载？ ", Snackbar.LENGTH_LONG)
-                        .setAction("立即下载", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
-                            }
-                        }).show();
+//                Snackbar.make(coordinatorLayout, " 文件不存在，是否立即下载？ ", Snackbar.LENGTH_LONG)
+//                        .setAction("立即下载", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
+//                            }
+//                        }).show();
+                nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
             } else {
                 OpenThisFile(context, file1);
-
             }
         }
     }
 
+
     public static void OpenThisFile(Context context, File file1) {
-        //已经存在才打开文件
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //设置intent的Action属性
-        intent.setAction(Intent.ACTION_VIEW);
-        //获取文件file的MIME类型
-        //Collection mimeTypes = getMimeTypes(file);
-        //String type = mimeTypes.toString();
-        String type = getMIMEType(file1);
-        //设置intent的data和Type属性。
-        intent.setDataAndType(/*uri*/Uri.fromFile(file1), type);
-        //跳转
-        try {
-            context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
+        setFile(file1);
+        String filename = file1.getName();
+        Log.e(TAG, "MyUtils.OpenThisFile :   --> "+filename);
+        if (FileUtil.isPictureFile(filename)) {
+            /** **** **  如果是图片文件则使用自己的打开  ** **** **/
+            Log.e(TAG, "MyUtils.openFile :  图片文件 --> ");
+            EventBus.getDefault().post(new EventMessage(IDEventF.open_picture,file1.getAbsolutePath()));
+        }else if(FileUtil.isDocumentFile(filename)){
+            /** **** **  如果是文档类文件，设置只能使用WPS软件打开  ** **** **/
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString(WpsModel.OPEN_MODE, WpsModel.OpenMode.NORMAL); // 打开模式
+            bundle.putBoolean(WpsModel.SEND_CLOSE_BROAD, true); // 关闭时是否发送广播
+            bundle.putBoolean(WpsModel.SEND_SAVE_BROAD, true); // 保存时是否发送广播
+            bundle.putBoolean(WpsModel.HOMEKEY_DOWN, true); // 单机home键是否发送广播
+            bundle.putBoolean(WpsModel.BACKKEY_DOWN, true); // 单机back键是否发送广播
+            bundle.putBoolean(WpsModel.ENTER_REVISE_MODE, true); // 以修订模式打开文档
+            bundle.putBoolean(WpsModel.SAVE_PATH, true); // 文件保存路径
+//            bundle.putString(WpsModel.THIRD_PACKAGE, getPackageName()); // 第三方应用的包名，用于对改应用合法性的验证
+            bundle.putString(WpsModel.THIRD_PACKAGE, WpsModel.PackageName.NORMAL); // 第三方应用的包名，用于对改应用合法性的验证
+            bundle.putBoolean(WpsModel.CLEAR_TRACE, true);// 清除打开记录
+            // bundle.putBoolean(CLEAR_FILE, true); //关闭后删除打开文件
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setClassName(WpsModel.PackageName.NORMAL, WpsModel.ClassName.NORMAL);
+
+            Uri uri = Uri.fromFile(file1);
+            intent.setData(uri);
+            intent.putExtras(bundle);
+            try {
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                System.out.println("打开wps异常："+e.toString());
+                e.printStackTrace();
+            }
+        }
+        else {
+            //已经存在才打开文件
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //设置intent的Action属性
+            intent.setAction(Intent.ACTION_VIEW);
+            //获取文件file的MIME类型
+            //Collection mimeTypes = getMimeTypes(file);
+            //String type = mimeTypes.toString();
+            String type = getMIMEType(file1);
+            //设置intent的data和Type属性。
+            intent.setDataAndType(/*uri*/Uri.fromFile(file1), type);
+            //跳转
+            try {
+                context.startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
     /**
      * 在MEETFILE目录下创建文件

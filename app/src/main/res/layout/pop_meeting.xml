@@ -128,4 +128,5 @@
             android:text="电子白板"
             android:textColor="@color/white" />
     </LinearLayout>
+
 </com.zhy.android.percent.support.PercentLinearLayout>

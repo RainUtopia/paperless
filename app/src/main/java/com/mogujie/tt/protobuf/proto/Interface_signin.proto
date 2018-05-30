@@ -4,7 +4,6 @@ option optimize_for = LITE_RUNTIME;
 
 import "Interface_Macro.proto";
 
-
 //会议签到
 message pbui_Item_MeetSignInDetailInfo
 {

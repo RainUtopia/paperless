@@ -101,6 +101,15 @@ public final class InterfaceMeet {
      * <code>fixed32 status = 10;</code>
      */
     int getStatus();
+
+    /**
+     * <pre>
+     *会议预约人
+     * </pre>
+     *
+     * <code>bytes ordername = 11;</code>
+     */
+    com.google.protobuf.ByteString getOrdername();
   }
   /**
    * <pre>
@@ -117,6 +126,7 @@ public final class InterfaceMeet {
     private pbui_Item_MeetMeetInfo() {
       name_ = com.google.protobuf.ByteString.EMPTY;
       onepswSignin_ = com.google.protobuf.ByteString.EMPTY;
+      ordername_ = com.google.protobuf.ByteString.EMPTY;
     }
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
@@ -474,6 +484,44 @@ public final class InterfaceMeet {
       status_ = 0;
     }
 
+    public static final int ORDERNAME_FIELD_NUMBER = 11;
+    private com.google.protobuf.ByteString ordername_;
+    /**
+     * <pre>
+     *会议预约人
+     * </pre>
+     *
+     * <code>bytes ordername = 11;</code>
+     */
+    public com.google.protobuf.ByteString getOrdername() {
+      return ordername_;
+    }
+    /**
+     * <pre>
+     *会议预约人
+     * </pre>
+     *
+     * <code>bytes ordername = 11;</code>
+     */
+    private void setOrdername(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      ordername_ = value;
+    }
+    /**
+     * <pre>
+     *会议预约人
+     * </pre>
+     *
+     * <code>bytes ordername = 11;</code>
+     */
+    private void clearOrdername() {
+      
+      ordername_ = getDefaultInstance().getOrdername();
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (id_ != 0) {
@@ -505,6 +553,9 @@ public final class InterfaceMeet {
       }
       if (status_ != 0) {
         output.writeFixed32(10, status_);
+      }
+      if (!ordername_.isEmpty()) {
+        output.writeBytes(11, ordername_);
       }
     }
 
@@ -552,6 +603,10 @@ public final class InterfaceMeet {
       if (status_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(10, status_);
+      }
+      if (!ordername_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(11, ordername_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -1006,6 +1061,41 @@ public final class InterfaceMeet {
         return this;
       }
 
+      /**
+       * <pre>
+       *会议预约人
+       * </pre>
+       *
+       * <code>bytes ordername = 11;</code>
+       */
+      public com.google.protobuf.ByteString getOrdername() {
+        return instance.getOrdername();
+      }
+      /**
+       * <pre>
+       *会议预约人
+       * </pre>
+       *
+       * <code>bytes ordername = 11;</code>
+       */
+      public Builder setOrdername(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setOrdername(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议预约人
+       * </pre>
+       *
+       * <code>bytes ordername = 11;</code>
+       */
+      public Builder clearOrdername() {
+        copyOnWrite();
+        instance.clearOrdername();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetMeetInfo)
     }
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -1048,6 +1138,8 @@ public final class InterfaceMeet {
               other.onepswSignin_ != com.google.protobuf.ByteString.EMPTY, other.onepswSignin_);
           status_ = visitor.visitInt(status_ != 0, status_,
               other.status_ != 0, other.status_);
+          ordername_ = visitor.visitByteString(ordername_ != com.google.protobuf.ByteString.EMPTY, ordername_,
+              other.ordername_ != com.google.protobuf.ByteString.EMPTY, other.ordername_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
@@ -1120,6 +1212,11 @@ public final class InterfaceMeet {
                 case 85: {
 
                   status_ = input.readFixed32();
+                  break;
+                }
+                case 90: {
+
+                  ordername_ = input.readBytes();
                   break;
                 }
               }

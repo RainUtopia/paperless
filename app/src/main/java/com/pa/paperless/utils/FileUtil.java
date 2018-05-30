@@ -6,13 +6,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+
+import com.bumptech.glide.Glide;
+import com.pa.paperless.R;
+import com.zhy.android.percent.support.PercentLinearLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,33 +32,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pa.paperless.utils.MyUtils.setBackgroundAlpha;
+
 /**
  * Created by Administrator on 2017/11/24.
  */
 
 public class FileUtil {
-
-    private static String name = null;
-
-    public static String EdtNewFileName(Context context, final String postfix) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("请输入新的文件名");
-        final EditText edt = new EditText(context);
-        edt.setHint("输入新的文件名");
-        builder.setView(edt);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String s = edt.getText().toString();
-                if (s.equals("") && s.length() > 0) {
-                    name = s + postfix;
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.create().show();
-        return name;
-    }
+    public static final String TAG = "FileUtil-->";
 
     /**
      * 将BitMap转为byte数组
@@ -175,6 +168,8 @@ public class FileUtil {
                 || fileEnd.equals("doc")
                 || fileEnd.equals("docx")
                 || fileEnd.equals("xls")
+                || fileEnd.equals("xlsx")
+                || fileEnd.equals("ppt")
                 || fileEnd.equals("wps")
                 || fileEnd.equals("pdf")
                 ) {
@@ -282,9 +277,7 @@ public class FileUtil {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
         return null;
-
     }
 
     /**
@@ -310,6 +303,103 @@ public class FileUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * 查找某目录下的某个文件
+     *
+     * @param dir      父目录
+     * @param filename 文件名
+     * @return
+     */
+    public static File findFilePathByName(String dir, final String filename) {
+        List<File> fs = new ArrayList<>();
+        File baseDir = new File(dir);
+        if (!baseDir.exists() || !baseDir.isDirectory()) {  // 判断目录是否存在
+            Log.e(TAG, "FileUtil.findFilePathByName :   --> " + "文件查找失败：" + dir + "不是一个目录！");
+        }
+        File[] files = baseDir.listFiles();
+        List<File> getdss = getdss(files, filename, fs);
+        if(getdss.size()>0) {
+            File file = getdss.get(0);
+            String name = file.getName();
+            Log.e(TAG, "FileUtil.findFilePathByName :  name --> " + name);
+            return file;
+        }else {
+            Log.e(TAG, "FileUtil.findFilePathByName :  没有查找到文件 --> ");
+            return null;
+        }
+    }
+
+    public static List<File> getdss(File[] files, String filename, List<File> fs) {
+        for (int i = 0; i < files.length; i++) {
+            File f1 = files[i];
+            if (f1.isFile()) {
+                if (filename.equals(f1.getName())) {
+                    fs.add(f1);
+                }
+            } else if (f1.isDirectory()) {
+                String path = f1.getPath();
+                File[] files1 = f1.listFiles();
+                if (files1.length > 0) {
+                    getdss(files1, filename, fs);
+                }
+            }
+        }
+        return fs;
+    }
+
+    /**
+     * 删除目录下的所有文件，不包含文件夹
+     * @param dirfile 目录文件
+     * @return
+     */
+    public static boolean deleteAllFile(File dirfile){
+        if(dirfile.exists()){
+            File[] files = dirfile.listFiles();
+            if(files.length>0) {
+                for (int i = 0; i < files.length; i++) {
+                    File file = files[i];
+                    file.delete();
+                    if (file.isDirectory()) {
+                        deleteAllFile(file);
+                    }
+                }
+            }else {
+                dirfile.delete();
+            }
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 打开图片
+     *
+     * @param filepath 文件路径
+     * @param context  上下文
+     * @param view     展示位置的 view
+     */
+    public static void openPicture(String filepath, final Context context, View view) {
+        byte[] bytes = FileUtil.readBytes(filepath);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.open_piccc, null);
+        ImageView imgv = inflate.findViewById(R.id.imgv);
+        PopupWindow picPop = new PopupWindow(inflate, PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.MATCH_PARENT, true);
+        Glide.with(context).load(bytes).into(imgv);
+        picPop.setAnimationStyle(R.style.AnimHorizontal);
+        picPop.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        picPop.setTouchable(true);
+        setBackgroundAlpha(context, 0.3f);
+        picPop.setOutsideTouchable(true);
+        picPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(context, 1.0f);
+            }
+        });
+        picPop.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
 
     /**

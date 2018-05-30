@@ -3396,10 +3396,19 @@ public final class InterfacePlaymedia {
 
     /**
      * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    int getPlayflag();
+
+    /**
+     * <pre>
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     int getTriggeruserval();
 
@@ -3408,7 +3417,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
@@ -3416,7 +3425,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     int getDeviceidCount();
     /**
@@ -3424,7 +3433,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     int getDeviceid(int index);
   }
@@ -3517,14 +3526,49 @@ public final class InterfacePlaymedia {
       pos_ = 0;
     }
 
-    public static final int TRIGGERUSERVAL_FIELD_NUMBER = 3;
+    public static final int PLAYFLAG_FIELD_NUMBER = 3;
+    private int playflag_;
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    public int getPlayflag() {
+      return playflag_;
+    }
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    private void setPlayflag(int value) {
+      
+      playflag_ = value;
+    }
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    private void clearPlayflag() {
+      
+      playflag_ = 0;
+    }
+
+    public static final int TRIGGERUSERVAL_FIELD_NUMBER = 4;
     private int triggeruserval_;
     /**
      * <pre>
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     public int getTriggeruserval() {
       return triggeruserval_;
@@ -3534,7 +3578,7 @@ public final class InterfacePlaymedia {
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     private void setTriggeruserval(int value) {
       
@@ -3545,21 +3589,21 @@ public final class InterfacePlaymedia {
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     private void clearTriggeruserval() {
       
       triggeruserval_ = 0;
     }
 
-    public static final int DEVICEID_FIELD_NUMBER = 4;
+    public static final int DEVICEID_FIELD_NUMBER = 5;
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     public java.util.List<java.lang.Integer>
         getDeviceidList() {
@@ -3570,7 +3614,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     public int getDeviceidCount() {
       return deviceid_.size();
@@ -3580,7 +3624,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     public int getDeviceid(int index) {
       return deviceid_.getInt(index);
@@ -3596,7 +3640,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     private void setDeviceid(
         int index, int value) {
@@ -3608,7 +3652,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     private void addDeviceid(int value) {
       ensureDeviceidIsMutable();
@@ -3619,7 +3663,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     private void addAllDeviceid(
         java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -3632,7 +3676,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 4;</code>
+     * <code>repeated fixed32 deviceid = 5;</code>
      */
     private void clearDeviceid() {
       deviceid_ = emptyIntList();
@@ -3647,11 +3691,14 @@ public final class InterfacePlaymedia {
       if (pos_ != 0) {
         output.writeFixed32(2, pos_);
       }
+      if (playflag_ != 0) {
+        output.writeFixed32(3, playflag_);
+      }
       if (triggeruserval_ != 0) {
-        output.writeFixed32(3, triggeruserval_);
+        output.writeFixed32(4, triggeruserval_);
       }
       for (int i = 0; i < deviceid_.size(); i++) {
-        output.writeFixed32(4, deviceid_.getInt(i));
+        output.writeFixed32(5, deviceid_.getInt(i));
       }
     }
 
@@ -3668,9 +3715,13 @@ public final class InterfacePlaymedia {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(2, pos_);
       }
+      if (playflag_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(3, playflag_);
+      }
       if (triggeruserval_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(3, triggeruserval_);
+          .computeFixed32Size(4, triggeruserval_);
       }
       {
         int dataSize = 0;
@@ -3856,10 +3907,45 @@ public final class InterfacePlaymedia {
 
       /**
        * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 3;</code>
+       */
+      public int getPlayflag() {
+        return instance.getPlayflag();
+      }
+      /**
+       * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 3;</code>
+       */
+      public Builder setPlayflag(int value) {
+        copyOnWrite();
+        instance.setPlayflag(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 3;</code>
+       */
+      public Builder clearPlayflag() {
+        copyOnWrite();
+        instance.clearPlayflag();
+        return this;
+      }
+
+      /**
+       * <pre>
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 3;</code>
+       * <code>fixed32 triggeruserval = 4;</code>
        */
       public int getTriggeruserval() {
         return instance.getTriggeruserval();
@@ -3869,7 +3955,7 @@ public final class InterfacePlaymedia {
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 3;</code>
+       * <code>fixed32 triggeruserval = 4;</code>
        */
       public Builder setTriggeruserval(int value) {
         copyOnWrite();
@@ -3881,7 +3967,7 @@ public final class InterfacePlaymedia {
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 3;</code>
+       * <code>fixed32 triggeruserval = 4;</code>
        */
       public Builder clearTriggeruserval() {
         copyOnWrite();
@@ -3894,7 +3980,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public java.util.List<java.lang.Integer>
           getDeviceidList() {
@@ -3906,7 +3992,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public int getDeviceidCount() {
         return instance.getDeviceidCount();
@@ -3916,7 +4002,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public int getDeviceid(int index) {
         return instance.getDeviceid(index);
@@ -3926,7 +4012,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public Builder setDeviceid(
           int index, int value) {
@@ -3939,7 +4025,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public Builder addDeviceid(int value) {
         copyOnWrite();
@@ -3951,7 +4037,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public Builder addAllDeviceid(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -3964,7 +4050,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 4;</code>
+       * <code>repeated fixed32 deviceid = 5;</code>
        */
       public Builder clearDeviceid() {
         copyOnWrite();
@@ -3999,6 +4085,8 @@ public final class InterfacePlaymedia {
               other.resindex_ != 0, other.resindex_);
           pos_ = visitor.visitInt(pos_ != 0, pos_,
               other.pos_ != 0, other.pos_);
+          playflag_ = visitor.visitInt(playflag_ != 0, playflag_,
+              other.playflag_ != 0, other.playflag_);
           triggeruserval_ = visitor.visitInt(triggeruserval_ != 0, triggeruserval_,
               other.triggeruserval_ != 0, other.triggeruserval_);
           deviceid_= visitor.visitIntList(deviceid_, other.deviceid_);
@@ -4039,10 +4127,15 @@ public final class InterfacePlaymedia {
                 }
                 case 29: {
 
-                  triggeruserval_ = input.readFixed32();
+                  playflag_ = input.readFixed32();
                   break;
                 }
                 case 37: {
+
+                  triggeruserval_ = input.readFixed32();
+                  break;
+                }
+                case 45: {
                   if (!deviceid_.isModifiable()) {
                     deviceid_ =
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(deviceid_);
@@ -4050,7 +4143,7 @@ public final class InterfacePlaymedia {
                   deviceid_.addInt(input.readFixed32());
                   break;
                 }
-                case 34: {
+                case 42: {
                   int length = input.readRawVarint32();
                   int limit = input.pushLimit(length);
                   if (!deviceid_.isModifiable() && input.getBytesUntilLimit() > 0) {
@@ -4126,10 +4219,19 @@ public final class InterfacePlaymedia {
 
     /**
      * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 2;</code>
+     */
+    int getPlayflag();
+
+    /**
+     * <pre>
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 2;</code>
+     * <code>fixed32 triggeruserval = 3;</code>
      */
     int getTriggeruserval();
 
@@ -4138,7 +4240,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
@@ -4146,7 +4248,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     int getDeviceidCount();
     /**
@@ -4154,7 +4256,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     int getDeviceid(int index);
   }
@@ -4212,14 +4314,49 @@ public final class InterfacePlaymedia {
       resindex_ = 0;
     }
 
-    public static final int TRIGGERUSERVAL_FIELD_NUMBER = 2;
+    public static final int PLAYFLAG_FIELD_NUMBER = 2;
+    private int playflag_;
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 2;</code>
+     */
+    public int getPlayflag() {
+      return playflag_;
+    }
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 2;</code>
+     */
+    private void setPlayflag(int value) {
+      
+      playflag_ = value;
+    }
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 2;</code>
+     */
+    private void clearPlayflag() {
+      
+      playflag_ = 0;
+    }
+
+    public static final int TRIGGERUSERVAL_FIELD_NUMBER = 3;
     private int triggeruserval_;
     /**
      * <pre>
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 2;</code>
+     * <code>fixed32 triggeruserval = 3;</code>
      */
     public int getTriggeruserval() {
       return triggeruserval_;
@@ -4229,7 +4366,7 @@ public final class InterfacePlaymedia {
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 2;</code>
+     * <code>fixed32 triggeruserval = 3;</code>
      */
     private void setTriggeruserval(int value) {
       
@@ -4240,21 +4377,21 @@ public final class InterfacePlaymedia {
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 2;</code>
+     * <code>fixed32 triggeruserval = 3;</code>
      */
     private void clearTriggeruserval() {
       
       triggeruserval_ = 0;
     }
 
-    public static final int DEVICEID_FIELD_NUMBER = 3;
+    public static final int DEVICEID_FIELD_NUMBER = 4;
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     public java.util.List<java.lang.Integer>
         getDeviceidList() {
@@ -4265,7 +4402,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     public int getDeviceidCount() {
       return deviceid_.size();
@@ -4275,7 +4412,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     public int getDeviceid(int index) {
       return deviceid_.getInt(index);
@@ -4291,7 +4428,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     private void setDeviceid(
         int index, int value) {
@@ -4303,7 +4440,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     private void addDeviceid(int value) {
       ensureDeviceidIsMutable();
@@ -4314,7 +4451,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     private void addAllDeviceid(
         java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -4327,7 +4464,7 @@ public final class InterfacePlaymedia {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 3;</code>
+     * <code>repeated fixed32 deviceid = 4;</code>
      */
     private void clearDeviceid() {
       deviceid_ = emptyIntList();
@@ -4339,11 +4476,14 @@ public final class InterfacePlaymedia {
       if (resindex_ != 0) {
         output.writeFixed32(1, resindex_);
       }
+      if (playflag_ != 0) {
+        output.writeFixed32(2, playflag_);
+      }
       if (triggeruserval_ != 0) {
-        output.writeFixed32(2, triggeruserval_);
+        output.writeFixed32(3, triggeruserval_);
       }
       for (int i = 0; i < deviceid_.size(); i++) {
-        output.writeFixed32(3, deviceid_.getInt(i));
+        output.writeFixed32(4, deviceid_.getInt(i));
       }
     }
 
@@ -4356,9 +4496,13 @@ public final class InterfacePlaymedia {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(1, resindex_);
       }
+      if (playflag_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, playflag_);
+      }
       if (triggeruserval_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(2, triggeruserval_);
+          .computeFixed32Size(3, triggeruserval_);
       }
       {
         int dataSize = 0;
@@ -4509,10 +4653,45 @@ public final class InterfacePlaymedia {
 
       /**
        * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 2;</code>
+       */
+      public int getPlayflag() {
+        return instance.getPlayflag();
+      }
+      /**
+       * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 2;</code>
+       */
+      public Builder setPlayflag(int value) {
+        copyOnWrite();
+        instance.setPlayflag(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 2;</code>
+       */
+      public Builder clearPlayflag() {
+        copyOnWrite();
+        instance.clearPlayflag();
+        return this;
+      }
+
+      /**
+       * <pre>
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 2;</code>
+       * <code>fixed32 triggeruserval = 3;</code>
        */
       public int getTriggeruserval() {
         return instance.getTriggeruserval();
@@ -4522,7 +4701,7 @@ public final class InterfacePlaymedia {
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 2;</code>
+       * <code>fixed32 triggeruserval = 3;</code>
        */
       public Builder setTriggeruserval(int value) {
         copyOnWrite();
@@ -4534,7 +4713,7 @@ public final class InterfacePlaymedia {
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 2;</code>
+       * <code>fixed32 triggeruserval = 3;</code>
        */
       public Builder clearTriggeruserval() {
         copyOnWrite();
@@ -4547,7 +4726,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public java.util.List<java.lang.Integer>
           getDeviceidList() {
@@ -4559,7 +4738,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public int getDeviceidCount() {
         return instance.getDeviceidCount();
@@ -4569,7 +4748,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public int getDeviceid(int index) {
         return instance.getDeviceid(index);
@@ -4579,7 +4758,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public Builder setDeviceid(
           int index, int value) {
@@ -4592,7 +4771,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public Builder addDeviceid(int value) {
         copyOnWrite();
@@ -4604,7 +4783,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public Builder addAllDeviceid(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -4617,7 +4796,7 @@ public final class InterfacePlaymedia {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 3;</code>
+       * <code>repeated fixed32 deviceid = 4;</code>
        */
       public Builder clearDeviceid() {
         copyOnWrite();
@@ -4650,6 +4829,8 @@ public final class InterfacePlaymedia {
           com.mogujie.tt.protobuf.InterfacePlaymedia.pbui_Type_MeetDoPlayControl other = (com.mogujie.tt.protobuf.InterfacePlaymedia.pbui_Type_MeetDoPlayControl) arg1;
           resindex_ = visitor.visitInt(resindex_ != 0, resindex_,
               other.resindex_ != 0, other.resindex_);
+          playflag_ = visitor.visitInt(playflag_ != 0, playflag_,
+              other.playflag_ != 0, other.playflag_);
           triggeruserval_ = visitor.visitInt(triggeruserval_ != 0, triggeruserval_,
               other.triggeruserval_ != 0, other.triggeruserval_);
           deviceid_= visitor.visitIntList(deviceid_, other.deviceid_);
@@ -4685,10 +4866,15 @@ public final class InterfacePlaymedia {
                 }
                 case 21: {
 
-                  triggeruserval_ = input.readFixed32();
+                  playflag_ = input.readFixed32();
                   break;
                 }
                 case 29: {
+
+                  triggeruserval_ = input.readFixed32();
+                  break;
+                }
+                case 37: {
                   if (!deviceid_.isModifiable()) {
                     deviceid_ =
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(deviceid_);
@@ -4696,7 +4882,7 @@ public final class InterfacePlaymedia {
                   deviceid_.addInt(input.readFixed32());
                   break;
                 }
-                case 26: {
+                case 34: {
                   int length = input.readRawVarint32();
                   int limit = input.pushLimit(length);
                   if (!deviceid_.isModifiable() && input.getBytesUntilLimit() > 0) {

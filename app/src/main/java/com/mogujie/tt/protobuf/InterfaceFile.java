@@ -38,6 +38,15 @@ public final class InterfaceFile {
      * <code>fixed32 parentid = 3;</code>
      */
     int getParentid();
+
+    /**
+     * <pre>
+     *该目录下的文件数量
+     * </pre>
+     *
+     * <code>fixed32 filenum = 4;</code>
+     */
+    int getFilenum();
   }
   /**
    * <pre>
@@ -162,6 +171,41 @@ public final class InterfaceFile {
       parentid_ = 0;
     }
 
+    public static final int FILENUM_FIELD_NUMBER = 4;
+    private int filenum_;
+    /**
+     * <pre>
+     *该目录下的文件数量
+     * </pre>
+     *
+     * <code>fixed32 filenum = 4;</code>
+     */
+    public int getFilenum() {
+      return filenum_;
+    }
+    /**
+     * <pre>
+     *该目录下的文件数量
+     * </pre>
+     *
+     * <code>fixed32 filenum = 4;</code>
+     */
+    private void setFilenum(int value) {
+      
+      filenum_ = value;
+    }
+    /**
+     * <pre>
+     *该目录下的文件数量
+     * </pre>
+     *
+     * <code>fixed32 filenum = 4;</code>
+     */
+    private void clearFilenum() {
+      
+      filenum_ = 0;
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (id_ != 0) {
@@ -172,6 +216,9 @@ public final class InterfaceFile {
       }
       if (parentid_ != 0) {
         output.writeFixed32(3, parentid_);
+      }
+      if (filenum_ != 0) {
+        output.writeFixed32(4, filenum_);
       }
     }
 
@@ -191,6 +238,10 @@ public final class InterfaceFile {
       if (parentid_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(3, parentid_);
+      }
+      if (filenum_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(4, filenum_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -400,6 +451,41 @@ public final class InterfaceFile {
         return this;
       }
 
+      /**
+       * <pre>
+       *该目录下的文件数量
+       * </pre>
+       *
+       * <code>fixed32 filenum = 4;</code>
+       */
+      public int getFilenum() {
+        return instance.getFilenum();
+      }
+      /**
+       * <pre>
+       *该目录下的文件数量
+       * </pre>
+       *
+       * <code>fixed32 filenum = 4;</code>
+       */
+      public Builder setFilenum(int value) {
+        copyOnWrite();
+        instance.setFilenum(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *该目录下的文件数量
+       * </pre>
+       *
+       * <code>fixed32 filenum = 4;</code>
+       */
+      public Builder clearFilenum() {
+        copyOnWrite();
+        instance.clearFilenum();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetDirDetailInfo)
     }
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -428,6 +514,8 @@ public final class InterfaceFile {
               other.name_ != com.google.protobuf.ByteString.EMPTY, other.name_);
           parentid_ = visitor.visitInt(parentid_ != 0, parentid_,
               other.parentid_ != 0, other.parentid_);
+          filenum_ = visitor.visitInt(filenum_ != 0, filenum_,
+              other.filenum_ != 0, other.filenum_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
@@ -465,6 +553,11 @@ public final class InterfaceFile {
                 case 29: {
 
                   parentid_ = input.readFixed32();
+                  break;
+                }
+                case 37: {
+
+                  filenum_ = input.readFixed32();
                   break;
                 }
               }
@@ -1105,6 +1198,1000 @@ public final class InterfaceFile {
     private static volatile com.google.protobuf.Parser<pbui_Type_MeetDirDetailInfo> PARSER;
 
     public static com.google.protobuf.Parser<pbui_Type_MeetDirDetailInfo> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Item_MeetingDirPosItemOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Item_MeetingDirPosItem)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *会议目录
+     * </pre>
+     *
+     * <code>fixed32 dirid = 1;</code>
+     */
+    int getDirid();
+
+    /**
+     * <pre>
+     *序号
+     * </pre>
+     *
+     * <code>fixed32 pos = 2;</code>
+     */
+    int getPos();
+  }
+  /**
+   * Protobuf type {@code pbui_Item_MeetingDirPosItem}
+   */
+  public  static final class pbui_Item_MeetingDirPosItem extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Item_MeetingDirPosItem, pbui_Item_MeetingDirPosItem.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Item_MeetingDirPosItem)
+      pbui_Item_MeetingDirPosItemOrBuilder {
+    private pbui_Item_MeetingDirPosItem() {
+    }
+    public static final int DIRID_FIELD_NUMBER = 1;
+    private int dirid_;
+    /**
+     * <pre>
+     *会议目录
+     * </pre>
+     *
+     * <code>fixed32 dirid = 1;</code>
+     */
+    public int getDirid() {
+      return dirid_;
+    }
+    /**
+     * <pre>
+     *会议目录
+     * </pre>
+     *
+     * <code>fixed32 dirid = 1;</code>
+     */
+    private void setDirid(int value) {
+      
+      dirid_ = value;
+    }
+    /**
+     * <pre>
+     *会议目录
+     * </pre>
+     *
+     * <code>fixed32 dirid = 1;</code>
+     */
+    private void clearDirid() {
+      
+      dirid_ = 0;
+    }
+
+    public static final int POS_FIELD_NUMBER = 2;
+    private int pos_;
+    /**
+     * <pre>
+     *序号
+     * </pre>
+     *
+     * <code>fixed32 pos = 2;</code>
+     */
+    public int getPos() {
+      return pos_;
+    }
+    /**
+     * <pre>
+     *序号
+     * </pre>
+     *
+     * <code>fixed32 pos = 2;</code>
+     */
+    private void setPos(int value) {
+      
+      pos_ = value;
+    }
+    /**
+     * <pre>
+     *序号
+     * </pre>
+     *
+     * <code>fixed32 pos = 2;</code>
+     */
+    private void clearPos() {
+      
+      pos_ = 0;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (dirid_ != 0) {
+        output.writeFixed32(1, dirid_);
+      }
+      if (pos_ != 0) {
+        output.writeFixed32(2, pos_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (dirid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, dirid_);
+      }
+      if (pos_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, pos_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code pbui_Item_MeetingDirPosItem}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Item_MeetingDirPosItem)
+        com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItemOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *会议目录
+       * </pre>
+       *
+       * <code>fixed32 dirid = 1;</code>
+       */
+      public int getDirid() {
+        return instance.getDirid();
+      }
+      /**
+       * <pre>
+       *会议目录
+       * </pre>
+       *
+       * <code>fixed32 dirid = 1;</code>
+       */
+      public Builder setDirid(int value) {
+        copyOnWrite();
+        instance.setDirid(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议目录
+       * </pre>
+       *
+       * <code>fixed32 dirid = 1;</code>
+       */
+      public Builder clearDirid() {
+        copyOnWrite();
+        instance.clearDirid();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *序号
+       * </pre>
+       *
+       * <code>fixed32 pos = 2;</code>
+       */
+      public int getPos() {
+        return instance.getPos();
+      }
+      /**
+       * <pre>
+       *序号
+       * </pre>
+       *
+       * <code>fixed32 pos = 2;</code>
+       */
+      public Builder setPos(int value) {
+        copyOnWrite();
+        instance.setPos(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *序号
+       * </pre>
+       *
+       * <code>fixed32 pos = 2;</code>
+       */
+      public Builder clearPos() {
+        copyOnWrite();
+        instance.clearPos();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Item_MeetingDirPosItem)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem other = (com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem) arg1;
+          dirid_ = visitor.visitInt(dirid_ != 0, dirid_,
+              other.dirid_ != 0, other.dirid_);
+          pos_ = visitor.visitInt(pos_ != 0, pos_,
+              other.pos_ != 0, other.pos_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  dirid_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+
+                  pos_ = input.readFixed32();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Item_MeetingDirPosItem)
+    private static final com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Item_MeetingDirPosItem();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Item_MeetingDirPosItem> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Item_MeetingDirPosItem> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Type_ModMeetDirPosOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_ModMeetDirPos)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    java.util.List<com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem> 
+        getItemList();
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem getItem(int index);
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    int getItemCount();
+  }
+  /**
+   * <pre>
+   *修改会议目录排序
+   *type:Pb_TYPE_MEET_INTERFACE_MEETDIRECTORY
+   *method: set
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_ModMeetDirPos}
+   */
+  public  static final class pbui_Type_ModMeetDirPos extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_ModMeetDirPos, pbui_Type_ModMeetDirPos.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_ModMeetDirPos)
+      pbui_Type_ModMeetDirPosOrBuilder {
+    private pbui_Type_ModMeetDirPos() {
+      item_ = emptyProtobufList();
+    }
+    public static final int ITEM_FIELD_NUMBER = 1;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem> item_;
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem> getItemList() {
+      return item_;
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItemOrBuilder> 
+        getItemOrBuilderList() {
+      return item_;
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    public int getItemCount() {
+      return item_.size();
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    public com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem getItem(int index) {
+      return item_.get(index);
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    public com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItemOrBuilder getItemOrBuilder(
+        int index) {
+      return item_.get(index);
+    }
+    private void ensureItemIsMutable() {
+      if (!item_.isModifiable()) {
+        item_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
+       }
+    }
+
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void setItem(
+        int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureItemIsMutable();
+      item_.set(index, value);
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void setItem(
+        int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.Builder builderForValue) {
+      ensureItemIsMutable();
+      item_.set(index, builderForValue.build());
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void addItem(com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureItemIsMutable();
+      item_.add(value);
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void addItem(
+        int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureItemIsMutable();
+      item_.add(index, value);
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void addItem(
+        com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.Builder builderForValue) {
+      ensureItemIsMutable();
+      item_.add(builderForValue.build());
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void addItem(
+        int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.Builder builderForValue) {
+      ensureItemIsMutable();
+      item_.add(index, builderForValue.build());
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void addAllItem(
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem> values) {
+      ensureItemIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, item_);
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void clearItem() {
+      item_ = emptyProtobufList();
+    }
+    /**
+     * <pre>
+     *会议
+     * </pre>
+     *
+     * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+     */
+    private void removeItem(int index) {
+      ensureItemIsMutable();
+      item_.remove(index);
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < item_.size(); i++) {
+        output.writeMessage(1, item_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < item_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, item_.get(i));
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *修改会议目录排序
+     *type:Pb_TYPE_MEET_INTERFACE_MEETDIRECTORY
+     *method: set
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_ModMeetDirPos}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_ModMeetDirPos)
+        com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPosOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem> getItemList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getItemList());
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public int getItemCount() {
+        return instance.getItemCount();
+      }/**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem getItem(int index) {
+        return instance.getItem(index);
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder setItem(
+          int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem value) {
+        copyOnWrite();
+        instance.setItem(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder setItem(
+          int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.Builder builderForValue) {
+        copyOnWrite();
+        instance.setItem(index, builderForValue);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem value) {
+        copyOnWrite();
+        instance.addItem(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder addItem(
+          int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem value) {
+        copyOnWrite();
+        instance.addItem(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder addItem(
+          com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.Builder builderForValue) {
+        copyOnWrite();
+        instance.addItem(builderForValue);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder addItem(
+          int index, com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.Builder builderForValue) {
+        copyOnWrite();
+        instance.addItem(index, builderForValue);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder addAllItem(
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem> values) {
+        copyOnWrite();
+        instance.addAllItem(values);
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder clearItem() {
+        copyOnWrite();
+        instance.clearItem();
+        return this;
+      }
+      /**
+       * <pre>
+       *会议
+       * </pre>
+       *
+       * <code>repeated .pbui_Item_MeetingDirPosItem item = 1;</code>
+       */
+      public Builder removeItem(int index) {
+        copyOnWrite();
+        instance.removeItem(index);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_ModMeetDirPos)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          item_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos other = (com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos) arg1;
+          item_= visitor.visitList(item_, other.item_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  if (!item_.isModifiable()) {
+                    item_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
+                  }
+                  item_.add(
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceFile.pbui_Item_MeetingDirPosItem.parser(), extensionRegistry));
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_ModMeetDirPos)
+    private static final com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_ModMeetDirPos();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceFile.pbui_Type_ModMeetDirPos getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_ModMeetDirPos> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_ModMeetDirPos> parser() {
       return DEFAULT_INSTANCE.getParserForType();
     }
   }

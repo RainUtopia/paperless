@@ -19,8 +19,10 @@ message pbui_Type_MeetStopResWork
 //method: close
 message pbui_Type_MeetDoStopResWork
 {
-	repeated fixed32 res=1;//有效资源个数,为空表示全部 初始化播放资源时传入的资源ID eg:0,1,2,3 etc
-	repeated fixed32 deviceid=2;//通知的目标设备,为空表示全部
+	fixed32   playflag=1;//播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+	fixed32   triggeruserval=2;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
+	repeated fixed32 res=3;//有效资源个数,为空表示全部 初始化播放资源时传入的资源ID eg:0,1,2,3 etc
+	repeated fixed32 deviceid=4;//通知的目标设备,为空表示全部
 }
 
 //停止触发器
@@ -29,8 +31,11 @@ message pbui_Type_MeetDoStopResWork
 //method: stop
 message pbui_Type_MeetDoStopTrrigerWork
 {
-	fixed32 triggerid=1;//触发器ID 这是一个用户操作生成的ID,用来标识操作的,可以根据这个ID来判断操作,然后执行停止操作等
-	repeated fixed32 deviceid=2;//通知的目标设备,为空表示全部
+	fixed32   playflag=1;//播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+	fixed32   triggeruserval=2;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
+
+	fixed32 triggerid=3;//触发器ID 这是一个用户操作生成的ID,用来标识操作的,可以根据这个ID来判断操作,然后执行停止操作等
+	repeated fixed32 deviceid=4;//通知的目标设备,为空表示全部
 }
 
 //媒体、流停止播放通知

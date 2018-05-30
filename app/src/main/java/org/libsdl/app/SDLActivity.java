@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
@@ -106,6 +107,7 @@ public class SDLActivity extends Activity {
     public static boolean mIsPaused, mIsSurfaceReady, mHasFocus;
     public static boolean mExitCalledFromJava;
 
+    public static int screenw, screenh;
     /**
      * If shared libraries (e.g. SDL or the native application) could not be loaded.
      */
@@ -173,7 +175,8 @@ public class SDLActivity extends Activity {
         /** ************ ******  停止资源操作  ****** ************ **/
         nativeUtil.stopResourceOperate(a, b);
         /** ************ ******  释放播放资源  ****** ************ **/
-        nativeUtil.mediaDestroy(0);
+//        nativeUtil.mediaDestroy(0);
+        moveTaskToBack(true);
     }
 
     // Setup
@@ -183,6 +186,15 @@ public class SDLActivity extends Activity {
         Log.v(TAG, "Model: " + Build.MODEL);
         Log.v(TAG, "onCreate(): " + mSingleton);
         super.onCreate(savedInstanceState);
+
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        screenw = metric.widthPixels; // �屏幕宽度（像素）
+        screenh = metric.heightPixels; // �屏幕高度（像素）
+        Log.e("SDL", "Screen  --->>> w: " + screenw + ", h: " + screenh);
+
+        screenw = 1920;//screenw * 2 / 2;
+        screenh = 1080;//screenh * 2 / 2;
 
         EventBus.getDefault().post(new EventMessage(1, 1));
         try {
@@ -1096,7 +1108,6 @@ public class SDLActivity extends Activity {
             case IDEventMessage.STOP_PLAY:
                 if (message.getType() == Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
                     releaseMediaRes();
-                    finish();
                 }
                 break;
         }
@@ -1140,7 +1151,7 @@ class SDLMain implements Runnable {
 
 
         try {
-            fdd.initvideores();
+            fdd.initvideores(/*0, 0, SDLActivity.screenw, SDLActivity.screenh*/);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -1540,8 +1551,9 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     /** ************ ******  停止资源操作  ****** ************ **/
                     nativeUtil.stopResourceOperate(a, b);
                     /** ************ ******  释放播放资源  ****** ************ **/
-                    nativeUtil.mediaDestroy(0);
-                    SDLActivity.mSingleton.finish();
+//                    nativeUtil.mediaDestroy(0);
+//                    SDLActivity.mSingleton.finish();
+                    SDLActivity.mSingleton.releaseMediaRes();
                     break;
                 case R.id.SDL_playCtrl_btn_shareScreen:
                     Log.v("SDL-->", "mediaId=" + mediaId + " per=" + per);

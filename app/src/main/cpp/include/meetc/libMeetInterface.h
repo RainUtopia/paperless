@@ -20,6 +20,7 @@ extern "C" {
 #define MEET_PROGRAM_TYPE_SERVICE		 4 //茶水服务软件
 #define MEET_PROGRAM_TYPE_ANDROIDAPP	 5 //android APP
 #define MEET_PROGRAM_TYPE_CLIENTDEBUG	 6 //TCP客户端调试
+#define MEET_PROGRAM_TYPE_PUBLISHER	 7 //会议发布软件
 
 	//会议模块回调数据接口
 	//phdr 回调的数据 数据结构是 Type_HeaderInfo + 后接上真实的数据

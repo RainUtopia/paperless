@@ -3867,9 +3867,9 @@ public final class InterfaceWhiteboard {
      *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
-     * <code>fixed32 srcwbid = 5;</code>
+     * <code>fixed64 srcwbid = 5;</code>
      */
-    int getSrcwbid();
+    long getSrcwbid();
 
     /**
      * <pre>
@@ -4047,15 +4047,15 @@ public final class InterfaceWhiteboard {
     }
 
     public static final int SRCWBID_FIELD_NUMBER = 5;
-    private int srcwbid_;
+    private long srcwbid_;
     /**
      * <pre>
      *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
-     * <code>fixed32 srcwbid = 5;</code>
+     * <code>fixed64 srcwbid = 5;</code>
      */
-    public int getSrcwbid() {
+    public long getSrcwbid() {
       return srcwbid_;
     }
     /**
@@ -4063,9 +4063,9 @@ public final class InterfaceWhiteboard {
      *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
-     * <code>fixed32 srcwbid = 5;</code>
+     * <code>fixed64 srcwbid = 5;</code>
      */
-    private void setSrcwbid(int value) {
+    private void setSrcwbid(long value) {
       
       srcwbid_ = value;
     }
@@ -4074,11 +4074,11 @@ public final class InterfaceWhiteboard {
      *发起人的白板标识 取微秒级的时间作标识 白板标识使用
      * </pre>
      *
-     * <code>fixed32 srcwbid = 5;</code>
+     * <code>fixed64 srcwbid = 5;</code>
      */
     private void clearSrcwbid() {
       
-      srcwbid_ = 0;
+      srcwbid_ = 0L;
     }
 
     public static final int UTCSTAMP_FIELD_NUMBER = 6;
@@ -4165,8 +4165,8 @@ public final class InterfaceWhiteboard {
       if (srcmemid_ != 0) {
         output.writeFixed32(4, srcmemid_);
       }
-      if (srcwbid_ != 0) {
-        output.writeFixed32(5, srcwbid_);
+      if (srcwbid_ != 0L) {
+        output.writeFixed64(5, srcwbid_);
       }
       if (utcstamp_ != 0L) {
         output.writeFixed64(6, utcstamp_);
@@ -4197,9 +4197,9 @@ public final class InterfaceWhiteboard {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(4, srcmemid_);
       }
-      if (srcwbid_ != 0) {
+      if (srcwbid_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(5, srcwbid_);
+          .computeFixed64Size(5, srcwbid_);
       }
       if (utcstamp_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
@@ -4460,9 +4460,9 @@ public final class InterfaceWhiteboard {
        *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
-       * <code>fixed32 srcwbid = 5;</code>
+       * <code>fixed64 srcwbid = 5;</code>
        */
-      public int getSrcwbid() {
+      public long getSrcwbid() {
         return instance.getSrcwbid();
       }
       /**
@@ -4470,9 +4470,9 @@ public final class InterfaceWhiteboard {
        *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
-       * <code>fixed32 srcwbid = 5;</code>
+       * <code>fixed64 srcwbid = 5;</code>
        */
-      public Builder setSrcwbid(int value) {
+      public Builder setSrcwbid(long value) {
         copyOnWrite();
         instance.setSrcwbid(value);
         return this;
@@ -4482,7 +4482,7 @@ public final class InterfaceWhiteboard {
        *发起人的白板标识 取微秒级的时间作标识 白板标识使用
        * </pre>
        *
-       * <code>fixed32 srcwbid = 5;</code>
+       * <code>fixed64 srcwbid = 5;</code>
        */
       public Builder clearSrcwbid() {
         copyOnWrite();
@@ -4590,8 +4590,8 @@ public final class InterfaceWhiteboard {
               other.opermemberid_ != 0, other.opermemberid_);
           srcmemid_ = visitor.visitInt(srcmemid_ != 0, srcmemid_,
               other.srcmemid_ != 0, other.srcmemid_);
-          srcwbid_ = visitor.visitInt(srcwbid_ != 0, srcwbid_,
-              other.srcwbid_ != 0, other.srcwbid_);
+          srcwbid_ = visitor.visitLong(srcwbid_ != 0L, srcwbid_,
+              other.srcwbid_ != 0L, other.srcwbid_);
           utcstamp_ = visitor.visitLong(utcstamp_ != 0L, utcstamp_,
               other.utcstamp_ != 0L, other.utcstamp_);
           figuretype_ = visitor.visitInt(figuretype_ != 0, figuretype_,
@@ -4640,9 +4640,9 @@ public final class InterfaceWhiteboard {
                   srcmemid_ = input.readFixed32();
                   break;
                 }
-                case 45: {
+                case 41: {
 
-                  srcwbid_ = input.readFixed32();
+                  srcwbid_ = input.readFixed64();
                   break;
                 }
                 case 49: {

@@ -3402,10 +3402,19 @@ public final class InterfaceStream {
 
     /**
      * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    int getPlayflag();
+
+    /**
+     * <pre>
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     int getTriggeruserval();
 
@@ -3414,7 +3423,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     java.util.List<java.lang.Integer> getResList();
     /**
@@ -3422,7 +3431,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     int getResCount();
     /**
@@ -3430,7 +3439,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     int getRes(int index);
 
@@ -3439,7 +3448,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     java.util.List<java.lang.Integer> getDeviceidList();
     /**
@@ -3447,7 +3456,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     int getDeviceidCount();
     /**
@@ -3455,7 +3464,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     int getDeviceid(int index);
   }
@@ -3549,14 +3558,49 @@ public final class InterfaceStream {
       subid_ = 0;
     }
 
-    public static final int TRIGGERUSERVAL_FIELD_NUMBER = 3;
+    public static final int PLAYFLAG_FIELD_NUMBER = 3;
+    private int playflag_;
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    public int getPlayflag() {
+      return playflag_;
+    }
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    private void setPlayflag(int value) {
+      
+      playflag_ = value;
+    }
+    /**
+     * <pre>
+     *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+     * </pre>
+     *
+     * <code>fixed32 playflag = 3;</code>
+     */
+    private void clearPlayflag() {
+      
+      playflag_ = 0;
+    }
+
+    public static final int TRIGGERUSERVAL_FIELD_NUMBER = 4;
     private int triggeruserval_;
     /**
      * <pre>
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     public int getTriggeruserval() {
       return triggeruserval_;
@@ -3566,7 +3610,7 @@ public final class InterfaceStream {
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     private void setTriggeruserval(int value) {
       
@@ -3577,21 +3621,21 @@ public final class InterfaceStream {
      *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
      * </pre>
      *
-     * <code>fixed32 triggeruserval = 3;</code>
+     * <code>fixed32 triggeruserval = 4;</code>
      */
     private void clearTriggeruserval() {
       
       triggeruserval_ = 0;
     }
 
-    public static final int RES_FIELD_NUMBER = 4;
+    public static final int RES_FIELD_NUMBER = 5;
     private com.google.protobuf.Internal.IntList res_;
     /**
      * <pre>
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     public java.util.List<java.lang.Integer>
         getResList() {
@@ -3602,7 +3646,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     public int getResCount() {
       return res_.size();
@@ -3612,7 +3656,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     public int getRes(int index) {
       return res_.getInt(index);
@@ -3628,7 +3672,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     private void setRes(
         int index, int value) {
@@ -3640,7 +3684,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     private void addRes(int value) {
       ensureResIsMutable();
@@ -3651,7 +3695,7 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     private void addAllRes(
         java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -3664,20 +3708,20 @@ public final class InterfaceStream {
      *播放所用的资源,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 res = 4;</code>
+     * <code>repeated fixed32 res = 5;</code>
      */
     private void clearRes() {
       res_ = emptyIntList();
     }
 
-    public static final int DEVICEID_FIELD_NUMBER = 5;
+    public static final int DEVICEID_FIELD_NUMBER = 6;
     private com.google.protobuf.Internal.IntList deviceid_;
     /**
      * <pre>
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     public java.util.List<java.lang.Integer>
         getDeviceidList() {
@@ -3688,7 +3732,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     public int getDeviceidCount() {
       return deviceid_.size();
@@ -3698,7 +3742,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     public int getDeviceid(int index) {
       return deviceid_.getInt(index);
@@ -3714,7 +3758,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     private void setDeviceid(
         int index, int value) {
@@ -3726,7 +3770,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     private void addDeviceid(int value) {
       ensureDeviceidIsMutable();
@@ -3737,7 +3781,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     private void addAllDeviceid(
         java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -3750,7 +3794,7 @@ public final class InterfaceStream {
      *通知的目标设备,为空表示全部
      * </pre>
      *
-     * <code>repeated fixed32 deviceid = 5;</code>
+     * <code>repeated fixed32 deviceid = 6;</code>
      */
     private void clearDeviceid() {
       deviceid_ = emptyIntList();
@@ -3765,14 +3809,17 @@ public final class InterfaceStream {
       if (subid_ != 0) {
         output.writeFixed32(2, subid_);
       }
+      if (playflag_ != 0) {
+        output.writeFixed32(3, playflag_);
+      }
       if (triggeruserval_ != 0) {
-        output.writeFixed32(3, triggeruserval_);
+        output.writeFixed32(4, triggeruserval_);
       }
       for (int i = 0; i < res_.size(); i++) {
-        output.writeFixed32(4, res_.getInt(i));
+        output.writeFixed32(5, res_.getInt(i));
       }
       for (int i = 0; i < deviceid_.size(); i++) {
-        output.writeFixed32(5, deviceid_.getInt(i));
+        output.writeFixed32(6, deviceid_.getInt(i));
       }
     }
 
@@ -3789,9 +3836,13 @@ public final class InterfaceStream {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(2, subid_);
       }
+      if (playflag_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(3, playflag_);
+      }
       if (triggeruserval_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(3, triggeruserval_);
+          .computeFixed32Size(4, triggeruserval_);
       }
       {
         int dataSize = 0;
@@ -3983,10 +4034,45 @@ public final class InterfaceStream {
 
       /**
        * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 3;</code>
+       */
+      public int getPlayflag() {
+        return instance.getPlayflag();
+      }
+      /**
+       * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 3;</code>
+       */
+      public Builder setPlayflag(int value) {
+        copyOnWrite();
+        instance.setPlayflag(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+       * </pre>
+       *
+       * <code>fixed32 playflag = 3;</code>
+       */
+      public Builder clearPlayflag() {
+        copyOnWrite();
+        instance.clearPlayflag();
+        return this;
+      }
+
+      /**
+       * <pre>
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 3;</code>
+       * <code>fixed32 triggeruserval = 4;</code>
        */
       public int getTriggeruserval() {
         return instance.getTriggeruserval();
@@ -3996,7 +4082,7 @@ public final class InterfaceStream {
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 3;</code>
+       * <code>fixed32 triggeruserval = 4;</code>
        */
       public Builder setTriggeruserval(int value) {
         copyOnWrite();
@@ -4008,7 +4094,7 @@ public final class InterfaceStream {
        *参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
        * </pre>
        *
-       * <code>fixed32 triggeruserval = 3;</code>
+       * <code>fixed32 triggeruserval = 4;</code>
        */
       public Builder clearTriggeruserval() {
         copyOnWrite();
@@ -4021,7 +4107,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public java.util.List<java.lang.Integer>
           getResList() {
@@ -4033,7 +4119,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public int getResCount() {
         return instance.getResCount();
@@ -4043,7 +4129,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public int getRes(int index) {
         return instance.getRes(index);
@@ -4053,7 +4139,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public Builder setRes(
           int index, int value) {
@@ -4066,7 +4152,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public Builder addRes(int value) {
         copyOnWrite();
@@ -4078,7 +4164,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public Builder addAllRes(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -4091,7 +4177,7 @@ public final class InterfaceStream {
        *播放所用的资源,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 res = 4;</code>
+       * <code>repeated fixed32 res = 5;</code>
        */
       public Builder clearRes() {
         copyOnWrite();
@@ -4104,7 +4190,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public java.util.List<java.lang.Integer>
           getDeviceidList() {
@@ -4116,7 +4202,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public int getDeviceidCount() {
         return instance.getDeviceidCount();
@@ -4126,7 +4212,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public int getDeviceid(int index) {
         return instance.getDeviceid(index);
@@ -4136,7 +4222,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public Builder setDeviceid(
           int index, int value) {
@@ -4149,7 +4235,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public Builder addDeviceid(int value) {
         copyOnWrite();
@@ -4161,7 +4247,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public Builder addAllDeviceid(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -4174,7 +4260,7 @@ public final class InterfaceStream {
        *通知的目标设备,为空表示全部
        * </pre>
        *
-       * <code>repeated fixed32 deviceid = 5;</code>
+       * <code>repeated fixed32 deviceid = 6;</code>
        */
       public Builder clearDeviceid() {
         copyOnWrite();
@@ -4210,6 +4296,8 @@ public final class InterfaceStream {
               other.srcdeviceid_ != 0, other.srcdeviceid_);
           subid_ = visitor.visitInt(subid_ != 0, subid_,
               other.subid_ != 0, other.subid_);
+          playflag_ = visitor.visitInt(playflag_ != 0, playflag_,
+              other.playflag_ != 0, other.playflag_);
           triggeruserval_ = visitor.visitInt(triggeruserval_ != 0, triggeruserval_,
               other.triggeruserval_ != 0, other.triggeruserval_);
           res_= visitor.visitIntList(res_, other.res_);
@@ -4251,10 +4339,15 @@ public final class InterfaceStream {
                 }
                 case 29: {
 
-                  triggeruserval_ = input.readFixed32();
+                  playflag_ = input.readFixed32();
                   break;
                 }
                 case 37: {
+
+                  triggeruserval_ = input.readFixed32();
+                  break;
+                }
+                case 45: {
                   if (!res_.isModifiable()) {
                     res_ =
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(res_);
@@ -4262,7 +4355,7 @@ public final class InterfaceStream {
                   res_.addInt(input.readFixed32());
                   break;
                 }
-                case 34: {
+                case 42: {
                   int length = input.readRawVarint32();
                   int limit = input.pushLimit(length);
                   if (!res_.isModifiable() && input.getBytesUntilLimit() > 0) {
@@ -4276,7 +4369,7 @@ public final class InterfaceStream {
                   input.popLimit(limit);
                   break;
                 }
-                case 45: {
+                case 53: {
                   if (!deviceid_.isModifiable()) {
                     deviceid_ =
                         com.google.protobuf.GeneratedMessageLite.mutableCopy(deviceid_);
@@ -4284,7 +4377,7 @@ public final class InterfaceStream {
                   deviceid_.addInt(input.readFixed32());
                   break;
                 }
-                case 42: {
+                case 50: {
                   int length = input.readRawVarint32();
                   int limit = input.pushLimit(length);
                   if (!deviceid_.isModifiable() && input.getBytesUntilLimit() > 0) {

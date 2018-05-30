@@ -25,11 +25,13 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!-- 显示顶层浮窗  -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <!-- 关闭硬件加速:android:hardwareAccelerated="false" -->
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -80,6 +82,18 @@
         <service android:name=".service.PlayService" />
 
         <activity android:name="com.wind.myapplication.CameraDemo" />
+        <activity
+            android:name=".activity.FabActivity"
+            android:screenOrientation="landscape" />
+        <!--广播-->
+        <receiver android:name=".broadcase.WpsBroadCaseReciver">
+            <intent-filter>
+                <action android:name="com.kingsoft.writer.back.key.down" />
+                <action android:name="cn.wps.moffice.file.close" />
+                <action android:name="cn.wps.moffice.file.save" />
+                <action android:name="com.kingsoft.writer.home.key.down" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

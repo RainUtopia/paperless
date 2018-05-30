@@ -22,6 +22,7 @@ import java.util.List;
 
 public class MeetManageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+
     private final List<MeetManageBean> mData;
     private final Context mContext;
     private ItemClickListener mListener;

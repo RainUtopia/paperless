@@ -3615,6 +3615,15 @@ public final class InterfaceRoom {
      * <code>fixed32 role = 9;</code>
      */
     int getRole();
+
+    /**
+     * <pre>
+     *界面状态 参见MemState_MainFace 定义
+     * </pre>
+     *
+     * <code>fixed32 facestate = 10;</code>
+     */
+    int getFacestate();
   }
   /**
    * <pre>
@@ -3953,6 +3962,41 @@ public final class InterfaceRoom {
       role_ = 0;
     }
 
+    public static final int FACESTATE_FIELD_NUMBER = 10;
+    private int facestate_;
+    /**
+     * <pre>
+     *界面状态 参见MemState_MainFace 定义
+     * </pre>
+     *
+     * <code>fixed32 facestate = 10;</code>
+     */
+    public int getFacestate() {
+      return facestate_;
+    }
+    /**
+     * <pre>
+     *界面状态 参见MemState_MainFace 定义
+     * </pre>
+     *
+     * <code>fixed32 facestate = 10;</code>
+     */
+    private void setFacestate(int value) {
+      
+      facestate_ = value;
+    }
+    /**
+     * <pre>
+     *界面状态 参见MemState_MainFace 定义
+     * </pre>
+     *
+     * <code>fixed32 facestate = 10;</code>
+     */
+    private void clearFacestate() {
+      
+      facestate_ = 0;
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (devid_ != 0) {
@@ -3981,6 +4025,9 @@ public final class InterfaceRoom {
       }
       if (role_ != 0) {
         output.writeFixed32(9, role_);
+      }
+      if (facestate_ != 0) {
+        output.writeFixed32(10, facestate_);
       }
     }
 
@@ -4024,6 +4071,10 @@ public final class InterfaceRoom {
       if (role_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(9, role_);
+      }
+      if (facestate_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(10, facestate_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -4443,6 +4494,41 @@ public final class InterfaceRoom {
         return this;
       }
 
+      /**
+       * <pre>
+       *界面状态 参见MemState_MainFace 定义
+       * </pre>
+       *
+       * <code>fixed32 facestate = 10;</code>
+       */
+      public int getFacestate() {
+        return instance.getFacestate();
+      }
+      /**
+       * <pre>
+       *界面状态 参见MemState_MainFace 定义
+       * </pre>
+       *
+       * <code>fixed32 facestate = 10;</code>
+       */
+      public Builder setFacestate(int value) {
+        copyOnWrite();
+        instance.setFacestate(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *界面状态 参见MemState_MainFace 定义
+       * </pre>
+       *
+       * <code>fixed32 facestate = 10;</code>
+       */
+      public Builder clearFacestate() {
+        copyOnWrite();
+        instance.clearFacestate();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:pbui_Item_MeetRoomDevSeatDetailInfo)
     }
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -4483,6 +4569,8 @@ public final class InterfaceRoom {
               other.issignin_ != 0, other.issignin_);
           role_ = visitor.visitInt(role_ != 0, role_,
               other.role_ != 0, other.role_);
+          facestate_ = visitor.visitInt(facestate_ != 0, facestate_,
+              other.facestate_ != 0, other.facestate_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
           }
@@ -4550,6 +4638,11 @@ public final class InterfaceRoom {
                 case 77: {
 
                   role_ = input.readFixed32();
+                  break;
+                }
+                case 85: {
+
+                  facestate_ = input.readFixed32();
                   break;
                 }
               }

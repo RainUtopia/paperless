@@ -143,7 +143,7 @@
 #define TYPE_MEET_INTERFACE_DBSERVERERROR 44 //数据库后台回复错误信息
 #define TYPE_MEET_INTERFACE_MEDIAPLAY  45 //媒体播放
 #define TYPE_MEET_INTERFACE_STREAMPLAY 46 //流播放
-#define TYPE_MEET_INTERFACE_STOPPLAY 47 //流播放
+#define TYPE_MEET_INTERFACE_STOPPLAY 47 //停止播放
 #define TYPE_MEET_INTERFACE_MEMBERCOLOR  48 //参会人员白板颜色
 #define TYPE_MEET_INTERFACE_MEETCONTEXT  49 //上下文
 #define TYPE_MEET_INTERFACE_MEETCLEAR  50 //缓存清理,清空所有缓存,其它类型也支持单独
@@ -421,18 +421,18 @@ typedef struct
 
 //查询指定设备的某项属性
 //property id
-#define MEETMEMBER_PROPERTY_NAME				1 //设备名称 query
-#define MEETMEMBER_PROPERTY_IPADDR				2 //ip地址 query paramterval(ip地址索引)
-#define MEETMEMBER_PROPERTY_PORT				3 //网络端口 query
-#define MEETMEMBER_PROPERTY_NETSTATUS			4 //网络状态 query
-#define MEETMEMBER_PROPERTY_PLAYSTATUS			5 //播放状态 paramterval(res地址索引)(propertyval2(triggerid), propertyval3(val),propertyval4(val2),propertyval4(createdeviceid)有效) query
-#define MEETMEMBER_PROPERTY_FACESTATUS			6 //界面状态 query
-#define MEETMEMBER_PROPERTY_MEMBERID			7 //当前参会人员ID query
-#define MEETMEMBER_PROPERTY_MEETINGID			8 //当前会议ID query
-#define MEETMEMBER_PROPERTY_TRIGGERID			9 //当前正在执行的触发器ID query paramterval(res地址索引)
-#define MEETMEMBER_PROPERTY_STREAMNAME			10 //设备的流通道名称 query paramterval=查询的流通道号
-#define MEETMEMBER_PROPERTY_RESOPERTORID		11 //获取资源操作的设备ID query paramterval(res地址索引)
-#define MEETMEMBER_PROPERTY_TYPEAVAILABLE		12 //某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
+#define MEETDEVICE_PROPERTY_NAME				1 //设备名称 query
+#define MEETDEVICE_PROPERTY_IPADDR				2 //ip地址 query paramterval(ip地址索引)
+#define MEETDEVICE_PROPERTY_PORT				3 //网络端口 query
+#define MEETDEVICE_PROPERTY_NETSTATUS			4 //网络状态 query
+#define MEETDEVICE_PROPERTY_PLAYSTATUS			5 //播放状态 paramterval(res地址索引)(propertyval2(triggerid), propertyval3(val),propertyval4(val2),propertyval4(createdeviceid)有效) query
+#define MEETDEVICE_PROPERTY_FACESTATUS			6 //界面状态 query
+#define MEETDEVICE_PROPERTY_MEMBERID			7 //当前参会人员ID query
+#define MEETDEVICE_PROPERTY_MEETINGID			8 //当前会议ID query
+#define MEETDEVICE_PROPERTY_TRIGGERID			9 //当前正在执行的触发器ID query paramterval(res地址索引)
+#define MEETDEVICE_PROPERTY_STREAMNAME			10 //设备的流通道名称 query paramterval=查询的流通道号
+#define MEETDEVICE_PROPERTY_RESOPERTORID		11 //获取资源操作的设备ID query paramterval(res地址索引)
+#define MEETDEVICE_PROPERTY_TYPEAVAILABLE		12 //某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
 
 #define MEET_DEVICESTRING_MAXLEN 260
 //type:TYPE_MEET_INTERFACE_DEVICEINFO
@@ -791,19 +791,21 @@ typedef struct
 //会议上下文  查询整形数据
 
 //property id
-#define MEETCONTEXT_PROPERTY_ROLE				1 //当前会议的角色 set/query
-#define MEETCONTEXT_PROPERTY_CURADMINID			2 //当前会议登陆的管理员ID query
-#define MEETCONTEXT_PROPERTY_CURADMINNAME		3 //当前会议登陆的管理员用户名 query
-#define MEETCONTEXT_PROPERTY_CURADMINPASSWORD	4 //当前会议登陆的管理员密码 md5 query
-#define MEETCONTEXT_PROPERTY_HASTABLECARD		5 //当前会议是否是双屏 set/query
-#define MEETCONTEXT_PROPERTY_CURMEETINGID		6 //当前会议的会议ID set/query
-#define MEETCONTEXT_PROPERTY_SELFID				7 //本机设备ID query
-#define MEETCONTEXT_PROPERTY_CURROOMID			8 //当前会议的会场ID query
-#define MEETCONTEXT_PROPERTY_SELFMEMBERID		9 //当前会议的绑定的参会人员ID query
-#define MEETCONTEXT_PROPERTY_MEETDBDEVICEID		10 //当前会议数据库设备ID query
-#define MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX	11 //本机屏幕流通道号 query
-#define MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER	12 //媒体服务器是否可用 query propertyval=返回可用的个数
-#define MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER	13 //流服务器是否可用 query=返回可用的个数
+#define MEETCONTEXT_PROPERTY_ROLE				1 //当前会议的角色 set/query(int32u)
+#define MEETCONTEXT_PROPERTY_CURADMINID			2 //当前会议登陆的管理员ID query(int32u)
+#define MEETCONTEXT_PROPERTY_CURADMINNAME		3 //当前会议登陆的管理员用户名 query(string)
+#define MEETCONTEXT_PROPERTY_CURADMINPASSWORD	4 //当前会议登陆的管理员密码 md5 query(string)
+#define MEETCONTEXT_PROPERTY_HASTABLECARD		5 //当前会议是否是双屏 set/query(int32u)
+#define MEETCONTEXT_PROPERTY_CURMEETINGID		6 //当前会议的会议ID set/query(int32u)
+#define MEETCONTEXT_PROPERTY_SELFID				7 //本机设备ID query(int32u)
+#define MEETCONTEXT_PROPERTY_CURROOMID			8 //当前会议的会场ID query(int32u)
+#define MEETCONTEXT_PROPERTY_SELFMEMBERID		9 //当前会议的绑定的参会人员ID query(int32u)
+#define MEETCONTEXT_PROPERTY_MEETDBDEVICEID		10 //当前会议数据库设备ID query(int32u)
+#define MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX	11 //本机屏幕流通道号 query(int32u)
+#define MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER	12 //媒体服务器是否可用 query propertyval=返回可用的个数(int32u)
+#define MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER	13 //流服务器是否可用 query=返回可用的个数(int32u)
+#define MEETCONTEXT_PROPERTY_UTCMICROSECONDS	14 //返回当前系统微秒UTC时间 query(int64u)
+#define MEETCONTEXT_PROPERTY_LOCALCICROSECONDS	15 //返回当前系统微秒时间 query(int64u)
 
 //type: TYPE_MEET_INTERFACE_MEETCONTEXT
 //method: queryproperty/setproperty
@@ -814,6 +816,16 @@ typedef struct
 	int32u propertyid;//数据ID
 	int32u propertyval;//值 
 }Type_MeetContextInfo_int32u, *pType_MeetContextInfo_int32u;
+
+//type: TYPE_MEET_INTERFACE_MEETCONTEXT
+//method: queryproperty/setproperty
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u propertyid;//数据ID
+	int64u propertyval;//值 
+}Type_MeetContextInfo_int64u, *pType_MeetContextInfo_int64u;
 
 //会议上下文 查询字符串
 #define MEET_CONTEXTSTRING_MAXLEN 260
@@ -1644,8 +1656,10 @@ typedef struct
 	int32u memberid;
 	char   membername[DEFAULT_NAME_MAXLEN];
 
-	int  issignin;
-	int  role;
+	int  issignin;//是否已经签到 
+	int  role;//参会人员角色 
+
+	int32u	facestate;//界面状态 参见MemState_MainFace 定义
 }Item_MeetRoomDevSeatDetailInfo, *pItem_MeetRoomDevSeatDetailInfo;
 
 //type:TYPE_MEET_INTERFACE_ROOMDEVICE
@@ -1746,10 +1760,11 @@ typedef struct
 	int32u			managerid;//管理员id
 	char			onepsw_signin[SIGNIN_PSW_LEN];//会议签到密码
 	int32u			status;//会议状态，0为未开始会议，1为已开始会议，2为已结束会议
+	char		    ordername[DEFAULT_NAME_MAXLEN];//会议预约人名称
 }Item_MeetMeetInfo, *pItem_MeetMeetInfo;
 
 //type:TYPE_MEET_INTERFACE_MEETINFO
-//method: add/mod/del/query
+//method: add/mod/del/query/dump
 typedef struct
 {
 	Type_HeaderInfo hdr;
@@ -1818,6 +1833,7 @@ typedef struct
 	char			name[DEFAULT_DESCRIBE_LENG]; //名称
 	int32u			parentid; //父目录ID
 	int32u			dirpos; //目录序号
+	int			    filenum;//该目录下的文件数量
 }Item_MeetDirDetailInfo, *pItem_MeetDirDetailInfo;
 
 //type:TYPE_MEET_INTERFACE_MEETDIRECTORY
@@ -1844,6 +1860,36 @@ typedef struct
 	//Item_MeetingDirPosItem  item[];//排序 
 
 }Type_ModMeetDirPos, *pType_ModMeetDirPos;
+
+//查询指定会议目录的某项属性
+//property id
+#define MEETDIRECTORY_PROPERTY_NAME   1 //目录名称   query(text)
+#define MEETDIRECTORY_PROPERTY_SIZE	  2 //文件个数   query(fixed32) 
+#define MEETDIRECTORY_PROPERTY_PARENT 3 //父目录ID   query(fixed32) 
+#define MEETDIRECTORY_PROPERTY_POS    4 //目录的序号 query(fixed32)
+
+//method: queryproperty
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u propertyid;//数据ID 
+	int32u dirid;//传入参数
+	int32u propertyval;//返回值
+
+}Type_MeetDirectoryQueryPropertyInt32u, *pType_MeetDirectoryQueryPropertyInt32u;
+
+#define MEET_DIRECTORYSTRING_MAXLEN 260
+//method: queryproperty
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u propertyid;//数据ID
+	int32u dirid;//传入参数 为0表示当前会议
+	char   propertytext[MEET_DIRECTORYSTRING_MAXLEN]; //名称
+
+}Type_MeetDirectoryQueryPropertyString, *pType_MeetDirectoryQueryPropertyString;
 
 //会议目录文件
 //type:TYPE_MEET_INTERFACE_MEETDIRECTORYFILE
@@ -2100,8 +2146,8 @@ typedef struct
 //查询指定文件的某项属性
 //property id
 #define MEETFILE_PROPERTY_NAME   1 //名称 query(text)
-#define MEETFILE_PROPERTY_SIZE	 2 //大小 query(fixed64)
-#define MEETFILE_PROPERTY_TIME   3 //时长 query(fixed32)
+#define MEETFILE_PROPERTY_SIZE	 2 //大小 query(fixed64) 字节
+#define MEETFILE_PROPERTY_TIME   3 //时长 query(fixed32) 毫秒
 #define MEETFILE_PROPERTY_ATTRIB 4 //文件attrib query(fixed32)
 #define MEETFILE_PROPERTY_AVAILABLE 5 //文件是否可用 query 不存在返回ERROR_MEET_INTERFACE_NOFIND
 
@@ -2110,7 +2156,7 @@ typedef struct
 {
 	Type_HeaderInfo hdr;
 
-	int32u propertyid;//数据ID
+	int32u propertyid;//数据ID 
 	int32u mediaid;//传入参数
 	int32u propertyval;//返回值
 
@@ -3221,6 +3267,13 @@ typedef struct
 	int32u  key; //对应的key值 参考streamcontrol.h 定义
 }Type_MeetDoScreenKeyBoardControl, *pType_MeetDoScreenKeyBoardControl;
 
+//媒体播放
+//playflag
+#define MEDIA_PLAYFLAG_LOOP			0x00000001 //循环播放标志
+#define MEDIA_PLAYFLAG_CLIENT		0x00000002 //终端设备 在devnum=0时会判断
+#define MEDIA_PLAYFLAG_PROJECTIVE   0x00000004 //投影设备 在devnum=0时会判断
+#define MEDIA_PLAYFLAG_NOSELFID     0x00000008 //排除自己的设备ID 在devnum=0时会判断
+
 //停止资源功能
 //callback
 //type:TYPE_MEET_INTERFACE_STOPPLAY
@@ -3241,6 +3294,9 @@ typedef struct
 {
 	Type_HeaderInfo hdr;
 
+	int32u  playflag;//播放标志 MEDIA_PLAYFLAG_CLIENT
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
+
 	int   avalableres;//有效资源个数,为0表示全部
 	int8u res[32];
 
@@ -3256,7 +3312,9 @@ typedef struct
 {
 	Type_HeaderInfo hdr;
 
-	int32u triggerid;//触发器ID
+	int32u  playflag;//播放标志 MEDIA_PLAYFLAG_CLIENT
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
+	int32u  triggerid;//触发器ID
 
 	int   devnum;
 	//int32u deviceid[devnum];
@@ -3269,6 +3327,8 @@ typedef struct
 typedef struct
 {
 	Type_HeaderInfo hdr;
+	int32u  type;
+	int32u  method;
 	int32u  status;
 }Type_MeetDBServerOperError, *pType_MeetDBServerOperError;
 
@@ -3310,10 +3370,6 @@ typedef struct
 	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 }Type_MeetMediaPlay, *pType_MeetMediaPlay;
 
-//媒体播放
-//playflag
-#define MEDIA_PLAYFLAG_LOOP 0x00000001 //循环播放标志
-
 //call
 //type:TYPE_MEET_INTERFACE_MEDIAPLAY
 //method: start
@@ -3343,7 +3399,8 @@ typedef struct
 
 	int8u   resindex;//资源索引号
 	int     pos;//指定开始播放的百分比位置
-	int32u  triggeruserval;//触发器标志
+	int32u  playflag;//播放标志 MEDIA_PLAYFLAG_CLIENT
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 
 	int    devnum; //播放设备
 	//int32u deviceid[devnum];
@@ -3358,7 +3415,8 @@ typedef struct
 	Type_HeaderInfo hdr;
 
 	int8u   resindex;//资源索引号
-	int32u  triggeruserval;//触发器标志
+	int32u  playflag;//播放标志 MEDIA_PLAYFLAG_CLIENT
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 
 	int     devnum; //播放设备
 	//int32u deviceid[devnum];
@@ -3420,7 +3478,7 @@ typedef struct
 	int32u  deviceid;//发起请求的设备ID
 	int8u   resindex;//资源索引号
 	int8u   fill[3];
-
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 	int32u  userdefval1;//用户自定义的值
 }Type_ReqMediaUpdatePlay, *pType_ReqMediaUpdatePlay;
 
@@ -3431,7 +3489,7 @@ typedef struct
 typedef struct
 {
 	Type_HeaderInfo hdr;
-	int32u triggeruserval;//参见该文件中的triggeruserval定义
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 	int32u  deviceid;       //发起请求的设备ID
 	int32u  memberid;       //发起请求的人员ID
 	int8u   substreamindex;       //本设备子通道号
@@ -3443,7 +3501,7 @@ typedef struct
 typedef struct
 {
 	Type_HeaderInfo hdr;
-	int32u triggeruserval;		  //参见该文件中的triggeruserval定义
+	int32u  triggeruserval;		  //参见该文件中的triggeruserval定义
 	int32u  handledeviceid;       //处理该请求的设备ID
 	int8u   substreamindex;       //本设备子通道号
 
@@ -3502,7 +3560,8 @@ typedef struct
 
 	int32u  deviceid;//设备ID
 	int32u  subid;//设备子通道
-	int32u  triggeruserval;//触发器标志
+	int32u  playflag;//播放标志 MEDIA_PLAYFLAG_CLIENT
+	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 
 	int	   resnum;
 	int8u  res[MAX_RES_NUM];
@@ -3636,6 +3695,7 @@ typedef struct
 	pItem_MeetOneStatistic pitem;
 }Type_MeetQuarterStatisticInfo, *pType_MeetQuarterStatisticInfo;
 
+#ifndef MEET_FACEID_MAINBG
 //返回查询界面配置
 //会议界面设置
 //faceid
@@ -3699,6 +3759,7 @@ typedef struct
 #define MEET_FACEFLAG_SHOW			0x00000001 //该位用于表示该项是否可见
 #define MEET_FACEFLAG_TEXT			0x00000002 //该位用于表示数据是文本类型,否则为文件ID
 #define MEET_FACEFLAG_ONLYTEXT		0x00000004 //该位用于表示数据是纯文本类型
+#endif
 
 //文本项
 typedef struct

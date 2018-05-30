@@ -32,15 +32,15 @@
 
         <ImageButton
             android:id="@+id/meeting_message"
-            android:layout_width="100px"
-            android:layout_height="100px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/chat"
             android:scaleType="fitXY" />
 
         <ImageButton
             android:id="@+id/meeting_chat_online"
-            android:layout_width="100px"
-            android:layout_height="100px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:background="@drawable/service"
             android:scaleType="fitXY" />

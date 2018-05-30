@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.listener.ItemClickListener;
+import com.pa.paperless.utils.FileSizeUtil;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class TypeFileAdapter extends BaseAdapter {
         final MeetDirFileInfo bean = (MeetDirFileInfo) mDatas.get(i + ITEM_COUNT * PAGE_NOW);
         holder.document_item_number.setText(i + 1 + "");
         holder.document_item_filename.setText(bean.getFileName());
-        holder.document_item_filesize.setText(bean.getSize() + "");
+        holder.document_item_filesize.setText(FileSizeUtil.FormetFileSize(bean.getSize()));
         holder.document_item_uploadname.setText(bean.getUploader_name());
 
         final int mediaId = bean.getMediaId();

@@ -3658,6 +3658,22 @@ public final class InterfaceMacro {
      * <code>Pb_MEETDEVICE_PROPERTY_STREAMNAME = 10;</code>
      */
     Pb_MEETDEVICE_PROPERTY_STREAMNAME(10),
+    /**
+     * <pre>
+     *获取资源操作的设备ID query paramterval(res地址索引)
+     * </pre>
+     *
+     * <code>Pb_MEETMEMBER_PROPERTY_RESOPERTORID = 11;</code>
+     */
+    Pb_MEETMEMBER_PROPERTY_RESOPERTORID(11),
+    /**
+     * <pre>
+     *某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
+     * </pre>
+     *
+     * <code>Pb_MEETMEMBER_PROPERTY_TYPEAVAILABLE = 12;</code>
+     */
+    Pb_MEETMEMBER_PROPERTY_TYPEAVAILABLE(12),
     UNRECOGNIZED(-1),
     ;
 
@@ -3745,6 +3761,22 @@ public final class InterfaceMacro {
      * <code>Pb_MEETDEVICE_PROPERTY_STREAMNAME = 10;</code>
      */
     public static final int Pb_MEETDEVICE_PROPERTY_STREAMNAME_VALUE = 10;
+    /**
+     * <pre>
+     *获取资源操作的设备ID query paramterval(res地址索引)
+     * </pre>
+     *
+     * <code>Pb_MEETMEMBER_PROPERTY_RESOPERTORID = 11;</code>
+     */
+    public static final int Pb_MEETMEMBER_PROPERTY_RESOPERTORID_VALUE = 11;
+    /**
+     * <pre>
+     *某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
+     * </pre>
+     *
+     * <code>Pb_MEETMEMBER_PROPERTY_TYPEAVAILABLE = 12;</code>
+     */
+    public static final int Pb_MEETMEMBER_PROPERTY_TYPEAVAILABLE_VALUE = 12;
 
 
     public final int getNumber() {
@@ -3776,6 +3808,8 @@ public final class InterfaceMacro {
         case 8: return Pb_MEETDEVICE_PROPERTY_MEETINGID;
         case 9: return Pb_MEETDEVICE_PROPERTY_TRIGGERID;
         case 10: return Pb_MEETDEVICE_PROPERTY_STREAMNAME;
+        case 11: return Pb_MEETMEMBER_PROPERTY_RESOPERTORID;
+        case 12: return Pb_MEETMEMBER_PROPERTY_TYPEAVAILABLE;
         default: return null;
       }
     }
@@ -4005,6 +4039,38 @@ public final class InterfaceMacro {
      * <code>Pb_MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX = 11;</code>
      */
     Pb_MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX(11),
+    /**
+     * <pre>
+     *媒体服务器是否可用 query propertyval=返回可用的个数(int32u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER = 12;</code>
+     */
+    Pb_MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER(12),
+    /**
+     * <pre>
+     *流服务器是否可用 query=返回可用的个数(int32u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER = 13;</code>
+     */
+    Pb_MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER(13),
+    /**
+     * <pre>
+     *返回当前系统微秒UTC时间 query(int64u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_UTCMICROSECONDS = 14;</code>
+     */
+    Pb_MEETCONTEXT_PROPERTY_UTCMICROSECONDS(14),
+    /**
+     * <pre>
+     *返回当前系统微秒时间 query(int64u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_LOCALCICROSECONDS = 15;</code>
+     */
+    Pb_MEETCONTEXT_PROPERTY_LOCALCICROSECONDS(15),
     UNRECOGNIZED(-1),
     ;
 
@@ -4100,6 +4166,38 @@ public final class InterfaceMacro {
      * <code>Pb_MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX = 11;</code>
      */
     public static final int Pb_MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX_VALUE = 11;
+    /**
+     * <pre>
+     *媒体服务器是否可用 query propertyval=返回可用的个数(int32u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER = 12;</code>
+     */
+    public static final int Pb_MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER_VALUE = 12;
+    /**
+     * <pre>
+     *流服务器是否可用 query=返回可用的个数(int32u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER = 13;</code>
+     */
+    public static final int Pb_MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER_VALUE = 13;
+    /**
+     * <pre>
+     *返回当前系统微秒UTC时间 query(int64u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_UTCMICROSECONDS = 14;</code>
+     */
+    public static final int Pb_MEETCONTEXT_PROPERTY_UTCMICROSECONDS_VALUE = 14;
+    /**
+     * <pre>
+     *返回当前系统微秒时间 query(int64u)
+     * </pre>
+     *
+     * <code>Pb_MEETCONTEXT_PROPERTY_LOCALCICROSECONDS = 15;</code>
+     */
+    public static final int Pb_MEETCONTEXT_PROPERTY_LOCALCICROSECONDS_VALUE = 15;
 
 
     public final int getNumber() {
@@ -4132,6 +4230,10 @@ public final class InterfaceMacro {
         case 9: return Pb_MEETCONTEXT_PROPERTY_SELFMEMBERID;
         case 10: return Pb_MEETCONTEXT_PROPERTY_MEETDBDEVICEID;
         case 11: return Pb_MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX;
+        case 12: return Pb_MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER;
+        case 13: return Pb_MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER;
+        case 14: return Pb_MEETCONTEXT_PROPERTY_UTCMICROSECONDS;
+        case 15: return Pb_MEETCONTEXT_PROPERTY_LOCALCICROSECONDS;
         default: return null;
       }
     }
@@ -7035,6 +7137,141 @@ public final class InterfaceMacro {
 
   /**
    * <pre>
+   *查询指定会议目录的某项属性
+   *property id
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_MeetDirectoryAttrib}
+   */
+  public enum Pb_MeetDirectoryAttrib
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <code>Pb_MEETDIRECTORY_PROPERTY_ZERO = 0;</code>
+     */
+    Pb_MEETDIRECTORY_PROPERTY_ZERO(0),
+    /**
+     * <pre>
+     *目录名称   query(text)
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_NAME = 1;</code>
+     */
+    Pb_MEETDIRECTORY_PROPERTY_NAME(1),
+    /**
+     * <pre>
+     *文件个数   query(fixed32) 
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_SIZE = 2;</code>
+     */
+    Pb_MEETDIRECTORY_PROPERTY_SIZE(2),
+    /**
+     * <pre>
+     *父目录ID   query(fixed32) 
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_PARENT = 3;</code>
+     */
+    Pb_MEETDIRECTORY_PROPERTY_PARENT(3),
+    /**
+     * <pre>
+     *目录的序号 query(fixed32)
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_POS = 4;</code>
+     */
+    Pb_MEETDIRECTORY_PROPERTY_POS(4),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>Pb_MEETDIRECTORY_PROPERTY_ZERO = 0;</code>
+     */
+    public static final int Pb_MEETDIRECTORY_PROPERTY_ZERO_VALUE = 0;
+    /**
+     * <pre>
+     *目录名称   query(text)
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_NAME = 1;</code>
+     */
+    public static final int Pb_MEETDIRECTORY_PROPERTY_NAME_VALUE = 1;
+    /**
+     * <pre>
+     *文件个数   query(fixed32) 
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_SIZE = 2;</code>
+     */
+    public static final int Pb_MEETDIRECTORY_PROPERTY_SIZE_VALUE = 2;
+    /**
+     * <pre>
+     *父目录ID   query(fixed32) 
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_PARENT = 3;</code>
+     */
+    public static final int Pb_MEETDIRECTORY_PROPERTY_PARENT_VALUE = 3;
+    /**
+     * <pre>
+     *目录的序号 query(fixed32)
+     * </pre>
+     *
+     * <code>Pb_MEETDIRECTORY_PROPERTY_POS = 4;</code>
+     */
+    public static final int Pb_MEETDIRECTORY_PROPERTY_POS_VALUE = 4;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_MeetDirectoryAttrib valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_MeetDirectoryAttrib forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_MEETDIRECTORY_PROPERTY_ZERO;
+        case 1: return Pb_MEETDIRECTORY_PROPERTY_NAME;
+        case 2: return Pb_MEETDIRECTORY_PROPERTY_SIZE;
+        case 3: return Pb_MEETDIRECTORY_PROPERTY_PARENT;
+        case 4: return Pb_MEETDIRECTORY_PROPERTY_POS;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_MeetDirectoryAttrib>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_MeetDirectoryAttrib> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_MeetDirectoryAttrib>() {
+            public Pb_MeetDirectoryAttrib findValueByNumber(int number) {
+              return Pb_MeetDirectoryAttrib.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_MeetDirectoryAttrib(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_MeetDirectoryAttrib)
+  }
+
+  /**
+   * <pre>
    *文件attrib
    * </pre>
    *
@@ -7140,7 +7377,7 @@ public final class InterfaceMacro {
     Pb_MEETFILE_PROPERTY_NAME(1),
     /**
      * <pre>
-     *大小 query(fixed64)
+     *大小 query(fixed64) 字节
      * </pre>
      *
      * <code>Pb_MEETFILE_PROPERTY_SIZE = 2;</code>
@@ -7148,7 +7385,7 @@ public final class InterfaceMacro {
     Pb_MEETFILE_PROPERTY_SIZE(2),
     /**
      * <pre>
-     *时长 query(fixed32)
+     *时长 query(fixed32) 毫秒
      * </pre>
      *
      * <code>Pb_MEETFILE_PROPERTY_TIME = 3;</code>
@@ -7187,7 +7424,7 @@ public final class InterfaceMacro {
     public static final int Pb_MEETFILE_PROPERTY_NAME_VALUE = 1;
     /**
      * <pre>
-     *大小 query(fixed64)
+     *大小 query(fixed64) 字节
      * </pre>
      *
      * <code>Pb_MEETFILE_PROPERTY_SIZE = 2;</code>
@@ -7195,7 +7432,7 @@ public final class InterfaceMacro {
     public static final int Pb_MEETFILE_PROPERTY_SIZE_VALUE = 2;
     /**
      * <pre>
-     *时长 query(fixed32)
+     *时长 query(fixed32) 毫秒
      * </pre>
      *
      * <code>Pb_MEETFILE_PROPERTY_TIME = 3;</code>
@@ -9845,6 +10082,30 @@ public final class InterfaceMacro {
      * <code>Pb_MEDIA_PLAYFLAG_LOOP = 1;</code>
      */
     Pb_MEDIA_PLAYFLAG_LOOP(1),
+    /**
+     * <pre>
+     *终端设备 在devnum=0时会判断
+     * </pre>
+     *
+     * <code>Pb_MEDIA_PLAYFLAG_CLIENT = 2;</code>
+     */
+    Pb_MEDIA_PLAYFLAG_CLIENT(2),
+    /**
+     * <pre>
+     *投影设备 在devnum=0时会判断
+     * </pre>
+     *
+     * <code>Pb_MEDIA_PLAYFLAG_PROJECTIVE = 4;</code>
+     */
+    Pb_MEDIA_PLAYFLAG_PROJECTIVE(4),
+    /**
+     * <pre>
+     *排除自己的设备ID 在devnum=0时会判断
+     * </pre>
+     *
+     * <code>Pb_MEDIA_PLAYFLAG_NOSELFID = 8;</code>
+     */
+    Pb_MEDIA_PLAYFLAG_NOSELFID(8),
     UNRECOGNIZED(-1),
     ;
 
@@ -9860,6 +10121,30 @@ public final class InterfaceMacro {
      * <code>Pb_MEDIA_PLAYFLAG_LOOP = 1;</code>
      */
     public static final int Pb_MEDIA_PLAYFLAG_LOOP_VALUE = 1;
+    /**
+     * <pre>
+     *终端设备 在devnum=0时会判断
+     * </pre>
+     *
+     * <code>Pb_MEDIA_PLAYFLAG_CLIENT = 2;</code>
+     */
+    public static final int Pb_MEDIA_PLAYFLAG_CLIENT_VALUE = 2;
+    /**
+     * <pre>
+     *投影设备 在devnum=0时会判断
+     * </pre>
+     *
+     * <code>Pb_MEDIA_PLAYFLAG_PROJECTIVE = 4;</code>
+     */
+    public static final int Pb_MEDIA_PLAYFLAG_PROJECTIVE_VALUE = 4;
+    /**
+     * <pre>
+     *排除自己的设备ID 在devnum=0时会判断
+     * </pre>
+     *
+     * <code>Pb_MEDIA_PLAYFLAG_NOSELFID = 8;</code>
+     */
+    public static final int Pb_MEDIA_PLAYFLAG_NOSELFID_VALUE = 8;
 
 
     public final int getNumber() {
@@ -9882,6 +10167,9 @@ public final class InterfaceMacro {
       switch (value) {
         case 0: return Pb_MEDIA_PLAYFLAG_ZERO;
         case 1: return Pb_MEDIA_PLAYFLAG_LOOP;
+        case 2: return Pb_MEDIA_PLAYFLAG_CLIENT;
+        case 4: return Pb_MEDIA_PLAYFLAG_PROJECTIVE;
+        case 8: return Pb_MEDIA_PLAYFLAG_NOSELFID;
         default: return null;
       }
     }
@@ -10943,6 +11231,14 @@ public final class InterfaceMacro {
     Pb_DeviceIDType_MeetClient(17825792),
     /**
      * <pre>
+     *会议发布
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetPublish = 18087936;</code>
+     */
+    Pb_DeviceIDType_MeetPublish(18087936),
+    /**
+     * <pre>
      *会议一键同屏设备
      * </pre>
      *
@@ -11000,6 +11296,14 @@ public final class InterfaceMacro {
     public static final int Pb_DeviceIDType_MeetClient_VALUE = 17825792;
     /**
      * <pre>
+     *会议发布
+     * </pre>
+     *
+     * <code>Pb_DeviceIDType_MeetPublish = 18087936;</code>
+     */
+    public static final int Pb_DeviceIDType_MeetPublish_VALUE = 18087936;
+    /**
+     * <pre>
      *会议一键同屏设备
      * </pre>
      *
@@ -11032,6 +11336,7 @@ public final class InterfaceMacro {
         case 17301504: return Pb_DeviceIDType_MeetProjective;
         case 17563648: return Pb_DeviceIDType_MeetCapture;
         case 17825792: return Pb_DeviceIDType_MeetClient;
+        case 18087936: return Pb_DeviceIDType_MeetPublish;
         case 18874368: return Pb_DeviceIDType_MeetShare;
         default: return null;
       }

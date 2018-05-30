@@ -77,8 +77,9 @@ message pbui_Type_MeetDoSetPlayPos
 {
 	fixed32   resindex=1;//资源索引号 初始化播放资源时传入的资源ID eg:0,1,2,3 etc
 	fixed32   pos=2;//指定开始播放的百分比位置
-	fixed32   triggeruserval=3;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
-	repeated fixed32 deviceid=4;//通知的目标设备,为空表示全部
+	fixed32   playflag=3;//播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+	fixed32   triggeruserval=4;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
+	repeated fixed32 deviceid=5;//通知的目标设备,为空表示全部
 }
 
 //设置播放暂停 恢复
@@ -88,8 +89,9 @@ message pbui_Type_MeetDoSetPlayPos
 message pbui_Type_MeetDoPlayControl
 {
 	fixed32  resindex=1;//资源索引号 初始化播放资源时传入的资源ID eg:0,1,2,3 etc
-	fixed32  triggeruserval=2;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
-	repeated fixed32 deviceid=3;//通知的目标设备,为空表示全部
+	fixed32  playflag=2;//播放标志 参见Interface_Macro.proto Pb_MeetPlayFlag
+	fixed32  triggeruserval=3;//参见Interface_Macro.proto文件中的Pb_TriggerUsedef定义
+	repeated fixed32 deviceid=4;//通知的目标设备,为空表示全部
 }
 
 //查询媒体播放

@@ -14,30 +14,26 @@
 
         <ImageView
             android:id="@+id/agenda_imgbtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/selector_agenda"
-            android:scaleType="fitCenter"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="20%" />
+            android:scaleType="fitCenter" />
 
         <ImageView
             android:id="@+id/announcement_imgbtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/agenda_imgbtn"
             android:background="@drawable/selector_announce"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="20%" />
+            android:scaleType="centerCrop" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <ImageView
-        android:background="@color/divLineColor"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-<!--未完成-->
+        android:layout_height="1dp"
+        android:background="@color/divLineColor" />
+
     <FrameLayout
         android:id="@+id/agenda_fl"
         android:layout_width="0dp"

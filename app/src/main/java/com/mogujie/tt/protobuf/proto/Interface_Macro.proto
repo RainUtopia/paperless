@@ -265,6 +265,9 @@ Pb_MEETDEVICE_PROPERTY_MEMBERID=7;			 //当前参会人员ID query(fixed32)
 Pb_MEETDEVICE_PROPERTY_MEETINGID=8;		 //当前会议ID query(fixed32)
 Pb_MEETDEVICE_PROPERTY_TRIGGERID=9;			 //当前正在执行的触发器ID query(fixed32) paramterval(res地址索引)
 Pb_MEETDEVICE_PROPERTY_STREAMNAME=10;			 //设备的流通道名称 query paramterval=查询的流通道号(text)
+Pb_MEETMEMBER_PROPERTY_RESOPERTORID=11; //获取资源操作的设备ID query paramterval(res地址索引)
+Pb_MEETMEMBER_PROPERTY_TYPEAVAILABLE=12; //某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
+
 }
 
 //设备修改标志位 modflag
@@ -293,6 +296,10 @@ Pb_MEETCONTEXT_PROPERTY_CURROOMID=			8; //当前会议的会场ID query(fixed32)
 Pb_MEETCONTEXT_PROPERTY_SELFMEMBERID=		9; //当前会议的绑定的参会人员ID query(fixed32)
 Pb_MEETCONTEXT_PROPERTY_MEETDBDEVICEID=		10; //当前会议数据库设备ID query(fixed32)
 Pb_MEETCONTEXT_PROPERTY_SCREENSTREAMINDEX=	11; //本机屏幕流通道号 query(fixed32)
+Pb_MEETCONTEXT_PROPERTY_AVAILABLEMEDIASERER=	12; //媒体服务器是否可用 query propertyval=返回可用的个数(int32u)
+Pb_MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER=	13; //流服务器是否可用 query=返回可用的个数(int32u)
+Pb_MEETCONTEXT_PROPERTY_UTCMICROSECONDS=	14; //返回当前系统微秒UTC时间 query(int64u)
+Pb_MEETCONTEXT_PROPERTY_LOCALCICROSECONDS=	15; //返回当前系统微秒时间 query(int64u)
 }
 
 //会议议程
@@ -513,6 +520,17 @@ Pb_role_device_projector=	0x08;  //投影仪
 Pb_role_admin=				0x09;  //管理员
 }
 
+//查询指定会议目录的某项属性
+//property id
+enum Pb_MeetDirectoryAttrib
+{
+Pb_MEETDIRECTORY_PROPERTY_ZERO=0;
+Pb_MEETDIRECTORY_PROPERTY_NAME=   1; //目录名称   query(text)
+Pb_MEETDIRECTORY_PROPERTY_SIZE=	  2; //文件个数   query(fixed32) 
+Pb_MEETDIRECTORY_PROPERTY_PARENT= 3; //父目录ID   query(fixed32) 
+Pb_MEETDIRECTORY_PROPERTY_POS=    4; //目录的序号 query(fixed32)
+}
+
 //文件attrib
 enum Pb_MeetFileAttrib
 {
@@ -526,8 +544,8 @@ enum Pb_MeetFilePropertyID
 {
 Pb_MEETFILE_PROPERTY_ZERO=0;
 Pb_MEETFILE_PROPERTY_NAME=   1; //名称 query(text)
-Pb_MEETFILE_PROPERTY_SIZE=	 2; //大小 query(fixed64)
-Pb_MEETFILE_PROPERTY_TIME=   3; //时长 query(fixed32)
+Pb_MEETFILE_PROPERTY_SIZE=	 2; //大小 query(fixed64) 字节
+Pb_MEETFILE_PROPERTY_TIME=   3; //时长 query(fixed32) 毫秒
 Pb_MEETFILE_PROPERTY_ATTRIB= 4; //文件attrib query(fixed32)
 Pb_MEETFILE_PROPERTY_AVAILABLE=5; //文件是否可用 query(fixed32) 0:不存在 1:存在
 }
@@ -732,7 +750,10 @@ Pb_MEET_FUNCODE_DOCUMENT=		10;	//外部文档
 enum Pb_MeetPlayFlag
 {
 Pb_MEDIA_PLAYFLAG_ZERO=0;
-Pb_MEDIA_PLAYFLAG_LOOP= 0x00000001; //循环播放标志
+Pb_MEDIA_PLAYFLAG_LOOP= 		0x00000001; //循环播放标志
+Pb_MEDIA_PLAYFLAG_CLIENT=		0x00000002; //终端设备 在devnum=0时会判断
+Pb_MEDIA_PLAYFLAG_PROJECTIVE=   0x00000004; //投影设备 在devnum=0时会判断
+Pb_MEDIA_PLAYFLAG_NOSELFID=     0x00000008; //排除自己的设备ID 在devnum=0时会判断
 }
 
 //会议界面设置
@@ -819,6 +840,7 @@ enum Pb_DeviceIDType
 	Pb_DeviceIDType_MeetProjective=0x01080000;//投影设备
 	Pb_DeviceIDType_MeetCapture=0x010c0000;//会议流采集设备
 	Pb_DeviceIDType_MeetClient=0x01100000;//会议终端设备
+	Pb_DeviceIDType_MeetPublish=0x01140000;//会议发布
 	Pb_DeviceIDType_MeetShare=0x01200000;//会议一键同屏设备
 }
 

@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
 import com.pa.paperless.bean.CheckedMemberIds;
+import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.utils.MyUtils;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class MemberListAdapter extends BaseAdapter {
     private final Context mContext;
-    private final List<InterfaceMember.pbui_Item_MemberDetailInfo> datas;
+    private final List<DevMember> datas;
     //存放是否选中结果集
     public static List<Boolean> itemChecked = new ArrayList<>();
     //存放选中的CheckBox文本
@@ -31,7 +32,7 @@ public class MemberListAdapter extends BaseAdapter {
     private List<CheckedMemberIds> mCheckedMemberIds = new ArrayList<>();
     private List<String> checkName;
 
-    public MemberListAdapter(Context context, List<InterfaceMember.pbui_Item_MemberDetailInfo> data) {
+    public MemberListAdapter(Context context, List<DevMember> data) {
         mContext = context;
         datas = data;
         //初始化：设置默认都是未选的
@@ -66,7 +67,7 @@ public class MemberListAdapter extends BaseAdapter {
             //因为itemChecked 的索引和 数据的一一对应
             if (itemChecked.get(i)) {
                 //获取选中的人员的ID
-                int personid = datas.get(i).getPersonid();
+                int personid = datas.get(i).getMemberInfos().getPersonid();
                 mCheckedMemberIds.add(new CheckedMemberIds(personid));
             }
         }
@@ -84,7 +85,7 @@ public class MemberListAdapter extends BaseAdapter {
             //因为itemChecked 的索引和 数据的一一对应
             if (itemChecked.get(i)) {
                 //获取选中的人员的名字
-                String name = MyUtils.getBts(datas.get(i).getName());
+                String name = datas.get(i).getMemberInfos().getName();
                 checkName.add(name);
                 if (checkName.size() > 3) {
                     //如果 checkName 中的名字(选中的个数)超过3个 就在最后添加省略号并直接 return
@@ -133,9 +134,8 @@ public class MemberListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        final InterfaceMember.pbui_Item_MemberDetailInfo memberInfo = datas.get(i);
-        String name = new String(memberInfo.getName().toByteArray());
-        holder.chat_item_cb.setText(name);
+        final DevMember memberInfo = datas.get(i);
+        holder.chat_item_cb.setText(memberInfo.getMemberInfos().getName());
         holder.chat_item_cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,8 +154,8 @@ public class MemberListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void setNames(boolean checked, int i, InterfaceMember.pbui_Item_MemberDetailInfo bean) {
-        String name = new String(bean.getName().toByteArray());
+    public void setNames(boolean checked, int i, DevMember bean) {
+        String name = bean.getMemberInfos().getName();
         if (checked) {
             names.set(i, name);
         } else {

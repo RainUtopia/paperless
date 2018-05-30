@@ -76,6 +76,7 @@ message pbui_Item_MeetRoomDevSeatDetailInfo
 
 	fixed32  issignin=8;//是否已经签到
 	fixed32  role=9;//参会人员角色
+	fixed32	 facestate=10;//界面状态 参见MemState_MainFace 定义
 }
 
 //查询设备排位详细信息

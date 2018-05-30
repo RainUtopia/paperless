@@ -2,6 +2,7 @@ package com.pa.paperless.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class PlayService extends Service {
     private final String TAG = "PlayService-->";
 
     private boolean SDLIsShow = false;
+    private Handler handler = new Handler();
 
     @Nullable
     @Override
@@ -55,7 +57,7 @@ public class PlayService extends Service {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
+    public void getEventMessage(final EventMessage message) throws InvalidProtocolBufferException {
         if (message.getAction() == 0 && message.getType() == 0) {
             SDLIsShow = false;
         } else if (message.getAction() == 1 && message.getType() == 1) {
@@ -68,9 +70,20 @@ public class PlayService extends Service {
                     Log.e(TAG, "com.pa.paperless.service_PlayService.getEventMessage :  收到媒体播放通知 打开播放界面 EventBus --->>> ");
                     InterfacePlaymedia.pbui_Type_MeetMediaPlay data = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                             .putExtra("action", IDEventMessage.MEDIA_PLAY_INFORM)
                             .putExtra("data", data.toByteArray()));
+                }else {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            InterfacePlaymedia.pbui_Type_MeetMediaPlay data = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
+                            startActivity(new Intent(PlayService.this, SDLActivity.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                                    .putExtra("action", IDEventMessage.MEDIA_PLAY_INFORM)
+                                    .putExtra("data", data.toByteArray()));
+                        }
+                    },600);
                 }
                 break;
             case IDEventMessage.PLAY_STREAM_NOTIFY:
@@ -79,9 +92,20 @@ public class PlayService extends Service {
                     Log.e(TAG, "com.pa.paperless.service_PlayService.getEventMessage :  收到流播放通知 打开播放界面 EventBus --->>> ");
                     InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
                     startActivity(new Intent(this, SDLActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                             .putExtra("action", IDEventMessage.PLAY_STREAM_NOTIFY)
                             .putExtra("data", data.toByteArray()));
+                }else {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            InterfacePlaymedia.pbui_Type_MeetMediaPlay data = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
+                            startActivity(new Intent(PlayService.this, SDLActivity.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                                    .putExtra("action", IDEventMessage.MEDIA_PLAY_INFORM)
+                                    .putExtra("data", data.toByteArray()));
+                        }
+                    },600);
                 }
                 break;
             case IDEventMessage.START_COLLECTION_STREAM_NOTIFY:

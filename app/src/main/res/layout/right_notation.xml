@@ -28,71 +28,13 @@
             android:text="图片批注" />
     </LinearLayout>
 
-    <com.zhy.android.percent.support.PercentLinearLayout
 
+    <include
+        layout="@layout/incould_file_title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="horizontal"
         app:layout_heightPercent="10%"
-        app:layout_widthPercent="100%">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="序号" />
-
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:background="@color/divLineColor"
-            app:layout_heightPercent="30%" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="4"
-            android:gravity="center|left"
-            android:text="文件名" />
-
-        <ImageView
-
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:background="@color/divLineColor"
-            app:layout_heightPercent="30%" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="大小" />
-
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:background="@color/divLineColor"
-            app:layout_heightPercent="30%" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="上传" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2" />
-
-    </com.zhy.android.percent.support.PercentLinearLayout>
+        app:layout_widthPercent="100%" />
 
     <ListView
         android:id="@+id/nota_lv"

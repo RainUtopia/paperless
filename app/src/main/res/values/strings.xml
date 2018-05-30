@@ -36,4 +36,11 @@
     <string name="postil_7">停止投影</string>
     <string name="postil_8">上一张</string>
     <string name="postil_9">下一张</string>
+    <!--同屏控制-->
+    <string name="screen_title">同屏控制</string>
+    <!--文件的标题-->
+    <string name="number">序号</string>
+    <string name="file_name">文件名</string>
+    <string name="size">大小</string>
+    <string name="upload">上传</string>
 </resources>

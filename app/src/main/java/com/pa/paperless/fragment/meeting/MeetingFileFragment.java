@@ -1,10 +1,7 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,34 +13,24 @@ import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
-import com.mogujie.tt.protobuf.InterfaceDevice;
-import com.mogujie.tt.protobuf.InterfaceFile;
-import com.mogujie.tt.protobuf.InterfaceIM;
-import com.mogujie.tt.protobuf.InterfaceMember;
-import com.mogujie.tt.protobuf.InterfacePlaymedia;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.MeetingFileTypeAdapter;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.bean.MeetingFileTypeBean;
+import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.listener.CallListener;
-import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
-import com.wind.myapplication.NativeUtil;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.libsdl.app.SDLActivity;
-
 import java.util.ArrayList;
 import java.util.List;
+import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -51,9 +38,9 @@ import java.util.List;
  * 进入页面：1.查询文件目录 2.根据目录ID查找文件 3.先展示出第一个item 的文档类的数据
  */
 
-public class MeetingFileFragment extends BaseFragment implements View.OnClickListener, CallListener {
+public class MeetingFileFragment extends BaseFragment implements View.OnClickListener {
 
-    private NativeUtil nativeUtil;
+    private final String TAG = "MeetingFileFragment-->";
     private ListView dir_lv;
     private Button rightmeetfile_document;
     private Button rightmeetfile_picture;
@@ -66,7 +53,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     private MeetingFileTypeAdapter mDirAdapter;
     private List<Button> mBtns;
     private TypeFileAdapter dataAdapter;
-
     //  存放目录ID、目录名称
     private List<MeetingFileTypeBean> mDirData = new ArrayList<>();
     //  存放会议目录文件的详细信息
@@ -75,17 +61,15 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
     private List<MeetDirFileInfo> mFileData = new ArrayList<>();
     //播放时的媒体ID
     public static int mMediaid;
-    private int mDirId;//要查找的目录ID，查找该目录下的文件
-    private boolean isFirstIn;//默认设置是第一次进入
+    public static boolean meetfile_isshowing = false;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.e("FramentLife", "MeetingFileFragment.onCreateView:   --->>> ");
         View inflate = inflater.inflate(R.layout.right_mettingfile, container, false);
-        isFirstIn = true;
-        initController();
         initView(inflate);
+        meetfile_isshowing = true;
         initData();
         initBtns();
         try {
@@ -98,141 +82,68 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         return inflate;
     }
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case IDivMessage.QUERY_MEET_DIR://查询会议目录
-                    queryMeetDirU(msg);
-                    break;
-                case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件
-                    queryMeetDirFileU(msg);
-                    break;
-            }
-        }
-    };
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventMessage.MEETDIR_CHANGE_INFORM://135 会议目录变更通知
-                Log.e("MyLog", "MeetingFileFragment.getEventMessage 173行:  会议目录变更通知EventBus --->>> ");
-                nativeUtil.queryMeetDir();
+            //接收数据类
+            case IDEventF.post_meet_dir://接收到会议目录的数据
+                mDirData = (List<MeetingFileTypeBean>) message.getObject();
+                Log.e(TAG, "MeetingFileFragment.getEventMessage :  收到会议目录数据 --->>> " + mDirData.size());
+                if (mDirAdapter == null) {
+                    mDirAdapter = new MeetingFileTypeAdapter(getActivity(), mDirData);
+                    dir_lv.setAdapter(mDirAdapter);
+                } else {
+                    mDirAdapter.notifyDataSetChanged();
+                }
+                //当第一次进入会议资料界面时，就展示第一个目录item中的文档类信息
+                if (mDirData.size() > 0) {
+                    //每次刷新时都默认点击第一项的目录
+                    mDirAdapter.setCheck(0);
+                    try {
+                        //查询会议目录文件
+                        nativeUtil.queryMeetDirFile(mDirData.get(0).getDirId());
+                    } catch (InvalidProtocolBufferException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
+            case IDEventF.post_meet_dirFile://接收到某目录下会议目录文件的数据
+                //每次点击目录的item时，就展示该目录下的文档类文件
+                Log.e(TAG, "MeetingFileFragment.getEventMessage :  收到目录下的文件数据 --->>> ");
+                meetDirFileInfos = (List<MeetDirFileInfo>) message.getObject();
+                if (meetDirFileInfos != null) {
+                    mFileData.clear();
+                    for (int i = 0; i < meetDirFileInfos.size(); i++) {
+                        MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
+//                        String fileName = documentBean.getFileName();
+//                        if (FileUtil.isDocumentFile(fileName)) {//文档类
+                            mFileData.add(documentBean);
+//                        }
+                    }
+                    dataAdapter.notifyDataSetChanged();
+                    dataAdapter.PAGE_NOW = 0;
+                    checkButton();
+                    setBtnSelect(0);
+                }
+                break;
+            /** **** **  查询失败类  ** **** **/
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM://142 会议目录文件变更通知
                 if (!isHidden()) {
-                    Log.e("MyLog", "MeetingFileFragment.getEventMessage 180行:  会议目录文件变更通知EventBus --->>> ");
+                    Log.e(TAG, "MeetingFileFragment.getEventMessage 180行:  会议目录文件变更通知EventBus --->>> ");
                     InterfaceBase.pbui_MeetNotifyMsgForDouble object1 = (InterfaceBase.pbui_MeetNotifyMsgForDouble) message.getObject();
-                    Log.e("MyLog", "MeetingFileFragment.getEventMessage 126行:  EventBus会议目录ID --->>> " + object1.getId());
+                    Log.e(TAG, "MeetingFileFragment.getEventMessage 126行:  EventBus会议目录ID --->>> " + object1.getId());
                     nativeUtil.queryMeetDirFile(object1.getId());
                 }
                 break;
-            case IDEventMessage.MEMBER_CHANGE_INFORM://90 参会人员变更通知
-                InterfaceBase.pbui_MeetNotifyMsg object2 = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
-                /** ************ ******  91.查询指定ID的参会人  ****** ************ **/
-                nativeUtil.queryAttendPeopleFromId(object2.getId());
-                break;
         }
     }
-
-    @Override
-    public void callListener(int action, Object result) {
-        switch (action) {
-            case IDivMessage.QUERY_MEET_DIR://136.查询会议目录
-                MyUtils.handTo(IDivMessage.QUERY_MEET_DIR, (InterfaceFile.pbui_Type_MeetDirDetailInfo) result, "queryMeetDir", mHandler);
-                break;
-            case IDivMessage.QUERY_MEET_DIR_FILE://查询会议目录文件
-                MyUtils.handTo(IDivMessage.QUERY_MEET_DIR_FILE, (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) result, "queryMeetDirFile", mHandler);
-                break;
-            case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                MyUtils.handTo(IDivMessage.QUERY_DEVICE_INFO, (InterfaceDevice.pbui_Type_DeviceDetailInfo) result, "devInfos", mHandler);
-                break;
-            case IDivMessage.QUERY_DEVMEET_INFO://110.查询设备会议信息
-                MyUtils.handTo(IDivMessage.QUERY_DEVMEET_INFO, (InterfaceDevice.pbui_Type_DeviceFaceShowDetail) result, "devMeetInfos", mHandler);
-                break;
-            case IDivMessage.RECEIVE_MEET_IMINFO: //收到会议消息
-                Log.e("MyLog", "SigninFragment.callListener 296行:  收到会议消息 --->>> ");
-                MyUtils.receiveMessage((InterfaceIM.pbui_Type_MeetIM) result, nativeUtil);
-                break;
-            case IDivMessage.QUERY_ATTEND_BYID://查询指定ID的参会人
-                MyUtils.queryName((InterfaceMember.pbui_Type_MemberDetailInfo) result);
-                break;
-        }
-    }
-
-
-    private void queryMeetDirU(Message msg) {
-        mDirData.clear();
-        ArrayList queryMeetDir = msg.getData().getParcelableArrayList("queryMeetDir");
-        InterfaceFile.pbui_Type_MeetDirDetailInfo o = (InterfaceFile.pbui_Type_MeetDirDetailInfo) queryMeetDir.get(0);
-        for (int i = 0; i < o.getItemCount(); i++) {
-            InterfaceFile.pbui_Item_MeetDirDetailInfo item = o.getItem(i);
-            String dirName = new String(item.getName().toByteArray());
-            int id = item.getId();
-            int parentid = item.getParentid();
-            Log.e("MyLog", "MeetingFileFragment.handleMessage 91行:  文件目录名称 --->>> " + dirName);
-            //过滤掉共享文件和批注文件
-            if (!dirName.equals("共享文件") && !dirName.equals("批注文件")) {
-                mDirData.add(new MeetingFileTypeBean(id, parentid, dirName, ""));
-                Log.e("MyLog", "MeetingFileFragment.handleMessage:  mDirData添加的目录：  --->>> 文件名：" + dirName + "  目录ID ：" + id + " 父级ID： " + parentid);
-            }
-        }
-        mDirAdapter.notifyDataSetChanged();
-        //当第一次进入会议资料界面时，就展示第一个目录item中的文档类信息
-        Log.e("MyLog", "MeetingFileFragment.initData:  size --->>> " + mDirData.size());
-        if (mDirData.size() > 0 && isFirstIn) {
-            Log.e("MyLog", "MeetingFileFragment.initData:  第一次进入了 --->>> ");
-            try {
-                mDirId = mDirData.get(0).getDirId();
-                /** **** **  设置默认点击第一个item  ** **** **/
-                mDirAdapter.setCheck(0);
-                //查询会议目录文件
-                nativeUtil.queryMeetDirFile(mDirId);
-            } catch (InvalidProtocolBufferException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void queryMeetDirFileU(Message msg) {
-        ArrayList queryMeetDirFile = msg.getData().getParcelableArrayList("queryMeetDirFile");
-        InterfaceFile.pbui_Type_MeetDirFileDetailInfo o2 = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) queryMeetDirFile.get(0);
-        if (meetDirFileInfos == null) {
-            meetDirFileInfos = new ArrayList<>();
-        }
-        meetDirFileInfos.clear();
-        meetDirFileInfos = Dispose.MeetDirFile(o2);
-        //每次点击目录的item时，就展示该目录下的文档类文件
-        if (meetDirFileInfos != null) {
-            mFileData.clear();
-            for (int i = 0; i < meetDirFileInfos.size(); i++) {
-                MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
-                String fileName = documentBean.getFileName();
-                if (FileUtil.isDocumentFile(fileName)) {//文档类
-                    mFileData.add(documentBean);
-                }
-            }
-            dataAdapter.notifyDataSetChanged();
-            dataAdapter.PAGE_NOW = 0;
-            checkButton();
-            setBtnSelect(0);
-            isFirstIn = false;
-        }
-    }
-
 
     private void initData() {
-        mDirAdapter = new MeetingFileTypeAdapter(getActivity(), mDirData);
-        dir_lv.setAdapter(mDirAdapter);
-        //当点击其它Fragment时，nativeUtil对象就已经被改变了
-//        final MeetingFileFragment listener = this;
         dir_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("MyLog", "MeetingFileFragment.onItemClick:  item 点击 --->>> " + i);
-//                nativeUtil = NativeUtil.getInstance();
-                //从新设置的nativeUtil后还要从新设置回调
-//                nativeUtil.setCallListener(listener);
                 mDirAdapter.setCheck(i);
                 int dirId = mDirData.get(i).getDirId();
                 meetDirFileInfos.clear();
@@ -262,7 +173,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                     devIds.add(MeetingActivity.getDevId());
                     nativeUtil.mediaPlayOperate(mediaId, devIds, 0);
                 } else {
-                    MyUtils.openFile(Macro.MEETMATERIAL, filename, getView(), nativeUtil, mediaId, getContext(), filesize);
+                    MyUtils.openFile(Macro.MEETMATERIAL, filename, nativeUtil, mediaId, getContext(), filesize);
                 }
             }
         });
@@ -270,7 +181,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         dataAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
             @Override
             public void onDownListener(int mediaId, String filename, long filesize) {
-                MyUtils.downLoadFile(Macro.MEETMATERIAL, filename, getView(), getContext(), mediaId, nativeUtil, filesize);
+                MyUtils.downLoadFile(Macro.MEETMATERIAL, filename, getContext(), mediaId, nativeUtil, filesize);
             }
         });
     }
@@ -291,7 +202,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         rightmeetfile_other.setOnClickListener(this);
         rightmeetfile_prepage.setOnClickListener(this);
         rightmeetfile_nextpage.setOnClickListener(this);
-
     }
 
     @Override
@@ -383,11 +293,6 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initBtns() {
         mBtns = new ArrayList<>();
@@ -429,7 +334,11 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         if (dataAdapter.PAGE_NOW <= 0) {
             rightmeetfile_prepage.setEnabled(false);
             //如果不设置的话，只要进入一次else if ，那么下一页按钮就一直是false，不可点击状态
-            rightmeetfile_nextpage.setEnabled(true);
+            if(mFileData.size()>dataAdapter.ITEM_COUNT) {
+                rightmeetfile_nextpage.setEnabled(true);
+            }else {
+                rightmeetfile_nextpage.setEnabled(false);
+            }
         }
         //值的长度减去前几页的长度，剩下的就是这一页的长度，如果这一页的长度比View_Count小，表示这是最后的一页了，后面在没有了。
         else if (mFileData.size() - dataAdapter.PAGE_NOW * dataAdapter.ITEM_COUNT <= dataAdapter.ITEM_COUNT) {
@@ -445,17 +354,15 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void onHiddenChanged(boolean hidden) {
+        meetfile_isshowing = !hidden;
         if (!hidden) {
-            initController();
+            //设置默认点击第一个按钮
+            rightmeetfile_document.performClick();
             try {
                 Log.e("MyLog", "MeetingFileFragment.onHiddenChanged 462行:  不隐藏状态 --->>> ");
                 //136.查询会议目录
                 nativeUtil.queryMeetDir();
-                nativeUtil.queryMeetDirFile(mDirId);
                 //设置默认点击第一个目录item
-
-                //设置默认点击第一个按钮
-//                rightmeetfile_document.performClick();
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }

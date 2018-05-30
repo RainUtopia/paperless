@@ -43,7 +43,7 @@ public class Export {
         boolean succeed = true;
         try {
             //1.创建Excel文件
-            File file = new File("/sdcard/" + fileName + ".xls");
+            File file = new File(Macro.MEETFILE + fileName + ".xls");
             file.createNewFile();
             //2.创建工作簿
             WritableWorkbook workbook = Workbook.createWorkbook(file);
