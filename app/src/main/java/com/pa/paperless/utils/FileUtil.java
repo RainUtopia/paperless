@@ -281,32 +281,6 @@ public class FileUtil {
     }
 
     /**
-     * 打开文件
-     *
-     * @param file
-     */
-    public static void openFile(Context context, File file) {
-        //Uri uri = Uri.parse("file://"+file.getAbsolutePath());
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //设置intent的Action属性
-        intent.setAction(Intent.ACTION_VIEW);
-        //获取文件file的MIME类型
-//        Collection mimeTypes = getMimeTypes(file);
-//        String type = mimeTypes.toString();
-        String type = getMIMEType(file);
-        //设置intent的data和Type属性。
-        intent.setDataAndType(/*uri*/Uri.fromFile(file), type);
-        //跳转
-        try {
-            context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
      * 查找某目录下的某个文件
      *
      * @param dir      父目录
@@ -314,36 +288,37 @@ public class FileUtil {
      * @return
      */
     public static File findFilePathByName(String dir, final String filename) {
-        List<File> fs = new ArrayList<>();
         File baseDir = new File(dir);
         if (!baseDir.exists() || !baseDir.isDirectory()) {  // 判断目录是否存在
             Log.e(TAG, "FileUtil.findFilePathByName :   --> " + "文件查找失败：" + dir + "不是一个目录！");
         }
         File[] files = baseDir.listFiles();
-        List<File> getdss = getdss(files, filename, fs);
-        if(getdss.size()>0) {
-            File file = getdss.get(0);
-            String name = file.getName();
-            Log.e(TAG, "FileUtil.findFilePathByName :  name --> " + name);
-            return file;
-        }else {
+        List<File> fs = new ArrayList<>();
+        List<File> file = findFile(files, filename, fs);
+        if (file.size()>0) {
+            Log.e(TAG, "FileUtil.findFilePathByName :  查找到文件： --> " + file.get(0).getName());
+            return file.get(0);
+        } else {
             Log.e(TAG, "FileUtil.findFilePathByName :  没有查找到文件 --> ");
             return null;
         }
     }
 
-    public static List<File> getdss(File[] files, String filename, List<File> fs) {
+    public static List<File> findFile(File[] files, String filename,List<File> fs) {
         for (int i = 0; i < files.length; i++) {
             File f1 = files[i];
+            Log.e(TAG, "FileUtil.findFile :  当前文件名 --> " + f1.getName());
             if (f1.isFile()) {
+                Log.e(TAG, "FileUtil.findFile :  当前为文件 --> " + filename + "   ... " + f1.getName());
                 if (filename.equals(f1.getName())) {
+                    Log.e(TAG, "FileUtil.findFile :  添加文件： --> ");
                     fs.add(f1);
                 }
             } else if (f1.isDirectory()) {
-                String path = f1.getPath();
+                Log.e(TAG, "FileUtil.findFile :  当前为目录 --> ");
                 File[] files1 = f1.listFiles();
-                if (files1.length > 0) {
-                    getdss(files1, filename, fs);
+                if (files1.length > 0) {//如果目录下还有文件，递归查找
+                    findFile(files1, filename,fs);
                 }
             }
         }
@@ -352,13 +327,14 @@ public class FileUtil {
 
     /**
      * 删除目录下的所有文件，不包含文件夹
+     *
      * @param dirfile 目录文件
      * @return
      */
-    public static boolean deleteAllFile(File dirfile){
-        if(dirfile.exists()){
+    public static boolean deleteAllFile(File dirfile) {
+        if (dirfile.exists()) {
             File[] files = dirfile.listFiles();
-            if(files.length>0) {
+            if (files.length > 0) {
                 for (int i = 0; i < files.length; i++) {
                     File file = files[i];
                     file.delete();
@@ -366,11 +342,11 @@ public class FileUtil {
                         deleteAllFile(file);
                     }
                 }
-            }else {
+            } else {
                 dirfile.delete();
             }
             return true;
-        }else {
+        } else {
             return false;
         }
     }

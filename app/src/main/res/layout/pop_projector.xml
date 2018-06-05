@@ -15,8 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:text="@string/pro_control"
             android:textColor="@android:color/black"
-            android:text="投影控制"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -45,7 +45,8 @@
                         android:layout_weight="1"
                         android:button="@drawable/select_check"
                         android:padding="5dp"
-                        android:text="所有投影机" />
+                        android:text="@string/all_projection"
+                        android:textColor="@android:color/black" />
 
                     <RadioButton
                         android:id="@+id/choose_pro_cb"
@@ -54,7 +55,8 @@
                         android:layout_weight="1"
                         android:button="@drawable/select_check"
                         android:padding="5dp"
-                        android:text="选择投影机" />
+                        android:text="@string/choose_projection"
+                        android:textColor="@android:color/black" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -72,7 +74,8 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:background="@drawable/select_press"
-                    android:text="申请投影" />
+                    android:text="@string/apply_pro"
+                    android:textColor="@android:color/black" />
 
                 <Button
                     android:id="@+id/stop_pro"
@@ -81,7 +84,8 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:background="@drawable/select_press"
-                    android:text="结束投影" />
+                    android:text="@string/stop_pro"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
         </LinearLayout>
@@ -90,13 +94,12 @@
             android:id="@+id/pro_cancel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            android:layout_weight="1"
             android:background="@drawable/btn_enter"
-            android:text="取消" />
-
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

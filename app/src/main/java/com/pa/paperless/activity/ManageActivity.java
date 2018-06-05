@@ -102,7 +102,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     public void onBackPressed() {
         super.onBackPressed();
         //回到主界面
-        nativeUtil.backToMainInterfaceOperate();
+//        nativeUtil.backToMainInterfaceOperate();
     }
 
     public void changeFragment(int index) {

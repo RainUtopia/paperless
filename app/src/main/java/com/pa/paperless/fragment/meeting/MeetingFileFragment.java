@@ -25,11 +25,14 @@ import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
 
 /**
@@ -118,7 +121,7 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
                         MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
 //                        String fileName = documentBean.getFileName();
 //                        if (FileUtil.isDocumentFile(fileName)) {//文档类
-                            mFileData.add(documentBean);
+                        mFileData.add(documentBean);
 //                        }
                     }
                     dataAdapter.notifyDataSetChanged();
@@ -334,9 +337,9 @@ public class MeetingFileFragment extends BaseFragment implements View.OnClickLis
         if (dataAdapter.PAGE_NOW <= 0) {
             rightmeetfile_prepage.setEnabled(false);
             //如果不设置的话，只要进入一次else if ，那么下一页按钮就一直是false，不可点击状态
-            if(mFileData.size()>dataAdapter.ITEM_COUNT) {
+            if (mFileData.size() > dataAdapter.ITEM_COUNT) {
                 rightmeetfile_nextpage.setEnabled(true);
-            }else {
+            } else {
                 rightmeetfile_nextpage.setEnabled(false);
             }
         }

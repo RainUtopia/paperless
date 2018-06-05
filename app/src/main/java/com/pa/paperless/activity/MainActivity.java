@@ -300,8 +300,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         if (NetworkUtil.isNetworkAvailable(mContext)) {
             //  初始化无纸化网络平台
             nativeUtil.javaInitSys();
-            serviceIntent = new Intent(this, PlayService.class);
-            startService(serviceIntent);
+//            serviceIntent = new Intent(this, PlayService.class);
+//            startService(serviceIntent);
         } else {
             setPBGone();
             Toast.makeText(mContext, "请检查网络连接", Toast.LENGTH_SHORT).show();
@@ -397,7 +397,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        stopService(serviceIntent);
+//        stopService(serviceIntent);
 
         Log.e(TAG, "MainActivity.onDestroy : 销毁  --->>> ");
     }

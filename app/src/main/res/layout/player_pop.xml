@@ -40,7 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:text="参会人" />
+                    android:text="参会人"
+                    android:textColor="@color/black" />
 
                 <CheckBox
                     android:id="@+id/players_all_cb"
@@ -48,7 +49,8 @@
                     android:layout_height="wrap_content"
                     android:button="@drawable/select_check"
                     android:padding="5dp"
-                    android:text="全选" />
+                    android:text="全选"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -78,7 +80,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:text="投影机" />
+                    android:text="投影机"
+                    android:textColor="@color/black" />
 
                 <CheckBox
                     android:id="@+id/projector_all_cb"
@@ -86,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:button="@drawable/select_check"
                     android:padding="5dp"
-                    android:text="全选" />
+                    android:text="全选"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView

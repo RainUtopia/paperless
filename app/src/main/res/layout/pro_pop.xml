@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="选择投影机"
-            android:textColor="@android:color/black"
+            android:text="@string/choose_projection"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <CheckBox
@@ -25,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:text="全选" />
+            android:text="@string/all_choose"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <ImageView
@@ -35,10 +36,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pro_rl"
-        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:padding="20dp" />
 
     <LinearLayout
 
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/leftsel"
-            android:text="确定"
+            android:text="@string/ensure"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rightsel"
-            android:text="取消"
+            android:text="@string/cancel"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>

@@ -34,9 +34,6 @@ public class ScreenUtils {
 
     /**
      * 获得屏幕高度
-     *
-     * @param context
-     * @return
      */
     public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context
@@ -48,9 +45,6 @@ public class ScreenUtils {
 
     /**
      * 获得屏幕宽度
-     *
-     * @param context
-     * @return
      */
     public static int getScreenHeight(Context context) {
         WindowManager wm = (WindowManager) context
@@ -60,10 +54,9 @@ public class ScreenUtils {
         return outMetrics.heightPixels;
     }
 
+
     /**
      * 获得状态栏的高度
-     *
-     * @param context
      * @return
      */
     public static int getStatusHeight(Context context) {
@@ -103,8 +96,6 @@ public class ScreenUtils {
 
     /**
      * 标题栏高度
-     *
-     * @return
      */
     public static int getTitleHeight(Activity activity) {
         return activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
@@ -112,8 +103,6 @@ public class ScreenUtils {
 
     /**
      * 去除状态栏的屏幕高度
-     *
-     * @return
      */
     public static int getContentHeight(Context context) {
         return getScreenHeight(context) - getStatusHeight(context);
@@ -121,35 +110,22 @@ public class ScreenUtils {
 
     /**
      * 获取当前屏幕截图，包含状态栏
+     * 问题：状态栏只有背景颜色 无内容
      */
     public static Bitmap snapShotWithStatusBar(Activity activity) {
+        //获取Windows中最顶层的view
         Window window = activity.getWindow();
         View view = window.getDecorView();
+        //允许当前窗口保存缓存信息
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
+
         Bitmap bmp = view.getDrawingCache();
         int width = getScreenWidth(activity);
         int height = getScreenHeight(activity);
-        Log.e("MyLog","ScreenUtils.snapShotWithStatusBar 133行:  截图的宽高 --->>> "+width+"  "+height);
-        Bitmap bp = null;
-        bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
+        Log.e("MyLog", "ScreenUtils.snapShotWithStatusBar 133行:  截图的宽高 --->>> " + width + "  " + height);
+        Bitmap bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
         view.destroyDrawingCache();
-        /** **** **  保存到本地  ** **** **/
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
-//        File file = new File(Macro.MEETFILE);
-//        if(!file.exists()){
-//            file.mkdir();
-//        }
-//        String name = Macro.MEETFILE + sdf.format(new Date()) + ".png";
-//        if (null != bp) {
-//            try {
-//                FileOutputStream fos = new FileOutputStream(name);
-//                bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//                Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
         return bp;
 
     }
@@ -162,6 +138,7 @@ public class ScreenUtils {
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
         Bitmap bmp = view.getDrawingCache();
+        //获取状态栏的高度
         Rect frame = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top;
@@ -169,9 +146,14 @@ public class ScreenUtils {
         int width = getScreenWidth(activity);
         int height = getScreenHeight(activity);
         Bitmap bp = null;
-        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height
-                - statusBarHeight);
+        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height - statusBarHeight);
         view.destroyDrawingCache();
         return bp;
+    }
+
+    public static Bitmap screenShotWithoutStatusBar() {
+
+
+        return null;
     }
 }

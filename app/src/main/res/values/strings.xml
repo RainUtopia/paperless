@@ -43,4 +43,28 @@
     <string name="file_name">文件名</string>
     <string name="size">大小</string>
     <string name="upload">上传</string>
+    <!--Fab 文本-->
+    <string name="screen_control">同屏控制</string>
+    <string name="model">模式</string>
+    <string name="every_one">所有人</string>
+    <string name="choose_player">选择参会人</string>
+    <string name="projection">投影</string>
+    <string name="all_projection">所有投影机</string>
+    <string name="choose_projection">选择投影机</string>
+    <string name="join_screen">加入同屏</string>
+    <string name="cancel">取消</string>
+    <!--投影控制-->
+    <string name="pro_control">投影控制</string>
+    <string name="apply_pro">申请投影</string>
+    <string name="stop_pro">结束投影</string>
+    <!--投影机列表-->
+    <string name="all_choose">全选</string>
+    <string name="ensure">确定</string>
+    <string name="exit">退出</string>
+    <string name="meet_note">会议笔记</string>
+    <string name="clear_all">清空内容</string>
+    <string name="import_note">导入</string>
+    <string name="back">返回</string>
+    <string name="call_serve">呼叫服务</string>
+    <string name="screen_shot">截图批注</string>
 </resources>

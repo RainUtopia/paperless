@@ -85,7 +85,7 @@ public class WebBrowseFragment extends BaseFragment{
         s.setSaveFormData(true);
         s.setJavaScriptEnabled(true);
         s.setGeolocationEnabled(true);
-        s.setGeolocationDatabasePath("http://www.cvbaoli.com/webak/public/showAgreement");
+//        s.setGeolocationDatabasePath("http://www.cvbaoli.com/webak/public/showAgreement");
         s.setDomStorageEnabled(true);
         mWebView.setWebViewClient(new WebViewClient() {
             // 重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边

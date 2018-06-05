@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/dialog"
     android:orientation="vertical">
 
@@ -20,7 +20,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s1"
             android:gravity="center"
-            android:text="纸" />
+            android:text="纸"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/pen_msg"
@@ -30,7 +31,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s2"
             android:gravity="center"
-            android:text="笔" />
+            android:text="笔"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tea_msg"
@@ -40,7 +42,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s3"
             android:gravity="center"
-            android:text="茶水" />
+            android:text="茶水"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/water_msg"
@@ -50,7 +53,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s4"
             android:gravity="center"
-            android:text="矿泉水" />
+            android:text="矿泉水"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +72,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s5"
             android:gravity="center"
-            android:text="计算器" />
+            android:text="计算器"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/waiter_msg"
@@ -78,7 +83,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s6"
             android:gravity="center"
-            android:text="服务员" />
+            android:text="服务员"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/sweep_msg"
@@ -88,7 +94,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s7"
             android:gravity="center"
-            android:text="清扫" />
+            android:text="清扫"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/technician_msg"
@@ -98,7 +105,8 @@
             android:clickable="true"
             android:drawableTop="@drawable/s8"
             android:gravity="center"
-            android:text="技术员" />
+            android:text="技术员"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,12 +123,14 @@
             android:background="@drawable/chat_edt"
             android:orientation="horizontal">
 
+
             <EditText
                 android:id="@+id/edt_msg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
-                android:background="@null" />
+                android:background="@null"
+                android:textColor="@color/black" />
 
             <ImageView
                 android:layout_width="1dp"
@@ -132,13 +142,13 @@
                 android:id="@+id/send_msg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:textSize="20sp"
                 android:layout_weight="2"
-                android:textStyle="bold"
                 android:clickable="true"
                 android:gravity="center"
                 android:text="发送"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

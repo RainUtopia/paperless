@@ -301,12 +301,12 @@ public class NativeUtil {
 
 
     //  20.回到主界面操作
-    public boolean backToMainInterfaceOperate() {
+    public boolean backToMainInterfaceOperate(int devid) {
         InterfaceDevice.pbui_MeetDoToHomePage.Builder builder = InterfaceDevice.pbui_MeetDoToHomePage.newBuilder();
-//        builder.setDevid()
+        builder.addDevid(devid);
         InterfaceDevice.pbui_MeetDoToHomePage build = builder.build();
         byte[] bytes = build.toByteArray();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEVICEOPER.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_BACK.getNumber(), bytes);
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_DEVICEOPER.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_BACK.getNumber(), bytes);
         Log.e("MyLog", "NativeUtil.backToMainInterfaceOperate:  20.回到主界面操作 --->>> ");
         return true;
     }
@@ -3497,6 +3497,7 @@ public class NativeUtil {
             }
             case 4://start capture
             {
+                Log.e(TAG, "NativeUtil.callback :  采集流通知 -->   :" + type);
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.START_COLLECTION_STREAM_NOTIFY, type));
                 return 0;
             }
@@ -3540,7 +3541,7 @@ public class NativeUtil {
                 int mediaid = pbui_type_downloadCb.getMediaid();
                 int progress = pbui_type_downloadCb.getProgress();
                 int nstate = pbui_type_downloadCb.getNstate();//下载状态， 下载中/下载结束...
-                if(nstate == InterfaceMacro.Pb_Download_State.Pb_STATE_MEDIA_DOWNLOAD_WORKING.getNumber()) {
+                if (nstate == InterfaceMacro.Pb_Download_State.Pb_STATE_MEDIA_DOWNLOAD_WORKING.getNumber()) {
                     //设置只在下载中发送通知
                     Log.e("CaseLog", "NativeUtil.callback_method:  67 下载进度回调  -- 高频回调 --->>> " + progress + "   mediaid: " + mediaid);
                     EventBus.getDefault().post(new EventMessage(IDEventMessage.DOWN_FINISH, pbui_type_downloadCb));
@@ -3857,8 +3858,7 @@ public class NativeUtil {
                 break;
             case 47://246-247
                 if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber()) {
-                    InterfaceStop.pbui_Type_MeetStopResWork stopResourceInform = InterfaceStop.pbui_Type_MeetStopResWork.getDefaultInstance();
-                    InterfaceStop.pbui_Type_MeetStopResWork pbui_type_meetStopResWork = stopResourceInform.parseFrom(data);
+                    EventBus.getDefault().post(new EventMessage(IDEventMessage.stop_stram_inform,InterfaceStop.pbui_Type_MeetStopResWork.parseFrom(data)));
                     Log.e("CaseLog", "NativeUtil.callback_method:  246 停止资源通知 --->>> ");
                 } else if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY.getNumber()) {
                     InterfaceStop.pbui_Type_MeetStopPlay pbui_type_meetStopPlay = InterfaceStop.pbui_Type_MeetStopPlay.parseFrom(data);

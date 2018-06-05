@@ -12,5 +12,5 @@
         android:layout_height="wrap_content"
         android:background="@drawable/select_rect_btn"
         android:text="参会人"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@drawable/text_color_s" />
 </LinearLayout>

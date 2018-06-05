@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="同屏控制"
+            android:text="@string/screen_control"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -41,7 +42,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="模式" />
+                        android:text="@string/model"
+                        android:textColor="@color/black" />
 
                     <RadioGroup
                         android:layout_width="wrap_content"
@@ -56,7 +58,8 @@
                             android:layout_weight="1"
                             android:button="@drawable/select_check"
                             android:padding="5dp"
-                            android:text="所有人" />
+                            android:text="@string/every_one"
+                            android:textColor="@color/black" />
 
                         <RadioButton
                             android:id="@+id/players"
@@ -65,7 +68,8 @@
                             android:layout_weight="1"
                             android:button="@drawable/select_check"
                             android:padding="5dp"
-                            android:text="选择参会人" />
+                            android:text="@string/choose_player"
+                            android:textColor="@color/black" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -81,7 +85,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="投影" />
+                        android:text="@string/projection"
+                        android:textColor="@color/black" />
+
                     <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,7 +101,8 @@
                             android:layout_weight="1"
                             android:button="@drawable/select_check"
                             android:padding="5dp"
-                            android:text="所有投影机" />
+                            android:text="@string/all_projection"
+                            android:textColor="@color/black" />
 
                         <RadioButton
                             android:id="@+id/choose_projector"
@@ -104,7 +111,8 @@
                             android:layout_weight="1"
                             android:button="@drawable/select_check"
                             android:padding="5dp"
-                            android:text="选择投影机" />
+                            android:text="@string/choose_projection"
+                            android:textColor="@color/black" />
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
@@ -122,7 +130,8 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:background="@drawable/select_press"
-                    android:text="同屏控制" />
+                    android:text="@string/screen_control"
+                    android:textColor="@color/black" />
 
                 <Button
                     android:id="@+id/stop_btn"
@@ -131,7 +140,8 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:background="@drawable/select_press"
-                    android:text="停止同屏" />
+                    android:text="@string/postil_5"
+                    android:textColor="@color/black" />
 
                 <Button
                     android:id="@+id/join_btn"
@@ -139,7 +149,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/select_press"
-                    android:text="加入同屏" />
+                    android:text="@string/join_screen"
+                    android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
 
@@ -150,8 +161,8 @@
             android:layout_gravity="bottom"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_enter"
-            android:text="取消" />
-
+            android:text="@string/cancel"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 </LinearLayout>

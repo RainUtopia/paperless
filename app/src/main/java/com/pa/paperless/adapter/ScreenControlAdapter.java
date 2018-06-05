@@ -2,6 +2,7 @@ package com.pa.paperless.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,8 @@ import com.pa.paperless.listener.ItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.checks;
-import static com.pa.paperless.activity.PeletteActivity.boardCheck;
+//import static com.pa.paperless.activity.MeetingActivity.checks;
+import static com.pa.paperless.service.FabService.checks;
 
 
 /**
@@ -25,12 +26,13 @@ import static com.pa.paperless.activity.PeletteActivity.boardCheck;
 
 public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
+    private final String TAG = "ScreenControlAdapter-->";
     private List<DevMember> mData;
     private ItemClickListener mListener;
 
     public ScreenControlAdapter(List<DevMember> datas) {
         mData = datas;
+        Log.e(TAG, "ScreenControlAdapter.ScreenControlAdapter :  选中参会人集合 --> "+checks.toString());
     }
 
     /**
@@ -40,6 +42,7 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     public List<DevMember> getCheckedIds() {
         List<DevMember> checkedId = new ArrayList<>();
+        Log.e(TAG, "ScreenControlAdapter.getCheckedIds :  选中参会人集合 --> "+checks.toString());
         if (mData.size() > 0) {
             for (int i = 0; i < checks.size(); i++) {
                 if (checks.get(i)) {
@@ -53,11 +56,9 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_paly_rl, parent, false);
         ViewHolder holder = new ViewHolder(inflate);
         return holder;
-
     }
 
     @Override

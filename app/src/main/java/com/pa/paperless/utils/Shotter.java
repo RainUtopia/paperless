@@ -45,13 +45,13 @@ public class Shotter {
     private OnShotListener mOnShotListener;
 
 
-    public Shotter(Context context, Intent data) {
+    public Shotter(Context context,int resultCode, Intent data) {
         this.mRefContext = new SoftReference<>(context);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
 
-            mMediaProjection = getMediaProjectionManager().getMediaProjection(Activity.RESULT_OK,
+            mMediaProjection = getMediaProjectionManager().getMediaProjection(/*Activity.RESULT_OK*/resultCode,
                     data);
 
             mImageReader = ImageReader.newInstance(
@@ -101,7 +101,7 @@ public class Shotter {
                                         AsyncTaskCompat.executeParallel(new SaveTask(), image);
                                     }
                                 },
-                    300);
+                    500);
 
         }
 

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/pop_bg"
-    tools:context="com.pa.paperless.activity.FabActivity">
+    android:background="@drawable/fab_bg_shape"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,10 +18,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:clickable="true"
-            android:drawableTop="@drawable/keyboard"
             android:gravity="center"
-            android:text="软键盘"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/screens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawableTop="@drawable/screenshot"
+            android:gravity="center"
+            android:text="@string/screen_shot"
             android:textColor="@color/white" />
 
         <TextView
@@ -32,22 +36,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:clickable="true"
-            android:drawableTop="@drawable/writingboard"
             android:gravity="center"
-            android:text="手写"
             android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/screens"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:drawableTop="@drawable/screenshot"
-            android:gravity="center"
-            android:text="桌面截图"
-            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +56,7 @@
             android:clickable="true"
             android:drawableTop="@drawable/sscreen"
             android:gravity="center"
-            android:text="同屏控制"
+            android:text="@string/screen_control"
             android:textColor="@color/white" />
 
         <TextView
@@ -76,7 +67,7 @@
             android:clickable="true"
             android:drawableTop="@drawable/back_pop"
             android:gravity="center"
-            android:text="返回"
+            android:text="@string/back"
             android:textColor="@color/white" />
 
         <TextView
@@ -87,7 +78,7 @@
             android:clickable="true"
             android:drawableTop="@drawable/projective"
             android:gravity="center"
-            android:text="投影控制"
+            android:text="@string/pro_control"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -102,22 +93,24 @@
             android:id="@+id/note"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_toRightOf="@id/one_screen"
+            android:layout_weight="3"
             android:clickable="true"
-            android:drawableTop="@drawable/note"
             android:gravity="center"
-            android:text="会议笔记"
+            android:drawableTop="@drawable/note"
+            android:text="@string/meet_note"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/call_service"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/note"
             android:layout_weight="1"
             android:clickable="true"
-            android:drawableTop="@drawable/service"
             android:gravity="center"
-            android:text="呼叫服务"
+            android:drawableTop="@drawable/service"
+            android:text="@string/call_serve"
             android:textColor="@color/white" />
 
         <TextView
@@ -125,11 +118,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:clickable="true"
-            android:drawableTop="@drawable/multipostil"
             android:gravity="center"
-            android:text="电子白板"
             android:textColor="@color/white" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -13,8 +13,10 @@ import com.pa.paperless.listener.ItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.checkProAll;
-import static com.pa.paperless.activity.MeetingActivity.checkProOL;
+//import static com.pa.paperless.activity.MeetingActivity.checkProAll;
+//import static com.pa.paperless.activity.MeetingActivity.checkProOL;
+import static com.pa.paperless.service.FabService.checkProAll;
+import static com.pa.paperless.service.FabService.checkProOL;
 
 /**
  * Created by Administrator on 2018/3/3.
@@ -85,7 +87,6 @@ public class OnLineProjectorAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_paly_rl, parent, false);
         ViewHolder holder = new ViewHolder(inflate);
         return holder;

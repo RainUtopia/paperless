@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -89,6 +90,7 @@ public class MyUtils {
     public static final String TAG = "MyUtils-->";
 
     public static File mFile;
+
     public static int getMediaid(String path) {
         //其它
         if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
@@ -149,12 +151,38 @@ public class MyUtils {
         return 0;
     }
 
-    public static File getmFile(){
+    public static File getmFile() {
         return mFile;
     }
 
-    public static void setFile(File f){
+    public static void setFile(File f) {
         mFile = f;
+    }
+
+    /**
+     * @param mContext  上下文
+     * @param className 是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
+     * @return true 表示正在运行
+     */
+    public static boolean isServiceRunning(Context mContext, String className) {
+        boolean isRunning = false;
+        ActivityManager activityManager = (ActivityManager) mContext
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> serviceList = activityManager
+                .getRunningServices(30);
+
+        if (!(serviceList.size() > 0)) {
+            return false;
+        }
+        Log.e("OnlineService：", className);
+        for (int i = 0; i < serviceList.size(); i++) {
+            Log.e("serviceName：", serviceList.get(i).service.getClassName());
+            if (serviceList.get(i).service.getClassName().contains(className) == true) {
+                isRunning = true;
+                break;
+            }
+        }
+        return isRunning;
     }
 
     // 缩放图片
@@ -325,7 +353,7 @@ public class MyUtils {
 //                                }
 //                            }).show();
 //                    FileUtil.openFile(context, file);
-                    OpenThisFile(context,file);
+                    OpenThisFile(context, file);
                 } else {//没下载完成，或者是旧的文件
                     //目前采用，删除未完成的再重新下载
                     file.delete();
@@ -343,16 +371,10 @@ public class MyUtils {
             //先创建好目录
             CreateFile(dir);
             dir += filename;
+            Log.e(TAG, "MyUtils.openFile :  要打开的文件 --> " + dir);
             File file1 = new File(dir);
-            if (!file1.exists() || file1.length() != filesize) {
+            if (!file1.exists() || file1.length() != filesize) {//本地不存在或者大小不一致
                 final String finalFile = dir;
-//                Snackbar.make(coordinatorLayout, " 文件不存在，是否立即下载？ ", Snackbar.LENGTH_LONG)
-//                        .setAction("立即下载", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
-//                            }
-//                        }).show();
                 nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
             } else {
                 OpenThisFile(context, file1);
@@ -364,12 +386,12 @@ public class MyUtils {
     public static void OpenThisFile(Context context, File file1) {
         setFile(file1);
         String filename = file1.getName();
-        Log.e(TAG, "MyUtils.OpenThisFile :   --> "+filename);
+        Log.e(TAG, "MyUtils.OpenThisFile :   --> " + filename);
         if (FileUtil.isPictureFile(filename)) {
             /** **** **  如果是图片文件则使用自己的打开  ** **** **/
             Log.e(TAG, "MyUtils.openFile :  图片文件 --> ");
-            EventBus.getDefault().post(new EventMessage(IDEventF.open_picture,file1.getAbsolutePath()));
-        }else if(FileUtil.isDocumentFile(filename)){
+            EventBus.getDefault().post(new EventMessage(IDEventF.open_picture, file1.getAbsolutePath()));
+        } else if (FileUtil.isDocumentFile(filename)) {
             /** **** **  如果是文档类文件，设置只能使用WPS软件打开  ** **** **/
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
@@ -394,11 +416,10 @@ public class MyUtils {
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                System.out.println("打开wps异常："+e.toString());
+                System.out.println("打开wps异常：" + e.toString());
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             //已经存在才打开文件
             Intent intent = new Intent();
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

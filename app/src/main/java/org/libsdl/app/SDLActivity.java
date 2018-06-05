@@ -20,6 +20,8 @@ import android.hardware.SensorManager;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -51,6 +53,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
@@ -61,14 +64,19 @@ import com.mogujie.tt.protobuf.InterfaceStream;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.bean.DeviceInfo;
+import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.fab.FabInfo;
 import com.pa.paperless.listener.CallListener;
+import com.pa.paperless.service.FabService;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
+import com.wind.myapplication.CameraDemo;
 import com.wind.myapplication.NativeUtil;
+import com.wind.myapplication.ScreenRecorder;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -84,15 +92,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY;
+import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
 
 /**
  * SDL Activity
  */
 public class SDLActivity extends Activity {
 
-    NativeUtil nativeUtil;
+    //    NativeUtil nativeUtil;
     public static InterfacePlaymedia.pbui_Type_MeetMediaPlay meetMediaPlay;
     public static InterfaceStream.pbui_Type_MeetStreamPlay meetStreamPlay;
+    private MediaProjectionManager manager;
+    private MediaProjection projection;
+    private int width, height, dpi, bitrate, VideoQuality = 1;//VideoQuality:1/2/3
+    private ScreenRecorder recorder;
 
     public static int getLineNumber(Exception e) {
         StackTraceElement[] trace = e.getStackTrace();
@@ -142,6 +155,7 @@ public class SDLActivity extends Activity {
         return new String[]{path};
     }
 
+
     public static void initialize() {
         // The static nature of the singleton and Android quirkyness force us to initialize everything here
         // Otherwise, when exiting the app and returning to it, these variables *keep* their pre exit values
@@ -159,11 +173,30 @@ public class SDLActivity extends Activity {
         mHasFocus = true;
     }
 
+
+    @Override
+    protected void onStart() {
+        Log.e("SDL_life", "onStart :   --->>> ");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.e("SDL_life", "onStop :   --->>> ");
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.e("SDL_life", "onRestart :   --->>> ");
+        super.onRestart();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         releaseMediaRes();
-        Log.e("MyLog", "SDLActivity.onBackPressed:   --->>> ");
+        Log.e("SDL_life", "SDLActivity.onBackPressed:   --->>> ");
     }
 
     public void releaseMediaRes() {
@@ -171,12 +204,27 @@ public class SDLActivity extends Activity {
         List<Integer> a = new ArrayList<Integer>();
         List<Integer> b = new ArrayList<Integer>();
         a.add(0);
-        b.add(MeetingActivity.getDevId());
+        b.add(0);
         /** ************ ******  停止资源操作  ****** ************ **/
         nativeUtil.stopResourceOperate(a, b);
         /** ************ ******  释放播放资源  ****** ************ **/
 //        nativeUtil.mediaDestroy(0);
         moveTaskToBack(true);
+    }
+
+    private void initScreenParam() {
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        width = metric.widthPixels; // �屏幕宽度（像素）
+        height = metric.heightPixels; // �屏幕高度（像素）
+        Log.v(TAG, "ScreenSize: width=" + width + " height=" + height);
+        if (width > 1920)
+            width = 1920;
+        if (height > 1080)
+            height = 1080;
+        Log.i(TAG, "w:" + width + "/h:" + height);
+        dpi = metric.densityDpi; // �屏幕密度DPI（120 / 160 / 240）
+        bitrate = width * height * VideoQuality;//�比特率/码率
     }
 
     // Setup
@@ -186,7 +234,8 @@ public class SDLActivity extends Activity {
         Log.v(TAG, "Model: " + Build.MODEL);
         Log.v(TAG, "onCreate(): " + mSingleton);
         super.onCreate(savedInstanceState);
-
+        initScreenParam();
+        EventBus.getDefault().register(this);
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         screenw = metric.widthPixels; // �屏幕宽度（像素）
@@ -216,7 +265,7 @@ public class SDLActivity extends Activity {
             e.printStackTrace();
         }
 
-        nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = NativeUtil.getInstance();
         SDLActivity.initialize();
         // So we can call stuff from static callbacks
         mSingleton = this;
@@ -280,27 +329,24 @@ public class SDLActivity extends Activity {
                 SDLActivity.onNativeDropFile(filename);
             }
         }
-
-        EventBus.getDefault().register(this);
         Log.i("onCreate", "onCreate finish!");
+
     }
 
     // Events
     @Override
     protected void onPause() {
-        Log.v(TAG, "onPause()");
+        Log.v("SDL_life", "onPause()");
         super.onPause();
-
         if (SDLActivity.mBrokenLibraries) {
             return;
         }
-
         SDLActivity.handlePause();
     }
 
     @Override
     protected void onResume() {
-        Log.v(TAG, "onResume()");
+        Log.e("SDL_life", "onResume :   --> ");
         super.onResume();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -348,13 +394,10 @@ public class SDLActivity extends Activity {
     @Override
     protected void onDestroy() {
         EventBus.getDefault().post(new EventMessage(0, 0));
-
         releaseMediaRes();
-        Log.v(TAG, "onDestroy()");
-        Log.e("MyLog", "SDLActivity.onDestroy 315行:   --->>> ");
+        Log.v("SDL_life", "onDestroy()");
         if (SDLActivity.mBrokenLibraries) {
             super.onDestroy();
-            Log.e("MyLog", "SDLActivity.onDestroy 318行:   --->>> ");
             // Reset everything in case the user re opens the app
             onNativeSurfaceDestroyed();
             SDLActivity.initialize();
@@ -365,13 +408,11 @@ public class SDLActivity extends Activity {
         SDLActivity.mExitCalledFromJava = true;
 //        SDLActivity.nativeQuit();
         onNativeSurfaceDestroyed();
-        Log.e("MyLog", "SDLActivity.onDestroy 327行:   --->>> ");
 
         // Now wait for the SDL thread to quit
         if (SDLActivity.mSDLThread != null) {
             try {
                 SDLActivity.mSDLThread.join();
-                Log.e("MyLog", "SDLActivity.onDestroy 333行:   --->>> ");
             } catch (Exception e) {
                 Log.v(TAG, "Problem stopping thread: " + e);
             }
@@ -384,7 +425,6 @@ public class SDLActivity extends Activity {
         SDLActivity.initialize();
 
         EventBus.getDefault().unregister(this);
-        Log.e("MyLog", "SDLActivity.onDestroy 346行:   --->>> ");
     }
 
     @Override
@@ -1131,7 +1171,7 @@ class SDLMain implements Runnable {
 //        Log.i( "SDLMain", "SDLMain finish!");
 //        //Log.v("SDL", "SDL thread terminated");
 //
-        fdd = NativeUtil.getInstance();
+//        fdd = NativeUtil.getInstance();
 //        fdd.javaInitSys();
 //        new Thread() {
 //            @Override
@@ -1151,7 +1191,7 @@ class SDLMain implements Runnable {
 
 
         try {
-            fdd.initvideores(/*0, 0, SDLActivity.screenw, SDLActivity.screenh*/);
+            nativeUtil.initvideores(/*0, 0, SDLActivity.screenw, SDLActivity.screenh*/);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -1166,7 +1206,7 @@ class SDLMain implements Runnable {
  * Because of this, that's where we set up the SDL thread
  */
 class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
-        View.OnKeyListener, View.OnTouchListener, SensorEventListener, View.OnClickListener, CallListener {
+        View.OnKeyListener, View.OnTouchListener, SensorEventListener, View.OnClickListener {
 
     // Sensors
     protected static SensorManager mSensorManager;
@@ -1178,7 +1218,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     //add by gowcage
     private Context context;
     private PopupWindow popupWindow;
-    private NativeUtil nativeUtil;
+    //    private NativeUtil nativeUtil;
     private boolean isPause = false, isShare = false;//isShare,是否处于共享中
     // 参见Interface_main.proto中的播放进度通知
     private int mediaId = 0, status = 2, per = 0,//当前播放的媒体 ID、状态、百分比；
@@ -1199,7 +1239,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         setOnTouchListener(this);
         setOnClickListener(this);
         EventBus.getDefault().register(this);
-        nativeUtil = NativeUtil.getInstance();
+//        nativeUtil = NativeUtil.getInstance();
 
         mDisplay = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -1232,7 +1272,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     public void surfaceCreated(SurfaceHolder holder) {
         Log.v("SDL", "surfaceCreated()");
         holder.setType(SurfaceHolder.SURFACE_TYPE_GPU);
-        nativeUtil.setCallListener(this);
+//        nativeUtil.setCallListener(this);
         try {
             nativeUtil.queryDeviceInfo();
         } catch (InvalidProtocolBufferException e) {
@@ -1475,52 +1515,60 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                 if (tv_curTime != null)
                     tv_curTime.setText("" + DateUtil.convertTime(sec));
                 break;
+            case IDEventF.fab_member_pro:
+                FabInfo fabInfo = (FabInfo) message.getObject();
+                onlineProjectors = fabInfo.getOnLineProjectors();
+                for (int i = 0; i < onlineProjectors.size(); i++) {
+                    onlineProjectorIds.add(onlineProjectors.get(i).getDevId());
+                }
+                onlineClientIds = fabInfo.getOnlineClientIds();
+                break;
         }
     }
 
     //在线投影机
-    private ArrayList onlineProjectors = new ArrayList();
+    private List<DeviceInfo> onlineProjectors = new ArrayList();
     private ArrayList onlineProjectorIds = new ArrayList();
-    private ArrayList onlineClientIds = new ArrayList();
+    private List<Integer> onlineClientIds = new ArrayList();
 
-    @Override
-    public void callListener(int action, Object result) {
-        switch (action) {
-            case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
-                InterfaceDevice.pbui_Type_DeviceDetailInfo devInfos = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
-                Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
-                if (devInfos != null) {
-                    InterfaceDevice.pbui_Type_DeviceDetailInfo o5 = devInfos;
-                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
-                    onlineProjectors.clear();
-                    List allProjectors = new ArrayList<>();
-                    for (int i = 0; i < deviceInfos.size(); i++) {
-                        DeviceInfo deviceInfo = deviceInfos.get(i);
-                        int netState = deviceInfo.getNetState();
-                        int devId = deviceInfo.getDevId();
-                        //判断是否是投影机
-                        if ((devId & Macro.DEVICE_MEET_PROJECTIVE) == Macro.DEVICE_MEET_PROJECTIVE) {
-                            // 添加所有投影机
-                            allProjectors.add(deviceInfo);
-                            //判断是否是在线状态
-                            if (netState == 1) {
-                                //说明是在线状态的投影机
-                                onlineProjectors.add(deviceInfo);
-                                onlineProjectorIds.add(deviceInfo.getDevId());
-                            }
-                        } else if ((devId & Macro.DEVICE_MEET_CLIENT) == Macro.DEVICE_MEET_CLIENT) {//客户端
-                            if (netState == 1 && devId != MeetingActivity.getDevId()) {
-                                onlineClientIds.add(devId);//添加在线客户端
-//                                for (int j = 0; j < onlineClientIds.size(); j++) {
-//                                    Log.i("SDLSurface-->", "onlienClient: id=" + onlineClientIds.get(j));
-//                                }
-                            }
-                        }
-                    }
-                }
-                break;
-        }
-    }
+//    @Override
+//    public void callListener(int action, Object result) {
+//        switch (action) {
+//            case IDivMessage.QUERY_DEVICE_INFO://6.查询设备信息
+//                InterfaceDevice.pbui_Type_DeviceDetailInfo devInfos = (InterfaceDevice.pbui_Type_DeviceDetailInfo) result;
+//                Log.e("MyLog", "MeetingActivity.handleMessage 184行:  查询设备信息 --->>> ");
+//                if (devInfos != null) {
+//                    InterfaceDevice.pbui_Type_DeviceDetailInfo o5 = devInfos;
+//                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(o5);
+//                    onlineProjectors.clear();
+//                    List allProjectors = new ArrayList<>();
+//                    for (int i = 0; i < deviceInfos.size(); i++) {
+//                        DeviceInfo deviceInfo = deviceInfos.get(i);
+//                        int netState = deviceInfo.getNetState();
+//                        int devId = deviceInfo.getDevId();
+//                        //判断是否是投影机
+//                        if ((devId & Macro.DEVICE_MEET_PROJECTIVE) == Macro.DEVICE_MEET_PROJECTIVE) {
+//                            // 添加所有投影机
+//                            allProjectors.add(deviceInfo);
+//                            //判断是否是在线状态
+//                            if (netState == 1) {
+//                                //说明是在线状态的投影机
+//                                onlineProjectors.add(deviceInfo);
+//                                onlineProjectorIds.add(deviceInfo.getDevId());
+//                            }
+//                        } else if ((devId & Macro.DEVICE_MEET_CLIENT) == Macro.DEVICE_MEET_CLIENT) {//客户端
+//                            if (netState == 1 && devId != MeetingActivity.getDevId()) {
+//                                onlineClientIds.add(devId);//添加在线客户端
+////                                for (int j = 0; j < onlineClientIds.size(); j++) {
+////                                    Log.i("SDLSurface-->", "onlienClient: id=" + onlineClientIds.get(j));
+////                                }
+//                            }
+//                        }
+//                    }
+//                }
+//                break;
+//        }
+//    }
 
     OnClickListener onclick = new OnClickListener() {
         @Override
@@ -1530,7 +1578,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
             res.add(0);
             switch (v.getId()) {
                 case R.id.SDL_playCtrl_btn_pause:
-                    if(!isShare)
+                    if (!isShare)
                         devIds.add(MeetingActivity.DevMeetInfo.getDeviceid());
                     if (isPause) {
                         Log.i("SDL-->", "resume");
@@ -1546,7 +1594,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     List<Integer> a = new ArrayList<Integer>();
                     List<Integer> b = new ArrayList<Integer>();
                     a.add(0);
-                    if(!isShare)
+                    if (!isShare)
                         b.add(MeetingActivity.getDevId());
                     /** ************ ******  停止资源操作  ****** ************ **/
                     nativeUtil.stopResourceOperate(a, b);
@@ -1562,7 +1610,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     nativeUtil.mediaPlayOperate(mediaId, devIds, per);
                     break;
                 case R.id.SDL_playCtrl_btn_stopShare:
-                    if(!isShare)
+                    if (!isShare)
                         break;
                     isShare = false;
 //                    devIds.add(0x110000c);
@@ -1573,7 +1621,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     nativeUtil.mediaPlayOperate(mediaId, onlineProjectorIds, per);//开始投影
                     break;
                 case R.id.SDL_playCtrl_btn_stopProjection:
-                    if(!isShare)
+                    if (!isShare)
                         break;
                     isShare = false;
                     nativeUtil.stopResourceOperate(res, onlineProjectorIds);

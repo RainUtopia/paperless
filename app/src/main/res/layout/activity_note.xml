@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/edt_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/popTitleBackColor">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="5dp"
+            android:text="@string/meet_note"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:padding="5dp"
+            android:text="@string/clear_all"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <!--<ScrollView-->
+    <!--android:id="@+id/middle"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:focusable="false"-->
+    <!--android:layout_below="@id/top"-->
+    <!--android:layout_weight="1">-->
+
+    <EditText
+        android:id="@+id/edt_note"
+        style="@style/EdtTextTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:cursorVisible="true"
+        android:layout_weight="1"
+        android:background="@null"
+        android:gravity="top|left"/>
+    <!--</ScrollView>-->
+
+    <LinearLayout
+        android:id="@+id/boottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/note_import"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@color/popTitleBackColor"
+            android:text="@string/import_note"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/note_save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@color/popTitleBackColor"
+            android:text="@string/postil_1"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/note_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/popTitleBackColor"
+            android:text="@string/back"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

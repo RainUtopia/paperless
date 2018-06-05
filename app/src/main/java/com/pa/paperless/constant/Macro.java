@@ -52,7 +52,7 @@ public class Macro {
     public static String FILENAME = "client.ini";
     public static String FILENAME_DEV = "client.dev";
     //下载的文件存放目录
-    public static final String MEETFILE = SDCardUtils.getSDCardPath() + "/MEETFILE/";
+    public static final String MEETFILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MEETFILE/";
     public static final String MEETMATERIAL = MEETFILE + "会议资料/";//会议资料
     public static final String SHAREMATERIAL = MEETFILE + "共享资料/";//共享资料
     public static final String POSTILFILE = MEETFILE + "批注文件/";//批注文件

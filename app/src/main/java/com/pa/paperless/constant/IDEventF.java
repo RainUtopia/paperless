@@ -55,5 +55,10 @@ public class IDEventF {
     public static final int updata_to_postil = 6023;
     // 重新查找批注文件得到文件，与当前上传的文件进行比较
     public static final int upload_postil = 6024;
+    /** **** **  发送给悬浮窗参会人和投影机信息  ** **** **/
+    public static final int fab_member_pro = 6025;
+    //通知打开会议笔记
+    public static final int open_note = 6026;
+
 
 }

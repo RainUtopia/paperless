@@ -183,45 +183,45 @@ public class ScreenRecorder extends Thread {
                 index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);
             }
 
-            /*Log.i(TAG, "dequeue output buffer index=" + index);// �����������������
-            if (index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {// ��������ʽ�����ˣ��������������ʽ
-                resetOutputFormat();
-            } else if (index == MediaCodec.INFO_TRY_AGAIN_LATER) {// �������Ϊ-1�Ժ����ԣ���ʱ�������߳�����10����
-                Log.d(TAG, "������������ʱ!");
-                try {
-                    // wait 10ms
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                }
-            } else {
-                while (index >= 0) {// index>=0Ϊ��Ч���
-                    if (!muxerStarted) {// ���muxerδ����
-                        throw new IllegalStateException("MediaMuxer dose not call addTrack(format) ");
-                    }
-//                    encodeToVideoTrack(index);// ���뵽��Ƶ���
-
-                    //--
-                    *//*ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
-                    ByteBuffer outputBuffer = outputBuffers[index];
-                    byte[] outData = new byte[bufferInfo.size];
-                    outputBuffer.get(outData);
-                    if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
-                        configbyte = new byte[bufferInfo.size];
-                        configbyte = outData;
-                    } else if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_KEY_FRAME) {
-                        byte[] keyframe = new byte[bufferInfo.size + configbyte.length];
-                        System.arraycopy(configbyte, 0, keyframe, 0, configbyte.length);
-                        System.arraycopy(outData, 0, keyframe, configbyte.length, outData.length);
-                        //jni
-                    } else {
-                        //jni
-                    }*//*
-                    //--
-
-                    encoder.releaseOutputBuffer(index, false);// �ͷ�����ɵ�����
-//                    index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);
-                }
-            }*/
+//            Log.i(TAG, "dequeue output buffer index=" + index);// �����������������
+//            if (index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {// ��������ʽ�����ˣ��������������ʽ
+//                resetOutputFormat();
+//            } else if (index == MediaCodec.INFO_TRY_AGAIN_LATER) {// �������Ϊ-1�Ժ����ԣ���ʱ�������߳�����10����
+//                Log.d(TAG, "������������ʱ!");
+//                try {
+//                    // wait 10ms
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                }
+//            } else {
+//                while (index >= 0) {// index>=0Ϊ��Ч���
+//                    if (!muxerStarted) {// ���muxerδ����
+//                        throw new IllegalStateException("MediaMuxer dose not call addTrack(format) ");
+//                    }
+////                    encodeToVideoTrack(index);// ���뵽��Ƶ���
+//
+//                    //--
+//                    *//*ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
+//                    ByteBuffer outputBuffer = outputBuffers[index];
+//                    byte[] outData = new byte[bufferInfo.size];
+//                    outputBuffer.get(outData);
+//                    if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
+//                        configbyte = new byte[bufferInfo.size];
+//                        configbyte = outData;
+//                    } else if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_KEY_FRAME) {
+//                        byte[] keyframe = new byte[bufferInfo.size + configbyte.length];
+//                        System.arraycopy(configbyte, 0, keyframe, 0, configbyte.length);
+//                        System.arraycopy(outData, 0, keyframe, configbyte.length, outData.length);
+//                        //jni
+//                    } else {
+//                        //jni
+//                    }*//*
+//                    //--
+//
+//                    encoder.releaseOutputBuffer(index, false);// �ͷ�����ɵ�����
+////                    index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);
+//                }
+//            }
         }
     }
 

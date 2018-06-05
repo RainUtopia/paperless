@@ -384,10 +384,18 @@ public class Export {
      * @param content
      * @param fileName
      */
-    public static boolean ToNoteText(String content, String fileName) {
+    public static boolean ToNoteText(String content, String fileName, String filepath) {
+        File file = new File(filepath + fileName + ".txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         boolean b = true;
         try {
-            FileWriter fw = new FileWriter("/sdcard/" + fileName + ".txt");
+            FileWriter fw = new FileWriter(filepath + fileName + ".txt");
             fw.flush();
             fw.write(content);
             fw.close();

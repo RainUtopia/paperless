@@ -18,4 +18,9 @@
     <!--popupWindow 输入框背景色-->
     <color name="popEditTextColor">#b6cce6</color>
 
+    <drawable name="text_color_n">#619ce1</drawable>
+    <drawable name="text_color_p">#ffffff</drawable>
+
+    <color name="edt_bg">#dbd6d6</color>
+
 </resources>

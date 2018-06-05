@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/postil_layout_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,12 +9,13 @@
         android:id="@+id/postil_image"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="8" />
+        android:layout_weight="4"
+        android:background="@color/white" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:background="@drawable/bg"
         android:orientation="vertical">
 
@@ -58,12 +57,12 @@
         <Button
             android:id="@+id/postil_pre"
             style="@style/postil_button"
-            android:text="@string/postil_8" />
+            android:text="@string/exit" />
 
-        <Button
-            android:id="@+id/postil_next"
-            style="@style/postil_button"
-            android:text="@string/postil_9" />
+        <!--<Button-->
+            <!--android:id="@+id/postil_next"-->
+            <!--style="@style/postil_button"-->
+            <!--android:text="@string/postil_9" />-->
     </LinearLayout>
 
 </LinearLayout>
