@@ -1,9 +1,9 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
+import com.mogujie.tt.protobuf.InterfaceFile;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.TypeFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
@@ -20,18 +21,18 @@ import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
-import com.pa.paperless.utils.SDCardUtils;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
+import static com.pa.paperless.service.NativeService.nativeUtil;
 
 
 /**
@@ -48,7 +49,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     private Button mDocument;
     private Button mPicture;
     private List<Button> mBtns;
-    private final String TAG ="NotationFragment -->>";
+    private final String TAG = "NotationFragment -->>";
     //所有批注文件
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
     //用于临时存放不同类型的文件
@@ -76,27 +77,11 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventF.post_postil_file://收到批注文件数据
-                meetDirFileInfos = (List<MeetDirFileInfo>) message.getObject();
-                if (meetDirFileInfos != null) {
-                    if (mAdapter == null) {
-                        mAdapter = new TypeFileAdapter(getContext(), mData);
-                        mNotaLv.setAdapter(mAdapter);
-                    }
-                    mData.clear();
-                    for (int i = 0; i < meetDirFileInfos.size(); i++) {
-                        MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
-//                        String fileName = documentBean.getFileName();
-//                        if (FileUtil.isDocumentFile(fileName)) {
-                            mData.add(documentBean);
-//                        }
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    mAdapter.PAGE_NOW = 0;
-                    checkButton();
-                    setSelect(0);
-                }
-//                mDocument.performClick();
+            case IDEventF.meet_dir://收到会议目录信息
+                receiveMeetDir(message);
+                break;
+            case IDEventF.meet_dir_file://收到会议目录文件
+                receiveMeetDirFile(message);
                 break;
             case IDEventMessage.MEETDIR_FILE_CHANGE_INFORM://会议目录文件变更通知
                 if (!isHidden()) {
@@ -108,8 +93,51 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
+    private void receiveMeetDirFile(EventMessage message) {
+        InterfaceFile.pbui_Type_MeetDirFileDetailInfo object = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) message.getObject();
+        Log.e(TAG, "NotationFragment.receiveMeetDirFile :  object.getDirid() --> " + object.getDirid());
+        if (object.getDirid() == 2) {//批注文件
+            meetDirFileInfos = Dispose.MeetDirFile(object);
+            if (meetDirFileInfos != null) {
+                if (mAdapter == null) {
+                    mAdapter = new TypeFileAdapter(getContext(), mData);
+                    mNotaLv.setAdapter(mAdapter);
+                }
+                mData.clear();
+                for (int i = 0; i < meetDirFileInfos.size(); i++) {
+                    MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
+                    mData.add(documentBean);
+                }
+                mAdapter.notifyDataSetChanged();
+                mAdapter.PAGE_NOW = 0;
+                checkButton();
+                setSelect(0);
+            }
+        }
+    }
+
+    private void receiveMeetDir(EventMessage message) {
+        InterfaceFile.pbui_Type_MeetDirDetailInfo object = (InterfaceFile.pbui_Type_MeetDirDetailInfo) message.getObject();
+        List<InterfaceFile.pbui_Item_MeetDirDetailInfo> itemList = object.getItemList();
+        for (int i = 0; i < itemList.size(); i++) {
+            InterfaceFile.pbui_Item_MeetDirDetailInfo info = itemList.get(i);
+            String dirName = MyUtils.getBts(info.getName());
+            Log.e(TAG, "NotationFragment.receiveMeetDir :  目录名称 --> " + dirName + " 目录ID：" + info.getId());
+            if (dirName.equals("批注文件")) {
+                try {
+                    Log.e(TAG, "NotationFragment.receiveMeetDir :  批注文件的目录ID： --> " + info.getId());
+                    //查询会议目录文件
+                    nativeUtil.queryMeetDirFile(info.getId());
+                } catch (InvalidProtocolBufferException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     @Override
     public void onDestroy() {
+        Log.i("F_life", "NotationFragment.onDestroy :   --> ");
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
@@ -134,7 +162,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         mAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
             @Override
             public void onLookListener(int posion, String filename, long filesize) {
-                MyUtils.openFile(Macro.POSTILFILE,filename,nativeUtil,posion,getContext(),filesize);
+                MyUtils.openFile(Macro.POSTILFILE, filename, nativeUtil, posion, getContext(), filesize);
 //                OpenFile(Macro.POSTILFILE, posion, filename, filesize);
             }
         });
@@ -156,71 +184,6 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         mPicture.setOnClickListener(this);
     }
 
-    /**
-     * 打开文件操作
-     *
-     * @param posion
-     * @param filename
-     */
-    private void OpenFile(String dir, final int posion, final String filename, long filesize) {
-        //点击查看文件 如果手机上没有就得先下载下来
-        if (SDCardUtils.isSDCardEnable()) {
-            MyUtils.CreateFile(dir);
-            dir += filename;
-            File file1 = new File(dir);
-            if (!file1.exists()) {//文件不存在
-                final String finalFile = dir;
-                hintDownload(posion, finalFile, "文件不存在，是否先下载？", file1);
-            } else if (file1.length() != filesize) {//文件不是最新文件
-                final String finalFile = dir;
-                hintDownload(posion, finalFile, "本地文件与当前文件不符，是否重新下载？", file1);
-            } else {//文件是最新文件
-                MyUtils.OpenThisFile(getContext(), file1);
-            }
-        }
-    }
-
-    private void hintDownload(final int posion, final String finalFile, String showMeg, final File oldFile) {
-        Snackbar.make(getView(), showMeg, Snackbar.LENGTH_LONG)
-                .setAction(" 下载 ", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (oldFile.exists()) {
-                            //点击了下载才删除
-                            oldFile.delete();//目前采用删除再下载
-                        }
-                        nativeUtil.creationFileDownload(finalFile, posion, 0, 0);
-                    }
-                }).show();
-    }
-
-    /**
-     * 下载文件操作
-     *
-     * @param posion
-     * @param filename
-     */
-    private void downLoadFile(String dir, int posion, String filename, long filesize) {
-        if (SDCardUtils.isSDCardEnable()) {
-            MyUtils.CreateFile(dir);
-            dir += filename;
-            final File file = new File(dir);
-            if (file.exists() && file.length() == filesize) {
-                Snackbar.make(getView(), "  文件已经存在是否直接打开？  ", Snackbar.LENGTH_LONG)
-                        .setAction("打开", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // TODO: 2018/1/27 查看文件
-                                Log.e("MyLog", "MeetingFileFragment.onClick:  查看文件操作 --->>> ");
-                                MyUtils.OpenThisFile(getContext(), file);
-                            }
-                        }).show();
-            } else {
-                Log.e("MyLog", "MeetingFileFragment.onLookListener: 下载操作： 文件的绝对路径： --->>> " + dir);
-                nativeUtil.creationFileDownload(dir, posion, 0, 0);
-            }
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -284,9 +247,9 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         if (mAdapter.PAGE_NOW <= 0) {
             mNotaPrepage.setEnabled(false);
             //如果不设置的话，只要进入一次else if ，那么下一页按钮就一直是false，不可点击状态
-            if(mData.size()>mAdapter.ITEM_COUNT) {
+            if (mData.size() > mAdapter.ITEM_COUNT) {
                 mNotaNextpage.setEnabled(true);
-            }else {
+            } else {
                 mNotaNextpage.setEnabled(false);
             }
         }
@@ -304,6 +267,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onHiddenChanged(boolean hidden) {
+        Log.i("F_life", "NotationFragment.onHiddenChanged :   --->>> " + hidden);
         notationfragment_isshowing = !hidden;
         if (!hidden) {
             try {
@@ -314,5 +278,59 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.i("F_life", "NotationFragment.onAttach :   --> ");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "NotationFragment.onCreate :   --> ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "NotationFragment.onActivityCreated :   --> ");
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("F_life", "NotationFragment.onStart :   --> ");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Log.i("F_life", "NotationFragment.onResume :   --> ");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("F_life", "NotationFragment.onPause :   --> ");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("F_life", "NotationFragment.onStop :   --> ");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("F_life", "NotationFragment.onDestroyView :   --> ");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        Log.i("F_life", "NotationFragment.onDetach :   --> ");
+        super.onDetach();
     }
 }

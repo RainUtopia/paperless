@@ -1,11 +1,7 @@
 package com.pa.paperless.fragment.meeting;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -27,12 +23,14 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+
 import com.pa.paperless.R;
-import com.pa.paperless.activity.PeletteActivity;
+import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.Macro;
+import com.pa.paperless.event.EventMessage;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
@@ -44,7 +42,7 @@ import java.util.Arrays;
  * 外部文档
  */
 
-public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.Callback, View.OnClickListener {
+public class OverviewDocFragment extends BaseFragment implements SurfaceHolder.Callback, View.OnClickListener {
 
     private SurfaceView mCameraView;
     private CameraManager mCameraManager;
@@ -54,17 +52,13 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
     private CaptureRequest.Builder mRequestBuilder;
     private SurfaceHolder mSurfaceHolder;
     private CameraCaptureSession mCameraSession;
-    private ImageView imageView;
-    private RelativeLayout boottom_linear;
-    private Button open_drawboard;
-    private Button no_save;
     public static long now_time;
-
-
+    private boolean isClosed;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        Log.e("F_life", "OverviewDocFragment.onCreateView :   --> ");
         View inflate = inflater.inflate(R.layout.overviewdoc_fragment, container, false);
         initView(inflate);
         context = getContext();
@@ -74,22 +68,15 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
         return inflate;
     }
 
-
-
     @Override
     public void onDestroy() {
+        Log.e("F_life", "OverviewDocFragment.onDestroy :   --> ");
         super.onDestroy();
     }
-
 
     private void initView(View inflate) {
         mCameraView = inflate.findViewById(R.id.camera_surfaceView);
         inflate.findViewById(R.id.take_photo).setOnClickListener(this);
-        imageView = inflate.findViewById(R.id.iv);
-        boottom_linear = inflate.findViewById(R.id.boottom_linear);
-        boottom_linear.setVisibility(View.GONE);
-        open_drawboard = inflate.findViewById(R.id.open_drawboard);
-        no_save = inflate.findViewById(R.id.no_save);
     }
 
     @Override
@@ -101,7 +88,6 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -156,16 +142,16 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
 
     public class CameraCallBack extends CameraDevice.StateCallback implements ImageReader.OnImageAvailableListener {
 
-
         /**
          * *** **  相机打开  ** ****
          **/
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
+            Log.e(TAG, "CameraCallBack.onOpened :  相机打开 --> ");
             mCameraDevice = camera;
             mImageReader = ImageReader.newInstance(mCameraView.getWidth(), mCameraView.getHeight(), ImageFormat.JPEG, 7);
-            Log.e("mCameraView", "com.pa.paperless.fragment.meeting_CameraCallBack.onOpened :  mCameraView.getWidth() --->>> "+mCameraView.getWidth()
-            +"mCameraView.getHeight()："+mCameraView.getHeight());
+            Log.e("mCameraView", "com.pa.paperless.fragment.meeting_CameraCallBack.onOpened :  mCameraView.getWidth() --->>> " + mCameraView.getWidth()
+                    + "mCameraView.getHeight()：" + mCameraView.getHeight());
             mImageReader.setOnImageAvailableListener(this, null);
             try {
                 mRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
@@ -202,6 +188,7 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
          **/
         @Override
         public void onDisconnected(@NonNull CameraDevice camera) {
+            Log.e(TAG, "CameraCallBack.onDisconnected :  相机断开 --> ");
             camera.close();
             mCameraDevice = null;
         }
@@ -211,6 +198,7 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
          **/
         @Override
         public void onClosed(@NonNull CameraDevice camera) {
+            Log.e(TAG, "CameraCallBack.onClosed :  相机关闭 --> ");
             super.onClosed(camera);
             camera.close();
             mCameraDevice = null;
@@ -221,6 +209,7 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
          **/
         @Override
         public void onError(@NonNull CameraDevice camera, int error) {
+            Log.e(TAG, "CameraCallBack.onError :  相机出错 --> ");
             if (camera != null) {
                 camera.close();
             }
@@ -230,11 +219,9 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
         public void onImageAvailable(ImageReader reader) {
             File file = getTakePhotoFile(reader);
             String takePhotoFilePath = file.getAbsolutePath();
-            Log.e("MyLog", "CameraCallBack.onImageAvailable 295行:  图片的路径 --->>> " + takePhotoFilePath);
-            boottom_linear.setVisibility(View.VISIBLE);
+            Log.e(TAG, "CameraCallBack.onImageAvailable :  图片的临时缓存路径 --->>> " + takePhotoFilePath);
             Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            imageView.setImageBitmap(bitmap);
-            setImgAnimatorEvent(file, bitmap);
+            EventBus.getDefault().post(new EventMessage(IDEventF.take_photo, bitmap));
         }
 
         /**
@@ -250,15 +237,16 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
 
             now_time = System.currentTimeMillis();
             //检查 MEETFILE 目录是否存在
-            File file1 = new File(Macro.MEETFILE);
+            File file1 = new File(Macro.TAKE_PHOTO);
             if (!file1.exists()) {
-                file1.mkdir();
+                file1.mkdirs();
             }
             // 使用IO流将照片写入指定文件
-            File file = new File(Macro.MEETFILE + now_time + ".jpg");
+            File file = new File(Macro.TAKE_PHOTO + now_time + ".jpg");
             buffer.get(bytes);
             try (
-                    FileOutputStream output = new FileOutputStream(file)) {
+                    FileOutputStream output = new FileOutputStream(file)
+            ) {
                 output.write(bytes);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -268,41 +256,52 @@ public class OverviewDocFragment extends BaseFragment implements  SurfaceHolder.
             return file;
         }
 
-        /**
-         * 预览图片的点击事件处理
-         *
-         * @param file
-         */
-        private void setImgAnimatorEvent(final File file, final Bitmap bitmap) {
-            boottom_linear.setVisibility(View.VISIBLE);
-            final ObjectAnimator animator = ObjectAnimator.ofFloat(boottom_linear, "alpha", 1.0f, 0.0f);
-            animator.setDuration(5000);
-            animator.start();
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    boottom_linear.setVisibility(View.GONE);
+    }
+
+    private final String TAG = "OverviewDocFragment-->";
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden) {
+            Log.e(TAG, "OverviewDocFragment.onHiddenChanged :  隐藏时关闭相机 --> ");
+            if (mCameraDevice != null && !isClosed) {
+                mCameraDevice.close();
+                isClosed = true;
+            }
+        } else {
+            try {
+                Log.e(TAG, "OverviewDocFragment.onHiddenChanged :  展示时开启相机 --> ");
+                if (mCameraManager != null && isClosed) {
+                    mCameraManager.openCamera("0", new CameraCallBack(), null);
+                    isClosed = false;
                 }
-            });
-            open_drawboard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), PeletteActivity.class);
-                    PeletteActivity.ISFROMDOCUMENTFRAGMENT = true;//设置是从外部文档打开
-                    startActivity(intent);
-                }
-            });
-            no_save.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (file.exists()) {
-                        file.delete();
-                    }
-                    boottom_linear.setVisibility(View.GONE);
-                }
-            });
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    @Override
+    public void onResume() {
+        Log.e("F_life", "OverviewDocFragment.onResume :   --> ");
+        if (mCameraManager != null && isClosed) {
+            try {
+                mCameraManager.openCamera("0", new CameraCallBack(), null);
+                isClosed = false;
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        Log.e("F_life", "OverviewDocFragment.onStop :   --> ");
+        if (mCameraDevice != null && !isClosed) {
+            mCameraDevice.close();
+            isClosed = true;
+        }
+        super.onStop();
+    }
 }

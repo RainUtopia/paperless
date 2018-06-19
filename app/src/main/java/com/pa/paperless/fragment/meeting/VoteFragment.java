@@ -1,5 +1,6 @@
 package com.pa.paperless.fragment.meeting;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -21,9 +22,10 @@ import android.widget.Toast;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceMacro;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfaceVote;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MainActivity;
+import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.VoteAdapter;
 import com.pa.paperless.adapter.VoteInfoPopAdapter;
 import com.pa.paperless.bean.MemberInfo;
@@ -35,6 +37,7 @@ import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.ItemClickListener;
+import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
 import com.pa.paperless.utils.MyUtils;
 import com.zhy.android.percent.support.PercentLinearLayout;
@@ -47,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.pa.paperless.activity.MeetingActivity.getMeetName;
-import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
+import static com.pa.paperless.service.NativeService.nativeUtil;
 
 /**
  * Created by Administrator on 2017/10/31.
@@ -78,9 +81,9 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
     private boolean isFind = true;//是否查找到指定的投票提交人
     private boolean manageBtnisOpen = false;
     private boolean isHave;//是否有人投票过
-    private boolean resultquery = false;//点击了结果查询
-    private boolean isClicked = false;
-    private boolean localClick = false;
+    private boolean resultquery;//点击了结果查询
+    private boolean isClickedItem; //点击了item
+    private boolean localClick;//本人发起投票则为true
 
     @Nullable
     @Override
@@ -90,7 +93,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
         try {
             //200.查询投票
             nativeUtil.queryVote();
-            nativeUtil.queryAttendPeople();
+            nativeUtil.cacheData(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETVOTEINFO.getNumber());
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -102,6 +105,19 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
+            case IDEventF.vote://收到投票信息
+                receiveVoteInfo(message);
+                break;
+            case IDEventF.member_info://收到参会人数据
+                InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
+                memberInfos = Dispose.MemberInfo(o);
+                if (memberInfos != null && mVoteAdapter != null) {//有可能还未查询投票就收到了参会人数据
+                    VoteItem();
+                }
+                break;
+            case IDEventF.vote_member_byId://收到指定投票的提交人数据
+                receiveMemberByVote(message);
+                break;
             case IDEventF.you_are_compere:// 变成主持人了
                 mVoteManagement.setVisibility(View.VISIBLE);
                 manageBtnisOpen = true;
@@ -111,15 +127,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                 mVoteOpen.setVisibility(View.GONE);
                 mVoteOver.setVisibility(View.GONE);
                 mVoteQuery.setVisibility(View.GONE);
-                break;
-            case IDEventF.post_vote://收到投票数据
-                reveiveVote(message);
-                break;
-            case IDEventF.post_member_byVote:// 收到指定投票提交人数据
-                receiveMemberByVote(message);
-                break;
-            case IDEventF.post_member_toSignin://收到参会人数据
-                memberInfos = (List<MemberInfo>) message.getObject();
                 break;
             case IDEventMessage.Vote_Change_Inform://投票变更通知
                 nativeUtil.queryVote();
@@ -135,21 +142,53 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                     isFind = nativeUtil.queryOneVoteSubmitter(SelectedVoteid);
                 }
             case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
-                if (isClicked && localClick) {//判断是本人操作
-                    showChoose(voteInfo, true);
-                } else {
-                    nativeUtil.queryVote();
+                Log.e(TAG, "VoteFragment.getEventMessage :  有新的投票发起通知 --> ");
+                if (isClickedItem) {//点击了item
+                    if (localClick) {//判断是本人发起的投票操作
+                        Log.e(TAG, "VoteFragment.getEventMessage :  打开选项148 --> ");
+                        showChoose(mVoteData.get(mPosion), true);
+                    }
+                } else {//别人发起
+                    InterfaceBase.pbui_MeetNotifyMsg newVote = (InterfaceBase.pbui_MeetNotifyMsg) message.getObject();
+                    int id = newVote.getId();
+//                    /** **** **  查询指定ID的投票  ** **** **/
+//                    nativeUtil.queryVoteById(id);
+                    for (int i = 0; i < mVoteData.size(); i++) {
+                        if (mVoteData.get(i).getVoteid() == id) {
+                            Log.e(TAG, "VoteFragment.getEventMessage :  打开选项158 --> ");
+                            showChoose(mVoteData.get(i), false);
+                            break;
+                        }
+                    }
                 }
                 break;
         }
     }
 
+    private void receiveVoteInfo(EventMessage message) {
+        InterfaceVote.pbui_Type_MeetVoteDetailInfo object = (InterfaceVote.pbui_Type_MeetVoteDetailInfo) message.getObject();
+        mVoteData = Dispose.Vote(object);
+        if (mVoteAdapter == null) {
+            mVoteAdapter = new VoteAdapter(getContext(), mVoteData);
+            mVoteAdapter.setHasStableIds(true);
+            mVoteRl.setAdapter(mVoteAdapter);
+        } else {
+            mVoteAdapter.notifyDataSetChanged();
+        }
+        try {
+            nativeUtil.queryAttendPeople();
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void receiveMemberByVote(EventMessage message) {
+        Log.e(TAG, "VoteFragment.receiveMemberByVote :  收到指定投票的提交人信息 --> ");
         InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo object = (InterfaceVote.pbui_Type_MeetVoteSignInDetailInfo) message.getObject();
         List<InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo> itemList = object.getItemList();
         //获取当前选中投票的全部选项信息
         List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
-        List<Integer> ids = new ArrayList<>();
+        List<Integer> ids = new ArrayList<>();//存放选过的人员ID
         if (someOneVoteInfo == null) {
             someOneVoteInfo = new ArrayList<>();
         } else {
@@ -157,9 +196,10 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
         }
         for (int i = 0; i < itemList.size(); i++) {
             InterfaceVote.pbui_Item_MeetVoteSignInDetailInfo pbui_item_meetVoteSignInDetailInfo = itemList.get(i);
-            String chooseText = "";
-            String name = "";
+            String chooseText = "";//存放选中选项的文本内容
+            String name = "";//当前选择的人员名称
             int id = pbui_item_meetVoteSignInDetailInfo.getId();//查询到的投票人ID
+            Log.e(TAG, "VoteFragment.receiveMemberByVote :  选中的人员ID --> " + id + "  本机人员ID：" + MeetingActivity.getMemberId());
             ids.add(id);
             int selcnt = pbui_item_meetVoteSignInDetailInfo.getSelcnt();
             //int变量的二进制表示的字符串
@@ -168,11 +208,11 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
             int length = string.length();
             for (int j = 0; j < length; j++) {
                 char c = string.charAt(j);
-                //将 char 装换成int型整数
+                //将 char 转换成int型整数
                 int a = c - '0';
                 if (a == 1) {
                     selectedItem = length - j - 1;//索引从0开始
-                    Log.e(TAG, "VoteFragment.queryVoterById 256行:   --->>> 选中了第_ " + selectedItem + " _项");
+                    Log.e(TAG, "VoteFragment.receiveMemberByVote :   --> 选中了索引为_ " + selectedItem + " _项");
                     for (int k = 0; k < memberInfos.size(); k++) {
                         if (memberInfos.get(k).getPersonid() == id) {
                             name = memberInfos.get(k).getName();
@@ -188,10 +228,11 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
             }
             someOneVoteInfo.add(new VoteBean(name, chooseText));
         }
-        if (!ids.contains(MainActivity.getLocalInfo().getMemberid())) {//如果当前的投票人ID不是自己（自己没有投过）
+        //如果当前的投票人ID不是自己（自己没有投过）
+        if (!ids.contains(MeetingActivity.getMemberId())) {
             /** **** **  2.打开投票窗口  ** **** **/
-            Log.e(TAG, "VoteFragment.queryVoterById 274行:   --->>> 打开投票窗口");
-            showChoose(voteInfo, false);
+            Log.e(TAG, "VoteFragment.queryVoterById 274行:   --->>> 打开选项233");
+            showChoose(mVoteData.get(mPosion), false);
             ids.clear();
         } else {
             showTip("你已经投过了");
@@ -201,45 +242,40 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    private void reveiveVote(EventMessage message) {
-        mVoteData = (List<VoteInfo>) message.getObject();
-        if (mVoteAdapter == null) {
-            mVoteAdapter = new VoteAdapter(getContext(), mVoteData);
-            mVoteRl.setAdapter(mVoteAdapter);
-        } else {
-            mVoteAdapter.notifyDataSetChanged();
-        }
+
+    private void VoteItem() {
         mVoteAdapter.setItemListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, final int posion) {
                 mVoteAdapter.setCheckedId(posion);
                 mPosion = posion;
-                voteInfo = mVoteData.get(mPosion);
+                voteInfo = mVoteData.get(posion);
                 int votestate = voteInfo.getVotestate();
                 SelectedVoteid = voteInfo.getVoteid();
-                Log.e(TAG, "VoteFragment.onItemClick 308行:  item点击时选中的投票ID --->>> " + SelectedVoteid + "  当前的状态:" + votestate);
-                isClicked = true;
-                isHave = false;
+                Log.e(TAG, "VoteFragment.onItemClick :  item点击时选中的投票ID --->>> " + SelectedVoteid + "  当前的状态:" + votestate);
+                isClickedItem = true;//设置点击了item
+                isHave = false;//设置默认当前投票没有人选过
+                /** **** **  获取当前投票的选项数据  ** **** **/
                 List<VoteOptionsInfo> optionInfo = voteInfo.getOptionInfo();
                 //遍历查看，每一个选项已经投票的个数
                 for (int i = 0; i < optionInfo.size(); i++) {
                     if (optionInfo.get(i).getSelcnt() > 0) {//只要有一个已投票的个数大于0
-                        //有投票数据
-                        isHave = true;
-                        break;//如果查找到数据就终止循环
+                        isHave = true;//设置有投票数据
+                        break;//如果查找到数据就终止for循环
                     }
                 }
                 /** **** **  用户点击时，如果没选择过就展示出选项框  ** **** **/
                 if (votestate == 1) {//确保该投票是发起状态
                     if (isHave) {//有人投过
                         try {
-                            //进一步确定本机之前是不是已经投过，再做处理
+                            //查询指定投票的提交人,进一步确定本机之前是不是投过了，如果投过不需要再投
                             nativeUtil.queryOneVoteSubmitter(SelectedVoteid);
                         } catch (InvalidProtocolBufferException e) {
                             e.printStackTrace();
                         }
-                    } else {
-                        showChoose(voteInfo, false);
+                    } else {//没有人投过
+                        Log.e(TAG, "VoteFragment.onItemClick :  打开选项277 --> ");
+                        showChoose(mVoteData.get(posion), false);
                     }
                 }
             }
@@ -248,16 +284,15 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onDestroy() {
+        Log.i("F_life", "VoteFragment.onDestroy :   --->>> ");
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
 
-    private void showTip(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
     private void initView(View inflate) {
         mVoteRl = (RecyclerView) inflate.findViewById(R.id.vote_rl);
+        /** **** **  禁用item变化时的动画效果,闪烁问题  ** **** **/
+        mVoteRl.setItemAnimator(null);
         mVoteRl.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mVoteQuery = (Button) inflate.findViewById(R.id.vote_query);
@@ -297,7 +332,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                         } catch (InvalidProtocolBufferException e) {
                             e.printStackTrace();
                         }
-                    } else if (!isClicked) {
+                    } else if (!isClickedItem) {
                         showTip("需要先选中投票");
                     } else if (!isHave) {
                         showTip("该项没有数据可查询");
@@ -316,7 +351,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.vote_management://投票管理
-                if (isClicked) {
+                if (isClickedItem) {
                     /** ************ ******  如果是主持人则展示主持人功能  ****** ************ **/
                     mVoteOpen.setVisibility(View.VISIBLE);
                     mVoteOver.setVisibility(View.VISIBLE);
@@ -330,7 +365,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                     int votestate = voteInfo.getVotestate();
                     int mode = voteInfo.getMode();
                     // 判断是否是未发起状态
-                    if (votestate == 0 && isClicked) {
+                    if (votestate == 0 && isClickedItem) {
                         /** ************ ******  193.发起投票  ****** ************ **/
 //                    int voteid = mVoteData.get(mPosion).getVoteid();
                         Log.e(TAG, "VoteFragment.onClick 429行:   --->>> 发起的投票ID --->>> " + SelectedVoteid);
@@ -344,7 +379,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                 if (voteInfo != null) {
                     int votestate = voteInfo.getVotestate();
                     //判断是否是进行状态
-                    if (votestate == 1 && isClicked) {
+                    if (votestate == 1 && isClickedItem) {
                         /** ************ ******  195.停止投票  ****** ************ **/
                         nativeUtil.stopVote(SelectedVoteid);
                     } else {
@@ -362,7 +397,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
      */
     private void showChoose(VoteInfo voteInfo, boolean isStart) {
         if (isStart) {//主持人点击的
-            isClicked = false;
+            isClickedItem = false;
             localClick = false;
         }
         View popupView = getActivity().getLayoutInflater().inflate(R.layout.compere_vote_pop, null);
@@ -374,6 +409,12 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
         mChoosePop.setOutsideTouchable(true);
         ChooseViewHolder holder = new ChooseViewHolder(popupView, voteInfo);
         ChooseHolderEvent(holder, voteInfo);
+        mChoosePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mVoteAdapter.notifyDataSetChanged();
+            }
+        });
         mChoosePop.showAtLocation(getActivity().findViewById(R.id.meeting_layout_id), Gravity.CENTER, 0, 0);
     }
 
@@ -455,6 +496,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                     SubmitVoteBean submitVoteBean = new SubmitVoteBean(voteInfo.getVoteid(), selectcount1, bb);
                     /** ************ ******  196.提交投票结果  ****** ************ **/
                     nativeUtil.submitVoteResult(submitVoteBean);
+                    mVoteAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -540,8 +582,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
         return nowSelect;
     }
 
-
-    //展示详细的投票信息
+    //展示详细的投票信息 （导出投票结果）
     private void showDetailVoteInfo(List<VoteBean> voteBeen) {
         resultquery = false;
         View popupView = getActivity().getLayoutInflater().inflate(R.layout.vote_info_pop, null);
@@ -576,7 +617,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
-
 
     public static class ResultViewHolder {
         public View rootView;
@@ -671,6 +711,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
+        Log.i("F_life", "VoteFragment.onHiddenChanged :   --->>> " + hidden);
         if (!hidden) {
             try {
                 nativeUtil.queryVote();
@@ -678,5 +719,60 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.i("F_life", "VoteFragment.onAttach :   --> ");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "VoteFragment.onCreate :   --> ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "VoteFragment.onActivityCreated :   --> ");
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("F_life", "VoteFragment.onStart :   --> ");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Log.i("F_life", "VoteFragment.onResume :   --> ");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("F_life", "VoteFragment.onPause :   --> ");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("F_life", "VoteFragment.onStop :   --> ");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("F_life", "VoteFragment.onDestroyView :   --> ");
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDetach() {
+        Log.i("F_life", "VoteFragment.onDetach :   --> ");
+        super.onDetach();
     }
 }

@@ -52,11 +52,14 @@ public class Macro {
     public static String FILENAME = "client.ini";
     public static String FILENAME_DEV = "client.dev";
     //下载的文件存放目录
-    public static final String MEETFILE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MEETFILE/";
-    public static final String MEETMATERIAL = MEETFILE + "会议资料/";//会议资料
-    public static final String SHAREMATERIAL = MEETFILE + "共享资料/";//共享资料
-    public static final String POSTILFILE = MEETFILE + "批注文件/";//批注文件
-    public static final String VOTERESULT = MEETFILE + "投票结果/";//投票结果
+    public static final String PAPERLESSDATA = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MEETFILE/";
+    public static final String MEETFILE = PAPERLESSDATA + "download/";
+    public static final String MEETMATERIAL = MEETFILE + "meetFile/";//会议资料
+    public static final String SHAREMATERIAL = MEETFILE + "shareFile/";//共享资料
+    public static final String POSTILFILE = MEETFILE + "postilFile/";//批注文件
+
+    public static final String VOTERESULT = PAPERLESSDATA + "exportFile/";//导出文件
+    public static final String TAKE_PHOTO = PAPERLESSDATA + "scratch/";//临时文件
     //自定义 Fragment索引
     public static final int Pb_MEET_FUNCODE_AGENDA_BULLETIN = 0;    //会议议程
     public static final int Pb_MEET_FUNCODE_MATERIAL = 1;    //会议资料

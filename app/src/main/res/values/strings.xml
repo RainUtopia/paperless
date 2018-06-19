@@ -67,4 +67,12 @@
     <string name="back">返回</string>
     <string name="call_serve">呼叫服务</string>
     <string name="screen_shot">截图批注</string>
+    <string name="input_file_name">请输入新的文件名 :</string>
+    <string name="web_goto">前往</string>
+    <string name="canjoin">可加入</string>
+    <string name="member">参会人</string>
+    <string name="projector">投影机</string>
+
+    <!--代码中-->
+    <string name="please_enter_file_name">请输入文件名</string>
 </resources>

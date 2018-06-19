@@ -101,8 +101,8 @@ public class IDivMessage {
     public static final int QUERY_MEET_FUNCTION = 1046;
     // 查询指定ID发起的投票
     public static final int QUERY_VOTE_BYID = 1047;
-    //平台初始化完毕通知
-    public static final int PLATFORM_INITIALIZATION = 1048;
+    //参会人员权限
+    public static final int member_mission = 1049;
 
 
 }

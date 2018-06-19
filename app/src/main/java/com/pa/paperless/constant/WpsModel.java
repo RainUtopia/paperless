@@ -8,6 +8,8 @@ public class WpsModel {
     public static final String OPEN_MODE = "OpenMode";// 打开文件的模式。
     public static final String SEND_SAVE_BROAD = "SendSaveBroad";// 文件保存时是否发送广播。
     public static final String SEND_CLOSE_BROAD = "SendCloseBroad";// 文件关闭时是否发送广播
+    public static final String HOMEKEY_DOWN = "HomeKeyDown";// 监听home键并发广播
+    public static final String BACKKEY_DOWN = "BackKeyDown";// 监听back键并发广播
     public static final String THIRD_PACKAGE = "ThirdPackage";// 第三方的包名，关闭的广播会包含该项。
     public static final String CLEAR_BUFFER = "ClearBuffer";// 关闭文件时是否请空临时文件。
     public static final String CLEAR_TRACE = "ClearTrace";// 关闭文件时是否删除使用记录。
@@ -19,8 +21,6 @@ public class WpsModel {
     public static final String VIEW_SCALE_X = "ViewScrollX";// 文件上次查看的视图的X坐标。
     public static final String VIEW_SCALE_Y = "ViewScrollY";// 文件上次查看的视图的Y坐标。
     public static final String USER_NAME = "UserName";// 批注的作者。
-    public static final String HOMEKEY_DOWN = "HomeKeyDown";// 监听home键并发广播
-    public static final String BACKKEY_DOWN = "BackKeyDown";// 监听back键并发广播
     public static final String ENTER_REVISE_MODE = "EnterReviseMode";// 以修订模式打开文档
     public static final String CACHE_FILE_INVISIBLE = "CacheFileInvisible";// Wps生成的缓存文件外部是否可见
 

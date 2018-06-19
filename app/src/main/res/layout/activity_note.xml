@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/edt_bg"
-    android:orientation="vertical">
+    android:background="@color/edt_bg">
 
     <RelativeLayout
         android:id="@+id/top"
@@ -36,29 +35,38 @@
 
     </RelativeLayout>
 
-    <!--<ScrollView-->
-    <!--android:id="@+id/middle"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:focusable="false"-->
-    <!--android:layout_below="@id/top"-->
-    <!--android:layout_weight="1">-->
+    <ProgressBar
+        android:id="@+id/load_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
-    <EditText
-        android:id="@+id/edt_note"
-        style="@style/EdtTextTextStyle"
+    <ScrollView
+        android:id="@+id/middle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:cursorVisible="true"
+        android:layout_above="@+id/boottom"
+        android:layout_below="@+id/top"
         android:layout_weight="1"
-        android:background="@null"
-        android:gravity="top|left"/>
-    <!--</ScrollView>-->
+        android:focusable="false">
+
+
+        <EditText
+            android:id="@+id/edt_note"
+            style="@style/EdtTextTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:cursorVisible="true"
+            android:gravity="top|left"
+            android:minLines="100" />
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/boottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <Button
@@ -91,4 +99,4 @@
             android:textColor="@color/white" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

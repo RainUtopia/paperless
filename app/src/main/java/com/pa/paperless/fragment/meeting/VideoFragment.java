@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceDevice;
 import com.mogujie.tt.protobuf.InterfaceVideo;
 import com.pa.paperless.R;
 import com.pa.paperless.activity.MeetingActivity;
@@ -28,6 +29,8 @@ import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.ItemClickListener;
+import com.pa.paperless.service.NativeService;
+import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.ScreenRecorder;
 
 import org.greenrobot.eventbus.EventBus;
@@ -39,8 +42,8 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MEDIA_PROJECTION_SERVICE;
-import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
 import static com.pa.paperless.adapter.VideoItemAdapter.VideoStreamChecked;
+import static com.pa.paperless.service.NativeService.nativeUtil;
 
 
 /**
@@ -76,52 +79,53 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
     private List<Integer> ids;
     private List<VideoInfo> videoList;
 
-    private void initScreenParam() {
-        DisplayMetrics metric = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
-        width = metric.widthPixels; // �屏幕宽度（像素）
-        height = metric.heightPixels; // �屏幕高度（像素）
-        Log.i(TAG, "w:" + width + "/h:" + height);
-        density = metric.density; // �屏幕密度（0.75 / 1.0 / 1.5）
-        dpi = metric.densityDpi; // �屏幕密度DPI（120 / 160 / 240）
-        bitrate = width * height * VideoQuality;//�比特率/码率
-    }
+//    private void initScreenParam() {
+//        DisplayMetrics metric = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+//        width = metric.widthPixels; // �屏幕宽度（像素）
+//        height = metric.heightPixels; // �屏幕高度（像素）
+//        Log.i(TAG, "w:" + width + "/h:" + height);
+//        density = metric.density; // �屏幕密度（0.75 / 1.0 / 1.5）
+//        dpi = metric.densityDpi; // �屏幕密度DPI（120 / 160 / 240）
+//        bitrate = width * height * VideoQuality;//�比特率/码率
+//    }
+//
+//    private boolean stopRecord() {
+//        if (recorder != null) {
+//            Log.d(TAG, "quit");
+//            /** ************ ******  停止资源操作  ****** ************ **/
+//            nativeUtil.stopResourceOperate(allRes, devIds);
+//            /** ************ ******  释放播放资源  ****** ************ **/
+//            nativeUtil.mediaDestroy(0);
+//            recorder.quit();
+//            recorder = null;
+//            return true;
+//        } else return false;
+//    }
 
-    private boolean stopRecord() {
-        if (recorder != null) {
-            Log.d(TAG, "quit");
-            /** ************ ******  停止资源操作  ****** ************ **/
-            nativeUtil.stopResourceOperate(allRes, devIds);
-            /** ************ ******  释放播放资源  ****** ************ **/
-            nativeUtil.mediaDestroy(0);
-            recorder.quit();
-            recorder = null;
-            return true;
-        } else return false;
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult: ");
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                projection = manager.getMediaProjection(resultCode, data);
-            }
-        if (projection == null) {
-            Log.e(TAG, "media projection is null");
-            return;
-        }
-        initScreenParam();
-        if (recorder != null) recorder = null;
-        recorder = new ScreenRecorder(width, height, bitrate, 1, projection, "");
-        Log.d(TAG, "VideoFragment.onActivityResult 169行:   --->>> " + recorder.toString());
-        allRes.add(0);
-        nativeUtil.streamPlay(MeetingActivity.getDevId(), 2, 0, allRes, devIds);
-        recorder.start();//�启动录屏线程
-        Toast.makeText(getActivity(), "屏幕录制中...", Toast.LENGTH_LONG).show();
-    }
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.i(TAG, "onActivityResult: ");
+//        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                projection = manager.getMediaProjection(resultCode, data);
+//            }
+//        if (projection == null) {
+//            Log.e(TAG, "media projection is null");
+//            return;
+//        }
+//        initScreenParam();
+//        if (recorder != null) recorder = null;
+//        recorder = new ScreenRecorder(width, height, bitrate, 1, projection, "");
+//        Log.d(TAG, "VideoFragment.onActivityResult 169行:   --->>> " + recorder.toString());
+//        allRes.add(0);
+////        nativeUtil.streamPlay(MeetingActivity.getDevId(), 2, 0, allRes, devIds);
+//        nativeUtil.streamPlay(NativeService.localDevId, 2, 0, allRes, devIds);
+//        recorder.start();//�启动录屏线程
+//        Toast.makeText(getActivity(), "屏幕录制中...", Toast.LENGTH_LONG).show();
+//    }
 
     //add by gowcage
 
@@ -146,10 +150,15 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventF.post_meet_video://收到会议视频数据
+            case IDEventF.meet_video://收到会议视频数据
+                Log.e(TAG, "VideoFragment.getEventMessage :  收到会议视频数据 --> ");
                 InterfaceVideo.pbui_Type_MeetVideoDetailInfo object = (InterfaceVideo.pbui_Type_MeetVideoDetailInfo) message.getObject();
                 List<InterfaceVideo.pbui_Item_MeetVideoDetailInfo> itemList = object.getItemList();
-                videoList = new ArrayList<>();
+                if (videoList == null) {
+                    videoList = new ArrayList<>();
+                } else {
+                    videoList.clear();
+                }
                 for (int i = 0; i < itemList.size(); i++) {
                     videoList.add(new VideoInfo(itemList.get(i)));
                 }
@@ -158,8 +167,10 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
                     nativeUtil.queryDeviceInfo();
                 }
                 break;
-            case IDEventF.post_devInfo_video://收到设备数据
-                List<DeviceInfo> deviceInfos = (List<DeviceInfo>) message.getObject();
+            case IDEventF.dev_info://收到设备信息
+                Log.e(TAG, "VideoFragment.getEventMessage :  收到设备信息 --> ");
+                InterfaceDevice.pbui_Type_DeviceDetailInfo object1 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) message.getObject();
+                List<DeviceInfo> deviceInfos = Dispose.DevInfo(object1);
                 if (videoList != null && deviceInfos != null) {
                     for (int i = 0; i < videoList.size(); i++) {
                         for (int j = 0; j < deviceInfos.size(); j++) {
@@ -168,32 +179,34 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
                             }
                         }
                     }
-                }
-                /** **** **  每次更新时都同步索引  ** **** **/
-                if (VideoStreamChecked == null) {
-                    VideoStreamChecked = new ArrayList<>();
-                } else {
-                    VideoStreamChecked.clear();
-                }
-                for (int j = 0; j < videoList.size(); j++) {
-                    VideoStreamChecked.add(false);
-                }
-                if (adapter == null) {
-                    adapter = new VideoItemAdapter(cxt, videoList);
-                    mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
-                    mVideoLv.setAdapter(adapter);
-                }
-                adapter.notifyDataSetChanged();
-                adapter.setItemListener(new ItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int posion) {
-                        Log.e(TAG, "VideoFragment.onItemClick :  选中了索引为 --->>> " + posion);
-                        adapter.setCheckedId(posion);
+                    /** **** **  每次更新时都同步索引  ** **** **/
+                    if (VideoStreamChecked == null) {
+                        VideoStreamChecked = new ArrayList<>();
+                    } else {
+                        VideoStreamChecked.clear();
                     }
-                });
-
+                    for (int j = 0; j < videoList.size(); j++) {
+                        VideoStreamChecked.add(false);
+                    }
+                    if (adapter == null) {
+                        adapter = new VideoItemAdapter(cxt, videoList);
+                        adapter.setHasStableIds(true);//解决notifyDataSetChanged时导致图片闪烁
+                        mVideoLv.setLayoutManager(new LinearLayoutManager(getContext()));
+                        mVideoLv.setItemAnimator(null);//RecyclerView item变化时的动画效果
+                        mVideoLv.setAdapter(adapter);
+                    }
+                    adapter.notifyDataSetChanged();
+                    adapter.setItemListener(new ItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int posion) {
+                            Log.e(TAG, "VideoFragment.onItemClick :  选中了索引为 --->>> " + posion);
+                            adapter.setCheckedId(posion);
+                        }
+                    });
+                }
                 break;
             case IDEventMessage.Meet_vedio_changeInform://会议视频变更通知
+                Log.e(TAG, "VideoFragment.getEventMessage :  收到会议视频变更通知 --> ");
                 nativeUtil.queryMeetVedio();
                 break;
         }
@@ -201,9 +214,10 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onDestroy() {
+        Log.i("F_life", "VideoFragment.onDestroy :   --> ");
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        stopRecord();
+//        stopRecord();
     }
 
 
@@ -231,7 +245,8 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
                 int subid = videoInfo.getVideoInfo().getSubid();
                 Log.e(TAG, "VideoFragment.onClick :  观看触发 subid -->" + subid + ", deviceid -->" + deviceid);
                 res.add(0);
-                ids.add(MeetingActivity.getDevId());
+//                ids.add(MeetingActivity.getDevId());
+                ids.add(NativeService.localDevId);
                 nativeUtil.streamPlay(deviceid, subid, 0, res, ids);
                 break;
             case R.id.stop_video_btn://停止观看
@@ -281,5 +296,66 @@ public class VideoFragment extends BaseFragment implements View.OnClickListener 
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.i("F_life", "VideoFragment.onAttach :   --> ");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "VideoFragment.onCreate :   --> ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "VideoFragment.onActivityCreated :   --> ");
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("F_life", "VideoFragment.onStart :   --> ");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        /** **** **  查询会议视频  ** **** **/
+        try {
+            nativeUtil.queryMeetVedio();
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        }
+        Log.i("F_life", "VideoFragment.onResume :   --> ");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("F_life", "VideoFragment.onPause :   --> ");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("F_life", "VideoFragment.onStop :   --> ");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("F_life", "VideoFragment.onDestroyView :   --> ");
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDetach() {
+        Log.i("F_life", "VideoFragment.onDetach :   --> ");
+        super.onDetach();
     }
 }

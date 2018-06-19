@@ -43,6 +43,11 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
         mCxt = cxt;
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     public void setItemListener(ItemClickListener listener) {
         mListener = listener;
     }

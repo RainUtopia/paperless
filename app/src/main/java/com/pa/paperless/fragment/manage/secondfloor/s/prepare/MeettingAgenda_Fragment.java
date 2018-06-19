@@ -15,10 +15,13 @@ import android.widget.Toast;
 import com.pa.paperless.R;
 import com.pa.paperless.fragment.meeting.BaseFragment;
 import com.pa.paperless.utils.MyUtils;
+import com.pa.paperless.utils.SDCardUtils;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/11/17.
@@ -61,10 +64,14 @@ public class MeettingAgenda_Fragment extends BaseFragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.agenda_from:
-                MyUtils.showTxtDialog(getContext(),MyUtils.getSDPostfixFile(".txt"), mMeetAgendaEdt);
+                List<File> files = new ArrayList<>();
+                List<File> fs = MyUtils.GetFiles(SDCardUtils.getSDCardPath(), ".txt", true, files);
+                MyUtils.showTxtDialog(getContext(),fs, mMeetAgendaEdt);
                 break;
             case R.id.notice_from:
-                MyUtils.showTxtDialog(getContext(),MyUtils.getSDPostfixFile(".txt"), mMeetAgendaEdt);
+                List<File> files1 = new ArrayList<>();
+                List<File> fs1 = MyUtils.GetFiles(SDCardUtils.getSDCardPath(), ".txt", true, files1);
+                MyUtils.showTxtDialog(getContext(),fs1, mMeetAgendaEdt);
                 break;
             case R.id.agenda_export:
                 showDialog(mMeetAgendaEdt);

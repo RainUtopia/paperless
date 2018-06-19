@@ -155,6 +155,10 @@ public class VoteAdapter extends RecyclerView.Adapter<VoteAdapter.ViewHolder> {
         }
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     public void setCheckedId(int posion) {
         mCheckedPosion = posion;

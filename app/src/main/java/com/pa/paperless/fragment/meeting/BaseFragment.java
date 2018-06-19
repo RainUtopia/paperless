@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment implements IModelChangeListe
 
     }
 
-    protected void ShowToast(String msg){
+    protected void ShowToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -44,6 +44,10 @@ public abstract class BaseFragment extends Fragment implements IModelChangeListe
     @Override
     public void callListener(int action, Object result) {
         mHandler.obtainMessage(action, result).sendToTarget();
+    }
+
+    protected void showTip(String str) {
+        Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
     }
 
 }

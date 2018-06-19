@@ -2,19 +2,14 @@ package com.pa.paperless.utils;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
@@ -24,7 +19,6 @@ import com.zhy.android.percent.support.PercentLinearLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -145,6 +139,7 @@ public class FileUtil {
         String fileEnd = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
         if (fileEnd.equals("jpg")
                 || fileEnd.equals("png")
+                || fileEnd.equals("gif")
                 || fileEnd.equals("img")
                 || fileEnd.equals("bmp")
                 || fileEnd.equals("jpeg")
@@ -178,6 +173,21 @@ public class FileUtil {
             return false;
         }
     }
+    /**
+     * 判断是否为pdf文件
+     *
+     * @param fileName
+     * @return
+     */
+    public static boolean ispdfFile(String fileName) {
+        //获取文件的扩展名 -->获得的是小写：toLowerCase()  /大写:toUpperCase()
+        String fileEnd = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
+        if (fileEnd.equals("pdf")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * 判断是否为除文档、视频、图片外的其它类文件
@@ -194,50 +204,6 @@ public class FileUtil {
         } else {
             return false;
         }
-    }
-
-
-    /**
-     * 遍历获取某目录下指定类型的所有文件
-     *
-     * @param filePath
-     * @param type
-     * @return
-     */
-    public List<String> getFileDir(String filePath, String type) {
-        List<String> PathList = new ArrayList<String>();
-        try {
-            File f = new File(filePath);
-            File[] files = f.listFiles();// 列出目录下所有的文件
-            // 将所有的文件存入ArrayList中,并过滤所有type格式的文件路径
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                if (checkIsImageFile(file.getPath(), type)) {
-                    PathList.add(file.getPath());
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        // 返回得到的路径列表
-        return PathList;
-    }
-
-    // 检查扩展名，得到图片格式的文件
-    public static boolean checkIsImageFile(String fName, String type) {
-        boolean isImageFile = false;
-        // 获取扩展名
-        String FileEnd = fName.substring(fName.lastIndexOf(".") + 1,
-                fName.length()).toLowerCase();
-        if (FileEnd.equals(type)) {
-            isImageFile = true;
-            Log.e("MyLog", "FileUtil.checkIsImageFile:  图片文件名 --->>> " + fName);
-        } else {
-            isImageFile = false;
-        }
-
-        return isImageFile;
-
     }
 
 
@@ -295,7 +261,7 @@ public class FileUtil {
         File[] files = baseDir.listFiles();
         List<File> fs = new ArrayList<>();
         List<File> file = findFile(files, filename, fs);
-        if (file.size()>0) {
+        if (file.size() > 0) {
             Log.e(TAG, "FileUtil.findFilePathByName :  查找到文件： --> " + file.get(0).getName());
             return file.get(0);
         } else {
@@ -304,7 +270,7 @@ public class FileUtil {
         }
     }
 
-    public static List<File> findFile(File[] files, String filename,List<File> fs) {
+    public static List<File> findFile(File[] files, String filename, List<File> fs) {
         for (int i = 0; i < files.length; i++) {
             File f1 = files[i];
             Log.e(TAG, "FileUtil.findFile :  当前文件名 --> " + f1.getName());
@@ -318,7 +284,7 @@ public class FileUtil {
                 Log.e(TAG, "FileUtil.findFile :  当前为目录 --> ");
                 File[] files1 = f1.listFiles();
                 if (files1.length > 0) {//如果目录下还有文件，递归查找
-                    findFile(files1, filename,fs);
+                    findFile(files1, filename, fs);
                 }
             }
         }
@@ -385,6 +351,10 @@ public class FileUtil {
      * @return
      */
     public static String getMIMEType(File file) {
+        if (!file.isFile()) {
+            Log.e(TAG, "FileUtil.getMIMEType :  错误：你传递的不是一个文件 --> ");
+            return null;
+        }
         String type = "*/*";
         String fName = file.getName();
         //获取后缀名前的分隔符"."在fName中的位置。
@@ -401,7 +371,6 @@ public class FileUtil {
                 type = MIME_MapTable[i][1];
         }
         return type;
-
     }
 
     //建立一个MIME类型与文件后缀名的匹配表

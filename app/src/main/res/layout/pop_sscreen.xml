@@ -162,7 +162,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_enter"
             android:text="@string/cancel"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </LinearLayout>

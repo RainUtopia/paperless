@@ -58,7 +58,7 @@ public class TypeFileAdapter extends BaseAdapter {
          * 这一步是重点，括号中的值是获取到item的准确索引
          */
         final MeetDirFileInfo bean = (MeetDirFileInfo) mDatas.get(i + ITEM_COUNT * PAGE_NOW);
-        holder.document_item_number.setText(i + 1 + "");
+        holder.document_item_number.setText(i + ITEM_COUNT * PAGE_NOW + 1 + "");
         holder.document_item_filename.setText(bean.getFileName());
         holder.document_item_filesize.setText(FileSizeUtil.FormetFileSize(bean.getSize()));
         holder.document_item_uploadname.setText(bean.getUploader_name());

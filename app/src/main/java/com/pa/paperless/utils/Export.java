@@ -6,7 +6,11 @@ import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.bean.VoteBean;
 import com.pa.paperless.bean.VoteInfo;
 import com.pa.paperless.bean.VoteOptionsInfo;
+import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.Macro;
+import com.pa.paperless.event.EventMessage;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +47,7 @@ public class Export {
         boolean succeed = true;
         try {
             //1.创建Excel文件
-            File file = new File(Macro.MEETFILE + fileName + ".xls");
+            File file = new File(MyUtils.CreateFile(Macro.VOTERESULT) + fileName + ".xls");
             file.createNewFile();
             //2.创建工作簿
             WritableWorkbook workbook = Workbook.createWorkbook(file);
@@ -92,7 +96,7 @@ public class Export {
             workbook.write();
             //10.最后一步，关闭工作簿
             workbook.close();
-            Log.e("MyLog", "Export.ToExcel 112行:  导出Excel成功 --->>> ");
+            EventBus.getDefault().post(new EventMessage(IDEventF.export_finish, fileName + ".xls"));
         } catch (Exception e) {
             succeed = false;
             e.printStackTrace();
@@ -112,9 +116,8 @@ public class Export {
      */
     public static boolean ToVoteResultExcel(String content, String fileName, String SheetName, String[] titles, List<VoteBean> datas) {
         boolean succeed = true;
-        MyUtils.CreateFile(Macro.VOTERESULT);
         // 1.创建Excel文件
-        File file = new File(Macro.VOTERESULT + content + fileName + ".xls");
+        File file = new File(MyUtils.CreateFile(Macro.VOTERESULT) + content + fileName + ".xls");
         try {
             if (file.exists()) {
                 file.delete();
@@ -160,6 +163,7 @@ public class Export {
             workbook.write();
             //10.最后一步，关闭工作簿
             workbook.close();
+            EventBus.getDefault().post(new EventMessage(IDEventF.export_finish, content + fileName + ".xls"));
         } catch (IOException e) {
             succeed = false;
             e.printStackTrace();
@@ -329,6 +333,7 @@ public class Export {
             workbook.write();
             //10.最后一步，关闭工作簿
             workbook.close();
+            EventBus.getDefault().post(new EventMessage(IDEventF.export_finish, meetName + fileName + ".xls"));
         } catch (IOException e) {
             succeed = false;
             e.printStackTrace();
@@ -385,7 +390,11 @@ public class Export {
      * @param fileName
      */
     public static boolean ToNoteText(String content, String fileName, String filepath) {
-        File file = new File(filepath + fileName + ".txt");
+        File dir = new File(filepath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File file = new File(filepath, fileName + ".txt");
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -399,6 +408,7 @@ public class Export {
             fw.flush();
             fw.write(content);
             fw.close();
+            EventBus.getDefault().post(new EventMessage(IDEventF.export_finish, fileName + ".txt"));
         } catch (IOException e) {
             b = false;
             e.printStackTrace();

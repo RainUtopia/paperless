@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -42,6 +43,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
+import com.pa.paperless.activity.MeetingActivity;
+import com.pa.paperless.activity.NoteActivity;
 import com.pa.paperless.activity.PeletteActivity;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventF;
@@ -50,6 +53,7 @@ import com.pa.paperless.constant.Macro;
 import com.pa.paperless.constant.WpsModel;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.service.ShotApplication;
 import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
@@ -78,6 +82,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.pa.paperless.activity.MeetingActivity.context;
 import static com.pa.paperless.activity.MeetingActivity.mBadge;
 import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 import static com.pa.paperless.utils.FileUtil.getMIMEType;
@@ -91,6 +96,12 @@ public class MyUtils {
 
     public static File mFile;
 
+    /**
+     * 计算媒体ID
+     *
+     * @param path 文件路径
+     * @return 媒体ID
+     */
     public static int getMediaid(String path) {
         //其它
         if (FileUtil.isDocumentFile(path) || FileUtil.isOtherFile(path)) {
@@ -160,6 +171,8 @@ public class MyUtils {
     }
 
     /**
+     * 判断某个服务是否开启
+     *
      * @param mContext  上下文
      * @param className 是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
      * @return true 表示正在运行
@@ -174,9 +187,9 @@ public class MyUtils {
         if (!(serviceList.size() > 0)) {
             return false;
         }
-        Log.e("OnlineService：", className);
+        Log.d("OnlineService：", className);
         for (int i = 0; i < serviceList.size(); i++) {
-            Log.e("serviceName：", serviceList.get(i).service.getClassName());
+            Log.d("serviceName：", serviceList.get(i).service.getClassName());
             if (serviceList.get(i).service.getClassName().contains(className) == true) {
                 isRunning = true;
                 break;
@@ -185,7 +198,14 @@ public class MyUtils {
         return isRunning;
     }
 
-    // 缩放图片
+    /**
+     * 将bitmap缩放到指定大小
+     *
+     * @param bm
+     * @param newWidth
+     * @param newHeight
+     * @return
+     */
     public static Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
         // 获得图片的宽高
         int width = bm.getWidth();
@@ -284,7 +304,6 @@ public class MyUtils {
         }
     }
 
-
     private static String toMD5(String text) throws NoSuchAlgorithmException {
         //获取摘要器 MessageDigest
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -307,35 +326,6 @@ public class MyUtils {
         return sb.toString();
     }
 
-    /**
-     * 截屏 不能截取状态栏  有bug：界面不同 截出来的图片都一样
-     *
-     * @param v 截取传入的控件父控件
-     */
-    public static void ScreenShot(View v) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
-        String name = "/sdcard/" + sdf.format(new Date()) + ".png";
-        View view = v.getRootView();
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        Bitmap drawingCache = view.getDrawingCache();
-        if (null != drawingCache) {
-            try {
-                FileOutputStream fos = new FileOutputStream(name);
-                drawingCache.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                Log.e("MyLog", "MyUtils.ScreenShot:  文件名： --->>> " + name);
-                showMsg(v.getContext(), "截图成功");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Log.e("MyLog", "MyUtils.ScreenShot:  drawingCache 为空 --->>> ");
-        }
-    }
-
-    public static void showMsg(Context c, String msg) {
-        Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
-    }
 
     public static void downLoadFile(String dir, String filename, final Context context, int posion, NativeUtil nativeUtil, long filesize) {
         if (SDCardUtils.isSDCardEnable()) {
@@ -345,14 +335,6 @@ public class MyUtils {
             Log.e("MyLog", "MyUtils.downLoadFile 205行:  文件的大小 --->>> " + filesize + "  文件目录：" + dir);
             if (file.exists()) {//文件已存在
                 if (file.length() == filesize) {//该文件的大小与服务器中一致，已经是最新的
-//                    Snackbar.make(coordinatorLayout, "  文件已经存在是否直接打开？  ", Snackbar.LENGTH_LONG)
-//                            .setAction("打开查看", new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    FileUtil.openFile(context, file);
-//                                }
-//                            }).show();
-//                    FileUtil.openFile(context, file);
                     OpenThisFile(context, file);
                 } else {//没下载完成，或者是旧的文件
                     //目前采用，删除未完成的再重新下载
@@ -382,17 +364,17 @@ public class MyUtils {
         }
     }
 
-
     public static void OpenThisFile(Context context, File file1) {
         setFile(file1);
         String filename = file1.getName();
         Log.e(TAG, "MyUtils.OpenThisFile :   --> " + filename);
-        if (FileUtil.isPictureFile(filename)) {
+        if (FileUtil.isVideoFile(filename)) {
+
+        } else if (FileUtil.isPictureFile(filename)) {
             /** **** **  如果是图片文件则使用自己的打开  ** **** **/
-            Log.e(TAG, "MyUtils.openFile :  图片文件 --> ");
             EventBus.getDefault().post(new EventMessage(IDEventF.open_picture, file1.getAbsolutePath()));
-        } else if (FileUtil.isDocumentFile(filename)) {
-            /** **** **  如果是文档类文件，设置只能使用WPS软件打开  ** **** **/
+        } else if (FileUtil.isDocumentFile(filename) && !FileUtil.ispdfFile(filename)) {
+            /** **** **  如果是文档类文件并且不是pdf文件，设置只能使用WPS软件打开  ** **** **/
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putString(WpsModel.OPEN_MODE, WpsModel.OpenMode.NORMAL); // 打开模式
@@ -419,6 +401,9 @@ public class MyUtils {
                 System.out.println("打开wps异常：" + e.toString());
                 e.printStackTrace();
             }
+        } else if (FileUtil.ispdfFile(filename)) {
+            /** **** **  PDF类文件  ** **** **/
+            EventBus.getDefault().post(new EventMessage(IDEventF.well_open_pdf, file1.getAbsolutePath()));
         } else {
             //已经存在才打开文件
             Intent intent = new Intent();
@@ -442,7 +427,7 @@ public class MyUtils {
 
 
     /**
-     * 在MEETFILE目录下创建文件
+     * 多级创建目录
      *
      * @param dir
      */
@@ -454,50 +439,6 @@ public class MyUtils {
         return file.getAbsolutePath();
     }
 
-    /**
-     * 截图预览
-     *
-     * @param bitmap
-     */
-    public static void previewPic(Context context, Bitmap bitmap, View parent) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        float scale = 0.4f;
-        final View inflate = LayoutInflater.from(context).inflate(R.layout.preview_pop, null);
-        final PopupWindow preViewPop = new PopupWindow(inflate,
-                PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT, true);
-        preViewPop.setBackgroundDrawable(new BitmapDrawable(context.getResources(), (Bitmap) null));
-        preViewPop.setTouchable(true);
-        preViewPop.setFocusable(true);
-        preViewPop.setOutsideTouchable(true);
-        ImageView previewIV = inflate.findViewById(R.id.preview_iv);
-        //需要先将BitMap转为字节
-        final byte[] bytes = FileUtil.Bitmap2bytes(bitmap);
-        Glide.with(context)
-                .load(bytes)
-                .override((int) (width * scale), (int) (height * scale))
-                .into(previewIV);
-        final ObjectAnimator animator = ObjectAnimator.ofFloat(previewIV, "alpha", 1.0f, 0.0f);
-        animator.setDuration(5000);
-        animator.start();
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                preViewPop.dismiss();
-            }
-        });
-        previewIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("MyLog", "MyUtils.onClick 352行:  点击了预览图片 --->>> ");
-//                Intent intent = new Intent(MeetingActivity.this, PostilActivity.class);
-//                intent.putExtra("bitmap", bytes);
-//                startActivity(intent);
-            }
-        });
-        preViewPop.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
-    }
 
     /**
      * 设置popupWindow 的动画
@@ -753,28 +694,28 @@ public class MyUtils {
         return Integer.toBinaryString(value);
     }
 
-
     /**
-     * 查找sd卡中以 postfix 为后缀的文件
+     * 查找指定目录下的指定类型文件
      *
-     * @param postfix 文件的后缀  .txt .xls
-     * @return 得到一个存放文件路径的集合
+     * @param Path        搜索目录
+     * @param Extension   扩展名
+     * @param IsIterative 是否进入子文件夹
      */
-    public static List<File> getSDPostfixFile(String postfix) {
-        //1.获取到sd卡目录下所有的txt文件
-        List<File> txtFile = new ArrayList<>();
-        File file = new File(SDCardUtils.getSDCardPath());
-        TxtFileFilter txtFileFilter = new TxtFileFilter();
-        txtFileFilter.addType(postfix);
-        File[] files = file.listFiles(txtFileFilter);
-        if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                txtFile.add(files[i]);
-            }
-            return txtFile;
+    public static List<File> GetFiles(String Path, String Extension, boolean IsIterative, List<File> lstFile) {
+        File[] files = new File(Path).listFiles();
+        for (int i = 0; i < files.length; i++) {
+            File f = files[i];
+            if (f.isFile()) {
+                if (f.getPath().substring(f.getPath().length() - Extension.length()).equals(Extension))   //判断扩展名
+                    lstFile.add(f);
+                if (!IsIterative)
+                    break;
+            } else if (f.isDirectory() && f.getPath().indexOf("/.") == -1)  //忽略点文件（隐藏文件/文件夹）
+                GetFiles(f.getPath(), Extension, IsIterative, lstFile);
         }
-        return new ArrayList<>();
+        return lstFile;
     }
+
 
     /**
      * 以弹出框的形式展示查找到的txt文档文件
@@ -783,25 +724,34 @@ public class MyUtils {
      * @param edt     获取TXT文本内容后展示到 edt中
      */
     public static void showTxtDialog(Context context, List<File> txtFile, final EditText edt) {
-        //存放txt文件的路径  txtFile.size()用来定义数组的大小
-        final String[] txtFilePath = new String[txtFile.size()];
-        //txt文件的名称
-        final String[] txtFileName = new String[txtFile.size()];
+        final List<File> fs = new ArrayList<>();
         for (int i = 0; i < txtFile.size(); i++) {
-            txtFilePath[i] = txtFile.get(i).toString();//  /storage/emulated/0/文本.txt
-            txtFileName[i] = txtFile.get(i).getName();//   文本.txt
+            double size = (txtFile.get(i).length() / 1024);
+            /** **** **  文件过大会导致ANR，文件是小于2M的时候才加入  ** **** **/
+            Log.e(TAG, "MyUtils.showTxtDialog : " + txtFile.get(i).getName() + "  文件大小 -->" + size + " KB");
+            if (size > 0 && size < 300) {
+                fs.add(txtFile.get(i));
+            }
         }
-        if (txtFilePath.length == 0) {
-            Toast.makeText(context, "在SD卡中没有找到该类型文件", Toast.LENGTH_SHORT).show();
-        } else {
-            //只有SD卡中有该类文件的时候才展示，否则会报错
+        //txt文件的名称
+        final String[] txtFileName = new String[fs.size()];
+        for (int i = 0; i < fs.size(); i++) {
+            txtFileName[i] = fs.get(i).getName();
+        }
+        //只有SD卡中有该类文件的时候才展示，否则会报错
+        if (txtFileName.length > 0) {
             new AlertDialog.Builder(context).setTitle("SD卡中所有该类型文件")
                     .setItems(txtFileName, new DialogInterface.OnClickListener() {
+                        String content = "";
+
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+                        public void onClick(DialogInterface dialogInterface, final int i) {
+                            dialogInterface.dismiss();
+                            EventBus.getDefault().post(new EventMessage(IDEventF.is_loading, true));
                             //  读取内容获得文本
-                            String s = MyUtils.ReadTxtFile(txtFilePath[i]);
-                            edt.setText(s);
+                            content = MyUtils.ReadTxtFile(fs.get(i).getAbsolutePath());
+                            edt.setText(this.content);
+                            EventBus.getDefault().post(new EventMessage(IDEventF.is_loading, false));
                         }
                     }).create().show();
         }
@@ -814,13 +764,16 @@ public class MyUtils {
      * @return 返回该文件的文本内容
      */
     public static String ReadTxtFile(String strFilePath) {
+        Log.e(TAG, "MyUtils.ReadTxtFile :  要读取的文件 --> " + strFilePath);
+        long startTime = System.currentTimeMillis();
+        Log.e(TAG, "MyUtils.ReadTxtFile :  开始 --> " + startTime);
         String path = String.valueOf(strFilePath);
         String content = ""; //文件内容字符串
         //打开文件
         File file = new File(path);
         //如果path是传递过来的参数，可以做一个非目录的判断
         if (file.isDirectory()) {
-            Log.d("TestFile", "The File doesn't not exist.");
+            Log.e(TAG, "MyUtils.ReadTxtFile :  错误：不能读取文件夹的内容 --> ");
         } else {
             try {
                 InputStream instream = new FileInputStream(file);
@@ -835,11 +788,13 @@ public class MyUtils {
                     instream.close();
                 }
             } catch (java.io.FileNotFoundException e) {
-                Log.d("TestFile", "The File doesn't not exist.");
+                Log.e(TAG, "MyUtils.ReadTxtFile :  没有找到该文件 --> ");
             } catch (IOException e) {
-                Log.d("TestFile", e.getMessage());
+                Log.e(TAG, "MyUtils.ReadTxtFile :  读取文件异常 --> " + e.getMessage());
             }
         }
+        long endTime = System.currentTimeMillis();
+        Log.e(TAG, "MyUtils.ReadTxtFile :  结束 --> " + endTime + "  用时：" + (endTime - startTime) / 600);
         return content;
     }
 
@@ -880,7 +835,7 @@ public class MyUtils {
      * @param v2    除数
      * @param scale 表示表示需要精确到小数点以后几位。
      * @return 两个参数的商
-     * 调用时判断除不为0
+     * 调用时判断除数不为0
      */
     public static double div(double v1, double v2, int scale) {
         if (scale < 0) {
@@ -921,5 +876,32 @@ public class MyUtils {
                 .getAttributes();
         lp.alpha = bgAlpha;
         ((Activity) context).getWindow().setAttributes(lp);
+    }
+
+    /**
+     * 获取选中的项数
+     *
+     * @param value 10进制int型数据
+     * @return
+     */
+    public static List<Integer> getChoose(int value) {
+        List<Integer> ls = new ArrayList<>();
+        //将10进制转换成2进制字符串 010001
+        String to2 = MyUtils.get10To2(value);
+        Log.e(TAG, "MyUtils.getChoose :   --> 二进制数：" + value + "  二进制字符串：" + to2);
+        int length = to2.length();
+        for (int j = 0; j < length; j++) {
+            char c = to2.charAt(j);
+            //将 char 转换成int型整数
+            int a = c - '0';
+            if (a == 1) {
+                //从右往左数 <--
+                //举个栗子： 000100  得到的是第3个
+                int i1 = length - j;
+                ls.add(i1);
+                Log.e(TAG, "MyUtils.getChoose :  选中了第【" + i1 + "】个");
+            }
+        }
+        return ls;
     }
 }

@@ -190,7 +190,7 @@ jbyteArray jni_call(JNIEnv *env, jobject thiz, jint type, jint method, jbyteArra
 	jbyte *jBuf = 0;
     jint length = 0;
 
-    //LOGI("195 jni_call :type:%d method:%d ",type,method);
+    LOGI("195 jni_call  :type:%d method:%d ",type,method);
     		if(NULL != pdata)
     		{
     		        jBuf = env->GetByteArrayElements(pdata, JNI_FALSE);
@@ -198,7 +198,7 @@ jbyteArray jni_call(JNIEnv *env, jobject thiz, jint type, jint method, jbyteArra
     		}
         void* pretdata = NULL;
 	    int   retdatalen = 0;
-        //LOGI("203 jni_call :type:%d method:%d length:%d ",type,method, length);
+        LOGI("203 jni_call  :type:%d method:%d length:%d ",type,method, length);
 		ret = meetPB_call(type, method, jBuf, length, &pretdata, &retdatalen, 0);
 		if(jBuf)
 		{

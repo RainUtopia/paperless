@@ -4,6 +4,7 @@
         android:state_pressed="false"
         android:state_selected="false" />
     <item android:color="@drawable/text_color_p" android:state_selected="true"/>
+    <item android:color="@drawable/text_color_p" android:state_pressed="true"/>
     <item android:color="@drawable/text_color_n" android:state_focused="true"/>
 
 </selector>

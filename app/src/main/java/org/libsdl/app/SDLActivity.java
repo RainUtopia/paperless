@@ -72,6 +72,7 @@ import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fab.FabInfo;
 import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.service.FabService;
+import com.pa.paperless.service.NativeService;
 import com.pa.paperless.utils.DateUtil;
 import com.pa.paperless.utils.Dispose;
 import com.wind.myapplication.CameraDemo;
@@ -92,7 +93,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.mogujie.tt.protobuf.InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_NOTIFY;
-import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
+import static com.pa.paperless.service.NativeService.nativeUtil;
 
 /**
  * SDL Activity
@@ -1595,7 +1596,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     List<Integer> b = new ArrayList<Integer>();
                     a.add(0);
                     if (!isShare)
-                        b.add(MeetingActivity.getDevId());
+//                        b.add(MeetingActivity.getDevId());
+                        b.add(NativeService.localDevId);
                     /** ************ ******  停止资源操作  ****** ************ **/
                     nativeUtil.stopResourceOperate(a, b);
                     /** ************ ******  释放播放资源  ****** ************ **/

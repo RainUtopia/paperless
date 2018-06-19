@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceMacro;
+import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfaceSignin;
 import com.pa.paperless.R;
 import com.pa.paperless.adapter.SigninLvAdapter;
@@ -19,6 +21,7 @@ import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.utils.DateUtil;
+import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,7 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
+import static com.pa.paperless.service.NativeService.nativeUtil;
 
 
 /**
@@ -58,6 +61,8 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         try {
             /** ************ ******  92.查询参会人员  ****** ************ **/
             nativeUtil.queryAttendPeople();
+            /** **** **  将签到信息先缓存下来  ** **** **/
+            nativeUtil.cacheData(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_MEETSIGN.getNumber());
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
@@ -68,50 +73,55 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventF.post_member_toSignin://收到所有的参会人的数据
-                memberInfos = (List<MemberInfo>) message.getObject();
+            case IDEventF.member_info://收到所有的参会人的数据
+                InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
+                memberInfos = Dispose.MemberInfo(o);
                 if (memberInfos != null) {
                     /** ************ ******  206.查询签到信息  ****** ************ **/
                     nativeUtil.querySign();
                 }
                 break;
-            case IDEventF.post_signin_info://收到签到信息数据【已经签到的人员】
-                InterfaceSignin.pbui_Type_MeetSignInDetailInfo object1 = (InterfaceSignin.pbui_Type_MeetSignInDetailInfo) message.getObject();
-                List<InterfaceSignin.pbui_Item_MeetSignInDetailInfo> itemList = object1.getItemList();
-                Log.e(TAG, "SigninFragment.getEventMessage :  已经签到的数量 --> " + itemList.size()+"  打印全部:"+itemList.toString());
-                if (mDatas == null) {
-                    mDatas = new ArrayList<>();
-                } else {
-                    mDatas.clear();
-                }
-                for (int i = 0; i < itemList.size(); i++) {
-                    InterfaceSignin.pbui_Item_MeetSignInDetailInfo item = itemList.get(i);
-                    int nameId = item.getNameId();
-                    int signinType = item.getSigninType();
-                    long utcseconds = item.getUtcseconds();
-                    String[] gtmDate = DateUtil.getDate(utcseconds * 1000);
-                    String dateTime = gtmDate[0] + "  " + gtmDate[2];
-                    for (int j = 0; j < memberInfos.size(); j++) {
-                        if (memberInfos.get(j).getPersonid() == nameId) {
-                            mDatas.add(new SigninBean(nameId, mDatas.size() + 1 + "", memberInfos.get(j).getName(), dateTime, signinType));
-                        }
-                    }
-                }
-                if (signinLvAdapter == null) {
-                    signinLvAdapter = new SigninLvAdapter(getActivity(), mDatas);
-                    mSigninLv.setAdapter(signinLvAdapter);
-                } else {
-                    signinLvAdapter.notifyDataSetChanged();
-                }
-                checkButton();
+            case IDEventF.signin_info://收到签到信息
+                receiveSigninInfo(message);
                 break;
         }
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void receiveSigninInfo(EventMessage message) {
+        InterfaceSignin.pbui_Type_MeetSignInDetailInfo object1 = (InterfaceSignin.pbui_Type_MeetSignInDetailInfo) message.getObject();
+        List<InterfaceSignin.pbui_Item_MeetSignInDetailInfo> itemList = object1.getItemList();
+        if (mDatas == null) {
+            mDatas = new ArrayList<>();
+        } else {
+            mDatas.clear();
+        }
+        for (int i = 0; i < itemList.size(); i++) {
+            InterfaceSignin.pbui_Item_MeetSignInDetailInfo item = itemList.get(i);
+            int nameId = item.getNameId();
+            int signinType = item.getSigninType();
+            long utcseconds = item.getUtcseconds();
+            String[] gtmDate = DateUtil.getDate(utcseconds * 1000);
+            String dateTime = gtmDate[0] + "  " + gtmDate[2];
+            for (int j = 0; j < memberInfos.size(); j++) {
+                if (memberInfos.get(j).getPersonid() == nameId) {
+                    mDatas.add(new SigninBean(nameId, mDatas.size() + 1 + "", memberInfos.get(j).getName(), dateTime, signinType));
+                }
+            }
+        }
+        if (signinLvAdapter == null) {
+            signinLvAdapter = new SigninLvAdapter(getActivity(), mDatas);
+            mSigninLv.setAdapter(signinLvAdapter);
+        } else {
+            signinLvAdapter.notifyDataSetChanged();
+        }
+        checkButton();
     }
 
     private void initView(View inflate) {

@@ -8,14 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.mogujie.tt.protobuf.InterfaceBullet;
 import com.pa.paperless.R;
 import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
+import com.pa.paperless.utils.MyUtils;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import static com.pa.paperless.activity.MeetingActivity.nativeUtil;
+
+import static com.pa.paperless.service.NativeService.nativeUtil;
 
 /**
  * Created by Administrator on 2017/11/1.
@@ -31,7 +35,6 @@ public class NoticeFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.notice, container, false);
-        initController();
         initView(inflate);
         try {
             //查询长文本公告
@@ -46,9 +49,10 @@ public class NoticeFragment extends BaseFragment{
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventF.post_long_notice:
-                String text = (String) message.getObject();
-                mNoticeText.setText(text);
+            case IDEventF.notice://收到公告信息
+                InterfaceBullet.pbui_BigBulletDetailInfo object = (InterfaceBullet.pbui_BigBulletDetailInfo) message.getObject();
+                String content = MyUtils.getBts(object.getText());
+                mNoticeText.setText(content);
                 break;
             case IDEventMessage.NOTICE_CHANGE_INFO:
                 nativeUtil.queryLongNotice();

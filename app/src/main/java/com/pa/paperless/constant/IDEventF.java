@@ -59,6 +59,65 @@ public class IDEventF {
     public static final int fab_member_pro = 6025;
     //通知打开会议笔记
     public static final int open_note = 6026;
-
-
+    //收到参会人员数量和签到数量广播通知
+    public static final int signin_count = 6027;
+    // 界面配置变更通知
+    public static final int ICC_changed_inform = 6028;
+    // 拍摄的照片
+    public static final int take_photo = 6029;
+    // 发送截图批注消息
+    public static final int screen_postil = 6030;
+    // 发送消息打开PDF文件
+    public static final int well_open_pdf = 6031;
+    // 会议笔记导入文本状态
+    public static final int is_loading = 6032;
+    // 查询得到的参会人权限
+    public static final int permission_list = 6033;
+    /** **** **    ** **** **/
+    //后台时间
+    public static final int now_time = 6034;
+    //上下文
+    public static final int context_proper = 6035;
+    //设备信息
+    public static final int dev_info = 6036;
+    //设备会议信息
+    public static final int dev_meet_info = 6037;
+    //初始化NativeUtil
+    public static final int init_native = 6038;
+    //会议功能
+    public static final int meet_function = 6039;
+    //参会人信息
+    public static final int member_info = 6040;
+    //会议排位信息
+    public static final int meet_seat = 6041;
+    //参会人权限
+    public static final int member_mission = 6042;
+    //会议交流信息
+    public static final int meet_chat_info = 6043;
+    //指定ID的参会人员
+    public static final int member_byID = 6044;
+    //议程信息
+    public static final int agenda_info = 6045;
+    //会议目录
+    public static final int meet_dir = 6046;
+    //会议目录文件
+    public static final int meet_dir_file = 6047;
+    //公告文本
+    public static final int notice = 6048;
+    //签到信息
+    public static final int signin_info = 6049;
+    //会议视频
+    public static final int meet_video = 6050;
+    //投票信息
+    public static final int vote = 6051;
+    //指定投票的提交人
+    public static final int vote_member_byId = 6052;
+    //查询网页
+    public static final int net_url = 6053;
+    //查询可加入
+    public static final int can_join = 6054;
+    //查询流播放
+    public static final int all_stream_play = 6055;
+    //文件导出成功
+    public static final int export_finish = 6056;
 }

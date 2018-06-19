@@ -11,6 +11,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.Surface;
 
+import com.pa.paperless.service.FabService;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -84,7 +86,6 @@ public class ScreenRecorder extends Thread {
             display = projection.createVirtualDisplay("MainScreen", width, height, dpi,
                     DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mSurface, null, null);
             Log.d(TAG, "created virtual display: " + display);
-
             recordVirtualDisplay();// 录制虚拟屏幕
 
         } finally {
@@ -147,13 +148,14 @@ public class ScreenRecorder extends Thread {
     private void recordVirtualDisplay() {
         Log.d(TAG, "recordVirtualDisplay---------------------------");
         while (!quit.get()) {
-            int index = encoder.dequeueOutputBuffer(bufferInfo,TIMEOUT_US );// 输出流队列中取数据索引,返回已成功解码的输出缓冲区的索引
+            int index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);// 输出流队列中取数据索引,返回已成功解码的输出缓冲区的索引
             ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
             while (index >= 0) {
-                Log.i(TAG, "Get H264 Buffer Success! flag = " + bufferInfo.flags + ",pts = " + bufferInfo.presentationTimeUs + "");
+//                Log.i(TAG, "Get H264 Buffer Success! flag = " + bufferInfo.flags + ",pts = " + bufferInfo.presentationTimeUs + "");
                 ByteBuffer outputBuffer = outputBuffers[index];
                 byte[] outData = new byte[bufferInfo.size];
                 outputBuffer.get(outData);
+
                 if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
                     Log.d(TAG, "get config byte!");
                     configbyte = new byte[bufferInfo.size];
@@ -182,46 +184,45 @@ public class ScreenRecorder extends Thread {
                 encoder.releaseOutputBuffer(index, false);
                 index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);
             }
-
 //            Log.i(TAG, "dequeue output buffer index=" + index);// �����������������
-//            if (index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {// ��������ʽ�����ˣ��������������ʽ
-//                resetOutputFormat();
-//            } else if (index == MediaCodec.INFO_TRY_AGAIN_LATER) {// �������Ϊ-1�Ժ����ԣ���ʱ�������߳�����10����
-//                Log.d(TAG, "������������ʱ!");
-//                try {
-//                    // wait 10ms
-//                    Thread.sleep(100);
-//                } catch (InterruptedException e) {
-//                }
-//            } else {
-//                while (index >= 0) {// index>=0Ϊ��Ч���
-//                    if (!muxerStarted) {// ���muxerδ����
-//                        throw new IllegalStateException("MediaMuxer dose not call addTrack(format) ");
-//                    }
-////                    encodeToVideoTrack(index);// ���뵽��Ƶ���
-//
-//                    //--
-//                    *//*ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
-//                    ByteBuffer outputBuffer = outputBuffers[index];
-//                    byte[] outData = new byte[bufferInfo.size];
-//                    outputBuffer.get(outData);
-//                    if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
-//                        configbyte = new byte[bufferInfo.size];
-//                        configbyte = outData;
-//                    } else if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_KEY_FRAME) {
-//                        byte[] keyframe = new byte[bufferInfo.size + configbyte.length];
-//                        System.arraycopy(configbyte, 0, keyframe, 0, configbyte.length);
-//                        System.arraycopy(outData, 0, keyframe, configbyte.length, outData.length);
-//                        //jni
-//                    } else {
-//                        //jni
-//                    }*//*
-//                    //--
-//
-//                    encoder.releaseOutputBuffer(index, false);// �ͷ�����ɵ�����
-////                    index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);
-//                }
-//            }
+    //            if (index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {// ��������ʽ�����ˣ��������������ʽ
+    //                resetOutputFormat();
+    //            } else if (index == MediaCodec.INFO_TRY_AGAIN_LATER) {// �������Ϊ-1�Ժ����ԣ���ʱ�������߳�����10����
+    //                Log.d(TAG, "������������ʱ!");
+    //                try {
+    //                    // wait 10ms
+    //                    Thread.sleep(100);
+    //                } catch (InterruptedException e) {
+    //                }
+    //            } else {
+    //                while (index >= 0) {// index>=0Ϊ��Ч���
+    //                    if (!muxerStarted) {// ���muxerδ����
+    //                        throw new IllegalStateException("MediaMuxer dose not call addTrack(format) ");
+    //                    }
+    ////                    encodeToVideoTrack(index);// ���뵽��Ƶ���
+    //
+    //                    //--
+    //                    *//*ByteBuffer[] outputBuffers = encoder.getOutputBuffers();
+    //                    ByteBuffer outputBuffer = outputBuffers[index];
+    //                    byte[] outData = new byte[bufferInfo.size];
+    //                    outputBuffer.get(outData);
+    //                    if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
+    //                        configbyte = new byte[bufferInfo.size];
+    //                        configbyte = outData;
+    //                    } else if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_KEY_FRAME) {
+    //                        byte[] keyframe = new byte[bufferInfo.size + configbyte.length];
+    //                        System.arraycopy(configbyte, 0, keyframe, 0, configbyte.length);
+    //                        System.arraycopy(outData, 0, keyframe, configbyte.length, outData.length);
+    //                        //jni
+    //                    } else {
+    //                        //jni
+    //                    }*//*
+    //                    //--
+    //
+    //                    encoder.releaseOutputBuffer(index, false);// �ͷ�����ɵ�����
+    ////                    index = encoder.dequeueOutputBuffer(bufferInfo, TIMEOUT_US);
+    //                }
+    //            }
         }
     }
 
@@ -283,7 +284,7 @@ public class ScreenRecorder extends Thread {
      * @throws IOException
      */
     private void release() {
-        Log.d(TAG, "release---------------------------");
+        Log.d(TAG, "release-----------------释放资源----------");
         if (encoder != null) {
             encoder.stop();
             encoder.release();
@@ -300,6 +301,7 @@ public class ScreenRecorder extends Thread {
             muxer.release();
             muxer = null;
         }
+        FabService.isBusy = false;
     }
 
     // 获取编码前数据

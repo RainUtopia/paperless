@@ -1,5 +1,4 @@
-package com.pa.paperless.adapter;
-
+package com.pa.paperless.adapter.setadapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,28 +8,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.pa.paperless.R;
+import com.pa.paperless.adapter.ScreenControlAdapter;
 import com.pa.paperless.bean.DevMember;
 import com.pa.paperless.listener.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//import static com.pa.paperless.activity.MeetingActivity.checks;
-import static com.pa.paperless.service.FabService.checks;
+import static com.pa.paperless.service.FabService.canjoinMemberSelect;
 
 
 /**
- * Created by Administrator on 2017/11/9.
- * 同屏控制Adapter 参与人 和 投影机
+ * Created by Administrator on 2018/6/15.
  */
 
-public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CanJoinMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final String TAG = "ScreenControlAdapter-->";
+    private final String TAG = "CanJoinMemberAdapter-->";
     private List<DevMember> mData;
     private ItemClickListener mListener;
 
-    public ScreenControlAdapter(List<DevMember> datas) {
+    public CanJoinMemberAdapter(List<DevMember> datas) {
         mData = datas;
     }
 
@@ -41,10 +39,10 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     public List<DevMember> getCheckedIds() {
         List<DevMember> checkedId = new ArrayList<>();
-        Log.e(TAG, "ScreenControlAdapter.getCheckedIds :  选中参会人集合 --> "+checks.toString());
+        Log.e(TAG, "CanJoinMemberAdapter.getCheckedIds :  选中参会人集合 --> " + canjoinMemberSelect.toString());
         if (mData.size() > 0) {
-            for (int i = 0; i < checks.size(); i++) {
-                if (checks.get(i)) {
+            for (int i = 0; i < canjoinMemberSelect.size(); i++) {
+                if (canjoinMemberSelect.get(i)) {
                     checkedId.add(mData.get(i));
                 }
             }
@@ -62,9 +60,9 @@ public class ScreenControlAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
-        ((ViewHolder) holder).play_btn.setSelected(checks.get(position));
-        ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
+        ((ScreenControlAdapter.ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
+        ((ScreenControlAdapter.ViewHolder) holder).play_btn.setSelected(canjoinMemberSelect.get(position));
+        ((ScreenControlAdapter.ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
