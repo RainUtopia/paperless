@@ -103,7 +103,6 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.device_management, container, false);
         initView(inflate);
-        initController();
         try {
             //6.查询设备信息
             nativeUtil.queryDeviceInfo();
@@ -139,12 +138,6 @@ public class DeviceManagementFragment extends BaseFragment implements View.OnCli
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initView(View inflate) {
         mDevrceManageRl = (RecyclerView) inflate.findViewById(R.id.devrce_manage_rl);

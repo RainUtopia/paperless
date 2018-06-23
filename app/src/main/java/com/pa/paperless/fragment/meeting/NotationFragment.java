@@ -1,6 +1,5 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.pa.paperless.R;
-import com.pa.paperless.adapter.TypeFileAdapter;
+import com.pa.paperless.adapter.setadapter.NotationFileAdapter;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
@@ -45,7 +44,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     private ListView mNotaLv;
     private Button mNotaPrepage;
     private Button mNotaNextpage;
-    private TypeFileAdapter mAdapter;
+    private NotationFileAdapter mAdapter;
     private Button mDocument;
     private Button mPicture;
     private List<Button> mBtns;
@@ -53,32 +52,39 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     //所有批注文件
     private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
     //用于临时存放不同类型的文件
-    private List<MeetDirFileInfo> mData = new ArrayList<>();
+    private List<MeetDirFileInfo> mData;
     public static boolean notationfragment_isshowing = false;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_notation, container, false);
+        Log.i("F_life", "NotationFragment.onCreateView :   --->>> ");
         initView(inflate);
         notationfragment_isshowing = true;
         mBtns = new ArrayList<>();
         mBtns.add(mDocument);
         mBtns.add(mPicture);
         try {
-            nativeUtil.queryMeetDir();
+            //143.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
+            nativeUtil.queryMeetDirFile(2);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
+    }
+
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventF.meet_dir://收到会议目录信息
-                receiveMeetDir(message);
+//                receiveMeetDir(message);
                 break;
             case IDEventF.meet_dir_file://收到会议目录文件
                 receiveMeetDirFile(message);
@@ -97,22 +103,39 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         InterfaceFile.pbui_Type_MeetDirFileDetailInfo object = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) message.getObject();
         Log.e(TAG, "NotationFragment.receiveMeetDirFile :  object.getDirid() --> " + object.getDirid());
         if (object.getDirid() == 2) {//批注文件
+            Log.i("file_get", "NotationFragment.receiveMeetDirFile :   --> " + object.getDirid());
             meetDirFileInfos = Dispose.MeetDirFile(object);
             if (meetDirFileInfos != null) {
-                if (mAdapter == null) {
-                    mAdapter = new TypeFileAdapter(getContext(), mData);
-                    mNotaLv.setAdapter(mAdapter);
+                if (mData == null) {
+                    mData = new ArrayList<>();
+                } else {
+                    mData.clear();
                 }
-                mData.clear();
                 for (int i = 0; i < meetDirFileInfos.size(); i++) {
                     MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
                     mData.add(documentBean);
                 }
-                mAdapter.notifyDataSetChanged();
-                mAdapter.PAGE_NOW = 0;
-                checkButton();
-                setSelect(0);
             }
+            if (mAdapter == null) {
+                mAdapter = new NotationFileAdapter(getContext(), mData);
+                mNotaLv.setAdapter(mAdapter);
+            }
+            mAdapter.notifyDataSetChanged();
+            mAdapter.PAGE_NOW = 0;
+            checkButton();
+            setSelect(0);
+            mAdapter.setLookListener(new NotationFileAdapter.setLookListener() {
+                @Override
+                public void onLookListener(int posion, String filename, long filesize) {
+                    MyUtils.openFile(Macro.POSTILFILE, filename, nativeUtil, posion, getContext(), filesize);
+                }
+            });
+            mAdapter.setDownListener(new NotationFileAdapter.setDownListener() {
+                @Override
+                public void onDownListener(int posion, String filename, long filesize) {
+                    MyUtils.downLoadFile(Macro.POSTILFILE, filename, getContext(), posion, nativeUtil, filesize);
+                }
+            });
         }
     }
 
@@ -123,7 +146,7 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
             InterfaceFile.pbui_Item_MeetDirDetailInfo info = itemList.get(i);
             String dirName = MyUtils.getBts(info.getName());
             Log.e(TAG, "NotationFragment.receiveMeetDir :  目录名称 --> " + dirName + " 目录ID：" + info.getId());
-            if (dirName.equals("批注文件")) {
+            if (dirName.equals("批注文件") && info.getId() == 2) {
                 try {
                     Log.e(TAG, "NotationFragment.receiveMeetDir :  批注文件的目录ID： --> " + info.getId());
                     //查询会议目录文件
@@ -139,9 +162,13 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
     public void onDestroy() {
         Log.i("F_life", "NotationFragment.onDestroy :   --> ");
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
 
     private void setSelect(int index) {
         for (int i = 0; i < mBtns.size(); i++) {
@@ -157,22 +184,6 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
 
     private void initView(View inflate) {
         mNotaLv = (ListView) inflate.findViewById(R.id.nota_lv);
-        mAdapter = new TypeFileAdapter(getContext(), mData);
-        mNotaLv.setAdapter(mAdapter);
-        mAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
-            @Override
-            public void onLookListener(int posion, String filename, long filesize) {
-                MyUtils.openFile(Macro.POSTILFILE, filename, nativeUtil, posion, getContext(), filesize);
-//                OpenFile(Macro.POSTILFILE, posion, filename, filesize);
-            }
-        });
-        mAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
-            @Override
-            public void onDownListener(int posion, String filename, long filesize) {
-//                downLoadFile(Macro.POSTILFILE, posion, filename, filesize);
-                MyUtils.downLoadFile(Macro.POSTILFILE, filename, getContext(), posion, nativeUtil, filesize);
-            }
-        });
         mNotaPrepage = (Button) inflate.findViewById(R.id.nota_prepage);
         mNotaNextpage = (Button) inflate.findViewById(R.id.nota_nextpage);
 
@@ -199,7 +210,9 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                     mData.clear();
                     for (int i = 0; i < meetDirFileInfos.size(); i++) {
                         MeetDirFileInfo meetDirFileInfo = meetDirFileInfos.get(i);
+                        Log.d("files", "NotationFragment.onClick :  批注中所有的文件 --->>> " + meetDirFileInfo.getFileName());
                         if (FileUtil.isDocumentFile(meetDirFileInfo.getFileName())) {
+                            Log.i("files", "NotationFragment.onClick :  批注中添加的文件 --->>> " + meetDirFileInfo.getFileName());
                             mData.add(meetDirFileInfo);
                         }
                     }
@@ -214,7 +227,9 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
                     mData.clear();
                     for (int i = 0; i < meetDirFileInfos.size(); i++) {
                         MeetDirFileInfo meetDirFileInfo = meetDirFileInfos.get(i);
+                        Log.d("files", "NotationFragment.onClick :  批注中所有的文件 --->>> " + meetDirFileInfo.getFileName());
                         if (FileUtil.isPictureFile(meetDirFileInfo.getFileName())) {
+                            Log.i("files", "NotationFragment.onClick :  批注中添加的文件 --->>> " + meetDirFileInfo.getFileName());
                             mData.add(meetDirFileInfo);
                         }
                     }
@@ -272,65 +287,12 @@ public class NotationFragment extends BaseFragment implements View.OnClickListen
         if (!hidden) {
             try {
                 Log.e("MyLog", "NotationFragment.onHiddenChanged 341行:  不隐藏状态 --->>> ");
-                //136.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
-                nativeUtil.queryMeetDir();
+                //143.查询会议目录文件（直接查询 批注文件(id 是固定为 2 )的文件）
+                nativeUtil.queryMeetDirFile(2);
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        Log.i("F_life", "NotationFragment.onAttach :   --> ");
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.i("F_life", "NotationFragment.onCreate :   --> ");
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.i("F_life", "NotationFragment.onActivityCreated :   --> ");
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        Log.i("F_life", "NotationFragment.onStart :   --> ");
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        Log.i("F_life", "NotationFragment.onResume :   --> ");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Log.i("F_life", "NotationFragment.onPause :   --> ");
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        Log.i("F_life", "NotationFragment.onStop :   --> ");
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.i("F_life", "NotationFragment.onDestroyView :   --> ");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDetach() {
-        Log.i("F_life", "NotationFragment.onDetach :   --> ");
-        super.onDetach();
-    }
 }

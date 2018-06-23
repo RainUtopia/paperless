@@ -52,6 +52,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import static com.pa.paperless.activity.BaseActivity.subject;
 import static com.pa.paperless.utils.MyUtils.getStb;
 
 
@@ -88,6 +89,7 @@ public class NativeUtil {
 
     public CallListener mCallListener;
 
+
     private NativeUtil() {
     }
 
@@ -120,9 +122,9 @@ public class NativeUtil {
     public boolean javaInitSys() {
         //获取手机/平板的唯一标识
         String uniqueId = MainActivity.uniqueId;
-        Log.e("MyLog", "NativeUtil.onCreate 322行:   keystr手机的唯一标识符--->>> " + uniqueId);
+        Log.e(TAG, "NativeUtil.javaInitSys :  keystr手机的唯一标识符 --> " + uniqueId);
         String cfgpath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/NETCONFIG/client.ini";
-        Log.e("MyLog", "NativeUtil.javaInitSys 121行:   初始化ini路径：--->>> " + cfgpath);
+        Log.e(TAG, "NativeUtil.javaInitSys :  初始化ini路径：--->>> " + cfgpath);
         InterfaceBase.pbui_MeetCore_InitParam.Builder tmp = InterfaceBase.pbui_MeetCore_InitParam.newBuilder();
         tmp.setPconfigpathname(getStb(cfgpath));
         tmp.setProgramtype(InterfaceMacro.Pb_ProgramType.Pb_MEET_PROGRAM_TYPE_MEETCLIENT.getNumber());
@@ -133,7 +135,7 @@ public class NativeUtil {
         boolean bret = true;
         Log.i("NativeUtil", "javaInitSys:start!");
         if (-1 == Init_walletSys(pb.toByteArray())) {
-            Log.e("MyLog", "NativeUtil.javaInitSys 136行:  初始化失败了 --->>> ");
+            Log.e(TAG, "NativeUtil.javaInitSys :  初始化失败了 --> ");
             bret = false;
         }
         Log.i("NativeUtil", "javaInitSys:finish!");
@@ -761,8 +763,8 @@ public class NativeUtil {
      * @return
      */
     public boolean creationFileDownload(String pathname, int mediaid, int newfile, int onlyfinish) {
-        if (MeetingActivity.localPermissions != null) {
-            if (MeetingActivity.localPermissions.contains(4)) {
+        if (NativeService.localPermissions != null) {
+            if (NativeService.localPermissions.contains(4)) {
                 InterfaceDownload.pbui_Type_DownloadStart.Builder builder = InterfaceDownload.pbui_Type_DownloadStart.newBuilder();
                 builder.setMediaid(mediaid);
                 builder.setNewfile(newfile);
@@ -774,7 +776,6 @@ public class NativeUtil {
                 Log.e("MyLog", "NativeUtil.creationFileDownload:  65.创建一个文件下载 --->>> ");
                 return true;
             } else {
-                Toast.makeText(MeetingActivity.context, "您没有下载的权限", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "NativeUtil.creationFileDownload :  您没有下载权限 --> ");
                 return false;
             }
@@ -813,8 +814,8 @@ public class NativeUtil {
      * @throws InvalidProtocolBufferException
      */
     public boolean uploadFile(int uploadflag, int dirid, int attrib, String newname, String pathname, int userval, int mediaid) throws InvalidProtocolBufferException {
-        if (MeetingActivity.localPermissions != null) {
-            if (MeetingActivity.localPermissions.contains(3)) {
+        if (NativeService.localPermissions != null) {
+            if (NativeService.localPermissions.contains(3)) {
                 InterfaceUpload.pbui_Type_AddUploadFile.Builder builder = InterfaceUpload.pbui_Type_AddUploadFile.newBuilder();
                 builder.setUploadflag(uploadflag);
                 builder.setDirid(dirid);
@@ -833,7 +834,6 @@ public class NativeUtil {
                 Log.e("MyLog", "NativeUtil.uploadFile 820行:  69.上传文件成功 --->>> ");
                 return true;
             } else {
-                Toast.makeText(MeetingActivity.context, "您没有上传文件的权限", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "NativeUtil.uploadFile :  您没有上传文件的权限 --> ");
                 return false;
             }
@@ -2680,6 +2680,21 @@ public class NativeUtil {
         return true;
     }
 
+    /**
+     * 缓存会议数据
+     *
+     * @return
+     * @throws InvalidProtocolBufferException
+     */
+    public boolean cacheData(int type, int id) throws InvalidProtocolBufferException {
+        InterfaceBase.pbui_MeetCacheOper.Builder builder = InterfaceBase.pbui_MeetCacheOper.newBuilder();
+        builder.setCacheflag(InterfaceMacro.Pb_CacheFlag.Pb_MEET_CACEH_FLAG_FORCE.getNumber());
+        builder.setId(id);
+        call_method(type, InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CACHE.getNumber(), builder.build().toByteArray());
+        Log.e(TAG, "NativeUtil.cacheData :  缓存会议数据 --> ");
+        return true;
+    }
+
 
     /**
      * 206.查询签到
@@ -3277,16 +3292,19 @@ public class NativeUtil {
         return true;
     }
 
-
     /**
      * 260.请求播放流通道
      *
      * @return
      */
-    public boolean requestPlayStreamWay() {
+    public boolean requestPlayStreamWay(int triggeruserval, int handledeviceid, int substreamindex, List<Integer> devids) {
         InterfaceStream.pbui_Type_DoReqStreamPush.Builder builder = InterfaceStream.pbui_Type_DoReqStreamPush.newBuilder();
+        builder.setTriggeruserval(triggeruserval);
+        builder.setHandledeviceid(handledeviceid);
+        builder.setSubstreamindex(substreamindex);
+        builder.addAllDeviceid(devids);
         InterfaceStream.pbui_Type_DoReqStreamPush build = builder.build();
-        byte[] array = call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REQUESTPUSH.getNumber(), build.toByteArray());
+        call_method(InterfaceMacro.Pb_Type.Pb_TYPE_MEET_INTERFACE_STREAMPLAY.getNumber(), InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_REQUESTPUSH.getNumber(), build.toByteArray());
         Log.e("MyLog", "NativeUtil.requestPlayStreamWay:  260.请求播放流通道 --->>> ");
         return true;
     }
@@ -3475,6 +3493,8 @@ public class NativeUtil {
     //成功返回0 失败返回-1
     public native int InitAndCapture(int type, int channelindex);
 
+    public native void enablebackgroud(int type);
+
     //初始化桌面、摄像头采集
     //type 流类型
     //data 采集数据
@@ -3518,13 +3538,18 @@ public class NativeUtil {
             }
             case 4://start capture
             {
-                Log.e(TAG, "NativeUtil.callback :  采集流通知 -->   :" + type);
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.START_COLLECTION_STREAM_NOTIFY, type));
+                if (subject != null) {
+                    Log.i("stream_log", "NativeUtil.callback :  通知采集流 --->>> " + type);
+                    subject.inform(IDEventMessage.START_COLLECTION_STREAM_NOTIFY, type);
+                }
                 return 0;
             }
             case 5://stop capture
             {
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.STOP_COLLECTION_STREAM_NOTIFY, type));
+                if (subject != null) {
+                    Log.i("stream_log", "NativeUtil.callback :  通知停止采集流 --->>> " + type);
+                    subject.inform(IDEventMessage.STOP_COLLECTION_STREAM_NOTIFY, type);
+                }
                 return 0;
             }
         }
@@ -3584,8 +3609,10 @@ public class NativeUtil {
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.PLATFORM_INITIALIZATION));
                 break;
             case 6: //5   设备寄存器变更通知
-                EventBus.getDefault().post(new EventMessage(IDEventMessage.DEV_REGISTER_INFORM, InterfaceDevice.pbui_Type_MeetDeviceBaseInfo.parseFrom(data)));
-//                Log.e("CaseLog", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>> ");
+                InterfaceDevice.pbui_Type_MeetDeviceBaseInfo object1 = InterfaceDevice.pbui_Type_MeetDeviceBaseInfo.parseFrom(data);
+                EventBus.getDefault().post(new EventMessage(IDEventMessage.DEV_REGISTER_INFORM, object1));
+                Log.e("DevChange", "NativeUtil.callback_method:  5 设备寄存器变更通知 --->>> 设备ID:" + object1.getDeviceid() + "  寄存器ID:"
+                        + object1.getAttribid() + " SerializedSize: " + object1.getSerializedSize());
                 break;
             case 7://40
                 InterfaceBase.pbui_meetUrl pbui_meetUrl1 = InterfaceBase.pbui_meetUrl.parseFrom(data);
@@ -3701,7 +3728,7 @@ public class NativeUtil {
                 break;
             case 31://198
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.Vote_Change_Inform, InterfaceBase.pbui_MeetNotifyMsg.parseFrom(data)));
-                Log.e("MyLog", "NativeUtil.callback_method:  198 投票变更通知 --->>> ");
+                Log.e("CaseLog", "NativeUtil.callback_method:  198 投票变更通知 --->>> ");
                 break;
             case 32://202
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.VoteMember_ChangeInform, InterfaceBase.pbui_MeetNotifyMsg.parseFrom(data)));
@@ -3780,7 +3807,7 @@ public class NativeUtil {
                 break;
             case 42://10.界面状态变更通知
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.FACESTATUS_CHANGE_INFORM, InterfaceDevice.pbui_MeetDeviceMeetStatus.parseFrom(data)));
-//                Log.e("CaseLog", "NativeUtil.callback_method:  界面状态变更通知回调 --->>>" );
+                Log.e("CaseLog", "NativeUtil.callback_method:  界面状态变更通知 --->>>");
                 break;
             case 43://15-30
                 if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_ZOOM.getNumber()) {
@@ -3811,34 +3838,34 @@ public class NativeUtil {
                 int status = error.getStatus();
                 switch (status) {
                     case 0://多条查询记录
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 0 --->>> 多条查询记录");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 0 --->>> 多条查询记录");
                         break;
                     case 1://单条查询记录
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 1 --->>> 单条查询记录");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 1 --->>> 单条查询记录");
                         break;
                     case 2://无返回记录
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 2 --->>> 无返回记录");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 2 --->>> 无返回记录");
                         break;
                     case 3://操作成功
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 3 --->>> 操作成功");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 3 --->>> 操作成功");
                         break;
                     case 4://请求失败
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 4 --->>> 请求失败");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 4 --->>> 请求失败");
                         break;
                     case 5://数据库异常
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 5 --->>> 数据库异常");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 5 --->>> 数据库异常");
                         break;
                     case 6://服务器异常
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 6 --->>> 服务器异常");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 6 --->>> 服务器异常");
                         break;
                     case 7://权限限制
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 7 --->>> 权限限制");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 7 --->>> 权限限制");
                         break;
                     case 8://密码错误
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 8 --->>> 密码错误");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 8 --->>> 密码错误");
                         break;
                     case 9://创建会议有冲突
-                        Log.e("MyLog", "NativeUtil.callback_method: 250 数据后台回复的信息 9 --->>> 创建会议有冲突");
+                        Log.e("CaseLog", "NativeUtil.callback_method: 250 数据后台回复的信息 9 --->>> 创建会议有冲突");
                         break;
                 }
                 break;
@@ -3849,6 +3876,7 @@ public class NativeUtil {
             case 46://263
                 EventBus.getDefault().post(new EventMessage(IDEventMessage.PLAY_STREAM_NOTIFY, InterfaceStream.pbui_Type_MeetStreamPlay.parseFrom(data)));
                 Log.e("CaseLog", "NativeUtil.callback_method:  263 流播放通知 --->>> ");
+                Log.i("stream_log", "NativeUtil.callback_method :  流播放通知 --->>> ");
                 break;
             case 47://246-247
                 if (method == InterfaceMacro.Pb_Method.Pb_METHOD_MEET_INTERFACE_CLOSE.getNumber()) {
@@ -3904,7 +3932,7 @@ public class NativeUtil {
                 break;
             default:
                 android.util.Log.i("NativeUtil", "callback_method: type: " + type + ", method: " + method);
-                Log.e("MyLog", "NativeUtil.callback_method 3969行:  默认回调 --->>> ");
+                Log.e("CaseLog", "NativeUtil.callback_method 3969行:  默认回调 --->>> ");
                 break;
         }
         return 0;

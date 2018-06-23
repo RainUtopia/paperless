@@ -34,15 +34,12 @@ import static com.pa.paperless.service.NativeService.nativeUtil;
 
 public class AgendaFragment extends BaseFragment {
     private TextView agenda_tv;
-    List<AgendContext> mData;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.agenda, container, false);
         agenda_tv = (TextView) inflate.findViewById(R.id.agenda_text);
-        mData = new ArrayList<>();
-        EventBus.getDefault().register(this);
         try {
             //查询议程 -- 获取议程信息
             nativeUtil.queryAgenda();
@@ -69,7 +66,6 @@ public class AgendaFragment extends BaseFragment {
     public void onDestroy() {
         Log.i("F_life", "AgendaFragment.onDestroy :   --> ");
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -93,6 +89,7 @@ public class AgendaFragment extends BaseFragment {
     @Override
     public void onStart() {
         Log.i("F_life", "AgendaFragment.onStart :   --> ");
+        EventBus.getDefault().register(this);
         super.onStart();
     }
 
@@ -117,6 +114,7 @@ public class AgendaFragment extends BaseFragment {
     @Override
     public void onStop() {
         Log.i("F_life", "AgendaFragment.onStop :   --> ");
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 

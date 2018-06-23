@@ -1,14 +1,15 @@
 package com.pa.paperless.bean;
 
+
 /**
  * Created by Administrator on 2017/11/1.
  * 签到状态的信息列表bean
  */
 
 public class SigninBean {
+    String signin_name;
     int id;
     String signin_num;
-    String signin_name;
     String signin_date;
     int sign_in;
 

@@ -54,12 +54,16 @@ message pbui_Item_DeviceDetailInfo
 	bytes    devname=2;
 	repeated pbui_SubItem_DeviceIpAddrInfo ipinfo=3;//ip信息
 	fixed32  netstate=4;
+	fixed32  hardversion=5;//
+	fixed32  softversion=6;//
 
-	repeated pbui_SubItem_DeviceResInfo resinfo=5;//资源信息
+	repeated pbui_SubItem_DeviceResInfo resinfo=7;//资源信息
 
-	fixed32	 facestate=6;//界面状态 参见MemState_MainFace 定义
-	fixed32  memberid=7;// 当前人员
-	fixed32  meetingid=8;//当前会议
+	fixed32	 facestate=8;//界面状态 参见MemState_MainFace 定义
+	fixed32  memberid=9;//当前人员
+	fixed32  meetingid=10;//当前会议
+	fixed32 liftgroupres0=11;//升降话筒组ID
+	fixed32 liftgroupres1=12;//升降话筒组ID
 }
 
 //返回查询设备信息
@@ -69,6 +73,20 @@ message pbui_Item_DeviceDetailInfo
 message pbui_Type_DeviceDetailInfo
 {
 	repeated pbui_Item_DeviceDetailInfo pdev=1;
+}
+
+//分页查询返回查询设备信息结构头部
+//callreturn
+//type:需要查询的数据的类别
+//method: pagequery 接口方返回
+message	pbui_PageQueryDeviceInfo
+{
+	fixed32			pageindex=1;//起始索引 从0 开始
+	fixed32			pagenum=2;//每页项数
+	fixed32			itemnum=3;//当前页项数 ,根据数据不同用不同的解析
+	fixed32			totalnum=4;//总项数
+	fixed32		    idval=5;//用于分组使用,如：查询指分组中的人员,这里填写分组id
+	repeated pbui_Item_DeviceDetailInfo pdev=6;
 }
 
 message pbui_Item_DeviceResPlay
@@ -126,7 +144,7 @@ message pbui_DeviceStringProperty
 //method: modifyinfo
 message pbui_DeviceModInfo
 {
-	fixed32 modflag=1;//指定需要修改的标志位
+	fixed32 modflag=1;//指定需要修改的标志位 参见 Pb_DeviceModifyFlag
 	fixed32 devcieid=2;
 	bytes   devname=3;
 	repeated pbui_SubItem_DeviceIpAddrInfo ipinfo=4;//ip信息

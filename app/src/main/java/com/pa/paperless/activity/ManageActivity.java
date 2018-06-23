@@ -49,11 +49,11 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     private List<TextView> mViews = new ArrayList<>();
     private List<BaseFragment> mFragments;
     private FragmentTransaction mBeginTransaction;
-    private NativeUtil nativeUtil ;
-    private Handler mHandler = new Handler(){
+    private NativeUtil nativeUtil;
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case IDivMessage.QUERY_MEET:
                     ArrayList queryMeet = msg.getData().getParcelableArrayList("queryMeet");
                     InterfaceMeet.pbui_Type_MeetMeetInfo o = (InterfaceMeet.pbui_Type_MeetMeetInfo) queryMeet.get(0);
@@ -80,17 +80,30 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
         }
         //  设置默认点击
         mSystemSetting.performClick();
-        EventBus.getDefault().register(this);
     }
+
+    @Override
+    protected void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
-        switch (message.getAction()){
+        switch (message.getAction()) {
             case IDEventMessage.MEETINFO_CHANGE_INFORM:
-                Log.e("MyLog","ManageActivity.getEventMessage:  查询会议 EventBus --->>> ");
+                Log.e("MyLog", "ManageActivity.getEventMessage:  查询会议 EventBus --->>> ");
                 nativeUtil.queryMeet();
                 break;
         }
     }
+
     @Override
     protected void initController() {
         nativeUtil = NativeUtil.getInstance();
@@ -198,7 +211,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void callListener(int action, Object result) {
-        switch (action){
+        switch (action) {
             case IDivMessage.QUERY_MEET:
                 InterfaceMeet.pbui_Type_MeetMeetInfo result1 = (InterfaceMeet.pbui_Type_MeetMeetInfo) result;
                 if (result1 != null) {

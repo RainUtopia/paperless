@@ -14,6 +14,9 @@ int wallet_netinit_register_native_methods(JNIEnv* env);
 //Sucess return 0,failed retunr -1
 int Init_walletSys(JNIEnv *env, jobject thiz, jbyteArray data);
 
+//benable 0:foregroud 1:backgroud
+void jni_enablebackgroud(JNIEnv *env, jobject thiz, jint benable);
+
 //for system function call
 //sucess return a bytearray parse with type and method,failed return a null bytearray
 jbyteArray jni_call(JNIEnv *env, jobject thiz, jint type, jint method, jbyteArray pdata);

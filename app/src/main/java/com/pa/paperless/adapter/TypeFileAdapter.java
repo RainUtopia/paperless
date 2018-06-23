@@ -119,7 +119,6 @@ public class TypeFileAdapter extends BaseAdapter {
             this.document_item_look = (ImageView) rootView.findViewById(R.id.look);
             this.document_item_download = (ImageView) rootView.findViewById(R.id.download);
         }
-
     }
 }
 

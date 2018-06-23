@@ -47,7 +47,8 @@ public class Export {
         boolean succeed = true;
         try {
             //1.创建Excel文件
-            File file = new File(MyUtils.CreateFile(Macro.VOTERESULT) + fileName + ".xls");
+            MyUtils.CreateFile(Macro.VOTERESULT);
+            File file = new File(Macro.VOTERESULT + fileName + ".xls");
             file.createNewFile();
             //2.创建工作簿
             WritableWorkbook workbook = Workbook.createWorkbook(file);

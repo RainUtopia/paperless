@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceAgenda;
 import com.mogujie.tt.protobuf.InterfaceBase;
 import com.mogujie.tt.protobuf.InterfaceBullet;
@@ -25,6 +26,7 @@ import com.mogujie.tt.protobuf.InterfaceVideo;
 import com.mogujie.tt.protobuf.InterfaceVote;
 import com.pa.paperless.activity.NoteActivity;
 import com.pa.paperless.constant.IDEventF;
+import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.CallListener;
@@ -36,6 +38,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.pa.paperless.utils.MyUtils.handTo;
 
@@ -49,10 +52,12 @@ public class NativeService extends Service implements CallListener {
     public static NativeUtil nativeUtil;
     public static int localDevId;//本机设备ID
     public static int localMemberId;//本机参会人ID
+    public static List<InterfaceMember.pbui_Item_MemberPermission> mPermissionsList;//所有的参会人权限集合
+    public static List<Integer> localPermissions;//本机参会人权限集合
 
     @Override
     public void onDestroy() {
-        Log.i("S_life", "NativeService.onDestroy ");
+        Log.i("S_life", "NativeService.onDestroy " + this);
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
@@ -60,13 +65,13 @@ public class NativeService extends Service implements CallListener {
     @Override
     public void onCreate() {
         EventBus.getDefault().register(this);
-        Log.i("S_life", "NativeService.onCreate ");
+        Log.i("S_life", "NativeService.onCreate " + this);
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("S_life", "NativeService.onStartCommand ");
+        Log.i("S_life", "NativeService.onStartCommand " + this);
         nativeUtil = NativeUtil.getInstance();
         nativeUtil.setCallListener(this);
         //发送消息到主页初始化完毕
@@ -88,12 +93,33 @@ public class NativeService extends Service implements CallListener {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getEventMessage(EventMessage message) {
+    public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventF.export_finish://文件导出成功
                 String fileName = (String) message.getObject();
-                Toast.makeText(this, fileName + "导出成功", Toast.LENGTH_SHORT).show();
+                if (!fileName.equals("会议笔记存档.txt")) {
+                    Toast.makeText(this, fileName + "导出成功", Toast.LENGTH_SHORT).show();
+                }
                 break;
+            case IDEventF.member_mission://收到参会人权限
+                Log.e(TAG, "NativeService.getEventMessage :  收到参会人权限 --> ");
+                receiveMemberMissionInfo(message);
+                break;
+            case IDEventMessage.member_permission_inform://参会人权限变更通知
+                Log.e(TAG, "NativeService.getEventMessage :  参会人权限变更通知 --> ");
+                nativeUtil.queryAttendPeoplePermissions();
+                break;
+        }
+    }
+
+    private void receiveMemberMissionInfo(EventMessage message) {
+        InterfaceMember.pbui_Type_MemberPermission o = (InterfaceMember.pbui_Type_MemberPermission) message.getObject();
+        mPermissionsList = o.getItemList();
+        for (int i = 0; i < mPermissionsList.size(); i++) {
+            InterfaceMember.pbui_Item_MemberPermission item = mPermissionsList.get(i);
+            if (item.getMemberid() == localMemberId) {
+                localPermissions = MyUtils.getChoose(item.getPermission());
+            }
         }
     }
 

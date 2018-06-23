@@ -1,11 +1,9 @@
 package com.pa.paperless.fragment.meeting;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,65 +90,5 @@ public class AnnAgendaFragment extends BaseFragment implements View.OnClickListe
                 setImgSelect(1);
                 break;
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        Log.i("F_life", "AnnAgendaFragment.onAttach :   --> ");
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.i("F_life", "AnnAgendaFragment.onCreate :   --> ");
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.i("F_life", "AnnAgendaFragment.onActivityCreated :   --> ");
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        Log.i("F_life", "AnnAgendaFragment.onStart :   --> ");
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        Log.i("F_life", "AnnAgendaFragment.onResume :   --> ");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Log.i("F_life", "AnnAgendaFragment.onPause :   --> ");
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        Log.i("F_life", "AnnAgendaFragment.onStop :   --> ");
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.i("F_life", "AnnAgendaFragment.onDestroyView :   --> ");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i("F_life", "AnnAgendaFragment.onDestroy :   --> ");
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        Log.i("F_life", "AnnAgendaFragment.onDetach :   --> ");
-        super.onDetach();
     }
 }

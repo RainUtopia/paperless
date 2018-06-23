@@ -59,11 +59,9 @@ import com.pa.paperless.bean.DeviceInfo;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
-import com.pa.paperless.constant.IDivMessage;
 import com.pa.paperless.constant.Macro;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.fragment.meeting.OverviewDocFragment;
-import com.pa.paperless.listener.CallListener;
 import com.pa.paperless.listener.ItemClickListener;
 import com.pa.paperless.service.FabService;
 import com.pa.paperless.service.NativeService;
@@ -71,7 +69,6 @@ import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.FileUtil;
 import com.pa.paperless.utils.MyUtils;
 import com.pa.paperless.views.ColorPickerDialog;
-import com.wind.myapplication.NativeUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -108,12 +105,9 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
     private int paintMode = MODE_PAINT;// 画笔模式
     private int paintWidth = 1;// 画笔宽度
     private int paintColor = Color.BLACK;// 画笔颜色
-    private int paintMinNum = 1;// 画笔宽度最小值
-    private int eraserMinNum = 21;// 橡皮擦宽度最小值
     private String savePath = "";// 保存画布内容的图片路径
     private String drawText = "";// 保存要绘制的文本
 
-    public static int PHOTO_REQUEST_GALLERY = 1;
     private ImageView mPen, mEraser, mPalette, mText, mPic, mSline, mEllpse, mRect, mBack, mClean;
     private SeekBar mSeb;
     private int mPaintWidth = 10; // 设置画笔的默认宽度是 10
@@ -178,63 +172,11 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
-            case IDEventF.member_info://收到参会信息
-                InterfaceMember.pbui_Type_MemberDetailInfo object1 = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
-                memberInfos = Dispose.MemberInfo(object1);
-                if (memberInfos != null) {
-                    try {
-                        nativeUtil.queryDeviceInfo();
-                    } catch (InvalidProtocolBufferException e) {
-                        e.printStackTrace();
-                    }
-                }
+            case IDEventF.member_info://收到参会人信息
+                receiveMemberInfo(message);
                 break;
             case IDEventF.dev_info://收到设备信息
-                if (clicked) {
-                    clicked = false;
-                    InterfaceDevice.pbui_Type_DeviceDetailInfo object2 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) message.getObject();
-                    List<DeviceInfo> deviceInfos = Dispose.DevInfo(object2);
-                    onLineMembers = new ArrayList<>();
-                    for (int i = 0; i < deviceInfos.size(); i++) {
-                        DeviceInfo deviceInfo = deviceInfos.get(i);
-                        int netState = deviceInfo.getNetState();
-                        int devId = deviceInfo.getDevId();
-                        int memberId = deviceInfo.getMemberId();
-                        if (netState == 1) {//在线状态
-                            for (int j = 0; j < memberInfos.size(); j++) {
-                                MemberInfo memberInfo = memberInfos.get(j);
-                                if (memberInfo.getPersonid() == memberId) {
-                                    //查找到在线状态的参会人员
-//                                if (devId != MeetingActivity.getDevId()) {//过滤自己的设备
-                                    if (devId != NativeService.localDevId) {//过滤自己的设备
-                                        onLineMembers.add(new DevMember(memberInfo, devId));
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (onLineMembers.size() > 0) {
-                        //初始化在线参会人是否选中集合
-                        boardCheck = new ArrayList<>();
-                        //初始化 全部设为false
-                        for (int k = 0; k < onLineMembers.size(); k++) {
-                            boardCheck.add(false);
-                        }
-                        if (onLineBoardMemberAdapter == null) {
-                            onLineBoardMemberAdapter = new BoardAdapter(onLineMembers);
-                        }
-                        onLineBoardMemberAdapter.notifyDataSetChanged();
-                    } else {
-                        showToast("没有找到在线状态的参会人");
-                    }
-                    if (!isSharing && onLineMembers.size() > 0) {//不在共享中并且拥有数据才能打开弹出框
-                        showOlLineMember();
-                    } else if (isSharing) {
-                        showToast("已经在共享中");
-                    } else if (onLineMembers.size() == 0) {
-                        showToast("没有查找到参会人");
-                    }
-                }
+                receiveDevInfo(message);
                 break;
             case IDEventMessage.MEMBER_CHANGE_INFORM:// 参会人员变更通知
                 //92.查询参会人员
@@ -290,13 +232,66 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
             case IDEventMessage.WHITEBOARD_EMPTY_RECORDINFORM://白板清空记录通知
                 receiveDeleteEmptyRecore(message, 2);
                 break;
-            case IDEventMessage.START_COLLECTION_STREAM_NOTIFY://收集流(屏幕录制)
-                enentCollectionStream(message);
-                break;
-            case IDEventMessage.STOP_COLLECTION_STREAM_NOTIFY://停止采集流通知
-                //调用父类方法
-                stopStreamInform(message);
-                break;
+        }
+    }
+
+    private void receiveMemberInfo(EventMessage message) {
+        InterfaceMember.pbui_Type_MemberDetailInfo object1 = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
+        memberInfos = Dispose.MemberInfo(object1);
+        if (memberInfos != null) {
+            try {
+                nativeUtil.queryDeviceInfo();
+            } catch (InvalidProtocolBufferException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void receiveDevInfo(EventMessage message) {
+        if (clicked) {
+            clicked = false;
+            InterfaceDevice.pbui_Type_DeviceDetailInfo object2 = (InterfaceDevice.pbui_Type_DeviceDetailInfo) message.getObject();
+            List<DeviceInfo> deviceInfos = Dispose.DevInfo(object2);
+            onLineMembers = new ArrayList<>();
+            for (int i = 0; i < deviceInfos.size(); i++) {
+                DeviceInfo deviceInfo = deviceInfos.get(i);
+                int netState = deviceInfo.getNetState();
+                int devId = deviceInfo.getDevId();
+                int memberId = deviceInfo.getMemberId();
+                if (netState == 1) {//在线状态
+                    for (int j = 0; j < memberInfos.size(); j++) {
+                        MemberInfo memberInfo = memberInfos.get(j);
+                        if (memberInfo.getPersonid() == memberId) {
+                            //查找到在线状态的参会人员
+//                                if (devId != MeetingActivity.getDevId()) {//过滤自己的设备
+                            if (devId != NativeService.localDevId) {//过滤自己的设备
+                                onLineMembers.add(new DevMember(memberInfo, devId));
+                            }
+                        }
+                    }
+                }
+            }
+            if (onLineMembers.size() > 0) {
+                //初始化在线参会人是否选中集合
+                boardCheck = new ArrayList<>();
+                //初始化 全部设为false
+                for (int k = 0; k < onLineMembers.size(); k++) {
+                    boardCheck.add(false);
+                }
+                if (onLineBoardMemberAdapter == null) {
+                    onLineBoardMemberAdapter = new BoardAdapter(onLineMembers);
+                }
+                onLineBoardMemberAdapter.notifyDataSetChanged();
+            } else {
+                showToast("没有找到在线状态的参会人");
+            }
+            if (!isSharing && onLineMembers.size() > 0) {//不在共享中并且拥有数据才能打开弹出框
+                showOlLineMember();
+            } else if (isSharing) {
+                showToast("已经在共享中");
+            } else if (onLineMembers.size() == 0) {
+                showToast("没有查找到参会人");
+            }
         }
     }
 
@@ -306,6 +301,10 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      * @param message
      */
     private void receiveDeleteEmptyRecore(EventMessage message, int type) {
+        if (!isSharing) {
+            Log.e(TAG, "PeletteActivity.receiveDeleteEmptyRecore :  不在共享中 --> ");
+            return;
+        }
         InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard object = (InterfaceWhiteboard.pbui_Type_MeetClearWhiteBoard) message.getObject();
         Log.e(TAG, "PeletteActivity.receiveDeleteEmptyRecore :  白板删除记录通知EventBus --->>> ");
         int operid = object.getOperid();
@@ -376,6 +375,10 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      * @param message
      */
     private void receiveAddInk(EventMessage message) {
+        if (!isSharing) {
+            Log.e(TAG, "PeletteActivity.receiveAddInk :  不在共享中 --> ");
+            return;
+        }
         InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem object = (InterfaceWhiteboard.pbui_Type_MeetWhiteBoardInkItem) message.getObject();
         Log.e(TAG, "PeletteActivity.receiveAddInk :  收到添加墨迹操作EventBus --->>> ");
         int operid = object.getOperid();
@@ -455,6 +458,10 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      * @param message
      */
     private void receiveAddPic(EventMessage message) {
+        if (!isSharing) {
+            Log.e(TAG, "PeletteActivity.receiveAddPic :  不在共享中 --> ");
+            return;
+        }
         InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail object = (InterfaceWhiteboard.pbui_Item_MeetWBPictureDetail) message.getObject();
         Log.e(TAG, "PeletteActivity.receiveAddPic :  收到添加图片操作EventBus --->>> ");
         ByteString picdata = object.getPicdata();
@@ -473,6 +480,10 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      * @param message
      */
     private void receiveAddLine(EventMessage message) {
+        if (!isSharing) {
+            Log.e(TAG, "PeletteActivity.receiveAddLine :  不在共享中 --> ");
+            return;
+        }
         InterfaceWhiteboard.pbui_Item_MeetWBRectDetail object = (InterfaceWhiteboard.pbui_Item_MeetWBRectDetail) message.getObject();
         Log.e(TAG, "PeletteActivity.receiveAddLine : 收到添加矩形、直线、圆形通知EventBus--->>> 发起的人员ID： " + object.getSrcmemid());
         int operid = object.getOperid();
@@ -524,6 +535,10 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      * @param message
      */
     private void receiveAddText(EventMessage message) {
+        if (!isSharing) {
+            Log.e(TAG, "PeletteActivity.receiveAddText :  不在共享中 --> ");
+            return;
+        }
         InterfaceWhiteboard.pbui_Item_MeetWBTextDetail object = (InterfaceWhiteboard.pbui_Item_MeetWBTextDetail) message.getObject();
         Log.e(TAG, "PeletteActivity.receiveAddText :  添加文本通知EventBus --->>> ");
         int operid = object.getOperid();
@@ -635,7 +650,6 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
                 draw();
             }
         });
-        EventBus.getDefault().register(this);
     }
 
     /**
@@ -702,7 +716,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
                     localOperids.clear();
                     long utcstamp = System.currentTimeMillis();
                     int operid = (int) (utcstamp / 10);
-                    int opermemberid = MeetingActivity.getMemberId();
+                    int opermemberid = NativeService.localMemberId;
                     int srcmemid = launchPersonId;
                     long srcwbid = mSrcwbid;
                     int figuretype = InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ZERO.getNumber();
@@ -799,9 +813,9 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      */
     private void stopShare() {
         List<Integer> alluserid = new ArrayList<>();
-        alluserid.add(MeetingActivity.getMemberId());
+        alluserid.add(NativeService.localMemberId);
         nativeUtil.broadcastStopWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_EXIT.getNumber(),
-                "退出白板", MeetingActivity.getMemberId(), launchPersonId, mSrcwbid, alluserid);
+                "退出白板", NativeService.localMemberId, launchPersonId, mSrcwbid, alluserid);
         isSharing = false;
         mSrcwbid = 0;
     }
@@ -1000,7 +1014,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
         long utcstamp = System.currentTimeMillis();
         int operid = (int) (utcstamp / 10);
         localOperids.add(operid);
-        int opermemberid = MeetingActivity.getMemberId();
+        int opermemberid = NativeService.localMemberId;
         int srcmemid = launchPersonId;
         int figuretype = InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_INK.getNumber();
         Log.e(TAG, "PeletteActivity.addInk :  发送墨迹 --> operid:" + operid + ",opermemberid:" + opermemberid
@@ -1014,12 +1028,12 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
         long utcstamp = System.currentTimeMillis();
         int operid = (int) (utcstamp / 10);
         localOperids.add(operid);
-        int opermemberid = MeetingActivity.getMemberId();
+        int opermemberid = NativeService.localMemberId;
         int srcmemid = launchPersonId;
         for (int i = 0; i < allpt.size(); i++) {
             Log.e(TAG, "PeletteActivity.addDrawShape 853行:   --->>> " + allpt.get(i));
         }
-        Log.e(TAG, "PeletteActivity.addDrawShape 664行:   --->>> 发起人的人员ID：" + launchPersonId + "  自身的人员ID " + MeetingActivity.getMemberId() + "  发起人的白板标识： " + mSrcwbid);
+        Log.e(TAG, "PeletteActivity.addDrawShape 664行:   --->>> 发起人的人员ID：" + launchPersonId + "  自身的人员ID " + NativeService.localMemberId + "  发起人的白板标识： " + mSrcwbid);
         nativeUtil.addDrawFigure(operid, opermemberid, srcmemid,/*:发起人的人员ID*/
                 mSrcwbid, utcstamp, type, paintWidth, paintColor, allpt);
     }
@@ -1149,8 +1163,8 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //同意加入
-                Log.e(TAG, "PeletteActivity.onClick 700行:   --->>> " + opermemberid + " : " + MeetingActivity.getMemberId());
-                nativeUtil.agreeJoin(MeetingActivity.getMemberId(), srcmemid, srcwbidd);
+                Log.e(TAG, "PeletteActivity.onClick 700行:   --->>> " + opermemberid + " : " + NativeService.localMemberId);
+                nativeUtil.agreeJoin(NativeService.localMemberId, srcmemid, srcwbidd);
                 isSharing = true;//如果同意加入就设置已经在共享中
                 launchPersonId = srcmemid;//设置发起的人员ID
                 mSrcwbid = srcwbidd;
@@ -1160,7 +1174,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
         builder.setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                nativeUtil.rejectJoin(MeetingActivity.getMemberId(), srcmemid, srcwbidd);
+                nativeUtil.rejectJoin(NativeService.localMemberId, srcmemid, srcwbidd);
                 dialog.dismiss();
             }
         });
@@ -1175,7 +1189,6 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
         if (isSharing) {
             stopShare();
         }
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -1266,7 +1279,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
         int operid = (int) (time / 10);
 //        double divX = MyUtils.div(x, mWidth, 2);
 //        double divY = MyUtils.div(y, mHeight, 2);
-        nativeUtil.addText(operid, MeetingActivity.getMemberId(), launchPersonId, mSrcwbid,
+        nativeUtil.addText(operid, NativeService.localMemberId, launchPersonId, mSrcwbid,
                 time, InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_FREETEXT.getNumber(),
                 finalSize, 2, paintColor, "宋体", x, y, drawText);
     }
@@ -1515,7 +1528,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
             int operid = localOperids.get(localOperids.size() - 1);
             //已经撤销后就要删除最后一个
             localOperids.remove(localOperids.size() - 1);
-            int opermemberid = MeetingActivity.getMemberId();
+            int opermemberid = NativeService.localMemberId;
             int srcmemid = launchPersonId;
             int figuretype = InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_ZERO.getNumber();
             Log.e(TAG, "PeletteActivity.undo :  发送撤销通知其他人撤销 --> operid:" + operid + ",opermemberid：" + opermemberid
@@ -1673,7 +1686,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
 
     public static List<Boolean> boardCheck;
 
-    private void MemberHolder(MemberViewHolder holder) {
+    private void MemberHolder(final MemberViewHolder holder) {
         //所有人员
         holder.all_mer_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -1697,6 +1710,11 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
         holder.board_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (holder.all_mer_cb.isChecked()) {
+                    for (int i = 0; i < boardCheck.size(); i++) {
+                        boardCheck.set(i, true);
+                    }
+                }
                 ArrayList<Integer> devIds = new ArrayList<Integer>();
                 if (onLineBoardMemberAdapter != null) {
                     List<DevMember> checkedIds = onLineBoardMemberAdapter.getCheckedIds();
@@ -1712,8 +1730,8 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
                     }
                     Log.e(TAG, "PeletteActivity.onClick 1260行:  发起时的白板标识 --->>> " + mSrcwbid);
                     nativeUtil.coerceStartWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber(),
-                            MyUtils.getBts(MainActivity.getLocalInfo().getMembername()), MeetingActivity.getMemberId(),
-                            MeetingActivity.getMemberId(), mSrcwbid, devIds);
+                            MyUtils.getBts(MainActivity.getLocalInfo().getMembername()), NativeService.localMemberId,
+                            NativeService.localMemberId, mSrcwbid, devIds);
                 }
                 mMemberPop.dismiss();
             }
@@ -1809,8 +1827,8 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
                     }
                     Log.e(TAG, "PeletteActivity.onClick 1260行:  发起时的白板标识 --->>> " + mSrcwbid);
                     nativeUtil.coerceStartWhiteBoard(InterfaceMacro.Pb_MeetPostilOperType.Pb_MEETPOTIL_FLAG_REQUESTOPEN.getNumber(),
-                            MyUtils.getBts(MainActivity.getLocalInfo().getMembername()), MeetingActivity.getMemberId(),
-                            MeetingActivity.getMemberId(), mSrcwbid, devIds);
+                            MyUtils.getBts(MainActivity.getLocalInfo().getMembername()), NativeService.localMemberId,
+                            NativeService.localMemberId, mSrcwbid, devIds);
                 }
                 mChooseMemberPop.dismiss();
             }
@@ -1839,7 +1857,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
      **/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);//super方法要开启,因为录屏在基类中做的处理
         if (requestCode == IMAGE_CODE && resultCode == Activity.RESULT_OK) {
             // 获取选中文件的uri
             Uri uri = data.getData();
@@ -1901,7 +1919,7 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
                         /** ************ ******    ****** ************ **/
                         long time = System.currentTimeMillis();
                         int operid = (int) (time / 10);
-                        nativeUtil.addPicture(operid, MeetingActivity.getMemberId(), launchPersonId, mSrcwbid, time,
+                        nativeUtil.addPicture(operid, NativeService.localMemberId, launchPersonId, mSrcwbid, time,
                                 InterfaceMacro.Pb_MeetPostilFigureType.Pb_WB_FIGURETYPE_PICTURE.getNumber(), 0, 0, picdata);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -2029,5 +2047,17 @@ public class PeletteActivity extends BaseActivity implements View.OnClickListene
             this.boardEnsureBtn = (Button) rootView.findViewById(R.id.board_ensure_btn);
             this.boardCancelBtn = (Button) rootView.findViewById(R.id.board_cancel_btn);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

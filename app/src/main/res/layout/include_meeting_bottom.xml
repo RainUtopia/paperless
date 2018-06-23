@@ -79,7 +79,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:scaleType="centerCrop"
                         android:src="@drawable/member" />
 
@@ -90,7 +90,7 @@
                         android:gravity="center"
                         android:text="参会人"
                         android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/meeting_participate_name"
@@ -100,7 +100,7 @@
                         android:gravity="center"
                         android:text=" - "
                         android:textColor="@android:color/holo_green_dark"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -113,7 +113,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:scaleType="centerCrop"
                         android:src="@drawable/host" />
 
@@ -124,7 +124,7 @@
                         android:gravity="center"
                         android:text="主持人"
                         android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/meeting_host_name"
@@ -133,12 +133,13 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textColor="@android:color/holo_green_dark"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <ScrollView
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="7">

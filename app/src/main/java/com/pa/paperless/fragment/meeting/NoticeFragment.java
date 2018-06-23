@@ -42,8 +42,14 @@ public class NoticeFragment extends BaseFragment{
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
+    }
+
+
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -63,7 +69,12 @@ public class NoticeFragment extends BaseFragment{
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onStop() {
         EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private void initView(View inflate) {
@@ -72,10 +83,10 @@ public class NoticeFragment extends BaseFragment{
 
     @Override
     public void onHiddenChanged(boolean hidden) {
+        Log.e(TAG, "NoticeFragment.onHiddenChanged :  hidden --> "+hidden);
         if (!hidden) {
             //查询长文本公告
             try {
-                Log.e(TAG, "NoticeFragment.onHiddenChanged :  当前显示状态 --->>> ");
                 nativeUtil.queryLongNotice();
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();

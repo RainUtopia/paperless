@@ -9,6 +9,7 @@ import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.io.File;
 /**
  * @author Gowcage
  */
-public class Main extends Activity implements OnClickListener {
+public class Main extends AppCompatActivity implements OnClickListener {
 
     final String TAG = "Main-->";
     final int REQUEST_CODE = 1;// >=0

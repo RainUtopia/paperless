@@ -93,7 +93,6 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.commonly_partic, container, false);
-        initController();
         initView(inflate);
         try {
             //75.查询常用人员
@@ -146,12 +145,6 @@ public class CommonlyParticipantsFragment extends BaseFragment implements View.O
     }
 
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initView(View inflate) {
         mCommonlyRl = (RecyclerView) inflate.findViewById(R.id.commonly_rl);

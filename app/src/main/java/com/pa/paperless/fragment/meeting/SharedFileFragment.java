@@ -37,9 +37,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceFile;
 import com.mogujie.tt.protobuf.InterfaceMacro;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.adapter.ChooseDirDialogAdapter;
-import com.pa.paperless.adapter.TypeFileAdapter;
+import com.pa.paperless.adapter.ShareFileAdapter;
 import com.pa.paperless.bean.MeetDirBean;
 import com.pa.paperless.bean.MeetDirFileInfo;
 import com.pa.paperless.constant.IDEventF;
@@ -79,11 +78,11 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     private Button share_nextpage;
     private Button share_import;
     private List<Button> mBtns;
-    private TypeFileAdapter mAllAdapter;
+    private ShareFileAdapter mAllAdapter;
     public static boolean sharefile_isshowing = false;
 
-    private List<MeetDirFileInfo> mData = new ArrayList<>();//用于临时存放不同类型的文件
-    private List<MeetDirFileInfo> meetDirFileInfos = new ArrayList<>();
+    private List<MeetDirFileInfo> mData;//用于临时存放不同类型的文件
+    private List<MeetDirFileInfo> meetDirFileInfos;
     //会议目录的信息
     private List<MeetDirBean> meetDirInfos = new ArrayList<>();
 
@@ -93,28 +92,27 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        Log.i("F_life", "SharedFileFragment.onCreateView :   --->>> ");
         View inflate = inflater.inflate(R.layout.right_sharedfile, container, false);
         initView(inflate);
         sharefile_isshowing = true;
         initBtns();
         setBtnSelect(0);
         try {
-            //136.查询会议目录
-            nativeUtil.queryMeetDir();
             //143.查询会议目录文件（直接查询 共享资料(id 是固定为 1 )的文件）
-//            nativeUtil.queryMeetDirFile(1);
+            nativeUtil.queryMeetDirFile(1);
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
     }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventF.meet_dir://收到会议目录
-                receiveMeetDir(message);
+//                receiveMeetDir(message);
                 break;
             case IDEventF.meet_dir_file://收到会议目录文件信息
                 receiveMeetDirFile(message);
@@ -133,21 +131,47 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
     private void receiveMeetDirFile(EventMessage message) {
         InterfaceFile.pbui_Type_MeetDirFileDetailInfo object = (InterfaceFile.pbui_Type_MeetDirFileDetailInfo) message.getObject();
         if (object.getDirid() == 1) {//共享文件
+            Log.d("file_get", "SharedFileFragment.receiveMeetDirFile :   --> " + object.getDirid());
             meetDirFileInfos = Dispose.MeetDirFile(object);
             if (meetDirFileInfos != null) {
-                if (mAllAdapter == null) {
-                    mAllAdapter = new TypeFileAdapter(getContext(), mData);
-                    sharedfile_lv.setAdapter(mAllAdapter);
+                if (mData == null) {
+                    mData = new ArrayList<>();
+                } else {
+                    mData.clear();
                 }
-                mData.clear();
                 for (int i = 0; i < meetDirFileInfos.size(); i++) {
                     MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
                     mData.add(documentBean);
+                }
+                if (mAllAdapter == null) {
+                    mAllAdapter = new ShareFileAdapter(getContext(), mData);
+                    sharedfile_lv.setAdapter(mAllAdapter);
                 }
                 mAllAdapter.notifyDataSetChanged();
                 mAllAdapter.PAGE_NOW = 0;
                 checkButton();
                 setBtnSelect(0);
+
+                mAllAdapter.setLookListener(new ShareFileAdapter.setLookListener() {
+                    @Override
+                    public void onLookListener(int posion, String filename, long filesize) {
+                        if (FileUtil.isVideoFile(filename)) {
+                            //如果是音频或视频则在线播放
+                            List<Integer> devIds = new ArrayList<Integer>();
+//                    devIds.add(MeetingActivity.getDevId());
+                            devIds.add(NativeService.localDevId);
+                            nativeUtil.mediaPlayOperate(posion, devIds, 0);
+                        } else {
+                            MyUtils.openFile(Macro.SHAREMATERIAL, filename, nativeUtil, posion, getContext(), filesize);
+                        }
+                    }
+                });
+                mAllAdapter.setDownListener(new ShareFileAdapter.setDownListener() {
+                    @Override
+                    public void onDownListener(int posion, String filename, long filesize) {
+                        MyUtils.downLoadFile(Macro.SHAREMATERIAL, filename, getContext(), posion, nativeUtil, filesize);
+                    }
+                });
             }
         }
     }
@@ -158,7 +182,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         for (int i = 0; i < itemList.size(); i++) {
             InterfaceFile.pbui_Item_MeetDirDetailInfo info = itemList.get(i);
             String dirName = MyUtils.getBts(info.getName());
-            if (dirName.equals("共享文件")) {
+            if (dirName.equals("共享文件") && info.getId() == 1) {
                 try {
                     //查询会议目录文件
                     nativeUtil.queryMeetDirFile(info.getId());
@@ -171,8 +195,8 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
 
     @Override
     public void onDestroy() {
+        Log.i("F_life", "SharedFileFragment.onDestroy :   --> ");
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     private void initBtns() {
@@ -194,30 +218,6 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         share_prepage = (Button) inflate.findViewById(R.id.rightsharefile_prepage);
         share_nextpage = (Button) inflate.findViewById(R.id.rightsharefile_nextpage);
         share_import = (Button) inflate.findViewById(R.id.rightsharefile_import);
-
-        mAllAdapter = new TypeFileAdapter(getContext(), mData);
-        sharedfile_lv.setAdapter(mAllAdapter);
-
-        mAllAdapter.setLookListener(new TypeFileAdapter.setLookListener() {
-            @Override
-            public void onLookListener(int posion, String filename, long filesize) {
-                if (FileUtil.isVideoFile(filename)) {
-                    //如果是音频或视频则在线播放
-                    List<Integer> devIds = new ArrayList<Integer>();
-//                    devIds.add(MeetingActivity.getDevId());
-                    devIds.add(NativeService.localDevId);
-                    nativeUtil.mediaPlayOperate(posion, devIds, 0);
-                } else {
-                    MyUtils.openFile(Macro.SHAREMATERIAL, filename, nativeUtil, posion, getContext(), filesize);
-                }
-            }
-        });
-        mAllAdapter.setDownListener(new TypeFileAdapter.setDownListener() {
-            @Override
-            public void onDownListener(int posion, String filename, long filesize) {
-                MyUtils.downLoadFile(Macro.SHAREMATERIAL, filename, getContext(), posion, nativeUtil, filesize);
-            }
-        });
 
         btn_document.setOnClickListener(this);
         btn_picture.setOnClickListener(this);
@@ -250,7 +250,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     for (int i = 0; i < meetDirFileInfos.size(); i++) {
                         MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
                         String fileName = documentBean.getFileName();
+                        Log.d("files", "SharedFileFragment.onClick : 共享中所有文件  --->>> " + fileName);
                         if (FileUtil.isDocumentFile(fileName)) {
+                            Log.i("files", "SharedFileFragment.onClick : 共享中文档文件  --->>> " + fileName);
                             mData.add(documentBean);
                         }
                     }
@@ -266,7 +268,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     for (int i = 0; i < meetDirFileInfos.size(); i++) {
                         MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
                         String fileName = documentBean.getFileName();
+                        Log.d("files", "SharedFileFragment.onClick : 共享中所有文件 --->>> " + fileName);
                         if (FileUtil.isPictureFile(fileName)) {
+                            Log.i("files", "SharedFileFragment.onClick : 共享中图片文件  --->>> " + fileName);
                             mData.add(documentBean);
                         }
                     }
@@ -282,7 +286,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     for (int i = 0; i < meetDirFileInfos.size(); i++) {
                         MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
                         String fileName = documentBean.getFileName();
+                        Log.d("files", "SharedFileFragment.onClick :  共享中所有文件 --->>> " + fileName);
                         if (FileUtil.isVideoFile(fileName)) {
+                            Log.i("files", "SharedFileFragment.onClick :  共享中视频文件 --->>> " + fileName);
                             mData.add(documentBean);
                         }
                     }
@@ -298,7 +304,9 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
                     for (int i = 0; i < meetDirFileInfos.size(); i++) {
                         MeetDirFileInfo documentBean = meetDirFileInfos.get(i);
                         String fileName = documentBean.getFileName();
+                        Log.d("files", "SharedFileFragment.onClick :  共享中所有文件 --->>> " + fileName);
                         if (FileUtil.isOtherFile(fileName)) {
+                            Log.i("files", "SharedFileFragment.onClick :  共享中其它文件 --->>> " + fileName);
                             mData.add(documentBean);
                         }
                     }
@@ -336,6 +344,7 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);//super方法要开启,因为录屏在基类中做的处理
         if (resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
@@ -607,6 +616,62 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        Log.i("F_life", "SharedFileFragment.onAttach :   --> ");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "SharedFileFragment.onCreate :   --> ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "SharedFileFragment.onActivityCreated :   --> ");
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("F_life", "SharedFileFragment.onStart :   --> ");
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Log.i("F_life", "SharedFileFragment.onResume :   --> ");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("F_life", "SharedFileFragment.onPause :   --> ");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("F_life", "SharedFileFragment.onStop :   --> ");
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("F_life", "SharedFileFragment.onDestroyView :   --> ");
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDetach() {
+        Log.i("F_life", "SharedFileFragment.onDetach :   --> ");
+        super.onDetach();
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -614,7 +679,8 @@ public class SharedFileFragment extends BaseFragment implements View.OnClickList
         Log.e(TAG, "SharedFileFragment.onHiddenChanged :  是否隐藏 --> " + hidden);
         if (!hidden) {
             try {
-                nativeUtil.queryMeetDir();
+                //143.查询会议目录文件（直接查询 共享资料(id 是固定为 1 )的文件）
+                nativeUtil.queryMeetDirFile(1);
             } catch (InvalidProtocolBufferException e) {
                 e.printStackTrace();
             }

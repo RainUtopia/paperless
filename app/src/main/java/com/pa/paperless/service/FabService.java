@@ -1,6 +1,7 @@
 package com.pa.paperless.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
@@ -44,7 +45,6 @@ import com.mogujie.tt.protobuf.InterfaceMember;
 import com.mogujie.tt.protobuf.InterfacePlaymedia;
 import com.mogujie.tt.protobuf.InterfaceStream;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
 import com.pa.paperless.activity.NoteActivity;
 import com.pa.paperless.activity.PeletteActivity;
 import com.pa.paperless.adapter.CanJoinProAdapter;
@@ -79,7 +79,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.pa.paperless.activity.MeetingActivity.DevMeetInfo;
 import static com.pa.paperless.service.NativeService.nativeUtil;
 import static com.pa.paperless.utils.MyUtils.getMediaid;
 
@@ -100,10 +99,12 @@ public class FabService extends Service implements View.OnTouchListener {
     public static List<Boolean> checks, checkProOL, checkProAll;
     public static OnLineProjectorAdapter allProjectorAdapter, onLineProjectorAdapter;
     public static ScreenControlAdapter onLineMemberAdapter;
-    private ArrayList<Integer> sameMemberDevRrsIds, sameMemberDevIds, applyProjectionIds, informDev, onlineClientIds;
+    private ArrayList<Integer> tempRes, allScreenDevIds, applyProjectionIds, onlineClientIds;
     private List<VideoInfo> videoInfos;
     private boolean fromVideo, openProjector;
     private View pop, screenPop, choosePlayerPop, projectPop, proListPop, callServePop, postilPop, edtPop, canJoinPop;
+    private boolean mImageViewIsShow, popIsShow, screenPopIsShow, choosePlayerPopIsShow, projectPopIsShow, proListPopIsShow,
+            callServePopIsShow, postilPopIsShow, edtPopIsShow, canJoinPopIsShow;
     private boolean clickScreen;//是否点击了同屏控制  预防后台数据自动更新时自动打开多次
     private boolean clickProject;//是否点击了投影控制  预防后台数据自动更新时自动打开多次
     private int MSG_TYPE;
@@ -120,8 +121,8 @@ public class FabService extends Service implements View.OnTouchListener {
     private MediaProjectionManager mMediaProjectionManager1;
     private MediaProjection mMediaProjection;
     private VirtualDisplay mVirtualDisplay;
-    private long tempImgName;
-    private FabService fabContext;
+    private long tempImgName;//截图的临时文件名
+    private Context fabContext;
     public static byte[] bytes;
     public static boolean isBusy;
     private List<DeviceInfo> deviceInfos;
@@ -132,6 +133,91 @@ public class FabService extends Service implements View.OnTouchListener {
     public static CanJoinMemberAdapter canJoinMemberAdapter;
     public static List<Boolean> canjoinProSelect, canjoinMemberSelect;
 
+    /**
+     * 展示新的弹框
+     *
+     * @param removeView 正在展示的view
+     * @param addView    需要替换的view
+     * @param params     params配置
+     */
+    private void showPop(View removeView, View addView, WindowManager.LayoutParams params) {
+        wm.removeView(removeView);
+        wm.addView(addView, params);
+        setIsShowing(removeView, addView);
+    }
+
+    private void setIsShowing(View removeView, View addView) {
+        switch ((String) removeView.getTag()) {
+            case "mImageView":
+                mImageViewIsShow = false;
+                break;
+            case "pop":
+                popIsShow = false;
+                break;
+            case "screenPop":
+                screenPopIsShow = false;
+                break;
+            case "choosePlayerPop":
+                choosePlayerPopIsShow = false;
+                break;
+            case "projectPop":
+                projectPopIsShow = false;
+                break;
+            case "proListPop":
+                proListPopIsShow = false;
+                break;
+            case "callServePop":
+                callServePopIsShow = false;
+                break;
+            case "postilPop":
+                postilPopIsShow = false;
+                break;
+            case "edtPop":
+                edtPopIsShow = false;
+                break;
+            case "canJoinPop":
+                canJoinPopIsShow = false;
+                break;
+        }
+        switch ((String) addView.getTag()) {
+            case "mImageView":
+                mImageViewIsShow = true;
+                break;
+            case "pop":
+                popIsShow = true;
+                break;
+            case "screenPop":
+                screenPopIsShow = true;
+                break;
+            case "choosePlayerPop":
+                choosePlayerPopIsShow = true;
+                break;
+            case "projectPop":
+                projectPopIsShow = true;
+                break;
+            case "proListPop":
+                proListPopIsShow = true;
+                break;
+            case "callServePop":
+                callServePopIsShow = true;
+                break;
+            case "postilPop":
+                postilPopIsShow = true;
+                break;
+            case "edtPop":
+                edtPopIsShow = true;
+                break;
+            case "canJoinPop":
+                canJoinPopIsShow = true;
+                break;
+        }
+    }
+
+    private void showPop(View removeView, View addView) {
+        wm.removeView(removeView);
+        wm.addView(addView, params);
+        setIsShowing(removeView, addView);
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(final EventMessage message) {
@@ -169,15 +255,12 @@ public class FabService extends Service implements View.OnTouchListener {
             case IDEventF.can_join://收到可加入同屏数据
                 receiveCanJoinInfo(message);
                 break;
-            case IDEventF.all_stream_play://得到所有流播放信息
-                receiveAllStreamInfo(message);
-                break;
         }
     }
 
     private void openProjector(EventMessage message) {
-        if (MeetingActivity.localPermissions != null) {
-            if (MeetingActivity.localPermissions.contains(2)) {
+        if (NativeService.localPermissions != null) {
+            if (NativeService.localPermissions.contains(2)) {
                 Log.e(TAG, "FabService.getEventMessage :  从视屏直播页面收到打开投影控制 --> ");
                 openProjector = true;
                 videoInfos = (List<VideoInfo>) message.getObject();
@@ -193,8 +276,8 @@ public class FabService extends Service implements View.OnTouchListener {
     }
 
     private void openScreen(EventMessage message) {
-        if (MeetingActivity.localPermissions != null) {
-            if (MeetingActivity.localPermissions.contains(1)) {
+        if (NativeService.localPermissions != null) {
+            if (NativeService.localPermissions.contains(1)) {
                 Log.e(TAG, "FabService.getEventMessage :  从视屏直播页面收到打开同屏控制 --> ");
                 fromVideo = true;
                 videoInfos = (List<VideoInfo>) message.getObject();
@@ -232,28 +315,27 @@ public class FabService extends Service implements View.OnTouchListener {
     }
 
     private void receivePlayStreamInform(final EventMessage message) {
-        Log.e(TAG, "FabService.getEventMessage :  流播放通知EventBus --> ");
+        Log.i("stream_log", "FabService.receivePlayStreamInform :  流播放通知 --->>> ");
         if (!SDLIsShow) {
-            InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
-            startActivity(new Intent(FabService.this, SDLActivity.class)
-                    .setFlags(FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    .putExtra("action", IDEventMessage.PLAY_STREAM_NOTIFY)
-                    .putExtra("data", data.toByteArray()));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
+                    startActivity(new Intent(FabService.this, SDLActivity.class)
+                            .setFlags(FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                            .putExtra("action", IDEventMessage.PLAY_STREAM_NOTIFY)
+                            .putExtra("data", data.toByteArray()));
+                }
+            }, 600);
         } else {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        InterfacePlaymedia.pbui_Type_MeetMediaPlay data = (InterfacePlaymedia.pbui_Type_MeetMediaPlay) message.getObject();
-                        startActivity(new Intent(FabService.this, SDLActivity.class)
-                                .setFlags(FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                                .putExtra("action", IDEventMessage.MEDIA_PLAY_INFORM)
-                                .putExtra("data", data.toByteArray()));
-                    } catch (Exception e) {
-                        Toast.makeText(FabService.this, "操作失败：类型装换问题", Toast.LENGTH_LONG).show();
-                        Log.e(TAG, "FabService.run :  异常信息： --> " + e.getMessage());
-                        e.printStackTrace();
-                    }
+                    InterfaceStream.pbui_Type_MeetStreamPlay data = (InterfaceStream.pbui_Type_MeetStreamPlay) message.getObject();
+                    startActivity(new Intent(FabService.this, SDLActivity.class)
+                            .setFlags(FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                            .putExtra("action", IDEventMessage.PLAY_STREAM_NOTIFY)
+                            .putExtra("data", data.toByteArray()));
                 }
             }, 600);
         }
@@ -330,38 +412,10 @@ public class FabService extends Service implements View.OnTouchListener {
         }
     }
 
-    private void receiveAllStreamInfo(EventMessage message) {
-        InterfaceStream.pbui_Type_MeetStreamPlayDetailInfo object1 = (InterfaceStream.pbui_Type_MeetStreamPlayDetailInfo) message.getObject();
-        if (object1 != null) {
-            int playID = 0;
-            //获取选择播放的参会人或则投影机，只能选择一个
-            List<DeviceInfo> checkedIds = canJoinProAdapter.getCheckedIds();
-            List<DevMember> checkedIds1 = canJoinMemberAdapter.getCheckedIds();
-            if (checkedIds.size() == 1) {
-                playID = checkedIds.get(0).getDevId();
-            }
-            if (checkedIds1.size() == 1) {
-                playID = checkedIds1.get(0).getDevId();
-            }
-            List<InterfaceStream.pbui_Item_MeetStreamPlayDetailInfo> itemList = object1.getItemList();
-            for (int i = 0; i < itemList.size(); i++) {
-                InterfaceStream.pbui_Item_MeetStreamPlayDetailInfo item = itemList.get(i);
-                if (item.getDeviceid() == playID) {//进行匹配要播放的所在流的设备ID
-                    List<Integer> res = new ArrayList<>();
-                    List<Integer> ids = new ArrayList<>();
-                    res.add(0);
-                    ids.add(NativeService.localDevId);
-                    /** **** **  进行流播放  ** **** **/
-                    nativeUtil.streamPlay(playID, item.getSubid(), 0, res, ids);
-                }
-            }
-        }
-    }
-
     private void receiveDevInfo(EventMessage message) {
-        Log.e(TAG, "FabService.receiveDevInfo :  收到设备信息 --> ");
         InterfaceDevice.pbui_Type_DeviceDetailInfo o = (InterfaceDevice.pbui_Type_DeviceDetailInfo) message.getObject();
         deviceInfos = Dispose.DevInfo(o);
+        Log.e(TAG, "FabService.receiveDevInfo :  收到设备信息 --> " + (deviceInfos == null));
         int number = Macro.DEVICE_MEET_PROJECTIVE;
         if (onLineMembers == null) {
             onLineMembers = new ArrayList<>();
@@ -407,7 +461,7 @@ public class FabService extends Service implements View.OnTouchListener {
                     int personid = memberInfo.getPersonid();
                     if (personid == memberId) {
                         /** **** **  过滤掉自己的设备  ** **** **/
-                        if (devId != DevMeetInfo.getDeviceid()) {
+                        if (devId != NativeService.localDevId) {
                             //查找到在线状态的参会人员
                             onLineMembers.add(new DevMember(memberInfos.get(j), devId));
                         }
@@ -415,8 +469,7 @@ public class FabService extends Service implements View.OnTouchListener {
                 }
             }
             if ((devId & Macro.DEVICE_MEET_CLIENT) == Macro.DEVICE_MEET_CLIENT) {//客户端
-//                if (netState == 1 && devId != MeetingActivity.getDevId()) {
-                if (netState == 1 && devId != NativeService.localDevId) {
+                if (netState == 1 && devId != NativeService.localDevId) {//过滤自己
                     onlineClientIds.add(devId);//添加在线客户端
                 }
             }
@@ -453,31 +506,29 @@ public class FabService extends Service implements View.OnTouchListener {
         onLineMemberAdapter.notifyDataSetChanged();
 
         Log.e(TAG, "FabService.getEventMessage :  收到参会人和投影机信息 --> 是否点击了同屏控制按钮" + clickScreen);
-//        initData(message);
         if (clickScreen) {//判断是点击了同屏控制按钮才能打开
-            if (MeetingActivity.localPermissions != null) {//本机权限集合
-                if (MeetingActivity.localPermissions.contains(1)) {//有同屏权限
+            if (NativeService.localPermissions != null) {//本机权限集合
+                if (NativeService.localPermissions.contains(1)) {//有同屏权限
                     Log.e(TAG, "FabService.getEventMessage :  选中参会人集合 --> " + checks.toString());
                     Log.e(TAG, "FabService.getEventMessage :  点击后打开同屏控制 --> ");
                     clickScreen = false;
                     showPop(pop, screenPop);//打开同屏控制
                 } else {
-                    Toast.makeText(fabContext, "您没有权限这样做", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fabContext, "您没有同屏权限", Toast.LENGTH_SHORT).show();
                 }
             }
         }
         if (clickProject) {
-            if (MeetingActivity.localPermissions != null) {
-                if (MeetingActivity.localPermissions.contains(2)) {//选中第二项，投影权限
+            if (NativeService.localPermissions != null) {
+                if (NativeService.localPermissions.contains(2)) {//选中第二项，投影权限
                     Log.e(TAG, "FabService.getEventMessage :  点击后打开投影控制 --> ");
                     clickProject = false;
                     showPop(pop, projectPop);
                 } else {
-                    Toast.makeText(fabContext, "您没有权限这样做", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fabContext, "您没有投影权限", Toast.LENGTH_SHORT).show();
                 }
             }
         }
-
     }
 
     private void receiveMemberInfo(EventMessage message) {
@@ -491,6 +542,7 @@ public class FabService extends Service implements View.OnTouchListener {
             e.printStackTrace();
         }
     }
+
     //起点
     private void showFab() {
         //获取 WindowManager
@@ -506,6 +558,7 @@ public class FabService extends Service implements View.OnTouchListener {
         // 初始化需要使用的Params
         initParams();
         wm.addView(mImageView, mParams);
+        mImageViewIsShow = true;
     }
 
     public void startVirtual() {
@@ -583,20 +636,26 @@ public class FabService extends Service implements View.OnTouchListener {
 
     // 初始化View
     private void initViews() {
+        tempRes = new ArrayList<Integer>();
+        tempRes.add(0);
         /** **** **  悬浮按钮  ** **** **/
         mImageView = new ImageView(this);
+        mImageView.setTag("mImageView");
         mImageView.setImageResource(R.drawable.side);
         mImageView.setOnTouchListener(this);
         /** **** **  弹出框主页  ** **** **/
         pop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_fab, null);
+        pop.setTag("pop");
         FabViewHolder holder = new FabViewHolder(pop);
         holderEvent(holder);
         /** **** **  同屏控制  ** **** **/
         screenPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pop_sscreen, null);
+        screenPop.setTag("screenPop");
         ScreenViewHolder screenHolder = new ScreenViewHolder(screenPop);
         Screen_Event(screenHolder);
         /** **** **  投影控制  ** **** **/
         projectPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pop_projector, null);
+        projectPop.setTag("projectPop");
         ProjectViewHolder proHolder = new ProjectViewHolder(projectPop);
         proHolder_Event(proHolder);
     }
@@ -645,6 +704,7 @@ public class FabService extends Service implements View.OnTouchListener {
     private void showPostilPop(byte[] bytes) {
         /** **** **  批注图片页面  ** **** **/
         postilPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_postil, null);
+        postilPop.setTag("postilPop");
         PostilViewHolder postilHolder = new PostilViewHolder(postilPop);
         postilHolder_Event(postilHolder, bytes);
     }
@@ -653,7 +713,6 @@ public class FabService extends Service implements View.OnTouchListener {
     private void postilHolder_Event(final PostilViewHolder postilHolder, final byte[] bytes) {
         /** **** **  将截取的屏幕图片展示到ImageView  ** **** **/
         Glide.with(getApplicationContext()).load(bytes).into(postilHolder.postil_image);
-//        postilHolder.postil_image.setImageBitmap(FileUtil.bytes2Bitmap(bytes));
         //保存本地
         postilHolder.postil_save_local.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -672,7 +731,6 @@ public class FabService extends Service implements View.OnTouchListener {
         postilHolder.postil_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                EventBus.getDefault().post(new EventMessage(IDEventF.screen_postil,bytes));
                 Intent intent = new Intent(fabContext, PeletteActivity.class);
                 Log.e(TAG, "FabService.onClick :  数组的大小bytes --> " + bytes.length);
                 intent.putExtra("postilpic", "postilpic");
@@ -685,24 +743,21 @@ public class FabService extends Service implements View.OnTouchListener {
         postilHolder.postil_start_screen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showPop(postilPop, screenPop, params);
                 openScreenpopFromPostilpop = true;
                 wm.addView(screenPop, notParams);
+                screenPopIsShow = true;
             }
         });
         //停止同屏
         postilHolder.postil_stop_screen.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if (sameMemberDevRrsIds != null && sameMemberDevIds != null) {
+                List<Integer> tempRes = new ArrayList<Integer>();
+                tempRes.add(0);
+                if (allScreenDevIds != null) {
                     /** ************ ******  停止资源操作  ****** ************ **/
-                    for (int i = 0; i < sameMemberDevIds.size(); i++) {
-                        Log.e(TAG, "停止同屏按钮 :  sameMemberDevIds --->>> " + sameMemberDevIds.get(i));
-                    }
-                    for (int i = 0; i < sameMemberDevRrsIds.size(); i++) {
-                        Log.e(TAG, "停止同屏按钮 :  sameMemberDevRrsIds --->>> " + sameMemberDevRrsIds.get(i));
-                    }
-                    nativeUtil.stopResourceOperate(sameMemberDevRrsIds, sameMemberDevIds);
+                    nativeUtil.stopResourceOperate(tempRes, allScreenDevIds);
                 }
             }
         });
@@ -713,15 +768,16 @@ public class FabService extends Service implements View.OnTouchListener {
 //                showPop(postilPop, projectPop, params);
                 openProjectpopFromPostilPop = true;
                 wm.addView(projectPop, notParams);
+                projectPopIsShow = true;
             }
         });
         // 停止投影
         postilHolder.postil_stop_projection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (applyProjectionIds != null && informDev != null) {
+                if (applyProjectionIds != null) {
                     /** ************ ******  停止资源操作  ****** ************ **/
-                    nativeUtil.stopResourceOperate(informDev, applyProjectionIds);
+                    nativeUtil.stopResourceOperate(tempRes, applyProjectionIds);
                 }
             }
         });
@@ -738,6 +794,7 @@ public class FabService extends Service implements View.OnTouchListener {
     private void savePop(final byte[] bytes, final int type) {
         /** **** **  输入框  ** **** **/
         edtPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.edt_file_name, null);
+        edtPop.setTag("edtPop");
         EdtViewHolder edtHolder = new EdtViewHolder(edtPop);
         EdtHolder_Event(edtHolder, bytes, type);
     }
@@ -745,6 +802,7 @@ public class FabService extends Service implements View.OnTouchListener {
     //输入文件名的输入框
     private void EdtHolder_Event(final EdtViewHolder holder, final byte[] bytes, final int type) {
         wm.addView(edtPop, notParams);
+        edtPopIsShow = true;
         holder.edt_name.setHint("请输入文件名");
         holder.edt_name.setText(System.currentTimeMillis() + "");
         //确定
@@ -779,6 +837,7 @@ public class FabService extends Service implements View.OnTouchListener {
                         e.printStackTrace();
                     }
                     wm.removeView(edtPop);
+                    edtPopIsShow = false;
                 }
             }
         });
@@ -787,6 +846,7 @@ public class FabService extends Service implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 wm.removeView(edtPop);
+                edtPopIsShow = false;
             }
         });
     }
@@ -885,7 +945,7 @@ public class FabService extends Service implements View.OnTouchListener {
     }
 
     //投影控制事件
-    private void proHolder_Event(ProjectViewHolder proHolder) {
+    private void proHolder_Event(final ProjectViewHolder proHolder) {
         //所有投影机
         proHolder.all_pro_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -912,37 +972,68 @@ public class FabService extends Service implements View.OnTouchListener {
 
             @Override
             public void onClick(View v) {
-                applyProjectionIds = new ArrayList<Integer>();
-                informDev = new ArrayList<Integer>();
+                if (proHolder.all_pro_cb.isChecked()) {
+                    for (int i = 0; i < checkProAll.size(); i++) {
+                        checkProAll.set(i, true);
+                    }
+                }
+                if (applyProjectionIds == null) {
+                    applyProjectionIds = new ArrayList<Integer>();
+                } else {
+                    applyProjectionIds.clear();
+                }
+                /** **** **  判断是否从视屏列表页面打开的  ** **** **/
                 if (openProjector) {
                     srcdeviceid = videoInfos.get(0).getVideoInfo().getDeviceid();
                     subid = videoInfos.get(0).getVideoInfo().getSubid();
-//                    applyProjectionIds.add(MeetingActivity.getDevId());
                     applyProjectionIds.add(NativeService.localDevId);
                 } else {
                     subid = 2;
-                    srcdeviceid = DevMeetInfo.getDeviceid();
+                    srcdeviceid = NativeService.localDevId;
                 }
                 if (allProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
                     for (int i = 0; i < checkedIds.size(); i++) {
                         applyProjectionIds.add(checkedIds.get(i).getDevId());
                     }
-                    informDev.add(0);
-                    applyProjectionIds.add(0);
-                    /** ************ ******  流播放  0x1080004****** ************ **/
-                    nativeUtil.streamPlay(srcdeviceid, subid, 0, informDev, applyProjectionIds);
+                    if (applyProjectionIds.size() > 0) {
+                        /** ************ ******  流播放  0x1080004****** ************ **/
+                        nativeUtil.streamPlay(srcdeviceid, subid, 0, tempRes, applyProjectionIds);
+                        showPop(projectPop, mImageView, mParams);
+                    } else {
+                        Toast.makeText(fabContext, "请先选择投影机", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
             }
         });
         //结束投影
         proHolder.stop_pro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (applyProjectionIds != null && informDev != null) {
-                    /** ************ ******  停止资源操作  ****** ************ **/
-                    nativeUtil.stopResourceOperate(informDev, applyProjectionIds);
+                if (proHolder.all_pro_cb.isChecked()) {
+                    for (int i = 0; i < checkProAll.size(); i++) {
+                        checkProAll.set(i, true);
+                    }
+                    if (applyProjectionIds == null) {
+                        applyProjectionIds = new ArrayList<Integer>();
+                    }
+                    if (allProjectorAdapter != null) {
+                        List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
+                        for (int i = 0; i < checkedIds.size(); i++) {
+                            applyProjectionIds.add(checkedIds.get(i).getDevId());
+                        }
+                        /** ************ ******  停止资源操作  ****** ************ **/
+                        nativeUtil.stopResourceOperate(tempRes, applyProjectionIds);
+                        showPop(projectPop, mImageView, mParams);
+                    }
+                } else {
+                    if (applyProjectionIds != null) {
+                        /** ************ ******  停止资源操作  ****** ************ **/
+                        nativeUtil.stopResourceOperate(tempRes, applyProjectionIds);
+                        showPop(projectPop, mImageView, mParams);
+                    } else {
+                        Toast.makeText(fabContext, "没有正在投影的设备", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -953,6 +1044,7 @@ public class FabService extends Service implements View.OnTouchListener {
                 if (openProjectpopFromPostilPop) {//判断是否是在批注页面打开的
                     openProjectpopFromPostilPop = false;//重新设置为false
                     wm.removeView(projectPop);
+                    projectPopIsShow = false;
                 } else {
                     showPop(projectPop, mImageView, mParams);
                 }
@@ -963,6 +1055,7 @@ public class FabService extends Service implements View.OnTouchListener {
     //投影机列表
     private void showProRlPop() {
         proListPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pro_pop, null);
+        proListPop.setTag("proListPop");
         ProListViewHolder proListHolder = new ProListViewHolder(proListPop);
         proListHolder_Event(proListHolder);
         showPop(projectPop, proListPop);
@@ -1007,26 +1100,33 @@ public class FabService extends Service implements View.OnTouchListener {
             }
         });
         proListHolder.pro_ensure_btn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                if (applyProjectionIds == null) {
+                    applyProjectionIds = new ArrayList<Integer>();
+                } else {
+                    applyProjectionIds.clear();
+                }
                 if (allProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds = allProjectorAdapter.getCheckedIds(1);
-                    Log.e("MyLog", "MeetingActivity.onClick 1067行:  选中的投影机有 --->>> " + checkedIds.size());
+                    for (int i = 0; i < checkedIds.size(); i++) {
+                        applyProjectionIds.add(checkedIds.get(i).getDevId());
+                    }
+                    showPop(proListPop, projectPop);
                 }
-                showPop(proListPop, projectPop);
-                allProjectorAdapter.notifyDataSetChanged();
             }
         });
         proListHolder.pro_cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPop(proListPop, projectPop);
+                showPop(proListPop, mImageView, mParams);
             }
         });
     }
 
     //同屏控制事件
-    private void Screen_Event(ScreenViewHolder holder) {
+    private void Screen_Event(final ScreenViewHolder holder) {
         //选中所有人
         holder.everyone_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -1068,22 +1168,34 @@ public class FabService extends Service implements View.OnTouchListener {
             }
         });
 
-        //同屏控制按钮
+        //开始同屏
         holder.screens_btn.setOnClickListener(new View.OnClickListener() {
 
             private int subid;  // 2：屏幕 3：摄像头
-            private int srcdeviceid;//需要采集的设备ID
+            private int srcdeviceid;//需要采集的设备ID (源头)
 
             @Override
             public void onClick(View view) {
-                sameMemberDevRrsIds = new ArrayList<Integer>();
-                sameMemberDevIds = new ArrayList<Integer>();
+                if (holder.everyone_cb.isChecked()) {
+                    for (int i = 0; i < checks.size(); i++) {
+                        checks.set(i, true);
+                    }
+                }
+                if (holder.all_projector.isChecked()) {
+                    for (int i = 0; i < checkProOL.size(); i++) {
+                        checkProOL.set(i, true);
+                    }
+                }
+                if (allScreenDevIds == null) {
+                    allScreenDevIds = new ArrayList<Integer>();
+                } else {
+                    allScreenDevIds.clear();
+                }
                 /** **** **  在线的参会人  ** **** **/
                 if (onLineMemberAdapter != null) {
                     List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
                     for (int i = 0; i < checkedIds.size(); i++) {
-                        Log.e(TAG, "添加参会人 --> ");
-                        sameMemberDevIds.add(checkedIds.get(i).getDevId());
+                        allScreenDevIds.add(checkedIds.get(i).getDevId());
                     }
                 } else {
                     Log.e(TAG, "在线参会人Adapter为空 --> ");
@@ -1092,31 +1204,33 @@ public class FabService extends Service implements View.OnTouchListener {
                 if (onLineProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
                     for (int i = 0; i < checkedIds1.size(); i++) {
-                        Log.e(TAG, "添加投影机 --> ");
-                        sameMemberDevRrsIds.add(checkedIds1.get(i).getDevId());
+                        allScreenDevIds.add(checkedIds1.get(i).getDevId());
                     }
                 } else {
                     Log.e(TAG, "在线投影机Adapter为空 --> ");
                 }
+
                 /** **** **  如果是从视屏直播列表点击：  ** **** **/
                 Log.e(TAG, "是否从视屏直播点击 --->>> " + fromVideo);
                 if (fromVideo) {
                     srcdeviceid = videoInfos.get(0).getVideoInfo().getDeviceid();
                     subid = videoInfos.get(0).getVideoInfo().getSubid();
-//                    sameMemberDevIds.add(MeetingActivity.getDevId());
-                    sameMemberDevIds.add(NativeService.localDevId);
+                    /** **** **  自己也观看  ** **** **/
+                    allScreenDevIds.add(NativeService.localDevId);
                 } else {
-                    srcdeviceid = DevMeetInfo.getDeviceid();
+                    srcdeviceid = NativeService.localDevId;
                     subid = 2;
                 }
                 Log.e(TAG, "需要采集屏幕还是摄像头 --->>> " + subid);
-                sameMemberDevRrsIds.add(0);
-//                sameMemberDevIds.add(0);//要播放的屏幕源(需要看的设备ID)
-                Log.e(TAG, "FabService.onClick :   --> " + sameMemberDevIds.toString());
-                Log.e(TAG, "FabService.onClick :   --> " + sameMemberDevRrsIds.toString());
+//                allScreenDevIds.add(0);//要播放的屏幕源(需要看的设备ID)
+                Log.e(TAG, "FabService.onClick :   --> " + allScreenDevIds.toString());
                 /** ************ ******  流播放  ******0x1080004  0x1100003************ **/
-                nativeUtil.streamPlay(srcdeviceid, subid, 0, sameMemberDevRrsIds, sameMemberDevIds);
-                showPop(screenPop, mImageView, mParams);
+                if (allScreenDevIds.size() > 0) {//避免自己观看自己的屏幕
+                    nativeUtil.streamPlay(srcdeviceid, subid, 0, tempRes, allScreenDevIds);
+                    showPop(screenPop, mImageView, mParams);
+                } else {
+                    Toast.makeText(fabContext, "请先选择要同屏的对象", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -1124,17 +1238,9 @@ public class FabService extends Service implements View.OnTouchListener {
         holder.stop_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sameMemberDevRrsIds != null && sameMemberDevIds != null) {
+                if (allScreenDevIds != null) {
                     /** ************ ******  停止资源操作  ****** ************ **/
-                    Log.e(TAG, "onClick :  停止同屏操作 --->>> ");
-                    for (int i = 0; i < sameMemberDevIds.size(); i++) {
-                        Log.e(TAG, "停止同屏按钮 :  sameMemberDevIds --->>> " + sameMemberDevIds.get(i));
-                    }
-                    for (int i = 0; i < sameMemberDevRrsIds.size(); i++) {
-                        Log.e(TAG, "停止同屏按钮 :  sameMemberDevRrsIds --->>> " + sameMemberDevRrsIds.get(i));
-                    }
-                    nativeUtil.stopResourceOperate(sameMemberDevRrsIds, sameMemberDevIds);
-                    Log.e(TAG, "FabService.onClick :  同屏控制 --> " + 1);
+                    nativeUtil.stopResourceOperate(tempRes, allScreenDevIds);
                 }
             }
         });
@@ -1149,7 +1255,6 @@ public class FabService extends Service implements View.OnTouchListener {
                 }
             }
         });
-        //取消
         holder.cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1157,6 +1262,7 @@ public class FabService extends Service implements View.OnTouchListener {
                 if (openScreenpopFromPostilpop) {
                     openScreenpopFromPostilpop = false;
                     wm.removeView(screenPop);
+                    screenPopIsShow = false;
                 } else {
                     showPop(screenPop, mImageView, mParams);
                 }
@@ -1167,6 +1273,7 @@ public class FabService extends Service implements View.OnTouchListener {
     //可加入同屏
     private void showJoinPop() {
         canJoinPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.canjoin_pop, null);
+        canJoinPop.setTag("canJoinPop");
         CanJoinViewHolder holder = new CanJoinViewHolder(canJoinPop);
         canJoin_Event(holder);
         showPop(screenPop, canJoinPop, notParams);
@@ -1178,24 +1285,16 @@ public class FabService extends Service implements View.OnTouchListener {
             @Override
             public void onItemClick(View view, int posion) {
                 /** **** **  点击哪个item就设置哪个选中  ** **** **/
-//                Button player = view.findViewById(R.id.palyer_name);
-//                boolean selected = !player.isSelected();
-//                player.setSelected(selected);
                 setOtherNoClick();
                 canjoinMemberSelect.set(posion, true);
-//                canjoinMemberSelect.set(posion, selected);
                 canJoinMemberAdapter.notifyDataSetChanged();
             }
         });
         canJoinProAdapter.setItemClick(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int posion) {
-//                Button player = view.findViewById(R.id.palyer_name);
-//                boolean selected = !player.isSelected();
-//                player.setSelected(selected);
                 setOtherNoClick();
                 canjoinProSelect.set(posion, true);
-//                holder.canjoin_projector_cb.setChecked(!canjoinProSelect.contains(false));
                 canJoinProAdapter.notifyDataSetChanged();
             }
         });
@@ -1203,12 +1302,33 @@ public class FabService extends Service implements View.OnTouchListener {
         holder.canjoin_ensure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /** **** **  查询流播放  ** **** **/
-                try {
-                    nativeUtil.queryStreamPlay();
-                } catch (InvalidProtocolBufferException e) {
-                    e.printStackTrace();
+                int playID = 0;
+                //获取选择播放的参会人或则投影机，只能选择一个
+                DeviceInfo checkedIds = canJoinProAdapter.getCheckedIds();
+                DevMember checkedIds1 = canJoinMemberAdapter.getCheckedIds();
+                if (checkedIds != null) {
+                    playID = checkedIds.getDevId();
                 }
+                if (checkedIds1 != null) {
+                    playID = checkedIds1.getDevId();
+                }
+                if (playID != 0) {
+                    List<Integer> res = new ArrayList<>();
+                    List<Integer> ids = new ArrayList<>();
+                    res.add(0);
+                    ids.add(NativeService.localDevId);
+                    /** **** **  进行流播放  ** **** **/
+                    nativeUtil.streamPlay(playID, 2, 0, res, ids);
+                    showPop(canJoinPop, mImageView, mParams);
+                } else {
+                    Toast.makeText(fabContext, "请先选择同屏对象", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        holder.canjoin_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPop(canJoinPop, mImageView, mParams);
             }
         });
     }
@@ -1229,6 +1349,7 @@ public class FabService extends Service implements View.OnTouchListener {
     //选择参会人和投影机
     private void showPlayerPop() {
         choosePlayerPop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.player_pop, null);
+        choosePlayerPop.setTag("choosePlayerPop");
         PlayerViewHolder holder = new PlayerViewHolder(choosePlayerPop);
         PlayerEvent(holder);
         showPop(screenPop, choosePlayerPop);
@@ -1264,7 +1385,6 @@ public class FabService extends Service implements View.OnTouchListener {
         holder.players_all_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Log.e("MyLog", "MeetingActivity.onCheckedChanged:  是否全部选中 --->>> " + b);
                 if (b) {
                     //如果包含false
                     for (int i = 0; i < onLineMembers.size(); i++) {
@@ -1314,19 +1434,50 @@ public class FabService extends Service implements View.OnTouchListener {
         });
         //确定按钮
         holder.player_pop_ensure.setOnClickListener(new View.OnClickListener() {
+
+            private int subid;  // 2：屏幕 3：摄像头
+            private int srcdeviceid;//需要采集的设备ID
+
             @Override
             public void onClick(View view) {
+                if (allScreenDevIds == null) {
+                    allScreenDevIds = new ArrayList<Integer>();
+                } else {
+                    allScreenDevIds.clear();
+                }
+                /** **** **  在线的参会人  ** **** **/
                 if (onLineMemberAdapter != null) {
                     List<DevMember> checkedIds = onLineMemberAdapter.getCheckedIds();
-                    Log.e("MyLog", "MeetingActivity.onClick 1262行:  选中的人员数量： --->>> " + checkedIds.size());
+                    for (int i = 0; i < checkedIds.size(); i++) {
+                        allScreenDevIds.add(checkedIds.get(i).getDevId());
+                    }
                 }
+                /** **** **  在线的投影机  ** **** **/
                 if (onLineProjectorAdapter != null) {
                     List<DeviceInfo> checkedIds1 = onLineProjectorAdapter.getCheckedIds(0);
-                    Log.e("MyLog", "MeetingActivity.onClick 1266行:  选中投影机数量 --->>> " + checkedIds1.size());
+                    for (int i = 0; i < checkedIds1.size(); i++) {
+                        allScreenDevIds.add(checkedIds1.get(i).getDevId());
+                    }
                 }
-                onLineMemberAdapter.notifyDataSetChanged();
-                onLineProjectorAdapter.notifyDataSetChanged();
-                showPop(choosePlayerPop, screenPop);
+                /** **** **  如果是从视屏直播列表点击：  ** **** **/
+                Log.e(TAG, "是否从视屏直播点击 --->>> " + fromVideo);
+                if (fromVideo) {
+                    srcdeviceid = videoInfos.get(0).getVideoInfo().getDeviceid();
+                    subid = videoInfos.get(0).getVideoInfo().getSubid();
+                    allScreenDevIds.add(NativeService.localDevId);
+                } else {
+                    srcdeviceid = NativeService.localDevId;//要采集的屏幕源是自己设备的屏幕
+                    subid = 2;// 2 屏幕,3 摄像
+                }
+                Log.e(TAG, "需要采集屏幕还是摄像头 --->>> " + subid);
+                Log.e(TAG, "FabService.onClick :   --> " + allScreenDevIds.toString());
+                /** ************ ******  流播放  ******0x1080004  0x1100003************ **/
+                if (allScreenDevIds.size() > 0) {//避免自己观看自己的屏幕
+                    nativeUtil.streamPlay(srcdeviceid, subid, 0, tempRes, allScreenDevIds);
+                    showPop(choosePlayerPop, mImageView, mParams);
+                } else {
+                    Toast.makeText(fabContext, "请先选择要同屏的对象", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         //取消按钮
@@ -1373,23 +1524,6 @@ public class FabService extends Service implements View.OnTouchListener {
                 break;
         }
         return true;
-    }
-
-    /**
-     * 展示新的弹框
-     *
-     * @param removeView 原来展示的view
-     * @param addView    需要展示的view
-     * @param params     params配置
-     */
-    private void showPop(View removeView, View addView, WindowManager.LayoutParams params) {
-        wm.removeView(removeView);
-        wm.addView(addView, params);
-    }
-
-    private void showPop(View removeView, View addView) {
-        wm.removeView(removeView);
-        wm.addView(addView, params);
     }
 
     //弹框主页事件
@@ -1458,6 +1592,7 @@ public class FabService extends Service implements View.OnTouchListener {
     //截图
     private void ScreenShot() {
         wm.removeView(pop);
+        popIsShow = false;
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             @Override
@@ -1478,6 +1613,8 @@ public class FabService extends Service implements View.OnTouchListener {
                                     bytes = FileUtil.Bitmap2bytes(bitmap);
                                     showPostilPop(bytes);
                                     wm.addView(postilPop, postilParams);
+
+                                    postilPopIsShow = true;
                                     //将临时图片删除
                                     file.delete();
                                 } else {
@@ -1506,6 +1643,7 @@ public class FabService extends Service implements View.OnTouchListener {
     // 呼叫服务弹框
     private void showServePop() {
         callServePop = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pop_function_msg, null);
+        callServePop.setTag("callServePop");
         FunViewHolder callServeHolder = new FunViewHolder(callServePop);
         callServeHolder_Event(callServeHolder);
         showPop(pop, callServePop, notParams);
@@ -1521,9 +1659,34 @@ public class FabService extends Service implements View.OnTouchListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        deleteAll();
         EventBus.getDefault().unregister(this);
         boolean fabService = MyUtils.isServiceRunning(fabContext, "com.pa.paperless.service.FabService");
-        Log.i("Fab_life", "FabService.onDestroy :   --> " + this + "  " + fabService);
+        Log.i("Fab_life", "FabService.onDestroy :   --> " + this + " 是否开启 " + fabService);
+    }
+
+    private void deleteAll() {
+        Log.e(TAG, "FabService.deleteAll :   --> ");
+        if (mImageViewIsShow)
+            wm.removeView(mImageView);
+        if (popIsShow)
+            wm.removeView(pop);
+        if (screenPopIsShow)
+            wm.removeView(screenPop);
+        if (choosePlayerPopIsShow)
+            wm.removeView(choosePlayerPop);
+        if (projectPopIsShow)
+            wm.removeView(projectPop);
+        if (proListPopIsShow)
+            wm.removeView(proListPop);
+        if (callServePopIsShow)
+            wm.removeView(callServePop);
+        if (postilPopIsShow)
+            wm.removeView(postilPop);
+        if (edtPopIsShow)
+            wm.removeView(edtPop);
+        if (canJoinPopIsShow)
+            wm.removeView(canJoinPop);
     }
 
     @Override
@@ -1543,7 +1706,7 @@ public class FabService extends Service implements View.OnTouchListener {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("Fab_life", "FabService.onStartCommand :  --> " + this);
         showFab();
-        fabContext = this;
+        fabContext = getApplicationContext();
         return super.onStartCommand(intent, flags, startId);
     }
 

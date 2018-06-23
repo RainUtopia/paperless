@@ -15,7 +15,6 @@ import com.pa.paperless.listener.ItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//import static com.pa.paperless.activity.MeetingActivity.checks;
 import static com.pa.paperless.service.FabService.checks;
 
 

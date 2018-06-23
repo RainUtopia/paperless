@@ -1,7 +1,5 @@
 package com.pa.paperless.utils;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -12,8 +10,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -22,30 +18,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mogujie.tt.protobuf.InterfaceIM;
 import com.mogujie.tt.protobuf.InterfaceMember;
 import com.pa.paperless.R;
-import com.pa.paperless.activity.MeetingActivity;
-import com.pa.paperless.activity.NoteActivity;
-import com.pa.paperless.activity.PeletteActivity;
 import com.pa.paperless.bean.ReceiveMeetIMInfo;
 import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
@@ -53,9 +38,7 @@ import com.pa.paperless.constant.Macro;
 import com.pa.paperless.constant.WpsModel;
 import com.pa.paperless.event.EventBadge;
 import com.pa.paperless.event.EventMessage;
-import com.pa.paperless.service.ShotApplication;
 import com.wind.myapplication.NativeUtil;
-import com.zhy.android.percent.support.PercentLinearLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -64,8 +47,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -76,13 +57,9 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import static com.pa.paperless.activity.MeetingActivity.context;
 import static com.pa.paperless.activity.MeetingActivity.mBadge;
 import static com.pa.paperless.activity.MeetingActivity.mReceiveMsg;
 import static com.pa.paperless.utils.FileUtil.getMIMEType;
@@ -740,7 +717,7 @@ public class MyUtils {
         }
         //只有SD卡中有该类文件的时候才展示，否则会报错
         if (txtFileName.length > 0) {
-            new AlertDialog.Builder(context).setTitle("SD卡中所有该类型文件")
+            new AlertDialog.Builder(context).setTitle("选择要导入的文本文件")
                     .setItems(txtFileName, new DialogInterface.OnClickListener() {
                         String content = "";
 

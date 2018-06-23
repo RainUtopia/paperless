@@ -30,7 +30,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
+public class NoteActivity extends BaseActivity implements View.OnClickListener {
 
     private final String TAG = "NoteActivity-->";
     private TextView empty;

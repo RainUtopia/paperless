@@ -17,7 +17,6 @@ import com.pa.paperless.R;
 import com.pa.paperless.adapter.SigninLvAdapter;
 import com.pa.paperless.bean.MemberInfo;
 import com.pa.paperless.constant.IDEventF;
-import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.bean.SigninBean;
 import com.pa.paperless.utils.DateUtil;
@@ -51,12 +50,10 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
     private SigninLvAdapter signinLvAdapter;
     private List<MemberInfo> memberInfos;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.right_signin, container, false);
-        EventBus.getDefault().register(this);
         initView(inflate);
         try {
             /** ************ ******  92.查询参会人员  ****** ************ **/
@@ -69,7 +66,6 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         return inflate;
     }
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
@@ -77,7 +73,15 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
                 InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
                 memberInfos = Dispose.MemberInfo(o);
                 if (memberInfos != null) {
+                    if (mDatas == null) {
+                        mDatas = new ArrayList<>();
+                    } else {
+                        mDatas.clear();
+                    }
                     /** ************ ******  206.查询签到信息  ****** ************ **/
+                    for (int i = 0; i < memberInfos.size(); i++) {
+                        mDatas.add(new SigninBean(memberInfos.get(i).getPersonid(),mDatas.size() + 1 + "", memberInfos.get(i).getName(), "", 0));
+                    }
                     nativeUtil.querySign();
                 }
                 break;
@@ -87,21 +91,26 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     private void receiveSigninInfo(EventMessage message) {
         InterfaceSignin.pbui_Type_MeetSignInDetailInfo object1 = (InterfaceSignin.pbui_Type_MeetSignInDetailInfo) message.getObject();
         List<InterfaceSignin.pbui_Item_MeetSignInDetailInfo> itemList = object1.getItemList();
-        if (mDatas == null) {
-            mDatas = new ArrayList<>();
-        } else {
-            mDatas.clear();
-        }
         for (int i = 0; i < itemList.size(); i++) {
             InterfaceSignin.pbui_Item_MeetSignInDetailInfo item = itemList.get(i);
             int nameId = item.getNameId();
@@ -109,9 +118,11 @@ public class SigninFragment extends BaseFragment implements View.OnClickListener
             long utcseconds = item.getUtcseconds();
             String[] gtmDate = DateUtil.getDate(utcseconds * 1000);
             String dateTime = gtmDate[0] + "  " + gtmDate[2];
-            for (int j = 0; j < memberInfos.size(); j++) {
-                if (memberInfos.get(j).getPersonid() == nameId) {
-                    mDatas.add(new SigninBean(nameId, mDatas.size() + 1 + "", memberInfos.get(j).getName(), dateTime, signinType));
+            for (int j = 0; j < mDatas.size(); j++) {
+                SigninBean bean = mDatas.get(j);
+                if (bean.getId() == nameId) {
+                    bean.setSignin_date(dateTime);
+                    bean.setSign_in(signinType);
                 }
             }
         }

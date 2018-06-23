@@ -41,7 +41,7 @@ message pbui_Type_MeetWhiteBoardControl
 //method: ask 
 message pbui_Type_MeetStartWhiteBoard
 {
-	fixed32  operflag=1;//指定操作标志 参见 Pb_MeetPostilOperType
+	fixed32  operflag=1;//指定操作标志 参见Pb_MeetPostilOperType
 	bytes    medianame=2;//白板操作描述
 	fixed32  opermemberid=3;//当前该命令的人员ID
 	fixed32  srcmemid=4;//发起人的人员ID 白板标识使用

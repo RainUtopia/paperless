@@ -57,7 +57,7 @@ public class OtherSettingFragment extends BaseFragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.other_setting, container, false);
-        initController();
+
         initView(inflate);
         try {
             //52.查询管理员
@@ -83,12 +83,6 @@ public class OtherSettingFragment extends BaseFragment implements View.OnClickLi
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initView(View inflate) {
         mOldPassword = (EditText) inflate.findViewById(R.id.old_password);

@@ -57,16 +57,6 @@ public class SigninLvAdapter extends BaseAdapter {
         if(!(holder.signin_item_signtime.getText().toString().isEmpty())){
             holder.signin_item_signstate.setText("已签到");
         }
-//        if (
-//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_direct.getNumber() ||
-//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw.getNumber() ||
-//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_photo.getNumber() ||
-//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw.getNumber() ||
-//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_onepsw_photo.getNumber() ||
-//                bean.getSign_in() == InterfaceMacro.Pb_MeetSignType.Pb_signin_psw_photo.getNumber()
-//                ) {
-//            holder.signin_item_signstate.setText("已签到");
-//        }
         else {
             holder.signin_item_signstate.setText(" ");
         }

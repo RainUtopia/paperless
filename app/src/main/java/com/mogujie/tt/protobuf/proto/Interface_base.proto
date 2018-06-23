@@ -71,7 +71,7 @@ message	pbui_Time
 //如果有缓存则返回ERROR_MEET_INTERFACE_NULL
 message	pbui_MeetCacheOper	
 {
-	fixed32      cacheflag=1;// 缓存标志 参见 Pb_CacheFlag
+	fixed32      cacheflag=1;// 缓存标志 参见Pb_CacheFlag
 
 	//id用法描述 eg:需要缓存目录id=0表示缓存所有目录信息(不包括目录里的文件),当id=1时表示缓存该目录里的文件,如果id=0不支持则会返回ERROR_MEET_INTERFACE_PARAMETER
 	fixed32		id=2;
@@ -86,19 +86,6 @@ message	pbui_PageReqQueryInfo
 	fixed32			pageindex=1;//请求页 从0 开始
 	fixed32			pagenum=2;  //每页项数
 	fixed32			idval=3;//用于分组使用,如：查询指分组中的人员,这里填写分组id
-}
-
-//分页查询返回结构头部
-//callreturn
-//type:需要查询的数据的类别
-//method: pagequery 接口方返回
-message	pbui_PageResQueryInfo
-{
-	fixed32			pageindex=1;//起始索引 从0 开始
-	fixed32			pagenum=2;//每页项数
-	fixed32			itemnum=3;//当前页项数 ,根据数据不同用不同的解析
-	fixed32			totalnum=4;//总项数
-	fixed32		    idval=5;//用于分组使用,如：查询指分组中的人员,这里填写分组id
 }
 
 //指定ID查询 返回结果按 query 返回

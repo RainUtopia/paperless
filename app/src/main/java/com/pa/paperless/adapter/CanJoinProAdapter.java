@@ -38,17 +38,16 @@ public class CanJoinProAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
      *
      * @return
      */
-    public List<DeviceInfo> getCheckedIds() {
-        List<DeviceInfo> checkedId = new ArrayList<>();
+    public DeviceInfo getCheckedIds() {
         //type 为1时 全部投影机
         if (mData.size() > 0) {
             for (int i = 0; i < canjoinProSelect.size(); i++) {
                 if (canjoinProSelect.get(i)) {//当前索引项是否选中
-                    checkedId.add(mData.get(i));
+                    return mData.get(i);
                 }
             }
         }
-        return checkedId;
+        return null;
     }
 
 

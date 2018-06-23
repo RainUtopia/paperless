@@ -2,10 +2,12 @@
 #include <wallet_net.h>
 #include <malloc.h>
 #include <string.h>
+#include <list>
 #include "jni_wallet_netinit.h"
 #include "meetc/meetinterface_type.h"
 #include "meetc/InterFaceCorePBModule.h"
 #include "meetc/androidcapturevideo.h"
+
 // c call java method
 static const char* main_interface_class_path_name = "com/wind/myapplication/NativeUtil";
 int wallet_netinit_register_native_methods(JNIEnv* env)
@@ -14,6 +16,7 @@ int wallet_netinit_register_native_methods(JNIEnv* env)
 	{
 			{ "Init_walletSys", "([B)I",  (void*) Init_walletSys},
 			{ "call_method", "(II[B)[B",  (void*) jni_call},
+            { "enablebackgroud", "(I)V",  (void*) jni_enablebackgroud},
 			{ "InitAndCapture", "(II)I", (void*)jni_AndroidDevice_initcapture },
 			{ "call", "(I[B)I", (void*)jni_AndroidDevice_call },
 	};
@@ -26,6 +29,14 @@ int wallet_netinit_register_native_methods(JNIEnv* env)
 	return JNI_TRUE;
 }
 
+typedef struct JniCacheData
+{
+    int32u type;
+    int32u method;
+    void* pdata;
+    int   datalen;
+}JniCacheData, *pJniCacheData;
+
 typedef struct InternalGlobalParam
 {
 	JavaVM *	 javavm;
@@ -34,9 +45,35 @@ typedef struct InternalGlobalParam
 
 	jmethodID mCallBack_DataProc;
 	jmethodID mDoCaptureOper;
+    jint      bisbackgroud;//是否处于后台运行
+    std::list<pJniCacheData>* cachelist;
 }InternalGlobalParam, *pInternalGlobalParam;
 
 static pInternalGlobalParam g_pinternalparam = NULL;
+
+void AddCacheData(int32u type, int32u method, void* pdata, int datalen)
+{
+    pJniCacheData ptmp = new JniCacheData;
+    do
+    {
+        if(ptmp == NULL)
+            return;
+
+        ptmp->type = type;
+        ptmp->method = method;
+        ptmp->datalen = datalen;
+        if(ptmp->datalen > 0)
+        {
+            ptmp->pdata = new char[datalen];
+            if(ptmp->pdata == NULL)
+                break;
+            memcpy(ptmp->pdata, pdata, datalen);
+        }
+        g_pinternalparam->cachelist->push_back(ptmp);
+        return;
+    }while(0);
+    delete ptmp;
+}
 
 /* functions*/
 pInternalGlobalParam GetGlobalParam()
@@ -82,6 +119,7 @@ int jni_initforjava(JNIEnv* env, jobject obj)
 			break;
 		}
 		memset(g_pinternalparam, 0, sizeof(InternalGlobalParam));
+        g_pinternalparam->cachelist = new std::list<pJniCacheData>;
 		ret = env->GetJavaVM(&g_pinternalparam->javavm);
 		if (ret)
 		{
@@ -139,7 +177,7 @@ void CBLogInfo(int loglevel, const char* pmsg, void* puser)
 
 int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* puser)
 {
-	/*if (type != TYPE_MEET_INTERFACE_TIME && type != TYPE_MEET_INTERFACE_MEDIAPLAYPOSINFO)
+    /*if (type != TYPE_MEET_INTERFACE_TIME && type != TYPE_MEET_INTERFACE_MEDIAPLAYPOSINFO)
 	{
 		switch (type)
 		{
@@ -148,7 +186,15 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 			break;
 		}
 	}*/
-
+    
+    if(g_pinternalparam->bisbackgroud)
+    {
+        if (type != TYPE_MEET_INTERFACE_TIME && type != TYPE_MEET_INTERFACE_MEDIAPLAYPOSINFO)
+	    {
+            AddCacheData(type, method, pdata, datalen);
+	    }
+        return 0;
+    }
 	int status, battach = 0;
 	JNIEnv *env = NULL;
 
@@ -164,9 +210,32 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 		battach = 1;
 	}
 
-	if(type == TYPE_MEET_INTERFACE_MEETIM){
-    LOGI("MeetChat Adapter_GetEnv get status2 return  %d",type);
-	}
+    if(!g_pinternalparam->cachelist->empty())
+    {
+        pJniCacheData ptmp;
+        std::list<pJniCacheData>::iterator iter = g_pinternalparam->cachelist->begin();
+        for (; iter != g_pinternalparam->cachelist->end(); )
+        {
+            ptmp = *iter;
+            ++iter;
+            if(ptmp->datalen > 0)
+            {
+                jbyteArray barray = env->NewByteArray(ptmp->datalen);
+                env->SetByteArrayRegion(barray, 0, ptmp->datalen, (const jbyte*) ptmp->pdata);
+                env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)ptmp->type, (jint)ptmp->method, barray, (jint)ptmp->datalen);
+                env->DeleteLocalRef(barray);
+                ptmp->datalen = 0;
+                delete[] ((char*)ptmp->pdata);
+            }
+            else
+            {
+                env->CallIntMethod(g_pinternalparam->thiz, g_pinternalparam->mCallBack_DataProc, (jint)ptmp->type, (jint)ptmp->method, NULL, 0);
+            }
+            delete ptmp;
+        }
+        g_pinternalparam->cachelist->clear();
+    }
+
     if(datalen > 0)
 	{
 		jbyteArray barray = env->NewByteArray(datalen);
@@ -182,6 +251,11 @@ int CallbackFunc(int32u type, int32u method, void* pdata, int datalen, void* pus
 	if(battach)
 		g_pinternalparam->javavm->DetachCurrentThread();
 	return 0;
+}
+
+void jni_enablebackgroud(JNIEnv *env, jobject thiz, jint benable)
+{
+    g_pinternalparam->bisbackgroud = benable;
 }
 
 jbyteArray jni_call(JNIEnv *env, jobject thiz, jint type, jint method, jbyteArray pdata)

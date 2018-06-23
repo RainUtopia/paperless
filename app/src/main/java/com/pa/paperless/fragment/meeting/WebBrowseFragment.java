@@ -49,7 +49,6 @@ public class WebBrowseFragment extends BaseFragment implements View.OnClickListe
     private ImageButton home;
     private EditText edt_url;
     private Button goto_url;
-    private WebView web_view;
     private List<String> histroyURL;//保存所有网站（历史记录）
 
     @Nullable
@@ -64,9 +63,9 @@ public class WebBrowseFragment extends BaseFragment implements View.OnClickListe
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
     }
+
 
     private void initEvent() {
         WebSettings webSettings = mWebView.getSettings();
@@ -137,12 +136,12 @@ public class WebBrowseFragment extends BaseFragment implements View.OnClickListe
     public void onDestroy() {
         Log.i("F_life", "WebBrowseFragment.onDestroy :   --> ");
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
 
     private void initView(View inflate) {
         mWebView = (WebView) inflate.findViewById(R.id.web_view);
+        mWebView.setOnClickListener(this);
         back_pre = (ImageButton) inflate.findViewById(R.id.back_pre);
         back_pre.setOnClickListener(this);
         goto_nex = (ImageButton) inflate.findViewById(R.id.goto_nex);
@@ -153,8 +152,6 @@ public class WebBrowseFragment extends BaseFragment implements View.OnClickListe
         edt_url.setOnClickListener(this);
         goto_url = (Button) inflate.findViewById(R.id.goto_url);
         goto_url.setOnClickListener(this);
-        web_view = (WebView) inflate.findViewById(R.id.web_view);
-        web_view.setOnClickListener(this);
 
     }
 
@@ -206,6 +203,7 @@ public class WebBrowseFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onStart() {
         Log.i("F_life", "WebBrowseFragment.onStart :   --> ");
+        EventBus.getDefault().register(this);
         super.onStart();
     }
 
@@ -224,6 +222,7 @@ public class WebBrowseFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onStop() {
         Log.i("F_life", "WebBrowseFragment.onStop :   --> ");
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 

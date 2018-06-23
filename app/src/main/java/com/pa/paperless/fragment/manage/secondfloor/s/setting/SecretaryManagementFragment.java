@@ -199,7 +199,7 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.secretary_management, container, false);
-        initController();
+
         initView(inflate);
         try {
             nativeUtil.queryAdmin();
@@ -239,12 +239,6 @@ public class SecretaryManagementFragment extends BaseFragment implements View.On
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
-        nativeUtil.setCallListener(this);
-    }
 
 
     private void initView(View inflate) {

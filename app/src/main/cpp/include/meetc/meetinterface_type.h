@@ -95,6 +95,7 @@
 #define METHOD_MEET_INTERFACE_TEXTMSG   59 //
 #define METHOD_MEET_INTERFACE_REBOOT    60 //
 #define METHOD_MEET_INTERFACE_RESINFO   61 //
+#define METHOD_MEET_INTERFACE_LOCATE    62 //
 
 //type
 #define TYPE_MEET_INTERFACE_TIME 1 //平台时间 -- 高频回调
@@ -156,6 +157,7 @@
 #define TYPE_MEET_INTERFACE_SYSTEMLOG     57 //管理员操作日志相关
 #define TYPE_MEET_INTERFACE_DEVICEVALIDATE 58 //设备ID校验
 #define TYPE_MEET_INTERFACE_SYSTEMFUNCTIONLIMIT 59 //平台功能限制
+#define TYPE_MEET_INTERFACE_PUBLICINFO 60 //全局字串
 
 //注：这里所有的字符串都约定为utf8编码
 #define DEFAULT_NAME_MAXLEN   48 //默认名称长度
@@ -380,6 +382,7 @@ typedef struct
 	int32u devcieid;
 	char   devname[DEVICE_NAME_MAXLEN];
 	int32u netstate;
+	int32u version;////hard(16):soft(16) 
 
 	SubItem_DeviceIpAddrInfo ipinfo[MAX_DEVICEIPADDR_NUM];
 	SubItem_DeviceResInfo    resinfo[MAX_RES_NUM];
@@ -433,6 +436,7 @@ typedef struct
 #define MEETDEVICE_PROPERTY_STREAMNAME			10 //设备的流通道名称 query paramterval=查询的流通道号
 #define MEETDEVICE_PROPERTY_RESOPERTORID		11 //获取资源操作的设备ID query paramterval(res地址索引)
 #define MEETDEVICE_PROPERTY_TYPEAVAILABLE		12 //某类设备是否可用 query deviceid(设备类别ID,eg:DEVICE_MEET_SERVICE) propertyval=1可用，=0不可用
+#define MEETDEVICE_PROPERTY_VERSION				13 //获取指定设备的版本 query propertyval返回版本号hard(16):soft(16) 
 
 #define MEET_DEVICESTRING_MAXLEN 260
 //type:TYPE_MEET_INTERFACE_DEVICEINFO
@@ -474,6 +478,7 @@ typedef struct
 
 	int32u  deviceid;
 	int32u  memberid;
+	int32u  oldfacestatus;//// 参见MemState_MainFace 定义 该值只有在notify通知时才有效
 	int32u  facestatus; // 参见MemState_MainFace 定义
 	int32u  meetingid;
 }Type_MeetDeviceMeetStatus, *pType_MeetDeviceMeetStatus;
@@ -806,6 +811,8 @@ typedef struct
 #define MEETCONTEXT_PROPERTY_AVAILABLESTREAMSERVER	13 //流服务器是否可用 query=返回可用的个数(int32u)
 #define MEETCONTEXT_PROPERTY_UTCMICROSECONDS	14 //返回当前系统微秒UTC时间 query(int64u)
 #define MEETCONTEXT_PROPERTY_LOCALCICROSECONDS	15 //返回当前系统微秒时间 query(int64u)
+#define MEETCONTEXT_PROPERTY_HARDVERSION     	16 //返回硬件版本号 query(int32u)
+#define MEETCONTEXT_PROPERTY_SOFTVERSION     	17 //返回软件版本号 query(int32u)
 
 //type: TYPE_MEET_INTERFACE_MEETCONTEXT
 //method: queryproperty/setproperty
@@ -3221,6 +3228,7 @@ typedef struct
 	int32u  flag;			//控制的标志  参考streamcontrol.h 定义
 	int32u  deviceid;       //发起请求的设备ID
 	int32u  memberid;       //发起请求的人员ID
+	int32u  otherflag;     //参考streamcontrol.h 定义
 	float   x; //x% width的百分
 	float   y; //y% height的百分
 }Type_MeetScreenMouseControl, *pType_MeetScreenMouseControl;
@@ -3234,6 +3242,7 @@ typedef struct
 
 	int32u  flag;			//控制的标志  参考streamcontrol.h 定义
 	int32u  deviceid;       //设备ID
+	int32u  otherflag;     //参考streamcontrol.h 定义
 	float   x; //x / width的百分比
 	float   y; //y / height的百分比
 }Type_MeetDoScreenMouseControl, *pType_MeetDoScreenMouseControl;
@@ -3335,7 +3344,7 @@ typedef struct
 //视频播放资源初始化
 //call
 //type:TYPE_MEET_INTERFACE_MEDIAPLAY
-//method: init
+//method: init/resinfo(查询播放资源真实的显示区域)
 typedef struct
 {
 	Type_HeaderInfo hdr;
@@ -3481,6 +3490,27 @@ typedef struct
 	int32u  triggeruserval;//参见该文件中的triggeruserval定义
 	int32u  userdefval1;//用户自定义的值
 }Type_ReqMediaUpdatePlay, *pType_ReqMediaUpdatePlay;
+
+//设备定位
+//call
+//type:TYPE_MEET_INTERFACE_DEVICEOPER
+//method:locate
+typedef struct
+{
+	Type_HeaderInfo hdr;
+	int		devnum;
+	//int32u  deviceid[devnum];       //设备ID
+}Type_DoDeviceLocate, *pType_DoDeviceLocate;
+
+//设备定位
+//callback
+//type:TYPE_MEET_INTERFACE_DEVICEOPER
+//method: locate
+typedef struct
+{
+	Type_HeaderInfo hdr;
+	int32u  oeprdeviceid;
+}Type_DeviceLocate, *pType_DeviceLocate;
 
 //流请求
 //type:TYPE_MEET_INTERFACE_STREAMPLAY
@@ -3816,6 +3846,56 @@ typedef struct
 	int32u opermethod;//本次通知是因为opermethod方法触发的
 	int32u id;//如果指定了ID刚表示是对特定ID的操作,为0表示全部
 }Type_meetFaceConfigInfo, *pType_meetFaceConfigInfo;
+
+
+//全局字串
+#define MEET_PUBLICINFO_DATALEN 260 
+
+//dataid
+#define MEET_MAXHUB_SERVERURL 2 //MAXHUB白板系统的服务器地址
+
+//callback
+//TYPE_MEET_INTERFACE_PUBLICINFO
+//method:notify
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int32u opermethod;//本次通知是因为opermethod方法触发的
+	int32u id;//如果指定了ID刚表示是对特定ID的操作,为0表示全部
+}Type_meetNotifyPublicInfo, *pType_meetNotifyPublicInfo;
+
+//查询系统全局字串
+//call
+//TYPE_MEET_INTERFACE_PUBLICINFO
+//method:notify/query(call)
+typedef struct
+{
+	Type_HeaderInfo hdr;
+
+	int num;//
+
+	//int32u dataid[num];
+}Type_meetQueryPublicInfo, *pType_meetQueryPublicInfo;
+
+//返回查询系统全局字串
+//单个全局字串
+typedef struct
+{
+	int32u dataid;//字串ID
+	char   dataval[MEET_PUBLICINFO_DATALEN];
+}Item_meetPublicInfo, *pItem_meetPublicInfo;
+
+//call
+//TYPE_MEET_INTERFACE_PUBLICINFO
+//method:set/query(return)
+typedef struct
+{
+	Type_HeaderInfo hdr;
+	int num;//
+
+	//Item_meetPublicInfo item[num];
+}Type_meetPublicInfo, *pType_meetPublicInfo;
 
 //call
 //type:TYPE_MEET_INTERFACE_MEETSENDMAIL

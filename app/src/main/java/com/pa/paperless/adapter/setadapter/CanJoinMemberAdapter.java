@@ -37,17 +37,16 @@ public class CanJoinMemberAdapter extends RecyclerView.Adapter<RecyclerView.View
      *
      * @return
      */
-    public List<DevMember> getCheckedIds() {
-        List<DevMember> checkedId = new ArrayList<>();
+    public DevMember getCheckedIds() {
         Log.e(TAG, "CanJoinMemberAdapter.getCheckedIds :  选中参会人集合 --> " + canjoinMemberSelect.toString());
         if (mData.size() > 0) {
             for (int i = 0; i < canjoinMemberSelect.size(); i++) {
                 if (canjoinMemberSelect.get(i)) {
-                    checkedId.add(mData.get(i));
+                    return mData.get(i);
                 }
             }
         }
-        return checkedId;
+        return null;
     }
 
 
@@ -60,9 +59,9 @@ public class CanJoinMemberAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        ((ScreenControlAdapter.ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
-        ((ScreenControlAdapter.ViewHolder) holder).play_btn.setSelected(canjoinMemberSelect.get(position));
-        ((ScreenControlAdapter.ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder) holder).play_btn.setText(mData.get(position).getMemberInfos().getName());
+        ((ViewHolder) holder).play_btn.setSelected(canjoinMemberSelect.get(position));
+        ((ViewHolder) holder).play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {

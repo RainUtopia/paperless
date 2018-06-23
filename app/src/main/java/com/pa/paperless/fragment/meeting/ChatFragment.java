@@ -84,9 +84,9 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
             e.printStackTrace();
         }
         chatisshowing = true;
-        EventBus.getDefault().register(this);
         return inflate;
     }
+
 
     private final String TAG = "ChatFragment-->";
 
@@ -94,15 +94,18 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     public void getEventMessage(EventMessage message) throws InvalidProtocolBufferException {
         switch (message.getAction()) {
             case IDEventF.member_info://得到参会人信息
+                Log.i("RTag", "ChatFragment.getEventMessage :  得到参会人信息 --->>> ");
                 InterfaceMember.pbui_Type_MemberDetailInfo o = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
                 memberInfos = Dispose.MemberInfo(o);
                 //查询设备信息
                 nativeUtil.queryDeviceInfo();
                 break;
             case IDEventF.dev_info://得到设备信息
+                Log.i("RTag", "ChatFragment.getEventMessage :  得到设备信息 --->>> ");
                 receiveDevInfo(message);
                 break;
             case IDEventF.meet_chat_info://收到新的聊天信息
+                Log.i("RTag", "ChatFragment.getEventMessage :  收到新的聊天信息 --->>> ");
                 if (chatisshowing) {
                     InterfaceIM.pbui_Type_MeetIM object = (InterfaceIM.pbui_Type_MeetIM) message.getObject();
                     if (object.getMsgtype() == 0) {//证明是文本类消息
@@ -119,6 +122,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case IDEventF.member_byID://收到指定ID的参会人
+                Log.i("RTag", "ChatFragment.getEventMessage :  收到指定ID的参会人 --->>> ");
                 InterfaceMember.pbui_Type_MemberDetailInfo member = (InterfaceMember.pbui_Type_MemberDetailInfo) message.getObject();
                 String name = MyUtils.getBts(member.getItemList().get(0).getName());
                 // 给之前添加进去的最后一个设置参会人名字
@@ -202,7 +206,6 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     public void onDestroy() {
         Log.i("F_life", "ChatFragment.onDestroy :   --> ");
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     private void initView(View inflate) {
@@ -315,6 +318,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onStart() {
         Log.i("F_life", "ChatFragment.onStart :   --> ");
+        EventBus.getDefault().register(this);
         super.onStart();
     }
 
@@ -333,6 +337,7 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onStop() {
         Log.i("F_life", "ChatFragment.onStop :   --> ");
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 

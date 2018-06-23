@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 /**
@@ -107,37 +108,37 @@ public class OverviewDocFragment extends BaseFragment implements SurfaceHolder.C
      */
     @Override
     public void onClick(View v) {
-        try {
-            final CaptureRequest.Builder mBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
-            mBuilder.addTarget(mImageReader.getSurface());
-            mBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
-            mBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            mBuilder.set(CaptureRequest.CONTROL_AWB_MODE, CaptureRequest.CONTROL_AWB_MODE_AUTO);
+            try {
+                final CaptureRequest.Builder mBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+                mBuilder.addTarget(mImageReader.getSurface());
+                mBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+                mBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+                mBuilder.set(CaptureRequest.CONTROL_AWB_MODE, CaptureRequest.CONTROL_AWB_MODE_AUTO);
 //            mImageReader.setOnImageAvailableListener(mSaveListener,null);
-            mCameraSession.stopRepeating();
-            mCameraSession.capture((mBuilder.build()), new CameraCaptureSession.CaptureCallback() {
-                @Override
-                public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
-                    super.onCaptureProgressed(session, request, partialResult);
-                    Log.e("MyLog", "OverviewDocFragment.onCaptureProgressed 100行:   --->>> ");
-                }
-
-                @Override
-                public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
-                    super.onCaptureCompleted(session, request, result);
-                    Log.e("MyLog", "OverviewDocFragment.onCaptureCompleted 106行:   --->>> ");
-                    mCameraSession = session;
-                    try {
-                        mCameraSession.setRepeatingRequest(mRequestBuilder.build(), null, null);
-                    } catch (CameraAccessException e) {
-                        Log.e("MyLog", "OverviewDocFragment.onCaptureCompleted 112行:   --->>> " + e.getMessage());
-                        e.printStackTrace();
+                mCameraSession.stopRepeating();
+                mCameraSession.capture((mBuilder.build()), new CameraCaptureSession.CaptureCallback() {
+                    @Override
+                    public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
+                        super.onCaptureProgressed(session, request, partialResult);
+                        Log.e("MyLog", "OverviewDocFragment.onCaptureProgressed 100行:   --->>> ");
                     }
-                }
-            }, null);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
+
+                    @Override
+                    public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+                        super.onCaptureCompleted(session, request, result);
+                        Log.e("MyLog", "OverviewDocFragment.onCaptureCompleted 106行:   --->>> ");
+                        mCameraSession = session;
+                        try {
+                            mCameraSession.setRepeatingRequest(mRequestBuilder.build(), null, null);
+                        } catch (CameraAccessException e) {
+                            Log.e("MyLog", "OverviewDocFragment.onCaptureCompleted 112行:   --->>> " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                }, null);
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
     }
 
     public class CameraCallBack extends CameraDevice.StateCallback implements ImageReader.OnImageAvailableListener {
@@ -150,8 +151,8 @@ public class OverviewDocFragment extends BaseFragment implements SurfaceHolder.C
             Log.e(TAG, "CameraCallBack.onOpened :  相机打开 --> ");
             mCameraDevice = camera;
             mImageReader = ImageReader.newInstance(mCameraView.getWidth(), mCameraView.getHeight(), ImageFormat.JPEG, 7);
-            Log.e("mCameraView", "com.pa.paperless.fragment.meeting_CameraCallBack.onOpened :  mCameraView.getWidth() --->>> " + mCameraView.getWidth()
-                    + "mCameraView.getHeight()：" + mCameraView.getHeight());
+            Log.e("mCameraView", "com.pa.paperless.fragment.meeting_CameraCallBack.onOpened :  mCameraView.getWidth() --->>> "
+                    + mCameraView.getWidth() + "mCameraView.getHeight()：" + mCameraView.getHeight());
             mImageReader.setOnImageAvailableListener(this, null);
             try {
                 mRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
@@ -175,7 +176,7 @@ public class OverviewDocFragment extends BaseFragment implements SurfaceHolder.C
 
                     @Override
                     public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-
+                        Log.e(TAG, "CameraCallBack.onConfigureFailed :   --> ");
                     }
                 }, null);
             } catch (CameraAccessException e) {
@@ -187,7 +188,7 @@ public class OverviewDocFragment extends BaseFragment implements SurfaceHolder.C
          * *** **  相机断开  ** ****
          **/
         @Override
-        public void onDisconnected(@NonNull CameraDevice camera) {
+        public void onDisconnected(CameraDevice camera) {
             Log.e(TAG, "CameraCallBack.onDisconnected :  相机断开 --> ");
             camera.close();
             mCameraDevice = null;
@@ -262,46 +263,87 @@ public class OverviewDocFragment extends BaseFragment implements SurfaceHolder.C
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        if (hidden) {
-            Log.e(TAG, "OverviewDocFragment.onHiddenChanged :  隐藏时关闭相机 --> ");
-            if (mCameraDevice != null && !isClosed) {
-                mCameraDevice.close();
-                isClosed = true;
-            }
-        } else {
-            try {
-                Log.e(TAG, "OverviewDocFragment.onHiddenChanged :  展示时开启相机 --> ");
-                if (mCameraManager != null && isClosed) {
-                    mCameraManager.openCamera("0", new CameraCallBack(), null);
-                    isClosed = false;
-                }
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        }
+        Log.e(TAG, "OverviewDocFragment.onHiddenChanged :  是否隐藏 --> " + hidden);
+//        if (hidden) {
+//            if (mCameraDevice != null) {
+//                mCameraDevice.close();
+//            }
+//        } else {
+//            try {
+//                if (mCameraManager != null) {
+//                    mCameraManager.openCamera("0", new CameraCallBack(), null);
+//                }
+//            } catch (CameraAccessException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override
     public void onResume() {
         Log.e("F_life", "OverviewDocFragment.onResume :   --> ");
-        if (mCameraManager != null && isClosed) {
-            try {
-                mCameraManager.openCamera("0", new CameraCallBack(), null);
-                isClosed = false;
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (mCameraManager != null) {
+//            try {
+//                mCameraManager.openCamera("0", new CameraCallBack(), null);
+//            } catch (CameraAccessException e) {
+//                e.printStackTrace();
+//            }
+//        }
         super.onResume();
     }
 
     @Override
     public void onStop() {
         Log.e("F_life", "OverviewDocFragment.onStop :   --> ");
-        if (mCameraDevice != null && !isClosed) {
-            mCameraDevice.close();
-            isClosed = true;
-        }
+//        if(mCameraDevice != null){
+//            mCameraDevice.close();
+//            isClosed = true;
+//        }
         super.onStop();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.i("F_life", "OverviewDocFragment.onAttach :   --> ");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "OverviewDocFragment.onCreate :   --> ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.i("F_life", "OverviewDocFragment.onActivityCreated :   --> ");
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("F_life", "OverviewDocFragment.onStart :   --> ");
+        super.onStart();
+    }
+
+
+    @Override
+    public void onPause() {
+        Log.i("F_life", "OverviewDocFragment.onPause :   --> ");
+        super.onPause();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        Log.i("F_life", "OverviewDocFragment.onDestroyView :   --> ");
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDetach() {
+        Log.i("F_life", "OverviewDocFragment.onDetach :   --> ");
+        super.onDetach();
     }
 }

@@ -43,12 +43,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -59,13 +58,13 @@
         <!-- standard：默认模式，可以不用写配置。在这个模式下，都会默认创建一个新的实例。因此，在这种模式下，
                 可以有多个相同的实例，也允许多个相同的Activity叠加。-->
 
-        <!-- singTask:开启一个ActivityB的时候检查任务栈里面是否有这个ActivityB的实例存在，
+        <!-- singleTask:开启一个ActivityB的时候检查任务栈里面是否有这个ActivityB的实例存在，
                 如果存在的话，清空这个任务栈ActivityB上面的所有的Activity，复用这个ActivityB。 -->
 
-        <!-- singTop:如果发现任务栈的栈顶已经存在这个Activity，再去开启Activity的时候，就不去重新创建新的Activity而是
+        <!-- singleTop:如果发现任务栈的栈顶已经存在这个Activity，再去开启Activity的时候，就不去重新创建新的Activity而是
                 复用这个栈顶已经存在的Activity。 -->
 
-        <!-- singleinstance：开启一个新的任务栈，任务栈里面只有一个Activity的实例存在，如果这个Activity被开启，
+        <!-- singleInstance：开启一个新的任务栈，任务栈里面只有一个Activity的实例存在，如果这个Activity被开启，
                 把这个任务栈放在前面，如果开启了新的别的Activity，则别的Activity所在的任务栈会被放在前面。极端的说，
                 在整个手机的操作系统里面只会有一个实例存在。-->
         <activity
@@ -84,7 +83,9 @@
         <activity
             android:name=".activity.DirPermissionActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name="org.libsdl.app.SDLActivity"
             android:launchMode="singleInstance"

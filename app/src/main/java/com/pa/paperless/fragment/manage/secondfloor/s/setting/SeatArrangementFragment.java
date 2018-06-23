@@ -82,7 +82,7 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.seat_arrangement, container, false);
-        initController();
+
         initView(inflate);
         try {
             //112.查询会场
@@ -111,12 +111,6 @@ public class SeatArrangementFragment extends BaseFragment implements View.OnClic
     }
 
 
-    @Override
-    protected void initController() {
-        nativeUtil = NativeUtil.getInstance();
-//        nativeUtil = new NativeUtil();
-        nativeUtil.setCallListener(this);
-    }
 
     private void initView(View inflate) {
         mSeatLeftRl = (RecyclerView) inflate.findViewById(R.id.seat_left_rl);

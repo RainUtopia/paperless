@@ -8,6 +8,149 @@ public final class InterfaceVote {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
+  /**
+   * <pre>
+   *会议发起投票信息
+   *voteflag
+   * </pre>
+   *
+   * Protobuf enum {@code Pb_VoteStartFlag}
+   */
+  public enum Pb_VoteStartFlag
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <pre>
+     *未使用
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_ZERO = 0;</code>
+     */
+    Pb_MEET_VOTING_FLAG_ZERO(0),
+    /**
+     * <pre>
+     *不在投影机上显示投票结果
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_NOPOST = 1;</code>
+     */
+    Pb_MEET_VOTING_FLAG_NOPOST(1),
+    /**
+     * <pre>
+     *投票选项保密投票模式
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_SECRETARY = 2;</code>
+     */
+    Pb_MEET_VOTING_FLAG_SECRETARY(2),
+    /**
+     * <pre>
+     *自动超时结束 --由发起方计时发送结束
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_AUTOEXIT = 4;</code>
+     */
+    Pb_MEET_VOTING_FLAG_AUTOEXIT(4),
+    /**
+     * <pre>
+     *重投 清空之前的记录
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_REVOTE = 8;</code>
+     */
+    Pb_MEET_VOTING_FLAG_REVOTE(8),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     *未使用
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_ZERO = 0;</code>
+     */
+    public static final int Pb_MEET_VOTING_FLAG_ZERO_VALUE = 0;
+    /**
+     * <pre>
+     *不在投影机上显示投票结果
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_NOPOST = 1;</code>
+     */
+    public static final int Pb_MEET_VOTING_FLAG_NOPOST_VALUE = 1;
+    /**
+     * <pre>
+     *投票选项保密投票模式
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_SECRETARY = 2;</code>
+     */
+    public static final int Pb_MEET_VOTING_FLAG_SECRETARY_VALUE = 2;
+    /**
+     * <pre>
+     *自动超时结束 --由发起方计时发送结束
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_AUTOEXIT = 4;</code>
+     */
+    public static final int Pb_MEET_VOTING_FLAG_AUTOEXIT_VALUE = 4;
+    /**
+     * <pre>
+     *重投 清空之前的记录
+     * </pre>
+     *
+     * <code>Pb_MEET_VOTING_FLAG_REVOTE = 8;</code>
+     */
+    public static final int Pb_MEET_VOTING_FLAG_REVOTE_VALUE = 8;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Pb_VoteStartFlag valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Pb_VoteStartFlag forNumber(int value) {
+      switch (value) {
+        case 0: return Pb_MEET_VOTING_FLAG_ZERO;
+        case 1: return Pb_MEET_VOTING_FLAG_NOPOST;
+        case 2: return Pb_MEET_VOTING_FLAG_SECRETARY;
+        case 4: return Pb_MEET_VOTING_FLAG_AUTOEXIT;
+        case 8: return Pb_MEET_VOTING_FLAG_REVOTE;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Pb_VoteStartFlag>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Pb_VoteStartFlag> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Pb_VoteStartFlag>() {
+            public Pb_VoteStartFlag findValueByNumber(int number) {
+              return Pb_VoteStartFlag.forNumber(number);
+            }
+          };
+
+    private final int value;
+
+    private Pb_VoteStartFlag(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Pb_VoteStartFlag)
+  }
+
   public interface pbui_Item_MeetOnVotingDetailInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:pbui_Item_MeetOnVotingDetailInfo)
       com.google.protobuf.MessageLiteOrBuilder {
@@ -97,10 +240,6 @@ public final class InterfaceVote {
     com.google.protobuf.ByteString getText(int index);
   }
   /**
-   * <pre>
-   *会议发起投票信息
-   * </pre>
-   *
    * Protobuf type {@code pbui_Item_MeetOnVotingDetailInfo}
    */
   public  static final class pbui_Item_MeetOnVotingDetailInfo extends
@@ -597,10 +736,6 @@ public final class InterfaceVote {
     }
 
     /**
-     * <pre>
-     *会议发起投票信息
-     * </pre>
-     *
      * Protobuf type {@code pbui_Item_MeetOnVotingDetailInfo}
      */
     public static final class Builder extends
@@ -1115,6 +1250,7 @@ public final class InterfaceVote {
   }
   /**
    * <pre>
+   *查询会议发起投票信息
    *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
    *method: query/add/mod/
    * </pre>
@@ -1408,6 +1544,7 @@ public final class InterfaceVote {
 
     /**
      * <pre>
+     *查询会议发起投票信息
      *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
      *method: query/add/mod/
      * </pre>
@@ -2106,9 +2243,9 @@ public final class InterfaceVote {
   }
   /**
    * <pre>
-   *会议发起投票信息
+   *会议停止、删除投票信息
    *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
-   *method: start/stop/del
+   *method: stop/del
    * </pre>
    *
    * Protobuf type {@code pbui_Type_MeetStopVoteInfo}
@@ -2285,9 +2422,9 @@ public final class InterfaceVote {
 
     /**
      * <pre>
-     *会议发起投票信息
+     *会议停止、删除投票信息
      *type:Pb_TYPE_MEET_INTERFACE_MEETONVOTING
-     *method: start/stop/del
+     *method: stop/del
      * </pre>
      *
      * Protobuf type {@code pbui_Type_MeetStopVoteInfo}
@@ -2471,6 +2608,1324 @@ public final class InterfaceVote {
     private static volatile com.google.protobuf.Parser<pbui_Type_MeetStopVoteInfo> PARSER;
 
     public static com.google.protobuf.Parser<pbui_Type_MeetStopVoteInfo> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_ItemVoteStartOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_ItemVoteStart)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *发起的投票ID
+     * </pre>
+     *
+     * <code>fixed32 voteid = 1;</code>
+     */
+    int getVoteid();
+
+    /**
+     * <pre>
+     *发起投票标志 Pb_VoteStartFlag 定义
+     * </pre>
+     *
+     * <code>fixed32 voteflag = 2;</code>
+     */
+    int getVoteflag();
+
+    /**
+     * <pre>
+     *计时结束 单位：秒
+     * </pre>
+     *
+     * <code>fixed32 timeouts = 3;</code>
+     */
+    int getTimeouts();
+
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    java.util.List<java.lang.Integer> getMemberidList();
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    int getMemberidCount();
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    int getMemberid(int index);
+  }
+  /**
+   * Protobuf type {@code pbui_ItemVoteStart}
+   */
+  public  static final class pbui_ItemVoteStart extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_ItemVoteStart, pbui_ItemVoteStart.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_ItemVoteStart)
+      pbui_ItemVoteStartOrBuilder {
+    private pbui_ItemVoteStart() {
+      memberid_ = emptyIntList();
+    }
+    private int bitField0_;
+    public static final int VOTEID_FIELD_NUMBER = 1;
+    private int voteid_;
+    /**
+     * <pre>
+     *发起的投票ID
+     * </pre>
+     *
+     * <code>fixed32 voteid = 1;</code>
+     */
+    public int getVoteid() {
+      return voteid_;
+    }
+    /**
+     * <pre>
+     *发起的投票ID
+     * </pre>
+     *
+     * <code>fixed32 voteid = 1;</code>
+     */
+    private void setVoteid(int value) {
+      
+      voteid_ = value;
+    }
+    /**
+     * <pre>
+     *发起的投票ID
+     * </pre>
+     *
+     * <code>fixed32 voteid = 1;</code>
+     */
+    private void clearVoteid() {
+      
+      voteid_ = 0;
+    }
+
+    public static final int VOTEFLAG_FIELD_NUMBER = 2;
+    private int voteflag_;
+    /**
+     * <pre>
+     *发起投票标志 Pb_VoteStartFlag 定义
+     * </pre>
+     *
+     * <code>fixed32 voteflag = 2;</code>
+     */
+    public int getVoteflag() {
+      return voteflag_;
+    }
+    /**
+     * <pre>
+     *发起投票标志 Pb_VoteStartFlag 定义
+     * </pre>
+     *
+     * <code>fixed32 voteflag = 2;</code>
+     */
+    private void setVoteflag(int value) {
+      
+      voteflag_ = value;
+    }
+    /**
+     * <pre>
+     *发起投票标志 Pb_VoteStartFlag 定义
+     * </pre>
+     *
+     * <code>fixed32 voteflag = 2;</code>
+     */
+    private void clearVoteflag() {
+      
+      voteflag_ = 0;
+    }
+
+    public static final int TIMEOUTS_FIELD_NUMBER = 3;
+    private int timeouts_;
+    /**
+     * <pre>
+     *计时结束 单位：秒
+     * </pre>
+     *
+     * <code>fixed32 timeouts = 3;</code>
+     */
+    public int getTimeouts() {
+      return timeouts_;
+    }
+    /**
+     * <pre>
+     *计时结束 单位：秒
+     * </pre>
+     *
+     * <code>fixed32 timeouts = 3;</code>
+     */
+    private void setTimeouts(int value) {
+      
+      timeouts_ = value;
+    }
+    /**
+     * <pre>
+     *计时结束 单位：秒
+     * </pre>
+     *
+     * <code>fixed32 timeouts = 3;</code>
+     */
+    private void clearTimeouts() {
+      
+      timeouts_ = 0;
+    }
+
+    public static final int MEMBERID_FIELD_NUMBER = 4;
+    private com.google.protobuf.Internal.IntList memberid_;
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getMemberidList() {
+      return memberid_;
+    }
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    public int getMemberidCount() {
+      return memberid_.size();
+    }
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    public int getMemberid(int index) {
+      return memberid_.getInt(index);
+    }
+    private void ensureMemberidIsMutable() {
+      if (!memberid_.isModifiable()) {
+        memberid_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(memberid_);
+       }
+    }
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    private void setMemberid(
+        int index, int value) {
+      ensureMemberidIsMutable();
+      memberid_.setInt(index, value);
+    }
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    private void addMemberid(int value) {
+      ensureMemberidIsMutable();
+      memberid_.addInt(value);
+    }
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    private void addAllMemberid(
+        java.lang.Iterable<? extends java.lang.Integer> values) {
+      ensureMemberidIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, memberid_);
+    }
+    /**
+     * <pre>
+     *参与投票的参会人员ID null表示所示参会人员
+     * </pre>
+     *
+     * <code>repeated fixed32 memberid = 4;</code>
+     */
+    private void clearMemberid() {
+      memberid_ = emptyIntList();
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (voteid_ != 0) {
+        output.writeFixed32(1, voteid_);
+      }
+      if (voteflag_ != 0) {
+        output.writeFixed32(2, voteflag_);
+      }
+      if (timeouts_ != 0) {
+        output.writeFixed32(3, timeouts_);
+      }
+      for (int i = 0; i < memberid_.size(); i++) {
+        output.writeFixed32(4, memberid_.getInt(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (voteid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(1, voteid_);
+      }
+      if (voteflag_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, voteflag_);
+      }
+      if (timeouts_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(3, timeouts_);
+      }
+      {
+        int dataSize = 0;
+        dataSize = 4 * getMemberidList().size();
+        size += dataSize;
+        size += 1 * getMemberidList().size();
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code pbui_ItemVoteStart}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_ItemVoteStart)
+        com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStartOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *发起的投票ID
+       * </pre>
+       *
+       * <code>fixed32 voteid = 1;</code>
+       */
+      public int getVoteid() {
+        return instance.getVoteid();
+      }
+      /**
+       * <pre>
+       *发起的投票ID
+       * </pre>
+       *
+       * <code>fixed32 voteid = 1;</code>
+       */
+      public Builder setVoteid(int value) {
+        copyOnWrite();
+        instance.setVoteid(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *发起的投票ID
+       * </pre>
+       *
+       * <code>fixed32 voteid = 1;</code>
+       */
+      public Builder clearVoteid() {
+        copyOnWrite();
+        instance.clearVoteid();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *发起投票标志 Pb_VoteStartFlag 定义
+       * </pre>
+       *
+       * <code>fixed32 voteflag = 2;</code>
+       */
+      public int getVoteflag() {
+        return instance.getVoteflag();
+      }
+      /**
+       * <pre>
+       *发起投票标志 Pb_VoteStartFlag 定义
+       * </pre>
+       *
+       * <code>fixed32 voteflag = 2;</code>
+       */
+      public Builder setVoteflag(int value) {
+        copyOnWrite();
+        instance.setVoteflag(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *发起投票标志 Pb_VoteStartFlag 定义
+       * </pre>
+       *
+       * <code>fixed32 voteflag = 2;</code>
+       */
+      public Builder clearVoteflag() {
+        copyOnWrite();
+        instance.clearVoteflag();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *计时结束 单位：秒
+       * </pre>
+       *
+       * <code>fixed32 timeouts = 3;</code>
+       */
+      public int getTimeouts() {
+        return instance.getTimeouts();
+      }
+      /**
+       * <pre>
+       *计时结束 单位：秒
+       * </pre>
+       *
+       * <code>fixed32 timeouts = 3;</code>
+       */
+      public Builder setTimeouts(int value) {
+        copyOnWrite();
+        instance.setTimeouts(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *计时结束 单位：秒
+       * </pre>
+       *
+       * <code>fixed32 timeouts = 3;</code>
+       */
+      public Builder clearTimeouts() {
+        copyOnWrite();
+        instance.clearTimeouts();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getMemberidList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getMemberidList());
+      }
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public int getMemberidCount() {
+        return instance.getMemberidCount();
+      }
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public int getMemberid(int index) {
+        return instance.getMemberid(index);
+      }
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public Builder setMemberid(
+          int index, int value) {
+        copyOnWrite();
+        instance.setMemberid(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public Builder addMemberid(int value) {
+        copyOnWrite();
+        instance.addMemberid(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public Builder addAllMemberid(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        copyOnWrite();
+        instance.addAllMemberid(values);
+        return this;
+      }
+      /**
+       * <pre>
+       *参与投票的参会人员ID null表示所示参会人员
+       * </pre>
+       *
+       * <code>repeated fixed32 memberid = 4;</code>
+       */
+      public Builder clearMemberid() {
+        copyOnWrite();
+        instance.clearMemberid();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_ItemVoteStart)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          memberid_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart other = (com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart) arg1;
+          voteid_ = visitor.visitInt(voteid_ != 0, voteid_,
+              other.voteid_ != 0, other.voteid_);
+          voteflag_ = visitor.visitInt(voteflag_ != 0, voteflag_,
+              other.voteflag_ != 0, other.voteflag_);
+          timeouts_ = visitor.visitInt(timeouts_ != 0, timeouts_,
+              other.timeouts_ != 0, other.timeouts_);
+          memberid_= visitor.visitIntList(memberid_, other.memberid_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+            bitField0_ |= other.bitField0_;
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 13: {
+
+                  voteid_ = input.readFixed32();
+                  break;
+                }
+                case 21: {
+
+                  voteflag_ = input.readFixed32();
+                  break;
+                }
+                case 29: {
+
+                  timeouts_ = input.readFixed32();
+                  break;
+                }
+                case 37: {
+                  if (!memberid_.isModifiable()) {
+                    memberid_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(memberid_);
+                  }
+                  memberid_.addInt(input.readFixed32());
+                  break;
+                }
+                case 34: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!memberid_.isModifiable() && input.getBytesUntilLimit() > 0) {
+                    final int currentSize = memberid_.size();
+                    memberid_ = memberid_.mutableCopyWithCapacity(
+                        currentSize + (length/4));
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    memberid_.addInt(input.readFixed32());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_ItemVoteStart)
+    private static final com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_ItemVoteStart();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_ItemVoteStart> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_ItemVoteStart> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface pbui_Type_MeetStartVoteInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pbui_Type_MeetStartVoteInfo)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    java.util.List<com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart> 
+        getItemList();
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart getItem(int index);
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    int getItemCount();
+  }
+  /**
+   * <pre>
+   *发起投票
+   *type:TYPE_MEET_INTERFACE_MEETONVOTING
+   *method: start
+   * </pre>
+   *
+   * Protobuf type {@code pbui_Type_MeetStartVoteInfo}
+   */
+  public  static final class pbui_Type_MeetStartVoteInfo extends
+      com.google.protobuf.GeneratedMessageLite<
+          pbui_Type_MeetStartVoteInfo, pbui_Type_MeetStartVoteInfo.Builder> implements
+      // @@protoc_insertion_point(message_implements:pbui_Type_MeetStartVoteInfo)
+      pbui_Type_MeetStartVoteInfoOrBuilder {
+    private pbui_Type_MeetStartVoteInfo() {
+      item_ = emptyProtobufList();
+    }
+    public static final int ITEM_FIELD_NUMBER = 1;
+    private com.google.protobuf.Internal.ProtobufList<com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart> item_;
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    public java.util.List<com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart> getItemList() {
+      return item_;
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    public java.util.List<? extends com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStartOrBuilder> 
+        getItemOrBuilderList() {
+      return item_;
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    public int getItemCount() {
+      return item_.size();
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    public com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart getItem(int index) {
+      return item_.get(index);
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    public com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStartOrBuilder getItemOrBuilder(
+        int index) {
+      return item_.get(index);
+    }
+    private void ensureItemIsMutable() {
+      if (!item_.isModifiable()) {
+        item_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
+       }
+    }
+
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void setItem(
+        int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureItemIsMutable();
+      item_.set(index, value);
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void setItem(
+        int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.Builder builderForValue) {
+      ensureItemIsMutable();
+      item_.set(index, builderForValue.build());
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void addItem(com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureItemIsMutable();
+      item_.add(value);
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void addItem(
+        int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureItemIsMutable();
+      item_.add(index, value);
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void addItem(
+        com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.Builder builderForValue) {
+      ensureItemIsMutable();
+      item_.add(builderForValue.build());
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void addItem(
+        int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.Builder builderForValue) {
+      ensureItemIsMutable();
+      item_.add(index, builderForValue.build());
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void addAllItem(
+        java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart> values) {
+      ensureItemIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, item_);
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void clearItem() {
+      item_ = emptyProtobufList();
+    }
+    /**
+     * <pre>
+     *投票信息
+     * </pre>
+     *
+     * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+     */
+    private void removeItem(int index) {
+      ensureItemIsMutable();
+      item_.remove(index);
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < item_.size(); i++) {
+        output.writeMessage(1, item_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < item_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, item_.get(i));
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * <pre>
+     *发起投票
+     *type:TYPE_MEET_INTERFACE_MEETONVOTING
+     *method: start
+     * </pre>
+     *
+     * Protobuf type {@code pbui_Type_MeetStartVoteInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo, Builder> implements
+        // @@protoc_insertion_point(builder_implements:pbui_Type_MeetStartVoteInfo)
+        com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfoOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public java.util.List<com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart> getItemList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getItemList());
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public int getItemCount() {
+        return instance.getItemCount();
+      }/**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart getItem(int index) {
+        return instance.getItem(index);
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder setItem(
+          int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart value) {
+        copyOnWrite();
+        instance.setItem(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder setItem(
+          int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.Builder builderForValue) {
+        copyOnWrite();
+        instance.setItem(index, builderForValue);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder addItem(com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart value) {
+        copyOnWrite();
+        instance.addItem(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder addItem(
+          int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart value) {
+        copyOnWrite();
+        instance.addItem(index, value);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder addItem(
+          com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.Builder builderForValue) {
+        copyOnWrite();
+        instance.addItem(builderForValue);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder addItem(
+          int index, com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.Builder builderForValue) {
+        copyOnWrite();
+        instance.addItem(index, builderForValue);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder addAllItem(
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart> values) {
+        copyOnWrite();
+        instance.addAllItem(values);
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder clearItem() {
+        copyOnWrite();
+        instance.clearItem();
+        return this;
+      }
+      /**
+       * <pre>
+       *投票信息
+       * </pre>
+       *
+       * <code>repeated .pbui_ItemVoteStart item = 1;</code>
+       */
+      public Builder removeItem(int index) {
+        copyOnWrite();
+        instance.removeItem(index);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:pbui_Type_MeetStartVoteInfo)
+    }
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo();
+        }
+        case IS_INITIALIZED: {
+          return DEFAULT_INSTANCE;
+        }
+        case MAKE_IMMUTABLE: {
+          item_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo other = (com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo) arg1;
+          item_= visitor.visitList(item_, other.item_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  if (!item_.isModifiable()) {
+                    item_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(item_);
+                  }
+                  item_.add(
+                      input.readMessage(com.mogujie.tt.protobuf.InterfaceVote.pbui_ItemVoteStart.parser(), extensionRegistry));
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:pbui_Type_MeetStartVoteInfo)
+    private static final com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new pbui_Type_MeetStartVoteInfo();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static com.mogujie.tt.protobuf.InterfaceVote.pbui_Type_MeetStartVoteInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<pbui_Type_MeetStartVoteInfo> PARSER;
+
+    public static com.google.protobuf.Parser<pbui_Type_MeetStartVoteInfo> parser() {
       return DEFAULT_INSTANCE.getParserForType();
     }
   }

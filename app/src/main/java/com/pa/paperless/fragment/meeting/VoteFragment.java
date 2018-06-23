@@ -37,6 +37,7 @@ import com.pa.paperless.constant.IDEventF;
 import com.pa.paperless.constant.IDEventMessage;
 import com.pa.paperless.event.EventMessage;
 import com.pa.paperless.listener.ItemClickListener;
+import com.pa.paperless.service.NativeService;
 import com.pa.paperless.utils.Dispose;
 import com.pa.paperless.utils.Export;
 import com.pa.paperless.utils.MyUtils;
@@ -97,7 +98,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
-        EventBus.getDefault().register(this);
         return inflate;
     }
 
@@ -141,6 +141,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
                     Log.e(TAG, "VoteFragment.getEventMessage :  查询指定投票的提交人 --->>> ");
                     isFind = nativeUtil.queryOneVoteSubmitter(SelectedVoteid);
                 }
+                break;
             case IDEventMessage.newVote_launch_inform://188 有新的投票发起通知
                 Log.e(TAG, "VoteFragment.getEventMessage :  有新的投票发起通知 --> ");
                 if (isClickedItem) {//点击了item
@@ -199,7 +200,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
             String chooseText = "";//存放选中选项的文本内容
             String name = "";//当前选择的人员名称
             int id = pbui_item_meetVoteSignInDetailInfo.getId();//查询到的投票人ID
-            Log.e(TAG, "VoteFragment.receiveMemberByVote :  选中的人员ID --> " + id + "  本机人员ID：" + MeetingActivity.getMemberId());
+            Log.e(TAG, "VoteFragment.receiveMemberByVote :  选中的人员ID --> " + id + "  本机人员ID：" + NativeService.localMemberId);
             ids.add(id);
             int selcnt = pbui_item_meetVoteSignInDetailInfo.getSelcnt();
             //int变量的二进制表示的字符串
@@ -229,7 +230,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
             someOneVoteInfo.add(new VoteBean(name, chooseText));
         }
         //如果当前的投票人ID不是自己（自己没有投过）
-        if (!ids.contains(MeetingActivity.getMemberId())) {
+        if (!ids.contains(NativeService.localMemberId)) {
             /** **** **  2.打开投票窗口  ** **** **/
             Log.e(TAG, "VoteFragment.queryVoterById 274行:   --->>> 打开选项233");
             showChoose(mVoteData.get(mPosion), false);
@@ -286,7 +287,6 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
     public void onDestroy() {
         Log.i("F_life", "VoteFragment.onDestroy :   --->>> ");
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     private void initView(View inflate) {
@@ -742,6 +742,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onStart() {
         Log.i("F_life", "VoteFragment.onStart :   --> ");
+        EventBus.getDefault().register(this);
         super.onStart();
     }
 
@@ -760,6 +761,7 @@ public class VoteFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onStop() {
         Log.i("F_life", "VoteFragment.onStop :   --> ");
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 

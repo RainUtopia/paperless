@@ -254,10 +254,11 @@ public class SDLActivity extends Activity {
                 switch (action) {
                     case IDEventMessage.MEDIA_PLAY_INFORM:
                         Log.e(TAG, "org.libsdl.app_SDLActivity.onCreate :  媒体播放通知EventBus --->>> ");
+
                         meetMediaPlay = InterfacePlaymedia.pbui_Type_MeetMediaPlay.parseFrom(data);
                         break;
                     case IDEventMessage.PLAY_STREAM_NOTIFY:
-                        Log.e(TAG, "org.libsdl.app_SDLActivity.onCreate :  流播放通知EventBus --->>> ");
+                        Log.i("stream_log", "SDLActivity.onCreate :  流播放通知 --->>> ");
                         meetStreamPlay = InterfaceStream.pbui_Type_MeetStreamPlay.parseFrom(data);
                         break;
                 }
@@ -1596,7 +1597,6 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     List<Integer> b = new ArrayList<Integer>();
                     a.add(0);
                     if (!isShare)
-//                        b.add(MeetingActivity.getDevId());
                         b.add(NativeService.localDevId);
                     /** ************ ******  停止资源操作  ****** ************ **/
                     nativeUtil.stopResourceOperate(a, b);
